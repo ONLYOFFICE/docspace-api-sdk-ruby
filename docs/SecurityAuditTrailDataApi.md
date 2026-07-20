@@ -309,6 +309,29 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
 
 api_instance = DocspaceApiSdk::Security::AuditTrailDataApi.new
 opts = {
@@ -356,7 +379,7 @@ end
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 
@@ -379,6 +402,29 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
 
 api_instance = DocspaceApiSdk::Security::AuditTrailDataApi.new
 
@@ -419,7 +465,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
 
 ### HTTP request headers
 

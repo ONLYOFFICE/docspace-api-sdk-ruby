@@ -82,6 +82,65 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
+    # Get per-user AI settings
+    # Retrieves the current user's AI settings, including the recommended model banner visibility preference.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-ai-user-settings/
+    # @param [Hash] opts the optional parameters
+    # @return [AiUserSettingsWrapper]
+    def get_ai_user_settings(opts = {})
+      data, _status_code, _headers = get_ai_user_settings_with_http_info(opts)
+      data
+    end
+
+    # Get per-user AI settings
+    # Retrieves the current user's AI settings, including the recommended model banner visibility preference.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-ai-user-settings/
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AiUserSettingsWrapper, Integer, Hash)>] AiUserSettingsWrapper data, response status code and response headers
+    def get_ai_user_settings_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AI::SettingsApi.get_ai_user_settings ...'
+      end
+      # resource path
+      local_var_path = '/api/2.0/ai/config/user'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AiUserSettingsWrapper'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
+
+      new_options = opts.merge(
+        :operation => :"AI::SettingsApi.get_ai_user_settings",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AI::SettingsApi#get_ai_user_settings\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get vectorization settings
     # Retrieves the current embedding provider settings used for document vectorization,  including the configured provider type and whether the API key needs to be reset.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-vectorization-settings/
@@ -196,6 +255,72 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AI::SettingsApi#get_web_search_settings\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update per-user AI settings
+    # Updates the current user's AI recommended model banner visibility preferences.  Each user's settings are stored independently.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-ai-user-settings/
+    # @param [Hash] opts the optional parameters
+    # @option opts [SetAiUserSettingsRequestDto] :set_ai_user_settings_request_dto 
+    # @return [AiUserSettingsWrapper]
+    def set_ai_user_settings(opts = {})
+      data, _status_code, _headers = set_ai_user_settings_with_http_info(opts)
+      data
+    end
+
+    # Update per-user AI settings
+    # Updates the current user's AI recommended model banner visibility preferences.  Each user's settings are stored independently.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-ai-user-settings/
+    # @param [Hash] opts the optional parameters
+    # @option opts [SetAiUserSettingsRequestDto] :set_ai_user_settings_request_dto 
+    # @return [Array<(AiUserSettingsWrapper, Integer, Hash)>] AiUserSettingsWrapper data, response status code and response headers
+    def set_ai_user_settings_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AI::SettingsApi.set_ai_user_settings ...'
+      end
+      # resource path
+      local_var_path = '/api/2.0/ai/config/user'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'set_ai_user_settings_request_dto'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AiUserSettingsWrapper'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
+
+      new_options = opts.merge(
+        :operation => :"AI::SettingsApi.set_ai_user_settings",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AI::SettingsApi#set_ai_user_settings\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

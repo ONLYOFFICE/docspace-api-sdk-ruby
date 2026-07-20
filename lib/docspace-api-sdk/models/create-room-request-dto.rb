@@ -56,6 +56,12 @@ module DocspaceApiSdk
 
     attr_accessor :chat_settings
 
+    # Specifies whether to send form data to external database.
+    attr_accessor :send_form_to_external_db
+
+    # Specifies whether to save form data as XLSX file.
+    attr_accessor :save_form_as_xlsx
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -94,7 +100,9 @@ module DocspaceApiSdk
         :'room_type' => :'roomType',
         :'private' => :'private',
         :'share' => :'share',
-        :'chat_settings' => :'chatSettings'
+        :'chat_settings' => :'chatSettings',
+        :'send_form_to_external_db' => :'sendFormToExternalDB',
+        :'save_form_as_xlsx' => :'saveFormAsXLSX'
       }
     end
 
@@ -124,7 +132,9 @@ module DocspaceApiSdk
         :'room_type' => :'RoomType',
         :'private' => :'Boolean',
         :'share' => :'Array<FileShareParams>',
-        :'chat_settings' => :'ChatSettings'
+        :'chat_settings' => :'ChatSettings',
+        :'send_form_to_external_db' => :'Boolean',
+        :'save_form_as_xlsx' => :'Boolean'
       }
     end
 
@@ -139,6 +149,8 @@ module DocspaceApiSdk
         :'color',
         :'cover',
         :'share',
+        :'send_form_to_external_db',
+        :'save_form_as_xlsx'
       ])
     end
 
@@ -220,6 +232,14 @@ module DocspaceApiSdk
 
       if attributes.key?(:'chat_settings')
         self.chat_settings = attributes[:'chat_settings']
+      end
+
+      if attributes.key?(:'send_form_to_external_db')
+        self.send_form_to_external_db = attributes[:'send_form_to_external_db']
+      end
+
+      if attributes.key?(:'save_form_as_xlsx')
+        self.save_form_as_xlsx = attributes[:'save_form_as_xlsx']
       end
     end
 
@@ -343,7 +363,9 @@ module DocspaceApiSdk
           room_type == o.room_type &&
           private == o.private &&
           share == o.share &&
-          chat_settings == o.chat_settings
+          chat_settings == o.chat_settings &&
+          send_form_to_external_db == o.send_form_to_external_db &&
+          save_form_as_xlsx == o.save_form_as_xlsx
     end
 
     # @see the `==` method
@@ -355,7 +377,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, quota, indexing, deny_download, lifetime, watermark, logo, tags, color, cover, room_type, private, share, chat_settings].hash
+      [title, quota, indexing, deny_download, lifetime, watermark, logo, tags, color, cover, room_type, private, share, chat_settings, send_form_to_external_db, save_form_as_xlsx].hash
     end
 
     # Builds the object from hash

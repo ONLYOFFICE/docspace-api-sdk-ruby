@@ -1,6 +1,5 @@
 .gitignore
 .gitlab-ci.yml
-.openapi-generator-ignore
 .rspec
 .rubocop.yml
 .travis.yml
@@ -40,6 +39,7 @@ docs/AiChatModelPricing.md
 docs/AiChatPrice.md
 docs/AiEmbeddingModelPricing.md
 docs/AiEmbeddingPrice.md
+docs/AiModelCapabilities.md
 docs/AiPricesResponse.md
 docs/AiPricesResponseWrapper.md
 docs/AiProviderArrayWrapper.md
@@ -47,6 +47,8 @@ docs/AiProviderDto.md
 docs/AiProviderWrapper.md
 docs/AiSettingsDto.md
 docs/AiSettingsWrapper.md
+docs/AiUserSettingsDto.md
+docs/AiUserSettingsWrapper.md
 docs/AiWebSearchPricing.md
 docs/AnonymousConfigDto.md
 docs/ApiDateTime.md
@@ -98,7 +100,6 @@ docs/BatchRequestDtoAllOfFileIds.md
 docs/BatchRequestDtoAllOfFolderIds.md
 docs/BatchTagsRequestDto.md
 docs/BooleanWrapper.md
-docs/BuyWalletServiceRequestDto.md
 docs/CapabilitiesApi.md
 docs/CapabilitiesDto.md
 docs/CapabilitiesWrapper.md
@@ -148,8 +149,6 @@ docs/ConnectServerRequestBody.md
 docs/ConnectionTestResult.md
 docs/ConnectionTestResultWrapper.md
 docs/Contact.md
-docs/ContentDisposition.md
-docs/ContentType.md
 docs/ContinueChatBody.md
 docs/ContinueChatBodyFilesInner.md
 docs/ConversationResultArrayWrapper.md
@@ -175,6 +174,7 @@ docs/CreateTagRequestDto.md
 docs/CreateTextOrHtmlFile.md
 docs/CreateThirdPartyRoom.md
 docs/CreateWebhooksConfigRequestsDto.md
+docs/CreditAiBalanceRequestDto.md
 docs/Cron.md
 docs/CronParams.md
 docs/CspDto.md
@@ -254,6 +254,7 @@ docs/EditHistoryDto.md
 docs/EditHistoryUrl.md
 docs/EditorConfigurationDto.md
 docs/EditorToolCallStateDto.md
+docs/EditorToolDecisionRequestBody.md
 docs/EditorType.md
 docs/EmailActivationSettings.md
 docs/EmailActivationSettingsWrapper.md
@@ -278,13 +279,20 @@ docs/EncryptionSettingsWrapper.md
 docs/EngineType.md
 docs/EntryType.md
 docs/ExchangeToken200Response.md
-docs/ExportChatRequestBodyInteger.md
-docs/ExportMessageRequestBodyInteger.md
+docs/ExportChatRequestBody.md
+docs/ExportChatRequestBodyFolderId.md
+docs/ExportMessageRequestBody.md
 docs/ExternalDatabaseSettings.md
 docs/ExternalDatabaseType.md
+docs/ExternalDbSyncFormResultDto.md
+docs/ExternalDbSyncTaskDto.md
+docs/ExternalDbSyncTaskWrapper.md
 docs/ExternalShareDto.md
 docs/ExternalShareRequestParam.md
 docs/ExternalShareWrapper.md
+docs/ExternalSharingSettingsDto.md
+docs/ExternalSharingSettingsRequestDto.md
+docs/ExternalSharingSettingsWrapper.md
 docs/FeatureUsedDto.md
 docs/FeedbackConfig.md
 docs/FileConflictResolveType.md
@@ -368,10 +376,11 @@ docs/FormSubmissionsWrapper.md
 docs/FormsItemArrayWrapper.md
 docs/FormsItemData.md
 docs/FormsItemDto.md
+docs/GeneratedFileDto.md
+docs/GeneratedFileWrapper.md
 docs/GetPortalPrices200Response.md
 docs/GetPortalPrices200ResponseLinksInner.md
 docs/GetReferenceDataDtoInteger.md
-docs/GetWebhookTriggers200Response.md
 docs/GobackConfig.md
 docs/GreetingSettingsRequestsDto.md
 docs/GroupApi.md
@@ -470,6 +479,9 @@ docs/MobileRequestsDto.md
 docs/ModelArrayWrapper.md
 docs/ModelDto.md
 docs/ModelModule.md
+docs/ModelSettingsArrayWrapper.md
+docs/ModelSettingsDto.md
+docs/ModelSettingsItemDto.md
 docs/ModuleWrapper.md
 docs/MultiSizeLogoCover.md
 docs/NewItemsAgentNewItemsArrayWrapper.md
@@ -542,6 +554,7 @@ docs/PortalPaymentApi.md
 docs/PortalQuotaApi.md
 docs/PortalSettingsApi.md
 docs/PortalUsersApi.md
+docs/PreviewProviderModelsRequestDto.md
 docs/PriceDto.md
 docs/ProblemDetail.md
 docs/ProductAdministratorDto.md
@@ -626,6 +639,7 @@ docs/ServerType.md
 docs/ServicePayment.md
 docs/ServicePaymentWrapper.md
 docs/SessionRequest.md
+docs/SetAiUserSettingsRequestDto.md
 docs/SetDefaultProviderRequestDto.md
 docs/SetEmbeddingConfigRequestBody.md
 docs/SetManagerRequest.md
@@ -663,7 +677,6 @@ docs/SettingsWebpluginsApi.md
 docs/SettingsWrapper.md
 docs/SetupCode.md
 docs/SetupCodeWrapper.md
-docs/SexEnum.md
 docs/ShareFilterType.md
 docs/SignupAccountRequestDto.md
 docs/Size.md
@@ -753,6 +766,10 @@ docs/TenantWalletSettings.md
 docs/TenantWalletSettingsWrapper.md
 docs/TenantWrapper.md
 docs/TerminateRequestDto.md
+docs/TfaAppCodeArrayWrapper.md
+docs/TfaAppCodeDto.md
+docs/TfaConfirmDataDto.md
+docs/TfaConfirmDataWrapper.md
 docs/TfaRequestsDto.md
 docs/TfaRequestsDtoType.md
 docs/TfaSettingsArrayWrapper.md
@@ -792,7 +809,6 @@ docs/UpdateRoomsRoomIdsRequestDtoInteger.md
 docs/UpdateServerRequestBody.md
 docs/UpdateTagRequestDto.md
 docs/UpdateWebhooksConfigRequestsDto.md
-docs/UploadRequestDto.md
 docs/UploadResultDto.md
 docs/UploadResultWrapper.md
 docs/UploadSessionResponseDtoInteger.md
@@ -802,6 +818,8 @@ docs/UsageSpaceStatItemDto.md
 docs/UserChatSettingsDto.md
 docs/UserChatSettingsWrapper.md
 docs/UserConfig.md
+docs/UserExistsResponseDto.md
+docs/UserExistsResponseWrapper.md
 docs/UserInfo.md
 docs/UserInfoWrapper.md
 docs/UserInvitation.md
@@ -830,6 +848,8 @@ docs/WebSearchSettingsWrapper.md
 docs/WebhookGroupStatus.md
 docs/WebhookRetryRequestsDto.md
 docs/WebhookTrigger.md
+docs/WebhookTriggerArrayWrapper.md
+docs/WebhookTriggerDto.md
 docs/WebhooksConfigDto.md
 docs/WebhooksConfigWithStatusArrayWrapper.md
 docs/WebhooksConfigWithStatusDto.md
@@ -845,6 +865,8 @@ docs/WhiteLabelRequestsDto.md
 docs/WizardRequestsDto.md
 docs/WizardSettings.md
 docs/WizardSettingsWrapper.md
+docs/XlsxReportResponseDto.md
+docs/XlsxReportResponseWrapper.md
 docspace-api-sdk.gemspec
 lib/docspace-api-sdk.rb
 lib/docspace-api-sdk/api-client.rb
@@ -952,6 +974,7 @@ lib/docspace-api-sdk/models/ai-chat-model-pricing.rb
 lib/docspace-api-sdk/models/ai-chat-price.rb
 lib/docspace-api-sdk/models/ai-embedding-model-pricing.rb
 lib/docspace-api-sdk/models/ai-embedding-price.rb
+lib/docspace-api-sdk/models/ai-model-capabilities.rb
 lib/docspace-api-sdk/models/ai-prices-response-wrapper.rb
 lib/docspace-api-sdk/models/ai-prices-response.rb
 lib/docspace-api-sdk/models/ai-provider-array-wrapper.rb
@@ -959,6 +982,8 @@ lib/docspace-api-sdk/models/ai-provider-dto.rb
 lib/docspace-api-sdk/models/ai-provider-wrapper.rb
 lib/docspace-api-sdk/models/ai-settings-dto.rb
 lib/docspace-api-sdk/models/ai-settings-wrapper.rb
+lib/docspace-api-sdk/models/ai-user-settings-dto.rb
+lib/docspace-api-sdk/models/ai-user-settings-wrapper.rb
 lib/docspace-api-sdk/models/ai-web-search-pricing.rb
 lib/docspace-api-sdk/models/anonymous-config-dto.rb
 lib/docspace-api-sdk/models/api-date-time.rb
@@ -1007,7 +1032,6 @@ lib/docspace-api-sdk/models/batch-request-dto-all-of-folder-ids.rb
 lib/docspace-api-sdk/models/batch-request-dto.rb
 lib/docspace-api-sdk/models/batch-tags-request-dto.rb
 lib/docspace-api-sdk/models/boolean-wrapper.rb
-lib/docspace-api-sdk/models/buy-wallet-service-request-dto.rb
 lib/docspace-api-sdk/models/capabilities-dto.rb
 lib/docspace-api-sdk/models/capabilities-wrapper.rb
 lib/docspace-api-sdk/models/cdn-storage-settings-wrapper.rb
@@ -1056,8 +1080,6 @@ lib/docspace-api-sdk/models/connect-server-request-body.rb
 lib/docspace-api-sdk/models/connection-test-result-wrapper.rb
 lib/docspace-api-sdk/models/connection-test-result.rb
 lib/docspace-api-sdk/models/contact.rb
-lib/docspace-api-sdk/models/content-disposition.rb
-lib/docspace-api-sdk/models/content-type.rb
 lib/docspace-api-sdk/models/continue-chat-body-files-inner.rb
 lib/docspace-api-sdk/models/continue-chat-body.rb
 lib/docspace-api-sdk/models/conversation-result-array-wrapper.rb
@@ -1083,6 +1105,7 @@ lib/docspace-api-sdk/models/create-tag-request-dto.rb
 lib/docspace-api-sdk/models/create-text-or-html-file.rb
 lib/docspace-api-sdk/models/create-third-party-room.rb
 lib/docspace-api-sdk/models/create-webhooks-config-requests-dto.rb
+lib/docspace-api-sdk/models/credit-ai-balance-request-dto.rb
 lib/docspace-api-sdk/models/cron-params.rb
 lib/docspace-api-sdk/models/cron.rb
 lib/docspace-api-sdk/models/csp-dto.rb
@@ -1162,6 +1185,7 @@ lib/docspace-api-sdk/models/edit-history-dto.rb
 lib/docspace-api-sdk/models/edit-history-url.rb
 lib/docspace-api-sdk/models/editor-configuration-dto.rb
 lib/docspace-api-sdk/models/editor-tool-call-state-dto.rb
+lib/docspace-api-sdk/models/editor-tool-decision-request-body.rb
 lib/docspace-api-sdk/models/editor-type.rb
 lib/docspace-api-sdk/models/email-activation-settings-wrapper.rb
 lib/docspace-api-sdk/models/email-activation-settings.rb
@@ -1186,13 +1210,20 @@ lib/docspace-api-sdk/models/encryption-settings.rb
 lib/docspace-api-sdk/models/engine-type.rb
 lib/docspace-api-sdk/models/entry-type.rb
 lib/docspace-api-sdk/models/exchange-token200-response.rb
-lib/docspace-api-sdk/models/export-chat-request-body-integer.rb
-lib/docspace-api-sdk/models/export-message-request-body-integer.rb
+lib/docspace-api-sdk/models/export-chat-request-body-folder-id.rb
+lib/docspace-api-sdk/models/export-chat-request-body.rb
+lib/docspace-api-sdk/models/export-message-request-body.rb
 lib/docspace-api-sdk/models/external-database-settings.rb
 lib/docspace-api-sdk/models/external-database-type.rb
+lib/docspace-api-sdk/models/external-db-sync-form-result-dto.rb
+lib/docspace-api-sdk/models/external-db-sync-task-dto.rb
+lib/docspace-api-sdk/models/external-db-sync-task-wrapper.rb
 lib/docspace-api-sdk/models/external-share-dto.rb
 lib/docspace-api-sdk/models/external-share-request-param.rb
 lib/docspace-api-sdk/models/external-share-wrapper.rb
+lib/docspace-api-sdk/models/external-sharing-settings-dto.rb
+lib/docspace-api-sdk/models/external-sharing-settings-request-dto.rb
+lib/docspace-api-sdk/models/external-sharing-settings-wrapper.rb
 lib/docspace-api-sdk/models/feature-used-dto.rb
 lib/docspace-api-sdk/models/feedback-config.rb
 lib/docspace-api-sdk/models/file-conflict-resolve-type.rb
@@ -1269,10 +1300,11 @@ lib/docspace-api-sdk/models/form-submissions-wrapper.rb
 lib/docspace-api-sdk/models/forms-item-array-wrapper.rb
 lib/docspace-api-sdk/models/forms-item-data.rb
 lib/docspace-api-sdk/models/forms-item-dto.rb
+lib/docspace-api-sdk/models/generated-file-dto.rb
+lib/docspace-api-sdk/models/generated-file-wrapper.rb
 lib/docspace-api-sdk/models/get-portal-prices200-response-links-inner.rb
 lib/docspace-api-sdk/models/get-portal-prices200-response.rb
 lib/docspace-api-sdk/models/get-reference-data-dto-integer.rb
-lib/docspace-api-sdk/models/get-webhook-triggers200-response.rb
 lib/docspace-api-sdk/models/goback-config.rb
 lib/docspace-api-sdk/models/greeting-settings-requests-dto.rb
 lib/docspace-api-sdk/models/group-array-wrapper.rb
@@ -1368,6 +1400,9 @@ lib/docspace-api-sdk/models/mobile-requests-dto.rb
 lib/docspace-api-sdk/models/model-array-wrapper.rb
 lib/docspace-api-sdk/models/model-dto.rb
 lib/docspace-api-sdk/models/model-module.rb
+lib/docspace-api-sdk/models/model-settings-array-wrapper.rb
+lib/docspace-api-sdk/models/model-settings-dto.rb
+lib/docspace-api-sdk/models/model-settings-item-dto.rb
 lib/docspace-api-sdk/models/module-wrapper.rb
 lib/docspace-api-sdk/models/multi-size-logo-cover.rb
 lib/docspace-api-sdk/models/new-items-agent-new-items-array-wrapper.rb
@@ -1418,6 +1453,7 @@ lib/docspace-api-sdk/models/payments.rb
 lib/docspace-api-sdk/models/permissions-config.rb
 lib/docspace-api-sdk/models/plugins-config.rb
 lib/docspace-api-sdk/models/plugins-dto.rb
+lib/docspace-api-sdk/models/preview-provider-models-request-dto.rb
 lib/docspace-api-sdk/models/price-dto.rb
 lib/docspace-api-sdk/models/problem-detail.rb
 lib/docspace-api-sdk/models/product-administrator-dto.rb
@@ -1490,6 +1526,7 @@ lib/docspace-api-sdk/models/server-type.rb
 lib/docspace-api-sdk/models/service-payment-wrapper.rb
 lib/docspace-api-sdk/models/service-payment.rb
 lib/docspace-api-sdk/models/session-request.rb
+lib/docspace-api-sdk/models/set-ai-user-settings-request-dto.rb
 lib/docspace-api-sdk/models/set-default-provider-request-dto.rb
 lib/docspace-api-sdk/models/set-embedding-config-request-body.rb
 lib/docspace-api-sdk/models/set-manager-request.rb
@@ -1504,7 +1541,6 @@ lib/docspace-api-sdk/models/settings-request-dto.rb
 lib/docspace-api-sdk/models/settings-wrapper.rb
 lib/docspace-api-sdk/models/setup-code-wrapper.rb
 lib/docspace-api-sdk/models/setup-code.rb
-lib/docspace-api-sdk/models/sex-enum.rb
 lib/docspace-api-sdk/models/share-filter-type.rb
 lib/docspace-api-sdk/models/signup-account-request-dto.rb
 lib/docspace-api-sdk/models/size.rb
@@ -1595,6 +1631,10 @@ lib/docspace-api-sdk/models/tenant-wallet-settings-wrapper.rb
 lib/docspace-api-sdk/models/tenant-wallet-settings.rb
 lib/docspace-api-sdk/models/tenant-wrapper.rb
 lib/docspace-api-sdk/models/terminate-request-dto.rb
+lib/docspace-api-sdk/models/tfa-app-code-array-wrapper.rb
+lib/docspace-api-sdk/models/tfa-app-code-dto.rb
+lib/docspace-api-sdk/models/tfa-confirm-data-dto.rb
+lib/docspace-api-sdk/models/tfa-confirm-data-wrapper.rb
 lib/docspace-api-sdk/models/tfa-requests-dto-type.rb
 lib/docspace-api-sdk/models/tfa-requests-dto.rb
 lib/docspace-api-sdk/models/tfa-settings-array-wrapper.rb
@@ -1633,7 +1673,6 @@ lib/docspace-api-sdk/models/update-rooms-room-ids-request-dto-integer.rb
 lib/docspace-api-sdk/models/update-server-request-body.rb
 lib/docspace-api-sdk/models/update-tag-request-dto.rb
 lib/docspace-api-sdk/models/update-webhooks-config-requests-dto.rb
-lib/docspace-api-sdk/models/upload-request-dto.rb
 lib/docspace-api-sdk/models/upload-result-dto.rb
 lib/docspace-api-sdk/models/upload-result-wrapper.rb
 lib/docspace-api-sdk/models/upload-session-response-dto-integer.rb
@@ -1643,6 +1682,8 @@ lib/docspace-api-sdk/models/usage-space-stat-item-dto.rb
 lib/docspace-api-sdk/models/user-chat-settings-dto.rb
 lib/docspace-api-sdk/models/user-chat-settings-wrapper.rb
 lib/docspace-api-sdk/models/user-config.rb
+lib/docspace-api-sdk/models/user-exists-response-dto.rb
+lib/docspace-api-sdk/models/user-exists-response-wrapper.rb
 lib/docspace-api-sdk/models/user-info-wrapper.rb
 lib/docspace-api-sdk/models/user-info.rb
 lib/docspace-api-sdk/models/user-invitation-request-dto.rb
@@ -1670,6 +1711,8 @@ lib/docspace-api-sdk/models/web-search-settings-dto.rb
 lib/docspace-api-sdk/models/web-search-settings-wrapper.rb
 lib/docspace-api-sdk/models/webhook-group-status.rb
 lib/docspace-api-sdk/models/webhook-retry-requests-dto.rb
+lib/docspace-api-sdk/models/webhook-trigger-array-wrapper.rb
+lib/docspace-api-sdk/models/webhook-trigger-dto.rb
 lib/docspace-api-sdk/models/webhook-trigger.rb
 lib/docspace-api-sdk/models/webhooks-config-dto.rb
 lib/docspace-api-sdk/models/webhooks-config-with-status-array-wrapper.rb
@@ -1686,6 +1729,8 @@ lib/docspace-api-sdk/models/white-label-requests-dto.rb
 lib/docspace-api-sdk/models/wizard-requests-dto.rb
 lib/docspace-api-sdk/models/wizard-settings-wrapper.rb
 lib/docspace-api-sdk/models/wizard-settings.rb
+lib/docspace-api-sdk/models/xlsx-report-response-dto.rb
+lib/docspace-api-sdk/models/xlsx-report-response-wrapper.rb
 lib/docspace-api-sdk/version.rb
 samples/docspace-api-sdk-ruby-sample/Gemfile
 samples/docspace-api-sdk-ruby-sample/main.rb

@@ -20,6 +20,7 @@
 | **generate_form_tool_name** | **String** | The tool name used by the AI assistant to launch form creation in the editor. |  |
 | **generate_presentation_tool_name** | **String** | The tool name used by the AI assistant to launch presentation creation in the editor. |  |
 | **system_ai_enabled** | **Boolean** | Indicates whether the system-level AI provider is enabled. | [optional] |
+| **recommended_model_for_forms** | **String** | The identifier of the model recommended for form generation. | [optional] |
 
 ## Example
 
@@ -42,6 +43,7 @@ instance = DocspaceApiSdk::AiSettingsDto.new(
   generate_docx_tool_name: generate_docx,
   generate_form_tool_name: generate_form,
   generate_presentation_tool_name: generate_presentation,
-  system_ai_enabled: true
+  system_ai_enabled: true,
+  recommended_model_for_forms: gpt-5.4
 )
 ```

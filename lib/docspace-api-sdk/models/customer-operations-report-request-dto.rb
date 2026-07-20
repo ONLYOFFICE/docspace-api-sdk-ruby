@@ -22,9 +22,6 @@ module DocspaceApiSdk
     # The service name.
     attr_accessor :service_name
 
-    # Write-off of the quota for the service
-    attr_accessor :write_off_service_quota
-
     # The report start date.
     attr_accessor :start_date
 
@@ -40,7 +37,7 @@ module DocspaceApiSdk
     # Specifies whether to include debit operations in the report.
     attr_accessor :debit
 
-    attr_accessor :types
+    attr_accessor :type
 
     attr_accessor :status
 
@@ -75,13 +72,12 @@ module DocspaceApiSdk
     def self.attribute_map
       {
         :'service_name' => :'serviceName',
-        :'write_off_service_quota' => :'writeOffServiceQuota',
         :'start_date' => :'startDate',
         :'end_date' => :'endDate',
         :'participant_name' => :'participantName',
         :'credit' => :'credit',
         :'debit' => :'debit',
-        :'types' => :'types',
+        :'type' => :'type',
         :'status' => :'status',
         :'order_by' => :'orderBy',
         :'order_type' => :'orderType'
@@ -102,13 +98,12 @@ module DocspaceApiSdk
     def self.openapi_types
       {
         :'service_name' => :'String',
-        :'write_off_service_quota' => :'Boolean',
         :'start_date' => :'Time',
         :'end_date' => :'Time',
         :'participant_name' => :'String',
         :'credit' => :'Boolean',
         :'debit' => :'Boolean',
-        :'types' => :'OperationType',
+        :'type' => :'OperationType',
         :'status' => :'OperationStatus',
         :'order_by' => :'String',
         :'order_type' => :'OperationOrderType'
@@ -148,10 +143,6 @@ module DocspaceApiSdk
         self.service_name = attributes[:'service_name']
       end
 
-      if attributes.key?(:'write_off_service_quota')
-        self.write_off_service_quota = attributes[:'write_off_service_quota']
-      end
-
       if attributes.key?(:'start_date')
         self.start_date = attributes[:'start_date']
       end
@@ -172,8 +163,8 @@ module DocspaceApiSdk
         self.debit = attributes[:'debit']
       end
 
-      if attributes.key?(:'types')
-        self.types = attributes[:'types']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
 
       if attributes.key?(:'status')
@@ -210,13 +201,12 @@ module DocspaceApiSdk
       return true if self.equal?(o)
       self.class == o.class &&
           service_name == o.service_name &&
-          write_off_service_quota == o.write_off_service_quota &&
           start_date == o.start_date &&
           end_date == o.end_date &&
           participant_name == o.participant_name &&
           credit == o.credit &&
           debit == o.debit &&
-          types == o.types &&
+          type == o.type &&
           status == o.status &&
           order_by == o.order_by &&
           order_type == o.order_type
@@ -231,7 +221,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [service_name, write_off_service_quota, start_date, end_date, participant_name, credit, debit, types, status, order_by, order_type].hash
+      [service_name, start_date, end_date, participant_name, credit, debit, type, status, order_by, order_type].hash
     end
 
     # Builds the object from hash

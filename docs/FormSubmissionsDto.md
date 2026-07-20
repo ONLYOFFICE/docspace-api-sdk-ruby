@@ -13,7 +13,7 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::FormSubmissionsDto.new(
-  metadata: null,
-  submissions: null
+  metadata: [],
+  submissions: []
 )
 ```

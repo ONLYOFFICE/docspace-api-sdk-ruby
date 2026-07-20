@@ -58,7 +58,7 @@ end
 
 api_instance = DocspaceApiSdk::Group::GroupApi.new
 opts = {
-  group_request_dto: DocspaceApiSdk::GroupRequestDto.new({group_manager: '00000000-0000-0000-0000-000000000000'}) # GroupRequestDto | 
+  group_request_dto: DocspaceApiSdk::GroupRequestDto.new({group_name: 'Marketing Team'}) # GroupRequestDto | 
 }
 
 begin

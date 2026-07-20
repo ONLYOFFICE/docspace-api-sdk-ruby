@@ -96,6 +96,14 @@ module DocspaceApiSdk
         invalid_properties.push('invalid value for "amount", must be greater than or equal to 1.')
       end
 
+      if !@currency.nil? && @currency.to_s.length > 3
+        invalid_properties.push('invalid value for "currency", the character length must be smaller than or equal to 3.')
+      end
+
+      if !@currency.nil? && @currency.to_s.length < 0
+        invalid_properties.push('invalid value for "currency", the character length must be greater than or equal to 0.')
+      end
+
       invalid_properties
     end
 
@@ -105,6 +113,8 @@ module DocspaceApiSdk
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@amount.nil? && @amount > 999999
       return false if !@amount.nil? && @amount < 1
+      return false if !@currency.nil? && @currency.to_s.length > 3
+      return false if !@currency.nil? && @currency.to_s.length < 0
       true
     end
 
@@ -124,6 +134,20 @@ module DocspaceApiSdk
       end
 
       @amount = amount
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] currency Value to be assigned
+    def currency=(currency)
+      if !currency.nil? && currency.to_s.length > 3
+        fail ArgumentError, 'invalid value for "currency", the character length must be smaller than or equal to 3.'
+      end
+
+      if !currency.nil? && currency.to_s.length < 0
+        fail ArgumentError, 'invalid value for "currency", the character length must be greater than or equal to 0.'
+      end
+
+      @currency = currency
     end
 
     # Checks equality by comparing each attribute.

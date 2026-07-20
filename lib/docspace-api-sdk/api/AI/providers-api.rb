@@ -271,6 +271,71 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
+    # Get all models for a provider with their settings
+    # Returns the full list of AI models available from a provider, including both recommended and additional models.  Each model includes its current settings: enabled state, display alias, and capabilities (vision, tool calling, thinking).  Recommended models are enabled by default and their alias and capabilities come from configuration.  Additional models are disabled by default and can be configured by the admin.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-provider-models/
+    # @param provider_id [Integer] The identifier of the AI provider.
+    # @param [Hash] opts the optional parameters
+    # @return [ModelSettingsArrayWrapper]
+    def get_provider_models(provider_id, opts = {})
+      data, _status_code, _headers = get_provider_models_with_http_info(provider_id, opts)
+      data
+    end
+
+    # Get all models for a provider with their settings
+    # Returns the full list of AI models available from a provider, including both recommended and additional models.  Each model includes its current settings: enabled state, display alias, and capabilities (vision, tool calling, thinking).  Recommended models are enabled by default and their alias and capabilities come from configuration.  Additional models are disabled by default and can be configured by the admin.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-provider-models/
+    # @param provider_id [Integer] The identifier of the AI provider.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ModelSettingsArrayWrapper, Integer, Hash)>] ModelSettingsArrayWrapper data, response status code and response headers
+    def get_provider_models_with_http_info(provider_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AI::ProvidersApi.get_provider_models ...'
+      end
+      # verify the required parameter 'provider_id' is set
+      if @api_client.config.client_side_validation && provider_id.nil?
+        fail ArgumentError, "Missing the required parameter 'provider_id' when calling AI::ProvidersApi.get_provider_models"
+      end
+      # resource path
+      local_var_path = '/api/2.0/ai/providers/{providerId}/models'.sub('{' + 'providerId' + '}', CGI.escape(provider_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ModelSettingsArrayWrapper'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
+
+      new_options = opts.merge(
+        :operation => :"AI::ProvidersApi.get_provider_models",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AI::ProvidersApi#get_provider_models\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get AI providers
     # Returns a paginated list of AI providers configured for the current tenant.  Supports pagination via the startIndex and count query parameters. The total number of providers is included in the response metadata.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-providers/
@@ -332,6 +397,72 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AI::ProvidersApi#get_providers\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Preview models for a new AI provider
+    # Connects to the specified AI provider using the provided credentials and returns the available models  with their default settings. This is used to preview models before saving the provider.  Recommended models are enabled by default with configuration-defined settings.  Additional models are disabled by default with empty capabilities.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/preview-provider-models/
+    # @param [Hash] opts the optional parameters
+    # @option opts [PreviewProviderModelsRequestDto] :preview_provider_models_request_dto 
+    # @return [ModelSettingsArrayWrapper]
+    def preview_provider_models(opts = {})
+      data, _status_code, _headers = preview_provider_models_with_http_info(opts)
+      data
+    end
+
+    # Preview models for a new AI provider
+    # Connects to the specified AI provider using the provided credentials and returns the available models  with their default settings. This is used to preview models before saving the provider.  Recommended models are enabled by default with configuration-defined settings.  Additional models are disabled by default with empty capabilities.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/preview-provider-models/
+    # @param [Hash] opts the optional parameters
+    # @option opts [PreviewProviderModelsRequestDto] :preview_provider_models_request_dto 
+    # @return [Array<(ModelSettingsArrayWrapper, Integer, Hash)>] ModelSettingsArrayWrapper data, response status code and response headers
+    def preview_provider_models_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AI::ProvidersApi.preview_provider_models ...'
+      end
+      # resource path
+      local_var_path = '/api/2.0/ai/providers/models/preview'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'preview_provider_models_request_dto'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ModelSettingsArrayWrapper'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
+
+      new_options = opts.merge(
+        :operation => :"AI::ProvidersApi.preview_provider_models",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AI::ProvidersApi#preview_provider_models\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -285,11 +285,11 @@ This endpoint does not need any parameter.
 
 ## get_webhook_triggers
 
-> <GetWebhookTriggers200Response> get_webhook_triggers
+> <WebhookTriggerArrayWrapper> get_webhook_triggers
 
 Get webhook triggers
 
-Returns a list of triggers for a webhook.
+Returns a list of triggers for a webhook with their availability for the current user.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-webhook-triggers/).
 
@@ -337,7 +337,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetWebhookTriggers200Response>, Integer, Hash)> get_webhook_triggers_with_http_info
+> <Array(<WebhookTriggerArrayWrapper>, Integer, Hash)> get_webhook_triggers_with_http_info
 
 ```ruby
 begin
@@ -345,7 +345,7 @@ begin
   data, status_code, headers = api_instance.get_webhook_triggers_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetWebhookTriggers200Response>
+  p data # => <WebhookTriggerArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::WebhooksApi->get_webhook_triggers_with_http_info: #{e}"
 end
@@ -357,7 +357,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**GetWebhookTriggers200Response**](GetWebhookTriggers200Response.md)
+[**WebhookTriggerArrayWrapper**](WebhookTriggerArrayWrapper.md)
 
 ### Authorization
 

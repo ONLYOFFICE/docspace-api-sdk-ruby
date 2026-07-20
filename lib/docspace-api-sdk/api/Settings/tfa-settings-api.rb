@@ -27,7 +27,7 @@ module DocspaceApiSdk
     # Returns the two-factor authentication application codes.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-app-codes/
     # @param [Hash] opts the optional parameters
-    # @return [ObjectArrayWrapper]
+    # @return [TfaAppCodeArrayWrapper]
     def get_tfa_app_codes(opts = {})
       data, _status_code, _headers = get_tfa_app_codes_with_http_info(opts)
       data
@@ -37,7 +37,7 @@ module DocspaceApiSdk
     # Returns the two-factor authentication application codes.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-app-codes/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ObjectArrayWrapper, Integer, Hash)>] ObjectArrayWrapper data, response status code and response headers
+    # @return [Array<(TfaAppCodeArrayWrapper, Integer, Hash)>] TfaAppCodeArrayWrapper data, response status code and response headers
     def get_tfa_app_codes_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Settings::TFASettingsApi.get_tfa_app_codes ...'
@@ -60,7 +60,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ObjectArrayWrapper'
+      return_type = opts[:debug_return_type] || 'TfaAppCodeArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -82,24 +82,24 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Get confirmation email
-    # Returns the confirmation email URL for authorization via SMS or TFA application.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-confirm-url/
+    # Get TFA confirmation data
+    # Returns the confirmation data for authorization via SMS or TFA application.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-confirm-data/
     # @param [Hash] opts the optional parameters
-    # @return [StringWrapper]
-    def get_tfa_confirm_url(opts = {})
-      data, _status_code, _headers = get_tfa_confirm_url_with_http_info(opts)
+    # @return [TfaConfirmDataWrapper]
+    def get_tfa_confirm_data(opts = {})
+      data, _status_code, _headers = get_tfa_confirm_data_with_http_info(opts)
       data
     end
 
-    # Get confirmation email
-    # Returns the confirmation email URL for authorization via SMS or TFA application.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-confirm-url/
+    # Get TFA confirmation data
+    # Returns the confirmation data for authorization via SMS or TFA application.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-confirm-data/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(StringWrapper, Integer, Hash)>] StringWrapper data, response status code and response headers
-    def get_tfa_confirm_url_with_http_info(opts = {})
+    # @return [Array<(TfaConfirmDataWrapper, Integer, Hash)>] TfaConfirmDataWrapper data, response status code and response headers
+    def get_tfa_confirm_data_with_http_info(opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Settings::TFASettingsApi.get_tfa_confirm_url ...'
+        @api_client.config.logger.debug 'Calling API: Settings::TFASettingsApi.get_tfa_confirm_data ...'
       end
       # resource path
       local_var_path = '/api/2.0/settings/tfaapp/confirm'
@@ -119,13 +119,13 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'StringWrapper'
+      return_type = opts[:debug_return_type] || 'TfaConfirmDataWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
 
       new_options = opts.merge(
-        :operation => :"Settings::TFASettingsApi.get_tfa_confirm_url",
+        :operation => :"Settings::TFASettingsApi.get_tfa_confirm_data",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -136,7 +136,7 @@ module DocspaceApiSdk
 
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Settings::TFASettingsApi#get_tfa_confirm_url\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: Settings::TFASettingsApi#get_tfa_confirm_data\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -395,7 +395,7 @@ module DocspaceApiSdk
     # Requests the new backup codes for the two-factor authentication application.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tfa-app-codes/
     # @param [Hash] opts the optional parameters
-    # @return [ObjectArrayWrapper]
+    # @return [TfaAppCodeArrayWrapper]
     def update_tfa_app_codes(opts = {})
       data, _status_code, _headers = update_tfa_app_codes_with_http_info(opts)
       data
@@ -405,7 +405,7 @@ module DocspaceApiSdk
     # Requests the new backup codes for the two-factor authentication application.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tfa-app-codes/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ObjectArrayWrapper, Integer, Hash)>] ObjectArrayWrapper data, response status code and response headers
+    # @return [Array<(TfaAppCodeArrayWrapper, Integer, Hash)>] TfaAppCodeArrayWrapper data, response status code and response headers
     def update_tfa_app_codes_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Settings::TFASettingsApi.update_tfa_app_codes ...'
@@ -428,7 +428,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ObjectArrayWrapper'
+      return_type = opts[:debug_return_type] || 'TfaAppCodeArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -516,8 +516,8 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Get a confirmation email for updating TFA settings
-    # Returns the confirmation email URL for updating TFA settings.
+    # Updates TFA settings
+    # Updates TFA settings and returns the confirmation URL for authorization via SMS or TFA application.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tfa-settings-link/
     # @param [Hash] opts the optional parameters
     # @option opts [TfaRequestsDto] :tfa_requests_dto 
@@ -527,8 +527,8 @@ module DocspaceApiSdk
       data
     end
 
-    # Get a confirmation email for updating TFA settings
-    # Returns the confirmation email URL for updating TFA settings.
+    # Updates TFA settings
+    # Updates TFA settings and returns the confirmation URL for authorization via SMS or TFA application.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tfa-settings-link/
     # @param [Hash] opts the optional parameters
     # @option opts [TfaRequestsDto] :tfa_requests_dto 

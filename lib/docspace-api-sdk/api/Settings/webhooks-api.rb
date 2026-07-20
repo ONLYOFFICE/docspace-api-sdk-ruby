@@ -215,20 +215,20 @@ module DocspaceApiSdk
     end
 
     # Get webhook triggers
-    # Returns a list of triggers for a webhook.
+    # Returns a list of triggers for a webhook with their availability for the current user.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-webhook-triggers/
     # @param [Hash] opts the optional parameters
-    # @return [GetWebhookTriggers200Response]
+    # @return [WebhookTriggerArrayWrapper]
     def get_webhook_triggers(opts = {})
       data, _status_code, _headers = get_webhook_triggers_with_http_info(opts)
       data
     end
 
     # Get webhook triggers
-    # Returns a list of triggers for a webhook.
+    # Returns a list of triggers for a webhook with their availability for the current user.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-webhook-triggers/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(GetWebhookTriggers200Response, Integer, Hash)>] GetWebhookTriggers200Response data, response status code and response headers
+    # @return [Array<(WebhookTriggerArrayWrapper, Integer, Hash)>] WebhookTriggerArrayWrapper data, response status code and response headers
     def get_webhook_triggers_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Settings::WebhooksApi.get_webhook_triggers ...'
@@ -251,7 +251,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'GetWebhookTriggers200Response'
+      return_type = opts[:debug_return_type] || 'WebhookTriggerArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']

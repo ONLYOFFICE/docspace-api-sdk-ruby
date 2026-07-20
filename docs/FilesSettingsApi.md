@@ -9,6 +9,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | [**change_default_access_rights**](FilesSettingsApi.md#change_default_access_rights) | **PUT** /api/2.0/files/settings/dafaultaccessrights | Change the default access rights |
 | [**change_delete_confirm**](FilesSettingsApi.md#change_delete_confirm) | **PUT** /api/2.0/files/changedeleteconfrim | Confirm the file deletion |
 | [**change_download_zip_from_body**](FilesSettingsApi.md#change_download_zip_from_body) | **PUT** /api/2.0/files/settings/downloadtargz | Change the archive format (using body parameters) |
+| [**change_external_sharing_settings**](FilesSettingsApi.md#change_external_sharing_settings) | **PUT** /api/2.0/files/settings/externalsharingsettings | Change the Access Control external sharing settings |
 | [**check_doc_service_url**](FilesSettingsApi.md#check_doc_service_url) | **PUT** /api/2.0/files/docservice | Check the document service URL |
 | [**display_file_extension**](FilesSettingsApi.md#display_file_extension) | **PUT** /api/2.0/files/displayfileextension | Display a file extension |
 | [**display_recent**](FilesSettingsApi.md#display_recent) | **PUT** /api/2.0/files/displayrecent | Display the Recent folder |
@@ -479,6 +480,97 @@ end
 ### Return type
 
 [**ICompressWrapper**](ICompressWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## change_external_sharing_settings
+
+> <ExternalSharingSettingsWrapper> change_external_sharing_settings(opts)
+
+Change the Access Control external sharing settings
+
+Changes the Access Control external sharing settings.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-external-sharing-settings/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Files::SettingsApi.new
+opts = {
+  external_sharing_settings_request_dto: DocspaceApiSdk::ExternalSharingSettingsRequestDto.new # ExternalSharingSettingsRequestDto | 
+}
+
+begin
+  # Change the Access Control external sharing settings
+  result = api_instance.change_external_sharing_settings(opts)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Files::SettingsApi->change_external_sharing_settings: #{e}"
+end
+```
+
+#### Using the change_external_sharing_settings_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ExternalSharingSettingsWrapper>, Integer, Hash)> change_external_sharing_settings_with_http_info(opts)
+
+```ruby
+begin
+  # Change the Access Control external sharing settings
+  data, status_code, headers = api_instance.change_external_sharing_settings_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ExternalSharingSettingsWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Files::SettingsApi->change_external_sharing_settings_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **external_sharing_settings_request_dto** | [**ExternalSharingSettingsRequestDto**](ExternalSharingSettingsRequestDto.md) |  | [optional] |
+
+### Return type
+
+[**ExternalSharingSettingsWrapper**](ExternalSharingSettingsWrapper.md)
 
 ### Authorization
 

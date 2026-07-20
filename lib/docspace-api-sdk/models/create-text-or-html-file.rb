@@ -104,8 +104,8 @@ module DocspaceApiSdk
         invalid_properties.push('invalid value for "title", the character length must be smaller than or equal to 165.')
       end
 
-      if @title.to_s.length < 0
-        invalid_properties.push('invalid value for "title", the character length must be greater than or equal to 0.')
+      if @title.to_s.length < 1
+        invalid_properties.push('invalid value for "title", the character length must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -116,7 +116,7 @@ module DocspaceApiSdk
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @title.to_s.length > 165
-      return false if @title.to_s.length < 0
+      return false if @title.to_s.length < 1
       true
     end
 
@@ -127,8 +127,8 @@ module DocspaceApiSdk
         fail ArgumentError, 'invalid value for "title", the character length must be smaller than or equal to 165.'
       end
 
-      if !title.nil? && title.to_s.length < 0
-        fail ArgumentError, 'invalid value for "title", the character length must be greater than or equal to 0.'
+      if !title.nil? && title.to_s.length < 1
+        fail ArgumentError, 'invalid value for "title", the character length must be greater than or equal to 1.'
       end
 
       @title = title

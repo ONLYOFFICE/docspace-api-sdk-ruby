@@ -284,7 +284,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'ObjectWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
 
       new_options = opts.merge(
         :operation => :"Security::AuditTrailDataApi.get_audit_trail_mappers",
@@ -343,7 +343,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'ObjectWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
 
       new_options = opts.merge(
         :operation => :"Security::AuditTrailDataApi.get_audit_trail_types",

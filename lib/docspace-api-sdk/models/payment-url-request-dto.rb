@@ -19,8 +19,11 @@ require 'time'
 module DocspaceApiSdk
   # The request parameters for the payment URL configuration with quantity information.
   class PaymentUrlRequestDto < ApiModelBase
-    # The URL where the user will be redirected after payment processing.
+    # The URL where the user will be redirected after payment cancellation.
     attr_accessor :back_url
+
+    # The URL where the user will be redirected after successful payment.
+    attr_accessor :success_url
 
     # The payment quantity.
     attr_accessor :quantity
@@ -29,6 +32,7 @@ module DocspaceApiSdk
     def self.attribute_map
       {
         :'back_url' => :'backUrl',
+        :'success_url' => :'successUrl',
         :'quantity' => :'quantity'
       }
     end
@@ -47,6 +51,7 @@ module DocspaceApiSdk
     def self.openapi_types
       {
         :'back_url' => :'String',
+        :'success_url' => :'String',
         :'quantity' => :'Hash<String, Integer>'
       }
     end
@@ -54,7 +59,6 @@ module DocspaceApiSdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'back_url',
         :'quantity'
       ])
     end
@@ -77,6 +81,14 @@ module DocspaceApiSdk
 
       if attributes.key?(:'back_url')
         self.back_url = attributes[:'back_url']
+      else
+        self.back_url = nil
+      end
+
+      if attributes.key?(:'success_url')
+        self.success_url = attributes[:'success_url']
+      else
+        self.success_url = nil
       end
 
       if attributes.key?(:'quantity')
@@ -91,6 +103,30 @@ module DocspaceApiSdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @back_url.nil?
+        invalid_properties.push('invalid value for "back_url", back_url cannot be nil.')
+      end
+
+      if @back_url.to_s.length > 255
+        invalid_properties.push('invalid value for "back_url", the character length must be smaller than or equal to 255.')
+      end
+
+      if @back_url.to_s.length < 0
+        invalid_properties.push('invalid value for "back_url", the character length must be greater than or equal to 0.')
+      end
+
+      if @success_url.nil?
+        invalid_properties.push('invalid value for "success_url", success_url cannot be nil.')
+      end
+
+      if @success_url.to_s.length > 255
+        invalid_properties.push('invalid value for "success_url", the character length must be smaller than or equal to 255.')
+      end
+
+      if @success_url.to_s.length < 0
+        invalid_properties.push('invalid value for "success_url", the character length must be greater than or equal to 0.')
+      end
+
       invalid_properties
     end
 
@@ -98,7 +134,49 @@ module DocspaceApiSdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @back_url.nil?
+      return false if @back_url.to_s.length > 255
+      return false if @back_url.to_s.length < 0
+      return false if @success_url.nil?
+      return false if @success_url.to_s.length > 255
+      return false if @success_url.to_s.length < 0
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] back_url Value to be assigned
+    def back_url=(back_url)
+      if back_url.nil?
+        fail ArgumentError, 'back_url cannot be nil'
+      end
+
+      if back_url.to_s.length > 255
+        fail ArgumentError, 'invalid value for "back_url", the character length must be smaller than or equal to 255.'
+      end
+
+      if back_url.to_s.length < 0
+        fail ArgumentError, 'invalid value for "back_url", the character length must be greater than or equal to 0.'
+      end
+
+      @back_url = back_url
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] success_url Value to be assigned
+    def success_url=(success_url)
+      if success_url.nil?
+        fail ArgumentError, 'success_url cannot be nil'
+      end
+
+      if success_url.to_s.length > 255
+        fail ArgumentError, 'invalid value for "success_url", the character length must be smaller than or equal to 255.'
+      end
+
+      if success_url.to_s.length < 0
+        fail ArgumentError, 'invalid value for "success_url", the character length must be greater than or equal to 0.'
+      end
+
+      @success_url = success_url
     end
 
     # Checks equality by comparing each attribute.
@@ -107,6 +185,7 @@ module DocspaceApiSdk
       return true if self.equal?(o)
       self.class == o.class &&
           back_url == o.back_url &&
+          success_url == o.success_url &&
           quantity == o.quantity
     end
 
@@ -119,7 +198,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [back_url, quantity].hash
+      [back_url, success_url, quantity].hash
     end
 
     # Builds the object from hash

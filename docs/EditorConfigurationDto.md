@@ -34,8 +34,8 @@ instance = DocspaceApiSdk::EditorConfigurationDto.new(
   mode: edit,
   mode_write: true,
   plugins: null,
-  recent: null,
-  templates: null,
+  recent: [],
+  templates: [],
   user: null
 )
 ```

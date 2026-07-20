@@ -51,6 +51,36 @@ module DocspaceApiSdk
     # The participant display name.
     attr_accessor :participant_display_name
 
+    # AI Agent id.
+    attr_accessor :agent_id
+
+    # AI Agent name.
+    attr_accessor :agent_title
+
+    attr_accessor :type
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -64,7 +94,10 @@ module DocspaceApiSdk
         :'credit' => :'credit',
         :'debit' => :'debit',
         :'participant_name' => :'participantName',
-        :'participant_display_name' => :'participantDisplayName'
+        :'participant_display_name' => :'participantDisplayName',
+        :'agent_id' => :'agentId',
+        :'agent_title' => :'agentTitle',
+        :'type' => :'type'
       }
     end
 
@@ -91,7 +124,10 @@ module DocspaceApiSdk
         :'credit' => :'Float',
         :'debit' => :'Float',
         :'participant_name' => :'String',
-        :'participant_display_name' => :'String'
+        :'participant_display_name' => :'String',
+        :'agent_id' => :'String',
+        :'agent_title' => :'String',
+        :'type' => :'OperationType'
       }
     end
 
@@ -104,7 +140,9 @@ module DocspaceApiSdk
         :'service_unit',
         :'currency',
         :'participant_name',
-        :'participant_display_name'
+        :'participant_display_name',
+        :'agent_id',
+        :'agent_title',
       ])
     end
 
@@ -167,6 +205,18 @@ module DocspaceApiSdk
       if attributes.key?(:'participant_display_name')
         self.participant_display_name = attributes[:'participant_display_name']
       end
+
+      if attributes.key?(:'agent_id')
+        self.agent_id = attributes[:'agent_id']
+      end
+
+      if attributes.key?(:'agent_title')
+        self.agent_title = attributes[:'agent_title']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -199,7 +249,10 @@ module DocspaceApiSdk
           credit == o.credit &&
           debit == o.debit &&
           participant_name == o.participant_name &&
-          participant_display_name == o.participant_display_name
+          participant_display_name == o.participant_display_name &&
+          agent_id == o.agent_id &&
+          agent_title == o.agent_title &&
+          type == o.type
     end
 
     # @see the `==` method
@@ -211,7 +264,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [date, service, description, details, service_unit, quantity, currency, credit, debit, participant_name, participant_display_name].hash
+      [date, service, description, details, service_unit, quantity, currency, credit, debit, participant_name, participant_display_name, agent_id, agent_title, type].hash
     end
 
     # Builds the object from hash

@@ -10,6 +10,7 @@
 | **owned_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] |
 | **shared** | **Boolean** | Specifies if the file entry is shared via link or not. | [optional] |
 | **shared_for_user** | **Boolean** | Specifies if the file entry is shared for user or not. | [optional] |
+| **shared_external** | **Boolean** | Specifies if the file entry is shared via a public (non-internal) external link. | [optional] |
 | **parent_shared** | **Boolean** | Indicates whether the parent entity is shared. | [optional] |
 | **short_web_url** | **String** | The short Web URL. | [optional] |
 | **created** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] |
@@ -52,6 +53,7 @@ instance = DocspaceApiSdk::FileEntryDtoString.new(
   owned_by: null,
   shared: false,
   shared_for_user: false,
+  shared_external: false,
   parent_shared: false,
   short_web_url: http://localhost/s/abc123,
   created: null,

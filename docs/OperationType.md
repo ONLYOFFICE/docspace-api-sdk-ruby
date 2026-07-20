@@ -3,41 +3,43 @@
 ## Enum
 
 
-* `Any` (value: `0`)
+* `Unknown` (value: `0`)
 
-* `Unknown` (value: `1`)
+* `ServicePayment` (value: `1`)
 
-* `ServicePayment` (value: `2`)
+* `PackagePayment` (value: `2`)
 
-* `PackagePayment` (value: `4`)
+* `AiServicePayment` (value: `3`)
 
-* `ServiceUsage` (value: `8`)
+* `Deposit` (value: `4`)
 
-* `Deposit` (value: `16`)
+* `ReceiveProviderInvoice` (value: `5`)
 
-* `ReceiveProviderInvoice` (value: `32`)
+* `ProcessProviderInvoice` (value: `6`)
 
-* `ProcessProviderInvoice` (value: `64`)
+* `WriteOffServiceProfit` (value: `7`)
 
-* `WriteOffServiceProfit` (value: `128`)
+* `Profit` (value: `8`)
 
-* `Profit` (value: `256`)
+* `PartnerAccrual` (value: `9`)
 
-* `PartnerAccrual` (value: `512`)
+* `ProviderPayment` (value: `10`)
 
-* `ProviderPayment` (value: `1024`)
+* `PartnerPayment` (value: `11`)
 
-* `PartnerPayment` (value: `2048`)
+* `Refund` (value: `12`)
 
-* `Refund` (value: `4096`)
+* `BankDeposit` (value: `13`)
 
-* `BankDeposit` (value: `8192`)
+* `BankWithdrawal` (value: `14`)
 
-* `BankWithdrawal` (value: `16384`)
+* `GoodwillCredit` (value: `15`)
 
-* `GoodwillCredit` (value: `32768`)
+* `WriteOffProfit` (value: `16`)
 
-* `WriteOffProfit` (value: `65536`)
+* `WriteOffDifferenceCurrency` (value: `17`)
 
-* `WriteOffDifferenceCurrency` (value: `131072`)
+* `AiDebit` (value: `18`)
+
+* `AiCredit` (value: `19`)
 

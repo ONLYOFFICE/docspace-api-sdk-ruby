@@ -11,11 +11,7 @@
 | **first_name** | **String** | The user first name. | [optional] |
 | **last_name** | **String** | The user last name. | [optional] |
 | **department** | **Array&lt;String&gt;** | The list of the user departments. | [optional] |
-| **title** | **String** | The user title. | [optional] |
 | **location** | **String** | The user location. | [optional] |
-| **sex** | [**SexEnum**](SexEnum.md) |  | [optional] |
-| **birthday** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] |
-| **worksfrom** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] |
 | **comment** | **String** | The user comment. | [optional] |
 | **contacts** | [**Array&lt;Contact&gt;**](Contact.md) | The list of the user contacts. | [optional] |
 | **files** | **String** | The user avatar photo URL. | [optional] |
@@ -34,11 +30,7 @@ instance = DocspaceApiSdk::UpdateMemberRequestDto.new(
   first_name: John,
   last_name: Doe,
   department: ["00000000-0000-0000-0000-000000000000"],
-  title: Manager,
   location: New York,
-  sex: null,
-  birthday: null,
-  worksfrom: null,
   comment: User comment,
   contacts: [{"type":"email","value":"john.doe@example.com"}],
   files: https://example.com/avatar.jpg,

@@ -40,17 +40,8 @@ module DocspaceApiSdk
     # The list of the user departments.
     attr_accessor :department
 
-    # The user title.
-    attr_accessor :title
-
     # The user location.
     attr_accessor :location
-
-    attr_accessor :sex
-
-    attr_accessor :birthday
-
-    attr_accessor :worksfrom
 
     # The user comment.
     attr_accessor :comment
@@ -64,28 +55,6 @@ module DocspaceApiSdk
     # Specifies if tips, updates and offers are allowed to be sent to the user or not.
     attr_accessor :spam
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -96,11 +65,7 @@ module DocspaceApiSdk
         :'first_name' => :'firstName',
         :'last_name' => :'lastName',
         :'department' => :'department',
-        :'title' => :'title',
         :'location' => :'location',
-        :'sex' => :'sex',
-        :'birthday' => :'birthday',
-        :'worksfrom' => :'worksfrom',
         :'comment' => :'comment',
         :'contacts' => :'contacts',
         :'files' => :'files',
@@ -128,11 +93,7 @@ module DocspaceApiSdk
         :'first_name' => :'String',
         :'last_name' => :'String',
         :'department' => :'Array<String>',
-        :'title' => :'String',
         :'location' => :'String',
-        :'sex' => :'SexEnum',
-        :'birthday' => :'ApiDateTime',
-        :'worksfrom' => :'ApiDateTime',
         :'comment' => :'String',
         :'contacts' => :'Array<Contact>',
         :'files' => :'String',
@@ -150,7 +111,6 @@ module DocspaceApiSdk
         :'first_name',
         :'last_name',
         :'department',
-        :'title',
         :'location',
         :'comment',
         :'contacts',
@@ -205,24 +165,8 @@ module DocspaceApiSdk
         end
       end
 
-      if attributes.key?(:'title')
-        self.title = attributes[:'title']
-      end
-
       if attributes.key?(:'location')
         self.location = attributes[:'location']
-      end
-
-      if attributes.key?(:'sex')
-        self.sex = attributes[:'sex']
-      end
-
-      if attributes.key?(:'birthday')
-        self.birthday = attributes[:'birthday']
-      end
-
-      if attributes.key?(:'worksfrom')
-        self.worksfrom = attributes[:'worksfrom']
       end
 
       if attributes.key?(:'comment')
@@ -273,14 +217,6 @@ module DocspaceApiSdk
         invalid_properties.push('invalid value for "last_name", the character length must be greater than or equal to 0.')
       end
 
-      if !@title.nil? && @title.to_s.length > 255
-        invalid_properties.push('invalid value for "title", the character length must be smaller than or equal to 255.')
-      end
-
-      if !@title.nil? && @title.to_s.length < 0
-        invalid_properties.push('invalid value for "title", the character length must be greater than or equal to 0.')
-      end
-
       invalid_properties
     end
 
@@ -294,8 +230,6 @@ module DocspaceApiSdk
       return false if !@first_name.nil? && @first_name.to_s.length < 0
       return false if !@last_name.nil? && @last_name.to_s.length > 255
       return false if !@last_name.nil? && @last_name.to_s.length < 0
-      return false if !@title.nil? && @title.to_s.length > 255
-      return false if !@title.nil? && @title.to_s.length < 0
       true
     end
 
@@ -341,20 +275,6 @@ module DocspaceApiSdk
       @last_name = last_name
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] title Value to be assigned
-    def title=(title)
-      if !title.nil? && title.to_s.length > 255
-        fail ArgumentError, 'invalid value for "title", the character length must be smaller than or equal to 255.'
-      end
-
-      if !title.nil? && title.to_s.length < 0
-        fail ArgumentError, 'invalid value for "title", the character length must be greater than or equal to 0.'
-      end
-
-      @title = title
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -367,11 +287,7 @@ module DocspaceApiSdk
           first_name == o.first_name &&
           last_name == o.last_name &&
           department == o.department &&
-          title == o.title &&
           location == o.location &&
-          sex == o.sex &&
-          birthday == o.birthday &&
-          worksfrom == o.worksfrom &&
           comment == o.comment &&
           contacts == o.contacts &&
           files == o.files &&
@@ -387,7 +303,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [user_id, disable, email, is_user, first_name, last_name, department, title, location, sex, birthday, worksfrom, comment, contacts, files, spam].hash
+      [user_id, disable, email, is_user, first_name, last_name, department, location, comment, contacts, files, spam].hash
     end
 
     # Builds the object from hash

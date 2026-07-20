@@ -353,6 +353,72 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
+    # Change the Access Control external sharing settings
+    # Changes the Access Control external sharing settings.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-external-sharing-settings/
+    # @param [Hash] opts the optional parameters
+    # @option opts [ExternalSharingSettingsRequestDto] :external_sharing_settings_request_dto 
+    # @return [ExternalSharingSettingsWrapper]
+    def change_external_sharing_settings(opts = {})
+      data, _status_code, _headers = change_external_sharing_settings_with_http_info(opts)
+      data
+    end
+
+    # Change the Access Control external sharing settings
+    # Changes the Access Control external sharing settings.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-external-sharing-settings/
+    # @param [Hash] opts the optional parameters
+    # @option opts [ExternalSharingSettingsRequestDto] :external_sharing_settings_request_dto 
+    # @return [Array<(ExternalSharingSettingsWrapper, Integer, Hash)>] ExternalSharingSettingsWrapper data, response status code and response headers
+    def change_external_sharing_settings_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: Files::SettingsApi.change_external_sharing_settings ...'
+      end
+      # resource path
+      local_var_path = '/api/2.0/files/settings/externalsharingsettings'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'external_sharing_settings_request_dto'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ExternalSharingSettingsWrapper'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
+
+      new_options = opts.merge(
+        :operation => :"Files::SettingsApi.change_external_sharing_settings",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: Files::SettingsApi#change_external_sharing_settings\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Check the document service URL
     # Checks the document service location URL.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-doc-service-url/

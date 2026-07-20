@@ -18,14 +18,13 @@ require 'time'
 
 module DocspaceApiSdk
   class OperationStatus
-    Any = 0.freeze
-    Pending = 1.freeze
-    Completed = 2.freeze
-    Rejected = 4.freeze
-    Canceled = 8.freeze
+    Pending = 0.freeze
+    Completed = 1.freeze
+    Rejected = 2.freeze
+    Canceled = 3.freeze
 
     def self.all_vars
-      @all_vars ||= [Any, Pending, Completed, Rejected, Canceled].freeze
+      @all_vars ||= [Pending, Completed, Rejected, Canceled].freeze
     end
 
     # Builds the enum from string

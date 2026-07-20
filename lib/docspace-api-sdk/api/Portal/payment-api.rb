@@ -23,72 +23,6 @@ module DocspaceApiSdk
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Purchases a wallet service with the specified quantity.
-    # This method processes a payment for a wallet service using the configured payment method.  Requires the tariff service to be configured and a valid payment method to be set for the customer.  Rate limiting is applied according to the payments API policy.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/buy-wallet-service/
-    # @param [Hash] opts the optional parameters
-    # @option opts [BuyWalletServiceRequestDto] :buy_wallet_service_request_dto 
-    # @return [ServicePaymentWrapper]
-    def buy_wallet_service(opts = {})
-      data, _status_code, _headers = buy_wallet_service_with_http_info(opts)
-      data
-    end
-
-    # Purchases a wallet service with the specified quantity.
-    # This method processes a payment for a wallet service using the configured payment method.  Requires the tariff service to be configured and a valid payment method to be set for the customer.  Rate limiting is applied according to the payments API policy.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/buy-wallet-service/
-    # @param [Hash] opts the optional parameters
-    # @option opts [BuyWalletServiceRequestDto] :buy_wallet_service_request_dto 
-    # @return [Array<(ServicePaymentWrapper, Integer, Hash)>] ServicePaymentWrapper data, response status code and response headers
-    def buy_wallet_service_with_http_info(opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Portal::PaymentApi.buy_wallet_service ...'
-      end
-      # resource path
-      local_var_path = '/api/2.0/portal/payment/buywalletservice'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'buy_wallet_service_request_dto'])
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ServicePaymentWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Portal::PaymentApi.buy_wallet_service",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Portal::PaymentApi#buy_wallet_service\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Calculate the wallet payment amount
     # Calculates an amount of the wallet payment with the parameters specified in the request.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/calculate-wallet-payment/
@@ -287,6 +221,72 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
+    # Credit AI balance
+    # Credits AI quota to the customer AI sub-account from their main balance.  Requires the customer to have a configured payment method.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/credit-ai-balance/
+    # @param [Hash] opts the optional parameters
+    # @option opts [CreditAiBalanceRequestDto] :credit_ai_balance_request_dto 
+    # @return [ServicePaymentWrapper]
+    def credit_ai_balance(opts = {})
+      data, _status_code, _headers = credit_ai_balance_with_http_info(opts)
+      data
+    end
+
+    # Credit AI balance
+    # Credits AI quota to the customer AI sub-account from their main balance.  Requires the customer to have a configured payment method.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/credit-ai-balance/
+    # @param [Hash] opts the optional parameters
+    # @option opts [CreditAiBalanceRequestDto] :credit_ai_balance_request_dto 
+    # @return [Array<(ServicePaymentWrapper, Integer, Hash)>] ServicePaymentWrapper data, response status code and response headers
+    def credit_ai_balance_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: Portal::PaymentApi.credit_ai_balance ...'
+      end
+      # resource path
+      local_var_path = '/api/2.0/portal/payment/creditaibalance'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'credit_ai_balance_request_dto'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ServicePaymentWrapper'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
+
+      new_options = opts.merge(
+        :operation => :"Portal::PaymentApi.credit_ai_balance",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: Portal::PaymentApi#credit_ai_balance\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get AI model prices
     # Retrieves the pricing information for AI models including chat, embedding, and web search services.  The prices are returned in the configured currency and normalized per million tokens.  Requires administrator permissions to access.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-ai-prices/
@@ -349,30 +349,57 @@ module DocspaceApiSdk
     # Get the checkout setup page URL
     # Returns the URL to the checkout setup page.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-checkout-setup-url/
+    # @param back_url [String] The URL where the user will be redirected after setup cancellation.
+    # @param success_url [String] The URL where the user will be redirected after successful payment.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :back_url The URL where the user will be redirected after completing the setup.
     # @return [StringWrapper]
-    def get_checkout_setup_url(opts = {})
-      data, _status_code, _headers = get_checkout_setup_url_with_http_info(opts)
+    def get_checkout_setup_url(back_url, success_url, opts = {})
+      data, _status_code, _headers = get_checkout_setup_url_with_http_info(back_url, success_url, opts)
       data
     end
 
     # Get the checkout setup page URL
     # Returns the URL to the checkout setup page.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-checkout-setup-url/
+    # @param back_url [String] The URL where the user will be redirected after setup cancellation.
+    # @param success_url [String] The URL where the user will be redirected after successful payment.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :back_url The URL where the user will be redirected after completing the setup.
     # @return [Array<(StringWrapper, Integer, Hash)>] StringWrapper data, response status code and response headers
-    def get_checkout_setup_url_with_http_info(opts = {})
+    def get_checkout_setup_url_with_http_info(back_url, success_url, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Portal::PaymentApi.get_checkout_setup_url ...'
       end
+      # verify the required parameter 'back_url' is set
+      if @api_client.config.client_side_validation && back_url.nil?
+        fail ArgumentError, "Missing the required parameter 'back_url' when calling Portal::PaymentApi.get_checkout_setup_url"
+      end
+      if @api_client.config.client_side_validation && back_url.to_s.length > 255
+        fail ArgumentError, 'invalid value for "back_url" when calling Portal::PaymentApi.get_checkout_setup_url, the character length must be smaller than or equal to 255.'
+      end
+
+      if @api_client.config.client_side_validation && back_url.to_s.length < 0
+        fail ArgumentError, 'invalid value for "back_url" when calling Portal::PaymentApi.get_checkout_setup_url, the character length must be greater than or equal to 0.'
+      end
+
+      # verify the required parameter 'success_url' is set
+      if @api_client.config.client_side_validation && success_url.nil?
+        fail ArgumentError, "Missing the required parameter 'success_url' when calling Portal::PaymentApi.get_checkout_setup_url"
+      end
+      if @api_client.config.client_side_validation && success_url.to_s.length > 255
+        fail ArgumentError, 'invalid value for "success_url" when calling Portal::PaymentApi.get_checkout_setup_url, the character length must be smaller than or equal to 255.'
+      end
+
+      if @api_client.config.client_side_validation && success_url.to_s.length < 0
+        fail ArgumentError, 'invalid value for "success_url" when calling Portal::PaymentApi.get_checkout_setup_url, the character length must be greater than or equal to 0.'
+      end
+
       # resource path
       local_var_path = '/api/2.0/portal/payment/checkoutsetupurl'
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'BackUrl'] = opts[:'back_url'] if !opts[:'back_url'].nil?
+      query_params[:'BackUrl'] = back_url
+      query_params[:'SuccessUrl'] = success_url
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -404,6 +431,68 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Portal::PaymentApi#get_checkout_setup_url\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get the customer AI balance
+    # Returns the AI quota balance of a customer from the accounting service.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-ai-balance/
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :refresh Specifies whether to refresh the payment information cache or not.
+    # @return [BalanceWrapper]
+    def get_customer_ai_balance(opts = {})
+      data, _status_code, _headers = get_customer_ai_balance_with_http_info(opts)
+      data
+    end
+
+    # Get the customer AI balance
+    # Returns the AI quota balance of a customer from the accounting service.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-ai-balance/
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :refresh Specifies whether to refresh the payment information cache or not.
+    # @return [Array<(BalanceWrapper, Integer, Hash)>] BalanceWrapper data, response status code and response headers
+    def get_customer_ai_balance_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: Portal::PaymentApi.get_customer_ai_balance ...'
+      end
+      # resource path
+      local_var_path = '/api/2.0/portal/payment/customer/aibalance'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'refresh'] = opts[:'refresh'] if !opts[:'refresh'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'BalanceWrapper'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
+
+      new_options = opts.merge(
+        :operation => :"Portal::PaymentApi.get_customer_ai_balance",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: Portal::PaymentApi#get_customer_ai_balance\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -539,14 +628,13 @@ module DocspaceApiSdk
     # @option opts [Integer] :offset The number of items to skip for pagination. The default value is 0.
     # @option opts [Integer] :limit The maximum number of items to return for pagination. The default value is 25.
     # @option opts [String] :service_name The service name.
-    # @option opts [Boolean] :write_off_service_quota Write-off of the quota for the service
     # @option opts [Time] :start_date The report start date.
     # @option opts [Time] :end_date The report end date.
     # @option opts [String] :participant_name The participant name.
     # @option opts [Boolean] :credit Specifies whether to include credit operations in the report.
     # @option opts [Boolean] :debit Specifies whether to include debit operations in the report.
-    # @option opts [OperationType] :types List of operation types to filter by.
-    # @option opts [OperationStatus] :status List of operation status to filter by.
+    # @option opts [OperationType] :type The operation type to filter by.
+    # @option opts [OperationStatus] :status The operation status to filter by.
     # @option opts [String] :order_by The field to order by.
     # @option opts [OperationOrderType] :order_type Order direction: Ascending or Descending.
     # @return [ReportWrapper]
@@ -562,14 +650,13 @@ module DocspaceApiSdk
     # @option opts [Integer] :offset The number of items to skip for pagination. The default value is 0.
     # @option opts [Integer] :limit The maximum number of items to return for pagination. The default value is 25.
     # @option opts [String] :service_name The service name.
-    # @option opts [Boolean] :write_off_service_quota Write-off of the quota for the service
     # @option opts [Time] :start_date The report start date.
     # @option opts [Time] :end_date The report end date.
     # @option opts [String] :participant_name The participant name.
     # @option opts [Boolean] :credit Specifies whether to include credit operations in the report.
     # @option opts [Boolean] :debit Specifies whether to include debit operations in the report.
-    # @option opts [OperationType] :types List of operation types to filter by.
-    # @option opts [OperationStatus] :status List of operation status to filter by.
+    # @option opts [OperationType] :type The operation type to filter by.
+    # @option opts [OperationStatus] :status The operation status to filter by.
     # @option opts [String] :order_by The field to order by.
     # @option opts [OperationOrderType] :order_type Order direction: Ascending or Descending.
     # @return [Array<(ReportWrapper, Integer, Hash)>] ReportWrapper data, response status code and response headers
@@ -585,13 +672,12 @@ module DocspaceApiSdk
       query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
       query_params[:'ServiceName'] = opts[:'service_name'] if !opts[:'service_name'].nil?
-      query_params[:'WriteOffServiceQuota'] = opts[:'write_off_service_quota'] if !opts[:'write_off_service_quota'].nil?
       query_params[:'StartDate'] = opts[:'start_date'] if !opts[:'start_date'].nil?
       query_params[:'EndDate'] = opts[:'end_date'] if !opts[:'end_date'].nil?
       query_params[:'ParticipantName'] = opts[:'participant_name'] if !opts[:'participant_name'].nil?
       query_params[:'Credit'] = opts[:'credit'] if !opts[:'credit'].nil?
       query_params[:'Debit'] = opts[:'debit'] if !opts[:'debit'].nil?
-      query_params[:'Types'] = opts[:'types'] if !opts[:'types'].nil?
+      query_params[:'Type'] = opts[:'type'] if !opts[:'type'].nil?
       query_params[:'Status'] = opts[:'status'] if !opts[:'status'].nil?
       query_params[:'OrderBy'] = opts[:'order_by'] if !opts[:'order_by'].nil?
       query_params[:'OrderType'] = opts[:'order_type'] if !opts[:'order_type'].nil?
@@ -689,71 +775,6 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Get the service quota
-    # Returns the service quota from the accounting service.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-service-quota/
-    # @param [Hash] opts the optional parameters
-    # @option opts [String] :service_name The service name.
-    # @option opts [Boolean] :refresh Specifies whether to refresh the payment information cache or not.
-    # @return [BalanceWrapper]
-    def get_customer_service_quota(opts = {})
-      data, _status_code, _headers = get_customer_service_quota_with_http_info(opts)
-      data
-    end
-
-    # Get the service quota
-    # Returns the service quota from the accounting service.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-service-quota/
-    # @param [Hash] opts the optional parameters
-    # @option opts [String] :service_name The service name.
-    # @option opts [Boolean] :refresh Specifies whether to refresh the payment information cache or not.
-    # @return [Array<(BalanceWrapper, Integer, Hash)>] BalanceWrapper data, response status code and response headers
-    def get_customer_service_quota_with_http_info(opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Portal::PaymentApi.get_customer_service_quota ...'
-      end
-      # resource path
-      local_var_path = '/api/2.0/portal/payment/customer/servicequota'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'serviceName'] = opts[:'service_name'] if !opts[:'service_name'].nil?
-      query_params[:'refresh'] = opts[:'refresh'] if !opts[:'refresh'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'BalanceWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Portal::PaymentApi.get_customer_service_quota",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Portal::PaymentApi#get_customer_service_quota\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Get the payment account
     # Returns the URL to the payment account.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-account/
@@ -775,6 +796,14 @@ module DocspaceApiSdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Portal::PaymentApi.get_payment_account ...'
       end
+      if @api_client.config.client_side_validation && !opts[:'back_url'].nil? && opts[:'back_url'].to_s.length > 255
+        fail ArgumentError, 'invalid value for "opts[:"back_url"]" when calling Portal::PaymentApi.get_payment_account, the character length must be smaller than or equal to 255.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'back_url'].nil? && opts[:'back_url'].to_s.length < 0
+        fail ArgumentError, 'invalid value for "opts[:"back_url"]" when calling Portal::PaymentApi.get_payment_account, the character length must be greater than or equal to 0.'
+      end
+
       # resource path
       local_var_path = '/api/2.0/portal/payment/account'
 

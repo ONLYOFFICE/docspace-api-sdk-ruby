@@ -88,12 +88,12 @@ module DocspaceApiSdk
 
       if attributes.key?(:'group_manager')
         self.group_manager = attributes[:'group_manager']
-      else
-        self.group_manager = nil
       end
 
       if attributes.key?(:'group_name')
         self.group_name = attributes[:'group_name']
+      else
+        self.group_name = nil
       end
     end
 
@@ -102,16 +102,12 @@ module DocspaceApiSdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @group_manager.nil?
-        invalid_properties.push('invalid value for "group_manager", group_manager cannot be nil.')
-      end
-
-      if !@group_name.nil? && @group_name.to_s.length > 128
+      if @group_name.to_s.length > 128
         invalid_properties.push('invalid value for "group_name", the character length must be smaller than or equal to 128.')
       end
 
-      if !@group_name.nil? && @group_name.to_s.length < 0
-        invalid_properties.push('invalid value for "group_name", the character length must be greater than or equal to 0.')
+      if @group_name.to_s.length < 1
+        invalid_properties.push('invalid value for "group_name", the character length must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -121,20 +117,9 @@ module DocspaceApiSdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @group_manager.nil?
-      return false if !@group_name.nil? && @group_name.to_s.length > 128
-      return false if !@group_name.nil? && @group_name.to_s.length < 0
+      return false if @group_name.to_s.length > 128
+      return false if @group_name.to_s.length < 1
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] group_manager Value to be assigned
-    def group_manager=(group_manager)
-      if group_manager.nil?
-        fail ArgumentError, 'group_manager cannot be nil'
-      end
-
-      @group_manager = group_manager
     end
 
     # Custom attribute writer method with validation
@@ -144,8 +129,8 @@ module DocspaceApiSdk
         fail ArgumentError, 'invalid value for "group_name", the character length must be smaller than or equal to 128.'
       end
 
-      if !group_name.nil? && group_name.to_s.length < 0
-        fail ArgumentError, 'invalid value for "group_name", the character length must be greater than or equal to 0.'
+      if !group_name.nil? && group_name.to_s.length < 1
+        fail ArgumentError, 'invalid value for "group_name", the character length must be greater than or equal to 1.'
       end
 
       @group_name = group_name

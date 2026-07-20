@@ -90,26 +90,26 @@ module DocspaceApiSdk
     end
 
     # Check if a user exists by email
-    # Returns a boolean indicating whether a user with the specified email exists on the portal.
+    # Returns data indicating whether a user with the specified email exists on the portal.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-user-exists-by-email/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :email The user email address.
     # @option opts [String] :encemail The user encrypted email address.
     # @option opts [String] :culture Culture
-    # @return [BooleanWrapper]
+    # @return [UserExistsResponseWrapper]
     def check_user_exists_by_email(opts = {})
       data, _status_code, _headers = check_user_exists_by_email_with_http_info(opts)
       data
     end
 
     # Check if a user exists by email
-    # Returns a boolean indicating whether a user with the specified email exists on the portal.
+    # Returns data indicating whether a user with the specified email exists on the portal.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-user-exists-by-email/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :email The user email address.
     # @option opts [String] :encemail The user encrypted email address.
     # @option opts [String] :culture Culture
-    # @return [Array<(BooleanWrapper, Integer, Hash)>] BooleanWrapper data, response status code and response headers
+    # @return [Array<(UserExistsResponseWrapper, Integer, Hash)>] UserExistsResponseWrapper data, response status code and response headers
     def check_user_exists_by_email_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: People::ProfilesApi.check_user_exists_by_email ...'
@@ -143,7 +143,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'BooleanWrapper'
+      return_type = opts[:debug_return_type] || 'UserExistsResponseWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']

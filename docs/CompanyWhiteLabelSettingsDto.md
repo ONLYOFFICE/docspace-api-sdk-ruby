@@ -19,7 +19,7 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::CompanyWhiteLabelSettingsDto.new(
-  company_name: Acme Corporation,
+  company_name: My Own Corporation,
   site: https://www.example.com,
   email: contact@example.com,
   address: 123 Business St, New York, NY 10001,

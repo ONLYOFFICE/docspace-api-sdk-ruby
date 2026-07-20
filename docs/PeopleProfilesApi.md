@@ -113,11 +113,11 @@ end
 
 ## check_user_exists_by_email
 
-> <BooleanWrapper> check_user_exists_by_email(opts)
+> <UserExistsResponseWrapper> check_user_exists_by_email(opts)
 
 Check if a user exists by email
 
-Returns a boolean indicating whether a user with the specified email exists on the portal.
+Returns data indicating whether a user with the specified email exists on the portal.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-user-exists-by-email/).
 
@@ -170,7 +170,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<BooleanWrapper>, Integer, Hash)> check_user_exists_by_email_with_http_info(opts)
+> <Array(<UserExistsResponseWrapper>, Integer, Hash)> check_user_exists_by_email_with_http_info(opts)
 
 ```ruby
 begin
@@ -178,7 +178,7 @@ begin
   data, status_code, headers = api_instance.check_user_exists_by_email_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <BooleanWrapper>
+  p data # => <UserExistsResponseWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling People::ProfilesApi->check_user_exists_by_email_with_http_info: #{e}"
 end
@@ -194,7 +194,7 @@ end
 
 ### Return type
 
-[**BooleanWrapper**](BooleanWrapper.md)
+[**UserExistsResponseWrapper**](UserExistsResponseWrapper.md)
 
 ### Authorization
 

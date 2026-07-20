@@ -490,7 +490,7 @@ end
 
 ## generate_xlsx_by_folder
 
-> <FileIntegerWrapper> generate_xlsx_by_folder(folder_id)
+> <XlsxReportResponseWrapper> generate_xlsx_by_folder(folder_id)
 
 Generate XLSX report by folder
 
@@ -543,7 +543,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<FileIntegerWrapper>, Integer, Hash)> generate_xlsx_by_folder_with_http_info(folder_id)
+> <Array(<XlsxReportResponseWrapper>, Integer, Hash)> generate_xlsx_by_folder_with_http_info(folder_id)
 
 ```ruby
 begin
@@ -551,7 +551,7 @@ begin
   data, status_code, headers = api_instance.generate_xlsx_by_folder_with_http_info(folder_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <FileIntegerWrapper>
+  p data # => <XlsxReportResponseWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FoldersApi->generate_xlsx_by_folder_with_http_info: #{e}"
 end
@@ -565,7 +565,7 @@ end
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**XlsxReportResponseWrapper**](XlsxReportResponseWrapper.md)
 
 ### Authorization
 
@@ -857,6 +857,7 @@ opts = {
   room_id: 1, # Integer | The room ID.
   exclude_subject: false, # Boolean | Specifies whether to exclude search by user or group ID.
   apply_filter_option: DocspaceApiSdk::ApplyFilterOption::All, # ApplyFilterOption | Specifies whether to return only files, only folders, or all elements from the specified folder.
+  with_sub_folders: true, # Boolean | Specifies whether to include files from subfolders in the results.
   extension: '.docx', # String | Specifies whether to search for the specific file extension.
   search_area: DocspaceApiSdk::SearchArea::Active, # SearchArea | The search area.
   forms_item_key: 'doc_key_123', # String | The forms item key.
@@ -907,6 +908,7 @@ end
 | **room_id** | **Integer** | The room ID. | [optional] |
 | **exclude_subject** | **Boolean** | Specifies whether to exclude search by user or group ID. | [optional] |
 | **apply_filter_option** | **ApplyFilterOption** | Specifies whether to return only files, only folders, or all elements from the specified folder. | [optional] |
+| **with_sub_folders** | **Boolean** | Specifies whether to include files from subfolders in the results. | [optional] |
 | **extension** | **String** | Specifies whether to search for the specific file extension. | [optional] |
 | **search_area** | **SearchArea** | The search area. | [optional] |
 | **forms_item_key** | **String** | The forms item key. | [optional] |
@@ -2559,7 +2561,7 @@ end
 
 ## upload_file
 
-> <ObjectWrapper> upload_file(folder_id, opts)
+> <FileIntegerArrayWrapper> upload_file(folder_id, opts)
 
 Upload a file
 
@@ -2599,7 +2601,10 @@ end
 api_instance = DocspaceApiSdk::Files::FoldersApi.new
 folder_id = 1 # Integer | The folder ID to upload a file.
 opts = {
-  upload_request_dto: DocspaceApiSdk::UploadRequestDto.new # UploadRequestDto | The request parameters for uploading a file.
+  create_new_if_exist: true, # Boolean | Specifies whether to create the new file if it already exists or not.
+  store_original_file: true, # Boolean | Specifies whether to upload documents in the original formats as well or not.
+  keep_convert_status: false, # Boolean | Specifies whether to keep the file converting status or not.
+  file: File.new('/path/to/some/file') # File | The file to be uploaded.
 }
 
 begin
@@ -2615,7 +2620,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ObjectWrapper>, Integer, Hash)> upload_file_with_http_info(folder_id, opts)
+> <Array(<FileIntegerArrayWrapper>, Integer, Hash)> upload_file_with_http_info(folder_id, opts)
 
 ```ruby
 begin
@@ -2623,7 +2628,7 @@ begin
   data, status_code, headers = api_instance.upload_file_with_http_info(folder_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ObjectWrapper>
+  p data # => <FileIntegerArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FoldersApi->upload_file_with_http_info: #{e}"
 end
@@ -2634,11 +2639,14 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **folder_id** | **Integer** | The folder ID to upload a file. |  |
-| **upload_request_dto** | [**UploadRequestDto**](UploadRequestDto.md) | The request parameters for uploading a file. | [optional] |
+| **create_new_if_exist** | **Boolean** | Specifies whether to create the new file if it already exists or not. | [optional] |
+| **store_original_file** | **Boolean** | Specifies whether to upload documents in the original formats as well or not. | [optional] |
+| **keep_convert_status** | **Boolean** | Specifies whether to keep the file converting status or not. | [optional] |
+| **file** | **File** | The file to be uploaded. | [optional] |
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**FileIntegerArrayWrapper**](FileIntegerArrayWrapper.md)
 
 ### Authorization
 
@@ -2646,13 +2654,13 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 
 
 ## upload_file_to_my
 
-> <ObjectWrapper> upload_file_to_my(opts)
+> <FileIntegerArrayWrapper> upload_file_to_my(opts)
 
 Upload a file to the My documents section
 
@@ -2691,7 +2699,10 @@ end
 
 api_instance = DocspaceApiSdk::Files::FoldersApi.new
 opts = {
-  in_dto: DocspaceApiSdk::UploadRequestDto.new # UploadRequestDto | The request parameters for uploading a file.
+  create_new_if_exist: true, # Boolean | Specifies whether to create the new file if it already exists or not.
+  store_original_file: true, # Boolean | Specifies whether to upload documents in the original formats as well or not.
+  keep_convert_status: false, # Boolean | Specifies whether to keep the file converting status or not.
+  file: File.new('/path/to/some/file') # File | The file to be uploaded.
 }
 
 begin
@@ -2707,7 +2718,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ObjectWrapper>, Integer, Hash)> upload_file_to_my_with_http_info(opts)
+> <Array(<FileIntegerArrayWrapper>, Integer, Hash)> upload_file_to_my_with_http_info(opts)
 
 ```ruby
 begin
@@ -2715,7 +2726,7 @@ begin
   data, status_code, headers = api_instance.upload_file_to_my_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ObjectWrapper>
+  p data # => <FileIntegerArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FoldersApi->upload_file_to_my_with_http_info: #{e}"
 end
@@ -2725,11 +2736,14 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **in_dto** | **UploadRequestDto** | The request parameters for uploading a file. | [optional] |
+| **create_new_if_exist** | **Boolean** | Specifies whether to create the new file if it already exists or not. | [optional] |
+| **store_original_file** | **Boolean** | Specifies whether to upload documents in the original formats as well or not. | [optional] |
+| **keep_convert_status** | **Boolean** | Specifies whether to keep the file converting status or not. | [optional] |
+| **file** | **File** | The file to be uploaded. | [optional] |
 
 ### Return type
 
-[**ObjectWrapper**](ObjectWrapper.md)
+[**FileIntegerArrayWrapper**](FileIntegerArrayWrapper.md)
 
 ### Authorization
 
@@ -2737,6 +2751,6 @@ end
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 

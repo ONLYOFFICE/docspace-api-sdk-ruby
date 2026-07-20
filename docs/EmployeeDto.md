@@ -6,7 +6,6 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | The user ID. | [optional] |
 | **display_name** | **String** | The HTML-encoded user's display name formatted according to the default format for the current culture. | [optional] |
-| **title** | **String** | The user title. | [optional] |
 | **avatar** | **String** | The user avatar. | [optional] |
 | **avatar_original** | **String** | The user original size avatar. | [optional] |
 | **avatar_max** | **String** | The user maximum size avatar. | [optional] |
@@ -24,7 +23,6 @@ require 'docspace-api-sdk'
 instance = DocspaceApiSdk::EmployeeDto.new(
   id: 00000000-0000-0000-0000-000000000000,
   display_name: Mike Zanyatski,
-  title: Manager,
   avatar: https://example.com/avatar.jpg,
   avatar_original: https://example.com/avatar_original.jpg,
   avatar_max: https://example.com/avatar_max.jpg,

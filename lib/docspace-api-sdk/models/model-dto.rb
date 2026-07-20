@@ -28,6 +28,11 @@ module DocspaceApiSdk
     # The model identifier as recognized by the AI provider (e.g., gpt-4o, claude-sonnet-4-20250514).
     attr_accessor :model_id
 
+    # The display name for the model.
+    attr_accessor :_alias
+
+    attr_accessor :capabilities
+
     attr_accessor :price
 
     attr_accessor :currency
@@ -38,6 +43,8 @@ module DocspaceApiSdk
         :'provider_id' => :'providerId',
         :'provider_title' => :'providerTitle',
         :'model_id' => :'modelId',
+        :'_alias' => :'alias',
+        :'capabilities' => :'capabilities',
         :'price' => :'price',
         :'currency' => :'currency'
       }
@@ -59,6 +66,8 @@ module DocspaceApiSdk
         :'provider_id' => :'Integer',
         :'provider_title' => :'String',
         :'model_id' => :'String',
+        :'_alias' => :'String',
+        :'capabilities' => :'AiModelCapabilities',
         :'price' => :'AiChatPrice',
         :'currency' => :'CurrencyInfo'
       }
@@ -69,6 +78,7 @@ module DocspaceApiSdk
       Set.new([
         :'provider_title',
         :'model_id',
+        :'_alias',
       ])
     end
 
@@ -104,6 +114,14 @@ module DocspaceApiSdk
         self.model_id = nil
       end
 
+      if attributes.key?(:'_alias')
+        self._alias = attributes[:'_alias']
+      end
+
+      if attributes.key?(:'capabilities')
+        self.capabilities = attributes[:'capabilities']
+      end
+
       if attributes.key?(:'price')
         self.price = attributes[:'price']
       end
@@ -136,6 +154,8 @@ module DocspaceApiSdk
           provider_id == o.provider_id &&
           provider_title == o.provider_title &&
           model_id == o.model_id &&
+          _alias == o._alias &&
+          capabilities == o.capabilities &&
           price == o.price &&
           currency == o.currency
     end
@@ -149,7 +169,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [provider_id, provider_title, model_id, price, currency].hash
+      [provider_id, provider_title, model_id, _alias, capabilities, price, currency].hash
     end
 
     # Builds the object from hash

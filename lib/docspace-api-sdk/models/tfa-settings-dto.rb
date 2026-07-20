@@ -29,7 +29,7 @@ module DocspaceApiSdk
     attr_accessor :enabled
 
     # Indicates whether the TFA configuration can be used.
-    attr_accessor :avaliable
+    attr_accessor :available
 
     # The list of IP addresses that are exempt from TFA requirements.
     attr_accessor :trusted_ips
@@ -46,7 +46,7 @@ module DocspaceApiSdk
         :'id' => :'id',
         :'title' => :'title',
         :'enabled' => :'enabled',
-        :'avaliable' => :'avaliable',
+        :'available' => :'available',
         :'trusted_ips' => :'trustedIps',
         :'mandatory_users' => :'mandatoryUsers',
         :'mandatory_groups' => :'mandatoryGroups'
@@ -69,7 +69,7 @@ module DocspaceApiSdk
         :'id' => :'String',
         :'title' => :'String',
         :'enabled' => :'Boolean',
-        :'avaliable' => :'Boolean',
+        :'available' => :'Boolean',
         :'trusted_ips' => :'Array<String>',
         :'mandatory_users' => :'Array<String>',
         :'mandatory_groups' => :'Array<String>'
@@ -121,10 +121,10 @@ module DocspaceApiSdk
         self.enabled = nil
       end
 
-      if attributes.key?(:'avaliable')
-        self.avaliable = attributes[:'avaliable']
+      if attributes.key?(:'available')
+        self.available = attributes[:'available']
       else
-        self.avaliable = nil
+        self.available = nil
       end
 
       if attributes.key?(:'trusted_ips')
@@ -155,8 +155,8 @@ module DocspaceApiSdk
         invalid_properties.push('invalid value for "enabled", enabled cannot be nil.')
       end
 
-      if @avaliable.nil?
-        invalid_properties.push('invalid value for "avaliable", avaliable cannot be nil.')
+      if @available.nil?
+        invalid_properties.push('invalid value for "available", available cannot be nil.')
       end
 
       invalid_properties
@@ -167,7 +167,7 @@ module DocspaceApiSdk
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @enabled.nil?
-      return false if @avaliable.nil?
+      return false if @available.nil?
       true
     end
 
@@ -182,13 +182,13 @@ module DocspaceApiSdk
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] avaliable Value to be assigned
-    def avaliable=(avaliable)
-      if avaliable.nil?
-        fail ArgumentError, 'avaliable cannot be nil'
+    # @param [Object] available Value to be assigned
+    def available=(available)
+      if available.nil?
+        fail ArgumentError, 'available cannot be nil'
       end
 
-      @avaliable = avaliable
+      @available = available
     end
 
     # Checks equality by comparing each attribute.
@@ -199,7 +199,7 @@ module DocspaceApiSdk
           id == o.id &&
           title == o.title &&
           enabled == o.enabled &&
-          avaliable == o.avaliable &&
+          available == o.available &&
           trusted_ips == o.trusted_ips &&
           mandatory_users == o.mandatory_users &&
           mandatory_groups == o.mandatory_groups
@@ -214,7 +214,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, title, enabled, avaliable, trusted_ips, mandatory_users, mandatory_groups].hash
+      [id, title, enabled, available, trusted_ips, mandatory_users, mandatory_groups].hash
     end
 
     # Builds the object from hash

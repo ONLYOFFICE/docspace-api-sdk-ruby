@@ -164,11 +164,11 @@ module DocspaceApiSdk
     # Exports the entire message history of an AI chat session and saves it as a document in the specified folder.  The exported file is created with the provided title. Only the chat owner can export their own chat sessions.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/export-chat/
     # @param chat_id [String] The unique identifier of the AI chat session to export.
-    # @param export_chat_request_body_integer [ExportChatRequestBodyInteger] The export parameters including destination folder and file title.
+    # @param export_chat_request_body [ExportChatRequestBody] The export parameters including destination folder and file title.
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def export_chat(chat_id, export_chat_request_body_integer, opts = {})
-      export_chat_with_http_info(chat_id, export_chat_request_body_integer, opts)
+    def export_chat(chat_id, export_chat_request_body, opts = {})
+      export_chat_with_http_info(chat_id, export_chat_request_body, opts)
       nil
     end
 
@@ -176,10 +176,10 @@ module DocspaceApiSdk
     # Exports the entire message history of an AI chat session and saves it as a document in the specified folder.  The exported file is created with the provided title. Only the chat owner can export their own chat sessions.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/export-chat/
     # @param chat_id [String] The unique identifier of the AI chat session to export.
-    # @param export_chat_request_body_integer [ExportChatRequestBodyInteger] The export parameters including destination folder and file title.
+    # @param export_chat_request_body [ExportChatRequestBody] The export parameters including destination folder and file title.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def export_chat_with_http_info(chat_id, export_chat_request_body_integer, opts = {})
+    def export_chat_with_http_info(chat_id, export_chat_request_body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::ChatApi.export_chat ...'
       end
@@ -187,9 +187,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && chat_id.nil?
         fail ArgumentError, "Missing the required parameter 'chat_id' when calling AI::ChatApi.export_chat"
       end
-      # verify the required parameter 'export_chat_request_body_integer' is set
-      if @api_client.config.client_side_validation && export_chat_request_body_integer.nil?
-        fail ArgumentError, "Missing the required parameter 'export_chat_request_body_integer' when calling AI::ChatApi.export_chat"
+      # verify the required parameter 'export_chat_request_body' is set
+      if @api_client.config.client_side_validation && export_chat_request_body.nil?
+        fail ArgumentError, "Missing the required parameter 'export_chat_request_body' when calling AI::ChatApi.export_chat"
       end
       # resource path
       local_var_path = '/api/2.0/ai/chats/{chatId}/messages/export'.sub('{' + 'chatId' + '}', CGI.escape(chat_id.to_s))
@@ -209,7 +209,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(export_chat_request_body_integer)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(export_chat_request_body)
 
       # return_type
       return_type = opts[:debug_return_type]
@@ -714,6 +714,82 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AI::ChatApi#rename_chat\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Resolve a pending editor file-generation tool
+    # Submits the user's approval or denial for a pending editor generation tool call (docx, form, presentation).  On approval the file is created from the original tool arguments and information about it is returned,  while the suspended chat tool is resumed with the same result so the AI session can continue.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/resolve-editor-tool/
+    # @param call_id [String] The unique identifier of the pending tool call awaiting the user's decision.
+    # @param editor_tool_decision_request_body [EditorToolDecisionRequestBody] The decision parameters.
+    # @param [Hash] opts the optional parameters
+    # @return [GeneratedFileWrapper]
+    def resolve_editor_tool(call_id, editor_tool_decision_request_body, opts = {})
+      data, _status_code, _headers = resolve_editor_tool_with_http_info(call_id, editor_tool_decision_request_body, opts)
+      data
+    end
+
+    # Resolve a pending editor file-generation tool
+    # Submits the user's approval or denial for a pending editor generation tool call (docx, form, presentation).  On approval the file is created from the original tool arguments and information about it is returned,  while the suspended chat tool is resumed with the same result so the AI session can continue.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/resolve-editor-tool/
+    # @param call_id [String] The unique identifier of the pending tool call awaiting the user's decision.
+    # @param editor_tool_decision_request_body [EditorToolDecisionRequestBody] The decision parameters.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GeneratedFileWrapper, Integer, Hash)>] GeneratedFileWrapper data, response status code and response headers
+    def resolve_editor_tool_with_http_info(call_id, editor_tool_decision_request_body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AI::ChatApi.resolve_editor_tool ...'
+      end
+      # verify the required parameter 'call_id' is set
+      if @api_client.config.client_side_validation && call_id.nil?
+        fail ArgumentError, "Missing the required parameter 'call_id' when calling AI::ChatApi.resolve_editor_tool"
+      end
+      # verify the required parameter 'editor_tool_decision_request_body' is set
+      if @api_client.config.client_side_validation && editor_tool_decision_request_body.nil?
+        fail ArgumentError, "Missing the required parameter 'editor_tool_decision_request_body' when calling AI::ChatApi.resolve_editor_tool"
+      end
+      # resource path
+      local_var_path = '/api/2.0/ai/chats/tool-files/{callId}/decision'.sub('{' + 'callId' + '}', CGI.escape(call_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(editor_tool_decision_request_body)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GeneratedFileWrapper'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
+
+      new_options = opts.merge(
+        :operation => :"AI::ChatApi.resolve_editor_tool",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AI::ChatApi#resolve_editor_tool\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -34,6 +34,9 @@ module DocspaceApiSdk
     # Specifies if the file entry is shared for user or not.
     attr_accessor :shared_for_user
 
+    # Specifies if the file entry is shared via a public (non-internal) external link.
+    attr_accessor :shared_external
+
     # Indicates whether the parent entity is shared.
     attr_accessor :parent_shared
 
@@ -186,6 +189,9 @@ module DocspaceApiSdk
     # The InProcess folder title of the file.
     attr_accessor :in_process_folder_title
 
+    # The ID of the FormFillingFolderDone folder that corresponds to this original form.
+    attr_accessor :results_folder_id
+
     attr_accessor :draft_location
 
     attr_accessor :view_accessibility
@@ -195,6 +201,9 @@ module DocspaceApiSdk
     attr_accessor :expired
 
     attr_accessor :vectorization_status
+
+    # The name of the table in the external database that corresponds to this form.
+    attr_accessor :external_db_table_name
 
     attr_accessor :dimensions
 
@@ -229,6 +238,7 @@ module DocspaceApiSdk
         :'owned_by' => :'ownedBy',
         :'shared' => :'shared',
         :'shared_for_user' => :'sharedForUser',
+        :'shared_external' => :'sharedExternal',
         :'parent_shared' => :'parentShared',
         :'short_web_url' => :'shortWebUrl',
         :'created' => :'created',
@@ -285,11 +295,13 @@ module DocspaceApiSdk
         :'is_filling_preparing' => :'isFillingPreparing',
         :'in_process_folder_id' => :'inProcessFolderId',
         :'in_process_folder_title' => :'inProcessFolderTitle',
+        :'results_folder_id' => :'resultsFolderId',
         :'draft_location' => :'draftLocation',
         :'view_accessibility' => :'viewAccessibility',
         :'last_opened' => :'lastOpened',
         :'expired' => :'expired',
         :'vectorization_status' => :'vectorizationStatus',
+        :'external_db_table_name' => :'externalDbTableName',
         :'dimensions' => :'dimensions'
       }
     end
@@ -313,6 +325,7 @@ module DocspaceApiSdk
         :'owned_by' => :'EmployeeDto',
         :'shared' => :'Boolean',
         :'shared_for_user' => :'Boolean',
+        :'shared_external' => :'Boolean',
         :'parent_shared' => :'Boolean',
         :'short_web_url' => :'String',
         :'created' => :'ApiDateTime',
@@ -369,11 +382,13 @@ module DocspaceApiSdk
         :'is_filling_preparing' => :'Boolean',
         :'in_process_folder_id' => :'Integer',
         :'in_process_folder_title' => :'String',
+        :'results_folder_id' => :'Integer',
         :'draft_location' => :'DraftLocationInteger',
         :'view_accessibility' => :'FileDtoIntegerAllOfViewAccessibility',
         :'last_opened' => :'ApiDateTime',
         :'expired' => :'ApiDateTime',
         :'vectorization_status' => :'VectorizationStatus',
+        :'external_db_table_name' => :'String',
         :'dimensions' => :'Size'
       }
     end
@@ -415,7 +430,9 @@ module DocspaceApiSdk
         :'is_filling_preparing',
         :'in_process_folder_id',
         :'in_process_folder_title',
+        :'results_folder_id',
         :'view_accessibility',
+        :'external_db_table_name',
       ])
     end
 
@@ -464,6 +481,10 @@ module DocspaceApiSdk
 
       if attributes.key?(:'shared_for_user')
         self.shared_for_user = attributes[:'shared_for_user']
+      end
+
+      if attributes.key?(:'shared_external')
+        self.shared_external = attributes[:'shared_external']
       end
 
       if attributes.key?(:'parent_shared')
@@ -692,6 +713,10 @@ module DocspaceApiSdk
         self.in_process_folder_title = attributes[:'in_process_folder_title']
       end
 
+      if attributes.key?(:'results_folder_id')
+        self.results_folder_id = attributes[:'results_folder_id']
+      end
+
       if attributes.key?(:'draft_location')
         self.draft_location = attributes[:'draft_location']
       end
@@ -710,6 +735,10 @@ module DocspaceApiSdk
 
       if attributes.key?(:'vectorization_status')
         self.vectorization_status = attributes[:'vectorization_status']
+      end
+
+      if attributes.key?(:'external_db_table_name')
+        self.external_db_table_name = attributes[:'external_db_table_name']
       end
 
       if attributes.key?(:'dimensions')
@@ -743,6 +772,7 @@ module DocspaceApiSdk
           owned_by == o.owned_by &&
           shared == o.shared &&
           shared_for_user == o.shared_for_user &&
+          shared_external == o.shared_external &&
           parent_shared == o.parent_shared &&
           short_web_url == o.short_web_url &&
           created == o.created &&
@@ -799,11 +829,13 @@ module DocspaceApiSdk
           is_filling_preparing == o.is_filling_preparing &&
           in_process_folder_id == o.in_process_folder_id &&
           in_process_folder_title == o.in_process_folder_title &&
+          results_folder_id == o.results_folder_id &&
           draft_location == o.draft_location &&
           view_accessibility == o.view_accessibility &&
           last_opened == o.last_opened &&
           expired == o.expired &&
           vectorization_status == o.vectorization_status &&
+          external_db_table_name == o.external_db_table_name &&
           dimensions == o.dimensions
     end
 
@@ -816,7 +848,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, access, shared_by, owned_by, shared, shared_for_user, parent_shared, short_web_url, created, created_by, updated, auto_delete, root_folder_type, parent_room_type, updated_by, provider_item, provider_key, provider_id, order, is_favorite, file_entry_type, id, root_folder_id, origin_id, origin_room_id, origin_title, origin_room_title, can_share, share_settings, security, available_share_rights, request_token, external, expiration_date, is_link_expired, folder_id, version, version_group, content_length, pure_content_length, file_status, editing_by, mute, view_url, web_url, file_type, file_exst, comment, encrypted, thumbnail_url, thumbnail_status, locked, locked_by, has_draft, form_filling_status, is_form, custom_filter_enabled, custom_filter_enabled_by, start_filling, is_filling_preparing, in_process_folder_id, in_process_folder_title, draft_location, view_accessibility, last_opened, expired, vectorization_status, dimensions].hash
+      [title, access, shared_by, owned_by, shared, shared_for_user, shared_external, parent_shared, short_web_url, created, created_by, updated, auto_delete, root_folder_type, parent_room_type, updated_by, provider_item, provider_key, provider_id, order, is_favorite, file_entry_type, id, root_folder_id, origin_id, origin_room_id, origin_title, origin_room_title, can_share, share_settings, security, available_share_rights, request_token, external, expiration_date, is_link_expired, folder_id, version, version_group, content_length, pure_content_length, file_status, editing_by, mute, view_url, web_url, file_type, file_exst, comment, encrypted, thumbnail_url, thumbnail_status, locked, locked_by, has_draft, form_filling_status, is_form, custom_filter_enabled, custom_filter_enabled_by, start_filling, is_filling_preparing, in_process_folder_id, in_process_folder_title, results_folder_id, draft_location, view_accessibility, last_opened, expired, vectorization_status, external_db_table_name, dimensions].hash
     end
 
     # Builds the object from hash

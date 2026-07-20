@@ -18,28 +18,29 @@ require 'time'
 
 module DocspaceApiSdk
   class OperationType
-    Any = 0.freeze
-    Unknown = 1.freeze
-    ServicePayment = 2.freeze
-    PackagePayment = 4.freeze
-    ServiceUsage = 8.freeze
-    Deposit = 16.freeze
-    ReceiveProviderInvoice = 32.freeze
-    ProcessProviderInvoice = 64.freeze
-    WriteOffServiceProfit = 128.freeze
-    Profit = 256.freeze
-    PartnerAccrual = 512.freeze
-    ProviderPayment = 1024.freeze
-    PartnerPayment = 2048.freeze
-    Refund = 4096.freeze
-    BankDeposit = 8192.freeze
-    BankWithdrawal = 16384.freeze
-    GoodwillCredit = 32768.freeze
-    WriteOffProfit = 65536.freeze
-    WriteOffDifferenceCurrency = 131072.freeze
+    Unknown = 0.freeze
+    ServicePayment = 1.freeze
+    PackagePayment = 2.freeze
+    AiServicePayment = 3.freeze
+    Deposit = 4.freeze
+    ReceiveProviderInvoice = 5.freeze
+    ProcessProviderInvoice = 6.freeze
+    WriteOffServiceProfit = 7.freeze
+    Profit = 8.freeze
+    PartnerAccrual = 9.freeze
+    ProviderPayment = 10.freeze
+    PartnerPayment = 11.freeze
+    Refund = 12.freeze
+    BankDeposit = 13.freeze
+    BankWithdrawal = 14.freeze
+    GoodwillCredit = 15.freeze
+    WriteOffProfit = 16.freeze
+    WriteOffDifferenceCurrency = 17.freeze
+    AiDebit = 18.freeze
+    AiCredit = 19.freeze
 
     def self.all_vars
-      @all_vars ||= [Any, Unknown, ServicePayment, PackagePayment, ServiceUsage, Deposit, ReceiveProviderInvoice, ProcessProviderInvoice, WriteOffServiceProfit, Profit, PartnerAccrual, ProviderPayment, PartnerPayment, Refund, BankDeposit, BankWithdrawal, GoodwillCredit, WriteOffProfit, WriteOffDifferenceCurrency].freeze
+      @all_vars ||= [Unknown, ServicePayment, PackagePayment, AiServicePayment, Deposit, ReceiveProviderInvoice, ProcessProviderInvoice, WriteOffServiceProfit, Profit, PartnerAccrual, ProviderPayment, PartnerPayment, Refund, BankDeposit, BankWithdrawal, GoodwillCredit, WriteOffProfit, WriteOffDifferenceCurrency, AiDebit, AiCredit].freeze
     end
 
     # Builds the enum from string

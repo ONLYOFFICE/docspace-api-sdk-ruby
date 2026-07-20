@@ -18,6 +18,6 @@ instance = DocspaceApiSdk::FormMetadata.new(
   key: name,
   type: text,
   format: date,
-  possible_values: null
+  possible_values: []
 )
 ```

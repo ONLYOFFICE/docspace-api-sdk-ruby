@@ -48,6 +48,7 @@
 | **ask_ai** | **Boolean** |  | [optional] |
 | **use_chat** | **Boolean** |  | [optional] |
 | **update_xlsx** | **Boolean** |  | [optional] |
+| **analyze_responses** | **Boolean** |  | [optional] |
 
 ## Example
 
@@ -98,6 +99,7 @@ instance = DocspaceApiSdk::FileEntryDtoIntegerAllOfSecurity.new(
   vectorization: null,
   ask_ai: null,
   use_chat: null,
-  update_xlsx: null
+  update_xlsx: null,
+  analyze_responses: null
 )
 ```

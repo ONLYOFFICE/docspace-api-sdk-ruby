@@ -107,6 +107,8 @@ module DocspaceApiSdk
 
     attr_accessor :update_xlsx
 
+    attr_accessor :analyze_responses
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -153,7 +155,8 @@ module DocspaceApiSdk
         :'vectorization' => :'Vectorization',
         :'ask_ai' => :'AskAi',
         :'use_chat' => :'UseChat',
-        :'update_xlsx' => :'UpdateXlsx'
+        :'update_xlsx' => :'UpdateXlsx',
+        :'analyze_responses' => :'AnalyzeResponses'
       }
     end
 
@@ -213,7 +216,8 @@ module DocspaceApiSdk
         :'vectorization' => :'Boolean',
         :'ask_ai' => :'Boolean',
         :'use_chat' => :'Boolean',
-        :'update_xlsx' => :'Boolean'
+        :'update_xlsx' => :'Boolean',
+        :'analyze_responses' => :'Boolean'
       }
     end
 
@@ -414,6 +418,10 @@ module DocspaceApiSdk
       if attributes.key?(:'update_xlsx')
         self.update_xlsx = attributes[:'update_xlsx']
       end
+
+      if attributes.key?(:'analyze_responses')
+        self.analyze_responses = attributes[:'analyze_responses']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -479,7 +487,8 @@ module DocspaceApiSdk
           vectorization == o.vectorization &&
           ask_ai == o.ask_ai &&
           use_chat == o.use_chat &&
-          update_xlsx == o.update_xlsx
+          update_xlsx == o.update_xlsx &&
+          analyze_responses == o.analyze_responses
     end
 
     # @see the `==` method
@@ -491,7 +500,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [read, comment, fill_forms, review, create, create_from, edit, delete, custom_filter, edit_room, rename, read_history, lock, edit_history, copy_to, copy, move_to, move, pin, mute, edit_access, duplicate, submit_to_form_gallery, download, convert, copy_shared_link, read_links, reconnect, create_room_from, copy_link, embed, change_owner, index_export, start_filling, filling_status, reset_filling, stop_filling, open_form, edit_internal, edit_expiration, vectorization, ask_ai, use_chat, update_xlsx].hash
+      [read, comment, fill_forms, review, create, create_from, edit, delete, custom_filter, edit_room, rename, read_history, lock, edit_history, copy_to, copy, move_to, move, pin, mute, edit_access, duplicate, submit_to_form_gallery, download, convert, copy_shared_link, read_links, reconnect, create_room_from, copy_link, embed, change_owner, index_export, start_filling, filling_status, reset_filling, stop_filling, open_form, edit_internal, edit_expiration, vectorization, ask_ai, use_chat, update_xlsx, analyze_responses].hash
     end
 
     # Builds the object from hash

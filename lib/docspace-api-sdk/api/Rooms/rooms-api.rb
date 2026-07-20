@@ -936,6 +936,71 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
+    # Get external DB sync status
+    # Returns the status of the external DB synchronization task for the specified filling forms room.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-external-db-sync-status/
+    # @param id [Integer] The room ID.
+    # @param [Hash] opts the optional parameters
+    # @return [ExternalDbSyncTaskWrapper]
+    def get_external_db_sync_status(id, opts = {})
+      data, _status_code, _headers = get_external_db_sync_status_with_http_info(id, opts)
+      data
+    end
+
+    # Get external DB sync status
+    # Returns the status of the external DB synchronization task for the specified filling forms room.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-external-db-sync-status/
+    # @param id [Integer] The room ID.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ExternalDbSyncTaskWrapper, Integer, Hash)>] ExternalDbSyncTaskWrapper data, response status code and response headers
+    def get_external_db_sync_status_with_http_info(id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.get_external_db_sync_status ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.get_external_db_sync_status"
+      end
+      # resource path
+      local_var_path = '/api/2.0/files/rooms/{id}/externaldbsync'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ExternalDbSyncTaskWrapper'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
+
+      new_options = opts.merge(
+        :operation => :"Rooms::RoomsApi.get_external_db_sync_status",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: Rooms::RoomsApi#get_external_db_sync_status\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get the new room items
     # Returns a list of all the new items from a room with the ID specified in the request.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-room-items/
@@ -2322,6 +2387,71 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Rooms::RoomsApi#set_room_security\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Start external DB sync
+    # Triggers external DB synchronization for all form templates in the specified filling forms room.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/start-external-db-sync/
+    # @param id [Integer] The room ID.
+    # @param [Hash] opts the optional parameters
+    # @return [ExternalDbSyncTaskWrapper]
+    def start_external_db_sync(id, opts = {})
+      data, _status_code, _headers = start_external_db_sync_with_http_info(id, opts)
+      data
+    end
+
+    # Start external DB sync
+    # Triggers external DB synchronization for all form templates in the specified filling forms room.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/start-external-db-sync/
+    # @param id [Integer] The room ID.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ExternalDbSyncTaskWrapper, Integer, Hash)>] ExternalDbSyncTaskWrapper data, response status code and response headers
+    def start_external_db_sync_with_http_info(id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.start_external_db_sync ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.start_external_db_sync"
+      end
+      # resource path
+      local_var_path = '/api/2.0/files/rooms/{id}/externaldbsync'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ExternalDbSyncTaskWrapper'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
+
+      new_options = opts.merge(
+        :operation => :"Rooms::RoomsApi.start_external_db_sync",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: Rooms::RoomsApi#start_external_db_sync\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

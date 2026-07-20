@@ -10,6 +10,7 @@
 | **prompt** | **String** | The system prompt for the chat. | [optional] |
 | **multimodal** | [**ChatMultimodalSettingsDto**](ChatMultimodalSettingsDto.md) |  | [optional] |
 | **thinking** | **Boolean** | Indicates whether the model supports extended thinking mode. | [optional] |
+| **capabilities** | [**AiModelCapabilities**](AiModelCapabilities.md) |  | [optional] |
 | **internal** | **Boolean** | Indicates whether this is an internal AI gateway provider. | [optional][readonly] |
 
 ## Example
@@ -24,6 +25,7 @@ instance = DocspaceApiSdk::ChatSettingsDto.new(
   prompt: You are a helpful assistant.,
   multimodal: null,
   thinking: false,
+  capabilities: null,
   internal: false
 )
 ```

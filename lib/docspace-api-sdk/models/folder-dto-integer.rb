@@ -34,6 +34,9 @@ module DocspaceApiSdk
     # Specifies if the file entry is shared for user or not.
     attr_accessor :shared_for_user
 
+    # Specifies if the file entry is shared via a public (non-internal) external link.
+    attr_accessor :shared_external
+
     # Indicates whether the parent entity is shared.
     attr_accessor :parent_shared
 
@@ -180,6 +183,9 @@ module DocspaceApiSdk
     # Specifies whether to send form data to external database.
     attr_accessor :send_form_to_external_db
 
+    # The original form ID that corresponds to this FormFillingFolderDone folder.
+    attr_accessor :original_form_id
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -211,6 +217,7 @@ module DocspaceApiSdk
         :'owned_by' => :'ownedBy',
         :'shared' => :'shared',
         :'shared_for_user' => :'sharedForUser',
+        :'shared_external' => :'sharedExternal',
         :'parent_shared' => :'parentShared',
         :'short_web_url' => :'shortWebUrl',
         :'created' => :'created',
@@ -265,7 +272,8 @@ module DocspaceApiSdk
         :'chat_settings' => :'chatSettings',
         :'root_room_type' => :'rootRoomType',
         :'save_form_as_xlsx' => :'saveFormAsXLSX',
-        :'send_form_to_external_db' => :'sendFormToExternalDB'
+        :'send_form_to_external_db' => :'sendFormToExternalDB',
+        :'original_form_id' => :'originalFormId'
       }
     end
 
@@ -288,6 +296,7 @@ module DocspaceApiSdk
         :'owned_by' => :'EmployeeDto',
         :'shared' => :'Boolean',
         :'shared_for_user' => :'Boolean',
+        :'shared_external' => :'Boolean',
         :'parent_shared' => :'Boolean',
         :'short_web_url' => :'String',
         :'created' => :'ApiDateTime',
@@ -342,7 +351,8 @@ module DocspaceApiSdk
         :'chat_settings' => :'ChatSettingsDto',
         :'root_room_type' => :'RoomType',
         :'save_form_as_xlsx' => :'Boolean',
-        :'send_form_to_external_db' => :'Boolean'
+        :'send_form_to_external_db' => :'Boolean',
+        :'original_form_id' => :'Integer'
       }
     end
 
@@ -373,7 +383,8 @@ module DocspaceApiSdk
         :'password_protected',
         :'expired',
         :'save_form_as_xlsx',
-        :'send_form_to_external_db'
+        :'send_form_to_external_db',
+        :'original_form_id'
       ])
     end
 
@@ -422,6 +433,10 @@ module DocspaceApiSdk
 
       if attributes.key?(:'shared_for_user')
         self.shared_for_user = attributes[:'shared_for_user']
+      end
+
+      if attributes.key?(:'shared_external')
+        self.shared_external = attributes[:'shared_external']
       end
 
       if attributes.key?(:'parent_shared')
@@ -645,6 +660,10 @@ module DocspaceApiSdk
       if attributes.key?(:'send_form_to_external_db')
         self.send_form_to_external_db = attributes[:'send_form_to_external_db']
       end
+
+      if attributes.key?(:'original_form_id')
+        self.original_form_id = attributes[:'original_form_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -673,6 +692,7 @@ module DocspaceApiSdk
           owned_by == o.owned_by &&
           shared == o.shared &&
           shared_for_user == o.shared_for_user &&
+          shared_external == o.shared_external &&
           parent_shared == o.parent_shared &&
           short_web_url == o.short_web_url &&
           created == o.created &&
@@ -727,7 +747,8 @@ module DocspaceApiSdk
           chat_settings == o.chat_settings &&
           root_room_type == o.root_room_type &&
           save_form_as_xlsx == o.save_form_as_xlsx &&
-          send_form_to_external_db == o.send_form_to_external_db
+          send_form_to_external_db == o.send_form_to_external_db &&
+          original_form_id == o.original_form_id
     end
 
     # @see the `==` method
@@ -739,7 +760,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, access, shared_by, owned_by, shared, shared_for_user, parent_shared, short_web_url, created, created_by, updated, auto_delete, root_folder_type, parent_room_type, updated_by, provider_item, provider_key, provider_id, order, is_favorite, file_entry_type, id, root_folder_id, origin_id, origin_room_id, origin_title, origin_room_title, can_share, share_settings, security, available_share_rights, request_token, external, expiration_date, is_link_expired, parent_id, files_count, folders_count, is_shareable, new, mute, tags, logo, pinned, room_type, private, indexing, deny_download, lifetime, watermark, type, in_room, quota_limit, is_custom_quota, used_space, password_protected, expired, chat_settings, root_room_type, save_form_as_xlsx, send_form_to_external_db].hash
+      [title, access, shared_by, owned_by, shared, shared_for_user, shared_external, parent_shared, short_web_url, created, created_by, updated, auto_delete, root_folder_type, parent_room_type, updated_by, provider_item, provider_key, provider_id, order, is_favorite, file_entry_type, id, root_folder_id, origin_id, origin_room_id, origin_title, origin_room_title, can_share, share_settings, security, available_share_rights, request_token, external, expiration_date, is_link_expired, parent_id, files_count, folders_count, is_shareable, new, mute, tags, logo, pinned, room_type, private, indexing, deny_download, lifetime, watermark, type, in_room, quota_limit, is_custom_quota, used_space, password_protected, expired, chat_settings, root_room_type, save_form_as_xlsx, send_form_to_external_db, original_form_id].hash
     end
 
     # Builds the object from hash

@@ -36,6 +36,8 @@ module DocspaceApiSdk
     # Indicates whether the model supports extended thinking mode.
     attr_accessor :thinking
 
+    attr_accessor :capabilities
+
     # Indicates whether this is an internal AI gateway provider.
     attr_accessor :internal
 
@@ -48,6 +50,7 @@ module DocspaceApiSdk
         :'prompt' => :'prompt',
         :'multimodal' => :'multimodal',
         :'thinking' => :'thinking',
+        :'capabilities' => :'capabilities',
         :'internal' => :'internal'
       }
     end
@@ -71,6 +74,7 @@ module DocspaceApiSdk
         :'prompt' => :'String',
         :'multimodal' => :'ChatMultimodalSettingsDto',
         :'thinking' => :'Boolean',
+        :'capabilities' => :'AiModelCapabilities',
         :'internal' => :'Boolean'
       }
     end
@@ -124,6 +128,10 @@ module DocspaceApiSdk
         self.thinking = attributes[:'thinking']
       end
 
+      if attributes.key?(:'capabilities')
+        self.capabilities = attributes[:'capabilities']
+      end
+
       if attributes.key?(:'internal')
         self.internal = attributes[:'internal']
       end
@@ -155,6 +163,7 @@ module DocspaceApiSdk
           prompt == o.prompt &&
           multimodal == o.multimodal &&
           thinking == o.thinking &&
+          capabilities == o.capabilities &&
           internal == o.internal
     end
 
@@ -167,7 +176,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [provider_id, model_id, model_alias, prompt, multimodal, thinking, internal].hash
+      [provider_id, model_id, model_alias, prompt, multimodal, thinking, capabilities, internal].hash
     end
 
     # Builds the object from hash

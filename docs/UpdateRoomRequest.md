@@ -35,7 +35,7 @@ instance = DocspaceApiSdk::UpdateRoomRequest.new(
   color: #FF5733,
   cover: cover1,
   chat_settings: null,
-  send_form_to_external_db: null,
-  save_form_as_xlsx: null
+  send_form_to_external_db: false,
+  save_form_as_xlsx: false
 )
 ```

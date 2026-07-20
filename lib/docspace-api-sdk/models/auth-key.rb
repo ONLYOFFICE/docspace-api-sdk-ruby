@@ -145,8 +145,8 @@ module DocspaceApiSdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @value.to_s.length > 255
-        invalid_properties.push('invalid value for "value", the character length must be smaller than or equal to 255.')
+      if @value.to_s.length > 4000
+        invalid_properties.push('invalid value for "value", the character length must be smaller than or equal to 4000.')
       end
 
       if @value.to_s.length < 0
@@ -160,7 +160,7 @@ module DocspaceApiSdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @value.to_s.length > 255
+      return false if @value.to_s.length > 4000
       return false if @value.to_s.length < 0
       true
     end
@@ -168,8 +168,8 @@ module DocspaceApiSdk
     # Custom attribute writer method with validation
     # @param [Object] value Value to be assigned
     def value=(value)
-      if !value.nil? && value.to_s.length > 255
-        fail ArgumentError, 'invalid value for "value", the character length must be smaller than or equal to 255.'
+      if !value.nil? && value.to_s.length > 4000
+        fail ArgumentError, 'invalid value for "value", the character length must be smaller than or equal to 4000.'
       end
 
       if !value.nil? && value.to_s.length < 0

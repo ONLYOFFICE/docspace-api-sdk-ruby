@@ -27,11 +27,11 @@ module DocspaceApiSdk
     # Exports a specific AI chat message as a document into the specified folder. The system verifies that the message exists  and belongs to a chat accessible by the current user, then publishes an asynchronous export task to the event bus.  The exported document will be created in the target folder with the given title once the background task completes.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/export-message/
     # @param message_id [Integer] The unique identifier of the AI chat message to export.
-    # @param export_message_request_body_integer [ExportMessageRequestBodyInteger] The export parameters including destination folder and file title.
+    # @param export_message_request_body [ExportMessageRequestBody] The export parameters including destination folder and file title.
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def export_message(message_id, export_message_request_body_integer, opts = {})
-      export_message_with_http_info(message_id, export_message_request_body_integer, opts)
+    def export_message(message_id, export_message_request_body, opts = {})
+      export_message_with_http_info(message_id, export_message_request_body, opts)
       nil
     end
 
@@ -39,10 +39,10 @@ module DocspaceApiSdk
     # Exports a specific AI chat message as a document into the specified folder. The system verifies that the message exists  and belongs to a chat accessible by the current user, then publishes an asynchronous export task to the event bus.  The exported document will be created in the target folder with the given title once the background task completes.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/export-message/
     # @param message_id [Integer] The unique identifier of the AI chat message to export.
-    # @param export_message_request_body_integer [ExportMessageRequestBodyInteger] The export parameters including destination folder and file title.
+    # @param export_message_request_body [ExportMessageRequestBody] The export parameters including destination folder and file title.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def export_message_with_http_info(message_id, export_message_request_body_integer, opts = {})
+    def export_message_with_http_info(message_id, export_message_request_body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::MessagesApi.export_message ...'
       end
@@ -58,9 +58,9 @@ module DocspaceApiSdk
         fail ArgumentError, 'invalid value for "message_id" when calling AI::MessagesApi.export_message, must be greater than or equal to 1.'
       end
 
-      # verify the required parameter 'export_message_request_body_integer' is set
-      if @api_client.config.client_side_validation && export_message_request_body_integer.nil?
-        fail ArgumentError, "Missing the required parameter 'export_message_request_body_integer' when calling AI::MessagesApi.export_message"
+      # verify the required parameter 'export_message_request_body' is set
+      if @api_client.config.client_side_validation && export_message_request_body.nil?
+        fail ArgumentError, "Missing the required parameter 'export_message_request_body' when calling AI::MessagesApi.export_message"
       end
       # resource path
       local_var_path = '/api/2.0/ai/messages/{messageId}/export'.sub('{' + 'messageId' + '}', CGI.escape(message_id.to_s))
@@ -80,7 +80,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(export_message_request_body_integer)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(export_message_request_body)
 
       # return_type
       return_type = opts[:debug_return_type]

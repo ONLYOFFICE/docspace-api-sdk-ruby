@@ -1234,7 +1234,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-xlsx/
     # @param file_id [Integer] The file unique identifier.
     # @param [Hash] opts the optional parameters
-    # @return [FileIntegerWrapper]
+    # @return [XlsxReportResponseWrapper]
     def generate_xlsx(file_id, opts = {})
       data, _status_code, _headers = generate_xlsx_with_http_info(file_id, opts)
       data
@@ -1245,7 +1245,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-xlsx/
     # @param file_id [Integer] The file unique identifier.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(FileIntegerWrapper, Integer, Hash)>] FileIntegerWrapper data, response status code and response headers
+    # @return [Array<(XlsxReportResponseWrapper, Integer, Hash)>] XlsxReportResponseWrapper data, response status code and response headers
     def generate_xlsx_with_http_info(file_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FilesApi.generate_xlsx ...'
@@ -1272,7 +1272,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'FileIntegerWrapper'
+      return_type = opts[:debug_return_type] || 'XlsxReportResponseWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -2252,6 +2252,71 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Files::FilesApi#get_reference_data\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get XLSX report generation status
+    # Returns the status of the XLSX report generation task for the specified form.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-xlsx/
+    # @param file_id [Integer] The file unique identifier.
+    # @param [Hash] opts the optional parameters
+    # @return [DocumentBuilderTaskWrapper]
+    def get_xlsx(file_id, opts = {})
+      data, _status_code, _headers = get_xlsx_with_http_info(file_id, opts)
+      data
+    end
+
+    # Get XLSX report generation status
+    # Returns the status of the XLSX report generation task for the specified form.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-xlsx/
+    # @param file_id [Integer] The file unique identifier.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(DocumentBuilderTaskWrapper, Integer, Hash)>] DocumentBuilderTaskWrapper data, response status code and response headers
+    def get_xlsx_with_http_info(file_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: Files::FilesApi.get_xlsx ...'
+      end
+      # verify the required parameter 'file_id' is set
+      if @api_client.config.client_side_validation && file_id.nil?
+        fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::FilesApi.get_xlsx"
+      end
+      # resource path
+      local_var_path = '/api/2.0/files/file/{fileId}/xlsx'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'DocumentBuilderTaskWrapper'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
+
+      new_options = opts.merge(
+        :operation => :"Files::FilesApi.get_xlsx",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: Files::FilesApi#get_xlsx\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

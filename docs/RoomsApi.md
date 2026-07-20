@@ -17,6 +17,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | [**delete_room**](RoomsApi.md#delete_room) | **DELETE** /api/2.0/files/rooms/{id} | Remove a room |
 | [**delete_room_logo**](RoomsApi.md#delete_room_logo) | **DELETE** /api/2.0/files/rooms/{id}/logo | Remove a room logo |
 | [**delete_room_tags**](RoomsApi.md#delete_room_tags) | **DELETE** /api/2.0/files/rooms/{id}/tags | Remove the room tags |
+| [**get_external_db_sync_status**](RoomsApi.md#get_external_db_sync_status) | **GET** /api/2.0/files/rooms/{id}/externaldbsync | Get external DB sync status |
 | [**get_new_room_items**](RoomsApi.md#get_new_room_items) | **GET** /api/2.0/files/rooms/{id}/news | Get the new room items |
 | [**get_public_settings**](RoomsApi.md#get_public_settings) | **GET** /api/2.0/files/roomtemplate/{id}/public | Get public settings |
 | [**get_room_covers**](RoomsApi.md#get_room_covers) | **GET** /api/2.0/files/rooms/covers | Get covers |
@@ -37,6 +38,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | [**set_public_settings**](RoomsApi.md#set_public_settings) | **PUT** /api/2.0/files/roomtemplate/public | Set public settings |
 | [**set_room_link**](RoomsApi.md#set_room_link) | **PUT** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link |
 | [**set_room_security**](RoomsApi.md#set_room_security) | **PUT** /api/2.0/files/rooms/{id}/share | Set the room access rights |
+| [**start_external_db_sync**](RoomsApi.md#start_external_db_sync) | **POST** /api/2.0/files/rooms/{id}/externaldbsync | Start external DB sync |
 | [**start_room_index_export**](RoomsApi.md#start_room_index_export) | **POST** /api/2.0/files/rooms/{id}/indexexport | Start the room index export |
 | [**terminate_room_index_export**](RoomsApi.md#terminate_room_index_export) | **DELETE** /api/2.0/files/rooms/indexexport | Terminate the room index export |
 | [**unarchive_room**](RoomsApi.md#unarchive_room) | **PUT** /api/2.0/files/rooms/{id}/unarchive | Unarchive a room |
@@ -546,7 +548,7 @@ end
 
 api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
 id = 1 # Integer | The room ID.
-logo_request = DocspaceApiSdk::LogoRequest.new # LogoRequest | The logo request parameters.
+logo_request = DocspaceApiSdk::LogoRequest.new({tmp_file: '/tmp/logo.png'}) # LogoRequest | The logo request parameters.
 
 begin
   # Create a room logo
@@ -1229,6 +1231,95 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## get_external_db_sync_status
+
+> <ExternalDbSyncTaskWrapper> get_external_db_sync_status(id)
+
+Get external DB sync status
+
+Returns the status of the external DB synchronization task for the specified filling forms room.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-external-db-sync-status/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
+id = 1 # Integer | The room ID.
+
+begin
+  # Get external DB sync status
+  result = api_instance.get_external_db_sync_status(id)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Rooms::RoomsApi->get_external_db_sync_status: #{e}"
+end
+```
+
+#### Using the get_external_db_sync_status_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ExternalDbSyncTaskWrapper>, Integer, Hash)> get_external_db_sync_status_with_http_info(id)
+
+```ruby
+begin
+  # Get external DB sync status
+  data, status_code, headers = api_instance.get_external_db_sync_status_with_http_info(id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ExternalDbSyncTaskWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Rooms::RoomsApi->get_external_db_sync_status_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **Integer** | The room ID. |  |
+
+### Return type
+
+[**ExternalDbSyncTaskWrapper**](ExternalDbSyncTaskWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
@@ -3035,6 +3126,95 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## start_external_db_sync
+
+> <ExternalDbSyncTaskWrapper> start_external_db_sync(id)
+
+Start external DB sync
+
+Triggers external DB synchronization for all form templates in the specified filling forms room.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-external-db-sync/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
+id = 1 # Integer | The room ID.
+
+begin
+  # Start external DB sync
+  result = api_instance.start_external_db_sync(id)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Rooms::RoomsApi->start_external_db_sync: #{e}"
+end
+```
+
+#### Using the start_external_db_sync_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ExternalDbSyncTaskWrapper>, Integer, Hash)> start_external_db_sync_with_http_info(id)
+
+```ruby
+begin
+  # Start external DB sync
+  data, status_code, headers = api_instance.start_external_db_sync_with_http_info(id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ExternalDbSyncTaskWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Rooms::RoomsApi->start_external_db_sync_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **Integer** | The room ID. |  |
+
+### Return type
+
+[**ExternalDbSyncTaskWrapper**](ExternalDbSyncTaskWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 

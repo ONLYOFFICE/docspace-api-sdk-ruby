@@ -36,6 +36,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | [**get_presigned_uri**](FilesFilesApi.md#get_presigned_uri) | **GET** /api/2.0/files/file/{fileId}/presigneduri | Get file download link |
 | [**get_protected_file_users**](FilesFilesApi.md#get_protected_file_users) | **GET** /api/2.0/files/file/{fileId}/protectusers | Get users access rights to the protected file |
 | [**get_reference_data**](FilesFilesApi.md#get_reference_data) | **POST** /api/2.0/files/file/referencedata | Get reference data |
+| [**get_xlsx**](FilesFilesApi.md#get_xlsx) | **GET** /api/2.0/files/file/{fileId}/xlsx | Get XLSX report generation status |
 | [**is_form_pdf**](FilesFilesApi.md#is_form_pdf) | **GET** /api/2.0/files/file/{fileId}/isformpdf | Check the PDF file |
 | [**lock_file**](FilesFilesApi.md#lock_file) | **PUT** /api/2.0/files/file/{fileId}/lock | Lock a file |
 | [**manage_form_filling**](FilesFilesApi.md#manage_form_filling) | **PUT** /api/2.0/files/file/{fileId}/manageformfilling | Perform form filling action |
@@ -1562,7 +1563,7 @@ end
 
 ## generate_xlsx
 
-> <FileIntegerWrapper> generate_xlsx(file_id)
+> <XlsxReportResponseWrapper> generate_xlsx(file_id)
 
 Generate XLSX report
 
@@ -1615,7 +1616,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<FileIntegerWrapper>, Integer, Hash)> generate_xlsx_with_http_info(file_id)
+> <Array(<XlsxReportResponseWrapper>, Integer, Hash)> generate_xlsx_with_http_info(file_id)
 
 ```ruby
 begin
@@ -1623,7 +1624,7 @@ begin
   data, status_code, headers = api_instance.generate_xlsx_with_http_info(file_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <FileIntegerWrapper>
+  p data # => <XlsxReportResponseWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FilesApi->generate_xlsx_with_http_info: #{e}"
 end
@@ -1637,7 +1638,7 @@ end
 
 ### Return type
 
-[**FileIntegerWrapper**](FileIntegerWrapper.md)
+[**XlsxReportResponseWrapper**](XlsxReportResponseWrapper.md)
 
 ### Authorization
 
@@ -2788,6 +2789,95 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## get_xlsx
+
+> <DocumentBuilderTaskWrapper> get_xlsx(file_id)
+
+Get XLSX report generation status
+
+Returns the status of the XLSX report generation task for the specified form.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-xlsx/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Files::FilesApi.new
+file_id = 1 # Integer | The file unique identifier.
+
+begin
+  # Get XLSX report generation status
+  result = api_instance.get_xlsx(file_id)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Files::FilesApi->get_xlsx: #{e}"
+end
+```
+
+#### Using the get_xlsx_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DocumentBuilderTaskWrapper>, Integer, Hash)> get_xlsx_with_http_info(file_id)
+
+```ruby
+begin
+  # Get XLSX report generation status
+  data, status_code, headers = api_instance.get_xlsx_with_http_info(file_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DocumentBuilderTaskWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Files::FilesApi->get_xlsx_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **file_id** | **Integer** | The file unique identifier. |  |
+
+### Return type
+
+[**DocumentBuilderTaskWrapper**](DocumentBuilderTaskWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 

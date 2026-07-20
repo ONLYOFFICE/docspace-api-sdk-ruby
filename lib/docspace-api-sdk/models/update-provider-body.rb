@@ -28,12 +28,16 @@ module DocspaceApiSdk
     # The new authentication API key for the AI provider. If null, the key is not changed.
     attr_accessor :key
 
+    # Optional list of model settings changes to apply atomically with the provider update.
+    attr_accessor :model_settings
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'title' => :'title',
         :'url' => :'url',
-        :'key' => :'key'
+        :'key' => :'key',
+        :'model_settings' => :'modelSettings'
       }
     end
 
@@ -52,7 +56,8 @@ module DocspaceApiSdk
       {
         :'title' => :'String',
         :'url' => :'String',
-        :'key' => :'String'
+        :'key' => :'String',
+        :'model_settings' => :'Array<ModelSettingsItemDto>'
       }
     end
 
@@ -61,7 +66,8 @@ module DocspaceApiSdk
       Set.new([
         :'title',
         :'url',
-        :'key'
+        :'key',
+        :'model_settings'
       ])
     end
 
@@ -92,6 +98,12 @@ module DocspaceApiSdk
       if attributes.key?(:'key')
         self.key = attributes[:'key']
       end
+
+      if attributes.key?(:'model_settings')
+        if (value = attributes[:'model_settings']).is_a?(Array)
+          self.model_settings = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -109,6 +121,12 @@ module DocspaceApiSdk
       true
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] model_settings Value to be assigned
+    def model_settings=(model_settings)
+      @model_settings = model_settings
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -116,7 +134,8 @@ module DocspaceApiSdk
       self.class == o.class &&
           title == o.title &&
           url == o.url &&
-          key == o.key
+          key == o.key &&
+          model_settings == o.model_settings
     end
 
     # @see the `==` method
@@ -128,7 +147,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, url, key].hash
+      [title, url, key, model_settings].hash
     end
 
     # Builds the object from hash

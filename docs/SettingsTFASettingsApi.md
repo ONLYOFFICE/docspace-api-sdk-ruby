@@ -5,19 +5,19 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**get_tfa_app_codes**](SettingsTFASettingsApi.md#get_tfa_app_codes) | **GET** /api/2.0/settings/tfaappcodes | Get the TFA codes |
-| [**get_tfa_confirm_url**](SettingsTFASettingsApi.md#get_tfa_confirm_url) | **GET** /api/2.0/settings/tfaapp/confirm | Get confirmation email |
+| [**get_tfa_confirm_data**](SettingsTFASettingsApi.md#get_tfa_confirm_data) | **GET** /api/2.0/settings/tfaapp/confirm | Get TFA confirmation data |
 | [**get_tfa_settings**](SettingsTFASettingsApi.md#get_tfa_settings) | **GET** /api/2.0/settings/tfaapp | Get the TFA settings |
 | [**tfa_app_generate_setup_code**](SettingsTFASettingsApi.md#tfa_app_generate_setup_code) | **GET** /api/2.0/settings/tfaapp/setup | Generate setup code |
 | [**tfa_validate_auth_code**](SettingsTFASettingsApi.md#tfa_validate_auth_code) | **POST** /api/2.0/settings/tfaapp/validate | Validate the TFA code |
 | [**unlink_tfa_app**](SettingsTFASettingsApi.md#unlink_tfa_app) | **PUT** /api/2.0/settings/tfaappnewapp | Unlink the TFA application |
 | [**update_tfa_app_codes**](SettingsTFASettingsApi.md#update_tfa_app_codes) | **PUT** /api/2.0/settings/tfaappnewcodes | Update the TFA codes |
 | [**update_tfa_settings**](SettingsTFASettingsApi.md#update_tfa_settings) | **PUT** /api/2.0/settings/tfaapp | Update the TFA settings |
-| [**update_tfa_settings_link**](SettingsTFASettingsApi.md#update_tfa_settings_link) | **PUT** /api/2.0/settings/tfaappwithlink | Get a confirmation email for updating TFA settings |
+| [**update_tfa_settings_link**](SettingsTFASettingsApi.md#update_tfa_settings_link) | **PUT** /api/2.0/settings/tfaappwithlink | Updates TFA settings |
 
 
 ## get_tfa_app_codes
 
-> <ObjectArrayWrapper> get_tfa_app_codes
+> <TfaAppCodeArrayWrapper> get_tfa_app_codes
 
 Get the TFA codes
 
@@ -69,7 +69,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ObjectArrayWrapper>, Integer, Hash)> get_tfa_app_codes_with_http_info
+> <Array(<TfaAppCodeArrayWrapper>, Integer, Hash)> get_tfa_app_codes_with_http_info
 
 ```ruby
 begin
@@ -77,7 +77,7 @@ begin
   data, status_code, headers = api_instance.get_tfa_app_codes_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ObjectArrayWrapper>
+  p data # => <TfaAppCodeArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::TFASettingsApi->get_tfa_app_codes_with_http_info: #{e}"
 end
@@ -89,7 +89,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ObjectArrayWrapper**](ObjectArrayWrapper.md)
+[**TfaAppCodeArrayWrapper**](TfaAppCodeArrayWrapper.md)
 
 ### Authorization
 
@@ -101,15 +101,15 @@ This endpoint does not need any parameter.
 - **Accept**: application/json
 
 
-## get_tfa_confirm_url
+## get_tfa_confirm_data
 
-> <StringWrapper> get_tfa_confirm_url
+> <TfaConfirmDataWrapper> get_tfa_confirm_data
 
-Get confirmation email
+Get TFA confirmation data
 
-Returns the confirmation email URL for authorization via SMS or TFA application.
+Returns the confirmation data for authorization via SMS or TFA application.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-confirm-url/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tfa-confirm-data/).
 
 ### Examples
 
@@ -143,29 +143,29 @@ end
 api_instance = DocspaceApiSdk::Settings::TFASettingsApi.new
 
 begin
-  # Get confirmation email
-  result = api_instance.get_tfa_confirm_url
+  # Get TFA confirmation data
+  result = api_instance.get_tfa_confirm_data
   p result
 rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Settings::TFASettingsApi->get_tfa_confirm_url: #{e}"
+  puts "Error when calling Settings::TFASettingsApi->get_tfa_confirm_data: #{e}"
 end
 ```
 
-#### Using the get_tfa_confirm_url_with_http_info variant
+#### Using the get_tfa_confirm_data_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<StringWrapper>, Integer, Hash)> get_tfa_confirm_url_with_http_info
+> <Array(<TfaConfirmDataWrapper>, Integer, Hash)> get_tfa_confirm_data_with_http_info
 
 ```ruby
 begin
-  # Get confirmation email
-  data, status_code, headers = api_instance.get_tfa_confirm_url_with_http_info
+  # Get TFA confirmation data
+  data, status_code, headers = api_instance.get_tfa_confirm_data_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <StringWrapper>
+  p data # => <TfaConfirmDataWrapper>
 rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Settings::TFASettingsApi->get_tfa_confirm_url_with_http_info: #{e}"
+  puts "Error when calling Settings::TFASettingsApi->get_tfa_confirm_data_with_http_info: #{e}"
 end
 ```
 
@@ -175,7 +175,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**StringWrapper**](StringWrapper.md)
+[**TfaConfirmDataWrapper**](TfaConfirmDataWrapper.md)
 
 ### Authorization
 
@@ -543,7 +543,7 @@ end
 
 ## update_tfa_app_codes
 
-> <ObjectArrayWrapper> update_tfa_app_codes
+> <TfaAppCodeArrayWrapper> update_tfa_app_codes
 
 Update the TFA codes
 
@@ -595,7 +595,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ObjectArrayWrapper>, Integer, Hash)> update_tfa_app_codes_with_http_info
+> <Array(<TfaAppCodeArrayWrapper>, Integer, Hash)> update_tfa_app_codes_with_http_info
 
 ```ruby
 begin
@@ -603,7 +603,7 @@ begin
   data, status_code, headers = api_instance.update_tfa_app_codes_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ObjectArrayWrapper>
+  p data # => <TfaAppCodeArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::TFASettingsApi->update_tfa_app_codes_with_http_info: #{e}"
 end
@@ -615,7 +615,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ObjectArrayWrapper**](ObjectArrayWrapper.md)
+[**TfaAppCodeArrayWrapper**](TfaAppCodeArrayWrapper.md)
 
 ### Authorization
 
@@ -722,9 +722,9 @@ end
 
 > <StringWrapper> update_tfa_settings_link(opts)
 
-Get a confirmation email for updating TFA settings
+Updates TFA settings
 
-Returns the confirmation email URL for updating TFA settings.
+Updates TFA settings and returns the confirmation URL for authorization via SMS or TFA application.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tfa-settings-link/).
 
@@ -763,7 +763,7 @@ opts = {
 }
 
 begin
-  # Get a confirmation email for updating TFA settings
+  # Updates TFA settings
   result = api_instance.update_tfa_settings_link(opts)
   p result
 rescue DocspaceApiSdk::ApiError => e
@@ -779,7 +779,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get a confirmation email for updating TFA settings
+  # Updates TFA settings
   data, status_code, headers = api_instance.update_tfa_settings_link_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }

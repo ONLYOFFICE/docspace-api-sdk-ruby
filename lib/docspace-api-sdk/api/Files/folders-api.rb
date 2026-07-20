@@ -397,7 +397,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-xlsx-by-folder/
     # @param folder_id [Integer] The folder unique identifier.
     # @param [Hash] opts the optional parameters
-    # @return [FileIntegerWrapper]
+    # @return [XlsxReportResponseWrapper]
     def generate_xlsx_by_folder(folder_id, opts = {})
       data, _status_code, _headers = generate_xlsx_by_folder_with_http_info(folder_id, opts)
       data
@@ -408,7 +408,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-xlsx-by-folder/
     # @param folder_id [Integer] The folder unique identifier.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(FileIntegerWrapper, Integer, Hash)>] FileIntegerWrapper data, response status code and response headers
+    # @return [Array<(XlsxReportResponseWrapper, Integer, Hash)>] XlsxReportResponseWrapper data, response status code and response headers
     def generate_xlsx_by_folder_with_http_info(folder_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FoldersApi.generate_xlsx_by_folder ...'
@@ -435,7 +435,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'FileIntegerWrapper'
+      return_type = opts[:debug_return_type] || 'XlsxReportResponseWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -680,6 +680,7 @@ module DocspaceApiSdk
     # @option opts [Integer] :room_id The room ID.
     # @option opts [Boolean] :exclude_subject Specifies whether to exclude search by user or group ID.
     # @option opts [ApplyFilterOption] :apply_filter_option Specifies whether to return only files, only folders, or all elements from the specified folder.
+    # @option opts [Boolean] :with_sub_folders Specifies whether to include files from subfolders in the results.
     # @option opts [String] :extension Specifies whether to search for the specific file extension.
     # @option opts [SearchArea] :search_area The search area.
     # @option opts [String] :forms_item_key The forms item key.
@@ -707,6 +708,7 @@ module DocspaceApiSdk
     # @option opts [Integer] :room_id The room ID.
     # @option opts [Boolean] :exclude_subject Specifies whether to exclude search by user or group ID.
     # @option opts [ApplyFilterOption] :apply_filter_option Specifies whether to return only files, only folders, or all elements from the specified folder.
+    # @option opts [Boolean] :with_sub_folders Specifies whether to include files from subfolders in the results.
     # @option opts [String] :extension Specifies whether to search for the specific file extension.
     # @option opts [SearchArea] :search_area The search area.
     # @option opts [String] :forms_item_key The forms item key.
@@ -745,6 +747,7 @@ module DocspaceApiSdk
       query_params[:'roomId'] = opts[:'room_id'] if !opts[:'room_id'].nil?
       query_params[:'excludeSubject'] = opts[:'exclude_subject'] if !opts[:'exclude_subject'].nil?
       query_params[:'applyFilterOption'] = opts[:'apply_filter_option'] if !opts[:'apply_filter_option'].nil?
+      query_params[:'withSubFolders'] = opts[:'with_sub_folders'] if !opts[:'with_sub_folders'].nil?
       query_params[:'extension'] = opts[:'extension'] if !opts[:'extension'].nil?
       query_params[:'searchArea'] = opts[:'search_area'] if !opts[:'search_area'].nil?
       query_params[:'formsItemKey'] = opts[:'forms_item_key'] if !opts[:'forms_item_key'].nil?
@@ -2175,8 +2178,11 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file/
     # @param folder_id [Integer] The folder ID to upload a file.
     # @param [Hash] opts the optional parameters
-    # @option opts [UploadRequestDto] :upload_request_dto The request parameters for uploading a file.
-    # @return [ObjectWrapper]
+    # @option opts [Boolean] :create_new_if_exist Specifies whether to create the new file if it already exists or not.
+    # @option opts [Boolean] :store_original_file Specifies whether to upload documents in the original formats as well or not.
+    # @option opts [Boolean] :keep_convert_status Specifies whether to keep the file converting status or not.
+    # @option opts [File] :file The file to be uploaded.
+    # @return [FileIntegerArrayWrapper]
     def upload_file(folder_id, opts = {})
       data, _status_code, _headers = upload_file_with_http_info(folder_id, opts)
       data
@@ -2187,8 +2193,11 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file/
     # @param folder_id [Integer] The folder ID to upload a file.
     # @param [Hash] opts the optional parameters
-    # @option opts [UploadRequestDto] :upload_request_dto The request parameters for uploading a file.
-    # @return [Array<(ObjectWrapper, Integer, Hash)>] ObjectWrapper data, response status code and response headers
+    # @option opts [Boolean] :create_new_if_exist Specifies whether to create the new file if it already exists or not.
+    # @option opts [Boolean] :store_original_file Specifies whether to upload documents in the original formats as well or not.
+    # @option opts [Boolean] :keep_convert_status Specifies whether to keep the file converting status or not.
+    # @option opts [File] :file The file to be uploaded.
+    # @return [Array<(FileIntegerArrayWrapper, Integer, Hash)>] FileIntegerArrayWrapper data, response status code and response headers
     def upload_file_with_http_info(folder_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FoldersApi.upload_file ...'
@@ -2202,25 +2211,29 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'createNewIfExist'] = opts[:'create_new_if_exist'] if !opts[:'create_new_if_exist'].nil?
+      query_params[:'storeOriginalFile'] = opts[:'store_original_file'] if !opts[:'store_original_file'].nil?
+      query_params[:'keepConvertStatus'] = opts[:'keep_convert_status'] if !opts[:'keep_convert_status'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
       # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
+      content_type = @api_client.select_header_content_type(['multipart/form-data'])
       if !content_type.nil?
           header_params['Content-Type'] = content_type
       end
 
       # form parameters
       form_params = opts[:form_params] || {}
+      form_params['File'] = opts[:'file'] if !opts[:'file'].nil?
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'upload_request_dto'])
+      post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ObjectWrapper'
+      return_type = opts[:debug_return_type] || 'FileIntegerArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -2246,8 +2259,11 @@ module DocspaceApiSdk
     # Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-to-my/
     # @param [Hash] opts the optional parameters
-    # @option opts [UploadRequestDto] :in_dto The request parameters for uploading a file.
-    # @return [ObjectWrapper]
+    # @option opts [Boolean] :create_new_if_exist Specifies whether to create the new file if it already exists or not.
+    # @option opts [Boolean] :store_original_file Specifies whether to upload documents in the original formats as well or not.
+    # @option opts [Boolean] :keep_convert_status Specifies whether to keep the file converting status or not.
+    # @option opts [File] :file The file to be uploaded.
+    # @return [FileIntegerArrayWrapper]
     def upload_file_to_my(opts = {})
       data, _status_code, _headers = upload_file_to_my_with_http_info(opts)
       data
@@ -2257,8 +2273,11 @@ module DocspaceApiSdk
     # Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-to-my/
     # @param [Hash] opts the optional parameters
-    # @option opts [UploadRequestDto] :in_dto The request parameters for uploading a file.
-    # @return [Array<(ObjectWrapper, Integer, Hash)>] ObjectWrapper data, response status code and response headers
+    # @option opts [Boolean] :create_new_if_exist Specifies whether to create the new file if it already exists or not.
+    # @option opts [Boolean] :store_original_file Specifies whether to upload documents in the original formats as well or not.
+    # @option opts [Boolean] :keep_convert_status Specifies whether to keep the file converting status or not.
+    # @option opts [File] :file The file to be uploaded.
+    # @return [Array<(FileIntegerArrayWrapper, Integer, Hash)>] FileIntegerArrayWrapper data, response status code and response headers
     def upload_file_to_my_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FoldersApi.upload_file_to_my ...'
@@ -2268,21 +2287,29 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'inDto'] = opts[:'in_dto'] if !opts[:'in_dto'].nil?
+      query_params[:'createNewIfExist'] = opts[:'create_new_if_exist'] if !opts[:'create_new_if_exist'].nil?
+      query_params[:'storeOriginalFile'] = opts[:'store_original_file'] if !opts[:'store_original_file'].nil?
+      query_params[:'keepConvertStatus'] = opts[:'keep_convert_status'] if !opts[:'keep_convert_status'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
       header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['multipart/form-data'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
 
       # form parameters
       form_params = opts[:form_params] || {}
+      form_params['File'] = opts[:'file'] if !opts[:'file'].nil?
 
       # http body (model)
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ObjectWrapper'
+      return_type = opts[:debug_return_type] || 'FileIntegerArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']

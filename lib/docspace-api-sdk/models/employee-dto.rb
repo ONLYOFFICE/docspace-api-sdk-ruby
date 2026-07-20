@@ -25,9 +25,6 @@ module DocspaceApiSdk
     # The HTML-encoded user's display name formatted according to the default format for the current culture.
     attr_accessor :display_name
 
-    # The user title.
-    attr_accessor :title
-
     # The user avatar.
     attr_accessor :avatar
 
@@ -57,7 +54,6 @@ module DocspaceApiSdk
       {
         :'id' => :'id',
         :'display_name' => :'displayName',
-        :'title' => :'title',
         :'avatar' => :'avatar',
         :'avatar_original' => :'avatarOriginal',
         :'avatar_max' => :'avatarMax',
@@ -84,7 +80,6 @@ module DocspaceApiSdk
       {
         :'id' => :'String',
         :'display_name' => :'String',
-        :'title' => :'String',
         :'avatar' => :'String',
         :'avatar_original' => :'String',
         :'avatar_max' => :'String',
@@ -100,7 +95,6 @@ module DocspaceApiSdk
     def self.openapi_nullable
       Set.new([
         :'display_name',
-        :'title',
         :'avatar',
         :'avatar_original',
         :'avatar_max',
@@ -132,10 +126,6 @@ module DocspaceApiSdk
 
       if attributes.key?(:'display_name')
         self.display_name = attributes[:'display_name']
-      end
-
-      if attributes.key?(:'title')
-        self.title = attributes[:'title']
       end
 
       if attributes.key?(:'avatar')
@@ -193,7 +183,6 @@ module DocspaceApiSdk
       self.class == o.class &&
           id == o.id &&
           display_name == o.display_name &&
-          title == o.title &&
           avatar == o.avatar &&
           avatar_original == o.avatar_original &&
           avatar_max == o.avatar_max &&
@@ -213,7 +202,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, display_name, title, avatar, avatar_original, avatar_max, avatar_medium, avatar_small, profile_url, has_avatar, is_anonim].hash
+      [id, display_name, avatar, avatar_original, avatar_max, avatar_medium, avatar_small, profile_url, has_avatar, is_anonim].hash
     end
 
     # Builds the object from hash

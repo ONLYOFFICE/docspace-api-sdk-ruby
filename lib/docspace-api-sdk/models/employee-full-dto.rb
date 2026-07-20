@@ -25,9 +25,6 @@ module DocspaceApiSdk
     # The HTML-encoded user's display name formatted according to the default format for the current culture.
     attr_accessor :display_name
 
-    # The user title.
-    attr_accessor :title
-
     # The user avatar.
     attr_accessor :avatar
 
@@ -67,11 +64,6 @@ module DocspaceApiSdk
     # The list of user contacts.
     attr_accessor :contacts
 
-    attr_accessor :birthday
-
-    # The user sex.
-    attr_accessor :sex
-
     attr_accessor :status
 
     attr_accessor :activation_status
@@ -80,8 +72,6 @@ module DocspaceApiSdk
 
     # The user department.
     attr_accessor :department
-
-    attr_accessor :work_from
 
     # The list of user groups.
     attr_accessor :groups
@@ -181,7 +171,6 @@ module DocspaceApiSdk
       {
         :'id' => :'id',
         :'display_name' => :'displayName',
-        :'title' => :'title',
         :'avatar' => :'avatar',
         :'avatar_original' => :'avatarOriginal',
         :'avatar_max' => :'avatarMax',
@@ -195,13 +184,10 @@ module DocspaceApiSdk
         :'user_name' => :'userName',
         :'email' => :'email',
         :'contacts' => :'contacts',
-        :'birthday' => :'birthday',
-        :'sex' => :'sex',
         :'status' => :'status',
         :'activation_status' => :'activationStatus',
         :'terminated' => :'terminated',
         :'department' => :'department',
-        :'work_from' => :'workFrom',
         :'groups' => :'groups',
         :'location' => :'location',
         :'notes' => :'notes',
@@ -245,7 +231,6 @@ module DocspaceApiSdk
       {
         :'id' => :'String',
         :'display_name' => :'String',
-        :'title' => :'String',
         :'avatar' => :'String',
         :'avatar_original' => :'String',
         :'avatar_max' => :'String',
@@ -259,13 +244,10 @@ module DocspaceApiSdk
         :'user_name' => :'String',
         :'email' => :'String',
         :'contacts' => :'Array<Contact>',
-        :'birthday' => :'ApiDateTime',
-        :'sex' => :'String',
         :'status' => :'EmployeeStatus',
         :'activation_status' => :'EmployeeActivationStatus',
         :'terminated' => :'ApiDateTime',
         :'department' => :'String',
-        :'work_from' => :'ApiDateTime',
         :'groups' => :'Array<GroupSummaryDto>',
         :'location' => :'String',
         :'notes' => :'String',
@@ -298,7 +280,6 @@ module DocspaceApiSdk
     def self.openapi_nullable
       Set.new([
         :'display_name',
-        :'title',
         :'avatar',
         :'avatar_original',
         :'avatar_max',
@@ -310,7 +291,6 @@ module DocspaceApiSdk
         :'user_name',
         :'email',
         :'contacts',
-        :'sex',
         :'department',
         :'groups',
         :'location',
@@ -358,10 +338,6 @@ module DocspaceApiSdk
 
       if attributes.key?(:'display_name')
         self.display_name = attributes[:'display_name']
-      end
-
-      if attributes.key?(:'title')
-        self.title = attributes[:'title']
       end
 
       if attributes.key?(:'avatar')
@@ -418,14 +394,6 @@ module DocspaceApiSdk
         end
       end
 
-      if attributes.key?(:'birthday')
-        self.birthday = attributes[:'birthday']
-      end
-
-      if attributes.key?(:'sex')
-        self.sex = attributes[:'sex']
-      end
-
       if attributes.key?(:'status')
         self.status = attributes[:'status']
       end
@@ -440,10 +408,6 @@ module DocspaceApiSdk
 
       if attributes.key?(:'department')
         self.department = attributes[:'department']
-      end
-
-      if attributes.key?(:'work_from')
-        self.work_from = attributes[:'work_from']
       end
 
       if attributes.key?(:'groups')
@@ -573,7 +537,6 @@ module DocspaceApiSdk
       self.class == o.class &&
           id == o.id &&
           display_name == o.display_name &&
-          title == o.title &&
           avatar == o.avatar &&
           avatar_original == o.avatar_original &&
           avatar_max == o.avatar_max &&
@@ -587,13 +550,10 @@ module DocspaceApiSdk
           user_name == o.user_name &&
           email == o.email &&
           contacts == o.contacts &&
-          birthday == o.birthday &&
-          sex == o.sex &&
           status == o.status &&
           activation_status == o.activation_status &&
           terminated == o.terminated &&
           department == o.department &&
-          work_from == o.work_from &&
           groups == o.groups &&
           location == o.location &&
           notes == o.notes &&
@@ -630,7 +590,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, display_name, title, avatar, avatar_original, avatar_max, avatar_medium, avatar_small, profile_url, has_avatar, is_anonim, first_name, last_name, user_name, email, contacts, birthday, sex, status, activation_status, terminated, department, work_from, groups, location, notes, is_admin, is_room_admin, is_ldap, list_admin_modules, is_owner, is_visitor, is_collaborator, culture_name, mobile_phone, mobile_phone_activation_status, is_sso, theme, quota_limit, used_space, shared, is_custom_quota, login_event_id, auth_cookie_lifetime, created_by, registration_date, has_personal_folder, tfa_app_enabled].hash
+      [id, display_name, avatar, avatar_original, avatar_max, avatar_medium, avatar_small, profile_url, has_avatar, is_anonim, first_name, last_name, user_name, email, contacts, status, activation_status, terminated, department, groups, location, notes, is_admin, is_room_admin, is_ldap, list_admin_modules, is_owner, is_visitor, is_collaborator, culture_name, mobile_phone, mobile_phone_activation_status, is_sso, theme, quota_limit, used_space, shared, is_custom_quota, login_event_id, auth_cookie_lifetime, created_by, registration_date, has_personal_folder, tfa_app_enabled].hash
     end
 
     # Builds the object from hash

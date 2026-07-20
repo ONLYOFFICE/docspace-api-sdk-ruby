@@ -10,6 +10,7 @@
 | **owned_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] |
 | **shared** | **Boolean** | Specifies if the file entry is shared via link or not. | [optional] |
 | **shared_for_user** | **Boolean** | Specifies if the file entry is shared for user or not. | [optional] |
+| **shared_external** | **Boolean** | Specifies if the file entry is shared via a public (non-internal) external link. | [optional] |
 | **parent_shared** | **Boolean** | Indicates whether the parent entity is shared. | [optional] |
 | **short_web_url** | **String** | The short Web URL. | [optional] |
 | **created** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] |
@@ -65,6 +66,7 @@
 | **root_room_type** | [**RoomType**](RoomType.md) |  | [optional] |
 | **save_form_as_xlsx** | **Boolean** | Specifies whether to save form data as XLSX file. | [optional] |
 | **send_form_to_external_db** | **Boolean** | Specifies whether to send form data to external database. | [optional] |
+| **original_form_id** | **Integer** | The original form ID that corresponds to this FormFillingFolderDone folder. | [optional] |
 
 ## Example
 
@@ -78,6 +80,7 @@ instance = DocspaceApiSdk::FolderDtoInteger.new(
   owned_by: null,
   shared: false,
   shared_for_user: false,
+  shared_external: false,
   parent_shared: false,
   short_web_url: http://localhost/s/abc123,
   created: null,
@@ -131,7 +134,8 @@ instance = DocspaceApiSdk::FolderDtoInteger.new(
   expired: false,
   chat_settings: null,
   root_room_type: null,
-  save_form_as_xlsx: null,
-  send_form_to_external_db: null
+  save_form_as_xlsx: false,
+  send_form_to_external_db: false,
+  original_form_id: 42
 )
 ```

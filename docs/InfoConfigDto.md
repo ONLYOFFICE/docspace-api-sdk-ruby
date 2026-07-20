@@ -20,7 +20,7 @@ instance = DocspaceApiSdk::InfoConfigDto.new(
   favorite: false,
   folder: My Documents,
   owner: John Doe,
-  sharing_settings: null,
+  sharing_settings: [],
   type: null,
   uploaded: 2025-01-01T00:00:00
 )

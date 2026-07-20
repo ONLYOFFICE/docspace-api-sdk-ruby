@@ -69,7 +69,6 @@ module DocspaceApiSdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'tmp_file',
       ])
     end
 
@@ -91,6 +90,8 @@ module DocspaceApiSdk
 
       if attributes.key?(:'tmp_file')
         self.tmp_file = attributes[:'tmp_file']
+      else
+        self.tmp_file = nil
       end
 
       if attributes.key?(:'x')
@@ -115,6 +116,46 @@ module DocspaceApiSdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @tmp_file.nil?
+        invalid_properties.push('invalid value for "tmp_file", tmp_file cannot be nil.')
+      end
+
+      if @tmp_file.to_s.length < 1
+        invalid_properties.push('invalid value for "tmp_file", the character length must be greater than or equal to 1.')
+      end
+
+      if !@x.nil? && @x > 1280
+        invalid_properties.push('invalid value for "x", must be smaller than or equal to 1280.')
+      end
+
+      if !@x.nil? && @x < 0
+        invalid_properties.push('invalid value for "x", must be greater than or equal to 0.')
+      end
+
+      if !@y.nil? && @y > 1280
+        invalid_properties.push('invalid value for "y", must be smaller than or equal to 1280.')
+      end
+
+      if !@y.nil? && @y < 0
+        invalid_properties.push('invalid value for "y", must be greater than or equal to 0.')
+      end
+
+      if !@width.nil? && @width > 1280
+        invalid_properties.push('invalid value for "width", must be smaller than or equal to 1280.')
+      end
+
+      if !@width.nil? && @width < 1
+        invalid_properties.push('invalid value for "width", must be greater than or equal to 1.')
+      end
+
+      if !@height.nil? && @height > 1280
+        invalid_properties.push('invalid value for "height", must be smaller than or equal to 1280.')
+      end
+
+      if !@height.nil? && @height < 1
+        invalid_properties.push('invalid value for "height", must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -122,7 +163,103 @@ module DocspaceApiSdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @tmp_file.nil?
+      return false if @tmp_file.to_s.length < 1
+      return false if !@x.nil? && @x > 1280
+      return false if !@x.nil? && @x < 0
+      return false if !@y.nil? && @y > 1280
+      return false if !@y.nil? && @y < 0
+      return false if !@width.nil? && @width > 1280
+      return false if !@width.nil? && @width < 1
+      return false if !@height.nil? && @height > 1280
+      return false if !@height.nil? && @height < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] tmp_file Value to be assigned
+    def tmp_file=(tmp_file)
+      if tmp_file.nil?
+        fail ArgumentError, 'tmp_file cannot be nil'
+      end
+
+      if tmp_file.to_s.length < 1
+        fail ArgumentError, 'invalid value for "tmp_file", the character length must be greater than or equal to 1.'
+      end
+
+      @tmp_file = tmp_file
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] x Value to be assigned
+    def x=(x)
+      if x.nil?
+        fail ArgumentError, 'x cannot be nil'
+      end
+
+      if x > 1280
+        fail ArgumentError, 'invalid value for "x", must be smaller than or equal to 1280.'
+      end
+
+      if x < 0
+        fail ArgumentError, 'invalid value for "x", must be greater than or equal to 0.'
+      end
+
+      @x = x
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] y Value to be assigned
+    def y=(y)
+      if y.nil?
+        fail ArgumentError, 'y cannot be nil'
+      end
+
+      if y > 1280
+        fail ArgumentError, 'invalid value for "y", must be smaller than or equal to 1280.'
+      end
+
+      if y < 0
+        fail ArgumentError, 'invalid value for "y", must be greater than or equal to 0.'
+      end
+
+      @y = y
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] width Value to be assigned
+    def width=(width)
+      if width.nil?
+        fail ArgumentError, 'width cannot be nil'
+      end
+
+      if width > 1280
+        fail ArgumentError, 'invalid value for "width", must be smaller than or equal to 1280.'
+      end
+
+      if width < 1
+        fail ArgumentError, 'invalid value for "width", must be greater than or equal to 1.'
+      end
+
+      @width = width
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] height Value to be assigned
+    def height=(height)
+      if height.nil?
+        fail ArgumentError, 'height cannot be nil'
+      end
+
+      if height > 1280
+        fail ArgumentError, 'invalid value for "height", must be smaller than or equal to 1280.'
+      end
+
+      if height < 1
+        fail ArgumentError, 'invalid value for "height", must be greater than or equal to 1.'
+      end
+
+      @height = height
     end
 
     # Checks equality by comparing each attribute.

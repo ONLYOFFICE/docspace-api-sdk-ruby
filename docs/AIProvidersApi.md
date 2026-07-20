@@ -8,7 +8,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | [**delete_providers**](AIProvidersApi.md#delete_providers) | **DELETE** /api/2.0/ai/providers | Delete AI providers |
 | [**get_available_providers**](AIProvidersApi.md#get_available_providers) | **GET** /api/2.0/ai/providers/available | Get available AI provider types |
 | [**get_default_provider**](AIProvidersApi.md#get_default_provider) | **GET** /api/2.0/ai/providers/default | Get the default AI provider |
+| [**get_provider_models**](AIProvidersApi.md#get_provider_models) | **GET** /api/2.0/ai/providers/{providerId}/models | Get all models for a provider with their settings |
 | [**get_providers**](AIProvidersApi.md#get_providers) | **GET** /api/2.0/ai/providers | Get AI providers |
+| [**preview_provider_models**](AIProvidersApi.md#preview_provider_models) | **POST** /api/2.0/ai/providers/models/preview | Preview models for a new AI provider |
 | [**set_default_provider**](AIProvidersApi.md#set_default_provider) | **PUT** /api/2.0/ai/providers/default | Set the default AI provider |
 | [**update_provider**](AIProvidersApi.md#update_provider) | **PUT** /api/2.0/ai/providers/{id} | Update an AI provider |
 
@@ -366,6 +368,95 @@ This endpoint does not need any parameter.
 - **Accept**: application/json
 
 
+## get_provider_models
+
+> <ModelSettingsArrayWrapper> get_provider_models(provider_id)
+
+Get all models for a provider with their settings
+
+Returns the full list of AI models available from a provider, including both recommended and additional models.  Each model includes its current settings: enabled state, display alias, and capabilities (vision, tool calling, thinking).  Recommended models are enabled by default and their alias and capabilities come from configuration.  Additional models are disabled by default and can be configured by the admin.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-provider-models/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::AI::ProvidersApi.new
+provider_id = 1 # Integer | The identifier of the AI provider.
+
+begin
+  # Get all models for a provider with their settings
+  result = api_instance.get_provider_models(provider_id)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling AI::ProvidersApi->get_provider_models: #{e}"
+end
+```
+
+#### Using the get_provider_models_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ModelSettingsArrayWrapper>, Integer, Hash)> get_provider_models_with_http_info(provider_id)
+
+```ruby
+begin
+  # Get all models for a provider with their settings
+  data, status_code, headers = api_instance.get_provider_models_with_http_info(provider_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ModelSettingsArrayWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling AI::ProvidersApi->get_provider_models_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **provider_id** | **Integer** | The identifier of the AI provider. |  |
+
+### Return type
+
+[**ModelSettingsArrayWrapper**](ModelSettingsArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_providers
 
 > <AiProviderArrayWrapper> get_providers(opts)
@@ -456,6 +547,97 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## preview_provider_models
+
+> <ModelSettingsArrayWrapper> preview_provider_models(opts)
+
+Preview models for a new AI provider
+
+Connects to the specified AI provider using the provided credentials and returns the available models  with their default settings. This is used to preview models before saving the provider.  Recommended models are enabled by default with configuration-defined settings.  Additional models are disabled by default with empty capabilities.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/preview-provider-models/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::AI::ProvidersApi.new
+opts = {
+  preview_provider_models_request_dto: DocspaceApiSdk::PreviewProviderModelsRequestDto.new({key: 'sk-example-key-123'}) # PreviewProviderModelsRequestDto | 
+}
+
+begin
+  # Preview models for a new AI provider
+  result = api_instance.preview_provider_models(opts)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling AI::ProvidersApi->preview_provider_models: #{e}"
+end
+```
+
+#### Using the preview_provider_models_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ModelSettingsArrayWrapper>, Integer, Hash)> preview_provider_models_with_http_info(opts)
+
+```ruby
+begin
+  # Preview models for a new AI provider
+  data, status_code, headers = api_instance.preview_provider_models_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ModelSettingsArrayWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling AI::ProvidersApi->preview_provider_models_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **preview_provider_models_request_dto** | [**PreviewProviderModelsRequestDto**](PreviewProviderModelsRequestDto.md) |  | [optional] |
+
+### Return type
+
+[**ModelSettingsArrayWrapper**](ModelSettingsArrayWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

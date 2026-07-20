@@ -62,6 +62,10 @@
 | **chunk_upload_size** | **Integer** | The size of a large file that is uploaded in chunks. | [optional] |
 | **open_editor_in_same_tab** | **Boolean** | Specifies whether to open the editor in the same tab or not. | [optional] |
 | **organize_rooms_grouping** | **Boolean** | Specifies whether the grouping of rooms is enabled or not. | [optional] |
+| **default_share_link_internal** | **Boolean** | Specifies the default sharing link type: true = DocSpace users only (internal), false = Anyone with the link. | [optional] |
+| **external_share_apply_to_documents** | **Boolean** | When external sharing is restricted, specifies whether the restriction applies to the My Documents section. | [optional] |
+| **external_share_apply_to_rooms** | **Boolean** | When external sharing is restricted, specifies whether the restriction applies to the Rooms section. | [optional] |
+| **block_existing_links_on_restrict** | **Boolean** | When external sharing is restricted, specifies whether existing public links are blocked immediately. | [optional] |
 | **exts_files_vectorized** | **Array&lt;String&gt;** | List of extensions available for vectorization | [optional] |
 | **max_vectorization_file_size** | **Integer** | The maximum file size for vectorization | [optional] |
 
@@ -129,6 +133,10 @@ instance = DocspaceApiSdk::FilesSettingsDto.new(
   chunk_upload_size: 10485760,
   open_editor_in_same_tab: false,
   organize_rooms_grouping: true,
+  default_share_link_internal: false,
+  external_share_apply_to_documents: true,
+  external_share_apply_to_rooms: true,
+  block_existing_links_on_restrict: true,
   exts_files_vectorized: [".docx",".pdf",".txt"],
   max_vectorization_file_size: 5242880
 )

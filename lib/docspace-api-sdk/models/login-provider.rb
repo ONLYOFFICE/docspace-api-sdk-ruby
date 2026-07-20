@@ -32,9 +32,10 @@ module DocspaceApiSdk
     Yahoo = 11.freeze
     Yandex = 12.freeze
     Github = 13.freeze
+    Nextcloud = 14.freeze
 
     def self.all_vars
-      @all_vars ||= [Facebook, Google, Dropbox, Docusign, Box, OneDrive, GosUslugi, LinkedIn, MailRu, VK, Wordpress, Yahoo, Yandex, Github].freeze
+      @all_vars ||= [Facebook, Google, Dropbox, Docusign, Box, OneDrive, GosUslugi, LinkedIn, MailRu, VK, Wordpress, Yahoo, Yandex, Github, Nextcloud].freeze
     end
 
     # Builds the enum from string

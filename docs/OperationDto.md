@@ -15,6 +15,9 @@
 | **debit** | **Float** | The debit amount of the operation. | [optional] |
 | **participant_name** | **String** | The participant original name. | [optional] |
 | **participant_display_name** | **String** | The participant display name. | [optional] |
+| **agent_id** | **String** | AI Agent id. | [optional] |
+| **agent_title** | **String** | AI Agent name. | [optional] |
+| **type** | [**OperationType**](OperationType.md) |  | [optional] |
 
 ## Example
 
@@ -32,6 +35,9 @@ instance = DocspaceApiSdk::OperationDto.new(
   credit: 99.99,
   debit: 99.99,
   participant_name: Example Name,
-  participant_display_name: Example Name
+  participant_display_name: Example Name,
+  agent_id: 123,
+  agent_title: My AI Agent,
+  type: null
 )
 ```

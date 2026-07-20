@@ -190,6 +190,18 @@ module DocspaceApiSdk
     # Specifies whether the grouping of rooms is enabled or not.
     attr_accessor :organize_rooms_grouping
 
+    # Specifies the default sharing link type: true = DocSpace users only (internal), false = Anyone with the link.
+    attr_accessor :default_share_link_internal
+
+    # When external sharing is restricted, specifies whether the restriction applies to the My Documents section.
+    attr_accessor :external_share_apply_to_documents
+
+    # When external sharing is restricted, specifies whether the restriction applies to the Rooms section.
+    attr_accessor :external_share_apply_to_rooms
+
+    # When external sharing is restricted, specifies whether existing public links are blocked immediately.
+    attr_accessor :block_existing_links_on_restrict
+
     # List of extensions available for vectorization
     attr_accessor :exts_files_vectorized
 
@@ -279,6 +291,10 @@ module DocspaceApiSdk
         :'chunk_upload_size' => :'chunkUploadSize',
         :'open_editor_in_same_tab' => :'openEditorInSameTab',
         :'organize_rooms_grouping' => :'organizeRoomsGrouping',
+        :'default_share_link_internal' => :'defaultShareLinkInternal',
+        :'external_share_apply_to_documents' => :'externalShareApplyToDocuments',
+        :'external_share_apply_to_rooms' => :'externalShareApplyToRooms',
+        :'block_existing_links_on_restrict' => :'blockExistingLinksOnRestrict',
         :'exts_files_vectorized' => :'extsFilesVectorized',
         :'max_vectorization_file_size' => :'maxVectorizationFileSize'
       }
@@ -355,6 +371,10 @@ module DocspaceApiSdk
         :'chunk_upload_size' => :'Integer',
         :'open_editor_in_same_tab' => :'Boolean',
         :'organize_rooms_grouping' => :'Boolean',
+        :'default_share_link_internal' => :'Boolean',
+        :'external_share_apply_to_documents' => :'Boolean',
+        :'external_share_apply_to_rooms' => :'Boolean',
+        :'block_existing_links_on_restrict' => :'Boolean',
         :'exts_files_vectorized' => :'Array<String>',
         :'max_vectorization_file_size' => :'Integer'
       }
@@ -692,6 +712,22 @@ module DocspaceApiSdk
         self.organize_rooms_grouping = attributes[:'organize_rooms_grouping']
       end
 
+      if attributes.key?(:'default_share_link_internal')
+        self.default_share_link_internal = attributes[:'default_share_link_internal']
+      end
+
+      if attributes.key?(:'external_share_apply_to_documents')
+        self.external_share_apply_to_documents = attributes[:'external_share_apply_to_documents']
+      end
+
+      if attributes.key?(:'external_share_apply_to_rooms')
+        self.external_share_apply_to_rooms = attributes[:'external_share_apply_to_rooms']
+      end
+
+      if attributes.key?(:'block_existing_links_on_restrict')
+        self.block_existing_links_on_restrict = attributes[:'block_existing_links_on_restrict']
+      end
+
       if attributes.key?(:'exts_files_vectorized')
         if (value = attributes[:'exts_files_vectorized']).is_a?(Array)
           self.exts_files_vectorized = value
@@ -781,6 +817,10 @@ module DocspaceApiSdk
           chunk_upload_size == o.chunk_upload_size &&
           open_editor_in_same_tab == o.open_editor_in_same_tab &&
           organize_rooms_grouping == o.organize_rooms_grouping &&
+          default_share_link_internal == o.default_share_link_internal &&
+          external_share_apply_to_documents == o.external_share_apply_to_documents &&
+          external_share_apply_to_rooms == o.external_share_apply_to_rooms &&
+          block_existing_links_on_restrict == o.block_existing_links_on_restrict &&
           exts_files_vectorized == o.exts_files_vectorized &&
           max_vectorization_file_size == o.max_vectorization_file_size
     end
@@ -794,7 +834,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [exts_image_previewed, exts_media_previewed, exts_web_previewed, exts_web_edited, exts_web_encrypt, exts_web_reviewed, exts_web_custom_filter_editing, exts_web_restricted_editing, exts_web_commented, exts_web_template, exts_must_convert, exts_convertible, exts_uploadable, exts_archive, exts_video, exts_audio, exts_image, exts_spreadsheet, exts_presentation, exts_document, exts_diagram, internal_formats, master_form_extension, param_version, param_out_type, file_download_url_string, file_web_viewer_url_string, file_web_viewer_external_url_string, file_web_editor_url_string, file_web_editor_external_url_string, file_redirect_preview_url_string, file_thumbnail_url_string, confirm_delete, enable_third_party, external_share, external_share_social_media, store_original_files, keep_new_file_name, display_file_extension, convert_notify, hide_confirm_cancel_operation, hide_confirm_convert_save, hide_confirm_convert_open, hide_confirm_room_lifetime, default_order, forcesave, store_forcesave, recent_section, favorites_section, templates_section, download_tar_gz, automatically_clean_up, can_search_by_content, default_sharing_access_rights, max_upload_thread_count, chunk_upload_size, open_editor_in_same_tab, organize_rooms_grouping, exts_files_vectorized, max_vectorization_file_size].hash
+      [exts_image_previewed, exts_media_previewed, exts_web_previewed, exts_web_edited, exts_web_encrypt, exts_web_reviewed, exts_web_custom_filter_editing, exts_web_restricted_editing, exts_web_commented, exts_web_template, exts_must_convert, exts_convertible, exts_uploadable, exts_archive, exts_video, exts_audio, exts_image, exts_spreadsheet, exts_presentation, exts_document, exts_diagram, internal_formats, master_form_extension, param_version, param_out_type, file_download_url_string, file_web_viewer_url_string, file_web_viewer_external_url_string, file_web_editor_url_string, file_web_editor_external_url_string, file_redirect_preview_url_string, file_thumbnail_url_string, confirm_delete, enable_third_party, external_share, external_share_social_media, store_original_files, keep_new_file_name, display_file_extension, convert_notify, hide_confirm_cancel_operation, hide_confirm_convert_save, hide_confirm_convert_open, hide_confirm_room_lifetime, default_order, forcesave, store_forcesave, recent_section, favorites_section, templates_section, download_tar_gz, automatically_clean_up, can_search_by_content, default_sharing_access_rights, max_upload_thread_count, chunk_upload_size, open_editor_in_same_tab, organize_rooms_grouping, default_share_link_internal, external_share_apply_to_documents, external_share_apply_to_rooms, block_existing_links_on_restrict, exts_files_vectorized, max_vectorization_file_size].hash
     end
 
     # Builds the object from hash

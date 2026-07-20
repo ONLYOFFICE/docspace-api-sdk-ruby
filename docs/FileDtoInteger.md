@@ -10,6 +10,7 @@
 | **owned_by** | [**EmployeeDto**](EmployeeDto.md) |  | [optional] |
 | **shared** | **Boolean** | Specifies if the file entry is shared via link or not. | [optional] |
 | **shared_for_user** | **Boolean** | Specifies if the file entry is shared for user or not. | [optional] |
+| **shared_external** | **Boolean** | Specifies if the file entry is shared via a public (non-internal) external link. | [optional] |
 | **parent_shared** | **Boolean** | Indicates whether the parent entity is shared. | [optional] |
 | **short_web_url** | **String** | The short Web URL. | [optional] |
 | **created** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] |
@@ -66,11 +67,13 @@
 | **is_filling_preparing** | **Boolean** | Specifies if the form filling has started but the file is still being saved by the document editor. Filling and editing are not allowed. | [optional] |
 | **in_process_folder_id** | **Integer** | The InProcess folder ID of the file. | [optional] |
 | **in_process_folder_title** | **String** | The InProcess folder title of the file. | [optional] |
+| **results_folder_id** | **Integer** | The ID of the FormFillingFolderDone folder that corresponds to this original form. | [optional] |
 | **draft_location** | [**DraftLocationInteger**](DraftLocationInteger.md) |  | [optional] |
 | **view_accessibility** | [**FileDtoIntegerAllOfViewAccessibility**](FileDtoIntegerAllOfViewAccessibility.md) |  | [optional] |
 | **last_opened** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] |
 | **expired** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] |
 | **vectorization_status** | [**VectorizationStatus**](VectorizationStatus.md) |  | [optional] |
+| **external_db_table_name** | **String** | The name of the table in the external database that corresponds to this form. | [optional] |
 | **dimensions** | [**Size**](Size.md) |  | [optional] |
 
 ## Example
@@ -85,6 +88,7 @@ instance = DocspaceApiSdk::FileDtoInteger.new(
   owned_by: null,
   shared: false,
   shared_for_user: false,
+  shared_external: false,
   parent_shared: false,
   short_web_url: http://localhost/s/abc123,
   created: null,
@@ -141,11 +145,13 @@ instance = DocspaceApiSdk::FileDtoInteger.new(
   is_filling_preparing: false,
   in_process_folder_id: 10,
   in_process_folder_title: In Process,
+  results_folder_id: 55,
   draft_location: null,
   view_accessibility: null,
   last_opened: null,
   expired: null,
   vectorization_status: null,
+  external_db_table_name: form_123_v1,
   dimensions: null
 )
 ```

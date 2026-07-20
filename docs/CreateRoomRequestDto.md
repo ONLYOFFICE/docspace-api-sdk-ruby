@@ -18,6 +18,8 @@
 | **private** | **Boolean** | Specifies whether the room to be created is private or not. | [optional] |
 | **share** | [**Array&lt;FileShareParams&gt;**](FileShareParams.md) | The collection of sharing parameters. | [optional] |
 | **chat_settings** | [**ChatSettings**](ChatSettings.md) |  | [optional] |
+| **send_form_to_external_db** | **Boolean** | Specifies whether to send form data to external database. | [optional] |
+| **save_form_as_xlsx** | **Boolean** | Specifies whether to save form data as XLSX file. | [optional] |
 
 ## Example
 
@@ -38,6 +40,8 @@ instance = DocspaceApiSdk::CreateRoomRequestDto.new(
   room_type: null,
   private: false,
   share: [{"shareTo":"00000000-0000-0000-0000-000000000000","access":1}],
-  chat_settings: null
+  chat_settings: null,
+  send_form_to_external_db: false,
+  save_form_as_xlsx: false
 )
 ```

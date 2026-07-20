@@ -28,12 +28,41 @@ module DocspaceApiSdk
     # AI provider title.
     attr_accessor :provider_title
 
+    attr_accessor :provider_type
+
+    # Display alias of the default model.
+    attr_accessor :default_model_alias
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'provider_id' => :'providerId',
         :'default_model' => :'defaultModel',
-        :'provider_title' => :'providerTitle'
+        :'provider_title' => :'providerTitle',
+        :'provider_type' => :'providerType',
+        :'default_model_alias' => :'defaultModelAlias'
       }
     end
 
@@ -52,7 +81,9 @@ module DocspaceApiSdk
       {
         :'provider_id' => :'Integer',
         :'default_model' => :'String',
-        :'provider_title' => :'String'
+        :'provider_title' => :'String',
+        :'provider_type' => :'ProviderType',
+        :'default_model_alias' => :'String'
       }
     end
 
@@ -60,7 +91,8 @@ module DocspaceApiSdk
     def self.openapi_nullable
       Set.new([
         :'default_model',
-        :'provider_title'
+        :'provider_title',
+        :'default_model_alias'
       ])
     end
 
@@ -93,6 +125,14 @@ module DocspaceApiSdk
       if attributes.key?(:'provider_title')
         self.provider_title = attributes[:'provider_title']
       end
+
+      if attributes.key?(:'provider_type')
+        self.provider_type = attributes[:'provider_type']
+      end
+
+      if attributes.key?(:'default_model_alias')
+        self.default_model_alias = attributes[:'default_model_alias']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -117,7 +157,9 @@ module DocspaceApiSdk
       self.class == o.class &&
           provider_id == o.provider_id &&
           default_model == o.default_model &&
-          provider_title == o.provider_title
+          provider_title == o.provider_title &&
+          provider_type == o.provider_type &&
+          default_model_alias == o.default_model_alias
     end
 
     # @see the `==` method
@@ -129,7 +171,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [provider_id, default_model, provider_title].hash
+      [provider_id, default_model, provider_title, provider_type, default_model_alias].hash
     end
 
     # Builds the object from hash

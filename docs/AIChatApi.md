@@ -14,6 +14,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | [**get_user_chats_settings**](AIChatApi.md#get_user_chats_settings) | **GET** /api/2.0/ai/rooms/{roomId}/chats/config | Get user chat settings for a room |
 | [**provide_permission**](AIChatApi.md#provide_permission) | **POST** /api/2.0/ai/chats/tool-permissions/{callId}/decision | Submit a tool execution permission decision |
 | [**rename_chat**](AIChatApi.md#rename_chat) | **PUT** /api/2.0/ai/chats/{chatId} | Rename an AI chat |
+| [**resolve_editor_tool**](AIChatApi.md#resolve_editor_tool) | **POST** /api/2.0/ai/chats/tool-files/{callId}/decision | Resolve a pending editor file-generation tool |
 | [**set_user_chats_settings**](AIChatApi.md#set_user_chats_settings) | **PUT** /api/2.0/ai/rooms/{roomId}/chats/config | Update user chat settings for a room |
 | [**start_new_chat**](AIChatApi.md#start_new_chat) | **POST** /api/2.0/ai/rooms/{roomId}/chats | Start a new AI chat |
 
@@ -198,7 +199,7 @@ nil (empty response body)
 
 ## export_chat
 
-> export_chat(chat_id, export_chat_request_body_integer)
+> export_chat(chat_id, export_chat_request_body)
 
 Export AI chat messages to a file
 
@@ -237,11 +238,11 @@ end
 
 api_instance = DocspaceApiSdk::AI::ChatApi.new
 chat_id = '00000000-0000-0000-0000-000000000000' # String | The unique identifier of the AI chat session to export.
-export_chat_request_body_integer = DocspaceApiSdk::ExportChatRequestBodyInteger.new({folder_id: 123, title: 'Chat Export'}) # ExportChatRequestBodyInteger | The export parameters including destination folder and file title.
+export_chat_request_body = DocspaceApiSdk::ExportChatRequestBody.new({folder_id: nil, title: 'Chat Export'}) # ExportChatRequestBody | The export parameters including destination folder and file title.
 
 begin
   # Export AI chat messages to a file
-  api_instance.export_chat(chat_id, export_chat_request_body_integer)
+  api_instance.export_chat(chat_id, export_chat_request_body)
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::ChatApi->export_chat: #{e}"
 end
@@ -251,12 +252,12 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> export_chat_with_http_info(chat_id, export_chat_request_body_integer)
+> <Array(nil, Integer, Hash)> export_chat_with_http_info(chat_id, export_chat_request_body)
 
 ```ruby
 begin
   # Export AI chat messages to a file
-  data, status_code, headers = api_instance.export_chat_with_http_info(chat_id, export_chat_request_body_integer)
+  data, status_code, headers = api_instance.export_chat_with_http_info(chat_id, export_chat_request_body)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -270,7 +271,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **chat_id** | **String** | The unique identifier of the AI chat session to export. |  |
-| **export_chat_request_body_integer** | [**ExportChatRequestBodyInteger**](ExportChatRequestBodyInteger.md) | The export parameters including destination folder and file title. |  |
+| **export_chat_request_body** | [**ExportChatRequestBody**](ExportChatRequestBody.md) | The export parameters including destination folder and file title. |  |
 
 ### Return type
 
@@ -915,6 +916,97 @@ end
 ### Return type
 
 [**ChatWrapper**](ChatWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## resolve_editor_tool
+
+> <GeneratedFileWrapper> resolve_editor_tool(call_id, editor_tool_decision_request_body)
+
+Resolve a pending editor file-generation tool
+
+Submits the user's approval or denial for a pending editor generation tool call (docx, form, presentation).  On approval the file is created from the original tool arguments and information about it is returned,  while the suspended chat tool is resumed with the same result so the AI session can continue.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/resolve-editor-tool/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::AI::ChatApi.new
+call_id = 'call_abc123' # String | The unique identifier of the pending tool call awaiting the user's decision.
+editor_tool_decision_request_body = DocspaceApiSdk::EditorToolDecisionRequestBody.new # EditorToolDecisionRequestBody | The decision parameters.
+
+begin
+  # Resolve a pending editor file-generation tool
+  result = api_instance.resolve_editor_tool(call_id, editor_tool_decision_request_body)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling AI::ChatApi->resolve_editor_tool: #{e}"
+end
+```
+
+#### Using the resolve_editor_tool_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GeneratedFileWrapper>, Integer, Hash)> resolve_editor_tool_with_http_info(call_id, editor_tool_decision_request_body)
+
+```ruby
+begin
+  # Resolve a pending editor file-generation tool
+  data, status_code, headers = api_instance.resolve_editor_tool_with_http_info(call_id, editor_tool_decision_request_body)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GeneratedFileWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling AI::ChatApi->resolve_editor_tool_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **call_id** | **String** | The unique identifier of the pending tool call awaiting the user's decision. |  |
+| **editor_tool_decision_request_body** | [**EditorToolDecisionRequestBody**](EditorToolDecisionRequestBody.md) | The decision parameters. |  |
+
+### Return type
+
+[**GeneratedFileWrapper**](GeneratedFileWrapper.md)
 
 ### Authorization
 

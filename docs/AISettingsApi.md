@@ -5,8 +5,10 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**get_ai_settings**](AISettingsApi.md#get_ai_settings) | **GET** /api/2.0/ai/config | Get AI settings |
+| [**get_ai_user_settings**](AISettingsApi.md#get_ai_user_settings) | **GET** /api/2.0/ai/config/user | Get per-user AI settings |
 | [**get_vectorization_settings**](AISettingsApi.md#get_vectorization_settings) | **GET** /api/2.0/ai/config/vectorization | Get vectorization settings |
 | [**get_web_search_settings**](AISettingsApi.md#get_web_search_settings) | **GET** /api/2.0/ai/config/web-search | Get web search settings |
+| [**set_ai_user_settings**](AISettingsApi.md#set_ai_user_settings) | **PUT** /api/2.0/ai/config/user | Update per-user AI settings |
 | [**set_vectorization_settings**](AISettingsApi.md#set_vectorization_settings) | **PUT** /api/2.0/ai/config/vectorization | Update vectorization settings |
 | [**set_web_search_settings**](AISettingsApi.md#set_web_search_settings) | **PUT** /api/2.0/ai/config/web-search | Update web search settings |
 
@@ -86,6 +88,92 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**AiSettingsWrapper**](AiSettingsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_ai_user_settings
+
+> <AiUserSettingsWrapper> get_ai_user_settings
+
+Get per-user AI settings
+
+Retrieves the current user's AI settings, including the recommended model banner visibility preference.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-ai-user-settings/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::AI::SettingsApi.new
+
+begin
+  # Get per-user AI settings
+  result = api_instance.get_ai_user_settings
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling AI::SettingsApi->get_ai_user_settings: #{e}"
+end
+```
+
+#### Using the get_ai_user_settings_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AiUserSettingsWrapper>, Integer, Hash)> get_ai_user_settings_with_http_info
+
+```ruby
+begin
+  # Get per-user AI settings
+  data, status_code, headers = api_instance.get_ai_user_settings_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AiUserSettingsWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling AI::SettingsApi->get_ai_user_settings_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**AiUserSettingsWrapper**](AiUserSettingsWrapper.md)
 
 ### Authorization
 
@@ -266,6 +354,97 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## set_ai_user_settings
+
+> <AiUserSettingsWrapper> set_ai_user_settings(opts)
+
+Update per-user AI settings
+
+Updates the current user's AI recommended model banner visibility preferences.  Each user's settings are stored independently.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-ai-user-settings/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::AI::SettingsApi.new
+opts = {
+  set_ai_user_settings_request_dto: DocspaceApiSdk::SetAiUserSettingsRequestDto.new # SetAiUserSettingsRequestDto | 
+}
+
+begin
+  # Update per-user AI settings
+  result = api_instance.set_ai_user_settings(opts)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling AI::SettingsApi->set_ai_user_settings: #{e}"
+end
+```
+
+#### Using the set_ai_user_settings_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AiUserSettingsWrapper>, Integer, Hash)> set_ai_user_settings_with_http_info(opts)
+
+```ruby
+begin
+  # Update per-user AI settings
+  data, status_code, headers = api_instance.set_ai_user_settings_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AiUserSettingsWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling AI::SettingsApi->set_ai_user_settings_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **set_ai_user_settings_request_dto** | [**SetAiUserSettingsRequestDto**](SetAiUserSettingsRequestDto.md) |  | [optional] |
+
+### Return type
+
+[**AiUserSettingsWrapper**](AiUserSettingsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

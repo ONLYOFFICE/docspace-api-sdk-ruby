@@ -6,7 +6,6 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | The user ID. | [optional] |
 | **display_name** | **String** | The HTML-encoded user's display name formatted according to the default format for the current culture. | [optional] |
-| **title** | **String** | The user title. | [optional] |
 | **avatar** | **String** | The user avatar. | [optional] |
 | **avatar_original** | **String** | The user original size avatar. | [optional] |
 | **avatar_max** | **String** | The user maximum size avatar. | [optional] |
@@ -20,13 +19,10 @@
 | **user_name** | **String** | The user username. | [optional] |
 | **email** | **String** | The user email. | [optional] |
 | **contacts** | [**Array&lt;Contact&gt;**](Contact.md) | The list of user contacts. | [optional] |
-| **birthday** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] |
-| **sex** | **String** | The user sex. | [optional] |
 | **status** | [**EmployeeStatus**](EmployeeStatus.md) |  | [optional] |
 | **activation_status** | [**EmployeeActivationStatus**](EmployeeActivationStatus.md) |  | [optional] |
 | **terminated** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] |
 | **department** | **String** | The user department. | [optional] |
-| **work_from** | [**ApiDateTime**](ApiDateTime.md) |  | [optional] |
 | **groups** | [**Array&lt;GroupSummaryDto&gt;**](GroupSummaryDto.md) | The list of user groups. | [optional] |
 | **location** | **String** | The user location. | [optional] |
 | **notes** | **String** | The user notes. | [optional] |
@@ -61,7 +57,6 @@ require 'docspace-api-sdk'
 instance = DocspaceApiSdk::EmployeeFullDto.new(
   id: 00000000-0000-0000-0000-000000000000,
   display_name: Mike Zanyatski,
-  title: Manager,
   avatar: https://example.com/avatar.jpg,
   avatar_original: https://example.com/avatar_original.jpg,
   avatar_max: https://example.com/avatar_max.jpg,
@@ -75,13 +70,10 @@ instance = DocspaceApiSdk::EmployeeFullDto.new(
   user_name: Mike.Zanyatski,
   email: my@gmail.com,
   contacts: [{"type":"email","value":"user@example.com"}],
-  birthday: null,
-  sex: male,
   status: null,
   activation_status: null,
   terminated: null,
   department: Marketing,
-  work_from: null,
   groups: [{"id":"00000000-0000-0000-0000-000000000000","name":"Marketing"}],
   location: Palo Alto,
   notes: Notes to worker,

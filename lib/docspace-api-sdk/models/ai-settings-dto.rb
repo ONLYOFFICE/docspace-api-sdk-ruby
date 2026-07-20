@@ -67,6 +67,9 @@ module DocspaceApiSdk
     # Indicates whether the system-level AI provider is enabled.
     attr_accessor :system_ai_enabled
 
+    # The identifier of the model recommended for form generation.
+    attr_accessor :recommended_model_for_forms
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -85,7 +88,8 @@ module DocspaceApiSdk
         :'generate_docx_tool_name' => :'generateDocxToolName',
         :'generate_form_tool_name' => :'generateFormToolName',
         :'generate_presentation_tool_name' => :'generatePresentationToolName',
-        :'system_ai_enabled' => :'systemAiEnabled'
+        :'system_ai_enabled' => :'systemAiEnabled',
+        :'recommended_model_for_forms' => :'recommendedModelForForms'
       }
     end
 
@@ -117,7 +121,8 @@ module DocspaceApiSdk
         :'generate_docx_tool_name' => :'String',
         :'generate_form_tool_name' => :'String',
         :'generate_presentation_tool_name' => :'String',
-        :'system_ai_enabled' => :'Boolean'
+        :'system_ai_enabled' => :'Boolean',
+        :'recommended_model_for_forms' => :'String'
       }
     end
 
@@ -133,6 +138,7 @@ module DocspaceApiSdk
         :'generate_docx_tool_name',
         :'generate_form_tool_name',
         :'generate_presentation_tool_name',
+        :'recommended_model_for_forms'
       ])
     end
 
@@ -233,6 +239,10 @@ module DocspaceApiSdk
       if attributes.key?(:'system_ai_enabled')
         self.system_ai_enabled = attributes[:'system_ai_enabled']
       end
+
+      if attributes.key?(:'recommended_model_for_forms')
+        self.recommended_model_for_forms = attributes[:'recommended_model_for_forms']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -270,7 +280,8 @@ module DocspaceApiSdk
           generate_docx_tool_name == o.generate_docx_tool_name &&
           generate_form_tool_name == o.generate_form_tool_name &&
           generate_presentation_tool_name == o.generate_presentation_tool_name &&
-          system_ai_enabled == o.system_ai_enabled
+          system_ai_enabled == o.system_ai_enabled &&
+          recommended_model_for_forms == o.recommended_model_for_forms
     end
 
     # @see the `==` method
@@ -282,7 +293,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [web_search_enabled, web_search_need_reset, vectorization_enabled, vectorization_need_reset, ai_ready, ai_ready_need_reset, portal_mcp_server_id, embedding_model, model_aliases, knowledge_search_tool_name, web_search_tool_name, web_crawling_tool_name, generate_docx_tool_name, generate_form_tool_name, generate_presentation_tool_name, system_ai_enabled].hash
+      [web_search_enabled, web_search_need_reset, vectorization_enabled, vectorization_need_reset, ai_ready, ai_ready_need_reset, portal_mcp_server_id, embedding_model, model_aliases, knowledge_search_tool_name, web_search_tool_name, web_crawling_tool_name, generate_docx_tool_name, generate_form_tool_name, generate_presentation_tool_name, system_ai_enabled, recommended_model_for_forms].hash
     end
 
     # Builds the object from hash

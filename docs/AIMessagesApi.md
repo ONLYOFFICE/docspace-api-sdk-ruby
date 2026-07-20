@@ -9,7 +9,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 ## export_message
 
-> export_message(message_id, export_message_request_body_integer)
+> export_message(message_id, export_message_request_body)
 
 Export a single AI message to a document
 
@@ -48,11 +48,11 @@ end
 
 api_instance = DocspaceApiSdk::AI::MessagesApi.new
 message_id = 1 # Integer | The unique identifier of the AI chat message to export.
-export_message_request_body_integer = DocspaceApiSdk::ExportMessageRequestBodyInteger.new({folder_id: 123, title: 'Message Export'}) # ExportMessageRequestBodyInteger | The export parameters including destination folder and file title.
+export_message_request_body = DocspaceApiSdk::ExportMessageRequestBody.new({folder_id: nil, title: 'Message Export'}) # ExportMessageRequestBody | The export parameters including destination folder and file title.
 
 begin
   # Export a single AI message to a document
-  api_instance.export_message(message_id, export_message_request_body_integer)
+  api_instance.export_message(message_id, export_message_request_body)
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::MessagesApi->export_message: #{e}"
 end
@@ -62,12 +62,12 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> export_message_with_http_info(message_id, export_message_request_body_integer)
+> <Array(nil, Integer, Hash)> export_message_with_http_info(message_id, export_message_request_body)
 
 ```ruby
 begin
   # Export a single AI message to a document
-  data, status_code, headers = api_instance.export_message_with_http_info(message_id, export_message_request_body_integer)
+  data, status_code, headers = api_instance.export_message_with_http_info(message_id, export_message_request_body)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -81,7 +81,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **message_id** | **Integer** | The unique identifier of the AI chat message to export. |  |
-| **export_message_request_body_integer** | [**ExportMessageRequestBodyInteger**](ExportMessageRequestBodyInteger.md) | The export parameters including destination folder and file title. |  |
+| **export_message_request_body** | [**ExportMessageRequestBody**](ExportMessageRequestBody.md) | The export parameters including destination folder and file title. |  |
 
 ### Return type
 

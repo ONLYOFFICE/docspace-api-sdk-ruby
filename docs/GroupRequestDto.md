@@ -5,8 +5,8 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **members** | **Array&lt;String&gt;** | The list of group member IDs. | [optional] |
-| **group_manager** | **String** | The group manager ID. |  |
-| **group_name** | **String** | The group name. | [optional] |
+| **group_manager** | **String** | The group manager ID. | [optional] |
+| **group_name** | **String** | The group name. |  |
 
 ## Example
 

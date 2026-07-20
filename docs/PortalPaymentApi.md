@@ -4,17 +4,17 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**buy_wallet_service**](PortalPaymentApi.md#buy_wallet_service) | **POST** /api/2.0/portal/payment/buywalletservice | Purchases a wallet service with the specified quantity. |
 | [**calculate_wallet_payment**](PortalPaymentApi.md#calculate_wallet_payment) | **PUT** /api/2.0/portal/payment/calculatewallet | Calculate the wallet payment amount |
 | [**change_tenant_wallet_service_state**](PortalPaymentApi.md#change_tenant_wallet_service_state) | **POST** /api/2.0/portal/payment/servicestate | Change tenant wallet service state |
 | [**create_customer_operations_report**](PortalPaymentApi.md#create_customer_operations_report) | **POST** /api/2.0/portal/payment/customer/operationsreport | Start the customer operations report generation |
+| [**credit_ai_balance**](PortalPaymentApi.md#credit_ai_balance) | **POST** /api/2.0/portal/payment/creditaibalance | Credit AI balance |
 | [**get_ai_prices**](PortalPaymentApi.md#get_ai_prices) | **GET** /api/2.0/portal/payment/ai-prices | Get AI model prices |
 | [**get_checkout_setup_url**](PortalPaymentApi.md#get_checkout_setup_url) | **GET** /api/2.0/portal/payment/checkoutsetupurl | Get the checkout setup page URL |
+| [**get_customer_ai_balance**](PortalPaymentApi.md#get_customer_ai_balance) | **GET** /api/2.0/portal/payment/customer/aibalance | Get the customer AI balance |
 | [**get_customer_balance**](PortalPaymentApi.md#get_customer_balance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance |
 | [**get_customer_info**](PortalPaymentApi.md#get_customer_info) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer information |
 | [**get_customer_operations**](PortalPaymentApi.md#get_customer_operations) | **GET** /api/2.0/portal/payment/customer/operations | Get the customer operations |
 | [**get_customer_operations_report**](PortalPaymentApi.md#get_customer_operations_report) | **GET** /api/2.0/portal/payment/customer/operationsreport | Get the status of the customer operations report generation |
-| [**get_customer_service_quota**](PortalPaymentApi.md#get_customer_service_quota) | **GET** /api/2.0/portal/payment/customer/servicequota | Get the service quota |
 | [**get_payment_account**](PortalPaymentApi.md#get_payment_account) | **GET** /api/2.0/portal/payment/account | Get the payment account |
 | [**get_payment_currencies**](PortalPaymentApi.md#get_payment_currencies) | **GET** /api/2.0/portal/payment/currencies | Get currencies |
 | [**get_payment_quotas**](PortalPaymentApi.md#get_payment_quotas) | **GET** /api/2.0/portal/payment/quotas | Get quotas |
@@ -33,97 +33,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | [**top_up_deposit**](PortalPaymentApi.md#top_up_deposit) | **POST** /api/2.0/portal/payment/deposit | Put money on deposit |
 | [**update_payment**](PortalPaymentApi.md#update_payment) | **PUT** /api/2.0/portal/payment/update | Update the payment quantity |
 | [**update_wallet_payment**](PortalPaymentApi.md#update_wallet_payment) | **PUT** /api/2.0/portal/payment/updatewallet | Update the wallet payment quantity |
-
-
-## buy_wallet_service
-
-> <ServicePaymentWrapper> buy_wallet_service(opts)
-
-Purchases a wallet service with the specified quantity.
-
-This method processes a payment for a wallet service using the configured payment method.  Requires the tariff service to be configured and a valid payment method to be set for the customer.  Rate limiting is applied according to the payments API policy.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/buy-wallet-service/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Portal::PaymentApi.new
-opts = {
-  buy_wallet_service_request_dto: DocspaceApiSdk::BuyWalletServiceRequestDto.new # BuyWalletServiceRequestDto | 
-}
-
-begin
-  # Purchases a wallet service with the specified quantity.
-  result = api_instance.buy_wallet_service(opts)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Portal::PaymentApi->buy_wallet_service: #{e}"
-end
-```
-
-#### Using the buy_wallet_service_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ServicePaymentWrapper>, Integer, Hash)> buy_wallet_service_with_http_info(opts)
-
-```ruby
-begin
-  # Purchases a wallet service with the specified quantity.
-  data, status_code, headers = api_instance.buy_wallet_service_with_http_info(opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ServicePaymentWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Portal::PaymentApi->buy_wallet_service_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **buy_wallet_service_request_dto** | [**BuyWalletServiceRequestDto**](BuyWalletServiceRequestDto.md) |  | [optional] |
-
-### Return type
-
-[**ServicePaymentWrapper**](ServicePaymentWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
 
 
 ## calculate_wallet_payment
@@ -399,6 +308,97 @@ end
 - **Accept**: application/json
 
 
+## credit_ai_balance
+
+> <ServicePaymentWrapper> credit_ai_balance(opts)
+
+Credit AI balance
+
+Credits AI quota to the customer AI sub-account from their main balance.  Requires the customer to have a configured payment method.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/credit-ai-balance/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Portal::PaymentApi.new
+opts = {
+  credit_ai_balance_request_dto: DocspaceApiSdk::CreditAiBalanceRequestDto.new # CreditAiBalanceRequestDto | 
+}
+
+begin
+  # Credit AI balance
+  result = api_instance.credit_ai_balance(opts)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->credit_ai_balance: #{e}"
+end
+```
+
+#### Using the credit_ai_balance_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ServicePaymentWrapper>, Integer, Hash)> credit_ai_balance_with_http_info(opts)
+
+```ruby
+begin
+  # Credit AI balance
+  data, status_code, headers = api_instance.credit_ai_balance_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ServicePaymentWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->credit_ai_balance_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **credit_ai_balance_request_dto** | [**CreditAiBalanceRequestDto**](CreditAiBalanceRequestDto.md) |  | [optional] |
+
+### Return type
+
+[**ServicePaymentWrapper**](ServicePaymentWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## get_ai_prices
 
 > <AiPricesResponseWrapper> get_ai_prices
@@ -487,7 +487,7 @@ This endpoint does not need any parameter.
 
 ## get_checkout_setup_url
 
-> <StringWrapper> get_checkout_setup_url(opts)
+> <StringWrapper> get_checkout_setup_url(back_url, success_url)
 
 Get the checkout setup page URL
 
@@ -525,13 +525,12 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::Portal::PaymentApi.new
-opts = {
-  back_url: 'https://example.com/setup/complete' # String | The URL where the user will be redirected after completing the setup.
-}
+back_url = 'https://example.com/payment/back' # String | The URL where the user will be redirected after setup cancellation.
+success_url = 'https://example.com/payment/success' # String | The URL where the user will be redirected after successful payment.
 
 begin
   # Get the checkout setup page URL
-  result = api_instance.get_checkout_setup_url(opts)
+  result = api_instance.get_checkout_setup_url(back_url, success_url)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Portal::PaymentApi->get_checkout_setup_url: #{e}"
@@ -542,12 +541,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<StringWrapper>, Integer, Hash)> get_checkout_setup_url_with_http_info(opts)
+> <Array(<StringWrapper>, Integer, Hash)> get_checkout_setup_url_with_http_info(back_url, success_url)
 
 ```ruby
 begin
   # Get the checkout setup page URL
-  data, status_code, headers = api_instance.get_checkout_setup_url_with_http_info(opts)
+  data, status_code, headers = api_instance.get_checkout_setup_url_with_http_info(back_url, success_url)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <StringWrapper>
@@ -560,11 +559,103 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **back_url** | **String** | The URL where the user will be redirected after completing the setup. | [optional] |
+| **back_url** | **String** | The URL where the user will be redirected after setup cancellation. |  |
+| **success_url** | **String** | The URL where the user will be redirected after successful payment. |  |
 
 ### Return type
 
 [**StringWrapper**](StringWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_customer_ai_balance
+
+> <BalanceWrapper> get_customer_ai_balance(opts)
+
+Get the customer AI balance
+
+Returns the AI quota balance of a customer from the accounting service.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-ai-balance/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Portal::PaymentApi.new
+opts = {
+  refresh: true # Boolean | Specifies whether to refresh the payment information cache or not.
+}
+
+begin
+  # Get the customer AI balance
+  result = api_instance.get_customer_ai_balance(opts)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->get_customer_ai_balance: #{e}"
+end
+```
+
+#### Using the get_customer_ai_balance_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<BalanceWrapper>, Integer, Hash)> get_customer_ai_balance_with_http_info(opts)
+
+```ruby
+begin
+  # Get the customer AI balance
+  data, status_code, headers = api_instance.get_customer_ai_balance_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <BalanceWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->get_customer_ai_balance_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **refresh** | **Boolean** | Specifies whether to refresh the payment information cache or not. | [optional] |
+
+### Return type
+
+[**BalanceWrapper**](BalanceWrapper.md)
 
 ### Authorization
 
@@ -802,14 +893,13 @@ opts = {
   offset: 0, # Integer | The number of items to skip for pagination. The default value is 0.
   limit: 25, # Integer | The maximum number of items to return for pagination. The default value is 25.
   service_name: 'backup', # String | The service name.
-  write_off_service_quota: false, # Boolean | Write-off of the quota for the service
   start_date: Time.parse('2024-01-01T00:00Z'), # Time | The report start date.
   end_date: Time.parse('2024-01-31T23:59:59Z'), # Time | The report end date.
-  participant_name: 'ACME Corp', # String | The participant name.
+  participant_name: 'My Own Corporation', # String | The participant name.
   credit: true, # Boolean | Specifies whether to include credit operations in the report.
   debit: false, # Boolean | Specifies whether to include debit operations in the report.
-  types: DocspaceApiSdk::OperationType::Any, # OperationType | List of operation types to filter by.
-  status: DocspaceApiSdk::OperationStatus::Any, # OperationStatus | List of operation status to filter by.
+  type: DocspaceApiSdk::OperationType::Unknown, # OperationType | The operation type to filter by.
+  status: DocspaceApiSdk::OperationStatus::Pending, # OperationStatus | The operation status to filter by.
   order_by: 'StartDate', # String | The field to order by.
   order_type: DocspaceApiSdk::OperationOrderType::Descending # OperationOrderType | Order direction: Ascending or Descending.
 }
@@ -848,14 +938,13 @@ end
 | **offset** | **Integer** | The number of items to skip for pagination. The default value is 0. | [optional] |
 | **limit** | **Integer** | The maximum number of items to return for pagination. The default value is 25. | [optional] |
 | **service_name** | **String** | The service name. | [optional] |
-| **write_off_service_quota** | **Boolean** | Write-off of the quota for the service | [optional] |
 | **start_date** | **Time** | The report start date. | [optional] |
 | **end_date** | **Time** | The report end date. | [optional] |
 | **participant_name** | **String** | The participant name. | [optional] |
 | **credit** | **Boolean** | Specifies whether to include credit operations in the report. | [optional] |
 | **debit** | **Boolean** | Specifies whether to include debit operations in the report. | [optional] |
-| **types** | **OperationType** | List of operation types to filter by. | [optional] |
-| **status** | **OperationStatus** | List of operation status to filter by. | [optional] |
+| **type** | **OperationType** | The operation type to filter by. | [optional] |
+| **status** | **OperationStatus** | The operation status to filter by. | [optional] |
 | **order_by** | **String** | The field to order by. | [optional] |
 | **order_type** | **OperationOrderType** | Order direction: Ascending or Descending. | [optional] |
 
@@ -948,99 +1037,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**DocumentBuilderTaskWrapper**](DocumentBuilderTaskWrapper.md)
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## get_customer_service_quota
-
-> <BalanceWrapper> get_customer_service_quota(opts)
-
-Get the service quota
-
-Returns the service quota from the accounting service.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-service-quota/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Portal::PaymentApi.new
-opts = {
-  service_name: 'backup', # String | The service name.
-  refresh: true # Boolean | Specifies whether to refresh the payment information cache or not.
-}
-
-begin
-  # Get the service quota
-  result = api_instance.get_customer_service_quota(opts)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Portal::PaymentApi->get_customer_service_quota: #{e}"
-end
-```
-
-#### Using the get_customer_service_quota_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<BalanceWrapper>, Integer, Hash)> get_customer_service_quota_with_http_info(opts)
-
-```ruby
-begin
-  # Get the service quota
-  data, status_code, headers = api_instance.get_customer_service_quota_with_http_info(opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <BalanceWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Portal::PaymentApi->get_customer_service_quota_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **service_name** | **String** | The service name. | [optional] |
-| **refresh** | **Boolean** | Specifies whether to refresh the payment information cache or not. | [optional] |
-
-### Return type
-
-[**BalanceWrapper**](BalanceWrapper.md)
 
 ### Authorization
 
@@ -1361,7 +1357,7 @@ end
 
 api_instance = DocspaceApiSdk::Portal::PaymentApi.new
 opts = {
-  payment_url_request_dto: DocspaceApiSdk::PaymentUrlRequestDto.new # PaymentUrlRequestDto | 
+  payment_url_request_dto: DocspaceApiSdk::PaymentUrlRequestDto.new({back_url: 'https://example.com/payment/back', success_url: 'https://example.com/payment/success'}) # PaymentUrlRequestDto | 
 }
 
 begin
