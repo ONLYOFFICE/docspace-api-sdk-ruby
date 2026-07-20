@@ -154,10 +154,10 @@ All API responses may include the following rate limiting headers:
 
 | Header | Description |
 |--------|-------------|
-| `` |  |
-| `` |  |
-| `` |  |
-| `` |  |
+| `X-RateLimit-Limit` | Sliding window rate limit: 1500 requests per minute per user/IP. |
+| `X-RateLimit-Remaining` | Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. |
+| `X-RateLimit-Reset` | Unix timestamp (seconds) when the current sliding window rate limit resets. |
+| `Retry-After` | Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). |
 
 ### Documentation for API Endpoints
 
