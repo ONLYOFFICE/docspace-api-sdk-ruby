@@ -17,24 +17,24 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The session request parameters.
+  # The file a chunked upload session is opened for, and how a clash with an existing name is settled.
   class SessionRequest < ApiModelBase
-    # The file name.
+    # The name to store the file under, extension included. Characters a title cannot hold are replaced and the name  is truncated, so the stored title can differ from the one sent.
     attr_accessor :file_name
 
-    # The file size.
+    # The exact number of bytes that will be sent. The size is reserved when the session opens and compared with the  parts as they arrive; below the portal chunk size the session takes the whole payload in one part, and above  the portal limit for chunked uploads it is refused.
     attr_accessor :file_size
 
-    # The relative path to the file.
+    # A slash-separated chain of folder titles under the target folder to store the file in; folders in the chain  that do not exist yet are created. Leave it empty to store the file in the folder from the path itself.
     attr_accessor :relative_path
 
-    # The date and time when the file was created.
+    # The creation time to stamp on a newly created file instead of the moment the upload finishes. It is ignored  when the upload lands on a file that already exists.
     attr_accessor :create_on
 
-    # Specifies whether the file is encrypted or not.
+    # Marks the stored file as client-side encrypted, which is how content uploaded into a private room is kept;  with false the bytes are stored as they arrive.
     attr_accessor :encrypted
 
-    # Specifies whether to create a new file if it already exists.
+    # Settles the clash when the folder already holds a file with this name: true stores the upload beside it under  a name with a numeric suffix, false takes the existing file over and adds the content to it as a new version.
     attr_accessor :create_new_if_exist
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -65,7 +65,7 @@ module DocspaceApiSdk
         :'file_name' => :'String',
         :'file_size' => :'Integer',
         :'relative_path' => :'String',
-        :'create_on' => :'Time',
+        :'create_on' => :'ApiDateTime',
         :'encrypted' => :'Boolean',
         :'create_new_if_exist' => :'Boolean'
       }
@@ -76,7 +76,6 @@ module DocspaceApiSdk
       Set.new([
         :'file_name',
         :'relative_path',
-        :'create_on',
       ])
     end
 

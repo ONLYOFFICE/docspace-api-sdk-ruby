@@ -18,12 +18,12 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiAiToolCallData.new(
-  thread_id: null,
-  message_id: null,
-  idx: null,
-  message: null,
-  action_args: null,
-  entity_id: null,
-  profile_id: null
+  thread_id: 11111111-1111-1111-1111-111111111111,
+  message_id: 22222222-2222-2222-2222-222222222222,
+  idx: 0,
+  message: {role=assistant, content=},
+  action_args: {isReasoning=false},
+  entity_id: 1234,
+  profile_id: 00000000-0000-0000-0000-000000000000
 )
 ```

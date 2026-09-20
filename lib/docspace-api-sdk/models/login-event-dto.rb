@@ -17,45 +17,45 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The login event parameters.
+  # One entry of the portal login history: a sign-in, a sign-out or a failed attempt, and where it came from.
   class LoginEventDto < ApiModelBase
-    # The login event ID.
+    # The ID of the recorded sign-in. When the entry is a successful sign-in that is still open, this is also  the value `GET api/2.0/security/activeconnections` reports as the connection's `id`.
     attr_accessor :id
 
-    # The login event date.
+    # When the attempt was made, in the portal time zone. The `from` and `to` filters are read as UTC instants,  so the two do not line up on a portal that is not on UTC.
     attr_accessor :date
 
-    # The user name of the login event.
+    # The display name of the account the attempt was made against, taken from the account as it stands now  rather than as it stood at the time. A localised placeholder stands in when there is no account to read,  which is the usual case for a failed attempt on an address nobody owns.
     attr_accessor :user
 
-    # The user ID of the login event.
+    # The ID of that account, which is what the `userId` filter of this operation matches on. It is the empty  GUID when the attempt could not be tied to an account.
     attr_accessor :user_id
 
-    # The user login of the login event.
+    # The login string as it was typed - normally the email address. It is the only field that survives a failed  attempt against an unknown account, which makes it the one to read when `user` is a placeholder.
     attr_accessor :login
 
-    # The login event action.
+    # The event as a readable sentence in the portal language. On `GET api/2.0/security/audit/login/last` each  substituted value is cut to 50 characters; the filtered operation substitutes them in full.
     attr_accessor :action
 
-    # The login-related action to filter events by.
+    # What happened, as the `action` filter of this operation spells it: a successful sign-in, a failed one, a  sign-out. Use this rather than parsing `action`, which is prose and changes with the portal language.
     attr_accessor :action_id
 
-    # The login event IP.
+    # The IP address the attempt came from, with the port stripped off.
     attr_accessor :ip
 
-    # The login event country.
+    # The English name of the country the IP address is located in, empty when the address cannot be located -  the normal outcome for private and loopback addresses.
     attr_accessor :country
 
-    # The login event city.
+    # The city the IP address is located in, empty under the same conditions as `country`.
     attr_accessor :city
 
-    # The login event browser.
+    # The browser and its version as parsed from the user agent of the attempt, empty when the client sent none  that could be parsed.
     attr_accessor :browser
 
-    # The login event platform.
+    # The operating system as parsed from the same user agent, empty under the same conditions as `browser`.
     attr_accessor :platform
 
-    # The login event page.
+    # Where in the portal the attempt was made from: the referrer of the request, or that request's own path  when it carried no referrer. Long values are cut off at 512 characters.
     attr_accessor :page
 
     class EnumAttributeValidator
@@ -113,7 +113,7 @@ module DocspaceApiSdk
     def self.openapi_types
       {
         :'id' => :'Integer',
-        :'date' => :'Time',
+        :'date' => :'ApiDateTime',
         :'user' => :'String',
         :'user_id' => :'String',
         :'login' => :'String',
@@ -131,7 +131,6 @@ module DocspaceApiSdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'date',
         :'user',
         :'login',
         :'action',

@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The TFA app code.
+  # One backup code of the caller's authenticator credential.
   class TfaAppCodeDto < ApiModelBase
-    # The TFA app code usage status.
+    # Whether the code has already been spent. A spent code is kept in the list but is no longer accepted, so  count the entries where this is `false` to know how many fallbacks remain.
     attr_accessor :is_used
 
-    # The TFA app code.
+    # The code itself, in the form it is typed at sign-in - six characters with the default configuration. It is  stored encrypted and decrypted for this answer, so this is the one place a caller can read it.
     attr_accessor :code
 
     # Attribute mapping from ruby-style variable name to JSON key.

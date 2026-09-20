@@ -17,18 +17,17 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The response containing paginated data.
+  # One page of results together with the cursor that asks for the next page.
   class PageableResponse < ApiModelBase
-    # The paginated data.
     attr_accessor :data
 
-    # The maximum number of results returned per page.
+    # The page size that was applied to this request, between 1 and 50.
     attr_accessor :limit
 
-    # The identifier of the last retrieved client.
+    # The cursor to send back as last_client_id to ask for the next page, together with last_created_on. It is null when the page is empty.
     attr_accessor :last_client_id
 
-    # The creation date of the last retrieved client.
+    # The cursor to send back as last_created_on to ask for the next page, together with last_client_id. It is null when the page is empty.
     attr_accessor :last_created_on
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -64,6 +63,7 @@ module DocspaceApiSdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'data',
       ])
     end
 

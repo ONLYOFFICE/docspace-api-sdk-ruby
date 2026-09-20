@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The file statictics folder parameters.
+  # One section of the portal and the space its documents take.
   class FilesStatisticsFolder < ApiModelBase
-    # The folder title.
+    # The name of the section as the interface shows it, translated into the language used by the caller, so it  suits display but not matching - which section an entry describes is told by the field that carries it.
     attr_accessor :title
 
-    # The used space in the folder.
+    # The size of the files kept in the section, in bytes, counting every folder and room inside it; 0 means the  section holds nothing. The counter is brought up to date as an operation finishes, so a reading taken right  after an upload or a delete can still show the previous value.
     attr_accessor :used_space
 
     # Attribute mapping from ruby-style variable name to JSON key.

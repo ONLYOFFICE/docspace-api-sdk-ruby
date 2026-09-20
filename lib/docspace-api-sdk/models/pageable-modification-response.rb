@@ -17,15 +17,14 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The response containing paginated modification information.
+  # One page of results ordered by modification time, together with the cursor that asks for the next page.
   class PageableModificationResponse < ApiModelBase
-    # The paginated modification data.
     attr_accessor :data
 
-    # The maximum number of results returned per page.
+    # The page size that was applied to this request, between 1 and 50.
     attr_accessor :limit
 
-    # The date when the user consent was last modified.
+    # The cursor to send back as last_modified_on to ask for the next page. It is null when the page is empty.
     attr_accessor :last_modified_on
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -59,6 +58,7 @@ module DocspaceApiSdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'data',
       ])
     end
 

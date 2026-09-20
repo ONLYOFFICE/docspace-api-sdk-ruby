@@ -19,13 +19,13 @@ require 'time'
 module DocspaceApiSdk
   # The request parameters for creating a new API key.
   class CreateApiKeyRequestDto < ApiModelBase
-    # The API key name.
+    # The label that tells this key apart in the key list. It is required, may be up to 30 characters long, and does  not have to be unique.
     attr_accessor :name
 
-    # The list of permissions granted to the API key.
+    # The scopes the key may use. Every value has to come from `GET api/2.0/keys/permissions`, an unknown value or  an empty array is rejected, and passing `*` or omitting the field records a key without scope restrictions.
     attr_accessor :permissions
 
-    # The number of days until the API key expires (null for no expiration).
+    # The lifetime of the key in days, counted from the moment it is created, from 1 to 365. Omit it to create a key  that never expires.
     attr_accessor :expires_in_days
 
     # Attribute mapping from ruby-style variable name to JSON key.

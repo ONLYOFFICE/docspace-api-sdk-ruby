@@ -17,24 +17,24 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The third-party account parameters.
+  # A third-party storage account connected to the portal.
   class ThirdPartyParams < ApiModelBase
-    # The authentication data.
+    # The stored credentials of the account. They are not filled in here: the portal does not give back credentials  once an account is saved.
     attr_accessor :auth_data
 
-    # Specifies if this is a corporate account or not.
+    # Whether the account is attached to the legacy Common section, which is the case only for accounts inherited  from an older portal.
     attr_accessor :corporate
 
-    # Specifies if this is a room storage or not.
+    # Whether the account is attached to the Rooms section, room templates and the archive counted in. This is where  `POST api/2.0/files/thirdparty` puts every account it connects.
     attr_accessor :rooms_storage
 
-    # The customer title.
+    # The name the account is shown under in the portal, as it was saved when the account was connected.
     attr_accessor :customer_title
 
-    # The provider ID.
+    # The account ID to send to `DELETE api/2.0/files/thirdparty/{providerId}`, or as `providerId` to  re-authenticate the account.
     attr_accessor :provider_id
 
-    # The provider key.
+    # The storage service behind the account. `WebDav` stands for every WebDAV preset, so it does not tell which of  them was chosen when the account was connected.
     attr_accessor :provider_key
 
     # Attribute mapping from ruby-style variable name to JSON key.

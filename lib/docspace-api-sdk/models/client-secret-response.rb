@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The response containing the regenerated client secret.
+  # The response carrying a regenerated client secret.
   class ClientSecretResponse < ApiModelBase
-    # The newly generated client secret.
+    # The newly generated client secret. It replaces the previous one immediately, so every deployed copy of the client has to be updated with this value.
     attr_accessor :client_secret
 
     # Attribute mapping from ruby-style variable name to JSON key.

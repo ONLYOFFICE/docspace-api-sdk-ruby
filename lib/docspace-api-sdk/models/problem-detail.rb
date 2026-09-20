@@ -17,18 +17,28 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
+  # RFC 7807 problem details returned by the registration API for failed requests.
   class ProblemDetail < ApiModelBase
+    # A URI reference that identifies the problem type. This service sets it to the DocSpace API getting-started page.
     attr_accessor :type
 
+    # A short, human-readable summary of the problem type, typically the HTTP status reason phrase.
     attr_accessor :title
 
+    # The HTTP status code for this occurrence of the problem.
     attr_accessor :status
 
+    # A human-readable explanation specific to this occurrence of the problem.
     attr_accessor :detail
 
+    # A URI reference that identifies the specific occurrence, set to the request path.
     attr_accessor :instance
 
+    # Extension members carried on the problem. Usually empty; validation failures also surface as the top-level errors array.
     attr_accessor :properties
+
+    # Field-specific validation errors. Present when the request body or parameters failed validation, or when a named scope is not in the tenant catalogue.
+    attr_accessor :errors
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -38,7 +48,8 @@ module DocspaceApiSdk
         :'status' => :'status',
         :'detail' => :'detail',
         :'instance' => :'instance',
-        :'properties' => :'properties'
+        :'properties' => :'properties',
+        :'errors' => :'errors'
       }
     end
 
@@ -60,7 +71,8 @@ module DocspaceApiSdk
         :'status' => :'Integer',
         :'detail' => :'String',
         :'instance' => :'String',
-        :'properties' => :'Hash<String, Object>'
+        :'properties' => :'Hash<String, Object>',
+        :'errors' => :'Array<FieldError>'
       }
     end
 
@@ -111,6 +123,12 @@ module DocspaceApiSdk
           self.properties = value
         end
       end
+
+      if attributes.key?(:'errors')
+        if (value = attributes[:'errors']).is_a?(Array)
+          self.errors = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -138,7 +156,8 @@ module DocspaceApiSdk
           status == o.status &&
           detail == o.detail &&
           instance == o.instance &&
-          properties == o.properties
+          properties == o.properties &&
+          errors == o.errors
     end
 
     # @see the `==` method
@@ -150,7 +169,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, title, status, detail, instance, properties].hash
+      [type, title, status, detail, instance, properties, errors].hash
     end
 
     # Builds the object from hash

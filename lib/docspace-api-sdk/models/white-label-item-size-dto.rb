@@ -17,39 +17,39 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The white label logo size parameters.
+  # The pixel box a logo slot is drawn in, in the shape the imaging library reports a geometry.
   class WhiteLabelItemSizeDto < ApiModelBase
-    # Specifies whether the size is an aspect ratio.
+    # Whether the numbers are to be read as an aspect ratio rather than as pixels. Always `false` on the sizes  this API reports.
     attr_accessor :aspect_ratio
 
-    # Specifies whether the logo is resized based on the smallest fitting dimension.
+    # Whether an image would be scaled to cover the box rather than to fit inside it. Always `false` here.
     attr_accessor :fill_area
 
-    # Specifies whether the logo is resized only if it is greater than the size.
+    # Whether scaling would apply only to an image larger than the box. Always `false` here.
     attr_accessor :greater
 
-    # The logo height, in pixels.
+    # The height of the box in pixels - one of the two fields of this object that carry information.
     attr_accessor :height
 
-    # Specifies whether the logo is resized without preserving the aspect ratio.
+    # Whether scaling would be allowed to distort the image. Always `false` here.
     attr_accessor :ignore_aspect_ratio
 
-    # Specifies whether the width and height are expressed as percentages.
+    # Whether `width` and `height` are to be read as percentages. Always `false` here, so both are pixels.
     attr_accessor :is_percentage
 
-    # Specifies whether the logo is resized only if it is less than the size.
+    # Whether scaling would apply only to an image smaller than the box. Always `false` here.
     attr_accessor :less
 
-    # Specifies whether the logo is resized using a pixel area count limit.
+    # Whether the box is to be read as a total pixel-area budget instead of as two dimensions. Always `false`  here.
     attr_accessor :limit_pixels
 
-    # The logo width, in pixels.
+    # The width of the box in pixels - the other field of this object that carries information.
     attr_accessor :width
 
-    # The X offset from the origin, in pixels.
+    # The horizontal offset of the box from the origin. Always `0` here.
     attr_accessor :x
 
-    # The Y offset from the origin, in pixels.
+    # The vertical offset of the box from the origin. Always `0` here.
     attr_accessor :y
 
     # Attribute mapping from ruby-style variable name to JSON key.

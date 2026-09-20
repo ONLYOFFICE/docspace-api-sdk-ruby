@@ -17,51 +17,49 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The response containing public client information.
+  # The consent-facing subset of a client: everything needed to render a consent screen, and nothing that would let a caller act as the client.
   class ClientInfoResponse < ApiModelBase
-    # The client name.
+    # The display name shown to the user on the consent screen, between 3 and 256 characters.
     attr_accessor :name
 
-    # The client description.
+    # The free-text description shown next to the name on the consent screen, at most 255 characters.
     attr_accessor :description
 
-    # The client scopes.
+    # The permissions the client may ask for, named as they appear in the tenant scope catalogue - for example files:read, rooms:write or openid. A client cannot request a scope that is not listed here.
     attr_accessor :scopes
 
-    attr_accessor :public
-
-    # The client ID.
+    # The generated identifier of the client, sent as client_id in every OAuth2 request. It is assigned when the client is registered and never changes afterwards.
     attr_accessor :client_id
 
-    # The URL to the client's website
+    # The URL of the client home page, offered to the user before they consent.
     attr_accessor :website_url
 
-    # The URL to the client's terms of service.
+    # The URL of the client terms of service, linked from the consent screen.
     attr_accessor :terms_url
 
-    # The URL to the client's privacy policy.
+    # The URL of the client privacy policy, linked from the consent screen.
     attr_accessor :policy_url
 
-    # The client logo in base64 format.
+    # The client logo as a data URI carrying base64 image data, shown on the consent screen. Only png, jpeg, jpg and svg+xml are accepted, the whole string may not exceed 2000000 characters and the decoded image may not exceed 256000 bytes.
     attr_accessor :logo
 
-    # The authentication methods supported by the client.
+    # How the client authenticates itself at the token endpoint: client_secret_post for a confidential client that sends its secret, none for a public client that proves itself with PKCE instead.
     attr_accessor :authentication_methods
 
-    # Indicates whether the client is accessible by third-party tenants.
-    attr_accessor :is_public
-
-    # The date and time when the client was created.
+    # When the client was registered, as an ISO-8601 timestamp with a zone offset.
     attr_accessor :created_on
 
-    # The user who created the client.
+    # The identifier of the user who registered the client. A plain user may read and change only the clients where this is their own identifier.
     attr_accessor :created_by
 
-    # The date and time when the client was last modified.
+    # When the client was last changed, as an ISO-8601 timestamp with a zone offset.
     attr_accessor :modified_on
 
-    # The user who last modified the client.
+    # The identifier of the user who last changed the client.
     attr_accessor :modified_by
+
+    # Whether the client is offered to third-party tenants rather than only to the tenant that registered it.
+    attr_accessor :is_public
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -69,18 +67,17 @@ module DocspaceApiSdk
         :'name' => :'name',
         :'description' => :'description',
         :'scopes' => :'scopes',
-        :'public' => :'public',
         :'client_id' => :'client_id',
         :'website_url' => :'website_url',
         :'terms_url' => :'terms_url',
         :'policy_url' => :'policy_url',
         :'logo' => :'logo',
         :'authentication_methods' => :'authentication_methods',
-        :'is_public' => :'is_public',
         :'created_on' => :'created_on',
         :'created_by' => :'created_by',
         :'modified_on' => :'modified_on',
-        :'modified_by' => :'modified_by'
+        :'modified_by' => :'modified_by',
+        :'is_public' => :'is_public'
       }
     end
 
@@ -100,18 +97,17 @@ module DocspaceApiSdk
         :'name' => :'String',
         :'description' => :'String',
         :'scopes' => :'Array<String>',
-        :'public' => :'Boolean',
         :'client_id' => :'String',
         :'website_url' => :'String',
         :'terms_url' => :'String',
         :'policy_url' => :'String',
         :'logo' => :'String',
         :'authentication_methods' => :'Array<String>',
-        :'is_public' => :'Boolean',
         :'created_on' => :'Time',
         :'created_by' => :'String',
         :'modified_on' => :'Time',
-        :'modified_by' => :'String'
+        :'modified_by' => :'String',
+        :'is_public' => :'Boolean'
       }
     end
 
@@ -151,10 +147,6 @@ module DocspaceApiSdk
         end
       end
 
-      if attributes.key?(:'public')
-        self.public = attributes[:'public']
-      end
-
       if attributes.key?(:'client_id')
         self.client_id = attributes[:'client_id']
       end
@@ -181,10 +173,6 @@ module DocspaceApiSdk
         end
       end
 
-      if attributes.key?(:'is_public')
-        self.is_public = attributes[:'is_public']
-      end
-
       if attributes.key?(:'created_on')
         self.created_on = attributes[:'created_on']
       end
@@ -199,6 +187,10 @@ module DocspaceApiSdk
 
       if attributes.key?(:'modified_by')
         self.modified_by = attributes[:'modified_by']
+      end
+
+      if attributes.key?(:'is_public')
+        self.is_public = attributes[:'is_public']
       end
     end
 
@@ -245,18 +237,17 @@ module DocspaceApiSdk
           name == o.name &&
           description == o.description &&
           scopes == o.scopes &&
-          public == o.public &&
           client_id == o.client_id &&
           website_url == o.website_url &&
           terms_url == o.terms_url &&
           policy_url == o.policy_url &&
           logo == o.logo &&
           authentication_methods == o.authentication_methods &&
-          is_public == o.is_public &&
           created_on == o.created_on &&
           created_by == o.created_by &&
           modified_on == o.modified_on &&
-          modified_by == o.modified_by
+          modified_by == o.modified_by &&
+          is_public == o.is_public
     end
 
     # @see the `==` method
@@ -268,7 +259,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, scopes, public, client_id, website_url, terms_url, policy_url, logo, authentication_methods, is_public, created_on, created_by, modified_on, modified_by].hash
+      [name, description, scopes, client_id, website_url, terms_url, policy_url, logo, authentication_methods, created_on, created_by, modified_on, modified_by, is_public].hash
     end
 
     # Builds the object from hash

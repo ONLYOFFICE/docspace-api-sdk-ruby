@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Backup service state.
+  # Whether the paid backup service is switched on for a portal.
   class BackupServiceStateDto < ApiModelBase
-    # Specifies if the backup service is enabled or not.
+    # Specifies whether the paid backup service is switched on for this portal, which is a setting of its  wallet rather than the health of the backup service. While it is true, backups beyond the free  monthly allowance are charged to the wallet.
     attr_accessor :enabled
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -19,7 +19,7 @@ require 'time'
 module DocspaceApiSdk
   # Client activation change request
   class ChangeClientActivationRequest < ApiModelBase
-    # The activation status of the client
+    # Whether the client may obtain tokens from now on. Sending false leaves the registration and the already issued tokens in place but refuses new authorization requests; sending true allows them again.
     attr_accessor :status
 
     # Attribute mapping from ruby-style variable name to JSON key.

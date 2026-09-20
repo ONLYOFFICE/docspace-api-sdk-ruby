@@ -13,7 +13,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Get the Developer Tools access settings
 
-Returns the Developer Tools access settings for the portal.
+Returns whether the portal currently restricts the `User` role from using the developer tools (API keys, OAuth  apps, webhooks). Requires an authenticated session; every role can read the restriction, even though it only  limits what a `User` may do, not what a `RoomAdmin` or `DocSpaceAdmin` may do. This is a read-only, idempotent  call. Change the restriction with `POST api/2.0/security/devtoolsaccess`, which requires the  EditPortalSettings permission.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-access-dev-tools-settings/).
 

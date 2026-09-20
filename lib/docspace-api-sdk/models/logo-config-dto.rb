@@ -17,24 +17,24 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The logo config parameters.
+  # The logo the editor shows, resolved for the file type and the layout of this opening.
   class LogoConfigDto < ApiModelBase
-    # The image of the logo.
+    # The logo for the current layout and file type, as the portal branding defines it.
     attr_accessor :image
 
-    # The dark image of the logo.
+    # The variant for a dark interface theme.
     attr_accessor :image_dark
 
-    # The light image of the logo.
+    # The variant for a light interface theme.
     attr_accessor :image_light
 
-    # The embedded image of the logo.
+    # The variant for the framed viewer. It is empty in every layout but the embedded one.
     attr_accessor :image_embedded
 
-    # The url link of the logo.
+    # Where clicking the logo takes the user.
     attr_accessor :url
 
-    # Specifies if the logo is visible.
+    # Whether the logo is shown at all; the mobile layout hides it.
     attr_accessor :visible
 
     # Attribute mapping from ruby-style variable name to JSON key.

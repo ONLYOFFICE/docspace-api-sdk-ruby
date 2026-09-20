@@ -19,10 +19,10 @@ require 'time'
 module DocspaceApiSdk
   # The request parameters for updating the user information.
   class UpdateMembersRequestDto < ApiModelBase
-    # The list of user IDs.
+    # The accounts the operation applies to. System accounts are dropped from the list without an error, and the  remaining ones are processed in the order they are given.
     attr_accessor :user_ids
 
-    # Specifies whether to resend invitation letters to all the users or not.
+    # Reaches every pending account of the portal instead of the ones in `userIds`. It is read only by  `PUT api/2.0/people/invite` and is ignored by every other operation that binds this body.
     attr_accessor :resend_all
 
     # Attribute mapping from ruby-style variable name to JSON key.

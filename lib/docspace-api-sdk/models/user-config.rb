@@ -17,21 +17,21 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The configuration parameters of the user currently viewing or editing the document.
+  # The account the editors attribute the changes of this session to.
   class UserConfig < ApiModelBase
-    # The user ID.
+    # The account the changes are recorded under. Two sessions carrying the same value are taken by the editors for  the same person.
     attr_accessor :id
 
-    # The full name of the user.
+    # The name shown next to the changes and in the list of participants.
     attr_accessor :name
 
-    # The path to the user's avatar.
+    # An absolute address of the avatar shown for this participant.
     attr_accessor :image
 
-    # Roles
+    # The filling roles this participant holds in the form being filled out. It is set only for a form in a virtual  data room, where the role decides which fields open for them.
     attr_accessor :roles
 
-    # Customer identifier associated with the user.
+    # Identifies the paying customer this participant belongs to, on deployments where the editors are licensed per  customer.
     attr_accessor :customer_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

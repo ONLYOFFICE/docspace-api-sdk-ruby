@@ -15,9 +15,9 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiTProvider.new(
-  type: null,
-  name: null,
-  key: null,
-  base_url: null
+  type: openai,
+  name: OpenAI GPT-4o,
+  key: sk-your-provider-api-key,
+  base_url: https://api.openai.com/v1
 )
 ```

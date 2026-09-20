@@ -24,22 +24,22 @@ module DocspaceApiSdk
       @api_client = api_client
     end
     # Reset the room quota limit
-    # Resets the quota limit for the rooms with the IDs specified in the request.
+    # Returns every listed room to the default room quota of the portal and streams the updated rooms back in the  order they were given. This is not the same as removing the limit: the room stops carrying its own value and  starts following the portal default, which a portal administrator can change at any time. The per-room quota  feature has to be on, the caller must be a manager of each listed room, and an archived room or a room in the  trash is refused. The list is not transactional, so rooms processed before a failing one keep the default and  the rest keep what they had. Only numeric room ids are processed, which means ids of rooms stored in a  connected third-party account are silently skipped. Use `PUT api/2.0/files/rooms/roomquota` to set an explicit  value, and a quota of -1 in `PUT api/2.0/files/rooms/{id}` to leave the room with no custom limit at all.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-room-quota/
     # @param [Hash] opts the optional parameters
-    # @option opts [UpdateRoomsRoomIdsRequestDtoInteger] :update_rooms_room_ids_request_dto_integer 
-    # @return [FolderIntegerArrayWrapper]
+    # @option opts [UpdateRoomsRoomIdsRequestDto] :update_rooms_room_ids_request_dto 
+    # @return [FolderArrayWrapper]
     def reset_room_quota(opts = {})
       data, _status_code, _headers = reset_room_quota_with_http_info(opts)
       data
     end
 
     # Reset the room quota limit
-    # Resets the quota limit for the rooms with the IDs specified in the request.
+    # Returns every listed room to the default room quota of the portal and streams the updated rooms back in the  order they were given. This is not the same as removing the limit: the room stops carrying its own value and  starts following the portal default, which a portal administrator can change at any time. The per-room quota  feature has to be on, the caller must be a manager of each listed room, and an archived room or a room in the  trash is refused. The list is not transactional, so rooms processed before a failing one keep the default and  the rest keep what they had. Only numeric room ids are processed, which means ids of rooms stored in a  connected third-party account are silently skipped. Use `PUT api/2.0/files/rooms/roomquota` to set an explicit  value, and a quota of -1 in `PUT api/2.0/files/rooms/{id}` to leave the room with no custom limit at all.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-room-quota/
     # @param [Hash] opts the optional parameters
-    # @option opts [UpdateRoomsRoomIdsRequestDtoInteger] :update_rooms_room_ids_request_dto_integer 
-    # @return [Array<(FolderIntegerArrayWrapper, Integer, Hash)>] FolderIntegerArrayWrapper data, response status code and response headers
+    # @option opts [UpdateRoomsRoomIdsRequestDto] :update_rooms_room_ids_request_dto 
+    # @return [Array<(FolderArrayWrapper, Integer, Hash)>] FolderArrayWrapper data, response status code and response headers
     def reset_room_quota_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::QuotaApi.reset_room_quota ...'
@@ -64,10 +64,10 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'update_rooms_room_ids_request_dto_integer'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'update_rooms_room_ids_request_dto'])
 
       # return_type
-      return_type = opts[:debug_return_type] || 'FolderIntegerArrayWrapper'
+      return_type = opts[:debug_return_type] || 'FolderArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -90,22 +90,22 @@ module DocspaceApiSdk
     end
 
     # Change the room quota limit
-    # Changes the quota limit for the rooms with the IDs specified in the request.
+    # Sets the same custom storage limit, in bytes, on every listed room and streams the updated rooms back in the  order they were given. The per-room quota feature has to be on for the portal, and the value must stay within  the portal own limit, otherwise the call is refused before anything is written. The caller must be a manager  of each listed room, and an archived room or a room in the trash is refused. The list is not transactional:  rooms processed before the offending one keep their new limit, so a failed call has to be checked room by  room. Only numeric room ids are processed, which means ids of rooms stored in a connected third-party account  are silently skipped. A room whose limit already equals the requested value is left untouched and still  returned. To go back to the portal default use `PUT api/2.0/files/rooms/resetquota`, and to drop the custom  limit entirely send a quota of -1 to `PUT api/2.0/files/rooms/{id}`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-rooms-quota/
     # @param [Hash] opts the optional parameters
-    # @option opts [UpdateRoomsQuotaRequestDtoInteger] :update_rooms_quota_request_dto_integer 
-    # @return [FolderIntegerArrayWrapper]
+    # @option opts [UpdateRoomsQuotaRequestDto] :update_rooms_quota_request_dto 
+    # @return [FolderArrayWrapper]
     def update_rooms_quota(opts = {})
       data, _status_code, _headers = update_rooms_quota_with_http_info(opts)
       data
     end
 
     # Change the room quota limit
-    # Changes the quota limit for the rooms with the IDs specified in the request.
+    # Sets the same custom storage limit, in bytes, on every listed room and streams the updated rooms back in the  order they were given. The per-room quota feature has to be on for the portal, and the value must stay within  the portal own limit, otherwise the call is refused before anything is written. The caller must be a manager  of each listed room, and an archived room or a room in the trash is refused. The list is not transactional:  rooms processed before the offending one keep their new limit, so a failed call has to be checked room by  room. Only numeric room ids are processed, which means ids of rooms stored in a connected third-party account  are silently skipped. A room whose limit already equals the requested value is left untouched and still  returned. To go back to the portal default use `PUT api/2.0/files/rooms/resetquota`, and to drop the custom  limit entirely send a quota of -1 to `PUT api/2.0/files/rooms/{id}`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-rooms-quota/
     # @param [Hash] opts the optional parameters
-    # @option opts [UpdateRoomsQuotaRequestDtoInteger] :update_rooms_quota_request_dto_integer 
-    # @return [Array<(FolderIntegerArrayWrapper, Integer, Hash)>] FolderIntegerArrayWrapper data, response status code and response headers
+    # @option opts [UpdateRoomsQuotaRequestDto] :update_rooms_quota_request_dto 
+    # @return [Array<(FolderArrayWrapper, Integer, Hash)>] FolderArrayWrapper data, response status code and response headers
     def update_rooms_quota_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::QuotaApi.update_rooms_quota ...'
@@ -130,10 +130,10 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'update_rooms_quota_request_dto_integer'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'update_rooms_quota_request_dto'])
 
       # return_type
-      return_type = opts[:debug_return_type] || 'FolderIntegerArrayWrapper'
+      return_type = opts[:debug_return_type] || 'FolderArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']

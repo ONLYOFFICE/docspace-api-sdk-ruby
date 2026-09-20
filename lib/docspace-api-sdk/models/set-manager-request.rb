@@ -19,7 +19,7 @@ require 'time'
 module DocspaceApiSdk
   # The request for setting a group manager.
   class SetManagerRequest < ApiModelBase
-    # The user ID.
+    # The account to make the manager. It has to exist, otherwise the operation answers 404, and it is added to the  group at the same time, so it does not have to be a member beforehand.
     attr_accessor :user_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

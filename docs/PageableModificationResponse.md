@@ -4,9 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **data** | **Object** | The paginated modification data. | [optional] |
-| **limit** | **Integer** | The maximum number of results returned per page. | [optional] |
-| **last_modified_on** | **Time** | The date when the user consent was last modified. | [optional] |
+| **data** | **Object** |  | [optional] |
+| **limit** | **Integer** | The page size that was applied to this request, between 1 and 50. | [optional] |
+| **last_modified_on** | **Time** | The cursor to send back as last_modified_on to ask for the next page. It is null when the page is empty. | [optional] |
 
 ## Example
 
@@ -15,7 +15,7 @@ require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::PageableModificationResponse.new(
   data: null,
-  limit: null,
-  last_modified_on: null
+  limit: 50,
+  last_modified_on: 2024-04-04T12:00:00Z
 )
 ```

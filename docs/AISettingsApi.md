@@ -17,7 +17,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Get AI settings
 
-Reports the portal's combined AI configuration and readiness.
+Reports the portal's AI configuration and whether AI is usable at all, which is the first call a client makes before offering any AI feature. It takes no parameters and is proxied unchanged to the DocSpace AI service, so the answer is that service's settings payload. Among other things it says whether the portal runs on the central AI gateway, which decides whether provider profiles can be edited here at all. This is a read-only operation.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get/).
 
@@ -26,6 +26,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::SettingsApi.new
 
@@ -66,7 +76,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -80,7 +90,7 @@ No authorization required
 
 Get user AI settings
 
-Returns the current user's AI settings.
+Returns the AI settings of the calling user, as opposed to the portal-wide ones. It takes no parameters - the user is the authenticated caller, and there is no way to read somebody else's settings - and is proxied unchanged to the DocSpace AI service. Use `GET api/2.0/ai/config` for the portal-wide configuration. This is a read-only operation.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-user/).
 
@@ -89,6 +99,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::SettingsApi.new
 
@@ -129,7 +149,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -143,7 +163,7 @@ No authorization required
 
 Get vectorization settings
 
-Returns the portal's vectorization settings.
+Returns the portal's vectorization settings - the embedding provider and the options used when portal content is indexed for retrieval. It takes no parameters and is proxied unchanged to the DocSpace AI service. Vectorization is a portal-wide setting, so there is no room-scoped form of it. Change it with `PUT api/2.0/ai/config/vectorization`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-vectorization/).
 
@@ -152,6 +172,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::SettingsApi.new
 
@@ -192,7 +222,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -206,7 +236,7 @@ No authorization required
 
 Update user AI settings
 
-Updates the current user's AI settings.
+Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-user/).
 
@@ -215,9 +245,19 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::SettingsApi.new
-request_body = { key: 3.56} # Hash<String, Object> | 
+request_body = { key: 3.56} # Hash<String, Object> | The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
 
 begin
   # Update user AI settings
@@ -250,7 +290,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **request_body** | [**Hash&lt;String, Object&gt;**](Object.md) |  |  |
+| **request_body** | [**Hash&lt;String, Object&gt;**](Object.md) | The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed. |  |
 
 ### Return type
 
@@ -258,7 +298,7 @@ end
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -272,7 +312,7 @@ No authorization required
 
 Update vectorization settings
 
-Updates the portal's vectorization settings.
+Replaces the portal's vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service's own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with `POST api/2.0/ai/vectorization/tasks`. This is a portal-wide setting and requires the permissions the AI service demands for it.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-vectorization/).
 
@@ -281,9 +321,19 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::SettingsApi.new
-request_body = { key: 3.56} # Hash<String, Object> | 
+request_body = { key: 3.56} # Hash<String, Object> | The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.
 
 begin
   # Update vectorization settings
@@ -316,7 +366,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **request_body** | [**Hash&lt;String, Object&gt;**](Object.md) |  |  |
+| **request_body** | [**Hash&lt;String, Object&gt;**](Object.md) | The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed. |  |
 
 ### Return type
 
@@ -324,7 +374,7 @@ end
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

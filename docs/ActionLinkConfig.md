@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **action** | [**ActionConfig**](ActionConfig.md) | The information about the action in the document that will be scrolled to. | [optional] |
+| **action** | [**ActionConfig**](ActionConfig.md) | The anchor itself. It is passed on to the editor unchanged, so it has to be the value the editor produced for  the comment or the mention it points at. | [optional] |
 
 ## Example
 

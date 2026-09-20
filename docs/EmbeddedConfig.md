@@ -4,11 +4,11 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **embed_url** | **String** | The absolute URL to the document serving as a source file for the document embedded into the web page. | [optional] |
-| **save_url** | **String** | The absolute URL that will allow the document to be saved onto the user personal computer. | [optional][readonly] |
-| **share_link_param** | **String** | The shared URL parameter. | [optional] |
-| **share_url** | **String** | The absolute URL that will allow other users to share this document. | [optional] |
-| **toolbar_docked** | **String** | The place for the embedded viewer toolbar, can be either top or bottom. | [optional][readonly] |
+| **embed_url** | **String** | The page to put into the frame. It is empty when the opening carries no external share key, since a framed  viewer cannot authenticate a portal member. | [optional] |
+| **save_url** | **String** | Where the download button of the framed viewer leads. | [optional][readonly] |
+| **share_link_param** | **String** | The query fragment carrying the external share key, ampersand included, out of which the addresses around it  are built. | [optional] |
+| **share_url** | **String** | The address behind the share button of the framed viewer, the document opened full-screen for reading. It is  empty when the opening carries no external share key. | [optional] |
+| **toolbar_docked** | **String** | Where the framed viewer puts its toolbar. The portal always asks for the top. | [optional][readonly] |
 
 ## Example
 
@@ -16,10 +16,10 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::EmbeddedConfig.new(
-  embed_url: https://portal.example.com/files/editor?action=embedded&share=abc123,
-  save_url: https://portal.example.com/files/filehandler?action=download&share=abc123,
-  share_link_param: &share=abc123,
-  share_url: https://portal.example.com/files/editor?action=view&share=abc123,
+  embed_url: https://portal.example.com/products/files/doceditor?action=embedded&share=HkQd9nT2,
+  save_url: https://portal.example.com/filehandler.ashx?action=download&share=HkQd9nT2,
+  share_link_param: &fileid=512&share=HkQd9nT2,
+  share_url: https://portal.example.com/products/files/doceditor?action=view&share=HkQd9nT2,
   toolbar_docked: top
 )
 ```

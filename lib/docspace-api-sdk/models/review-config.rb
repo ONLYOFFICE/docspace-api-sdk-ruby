@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Configuration for review display settings.
+  # How tracked changes are displayed when the document opens.
   class ReviewConfig < ApiModelBase
-    # The review display string representation.
+    # How the editors render tracked changes at first: with the markup, in a simplified markup, as the final text,  or as the original text. A session that may not write opens on the final text.
     attr_accessor :review_display
 
     # Attribute mapping from ruby-style variable name to JSON key.

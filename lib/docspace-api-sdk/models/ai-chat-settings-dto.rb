@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The chat settings parameters.
+  # The chat configuration of an AI room.
   class AiChatSettingsDto < ApiModelBase
-    # The system prompt for the chat.
+    # The instruction put in front of every conversation held in the room, which sets the role the assistant takes  and the way it answers. Empty when the room was left on the behaviour the portal provides by default.
     attr_accessor :prompt
 
     # Attribute mapping from ruby-style variable name to JSON key.

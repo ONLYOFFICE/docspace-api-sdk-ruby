@@ -23,8 +23,8 @@ module DocspaceApiSdk
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Create
-    # Saves a new prompt. The name must be non-empty and unique inside its folder, and `folderId` must point at an existing folder - omit it for the root.
+    # Save a prompt
+    # Saves a new prompt in the caller's own prompt library and returns it. The name has to be non-empty and unique inside its folder, and `folderId` has to name an existing folder - omit it to save the prompt at the root. Prompts are per-user: another user's library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-create/
     # @param ai_create_prompt_input [AiCreatePromptInput] 
     # @param [Hash] opts the optional parameters
@@ -34,8 +34,8 @@ module DocspaceApiSdk
       data
     end
 
-    # Create
-    # Saves a new prompt. The name must be non-empty and unique inside its folder, and `folderId` must point at an existing folder - omit it for the root.
+    # Save a prompt
+    # Saves a new prompt in the caller's own prompt library and returns it. The name has to be non-empty and unique inside its folder, and `folderId` has to name an existing folder - omit it to save the prompt at the root. Prompts are per-user: another user's library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-create/
     # @param ai_create_prompt_input [AiCreatePromptInput] 
     # @param [Hash] opts the optional parameters
@@ -74,7 +74,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiPromptMutationResult'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::PromptsApi.ai_prompts_create",
@@ -94,9 +94,9 @@ module DocspaceApiSdk
     end
 
     # Create folder
-    # Creates a prompt folder. The name must be non-empty and unique across the portal - prompt folders do not nest.
+    # Creates a folder in the caller's prompt library and returns it. The name has to be non-empty and unique across that library. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-create-folder/
-    # @param body [String] 
+    # @param body [String] The name of the folder to create, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [AiFolderMutationResult]
     def ai_prompts_create_folder(body, opts = {})
@@ -105,9 +105,9 @@ module DocspaceApiSdk
     end
 
     # Create folder
-    # Creates a prompt folder. The name must be non-empty and unique across the portal - prompt folders do not nest.
+    # Creates a folder in the caller's prompt library and returns it. The name has to be non-empty and unique across that library. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-create-folder/
-    # @param body [String] 
+    # @param body [String] The name of the folder to create, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiFolderMutationResult, Integer, Hash)>] AiFolderMutationResult data, response status code and response headers
     def ai_prompts_create_folder_with_http_info(body, opts = {})
@@ -144,7 +144,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiFolderMutationResult'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::PromptsApi.ai_prompts_create_folder",
@@ -163,10 +163,10 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Delete
-    # Deletes a saved prompt. Does nothing when it no longer exists.
+    # Delete a saved prompt
+    # Deletes one saved prompt from the caller's library. The ID may be sent in the body or as a query parameter, and it is required. An ID that does not exist, or that belongs to another user, is not reported: the call answers success without deleting anything. The deletion is permanent.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete/
-    # @param body [String] 
+    # @param body [String] The ID of the prompt to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [AiSuccessResponse]
     def ai_prompts_delete(body, opts = {})
@@ -174,10 +174,10 @@ module DocspaceApiSdk
       data
     end
 
-    # Delete
-    # Deletes a saved prompt. Does nothing when it no longer exists.
+    # Delete a saved prompt
+    # Deletes one saved prompt from the caller's library. The ID may be sent in the body or as a query parameter, and it is required. An ID that does not exist, or that belongs to another user, is not reported: the call answers success without deleting anything. The deletion is permanent.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete/
-    # @param body [String] 
+    # @param body [String] The ID of the prompt to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
     def ai_prompts_delete_with_http_info(body, opts = {})
@@ -214,7 +214,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::PromptsApi.ai_prompts_delete",
@@ -234,9 +234,9 @@ module DocspaceApiSdk
     end
 
     # Delete folder
-    # Deletes a prompt folder together with the prompts inside it.
+    # Deletes a folder together with every prompt inside it, permanently. The ID is required and may be sent in the body or as a query parameter. Unlike deleting a prompt, this checks first: a folder that does not exist, and one that belongs to another user, both answer 404 - the two cases are deliberately indistinguishable, so a foreign folder cannot be probed. Move the prompts out with `PUT api/2.0/ai/prompts/move` first if they should survive.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete-folder/
-    # @param body [String] 
+    # @param body [String] The ID of the folder to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [AiSuccessResponse]
     def ai_prompts_delete_folder(body, opts = {})
@@ -245,9 +245,9 @@ module DocspaceApiSdk
     end
 
     # Delete folder
-    # Deletes a prompt folder together with the prompts inside it.
+    # Deletes a folder together with every prompt inside it, permanently. The ID is required and may be sent in the body or as a query parameter. Unlike deleting a prompt, this checks first: a folder that does not exist, and one that belongs to another user, both answer 404 - the two cases are deliberately indistinguishable, so a foreign folder cannot be probed. Move the prompts out with `PUT api/2.0/ai/prompts/move` first if they should survive.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete-folder/
-    # @param body [String] 
+    # @param body [String] The ID of the folder to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
     def ai_prompts_delete_folder_with_http_info(body, opts = {})
@@ -284,7 +284,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::PromptsApi.ai_prompts_delete_folder",
@@ -303,8 +303,8 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Export
-    # Builds a self-contained, versioned bundle of every saved prompt and folder, ready for `import-bundle`.
+    # Export the prompt library
+    # Builds a versioned bundle of every prompt and folder in the caller's library and returns it, with no parameters. The bundle is self-contained: it carries its own format version so an older export can still be read back, and it is the input `POST api/2.0/ai/prompts/import-bundle` expects. This is also the only way to read the whole library at once, since listing is folder-scoped. Nothing is changed by the call.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-export/
     # @param [Hash] opts the optional parameters
     # @return [AiPromptBundle]
@@ -313,8 +313,8 @@ module DocspaceApiSdk
       data
     end
 
-    # Export
-    # Builds a self-contained, versioned bundle of every saved prompt and folder, ready for `import-bundle`.
+    # Export the prompt library
+    # Builds a versioned bundle of every prompt and folder in the caller's library and returns it, with no parameters. The bundle is self-contained: it carries its own format version so an older export can still be read back, and it is the input `POST api/2.0/ai/prompts/import-bundle` expects. This is also the only way to read the whole library at once, since listing is folder-scoped. Nothing is changed by the call.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-export/
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiPromptBundle, Integer, Hash)>] AiPromptBundle data, response status code and response headers
@@ -343,7 +343,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiPromptBundle'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::PromptsApi.ai_prompts_export",
@@ -362,8 +362,8 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Get by id
-    # Returns one saved prompt, or an empty result when the identifier is unknown.
+    # Get a saved prompt
+    # Returns one saved prompt by its ID. The ID is required and is read from the query. An ID that is unknown, or that belongs to another user, is not reported as 404: the answer is an empty body with status 200, so treat a missing payload as no such prompt. Prompt IDs come from `GET api/2.0/ai/prompts/list` or from the answer of the create operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-get-by-id/
     # @param id [String] The saved prompt identifier.
     # @param [Hash] opts the optional parameters
@@ -373,8 +373,8 @@ module DocspaceApiSdk
       data
     end
 
-    # Get by id
-    # Returns one saved prompt, or an empty result when the identifier is unknown.
+    # Get a saved prompt
+    # Returns one saved prompt by its ID. The ID is required and is read from the query. An ID that is unknown, or that belongs to another user, is not reported as 404: the answer is an empty body with status 200, so treat a missing payload as no such prompt. Prompt IDs come from `GET api/2.0/ai/prompts/list` or from the answer of the create operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-get-by-id/
     # @param id [String] The saved prompt identifier.
     # @param [Hash] opts the optional parameters
@@ -409,7 +409,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiPrompt'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::PromptsApi.ai_prompts_get_by_id",
@@ -428,8 +428,8 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Get folder by id
-    # Returns one prompt folder, or an empty result when the identifier is unknown.
+    # Get a prompt folder
+    # Returns one folder of the caller's prompt library by its ID, without the prompts inside it. The ID is required and is read from the query. An unknown or foreign ID is not reported as 404: the answer is an empty body with status 200. This differs from the delete operation on the same ID, which does answer 404.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-get-folder-by-id/
     # @param id [String] The prompt folder identifier.
     # @param [Hash] opts the optional parameters
@@ -439,8 +439,8 @@ module DocspaceApiSdk
       data
     end
 
-    # Get folder by id
-    # Returns one prompt folder, or an empty result when the identifier is unknown.
+    # Get a prompt folder
+    # Returns one folder of the caller's prompt library by its ID, without the prompts inside it. The ID is required and is read from the query. An unknown or foreign ID is not reported as 404: the answer is an empty body with status 200. This differs from the delete operation on the same ID, which does answer 404.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-get-folder-by-id/
     # @param id [String] The prompt folder identifier.
     # @param [Hash] opts the optional parameters
@@ -475,7 +475,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiPromptFolder'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::PromptsApi.ai_prompts_get_folder_by_id",
@@ -495,7 +495,7 @@ module DocspaceApiSdk
     end
 
     # Import bundle
-    # Restores a prompt bundle. `replace` wipes the current prompts and folders before writing the bundle, `merge` writes the bundle on top of what is already there; both validate the folder references inside the bundle before any write, so a corrupt bundle is rejected whole.
+    # Writes a bundle produced by `GET api/2.0/ai/prompts/export` back into the caller's library. `mode` decides how: `replace` deletes the current prompts and folders before writing, and `merge` writes the bundle on top of what is already there. The folder references inside the bundle are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway. `replace` is destructive and cannot be undone - export first if the current library matters.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-import-bundle/
     # @param ai_prompts_import_bundle_request [AiPromptsImportBundleRequest] 
     # @param [Hash] opts the optional parameters
@@ -506,7 +506,7 @@ module DocspaceApiSdk
     end
 
     # Import bundle
-    # Restores a prompt bundle. `replace` wipes the current prompts and folders before writing the bundle, `merge` writes the bundle on top of what is already there; both validate the folder references inside the bundle before any write, so a corrupt bundle is rejected whole.
+    # Writes a bundle produced by `GET api/2.0/ai/prompts/export` back into the caller's library. `mode` decides how: `replace` deletes the current prompts and folders before writing, and `merge` writes the bundle on top of what is already there. The folder references inside the bundle are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway. `replace` is destructive and cannot be undone - export first if the current library matters.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-import-bundle/
     # @param ai_prompts_import_bundle_request [AiPromptsImportBundleRequest] 
     # @param [Hash] opts the optional parameters
@@ -545,7 +545,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiImportResult'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::PromptsApi.ai_prompts_import_bundle",
@@ -564,8 +564,8 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # List
-    # Lists saved prompts. Scope the answer to one folder, ask for the root-level prompts only, or omit the folder to get every prompt newest first.
+    # List saved prompts
+    # Lists the caller's saved prompts, newest first. `folderId` scopes the answer to one folder, and omitting it - or sending it empty - lists the prompts that sit at the root rather than every prompt, because the client fetcher cannot tell an absent value from a null one. There is therefore no way to ask for the whole library in one call: walk the folders from `GET api/2.0/ai/prompts/list-folders`, or take everything at once with `GET api/2.0/ai/prompts/export`. The prompts of other users are never included.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-list/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :folder_id The prompt folder identifier. Omit to list the prompts that sit outside any folder.
@@ -575,8 +575,8 @@ module DocspaceApiSdk
       data
     end
 
-    # List
-    # Lists saved prompts. Scope the answer to one folder, ask for the root-level prompts only, or omit the folder to get every prompt newest first.
+    # List saved prompts
+    # Lists the caller's saved prompts, newest first. `folderId` scopes the answer to one folder, and omitting it - or sending it empty - lists the prompts that sit at the root rather than every prompt, because the client fetcher cannot tell an absent value from a null one. There is therefore no way to ask for the whole library in one call: walk the folders from `GET api/2.0/ai/prompts/list-folders`, or take everything at once with `GET api/2.0/ai/prompts/export`. The prompts of other users are never included.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-list/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :folder_id The prompt folder identifier. Omit to list the prompts that sit outside any folder.
@@ -607,7 +607,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'Array<AiPrompt>'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::PromptsApi.ai_prompts_list",
@@ -627,7 +627,7 @@ module DocspaceApiSdk
     end
 
     # List folders
-    # Lists the prompt folders, newest first.
+    # Lists every folder of the caller's prompt library, newest first, with no parameters and no pagination. Folders are flat, so the answer is a single list rather than a tree. The prompts inside them are not included - read those with `GET api/2.0/ai/prompts/list` per folder. Another user's folders are never listed.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-list-folders/
     # @param [Hash] opts the optional parameters
     # @return [Array<AiPromptFolder>]
@@ -637,7 +637,7 @@ module DocspaceApiSdk
     end
 
     # List folders
-    # Lists the prompt folders, newest first.
+    # Lists every folder of the caller's prompt library, newest first, with no parameters and no pagination. Folders are flat, so the answer is a single list rather than a tree. The prompts inside them are not included - read those with `GET api/2.0/ai/prompts/list` per folder. Another user's folders are never listed.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-list-folders/
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<AiPromptFolder>, Integer, Hash)>] Array<AiPromptFolder> data, response status code and response headers
@@ -666,7 +666,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'Array<AiPromptFolder>'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::PromptsApi.ai_prompts_list_folders",
@@ -685,8 +685,8 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Move
-    # Moves a saved prompt into another folder, or to the root. The name is re-validated in the target folder, so the move fails when a prompt of that name is already there.
+    # Move a prompt to a folder
+    # Moves a saved prompt into another folder, or to the root when `folderId` is omitted or null. The name is re-validated in the target folder, so the move fails when a prompt of that name already sits there - rename it first with `PUT api/2.0/ai/prompts/update`. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-move/
     # @param ai_prompts_move_request [AiPromptsMoveRequest] 
     # @param [Hash] opts the optional parameters
@@ -696,8 +696,8 @@ module DocspaceApiSdk
       data
     end
 
-    # Move
-    # Moves a saved prompt into another folder, or to the root. The name is re-validated in the target folder, so the move fails when a prompt of that name is already there.
+    # Move a prompt to a folder
+    # Moves a saved prompt into another folder, or to the root when `folderId` is omitted or null. The name is re-validated in the target folder, so the move fails when a prompt of that name already sits there - rename it first with `PUT api/2.0/ai/prompts/update`. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-move/
     # @param ai_prompts_move_request [AiPromptsMoveRequest] 
     # @param [Hash] opts the optional parameters
@@ -736,7 +736,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiPromptMutationResult'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::PromptsApi.ai_prompts_move",
@@ -756,7 +756,7 @@ module DocspaceApiSdk
     end
 
     # Rename folder
-    # Renames a prompt folder, validating the new name against the existing folders.
+    # Renames a folder in the caller's prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-rename-folder/
     # @param ai_prompts_rename_folder_request [AiPromptsRenameFolderRequest] 
     # @param [Hash] opts the optional parameters
@@ -767,7 +767,7 @@ module DocspaceApiSdk
     end
 
     # Rename folder
-    # Renames a prompt folder, validating the new name against the existing folders.
+    # Renames a folder in the caller's prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-rename-folder/
     # @param ai_prompts_rename_folder_request [AiPromptsRenameFolderRequest] 
     # @param [Hash] opts the optional parameters
@@ -806,7 +806,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiFolderMutationResult'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::PromptsApi.ai_prompts_rename_folder",
@@ -825,8 +825,8 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Update
-    # Updates a saved prompt. The name and the folder reference are re-validated whenever either of them changes.
+    # Update a saved prompt
+    # Changes a saved prompt and returns the stored result. Only the fields present in `updates` are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses. Use `PUT api/2.0/ai/prompts/move` to change only the folder.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-update/
     # @param ai_prompts_update_request [AiPromptsUpdateRequest] 
     # @param [Hash] opts the optional parameters
@@ -836,8 +836,8 @@ module DocspaceApiSdk
       data
     end
 
-    # Update
-    # Updates a saved prompt. The name and the folder reference are re-validated whenever either of them changes.
+    # Update a saved prompt
+    # Changes a saved prompt and returns the stored result. Only the fields present in `updates` are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses. Use `PUT api/2.0/ai/prompts/move` to change only the folder.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-update/
     # @param ai_prompts_update_request [AiPromptsUpdateRequest] 
     # @param [Hash] opts the optional parameters
@@ -876,7 +876,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiPromptMutationResult'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::PromptsApi.ai_prompts_update",

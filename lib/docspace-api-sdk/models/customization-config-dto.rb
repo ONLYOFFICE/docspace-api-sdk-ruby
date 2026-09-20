@@ -17,40 +17,43 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The customization config parameters.
+  # How the editor interface is dressed: branding, the buttons that lead back into the portal, and the behaviour of  review, mentions and form submission.
   class CustomizationConfigDto < ApiModelBase
-    # Specifies if the customization is about.
+    # Whether the About entry of the editor menu is shown.
     attr_accessor :about
 
-    # The customization customer configuration.
+    # The branding of the organization running the portal. It is filled in on a server installation only and is  empty in the cloud.
     attr_accessor :customer
 
-    # The anonymous configuration of the customization.
+    # How an anonymous participant is treated in this session.
     attr_accessor :anonymous
 
-    # The feedback configuration of the customization.
+    # The support link the editor offers behind its feedback button.
     attr_accessor :feedback
 
-    # Specifies if the customization should be force saved.
+    # Whether the editors write intermediate revisions while the document stays open. It is empty when the portal  leaves the decision to the editors themselves.
     attr_accessor :forcesave
 
-    # The go back configuration of the customization.
+    # Where the editor returns the user to when they leave the document. It is empty when there is nowhere to go  back to, as in an embedded opening.
     attr_accessor :goback
 
-    # The review configuration of the customization.
+    # How tracked changes are displayed when the document opens; it depends on whether this session may write.
     attr_accessor :review
 
-    # The logo of the customization.
+    # The logo the editor shows, in the variants the current layout and file type need.
     attr_accessor :logo
 
-    # Specifies if the share should be mentioned.
+    # Whether mentioning a user who cannot yet open the document offers to share it with them, instead of silently  notifying nobody.
     attr_accessor :mention_share
 
-    # The Complete & Submit button settings.
+    # The submit button of a form: whether it is shown and what it says.
     attr_accessor :submit_form
 
-    # The parameters of the button that starts filling out the form.
+    # The button that starts filling out the form. It is empty when this opening offers no such button.
     attr_accessor :start_filling_form
+
+    # The AI configuration settings.
+    attr_accessor :ai
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -65,7 +68,8 @@ module DocspaceApiSdk
         :'logo' => :'logo',
         :'mention_share' => :'mentionShare',
         :'submit_form' => :'submitForm',
-        :'start_filling_form' => :'startFillingForm'
+        :'start_filling_form' => :'startFillingForm',
+        :'ai' => :'ai'
       }
     end
 
@@ -92,7 +96,8 @@ module DocspaceApiSdk
         :'logo' => :'LogoConfigDto',
         :'mention_share' => :'Boolean',
         :'submit_form' => :'SubmitForm',
-        :'start_filling_form' => :'StartFillingForm'
+        :'start_filling_form' => :'StartFillingForm',
+        :'ai' => :'AIConfig'
       }
     end
 
@@ -162,6 +167,10 @@ module DocspaceApiSdk
       if attributes.key?(:'start_filling_form')
         self.start_filling_form = attributes[:'start_filling_form']
       end
+
+      if attributes.key?(:'ai')
+        self.ai = attributes[:'ai']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -194,7 +203,8 @@ module DocspaceApiSdk
           logo == o.logo &&
           mention_share == o.mention_share &&
           submit_form == o.submit_form &&
-          start_filling_form == o.start_filling_form
+          start_filling_form == o.start_filling_form &&
+          ai == o.ai
     end
 
     # @see the `==` method
@@ -206,7 +216,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [about, customer, anonymous, feedback, forcesave, goback, review, logo, mention_share, submit_form, start_filling_form].hash
+      [about, customer, anonymous, feedback, forcesave, goback, review, logo, mention_share, submit_form, start_filling_form, ai].hash
     end
 
     # Builds the object from hash

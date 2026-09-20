@@ -39,6 +39,9 @@ module DocspaceApiSdk
     # Whether extended thinking is enabled for this profile's model.
     attr_accessor :reasoning
 
+    # Extended-thinking capabilities of the selected model as reported by the provider's catalogue at save time (see `Model.reasoningSupport`). When present the composer's Effort row follows it exactly; when absent the provider's id-based table answers. Hosts persist it with the rest of the profile.
+    attr_accessor :reasoning_support
+
     # Bitmask of capabilities supported by the selected model.
     attr_accessor :capabilities
 
@@ -89,6 +92,7 @@ module DocspaceApiSdk
         :'base_url' => :'baseUrl',
         :'model_id' => :'modelId',
         :'reasoning' => :'reasoning',
+        :'reasoning_support' => :'reasoningSupport',
         :'capabilities' => :'capabilities',
         :'can_use_tool' => :'canUseTool',
         :'use_responses_api' => :'useResponsesApi',
@@ -118,6 +122,7 @@ module DocspaceApiSdk
         :'base_url' => :'String',
         :'model_id' => :'String',
         :'reasoning' => :'Boolean',
+        :'reasoning_support' => :'AiReasoningSupport',
         :'capabilities' => :'Float',
         :'can_use_tool' => :'Boolean',
         :'use_responses_api' => :'Boolean',
@@ -185,6 +190,10 @@ module DocspaceApiSdk
 
       if attributes.key?(:'reasoning')
         self.reasoning = attributes[:'reasoning']
+      end
+
+      if attributes.key?(:'reasoning_support')
+        self.reasoning_support = attributes[:'reasoning_support']
       end
 
       if attributes.key?(:'capabilities')
@@ -314,6 +323,7 @@ module DocspaceApiSdk
           base_url == o.base_url &&
           model_id == o.model_id &&
           reasoning == o.reasoning &&
+          reasoning_support == o.reasoning_support &&
           capabilities == o.capabilities &&
           can_use_tool == o.can_use_tool &&
           use_responses_api == o.use_responses_api &&
@@ -331,7 +341,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, provider_type, based_on, base_url, model_id, reasoning, capabilities, can_use_tool, use_responses_api, is_cloud_provider, use_proxy, created_at].hash
+      [id, name, provider_type, based_on, base_url, model_id, reasoning, reasoning_support, capabilities, can_use_tool, use_responses_api, is_cloud_provider, use_proxy, created_at].hash
     end
 
     # Builds the object from hash

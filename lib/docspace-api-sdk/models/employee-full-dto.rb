@@ -253,7 +253,7 @@ module DocspaceApiSdk
         :'contacts' => :'Array<Contact>',
         :'status' => :'EmployeeStatus',
         :'activation_status' => :'EmployeeActivationStatus',
-        :'terminated' => :'Time',
+        :'terminated' => :'ApiDateTime',
         :'department' => :'String',
         :'groups' => :'Array<GroupSummaryDto>',
         :'location' => :'String',
@@ -277,7 +277,7 @@ module DocspaceApiSdk
         :'login_event_id' => :'Integer',
         :'auth_cookie_lifetime' => :'Float',
         :'created_by' => :'EmployeeDto',
-        :'registration_date' => :'Time',
+        :'registration_date' => :'ApiDateTime',
         :'has_personal_folder' => :'Boolean',
         :'tfa_app_enabled' => :'Boolean'
       }
@@ -291,7 +291,6 @@ module DocspaceApiSdk
         :'user_name',
         :'email',
         :'contacts',
-        :'terminated',
         :'department',
         :'groups',
         :'location',
@@ -305,7 +304,6 @@ module DocspaceApiSdk
         :'is_custom_quota',
         :'login_event_id',
         :'auth_cookie_lifetime',
-        :'registration_date',
         :'has_personal_folder',
         :'tfa_app_enabled'
       ])

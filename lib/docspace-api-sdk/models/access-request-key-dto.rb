@@ -17,15 +17,15 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The encryption key granting one user access to a file.
+  # The file key issued to one account.
   class AccessRequestKeyDto < ApiModelBase
-    # User ID
+    # The account that is to open the file with this key; it has to have read access to the file.
     attr_accessor :user_id
 
-    # Public key ID
+    # The public key the file key was encrypted with, as reported for that account by  `GET api/2.0/files/file/{fileId}/publickeys`.
     attr_accessor :public_key_id
 
-    # Encrypted private key
+    # The key of the file itself, encrypted by the client with that public key, so that the plain key never reaches  the portal.
     attr_accessor :private_key_enc
 
     # Attribute mapping from ruby-style variable name to JSON key.

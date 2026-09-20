@@ -17,72 +17,72 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The file entry information.
+  # What every file and folder in an answer has in common; the concrete shape is a file or a folder, told apart by the  entry type.
   class AiFileEntryBaseDto < ApiModelBase
-    # The file entry title.
+    # The name shown for the entry. For a file it carries the extension, which is how the format is recognised, and  for a room it is the room name.
     attr_accessor :title
 
-    # The access rights to the file entry.
+    # The level the calling account holds on this entry, resolved from its own rights, the groups it belongs to and  any link it came in through. It is the level itself, not what the account may do with it - the action flags  below answer that.
     attr_accessor :access
 
-    # Provides information about the employee who shared the file or folder.
+    # Who gave the calling account the access it is using. It is filled in only while the entry is being read  through a share, and never for a caller without an account.
     attr_accessor :shared_by
 
-    # The information about the employee who owns the file entry.
+    # Who owns the place the entry is shared from - the creator of the room it lies in, or of the personal section  that holds it. It is filled in only while the entry is being read through a share, and never for a caller  without an account.
     attr_accessor :owned_by
 
-    # Specifies if the file entry is shared via link or not.
+    # Whether at least one external link exists for the entry, whichever kind. It says nothing about accounts and  groups - those are counted by the flag for members below.
     attr_accessor :shared
 
-    # Specifies if the file entry is shared for user or not.
+    # Whether at least one account or group has been given rights on the entry directly, as opposed to reaching it  through a link or through the room around it.
     attr_accessor :shared_for_user
 
-    # Specifies if the file entry is shared via a public (non-internal) external link.
+    # Whether one of the entry's links is open to people outside the portal, as opposed to a link that only its own  members can follow. This is the flag to watch when the concern is who can reach the content from outside.
     attr_accessor :shared_external
 
-    # Indicates whether the parent entity is shared.
+    # Whether the entry is reachable because the room or folder around it is shared, rather than through rights of  its own. A copy or a move takes the entry out of that scope.
     attr_accessor :parent_shared
 
-    # The short Web URL.
+    # A shortened address that opens the entry through the link it is being read with. It is an empty string  whenever no link applies, which is the usual case for a member browsing their own rooms.
     attr_accessor :short_web_url
 
-    # The creation date and time of the file entry.
+    # When the entry was created, written with the offset of the portal's time zone. For a file restored from an  older version this is still the moment the file first appeared.
     attr_accessor :created
 
-    # The file entry author.
+    # Who created the entry. It is null for a caller without an account, who is told nothing about the portal's  members.
     attr_accessor :created_by
 
-    # The last date and time when the file entry was updated.
+    # When the entry last changed, written with the offset of the portal's time zone. It is never reported as  earlier than the creation moment, so the two can be compared safely.
     attr_accessor :updated
 
-    # The date and time when the file entry will be automatically deleted.
+    # When the entry will disappear on its own, written with the offset of the portal's time zone. It is filled in  only where a removal is actually scheduled - something in the trash while the portal cleans it up  automatically, or a guest's own documents - so a null means nothing is scheduled rather than that the entry is  permanent.
     attr_accessor :auto_delete
 
-    # The root folder type of the file entry.
+    # The section the entry ultimately belongs to, which is what tells a personal document from one inside a room,  from a template and from something in the trash or the archive.
     attr_accessor :root_folder_type
 
-    # The parent room type of the file entry.
+    # The kind of room the entry lies in, which decides what the room allows - filling forms, public links,  indexing. It is null for an entry that is not inside a room at all.
     attr_accessor :parent_room_type
 
-    # The user who updated the file entry.
+    # Who changed the entry last. It is null for a caller without an account.
     attr_accessor :updated_by
 
-    # Specifies if the file entry provider is specified or not.
+    # Set when the entry is stored on a connected third-party account rather than on the portal, and null when it is  stored on the portal. Such an entry is identified by a string rather than a number, and some operations skip  it.
     attr_accessor :provider_item
 
-    # The provider key of the file entry.
+    # Which third-party service holds the entry, matching the keys accepted by the third-party operations. It is  null for an entry stored on the portal.
     attr_accessor :provider_key
 
-    # The provider ID of the file entry.
+    # The connected account the entry comes from, for telling apart two connections to the same service. It is null  for an entry stored on the portal.
     attr_accessor :provider_id
 
-    # The order of the file entry.
+    # The place of the entry in a room where the members arrange the content themselves, given as the position of  the entry preceded by the positions of the folders leading to it, separated by dots. It is empty when nothing  has been arranged.
     attr_accessor :order
 
-    # Specifies if the file is a favorite or not.
+    # Set when the calling account has marked the entry as a favorite, which is what puts it into the favorites  listing. For a file that is not marked it is null rather than false.
     attr_accessor :is_favorite
 
-    # The file entry type.
+    # Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here.
     attr_accessor :file_entry_type
 
     class EnumAttributeValidator
@@ -157,10 +157,10 @@ module DocspaceApiSdk
         :'shared_external' => :'Boolean',
         :'parent_shared' => :'Boolean',
         :'short_web_url' => :'String',
-        :'created' => :'Time',
+        :'created' => :'AiApiDateTime',
         :'created_by' => :'AiEmployeeDto',
-        :'updated' => :'Time',
-        :'auto_delete' => :'Time',
+        :'updated' => :'AiApiDateTime',
+        :'auto_delete' => :'AiApiDateTime',
         :'root_folder_type' => :'AiFolderType',
         :'parent_room_type' => :'AiFolderType',
         :'updated_by' => :'AiEmployeeDto',
@@ -178,9 +178,6 @@ module DocspaceApiSdk
       Set.new([
         :'title',
         :'short_web_url',
-        :'created',
-        :'updated',
-        :'auto_delete',
         :'provider_item',
         :'provider_key',
         :'provider_id',

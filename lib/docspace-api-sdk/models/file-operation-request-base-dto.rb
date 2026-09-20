@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The base operation request parameters.
+  # The parameter shared by every request that starts a background file operation.
   class FileOperationRequestBaseDto < ApiModelBase
-    # Specifies whether to return only the current operation
+    # Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
     attr_accessor :return_single_operation
 
     # Attribute mapping from ruby-style variable name to JSON key.

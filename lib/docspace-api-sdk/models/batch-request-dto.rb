@@ -17,29 +17,29 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for copying/moving files.
+  # The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
   class BatchRequestDto < ApiModelBase
-    # Specifies whether to return only the current operation
+    # Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
     attr_accessor :return_single_operation
 
-    # The list of folder IDs to be copied/moved.
+    # The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
     attr_accessor :folder_ids
 
-    # The list of file IDs to be copied/moved.
+    # The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
     attr_accessor :file_ids
 
     attr_accessor :dest_folder_id
 
-    # The overwriting behavior of the file copying or moving.
+    # What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
     attr_accessor :conflict_resolve_type
 
-    # Specifies whether to delete the source files/folders after they are moved or copied to the destination folder.
+    # Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
     attr_accessor :delete_after
 
-    # Specifies whether to copy or move the folder content or not.
+    # What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
     attr_accessor :content
 
-    # Specifies whether the file is copied for filling out
+    # Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
     attr_accessor :to_fill_out
 
     class EnumAttributeValidator

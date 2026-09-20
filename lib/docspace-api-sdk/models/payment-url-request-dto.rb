@@ -17,15 +17,15 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for the payment URL configuration with quantity information.
+  # The plan being bought and the two pages the hosted checkout returns the buyer to.
   class PaymentUrlRequestDto < ApiModelBase
-    # The URL where the user will be redirected after payment cancellation.
+    # The absolute address the hosted checkout page sends the buyer back to when the purchase is abandoned. It has  to be a well-formed URL and is carried into the checkout page as it is given, so it must be reachable by the  buyer rather than by the portal.
     attr_accessor :back_url
 
-    # The URL where the user will be redirected after successful payment.
+    # The absolute address the hosted checkout page sends the buyer to once the payment provider accepts the  purchase. Reaching it says the provider took the money, not that the portal has already been switched to the  new plan, so a client that lands here reads the plan back rather than assuming it.
     attr_accessor :success_url
 
-    # The payment quantity.
+    # The plan being bought, as a single pair of the plan name and the number of units of it. The key is the `name`  of a monthly, non-wallet quota from `GET api/2.0/portal/payment/quotas`, and the value is how many  administrators the plan is to cover, which has to be greater than zero. Exactly one pair is accepted; yearly  and wallet products are refused with 400, and wallet services are bought through  `PUT api/2.0/portal/payment/updatewallet` instead.
     attr_accessor :quantity
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -132,6 +132,14 @@ module DocspaceApiSdk
         invalid_properties.push('invalid value for "quantity", quantity cannot be nil.')
       end
 
+      if @quantity.length > 1
+        invalid_properties.push('invalid value for "quantity", number of items must be less than or equal to 1.')
+      end
+
+      if @quantity.length < 1
+        invalid_properties.push('invalid value for "quantity", number of items must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -146,6 +154,8 @@ module DocspaceApiSdk
       return false if @success_url.to_s.length > 255
       return false if @success_url.to_s.length < 0
       return false if @quantity.nil?
+      return false if @quantity.length > 1
+      return false if @quantity.length < 1
       true
     end
 
@@ -190,6 +200,14 @@ module DocspaceApiSdk
     def quantity=(quantity)
       if quantity.nil?
         fail ArgumentError, 'quantity cannot be nil'
+      end
+
+      if quantity.length > 1
+        fail ArgumentError, 'invalid value for "quantity", number of items must be less than or equal to 1.'
+      end
+
+      if quantity.length < 1
+        fail ArgumentError, 'invalid value for "quantity", number of items must be greater than or equal to 1.'
       end
 
       @quantity = quantity

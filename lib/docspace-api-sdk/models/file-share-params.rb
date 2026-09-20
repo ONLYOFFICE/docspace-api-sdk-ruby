@@ -17,15 +17,15 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The collection of file sharing parameters.
+  # One sharing entry: an account, a group or an email address, and the access level it is given.
   class FileShareParams < ApiModelBase
-    # The email address.
+    # The address of somebody who has no portal account yet. An invitation is sent to it and an account is created  once it is accepted, so this is the field to use instead of an account identifier when the person is new to  the portal.
     attr_accessor :email
 
-    # The ID of the user to whom the file will be shared.
+    # The account or the group the entry is about, taken from the portal people and group listings. Leave it out and  give an email address instead to share with somebody who has no account yet.
     attr_accessor :share_to
 
-    # The sharing access rights.
+    # What the subject may do with the shared item. The value 0 takes the access away again, and which of the other  levels are accepted depends on what is being shared.
     attr_accessor :access
 
     class EnumAttributeValidator

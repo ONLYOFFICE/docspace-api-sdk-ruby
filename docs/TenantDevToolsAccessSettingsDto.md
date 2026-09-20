@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **limited_access_for_users** | **Boolean** | Determines if users have restricted access to the Developer Tools. | [optional] |
+| **limited_access_for_users** | **Boolean** | Whether members holding the `User` role are barred from the developer tools - API keys, OAuth applications  and webhooks. Room administrators and DocSpace administrators keep their access either way. | [optional] |
 
 ## Example
 

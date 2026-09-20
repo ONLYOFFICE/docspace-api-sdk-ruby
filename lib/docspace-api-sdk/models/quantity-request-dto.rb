@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for specifying payment quantity.
+  # The new size of the portal subscription.
   class QuantityRequestDto < ApiModelBase
-    # The mapping of item identifiers to their respective quantities in the payment.
+    # The plan and the number of units it is to cover, as a single pair. While the portal is on a priced plan the  key has to be the `name` of that same plan, which `GET api/2.0/portal/payment/quota` reports, because the  subscription is resized rather than swapped; the value is the total the subscription is to have afterwards,  not the difference. Exactly one pair is accepted, and a value that is already in effect is refused with 400.
     attr_accessor :quantity
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -86,6 +86,14 @@ module DocspaceApiSdk
         invalid_properties.push('invalid value for "quantity", quantity cannot be nil.')
       end
 
+      if @quantity.length > 1
+        invalid_properties.push('invalid value for "quantity", number of items must be less than or equal to 1.')
+      end
+
+      if @quantity.length < 1
+        invalid_properties.push('invalid value for "quantity", number of items must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -94,6 +102,8 @@ module DocspaceApiSdk
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @quantity.nil?
+      return false if @quantity.length > 1
+      return false if @quantity.length < 1
       true
     end
 
@@ -102,6 +112,14 @@ module DocspaceApiSdk
     def quantity=(quantity)
       if quantity.nil?
         fail ArgumentError, 'quantity cannot be nil'
+      end
+
+      if quantity.length > 1
+        fail ArgumentError, 'invalid value for "quantity", number of items must be less than or equal to 1.'
+      end
+
+      if quantity.length < 1
+        fail ArgumentError, 'invalid value for "quantity", number of items must be greater than or equal to 1.'
       end
 
       @quantity = quantity

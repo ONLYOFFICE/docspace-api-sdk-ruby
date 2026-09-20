@@ -19,7 +19,7 @@ require 'time'
 module DocspaceApiSdk
   # The request parameters for updating a user quota.
   class UpdateMembersQuotaRequestDto < ApiModelBase
-    # The list of user IDs.
+    # The accounts the operation applies to. System accounts are dropped from the list without an error.
     attr_accessor :user_ids
 
     attr_accessor :quota

@@ -14,7 +14,7 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiProfileMutationResult.new(
-  success: null,
+  success: true,
   profile: null,
   error: null
 )

@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The internal file formats.
+  # The extension the portal creates for each kind of document, keyed by that kind. This is what a new empty  document gets when no extension is asked for.
   class FilesSettingsDtoInternalFormats < ApiModelBase
     attr_accessor :unknown
 

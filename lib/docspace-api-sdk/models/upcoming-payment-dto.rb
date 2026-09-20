@@ -17,33 +17,33 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The upcoming payment parameters.
+  # One charge the portal is going to be billed for at the start of the next period.
   class UpcomingPaymentDto < ApiModelBase
-    # The quota ID.
+    # The quota that is going to be charged. When a switch to another quota is scheduled, this is the quota  being switched to, so it can differ from what `GET api/2.0/portal/tariff` reports for today.
     attr_accessor :id
 
-    # The quota name.
+    # The quota's stable key, which is the same identifier the wallet operations use for a service.
     attr_accessor :name
 
-    # The quota title.
+    # The quota name in the portal language, meant to be printed on an invoice preview.
     attr_accessor :title
 
-    # The quota unit of measure.
+    # What `quantity` counts, in the portal language - seats, administrators, gigabytes. It is empty for a quota  that is simply on or off.
     attr_accessor :unit_of_measure
 
-    # The quantity that will be charged (the next quantity if set, otherwise the current quantity).
+    # How much is going to be charged for, which is the quantity scheduled for the next period when one has been  scheduled and today's quantity otherwise.
     attr_accessor :quantity
 
-    # The quota applies to the wallet or not.
+    # Whether the charge is paid out of the portal wallet rather than from the subscription.
     attr_accessor :wallet
 
-    # The due date of the upcoming payment in the portal time zone.
+    # When the charge falls due, in the portal time zone.
     attr_accessor :due_date
 
-    # The amount that will be charged (unit price multiplied by the quantity).
+    # What the charge comes to: the unit price of the quota multiplied by `quantity`. Taxes are not part of it,  and a quota with no price of its own is not listed at all rather than listed with a zero.
     attr_accessor :amount
 
-    # The three-character ISO 4217 currency symbol of the amount.
+    # The currency `amount` is expressed in, as a three-letter ISO 4217 code. It follows the portal's billing  account, so every entry of one answer carries the same code.
     attr_accessor :currency
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -80,7 +80,7 @@ module DocspaceApiSdk
         :'unit_of_measure' => :'String',
         :'quantity' => :'Integer',
         :'wallet' => :'Boolean',
-        :'due_date' => :'Time',
+        :'due_date' => :'ApiDateTime',
         :'amount' => :'Float',
         :'currency' => :'String'
       }
@@ -92,7 +92,6 @@ module DocspaceApiSdk
         :'name',
         :'title',
         :'unit_of_measure',
-        :'due_date',
         :'currency'
       ])
     end

@@ -17,20 +17,20 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The parameters for copying a file.
+  # The parameters of a file copy that may change the format on the way.
   class CopyAsJsonElement < ApiModelBase
-    # The copied file name.
+    # The title of the copy, extension included. That extension decides the format: the same one as the source  copies the content as it is, a different one has it converted first.
     attr_accessor :dest_title
 
     attr_accessor :dest_folder_id
 
-    # Specifies whether to allow creating the copied file of an external extension or not.
+    # Whether the extension of the new title may be one the portal does not edit itself.
     attr_accessor :enable_external_ext
 
-    # The copied file password.
+    # The password that opens the source document, for a file that is protected by one.
     attr_accessor :password
 
-    # Specifies whether to convert the file to form or not.
+    # Whether the copy is to become a PDF form rather than a plain document, which the conversion supports for the  text formats it can read.
     attr_accessor :to_form
 
     # Attribute mapping from ruby-style variable name to JSON key.

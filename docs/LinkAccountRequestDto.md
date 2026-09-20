@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **serialized_profile** | **String** | The third-party profile in the serialized format. | [optional] |
+| **serialized_profile** | **String** | The profile a completed provider authorization produced, in the serialized form the login flow hands back.  Pass that value unchanged; it carries the provider, the third-party account ID and the authorization result,  and a hand-written object is not accepted. | [optional] |
 
 ## Example
 
@@ -12,6 +12,6 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::LinkAccountRequestDto.new(
-  serialized_profile: {"provider":"Google","id":"123456"}
+  serialized_profile: {"provider":"google","id":"123456"}
 )
 ```

@@ -12,6 +12,6 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiErrorResponse.new(
-  error: null
+  error: threadId required
 )
 ```

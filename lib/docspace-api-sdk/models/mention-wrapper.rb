@@ -17,24 +17,24 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The parameters of a user mentioned in a message.
+  # A user the editor may offer: to be mentioned in a comment, or to be picked when protecting a document.
   class MentionWrapper < ApiModelBase
-    # The user information.
+    # The account itself, in the shape the people listings use.
     attr_accessor :user
 
-    # The user email address.
+    # Where a mention notification for this user is delivered.
     attr_accessor :email
 
-    # The user unique identification.
+    # The account id as text, the same value the account object carries; it is what identifies the user in a sharing  request built from this list.
     attr_accessor :id
 
-    # The path to the user's avatar.
+    # An absolute address of the medium-sized avatar. A generated default avatar is reported when the user never  uploaded one, so the field is never empty.
     attr_accessor :image
 
-    # Specifies whether the user has the access to the file where they are mentioned.
+    # Not filled in by the operations that return this list: it always comes back false. Whether a user can already  open the document has to be read from the sharing settings of the file.
     attr_accessor :has_access
 
-    # The user full name.
+    # The name to display, assembled the way the portal is configured to show names.
     attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.

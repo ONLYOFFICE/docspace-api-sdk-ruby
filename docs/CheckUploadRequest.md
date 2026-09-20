@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **files_title** | **Array&lt;String&gt;** | The list of file titles. | [optional] |
+| **files_title** | **Array&lt;String&gt;** | The names to test, extensions included, spelled as they would be sent to the upload. Matching ignores case,  and a name repeated in the list is answered once. | [optional] |
 
 ## Example
 

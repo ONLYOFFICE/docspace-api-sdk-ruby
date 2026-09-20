@@ -18,12 +18,12 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiThreadMessageLike.new(
-  id: null,
-  role: null,
+  id: 22222222-2222-2222-2222-222222222222,
+  role: user,
   content: null,
-  created_at: null,
+  created_at: 2026-01-01T00:00:00.000Z,
   status: null,
-  metadata: null,
-  attachments: null
+  metadata: {},
+  attachments: [55555555-5555-5555-5555-555555555555]
 )
 ```

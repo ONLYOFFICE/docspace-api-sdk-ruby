@@ -31,6 +31,9 @@ module DocspaceApiSdk
     # Whether this model supports extended thinking / chain-of-thought reasoning.
     attr_accessor :reasoning
 
+    # What the model can do with extended thinking, when the provider's catalogue says so (OpenRouter and the ONLYOFFICE route report a per-model `reasoning` object). Copied onto the profile at save time; absent, the widget falls back to the provider's id-based table.
+    attr_accessor :reasoning_support
+
     # Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per `ActionType`.
     attr_accessor :capabilities
 
@@ -41,6 +44,7 @@ module DocspaceApiSdk
         :'name' => :'name',
         :'provider' => :'provider',
         :'reasoning' => :'reasoning',
+        :'reasoning_support' => :'reasoningSupport',
         :'capabilities' => :'capabilities'
       }
     end
@@ -62,6 +66,7 @@ module DocspaceApiSdk
         :'name' => :'String',
         :'provider' => :'AiProviderType',
         :'reasoning' => :'Boolean',
+        :'reasoning_support' => :'AiReasoningSupport',
         :'capabilities' => :'Float'
       }
     end
@@ -108,6 +113,10 @@ module DocspaceApiSdk
 
       if attributes.key?(:'reasoning')
         self.reasoning = attributes[:'reasoning']
+      end
+
+      if attributes.key?(:'reasoning_support')
+        self.reasoning_support = attributes[:'reasoning_support']
       end
 
       if attributes.key?(:'capabilities')
@@ -184,6 +193,7 @@ module DocspaceApiSdk
           name == o.name &&
           provider == o.provider &&
           reasoning == o.reasoning &&
+          reasoning_support == o.reasoning_support &&
           capabilities == o.capabilities
     end
 
@@ -196,7 +206,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, provider, reasoning, capabilities].hash
+      [id, name, provider, reasoning, reasoning_support, capabilities].hash
     end
 
     # Builds the object from hash

@@ -14,8 +14,8 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiPromptBundle.new(
-  version: null,
-  folders: null,
-  prompts: null
+  version: 1,
+  folders: [],
+  prompts: []
 )
 ```

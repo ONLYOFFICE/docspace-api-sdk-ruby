@@ -4,12 +4,12 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **doc_service_url** | **String** | The ONLYOFFICE Docs URL address. |  |
-| **doc_service_url_internal** | **String** | The ONLYOFFICE Docs URL address in the local private network. | [optional] |
-| **doc_service_url_portal** | **String** | The ONLYOFFICE Docs URL address. | [optional] |
-| **doc_service_signature_secret** | **String** | The signature secret of the ONLYOFFICE Docs. | [optional] |
-| **doc_service_signature_header** | **String** | The signature header of the ONLYOFFICE Docs. | [optional] |
-| **doc_service_ssl_verification** | **Boolean** | Specifies if the SSL verification of the ONLYOFFICE Docs is enabled or not. | [optional] |
+| **doc_service_url** | **String** | The public address of the Document Server, the one a browser loads the editor from. An empty value drops the  portal's own setting, so the address configured for the deployment takes over again. A value with no scheme is  stored with `http://` prepended, and an absolute address may not carry a query string. |  |
+| **doc_service_url_internal** | **String** | The address the portal itself uses for its server-to-server calls to the Document Server, for deployments  where that traffic stays inside the private network. Left empty, those calls go to the public address instead. | [optional] |
+| **doc_service_url_portal** | **String** | The address of this portal as the Document Server has to call it back on in order to fetch and save a  document. Set it when the Document Server cannot resolve the portal by its public name; left empty, the  portal's own resolved address is used. | [optional] |
+| **doc_service_signature_secret** | **String** | The shared secret that requests between the portal and the Document Server are signed with; it has to be the  same value the Document Server itself is configured with, otherwise the verification of the new settings  fails. It is write-only: the document service location is reported without it. | [optional] |
+| **doc_service_signature_header** | **String** | The name of the HTTP header the signature travels in, which has to match the header the Document Server  expects. A secret without a header is not a usable pair and is rejected. | [optional] |
+| **doc_service_ssl_verification** | **Boolean** | Whether the portal validates the TLS certificate of the Document Server. With verification on, a self-signed  certificate breaks the connection; with it off, any certificate is accepted, which is meant for test  deployments only. Omitting the field turns verification on. | [optional] |
 
 ## Example
 
@@ -19,7 +19,7 @@ require 'docspace-api-sdk'
 instance = DocspaceApiSdk::CheckDocServiceUrlRequestDto.new(
   doc_service_url: https://documentserver.example.com,
   doc_service_url_internal: https://documentserver-internal.example.com,
-  doc_service_url_portal: https://documentserver-portal.example.com,
+  doc_service_url_portal: https://portal.example.com,
   doc_service_signature_secret: secret-key-123,
   doc_service_signature_header: Authorization,
   doc_service_ssl_verification: true

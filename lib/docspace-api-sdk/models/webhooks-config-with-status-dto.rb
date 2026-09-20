@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The webhook configuration with its status.
+  # A webhook subscription together with how its last delivery ended.
   class WebhooksConfigWithStatusDto < ApiModelBase
-    # The webhook configuration.
+    # The subscription itself. Despite the plural name it is one subscription, not a list.
     attr_accessor :configs
 
-    # The webhook status.
+    # The HTTP status code the target answered on the last attempt. `0` means nothing has been delivered yet,  which is not the same as a failure.
     attr_accessor :status
 
     # Attribute mapping from ruby-style variable name to JSON key.

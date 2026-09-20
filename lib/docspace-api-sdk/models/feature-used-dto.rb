@@ -17,11 +17,11 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The used space parameters of the tenant quota feature.
+  # How much of one quota feature the portal has already consumed.
   class FeatureUsedDto < ApiModelBase
     attr_accessor :value
 
-    # The used space title.
+    # The same figure as a sentence in the portal language, ready to print. It is empty when this build ships no  wording for the feature.
     attr_accessor :title
 
     # Attribute mapping from ruby-style variable name to JSON key.

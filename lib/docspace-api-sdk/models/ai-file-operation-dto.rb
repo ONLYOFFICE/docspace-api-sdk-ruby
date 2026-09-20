@@ -17,36 +17,36 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The file operation information.
+  # One background file operation of the caller, as it stood when the answer was built.
   class AiFileOperationDto < ApiModelBase
-    # The file operation ID.
+    # The identifier of the operation, the one to pass to `PUT api/2.0/files/fileops/terminate/{id}` to stop it.  Operations belong to the account that started them, so an identifier of somebody else is never listed here.
     attr_accessor :id
 
-    # The file operation type.
+    # What the operation does with the entries, which also decides what else is reported: only a download fills  `url`, and a deletion leaves `files` and `folders` empty.
     attr_accessor :operation
 
-    # The file operation progress in percentage.
+    # How far the operation has come, from 0 to 100. Reaching 100 only means it stopped; whether it did what it was  asked for is told by `error`.
     attr_accessor :progress
 
-    # The file operation error message.
+    # The reason the operation could not finish its work, in the language of the request. Empty when nothing went  wrong, which is the only way to tell a successful operation from a failed one.
     attr_accessor :error
 
-    # The file operation processing status.
+    # How many entries the operation has handled so far, written as a decimal number in a string. It counts items,  not percent, and stays behind `progress` on operations that walk into subfolders.
     attr_accessor :processed
 
-    # Specifies if the file operation is finished or not.
+    # Whether the operation has stopped running. A finished operation is reported once and then dropped, so the next  read of the operation list no longer contains it.
     attr_accessor :finished
 
-    # The file operation URL.
+    # The address the packed archive can be downloaded from once a bulk download has finished. Empty for every other  kind of operation.
     attr_accessor :url
 
-    # The list of files of the file operation.
+    # The files the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion, which reports no entries at all.
     attr_accessor :files
 
-    # The list of folders of the file operation.
+    # The folders the operation produced or moved, in the order it wrote them down. Empty while nothing has been  written yet and for a deletion.
     attr_accessor :folders
 
-    # The status of the distributed task related to the file operation.
+    # The state of the background task behind the operation, which tells a task that was cancelled or that crashed  from one that ran to its end.
     attr_accessor :status
 
     class EnumAttributeValidator

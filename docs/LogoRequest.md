@@ -4,11 +4,11 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **tmp_file** | **String** | The path to the temporary image file. |  |
-| **x** | **Integer** | The X coordinate of the rectangle starting point. | [optional] |
-| **y** | **Integer** | The Y coordinate of the rectangle starting point. | [optional] |
-| **width** | **Integer** | The rectangle width. | [optional] |
-| **height** | **Integer** | The rectangle height. | [optional] |
+| **tmp_file** | **String** | The picture to cut the logo out of, named by the path that `POST api/2.0/files/logos` returned for it. The  path may be used once and only by the account that uploaded it. |  |
+| **x** | **Integer** | The left edge of the rectangle cut out of the uploaded picture, counted in pixels from its left side. The  picture itself was already scaled down to fit 1280 by 1280 pixels when it was uploaded. | [optional] |
+| **y** | **Integer** | The top edge of the rectangle cut out of the uploaded picture, counted in pixels from its top. | [optional] |
+| **width** | **Integer** | How wide a piece of the uploaded picture to cut out, in pixels. It has to be sent together with the height,  and the portal builds the four logo sizes out of the piece. | [optional] |
+| **height** | **Integer** | How tall a piece of the uploaded picture to cut out, in pixels. It has to be sent together with the width. | [optional] |
 
 ## Example
 
@@ -16,10 +16,10 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::LogoRequest.new(
-  tmp_file: /tmp/logo.png,
+  tmp_file: /temp/logo_a1b2c3.png,
   x: 0,
   y: 0,
-  width: 100,
-  height: 100
+  width: 300,
+  height: 300
 )
 ```

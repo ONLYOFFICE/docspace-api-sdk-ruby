@@ -19,10 +19,10 @@ require 'time'
 module DocspaceApiSdk
   # The request parameters for updating a user email.
   class ChangeEmailRequest < ApiModelBase
-    # The user email address.
+    # The new address in plain text, up to 255 characters. It is stored in lowercase, and one of this field and  `encEmail` is required.
     attr_accessor :email
 
-    # The user encrypted email address.
+    # The new address in the encrypted form the confirmation link carries. Pass the value from the link unchanged;  it is used only when `email` is empty.
     attr_accessor :enc_email
 
     # Attribute mapping from ruby-style variable name to JSON key.

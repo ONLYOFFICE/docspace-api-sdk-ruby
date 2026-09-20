@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The configuration settings to connect the special add-ons.
+  # Which editor add-ons the portal connects. It currently connects none.
   class PluginsConfig < ApiModelBase
     # The array of absolute URLs to the plugin configuration files.
     attr_accessor :plugins_data

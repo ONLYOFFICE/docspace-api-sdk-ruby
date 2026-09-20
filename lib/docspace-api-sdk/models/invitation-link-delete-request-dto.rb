@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for deleting an invitation link.
+  # Which invitation link is withdrawn.
   class InvitationLinkDeleteRequestDto < ApiModelBase
-    # The ID of the invitation link.
+    # The link to delete, by the `id` that creating or reading it returned. A link recreated for the same role  afterwards gets a new id, a new URL and a use count starting from zero.
     attr_accessor :id
 
     # Attribute mapping from ruby-style variable name to JSON key.

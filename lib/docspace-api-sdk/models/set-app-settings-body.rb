@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Request body for saving application-specific settings.
+  # The configuration document a portal application keeps.
   class SetAppSettingsBody < ApiModelBase
     attr_accessor :settings
 

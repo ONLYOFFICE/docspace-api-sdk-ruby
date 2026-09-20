@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Request body for toggling an application enabled state.
+  # Whether a portal application is switched on.
   class SetAppEnabledBody < ApiModelBase
-    # Whether the application should be enabled.
+    # Whether the application is available in this portal. Switching it off leaves its settings document stored, so  switching it back on restores the configuration it had; connected clients are told of the new state without a  reload.
     attr_accessor :enabled
 
     # Attribute mapping from ruby-style variable name to JSON key.

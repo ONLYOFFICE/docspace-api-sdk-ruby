@@ -4,14 +4,14 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **access_token** | **String** | Access token | [optional] |
-| **refresh_token** | **String** | Refresh token | [optional] |
-| **expires_in** | **Integer** | Expires in | [optional] |
-| **client_id** | **String** | Client id | [optional] |
-| **client_secret** | **String** | Client secret | [optional] |
-| **redirect_uri** | **String** | Redirect uri | [optional] |
-| **timestamp** | **Time** | Timestamp | [optional] |
-| **is_expired** | **Boolean** | Is expired | [optional][readonly] |
+| **access_token** | **String** | The token sent to the provider with every request made on behalf of the account. | [optional] |
+| **refresh_token** | **String** | The token used to obtain a new access token when the current one expires. A provider that issues no refresh  token leaves it empty, and the account then has to be connected again to keep working. | [optional] |
+| **expires_in** | **Integer** | How long the access token stays usable, in seconds counted from `timestamp`. Zero means the provider did not  say, and the token is then treated as expired. | [optional] |
+| **client_id** | **String** | The OAuth 2.0 client ID of the application the token was issued to. | [optional] |
+| **client_secret** | **String** | The client secret of the application the token was issued to, needed when the token is refreshed. | [optional] |
+| **redirect_uri** | **String** | The redirect URL the authorization code behind this token was obtained with; providers require the same value  again when the token is refreshed. | [optional] |
+| **timestamp** | **Time** | When the token was issued, in UTC. This is the point `expires_in` is counted from. | [optional] |
+| **is_expired** | **Boolean** | Whether the access token can no longer be used and has to be refreshed. It is also true when the provider did  not say how long the token lives. | [optional][readonly] |
 
 ## Example
 

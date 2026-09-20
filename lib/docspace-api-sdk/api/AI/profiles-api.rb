@@ -23,8 +23,8 @@ module DocspaceApiSdk
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Create
-    # Creates an AI provider profile. The name must be unique and the credentials are validated against the provider before the profile is stored; the portal's first profile also takes the `Default` assignment slot.
+    # Create a provider profile
+    # Creates an AI provider profile - the endpoint, credentials and model that a chat round runs on - and returns it. The name has to be unique, the credentials are probed against the live provider before anything is stored, and the portal's first profile also takes the `Default` assignment slot. Two inputs are refused outright: a `baseUrl` pointing at a private network address, and `providerType: external`, which delegates transport to the host application and therefore cannot work for a profile the server manages. On a portal running the AI gateway, profiles are managed centrally and this operation answers 403.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-create/
     # @param ai_create_profile_input [AiCreateProfileInput] 
     # @param [Hash] opts the optional parameters
@@ -34,8 +34,8 @@ module DocspaceApiSdk
       data
     end
 
-    # Create
-    # Creates an AI provider profile. The name must be unique and the credentials are validated against the provider before the profile is stored; the portal's first profile also takes the `Default` assignment slot.
+    # Create a provider profile
+    # Creates an AI provider profile - the endpoint, credentials and model that a chat round runs on - and returns it. The name has to be unique, the credentials are probed against the live provider before anything is stored, and the portal's first profile also takes the `Default` assignment slot. Two inputs are refused outright: a `baseUrl` pointing at a private network address, and `providerType: external`, which delegates transport to the host application and therefore cannot work for a profile the server manages. On a portal running the AI gateway, profiles are managed centrally and this operation answers 403.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-create/
     # @param ai_create_profile_input [AiCreateProfileInput] 
     # @param [Hash] opts the optional parameters
@@ -74,7 +74,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiProfileMutationResult'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::ProfilesApi.ai_profiles_create",
@@ -93,10 +93,10 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Delete
-    # Deletes an AI provider profile and cleans up the assignments pointing at it - the `Default` slot moves to the first remaining profile, the other slots are unbound.
+    # Delete a provider profile
+    # Deletes an AI provider profile and cleans up every assignment pointing at it: the `Default` slot moves to the first remaining profile and the other slots are left unbound. The ID is required and may be sent in the body or as a query parameter. An unknown ID is not reported - the call answers success without deleting anything. Threads already bound to the profile keep the stored reference, so a round on such a thread falls back to whatever the scope resolves to.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-delete/
-    # @param body [String] 
+    # @param body [String] The ID of the profile to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [AiSuccessResponse]
     def ai_profiles_delete(body, opts = {})
@@ -104,10 +104,10 @@ module DocspaceApiSdk
       data
     end
 
-    # Delete
-    # Deletes an AI provider profile and cleans up the assignments pointing at it - the `Default` slot moves to the first remaining profile, the other slots are unbound.
+    # Delete a provider profile
+    # Deletes an AI provider profile and cleans up every assignment pointing at it: the `Default` slot moves to the first remaining profile and the other slots are left unbound. The ID is required and may be sent in the body or as a query parameter. An unknown ID is not reported - the call answers success without deleting anything. Threads already bound to the profile keep the stored reference, so a round on such a thread falls back to whatever the scope resolves to.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-delete/
-    # @param body [String] 
+    # @param body [String] The ID of the profile to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
     def ai_profiles_delete_with_http_info(body, opts = {})
@@ -144,7 +144,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::ProfilesApi.ai_profiles_delete",
@@ -163,8 +163,8 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Get by id
-    # Returns one AI provider profile, or an empty result when the identifier is unknown.
+    # Get a provider profile
+    # Returns one AI provider profile by its ID, with its secrets stripped: neither the API key nor the custom headers are ever sent back, on any portal. The ID is required and is read from the query, and an unknown one answers 404. The `baseUrl` in the answer is the one that was stored, not the internal gateway address a round actually dials, so it cannot be used to reach the provider directly. Use `GET api/2.0/ai/profiles/list` to enumerate profiles instead of reading them one by one.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-get-by-id/
     # @param id [String] The AI provider profile identifier.
     # @param [Hash] opts the optional parameters
@@ -174,8 +174,8 @@ module DocspaceApiSdk
       data
     end
 
-    # Get by id
-    # Returns one AI provider profile, or an empty result when the identifier is unknown.
+    # Get a provider profile
+    # Returns one AI provider profile by its ID, with its secrets stripped: neither the API key nor the custom headers are ever sent back, on any portal. The ID is required and is read from the query, and an unknown one answers 404. The `baseUrl` in the answer is the one that was stored, not the internal gateway address a round actually dials, so it cannot be used to reach the provider directly. Use `GET api/2.0/ai/profiles/list` to enumerate profiles instead of reading them one by one.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-get-by-id/
     # @param id [String] The AI provider profile identifier.
     # @param [Hash] opts the optional parameters
@@ -210,7 +210,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiProfilesGetById200Response'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::ProfilesApi.ai_profiles_get_by_id",
@@ -229,8 +229,8 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # List
-    # Lists the portal's AI provider profiles.
+    # List provider profiles
+    # Lists the portal's AI provider profiles with their secrets stripped, the same way the single-profile read does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway's own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round's `profileId` accept.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-list/
     # @param [Hash] opts the optional parameters
     # @return [Array<AiProfile>]
@@ -239,8 +239,8 @@ module DocspaceApiSdk
       data
     end
 
-    # List
-    # Lists the portal's AI provider profiles.
+    # List provider profiles
+    # Lists the portal's AI provider profiles with their secrets stripped, the same way the single-profile read does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway's own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round's `profileId` accept.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-list/
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<AiProfile>, Integer, Hash)>] Array<AiProfile> data, response status code and response headers
@@ -269,7 +269,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'Array<AiProfile>'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::ProfilesApi.ai_profiles_list",
@@ -289,7 +289,7 @@ module DocspaceApiSdk
     end
 
     # List models
-    # Lists the models the given profile's provider offers, as reported by the provider itself.
+    # Lists the models a stored profile's provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider's own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a missing profile or a caller without access keeps the status the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-list-models/
     # @param profile_id [String] The AI provider profile identifier.
     # @param [Hash] opts the optional parameters
@@ -300,7 +300,7 @@ module DocspaceApiSdk
     end
 
     # List models
-    # Lists the models the given profile's provider offers, as reported by the provider itself.
+    # Lists the models a stored profile's provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider's own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a missing profile or a caller without access keeps the status the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-list-models/
     # @param profile_id [String] The AI provider profile identifier.
     # @param [Hash] opts the optional parameters
@@ -335,7 +335,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'Array<AiModel>'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::ProfilesApi.ai_profiles_list_models",
@@ -355,7 +355,7 @@ module DocspaceApiSdk
     end
 
     # List provider models
-    # Lists the models a provider offers for the supplied endpoint and key, before any profile is created from them.
+    # Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well. For `providerType: onlyoffice` the answer comes from the portal gateway's catalogue, which carries richer capability data than the provider's own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-list-provider-models/
     # @param ai_profiles_list_provider_models_request [AiProfilesListProviderModelsRequest] 
     # @param [Hash] opts the optional parameters
@@ -366,7 +366,7 @@ module DocspaceApiSdk
     end
 
     # List provider models
-    # Lists the models a provider offers for the supplied endpoint and key, before any profile is created from them.
+    # Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well. For `providerType: onlyoffice` the answer comes from the portal gateway's catalogue, which carries richer capability data than the provider's own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-list-provider-models/
     # @param ai_profiles_list_provider_models_request [AiProfilesListProviderModelsRequest] 
     # @param [Hash] opts the optional parameters
@@ -405,7 +405,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'Array<AiModel>'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::ProfilesApi.ai_profiles_list_provider_models",
@@ -424,10 +424,10 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Test connection
-    # Checks a stored profile's credentials against its provider and reports the provider's own error when the call fails. Nothing is written.
+    # Test a profile's provider
+    # Probes a stored profile's credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter. The result is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-test-connection/
-    # @param body [String] 
+    # @param body [String] The ID of the profile to probe, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [AiProfilesTestConnection200Response]
     def ai_profiles_test_connection(body, opts = {})
@@ -435,10 +435,10 @@ module DocspaceApiSdk
       data
     end
 
-    # Test connection
-    # Checks a stored profile's credentials against its provider and reports the provider's own error when the call fails. Nothing is written.
+    # Test a profile's provider
+    # Probes a stored profile's credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter. The result is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-test-connection/
-    # @param body [String] 
+    # @param body [String] The ID of the profile to probe, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiProfilesTestConnection200Response, Integer, Hash)>] AiProfilesTestConnection200Response data, response status code and response headers
     def ai_profiles_test_connection_with_http_info(body, opts = {})
@@ -475,7 +475,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiProfilesTestConnection200Response'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::ProfilesApi.ai_profiles_test_connection",
@@ -494,8 +494,8 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Update
-    # Updates an AI provider profile, re-checking name uniqueness and the provider credentials.
+    # Update a provider profile
+    # Replaces a stored AI provider profile and returns it, re-checking name uniqueness and probing the credentials against the live provider again. The same two inputs are refused as on create - a private-network `baseUrl` and `providerType: external` - and the whole profile is overwritten by the one supplied rather than merged. On a portal running the AI gateway this answers 403, because profiles are managed centrally there. A profile that is bound to an action or an agent keeps those bindings.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-update/
     # @param ai_profile [AiProfile] 
     # @param [Hash] opts the optional parameters
@@ -505,8 +505,8 @@ module DocspaceApiSdk
       data
     end
 
-    # Update
-    # Updates an AI provider profile, re-checking name uniqueness and the provider credentials.
+    # Update a provider profile
+    # Replaces a stored AI provider profile and returns it, re-checking name uniqueness and probing the credentials against the live provider again. The same two inputs are refused as on create - a private-network `baseUrl` and `providerType: external` - and the whole profile is overwritten by the one supplied rather than merged. On a portal running the AI gateway this answers 403, because profiles are managed centrally there. A profile that is bound to an action or an agent keeps those bindings.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-update/
     # @param ai_profile [AiProfile] 
     # @param [Hash] opts the optional parameters
@@ -545,7 +545,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiProfileMutationResult'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::ProfilesApi.ai_profiles_update",

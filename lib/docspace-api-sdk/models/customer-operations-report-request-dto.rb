@@ -17,36 +17,36 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for generating a report on client operations.
+  # The filters that select which wallet movements are reported: the services, the period, the participant, the  direction and the outcome of the movement, and the ordering.
   class CustomerOperationsReportRequestDto < ApiModelBase
-    # The service name list. A single string is also accepted for backward compatibility.
+    # The wallet services whose movements are kept, named the way the billing catalogue names them - `backup`,  `ai-tools`, `ai-search`, `disk-storage`, `docscloud`. Take the values from the `serviceName` field of  `GET api/2.0/portal/payment/walletservices`; the match ignores case, a name this installation does not sell  fails the call with 404, and an omitted list keeps every service. A bare string is accepted in place of an  array for backward compatibility.
     attr_accessor :service_name
 
-    # The report start date.
+    # The beginning of the reported period, inclusive. Read in the portal time zone rather than in UTC, so a  movement at the edge of the period falls where the portal sees it; defaults to the portal creation date.
     attr_accessor :start_date
 
-    # The report end date.
+    # The end of the reported period, inclusive. Read in the portal time zone rather than in UTC, and defaults to  the moment the call is made.
     attr_accessor :end_date
 
-    # The participant name.
+    # The participant whose movements are kept - the account the accounting service records as the cause of a  movement. A movement caused by a portal user carries that user ID here, and one caused by the portal itself  carries the customer name; surrounding whitespace is trimmed, and an omitted value keeps every participant.
     attr_accessor :participant_name
 
-    # Specifies whether to include credit operations in the report.
+    # Whether movements that add money to the wallet - top-ups, refunds and corrections in the portal's favour -  are kept. Both directions are reported when neither this nor `debit` is given.
     attr_accessor :credit
 
-    # Specifies whether to include debit operations in the report.
+    # Whether movements that take money out of the wallet - the charges of the wallet services - are kept. Both  directions are reported when neither this nor `credit` is given.
     attr_accessor :debit
 
-    # The operation type to filter by.
+    # The kind of movement to keep, which says what caused the money to move rather than how it ended. Every kind  is reported when it is omitted.
     attr_accessor :type
 
-    # The operation status to filter by.
+    # The outcome to keep. A movement that is still being settled is reported as pending and may change later,  while the other outcomes are final; every outcome is reported when this is omitted.
     attr_accessor :status
 
-    # The field to order by.
+    # The name of the field the movements are sorted by, spelled as the accounting service names it, such as  `StartDate` or `ServiceName`. Surrounding whitespace is trimmed, and the accounting service applies its own  ordering when this is omitted.
     attr_accessor :order_by
 
-    # Order direction: Ascending or Descending.
+    # The direction the field named in `orderBy` is sorted in. Newest or largest first is what the accounting  service does by default, so leaving this out sorts the same way as asking for descending explicitly.
     attr_accessor :order_type
 
     class EnumAttributeValidator

@@ -25,19 +25,19 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiAttachment.new(
-  id: null,
-  kind: null,
-  source: null,
-  title: null,
-  content: null,
+  id: 55555555-5555-5555-5555-555555555555,
+  kind: file,
+  source: user,
+  title: contract.docx,
+  content: This agreement is made on 1 January 2026 between …,
   base64: null,
-  path: null,
-  type: null,
-  message_id: null,
-  thread_id: null,
-  entity_id: null,
-  created_at: null,
-  can_analyze: null,
-  form_keys: null
+  path: file_1234,
+  type: 7,
+  message_id: 22222222-2222-2222-2222-222222222222,
+  thread_id: 11111111-1111-1111-1111-111111111111,
+  entity_id: 1234,
+  created_at: 1767225600000,
+  can_analyze: false,
+  form_keys: []
 )
 ```

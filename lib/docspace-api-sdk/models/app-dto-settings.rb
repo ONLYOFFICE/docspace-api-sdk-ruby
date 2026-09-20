@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Application-specific settings as a JSON document, or null if no overrides exist.
+  # The settings document saved for this portal, stored and returned verbatim - the portal never looks inside  it, and only the application knows its shape. It is empty while the portal has saved none, which means the  application falls back to its own defaults, and it also survives the application being switched off.
   module AppDtoSettings
     class << self
       # List of class defined in oneOf (OpenAPI v3)

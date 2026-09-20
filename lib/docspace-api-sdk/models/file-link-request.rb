@@ -17,30 +17,30 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The external link request parameters.
+  # The settings of an external link to a file.
   class FileLinkRequest < ApiModelBase
-    # The external link ID.
+    # The link to rewrite, as reported by `GET api/2.0/files/file/{id}/links`. An identifier that is not yet in use,  the empty one included, creates a link instead.
     attr_accessor :link_id
 
-    # The link sharing rights.
+    # The rights the link grants to whoever follows it. The value that denies everything revokes the link.
     attr_accessor :access
 
-    # The link expiration date.
+    # The moment the link stops working, read in the time zone of the portal. A date more than a few years ahead is  rejected as an invalid request; left out, the link does not expire on its own.
     attr_accessor :expiration_date
 
-    # The link name.
+    # The name the link carries in the sharing list of the file, for the people who manage it; it is not shown to  whoever follows the link.
     attr_accessor :title
 
-    # The link scope, whether it is internal or not.
+    # Who may follow the link: `true` admits only accounts that are signed in to the portal, `false` admits anybody  who has the address.
     attr_accessor :internal
 
-    # Specifies whether the file link is primary or not.
+    # Whether this link becomes the primary link of the file - the one the Copy link action of a client hands out.  A file has one primary link at a time.
     attr_accessor :primary
 
-    # Specifies whether to deny downloading the file or not.
+    # What a visitor may do with the content: `true` leaves them with viewing in the browser, `false` lets them  download and print it as their rights allow.
     attr_accessor :deny_download
 
-    # Password for access via link.
+    # The secret a visitor has to type before the file opens; left out, the link opens without one.
     attr_accessor :password
 
     class EnumAttributeValidator
@@ -94,7 +94,7 @@ module DocspaceApiSdk
       {
         :'link_id' => :'String',
         :'access' => :'FileShare',
-        :'expiration_date' => :'Time',
+        :'expiration_date' => :'ApiDateTime',
         :'title' => :'String',
         :'internal' => :'Boolean',
         :'primary' => :'Boolean',
@@ -106,7 +106,6 @@ module DocspaceApiSdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'expiration_date',
         :'title',
         :'password'
       ])

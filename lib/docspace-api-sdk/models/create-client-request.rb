@@ -19,43 +19,41 @@ require 'time'
 module DocspaceApiSdk
   # Client creation request containing client details
   class CreateClientRequest < ApiModelBase
-    # The client name.
+    # The display name shown to the user on the consent screen. It has to be between 3 and 256 characters long.
     attr_accessor :name
 
-    # The description of the client
+    # The free-text description shown next to the name on the consent screen, at most 255 characters.
     attr_accessor :description
 
-    # The logo of the client in base64 format
+    # The client logo as a data URI carrying base64 image data, shown on the consent screen. Only png, jpeg, jpg and svg+xml are accepted, the whole string may not exceed 2000000 characters and the decoded image may not exceed 256000 bytes.
     attr_accessor :logo
 
-    # The scopes for the client
+    # The permissions the client may ask for, named as they appear in the tenant scope catalogue - for example files:read, rooms:write or openid. A client cannot request a scope that is not listed here.
     attr_accessor :scopes
 
-    attr_accessor :public
-
-    # Indicates whether PKCE is allowed for the client
+    # Whether the client may use PKCE. Turning it on lets the client authenticate with the none method and prove itself with a code verifier instead of sending a secret, which is what a client that cannot keep a secret needs.
     attr_accessor :allow_pkce
 
-    # Indicates if the client is public
-    attr_accessor :is_public
-
-    # The website URL of the client
+    # The URL of the client home page, offered to the user before they consent. The value has to be an http or https URL.
     attr_accessor :website_url
 
-    # The terms URL of the client
+    # The URL of the client terms of service, linked from the consent screen. The value has to be an http or https URL.
     attr_accessor :terms_url
 
-    # The policy URL of the client
+    # The URL of the client privacy policy, linked from the consent screen. The value has to be an http or https URL.
     attr_accessor :policy_url
 
-    # The redirect URIs for the client
+    # The URIs an authorization code may be delivered to. An authorization request naming any other URI is refused, and the set holds between 1 and 12 addresses.
     attr_accessor :redirect_uris
 
-    # The allowed origins for the client
+    # The web origins allowed to call the portal on behalf of this client, used for the CORS check. The set holds between 1 and 12 addresses.
     attr_accessor :allowed_origins
 
-    # The logout redirect URI for the client
+    # The single URI the user may be sent back to once they have logged out. The value has to be an http or https URL.
     attr_accessor :logout_redirect_uri
+
+    # Whether the client is offered to third-party tenants rather than only to the tenant that registers it.
+    attr_accessor :is_public
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -64,15 +62,14 @@ module DocspaceApiSdk
         :'description' => :'description',
         :'logo' => :'logo',
         :'scopes' => :'scopes',
-        :'public' => :'public',
         :'allow_pkce' => :'allow_pkce',
-        :'is_public' => :'is_public',
         :'website_url' => :'website_url',
         :'terms_url' => :'terms_url',
         :'policy_url' => :'policy_url',
         :'redirect_uris' => :'redirect_uris',
         :'allowed_origins' => :'allowed_origins',
-        :'logout_redirect_uri' => :'logout_redirect_uri'
+        :'logout_redirect_uri' => :'logout_redirect_uri',
+        :'is_public' => :'is_public'
       }
     end
 
@@ -93,15 +90,14 @@ module DocspaceApiSdk
         :'description' => :'String',
         :'logo' => :'String',
         :'scopes' => :'Array<String>',
-        :'public' => :'Boolean',
         :'allow_pkce' => :'Boolean',
-        :'is_public' => :'Boolean',
         :'website_url' => :'String',
         :'terms_url' => :'String',
         :'policy_url' => :'String',
         :'redirect_uris' => :'Array<String>',
         :'allowed_origins' => :'Array<String>',
-        :'logout_redirect_uri' => :'String'
+        :'logout_redirect_uri' => :'String',
+        :'is_public' => :'Boolean'
       }
     end
 
@@ -129,6 +125,8 @@ module DocspaceApiSdk
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      else
+        self.name = nil
       end
 
       if attributes.key?(:'description')
@@ -137,36 +135,38 @@ module DocspaceApiSdk
 
       if attributes.key?(:'logo')
         self.logo = attributes[:'logo']
+      else
+        self.logo = nil
       end
 
       if attributes.key?(:'scopes')
         if (value = attributes[:'scopes']).is_a?(Array)
           self.scopes = value
         end
-      end
-
-      if attributes.key?(:'public')
-        self.public = attributes[:'public']
+      else
+        self.scopes = nil
       end
 
       if attributes.key?(:'allow_pkce')
         self.allow_pkce = attributes[:'allow_pkce']
       end
 
-      if attributes.key?(:'is_public')
-        self.is_public = attributes[:'is_public']
-      end
-
       if attributes.key?(:'website_url')
         self.website_url = attributes[:'website_url']
+      else
+        self.website_url = nil
       end
 
       if attributes.key?(:'terms_url')
         self.terms_url = attributes[:'terms_url']
+      else
+        self.terms_url = nil
       end
 
       if attributes.key?(:'policy_url')
         self.policy_url = attributes[:'policy_url']
+      else
+        self.policy_url = nil
       end
 
       if attributes.key?(:'redirect_uris')
@@ -187,6 +187,12 @@ module DocspaceApiSdk
 
       if attributes.key?(:'logout_redirect_uri')
         self.logout_redirect_uri = attributes[:'logout_redirect_uri']
+      else
+        self.logout_redirect_uri = nil
+      end
+
+      if attributes.key?(:'is_public')
+        self.is_public = attributes[:'is_public']
       end
     end
 
@@ -195,11 +201,15 @@ module DocspaceApiSdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@name.nil? && @name.to_s.length > 256
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
+      end
+
+      if @name.to_s.length > 256
         invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 256.')
       end
 
-      if !@name.nil? && @name.to_s.length < 3
+      if @name.to_s.length < 3
         invalid_properties.push('invalid value for "name", the character length must be greater than or equal to 3.')
       end
 
@@ -211,43 +221,63 @@ module DocspaceApiSdk
         invalid_properties.push('invalid value for "description", the character length must be greater than or equal to 0.')
       end
 
-      if !@logo.nil? && @logo.to_s.length < 1
+      if @logo.nil?
+        invalid_properties.push('invalid value for "logo", logo cannot be nil.')
+      end
+
+      if @logo.to_s.length < 1
         invalid_properties.push('invalid value for "logo", the character length must be greater than or equal to 1.')
       end
 
       pattern = Regexp.new(/^data:image\/(?:png|jpeg|jpg|svg\+xml);base64,.*.{1,}/)
-      if !@logo.nil? && @logo !~ pattern
+      if @logo !~ pattern
         invalid_properties.push("invalid value for \"logo\", must conform to the pattern #{pattern}.")
       end
 
-      if !@scopes.nil? && @scopes.length < 1
+      if @scopes.nil?
+        invalid_properties.push('invalid value for "scopes", scopes cannot be nil.')
+      end
+
+      if @scopes.length < 1
         invalid_properties.push('invalid value for "scopes", number of items must be greater than or equal to 1.')
       end
 
-      if !@website_url.nil? && @website_url.to_s.length < 1
+      if @website_url.nil?
+        invalid_properties.push('invalid value for "website_url", website_url cannot be nil.')
+      end
+
+      if @website_url.to_s.length < 1
         invalid_properties.push('invalid value for "website_url", the character length must be greater than or equal to 1.')
       end
 
       pattern = Regexp.new(/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/)
-      if !@website_url.nil? && @website_url !~ pattern
+      if @website_url !~ pattern
         invalid_properties.push("invalid value for \"website_url\", must conform to the pattern #{pattern}.")
       end
 
-      if !@terms_url.nil? && @terms_url.to_s.length < 1
+      if @terms_url.nil?
+        invalid_properties.push('invalid value for "terms_url", terms_url cannot be nil.')
+      end
+
+      if @terms_url.to_s.length < 1
         invalid_properties.push('invalid value for "terms_url", the character length must be greater than or equal to 1.')
       end
 
       pattern = Regexp.new(/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/)
-      if !@terms_url.nil? && @terms_url !~ pattern
+      if @terms_url !~ pattern
         invalid_properties.push("invalid value for \"terms_url\", must conform to the pattern #{pattern}.")
       end
 
-      if !@policy_url.nil? && @policy_url.to_s.length < 1
+      if @policy_url.nil?
+        invalid_properties.push('invalid value for "policy_url", policy_url cannot be nil.')
+      end
+
+      if @policy_url.to_s.length < 1
         invalid_properties.push('invalid value for "policy_url", the character length must be greater than or equal to 1.')
       end
 
       pattern = Regexp.new(/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/)
-      if !@policy_url.nil? && @policy_url !~ pattern
+      if @policy_url !~ pattern
         invalid_properties.push("invalid value for \"policy_url\", must conform to the pattern #{pattern}.")
       end
 
@@ -275,12 +305,16 @@ module DocspaceApiSdk
         invalid_properties.push('invalid value for "allowed_origins", number of items must be greater than or equal to 1.')
       end
 
-      if !@logout_redirect_uri.nil? && @logout_redirect_uri.to_s.length < 1
+      if @logout_redirect_uri.nil?
+        invalid_properties.push('invalid value for "logout_redirect_uri", logout_redirect_uri cannot be nil.')
+      end
+
+      if @logout_redirect_uri.to_s.length < 1
         invalid_properties.push('invalid value for "logout_redirect_uri", the character length must be greater than or equal to 1.')
       end
 
       pattern = Regexp.new(/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/)
-      if !@logout_redirect_uri.nil? && @logout_redirect_uri !~ pattern
+      if @logout_redirect_uri !~ pattern
         invalid_properties.push("invalid value for \"logout_redirect_uri\", must conform to the pattern #{pattern}.")
       end
 
@@ -291,27 +325,34 @@ module DocspaceApiSdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if !@name.nil? && @name.to_s.length > 256
-      return false if !@name.nil? && @name.to_s.length < 3
+      return false if @name.nil?
+      return false if @name.to_s.length > 256
+      return false if @name.to_s.length < 3
       return false if !@description.nil? && @description.to_s.length > 255
       return false if !@description.nil? && @description.to_s.length < 0
-      return false if !@logo.nil? && @logo.to_s.length < 1
-      return false if !@logo.nil? && @logo !~ Regexp.new(/^data:image\/(?:png|jpeg|jpg|svg\+xml);base64,.*.{1,}/)
-      return false if !@scopes.nil? && @scopes.length < 1
-      return false if !@website_url.nil? && @website_url.to_s.length < 1
-      return false if !@website_url.nil? && @website_url !~ Regexp.new(/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/)
-      return false if !@terms_url.nil? && @terms_url.to_s.length < 1
-      return false if !@terms_url.nil? && @terms_url !~ Regexp.new(/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/)
-      return false if !@policy_url.nil? && @policy_url.to_s.length < 1
-      return false if !@policy_url.nil? && @policy_url !~ Regexp.new(/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/)
+      return false if @logo.nil?
+      return false if @logo.to_s.length < 1
+      return false if @logo !~ Regexp.new(/^data:image\/(?:png|jpeg|jpg|svg\+xml);base64,.*.{1,}/)
+      return false if @scopes.nil?
+      return false if @scopes.length < 1
+      return false if @website_url.nil?
+      return false if @website_url.to_s.length < 1
+      return false if @website_url !~ Regexp.new(/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/)
+      return false if @terms_url.nil?
+      return false if @terms_url.to_s.length < 1
+      return false if @terms_url !~ Regexp.new(/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/)
+      return false if @policy_url.nil?
+      return false if @policy_url.to_s.length < 1
+      return false if @policy_url !~ Regexp.new(/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/)
       return false if @redirect_uris.nil?
       return false if @redirect_uris.length > 12
       return false if @redirect_uris.length < 1
       return false if @allowed_origins.nil?
       return false if @allowed_origins.length > 12
       return false if @allowed_origins.length < 1
-      return false if !@logout_redirect_uri.nil? && @logout_redirect_uri.to_s.length < 1
-      return false if !@logout_redirect_uri.nil? && @logout_redirect_uri !~ Regexp.new(/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/)
+      return false if @logout_redirect_uri.nil?
+      return false if @logout_redirect_uri.to_s.length < 1
+      return false if @logout_redirect_uri !~ Regexp.new(/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$|^https?:\/\/(\d{1,3}\.){3}\d{1,3}(:\d+)?(\/[a-zA-Z0-9-._~:\/?#\[\]@!$&'()*+,;=]*)?$/)
       true
     end
 
@@ -505,15 +546,14 @@ module DocspaceApiSdk
           description == o.description &&
           logo == o.logo &&
           scopes == o.scopes &&
-          public == o.public &&
           allow_pkce == o.allow_pkce &&
-          is_public == o.is_public &&
           website_url == o.website_url &&
           terms_url == o.terms_url &&
           policy_url == o.policy_url &&
           redirect_uris == o.redirect_uris &&
           allowed_origins == o.allowed_origins &&
-          logout_redirect_uri == o.logout_redirect_uri
+          logout_redirect_uri == o.logout_redirect_uri &&
+          is_public == o.is_public
     end
 
     # @see the `==` method
@@ -525,7 +565,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, logo, scopes, public, allow_pkce, is_public, website_url, terms_url, policy_url, redirect_uris, allowed_origins, logout_redirect_uri].hash
+      [name, description, logo, scopes, allow_pkce, website_url, terms_url, policy_url, redirect_uris, allowed_origins, logout_redirect_uri, is_public].hash
     end
 
     # Builds the object from hash

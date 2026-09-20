@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The editor tool call state. Used to run the agent flow in the editor.
+  # A generation the editor is expected to run as soon as the document opens, left behind by an AI agent that created  the file but not its content.
   class EditorToolCallStateDto < ApiModelBase
-    # The tool name.
+    # Which generation to run, which also decides the shape of the parameters below.
     attr_accessor :tool_name
 
-    # The tool call parameters.
+    # The arguments of the generation named above.
     attr_accessor :parameters
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -47,7 +47,7 @@ module DocspaceApiSdk
     def self.openapi_types
       {
         :'tool_name' => :'String',
-        :'parameters' => :'Object'
+        :'parameters' => :'EditorToolCallParametersDto'
       }
     end
 

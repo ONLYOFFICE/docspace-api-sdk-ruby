@@ -24,7 +24,7 @@ module DocspaceApiSdk
       @api_client = api_client
     end
     # Generate JWT token
-    # Generates a JWT token for communication between login (client) and identity services.
+    # Issues a short-lived JWT that identifies the calling user to the identity service, the component that stores  the OAuth2 applications of this installation and their consents. Any signed-in user may call it, nothing has  to be prepared first, and the token always describes the caller - it cannot be issued on behalf of somebody  else. The token is signed with the installation's own key and carries the user ID, name and e-mail, the portal  ID and address, whether the caller is an administrator or a guest, and whether the portal's developer tools  setting leaves OAuth2 applications open to ordinary users. It expires five minutes after it was issued and is  meant to be presented to the identity service in the `x-signature` header, not to this API: requests to the  portal are authorized with the token that `POST api/2.0/authentication` returns, and this JWT is not accepted  in its place. The call is read-only and gives the token back as a plain string; ask for a fresh one per  exchange instead of storing it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-jwt-token/
     # @param [Hash] opts the optional parameters
     # @return [StringWrapper]
@@ -34,7 +34,7 @@ module DocspaceApiSdk
     end
 
     # Generate JWT token
-    # Generates a JWT token for communication between login (client) and identity services.
+    # Issues a short-lived JWT that identifies the calling user to the identity service, the component that stores  the OAuth2 applications of this installation and their consents. Any signed-in user may call it, nothing has  to be prepared first, and the token always describes the caller - it cannot be issued on behalf of somebody  else. The token is signed with the installation's own key and carries the user ID, name and e-mail, the portal  ID and address, whether the caller is an administrator or a guest, and whether the portal's developer tools  setting leaves OAuth2 applications open to ordinary users. It expires five minutes after it was issued and is  meant to be presented to the identity service in the `x-signature` header, not to this API: requests to the  portal are authorized with the token that `POST api/2.0/authentication` returns, and this JWT is not accepted  in its place. The call is read-only and gives the token back as a plain string; ask for a fresh one per  exchange instead of storing it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/generate-jwt-token/
     # @param [Hash] opts the optional parameters
     # @return [Array<(StringWrapper, Integer, Hash)>] StringWrapper data, response status code and response headers

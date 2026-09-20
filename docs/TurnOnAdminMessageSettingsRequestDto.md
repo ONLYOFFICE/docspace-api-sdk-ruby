@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **turn_on** | **Boolean** | The global switch for the administrator messaging functionality. | [optional] |
+| **turn_on** | **Boolean** | Whether the form is offered. Switching it off hides the form for everybody and makes the operation that  submits it refuse new messages; letters already sent are untouched. | [optional] |
 
 ## Example
 

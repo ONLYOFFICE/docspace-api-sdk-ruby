@@ -19,25 +19,29 @@ require 'time'
 module DocspaceApiSdk
   # Client update request containing modified client details
   class UpdateClientRequest < ApiModelBase
-    # The name of the client
+    # The display name shown to the user on the consent screen. It has to be between 3 and 256 characters long.
     attr_accessor :name
 
-    # The description of the client
+    # The free-text description shown next to the name on the consent screen, at most 255 characters.
     attr_accessor :description
 
-    # The logo of the client in base64 format
+    # The client logo as a data URI carrying base64 image data, shown on the consent screen. Only png, jpeg, jpg and svg+xml are accepted.
     attr_accessor :logo
 
-    attr_accessor :public
+    # The permissions the client may ask for, named as they appear in the tenant scope catalogue - for example files:read, rooms:write or openid. A client cannot request a scope that is not listed here.
+    attr_accessor :scopes
 
-    # Indicates whether PKCE is allowed for the client
+    # Whether the client may use PKCE. Turning it on lets the client authenticate with the none method and prove itself with a code verifier instead of sending a secret, which is what a client that cannot keep a secret needs.
     attr_accessor :allow_pkce
 
-    # Indicates whether client is accessible by third-party tenants
-    attr_accessor :is_public
-
-    # The allowed origins for the client
+    # The web origins allowed to call the portal on behalf of this client, used for the CORS check. The set holds between 1 and 12 addresses.
     attr_accessor :allowed_origins
+
+    # The URIs an authorization code may be delivered to. An authorization request naming any other URI is refused, and the set holds between 1 and 12 addresses.
+    attr_accessor :redirect_uris
+
+    # Whether the client is offered to third-party tenants rather than only to the tenant that registers it.
+    attr_accessor :is_public
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -45,10 +49,11 @@ module DocspaceApiSdk
         :'name' => :'name',
         :'description' => :'description',
         :'logo' => :'logo',
-        :'public' => :'public',
+        :'scopes' => :'scopes',
         :'allow_pkce' => :'allow_pkce',
-        :'is_public' => :'is_public',
-        :'allowed_origins' => :'allowed_origins'
+        :'allowed_origins' => :'allowed_origins',
+        :'redirect_uris' => :'redirect_uris',
+        :'is_public' => :'is_public'
       }
     end
 
@@ -68,10 +73,11 @@ module DocspaceApiSdk
         :'name' => :'String',
         :'description' => :'String',
         :'logo' => :'String',
-        :'public' => :'Boolean',
+        :'scopes' => :'Array<String>',
         :'allow_pkce' => :'Boolean',
-        :'is_public' => :'Boolean',
-        :'allowed_origins' => :'Array<String>'
+        :'allowed_origins' => :'Array<String>',
+        :'redirect_uris' => :'Array<String>',
+        :'is_public' => :'Boolean'
       }
     end
 
@@ -99,6 +105,8 @@ module DocspaceApiSdk
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      else
+        self.name = nil
       end
 
       if attributes.key?(:'description')
@@ -107,24 +115,40 @@ module DocspaceApiSdk
 
       if attributes.key?(:'logo')
         self.logo = attributes[:'logo']
+      else
+        self.logo = nil
       end
 
-      if attributes.key?(:'public')
-        self.public = attributes[:'public']
+      if attributes.key?(:'scopes')
+        if (value = attributes[:'scopes']).is_a?(Array)
+          self.scopes = value
+        end
+      else
+        self.scopes = nil
       end
 
       if attributes.key?(:'allow_pkce')
         self.allow_pkce = attributes[:'allow_pkce']
       end
 
-      if attributes.key?(:'is_public')
-        self.is_public = attributes[:'is_public']
-      end
-
       if attributes.key?(:'allowed_origins')
         if (value = attributes[:'allowed_origins']).is_a?(Array)
           self.allowed_origins = value
         end
+      else
+        self.allowed_origins = nil
+      end
+
+      if attributes.key?(:'redirect_uris')
+        if (value = attributes[:'redirect_uris']).is_a?(Array)
+          self.redirect_uris = value
+        end
+      else
+        self.redirect_uris = nil
+      end
+
+      if attributes.key?(:'is_public')
+        self.is_public = attributes[:'is_public']
       end
     end
 
@@ -133,8 +157,16 @@ module DocspaceApiSdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@name.nil? && @name.to_s.length < 1
-        invalid_properties.push('invalid value for "name", the character length must be greater than or equal to 1.')
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
+      end
+
+      if @name.to_s.length > 256
+        invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 256.')
+      end
+
+      if @name.to_s.length < 3
+        invalid_properties.push('invalid value for "name", the character length must be greater than or equal to 3.')
       end
 
       if !@description.nil? && @description.to_s.length > 255
@@ -145,21 +177,49 @@ module DocspaceApiSdk
         invalid_properties.push('invalid value for "description", the character length must be greater than or equal to 0.')
       end
 
-      if !@logo.nil? && @logo.to_s.length < 1
+      if @logo.nil?
+        invalid_properties.push('invalid value for "logo", logo cannot be nil.')
+      end
+
+      if @logo.to_s.length < 1
         invalid_properties.push('invalid value for "logo", the character length must be greater than or equal to 1.')
       end
 
       pattern = Regexp.new(/^data:image\/(?:png|jpeg|jpg|svg\+xml);base64,.*.{1,}/)
-      if !@logo.nil? && @logo !~ pattern
+      if @logo !~ pattern
         invalid_properties.push("invalid value for \"logo\", must conform to the pattern #{pattern}.")
       end
 
-      if !@allowed_origins.nil? && @allowed_origins.length > 12
+      if @scopes.nil?
+        invalid_properties.push('invalid value for "scopes", scopes cannot be nil.')
+      end
+
+      if @scopes.length < 1
+        invalid_properties.push('invalid value for "scopes", number of items must be greater than or equal to 1.')
+      end
+
+      if @allowed_origins.nil?
+        invalid_properties.push('invalid value for "allowed_origins", allowed_origins cannot be nil.')
+      end
+
+      if @allowed_origins.length > 12
         invalid_properties.push('invalid value for "allowed_origins", number of items must be less than or equal to 12.')
       end
 
-      if !@allowed_origins.nil? && @allowed_origins.length < 1
+      if @allowed_origins.length < 1
         invalid_properties.push('invalid value for "allowed_origins", number of items must be greater than or equal to 1.')
+      end
+
+      if @redirect_uris.nil?
+        invalid_properties.push('invalid value for "redirect_uris", redirect_uris cannot be nil.')
+      end
+
+      if @redirect_uris.length > 12
+        invalid_properties.push('invalid value for "redirect_uris", number of items must be less than or equal to 12.')
+      end
+
+      if @redirect_uris.length < 1
+        invalid_properties.push('invalid value for "redirect_uris", number of items must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -169,13 +229,22 @@ module DocspaceApiSdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if !@name.nil? && @name.to_s.length < 1
+      return false if @name.nil?
+      return false if @name.to_s.length > 256
+      return false if @name.to_s.length < 3
       return false if !@description.nil? && @description.to_s.length > 255
       return false if !@description.nil? && @description.to_s.length < 0
-      return false if !@logo.nil? && @logo.to_s.length < 1
-      return false if !@logo.nil? && @logo !~ Regexp.new(/^data:image\/(?:png|jpeg|jpg|svg\+xml);base64,.*.{1,}/)
-      return false if !@allowed_origins.nil? && @allowed_origins.length > 12
-      return false if !@allowed_origins.nil? && @allowed_origins.length < 1
+      return false if @logo.nil?
+      return false if @logo.to_s.length < 1
+      return false if @logo !~ Regexp.new(/^data:image\/(?:png|jpeg|jpg|svg\+xml);base64,.*.{1,}/)
+      return false if @scopes.nil?
+      return false if @scopes.length < 1
+      return false if @allowed_origins.nil?
+      return false if @allowed_origins.length > 12
+      return false if @allowed_origins.length < 1
+      return false if @redirect_uris.nil?
+      return false if @redirect_uris.length > 12
+      return false if @redirect_uris.length < 1
       true
     end
 
@@ -186,8 +255,12 @@ module DocspaceApiSdk
         fail ArgumentError, 'name cannot be nil'
       end
 
-      if name.to_s.length < 1
-        fail ArgumentError, 'invalid value for "name", the character length must be greater than or equal to 1.'
+      if name.to_s.length > 256
+        fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 256.'
+      end
+
+      if name.to_s.length < 3
+        fail ArgumentError, 'invalid value for "name", the character length must be greater than or equal to 3.'
       end
 
       @name = name
@@ -231,6 +304,20 @@ module DocspaceApiSdk
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] scopes Value to be assigned
+    def scopes=(scopes)
+      if scopes.nil?
+        fail ArgumentError, 'scopes cannot be nil'
+      end
+
+      if scopes.length < 1
+        fail ArgumentError, 'invalid value for "scopes", number of items must be greater than or equal to 1.'
+      end
+
+      @scopes = scopes
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] allowed_origins Value to be assigned
     def allowed_origins=(allowed_origins)
       if allowed_origins.nil?
@@ -248,6 +335,24 @@ module DocspaceApiSdk
       @allowed_origins = allowed_origins
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] redirect_uris Value to be assigned
+    def redirect_uris=(redirect_uris)
+      if redirect_uris.nil?
+        fail ArgumentError, 'redirect_uris cannot be nil'
+      end
+
+      if redirect_uris.length > 12
+        fail ArgumentError, 'invalid value for "redirect_uris", number of items must be less than or equal to 12.'
+      end
+
+      if redirect_uris.length < 1
+        fail ArgumentError, 'invalid value for "redirect_uris", number of items must be greater than or equal to 1.'
+      end
+
+      @redirect_uris = redirect_uris
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -256,10 +361,11 @@ module DocspaceApiSdk
           name == o.name &&
           description == o.description &&
           logo == o.logo &&
-          public == o.public &&
+          scopes == o.scopes &&
           allow_pkce == o.allow_pkce &&
-          is_public == o.is_public &&
-          allowed_origins == o.allowed_origins
+          allowed_origins == o.allowed_origins &&
+          redirect_uris == o.redirect_uris &&
+          is_public == o.is_public
     end
 
     # @see the `==` method
@@ -271,7 +377,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, logo, public, allow_pkce, is_public, allowed_origins].hash
+      [name, description, logo, scopes, allow_pkce, allowed_origins, redirect_uris, is_public].hash
     end
 
     # Builds the object from hash

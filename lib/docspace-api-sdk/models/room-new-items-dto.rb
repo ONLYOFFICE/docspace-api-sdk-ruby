@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The room new items information.
+  # The unseen entries of one room inside a day group.
   class RoomNewItemsDto < ApiModelBase
-    # The room file entry.
+    # The room the entries were found in, in its short form: only the identifier, the title, the room type and the  logo are filled in.
     attr_accessor :room
 
-    # The list of file entry items.
+    # The files of that room the caller has not opened yet, the most recently changed first. Reading them here does  not clear the badges; opening the room itself does.
     attr_accessor :items
 
     # Attribute mapping from ruby-style variable name to JSON key.

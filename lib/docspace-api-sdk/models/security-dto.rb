@@ -17,21 +17,21 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The security information.
+  # How access to one portal module is configured: whether it is restricted, and who is let in.
   class SecurityDto < ApiModelBase
-    # The module ID.
+    # The module this entry is about, echoed from the identifier that was asked about. When several identifiers  are asked about at once, entries come back one per identifier and in the order they were sent, so they can  also be matched by position.
     attr_accessor :web_item_id
 
-    # The list of users with the access to the module.
+    # The individual members the rule was stored for. Members the caller is not allowed to see are left out, so  the same module can come back with different lists for different callers and an empty list does not prove  that nobody was granted access.
     attr_accessor :users
 
-    # The list of groups with the access to the module.
+    # The groups the rule was stored for, listed in full - unlike `users`, nothing is filtered out of it.
     attr_accessor :groups
 
-    # Specifies if the security settings are enabled or not.
+    # Whether access to the module is restricted to the subjects listed here. It is `false` for a module nobody  has ever configured, in which case the two lists say nothing about who may open it.
     attr_accessor :enabled
 
-    # Specifies if the module is a subitem or not.
+    # Whether the module hangs under another one rather than standing on its own. A sub-module is never returned  by `GET api/2.0/settings/security/modules`, which lists top-level modules only.
     attr_accessor :is_sub_item
 
     # Attribute mapping from ruby-style variable name to JSON key.

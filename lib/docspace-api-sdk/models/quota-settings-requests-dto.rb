@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for managing the user storage quota configurations.
+  # The default storage limit given to newly created users, rooms or AI agents, and whether it is enforced.
   class QuotaSettingsRequestsDto < ApiModelBase
-    # Specifies whether the storage quota restrictions are enabled.
+    # Whether the limit is enforced at all. While it is false the size is ignored and nothing created afterwards  carries a limit; objects that already have one keep it either way.
     attr_accessor :enable_quota
 
     attr_accessor :default_quota

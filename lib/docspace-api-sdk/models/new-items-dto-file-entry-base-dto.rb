@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The new item parameters.
+  # One day of the entries the caller has not opened yet, the groups running from the most recent day backwards.
   class NewItemsDtoFileEntryBaseDto < ApiModelBase
-    # The date and time when the new item was created.
+    # The day the grouped entries were last changed, written with the offset of the portal time zone. The time part  is the moment of the newest entry of the group.
     attr_accessor :date
 
-    # The list of items.
+    # What changed on that day, the most recent first. Folders are left out of it, so an entry here is always a file  or a room that holds them.
     attr_accessor :items
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -46,7 +46,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'date' => :'Time',
+        :'date' => :'ApiDateTime',
         :'items' => :'Array<FileEntryBaseDto>'
       }
     end
@@ -54,7 +54,6 @@ module DocspaceApiSdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'date',
         :'items'
       ])
     end
@@ -95,6 +94,10 @@ module DocspaceApiSdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @date.nil?
+        invalid_properties.push('invalid value for "date", date cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -102,7 +105,18 @@ module DocspaceApiSdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @date.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] date Value to be assigned
+    def date=(date)
+      if date.nil?
+        fail ArgumentError, 'date cannot be nil'
+      end
+
+      @date = date
     end
 
     # Checks equality by comparing each attribute.

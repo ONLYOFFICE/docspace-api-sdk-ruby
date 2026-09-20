@@ -16,10 +16,10 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiWebSearchConfig.new(
-  provider: null,
-  key: null,
-  base_url: null,
-  is_cloud_provider: null,
-  headers: null
+  provider: exa,
+  key: your-web-search-api-key,
+  base_url: https://api.exa.ai,
+  is_cloud_provider: true,
+  headers: {}
 )
 ```

@@ -4,10 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **file_key** | **String** | The unique document identifier used by the service to get a link to the file. | [optional] |
-| **instance_id** | **String** | The unique system identifier. | [optional] |
-| **room_id** | **String** | Room ID | [optional] |
-| **can_edit_room** | **Boolean** | Specifies if the room can be edited out or not. | [optional] |
+| **file_key** | **String** | The id of the document inside the portal named below. | [optional] |
+| **instance_id** | **String** | The portal the document lives in. A reference whose value is not this portal cannot be resolved by the file  key and falls back to the path or the link. | [optional] |
+| **room_id** | **String** | The room the document lies in. It is filled in only for a document opened in a virtual data room, and stays  empty everywhere else. | [optional] |
+| **can_edit_room** | **Boolean** | Whether the caller may manage the room named above; it is only meaningful together with it. | [optional] |
 
 ## Example
 
@@ -15,9 +15,9 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::FileReferenceData.new(
-  file_key: doc_2026_02_001,
-  instance_id: 00000000-0000-0000-0000-000000000000,
-  room_id: 1,
+  file_key: 512,
+  instance_id: 1,
+  room_id: 42,
   can_edit_room: true
 )
 ```

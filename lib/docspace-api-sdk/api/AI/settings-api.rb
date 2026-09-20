@@ -24,7 +24,7 @@ module DocspaceApiSdk
       @api_client = api_client
     end
     # Get AI settings
-    # Reports the portal's combined AI configuration and readiness.
+    # Reports the portal's AI configuration and whether AI is usable at all, which is the first call a client makes before offering any AI feature. It takes no parameters and is proxied unchanged to the DocSpace AI service, so the answer is that service's settings payload. Among other things it says whether the portal runs on the central AI gateway, which decides whether provider profiles can be edited here at all. This is a read-only operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get/
     # @param [Hash] opts the optional parameters
     # @return [AiAiSettingsWrapper]
@@ -34,7 +34,7 @@ module DocspaceApiSdk
     end
 
     # Get AI settings
-    # Reports the portal's combined AI configuration and readiness.
+    # Reports the portal's AI configuration and whether AI is usable at all, which is the first call a client makes before offering any AI feature. It takes no parameters and is proxied unchanged to the DocSpace AI service, so the answer is that service's settings payload. Among other things it says whether the portal runs on the central AI gateway, which decides whether provider profiles can be edited here at all. This is a read-only operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get/
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiAiSettingsWrapper, Integer, Hash)>] AiAiSettingsWrapper data, response status code and response headers
@@ -63,7 +63,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiAiSettingsWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::SettingsApi.ai_settings_get",
@@ -83,7 +83,7 @@ module DocspaceApiSdk
     end
 
     # Get user AI settings
-    # Returns the current user's AI settings.
+    # Returns the AI settings of the calling user, as opposed to the portal-wide ones. It takes no parameters - the user is the authenticated caller, and there is no way to read somebody else's settings - and is proxied unchanged to the DocSpace AI service. Use `GET api/2.0/ai/config` for the portal-wide configuration. This is a read-only operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-user/
     # @param [Hash] opts the optional parameters
     # @return [AiAiUserSettingsWrapper]
@@ -93,7 +93,7 @@ module DocspaceApiSdk
     end
 
     # Get user AI settings
-    # Returns the current user's AI settings.
+    # Returns the AI settings of the calling user, as opposed to the portal-wide ones. It takes no parameters - the user is the authenticated caller, and there is no way to read somebody else's settings - and is proxied unchanged to the DocSpace AI service. Use `GET api/2.0/ai/config` for the portal-wide configuration. This is a read-only operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-user/
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiAiUserSettingsWrapper, Integer, Hash)>] AiAiUserSettingsWrapper data, response status code and response headers
@@ -122,7 +122,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiAiUserSettingsWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::SettingsApi.ai_settings_get_user",
@@ -142,7 +142,7 @@ module DocspaceApiSdk
     end
 
     # Get vectorization settings
-    # Returns the portal's vectorization settings.
+    # Returns the portal's vectorization settings - the embedding provider and the options used when portal content is indexed for retrieval. It takes no parameters and is proxied unchanged to the DocSpace AI service. Vectorization is a portal-wide setting, so there is no room-scoped form of it. Change it with `PUT api/2.0/ai/config/vectorization`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-vectorization/
     # @param [Hash] opts the optional parameters
     # @return [AiVectorizationSettingsWrapper]
@@ -152,7 +152,7 @@ module DocspaceApiSdk
     end
 
     # Get vectorization settings
-    # Returns the portal's vectorization settings.
+    # Returns the portal's vectorization settings - the embedding provider and the options used when portal content is indexed for retrieval. It takes no parameters and is proxied unchanged to the DocSpace AI service. Vectorization is a portal-wide setting, so there is no room-scoped form of it. Change it with `PUT api/2.0/ai/config/vectorization`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-vectorization/
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiVectorizationSettingsWrapper, Integer, Hash)>] AiVectorizationSettingsWrapper data, response status code and response headers
@@ -181,7 +181,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiVectorizationSettingsWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::SettingsApi.ai_settings_get_vectorization",
@@ -201,9 +201,9 @@ module DocspaceApiSdk
     end
 
     # Update user AI settings
-    # Updates the current user's AI settings.
+    # Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-user/
-    # @param request_body [Hash<String, Object>] 
+    # @param request_body [Hash<String, Object>] The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
     # @param [Hash] opts the optional parameters
     # @return [AiAiUserSettingsWrapper]
     def ai_settings_set_user(request_body, opts = {})
@@ -212,9 +212,9 @@ module DocspaceApiSdk
     end
 
     # Update user AI settings
-    # Updates the current user's AI settings.
+    # Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-user/
-    # @param request_body [Hash<String, Object>] 
+    # @param request_body [Hash<String, Object>] The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiAiUserSettingsWrapper, Integer, Hash)>] AiAiUserSettingsWrapper data, response status code and response headers
     def ai_settings_set_user_with_http_info(request_body, opts = {})
@@ -251,7 +251,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiAiUserSettingsWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::SettingsApi.ai_settings_set_user",
@@ -271,9 +271,9 @@ module DocspaceApiSdk
     end
 
     # Update vectorization settings
-    # Updates the portal's vectorization settings.
+    # Replaces the portal's vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service's own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with `POST api/2.0/ai/vectorization/tasks`. This is a portal-wide setting and requires the permissions the AI service demands for it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-vectorization/
-    # @param request_body [Hash<String, Object>] 
+    # @param request_body [Hash<String, Object>] The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.
     # @param [Hash] opts the optional parameters
     # @return [AiVectorizationSettingsWrapper]
     def ai_settings_set_vectorization(request_body, opts = {})
@@ -282,9 +282,9 @@ module DocspaceApiSdk
     end
 
     # Update vectorization settings
-    # Updates the portal's vectorization settings.
+    # Replaces the portal's vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service's own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with `POST api/2.0/ai/vectorization/tasks`. This is a portal-wide setting and requires the permissions the AI service demands for it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-vectorization/
-    # @param request_body [Hash<String, Object>] 
+    # @param request_body [Hash<String, Object>] The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiVectorizationSettingsWrapper, Integer, Hash)>] AiVectorizationSettingsWrapper data, response status code and response headers
     def ai_settings_set_vectorization_with_http_info(request_body, opts = {})
@@ -321,7 +321,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiVectorizationSettingsWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::SettingsApi.ai_settings_set_vectorization",

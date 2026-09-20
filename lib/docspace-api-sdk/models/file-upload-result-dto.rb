@@ -19,12 +19,12 @@ require 'time'
 module DocspaceApiSdk
   # The file upload result.
   class FileUploadResultDto < ApiModelBase
-    # Specifies if the upload operation is successful or not.
+    # Whether the upload succeeded. This is the field to check: the operation answers 200 even when it fails, and  reports the reason in `message` instead of in the status code.
     attr_accessor :success
 
     attr_accessor :data
 
-    # The file upload result message.
+    # The reason the upload failed, ready to be shown to a person. It is empty for a successful upload, and it is  the only place where a failure is described, because the status code stays 200.
     attr_accessor :message
 
     # Attribute mapping from ruby-style variable name to JSON key.

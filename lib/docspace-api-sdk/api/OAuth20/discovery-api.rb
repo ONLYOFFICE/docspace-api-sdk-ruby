@@ -23,17 +23,21 @@ module DocspaceApiSdk
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Probe the discovery endpoint
+    # Answers the CORS preflight for the OAuth 2.0 Authorization Server metadata endpoint. The endpoint needs no authentication and reads nothing from the request: it always answers 200 with an empty body, and the CORS headers are added by the surrounding filter chain rather than by this handler. It changes no state, and it does not return the authorization server metadata document - issue a GET against the same path for that.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/handle-options/
     # @param [Hash] opts the optional parameters
-    # @return [Object]
+    # @return [nil]
     def handle_options(opts = {})
-      data, _status_code, _headers = handle_options_with_http_info(opts)
-      data
+      handle_options_with_http_info(opts)
+      nil
     end
 
+    # Probe the discovery endpoint
+    # Answers the CORS preflight for the OAuth 2.0 Authorization Server metadata endpoint. The endpoint needs no authentication and reads nothing from the request: it always answers 200 with an empty body, and the CORS headers are added by the surrounding filter chain rather than by this handler. It changes no state, and it does not return the authorization server metadata document - issue a GET against the same path for that.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/handle-options/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def handle_options_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: OAuth20::DiscoveryApi.handle_options ...'
@@ -46,8 +50,6 @@ module DocspaceApiSdk
 
       # header parameters
       header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['*/*']) unless header_params['Accept']
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -56,10 +58,10 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'Object'
+      return_type = opts[:debug_return_type]
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"OAuth20::DiscoveryApi.handle_options",
