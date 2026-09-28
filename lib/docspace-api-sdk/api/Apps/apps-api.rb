@@ -152,7 +152,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-settings/
     # @param id [String] The application to read, by the identifier `GET api/2.0/apps` reports - one of the feature modules the portal  can turn on, such as `ai-room` or `docs-cloud`. An identifier not declared in the installation configuration  answers 404, which is also how a caller learns that an application does not exist here.
     # @param [Hash] opts the optional parameters
-    # @return [UnknownNullableWrapper]
+    # @return [JsonValueWrapper]
     def get_settings(id, opts = {})
       data, _status_code, _headers = get_settings_with_http_info(id, opts)
       data
@@ -163,7 +163,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-settings/
     # @param id [String] The application to read, by the identifier `GET api/2.0/apps` reports - one of the feature modules the portal  can turn on, such as `ai-room` or `docs-cloud`. An identifier not declared in the installation configuration  answers 404, which is also how a caller learns that an application does not exist here.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(UnknownNullableWrapper, Integer, Hash)>] UnknownNullableWrapper data, response status code and response headers
+    # @return [Array<(JsonValueWrapper, Integer, Hash)>] JsonValueWrapper data, response status code and response headers
     def get_settings_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Apps::AppsApi.get_settings ...'
@@ -190,7 +190,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UnknownNullableWrapper'
+      return_type = opts[:debug_return_type] || 'JsonValueWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']

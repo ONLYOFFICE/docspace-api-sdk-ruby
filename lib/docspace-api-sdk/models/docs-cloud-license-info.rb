@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents the license information of a DocsCloud tenant.
+  # Represents the license information of a Docs Connect tenant.
   class DocsCloudLicenseInfo < ApiModelBase
     # The date and time until which the license is valid.
     attr_accessor :valid

@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents the usage statistics of a DocsCloud tenant.
+  # Represents the usage statistics of a Docs Connect tenant.
   class DocsCloudUsage < ApiModelBase
     # The date and time the usage statistics are counted from.
     attr_accessor :since

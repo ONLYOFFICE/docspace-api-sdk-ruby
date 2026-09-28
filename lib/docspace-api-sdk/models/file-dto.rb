@@ -184,7 +184,7 @@ module DocspaceApiSdk
     # How far the filling of this form has got for the calling account, and whose turn it is now. It is worked out  only inside a virtual data room, where filling runs in steps; everywhere else it stays at the none value.
     attr_accessor :form_filling_status
 
-    # Whether the PDF is a fillable form rather than a plain document. When the stored classification does not say,  the portal opens the file to find out, so the answer is reliable for a PDF and null for anything else.
+    # Whether the file is a PDF, and so offered as a fillable form. It is null for any other file type.
     attr_accessor :is_form
 
     # True while a spreadsheet is in the mode where each person sorts and filters their own view without changing  what the others see, and null rather than false when it is not.

@@ -1,4 +1,4 @@
-# DocspaceApiSdk::UnknownNullableWrapper
+# DocspaceApiSdk::JsonValueWrapper
 
 ## Properties
 
@@ -15,7 +15,7 @@
 ```ruby
 require 'docspace-api-sdk'
 
-instance = DocspaceApiSdk::UnknownNullableWrapper.new(
+instance = DocspaceApiSdk::JsonValueWrapper.new(
   response: null,
   count: null,
   links: null,

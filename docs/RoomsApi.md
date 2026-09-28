@@ -5,65 +5,45 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**add_room_tags**](RoomsApi.md#add_room_tags) | **PUT** /api/2.0/files/rooms/{id}/tags | Attach tags to a room |
-| [**add_room_tags_third_party**](RoomsApi.md#add_room_tags_third_party) | **PUT** /api/2.0/files/rooms/{id}/tags | Attach tags to a room (third-party storage) |
 | [**archive_room**](RoomsApi.md#archive_room) | **PUT** /api/2.0/files/rooms/{id}/archive | Archive a room |
-| [**archive_room_third_party**](RoomsApi.md#archive_room_third_party) | **PUT** /api/2.0/files/rooms/{id}/archive | Archive a room (third-party storage) |
 | [**change_room_cover**](RoomsApi.md#change_room_cover) | **POST** /api/2.0/files/rooms/{id}/cover | Change the room cover |
-| [**change_room_cover_third_party**](RoomsApi.md#change_room_cover_third_party) | **POST** /api/2.0/files/rooms/{id}/cover | Change the room cover (third-party storage) |
 | [**create_room**](RoomsApi.md#create_room) | **POST** /api/2.0/files/rooms | Create a room |
 | [**create_room_from_template**](RoomsApi.md#create_room_from_template) | **POST** /api/2.0/files/rooms/fromtemplate | Create a room from the template |
 | [**create_room_logo**](RoomsApi.md#create_room_logo) | **POST** /api/2.0/files/rooms/{id}/logo | Set the room logo |
-| [**create_room_logo_third_party**](RoomsApi.md#create_room_logo_third_party) | **POST** /api/2.0/files/rooms/{id}/logo | Set the room logo (third-party storage) |
 | [**create_room_tag**](RoomsApi.md#create_room_tag) | **POST** /api/2.0/files/tags | Create a room tag |
 | [**create_room_template**](RoomsApi.md#create_room_template) | **POST** /api/2.0/files/roomtemplate | Create a room template |
 | [**create_room_third_party**](RoomsApi.md#create_room_third_party) | **POST** /api/2.0/files/rooms/thirdparty/{id} | Create a third-party room |
 | [**delete_custom_tags**](RoomsApi.md#delete_custom_tags) | **DELETE** /api/2.0/files/tags | Delete the custom room tags |
 | [**delete_room**](RoomsApi.md#delete_room) | **DELETE** /api/2.0/files/rooms/{id} | Remove a room |
-| [**delete_room_third_party**](RoomsApi.md#delete_room_third_party) | **DELETE** /api/2.0/files/rooms/{id} | Remove a room (third-party storage) |
 | [**delete_room_logo**](RoomsApi.md#delete_room_logo) | **DELETE** /api/2.0/files/rooms/{id}/logo | Remove a room logo |
-| [**delete_room_logo_third_party**](RoomsApi.md#delete_room_logo_third_party) | **DELETE** /api/2.0/files/rooms/{id}/logo | Remove a room logo (third-party storage) |
 | [**delete_room_tags**](RoomsApi.md#delete_room_tags) | **DELETE** /api/2.0/files/rooms/{id}/tags | Detach tags from a room |
-| [**delete_room_tags_third_party**](RoomsApi.md#delete_room_tags_third_party) | **DELETE** /api/2.0/files/rooms/{id}/tags | Detach tags from a room (third-party storage) |
 | [**get_external_db_sync_status**](RoomsApi.md#get_external_db_sync_status) | **GET** /api/2.0/files/rooms/{id}/externaldbsync | Get external DB sync status |
 | [**get_new_room_items**](RoomsApi.md#get_new_room_items) | **GET** /api/2.0/files/rooms/{id}/news | Get new items in a room |
-| [**get_new_room_items_third_party**](RoomsApi.md#get_new_room_items_third_party) | **GET** /api/2.0/files/rooms/{id}/news | Get new items in a room (third-party storage) |
 | [**get_public_settings**](RoomsApi.md#get_public_settings) | **GET** /api/2.0/files/roomtemplate/{id}/public | Get room template public access |
 | [**get_room_covers**](RoomsApi.md#get_room_covers) | **GET** /api/2.0/files/rooms/covers | Get room cover gallery |
 | [**get_room_creating_status**](RoomsApi.md#get_room_creating_status) | **GET** /api/2.0/files/rooms/fromtemplate/status | Get the room creation progress |
 | [**get_room_index_export**](RoomsApi.md#get_room_index_export) | **GET** /api/2.0/files/rooms/indexexport | Get the room index export |
 | [**get_room_info**](RoomsApi.md#get_room_info) | **GET** /api/2.0/files/rooms/{id} | Get room information |
-| [**get_room_info_third_party**](RoomsApi.md#get_room_info_third_party) | **GET** /api/2.0/files/rooms/{id} | Get room information (third-party storage) |
 | [**get_room_links**](RoomsApi.md#get_room_links) | **GET** /api/2.0/files/rooms/{id}/links | Get the room links |
-| [**get_room_links_third_party**](RoomsApi.md#get_room_links_third_party) | **GET** /api/2.0/files/rooms/{id}/links | Get the room links (third-party storage) |
 | [**get_room_security_info**](RoomsApi.md#get_room_security_info) | **GET** /api/2.0/files/rooms/{id}/share | Get the room access rights |
-| [**get_room_security_info_third_party**](RoomsApi.md#get_room_security_info_third_party) | **GET** /api/2.0/files/rooms/{id}/share | Get the room access rights (third-party storage) |
 | [**get_room_tags_info**](RoomsApi.md#get_room_tags_info) | **GET** /api/2.0/files/tags | Get available room tags |
 | [**get_room_template_creating_status**](RoomsApi.md#get_room_template_creating_status) | **GET** /api/2.0/files/roomtemplate/status | Get room template creation status |
 | [**get_rooms_folder**](RoomsApi.md#get_rooms_folder) | **GET** /api/2.0/files/rooms | Get rooms |
 | [**get_rooms_new_items**](RoomsApi.md#get_rooms_new_items) | **GET** /api/2.0/files/rooms/news | Get new items in all rooms |
 | [**get_rooms_primary_external_link**](RoomsApi.md#get_rooms_primary_external_link) | **GET** /api/2.0/files/rooms/{id}/link | Get the room primary external link |
-| [**get_rooms_primary_external_link_third_party**](RoomsApi.md#get_rooms_primary_external_link_third_party) | **GET** /api/2.0/files/rooms/{id}/link | Get the room primary external link (third-party storage) |
 | [**has_tag_links**](RoomsApi.md#has_tag_links) | **GET** /api/2.0/files/tags/{tagName}/haslinks | Check room tag usage |
 | [**pin_room**](RoomsApi.md#pin_room) | **PUT** /api/2.0/files/rooms/{id}/pin | Pin a room |
-| [**pin_room_third_party**](RoomsApi.md#pin_room_third_party) | **PUT** /api/2.0/files/rooms/{id}/pin | Pin a room (third-party storage) |
 | [**reorder_room**](RoomsApi.md#reorder_room) | **PUT** /api/2.0/files/rooms/{id}/reorder | Reorder room contents |
-| [**reorder_room_third_party**](RoomsApi.md#reorder_room_third_party) | **PUT** /api/2.0/files/rooms/{id}/reorder | Reorder room contents (third-party storage) |
 | [**resend_email_invitations**](RoomsApi.md#resend_email_invitations) | **POST** /api/2.0/files/rooms/{id}/resend | Resend the room invitations |
-| [**resend_email_invitations_third_party**](RoomsApi.md#resend_email_invitations_third_party) | **POST** /api/2.0/files/rooms/{id}/resend | Resend the room invitations (third-party storage) |
 | [**set_public_settings**](RoomsApi.md#set_public_settings) | **PUT** /api/2.0/files/roomtemplate/public | Set room template public access |
 | [**set_room_link**](RoomsApi.md#set_room_link) | **PUT** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link |
-| [**set_room_link_third_party**](RoomsApi.md#set_room_link_third_party) | **PUT** /api/2.0/files/rooms/{id}/links | Set the room external or invitation link (third-party storage) |
 | [**set_room_security**](RoomsApi.md#set_room_security) | **PUT** /api/2.0/files/rooms/{id}/share | Set the room access rights |
-| [**set_room_security_third_party**](RoomsApi.md#set_room_security_third_party) | **PUT** /api/2.0/files/rooms/{id}/share | Set the room access rights (third-party storage) |
 | [**start_external_db_sync**](RoomsApi.md#start_external_db_sync) | **POST** /api/2.0/files/rooms/{id}/externaldbsync | Start external DB sync |
 | [**start_room_index_export**](RoomsApi.md#start_room_index_export) | **POST** /api/2.0/files/rooms/{id}/indexexport | Start the room index export |
 | [**terminate_room_index_export**](RoomsApi.md#terminate_room_index_export) | **DELETE** /api/2.0/files/rooms/indexexport | Terminate the room index export |
 | [**unarchive_room**](RoomsApi.md#unarchive_room) | **PUT** /api/2.0/files/rooms/{id}/unarchive | Unarchive a room |
-| [**unarchive_room_third_party**](RoomsApi.md#unarchive_room_third_party) | **PUT** /api/2.0/files/rooms/{id}/unarchive | Unarchive a room (third-party storage) |
 | [**unpin_room**](RoomsApi.md#unpin_room) | **PUT** /api/2.0/files/rooms/{id}/unpin | Unpin a room |
-| [**unpin_room_third_party**](RoomsApi.md#unpin_room_third_party) | **PUT** /api/2.0/files/rooms/{id}/unpin | Unpin a room (third-party storage) |
 | [**update_room**](RoomsApi.md#update_room) | **PUT** /api/2.0/files/rooms/{id} | Update a room |
-| [**update_room_third_party**](RoomsApi.md#update_room_third_party) | **PUT** /api/2.0/files/rooms/{id} | Update a room (third-party storage) |
 | [**update_room_tag**](RoomsApi.md#update_room_tag) | **PUT** /api/2.0/files/tags | Rename a room tag |
 | [**upload_room_logo**](RoomsApi.md#upload_room_logo) | **POST** /api/2.0/files/logos | Upload a room logo image |
 
@@ -151,98 +131,9 @@ end
 
 [**FolderWrapper**](FolderWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## add_room_tags_third_party
-
-> <ThirdPartyFolderWrapper> add_room_tags_third_party(id, opts)
-
-Attach tags to a room (third-party storage)
-
-Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels  shared by every room, and a name that the catalogue does not hold yet is created there by this call, so  attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as  they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and  does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager  of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag  has no identifier of its own and is addressed by name, so `GET api/2.0/files/tags` is what shows which names  already exist. Use `DELETE api/2.0/files/rooms/{id}/tags` to detach them again, which leaves the tags  themselves in the catalogue.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-opts = {
-  batch_tags_request_dto: DocspaceApiSdk::BatchTagsRequestDto.new({names: [Finance,  2026]}) # BatchTagsRequestDto | The names to attach or to detach.
-}
-
-begin
-  # Attach tags to a room (third-party storage)
-  result = api_instance.add_room_tags_third_party(id, opts)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->add_room_tags_third_party: #{e}"
-end
-```
-
-#### Using the add_room_tags_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ThirdPartyFolderWrapper>, Integer, Hash)> add_room_tags_third_party_with_http_info(id, opts)
-
-```ruby
-begin
-  # Attach tags to a room (third-party storage)
-  data, status_code, headers = api_instance.add_room_tags_third_party_with_http_info(id, opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ThirdPartyFolderWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->add_room_tags_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. |  |
-| **batch_tags_request_dto** | [**BatchTagsRequestDto**](BatchTagsRequestDto.md) | The names to attach or to detach. | [optional] |
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -337,98 +228,9 @@ end
 
 [**FileOperationWrapper**](FileOperationWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## archive_room_third_party
-
-> <FileOperationWrapper> archive_room_third_party(id, opts)
-
-Archive a room (third-party storage)
-
-Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/archive-room-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-opts = {
-  archive_room_request: DocspaceApiSdk::ArchiveRoomRequest.new # ArchiveRoomRequest | The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
-}
-
-begin
-  # Archive a room (third-party storage)
-  result = api_instance.archive_room_third_party(id, opts)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->archive_room_third_party: #{e}"
-end
-```
-
-#### Using the archive_room_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<FileOperationWrapper>, Integer, Hash)> archive_room_third_party_with_http_info(id, opts)
-
-```ruby
-begin
-  # Archive a room (third-party storage)
-  data, status_code, headers = api_instance.archive_room_third_party_with_http_info(id, opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <FileOperationWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->archive_room_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. |  |
-| **archive_room_request** | [**ArchiveRoomRequest**](ArchiveRoomRequest.md) | The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. | [optional] |
-
-### Return type
-
-[**FileOperationWrapper**](FileOperationWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String`.
 
 ### Authorization
 
@@ -521,96 +323,9 @@ end
 
 [**FolderWrapper**](FolderWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## change_room_cover_third_party
-
-> <ThirdPartyFolderWrapper> change_room_cover_third_party(id, cover_request_dto)
-
-Change the room cover (third-party storage)
-
-Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-cover-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-cover_request_dto = DocspaceApiSdk::CoverRequestDto.new # CoverRequestDto | The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.
-
-begin
-  # Change the room cover (third-party storage)
-  result = api_instance.change_room_cover_third_party(id, cover_request_dto)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->change_room_cover_third_party: #{e}"
-end
-```
-
-#### Using the change_room_cover_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ThirdPartyFolderWrapper>, Integer, Hash)> change_room_cover_third_party_with_http_info(id, cover_request_dto)
-
-```ruby
-begin
-  # Change the room cover (third-party storage)
-  data, status_code, headers = api_instance.change_room_cover_third_party_with_http_info(id, cover_request_dto)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ThirdPartyFolderWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->change_room_cover_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it. |  |
-| **cover_request_dto** | [**CoverRequestDto**](CoverRequestDto.md) | The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is. |  |
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -885,96 +600,9 @@ end
 
 [**FolderWrapper**](FolderWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## create_room_logo_third_party
-
-> <ThirdPartyFolderWrapper> create_room_logo_third_party(id, logo_request)
-
-Set the room logo (third-party storage)
-
-Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  `POST api/2.0/files/logos` first and pass the path it returns as `tmpFile`, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. `x`, `y`, `width` and  `height` crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-logo-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room the logo is set on.
-logo_request = DocspaceApiSdk::LogoRequest.new({tmp_file: '/temp/logo_a1b2c3.png'}) # LogoRequest | The uploaded picture and the piece of it to use.
-
-begin
-  # Set the room logo (third-party storage)
-  result = api_instance.create_room_logo_third_party(id, logo_request)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->create_room_logo_third_party: #{e}"
-end
-```
-
-#### Using the create_room_logo_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ThirdPartyFolderWrapper>, Integer, Hash)> create_room_logo_third_party_with_http_info(id, logo_request)
-
-```ruby
-begin
-  # Set the room logo (third-party storage)
-  data, status_code, headers = api_instance.create_room_logo_third_party_with_http_info(id, logo_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ThirdPartyFolderWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->create_room_logo_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room the logo is set on. |  |
-| **logo_request** | [**LogoRequest**](LogoRequest.md) | The uploaded picture and the piece of it to use. |  |
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -1430,96 +1058,9 @@ end
 
 [**FileOperationWrapper**](FileOperationWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## delete_room_third_party
-
-> <FileOperationWrapper> delete_room_third_party(id, delete_room_request)
-
-Remove a room (third-party storage)
-
-Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the `error` of the finished  operation still has to be read. Poll `GET api/2.0/files/fileops` until `finished` is true, or read the  returned record again by its `id`. The record is kept until it is read once, so one poll after completion  still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '10' # String | The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-delete_room_request = DocspaceApiSdk::DeleteRoomRequest.new # DeleteRoomRequest | The body of the request. It is required even though the deletion does not depend on what it holds.
-
-begin
-  # Remove a room (third-party storage)
-  result = api_instance.delete_room_third_party(id, delete_room_request)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->delete_room_third_party: #{e}"
-end
-```
-
-#### Using the delete_room_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<FileOperationWrapper>, Integer, Hash)> delete_room_third_party_with_http_info(id, delete_room_request)
-
-```ruby
-begin
-  # Remove a room (third-party storage)
-  data, status_code, headers = api_instance.delete_room_third_party_with_http_info(id, delete_room_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <FileOperationWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->delete_room_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it. |  |
-| **delete_room_request** | [**DeleteRoomRequest**](DeleteRoomRequest.md) | The body of the request. It is required even though the deletion does not depend on what it holds. |  |
-
-### Return type
-
-[**FileOperationWrapper**](FileOperationWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String`.
 
 ### Authorization
 
@@ -1610,94 +1151,9 @@ end
 
 [**FolderWrapper**](FolderWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## delete_room_logo_third_party
-
-> <ThirdPartyFolderWrapper> delete_room_logo_third_party(id)
-
-Remove a room logo (third-party storage)
-
-Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-logo-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-begin
-  # Remove a room logo (third-party storage)
-  result = api_instance.delete_room_logo_third_party(id)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->delete_room_logo_third_party: #{e}"
-end
-```
-
-#### Using the delete_room_logo_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ThirdPartyFolderWrapper>, Integer, Hash)> delete_room_logo_third_party_with_http_info(id)
-
-```ruby
-begin
-  # Remove a room logo (third-party storage)
-  data, status_code, headers = api_instance.delete_room_logo_third_party_with_http_info(id)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ThirdPartyFolderWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->delete_room_logo_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. |  |
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -1792,98 +1248,9 @@ end
 
 [**FolderWrapper**](FolderWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## delete_room_tags_third_party
-
-> <ThirdPartyFolderWrapper> delete_room_tags_third_party(id, opts)
-
-Detach tags from a room (third-party storage)
-
-Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  `DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-tags-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-opts = {
-  batch_tags_request_dto: DocspaceApiSdk::BatchTagsRequestDto.new({names: [Finance,  2026]}) # BatchTagsRequestDto | The names to attach or to detach.
-}
-
-begin
-  # Detach tags from a room (third-party storage)
-  result = api_instance.delete_room_tags_third_party(id, opts)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->delete_room_tags_third_party: #{e}"
-end
-```
-
-#### Using the delete_room_tags_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ThirdPartyFolderWrapper>, Integer, Hash)> delete_room_tags_third_party_with_http_info(id, opts)
-
-```ruby
-begin
-  # Detach tags from a room (third-party storage)
-  data, status_code, headers = api_instance.delete_room_tags_third_party_with_http_info(id, opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ThirdPartyFolderWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->delete_room_tags_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it. |  |
-| **batch_tags_request_dto** | [**BatchTagsRequestDto**](BatchTagsRequestDto.md) | The names to attach or to detach. | [optional] |
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -2063,94 +1430,9 @@ end
 
 [**NewItemsFileEntryBaseArrayWrapper**](NewItemsFileEntryBaseArrayWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## get_new_room_items_third_party
-
-> <NewItemsFileEntryBaseArrayWrapper> get_new_room_items_third_party(id)
-
-Get new items in a room (third-party storage)
-
-Returns what is new for the calling account in one room, grouped by the day the entry was last changed, with  the newest day first and the entries inside a day ordered from the most recent. Only files are reported: a  folder somebody else created is not an entry of its own, while a file created inside it is, however deep it  lies. What the caller changed is never new for the caller, and a file that was deleted afterwards disappears  from the answer. Reading this list leaves the badges alone, which is what makes it the operation to call  before `GET api/2.0/files/rooms/{id}`, since opening the room clears them. An empty array therefore means that  there is nothing new, not that the badges were already read. The caller needs access to the room; somebody who  is not a member is refused, and an unknown or deleted room is answered as missing. Use  `GET api/2.0/files/rooms/news` for the same report across every room at once.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-room-items-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-begin
-  # Get new items in a room (third-party storage)
-  result = api_instance.get_new_room_items_third_party(id)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->get_new_room_items_third_party: #{e}"
-end
-```
-
-#### Using the get_new_room_items_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<NewItemsFileEntryBaseArrayWrapper>, Integer, Hash)> get_new_room_items_third_party_with_http_info(id)
-
-```ruby
-begin
-  # Get new items in a room (third-party storage)
-  data, status_code, headers = api_instance.get_new_room_items_third_party_with_http_info(id)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <NewItemsFileEntryBaseArrayWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->get_new_room_items_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. |  |
-
-### Return type
-
-[**NewItemsFileEntryBaseArrayWrapper**](NewItemsFileEntryBaseArrayWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String`.
 
 ### Authorization
 
@@ -2575,81 +1857,9 @@ end
 
 [**FolderWrapper**](FolderWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## get_room_info_third_party
-
-> <ThirdPartyFolderWrapper> get_room_info_third_party(id)
-
-Get room information (third-party storage)
-
-Returns one room with its type, title, tags, logo, cover, colour, quota and virtual data room settings,  together with the access level the caller has in it. Reading the room is not a side-effect-free call: it  clears the caller new-item badges for that room, and `newForMe` comes back as 0, so read  `GET api/2.0/files/rooms/{id}/news` first when the new items matter. The caller needs read access to the room;  portal administrators can read a room they were never invited to, while a member without access is refused.  The operation also answers an anonymous caller, but only in the context of a valid external share link of that  room, and a plain anonymous request is rejected as unauthenticated. A room that never existed, was deleted, or  lives in a section the caller cannot see is answered as missing. Archived rooms are returned as well and are  recognised by their root section rather than by a separate flag. Use `GET api/2.0/files/rooms` to search and  page through rooms instead of guessing ids.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-info-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure API key authorization: cookieAuth
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization: bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-begin
-  # Get room information (third-party storage)
-  result = api_instance.get_room_info_third_party(id)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->get_room_info_third_party: #{e}"
-end
-```
-
-#### Using the get_room_info_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ThirdPartyFolderWrapper>, Integer, Hash)> get_room_info_third_party_with_http_info(id)
-
-```ruby
-begin
-  # Get room information (third-party storage)
-  data, status_code, headers = api_instance.get_room_info_third_party_with_http_info(id)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ThirdPartyFolderWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->get_room_info_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. |  |
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -2744,98 +1954,9 @@ end
 
 [**FileShareArrayWrapper**](FileShareArrayWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## get_room_links_third_party
-
-> <FileShareArrayWrapper> get_room_links_third_party(id, opts)
-
-Get the room links (third-party storage)
-
-Returns the sharing links of a room, with the invitation and the external links mixed together unless `type`  narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag  that marks the primary external link of the room and, for invitation links, how many times it may still be  used. Public and form filling rooms come with an external link created for them, so an empty answer there  means that the link was revoked rather than that the room is private; rooms of the other kinds start with no  links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data  room can be an invitation link alone. The caller needs access to the room and the right to see its links: a  member invited without that right gets an empty list rather than an error, while somebody who is not in the  room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the  reported count is the number of entries actually sent.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-links-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-opts = {
-  type: DocspaceApiSdk::LinkType::Invitation # LinkType | Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together.
-}
-
-begin
-  # Get the room links (third-party storage)
-  result = api_instance.get_room_links_third_party(id, opts)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->get_room_links_third_party: #{e}"
-end
-```
-
-#### Using the get_room_links_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<FileShareArrayWrapper>, Integer, Hash)> get_room_links_third_party_with_http_info(id, opts)
-
-```ruby
-begin
-  # Get the room links (third-party storage)
-  data, status_code, headers = api_instance.get_room_links_third_party_with_http_info(id, opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <FileShareArrayWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->get_room_links_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. |  |
-| **type** | **LinkType** | Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together. | [optional] |
-
-### Return type
-
-[**FileShareArrayWrapper**](FileShareArrayWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String`.
 
 ### Authorization
 
@@ -2936,104 +2057,9 @@ end
 
 [**FileShareArrayWrapper**](FileShareArrayWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## get_room_security_info_third_party
-
-> <FileShareArrayWrapper> get_room_security_info_third_party(id, opts)
-
-Get the room access rights (third-party storage)
-
-Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-security-info-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-opts = {
-  filter_type: DocspaceApiSdk::ShareFilterType::UserOrGroup, # ShareFilterType | What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`.
-  count: 25, # Integer | How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed.
-  start_index: 0, # Integer | How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls.
-  filter_value: 'Smith' # String | Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for.
-}
-
-begin
-  # Get the room access rights (third-party storage)
-  result = api_instance.get_room_security_info_third_party(id, opts)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->get_room_security_info_third_party: #{e}"
-end
-```
-
-#### Using the get_room_security_info_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<FileShareArrayWrapper>, Integer, Hash)> get_room_security_info_third_party_with_http_info(id, opts)
-
-```ruby
-begin
-  # Get the room access rights (third-party storage)
-  data, status_code, headers = api_instance.get_room_security_info_third_party_with_http_info(id, opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <FileShareArrayWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->get_room_security_info_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it. |  |
-| **filter_type** | **ShareFilterType** | What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. | [optional] |
-| **count** | **Integer** | How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed. | [optional] |
-| **start_index** | **Integer** | How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls. | [optional] |
-| **filter_value** | **String** | Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for. | [optional] |
-
-### Return type
-
-[**FileShareArrayWrapper**](FileShareArrayWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String`.
 
 ### Authorization
 
@@ -3270,7 +2296,7 @@ opts = {
   type: [DocspaceApiSdk::RoomType::FillingFormsRoom], # Array<RoomType> | Keeps only the rooms of the listed kinds. Repeat the parameter to pass more than one value; they are combined  with OR, and omitting it returns the rooms of every kind.
   subject_id: '9a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9', # String | Keeps only the rooms this account or group has access to, which is how the rooms of one member are listed. The  identifier comes from the portal people and group listings, and the exclude flag turns the filter into its  opposite.
   subject_owner_id: '9a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9', # String | Keeps only the rooms created by this account, regardless of who else was invited to them. The identifier comes  from the portal people listing, and the exclude flag turns the filter into its opposite.
-  search_area: DocspaceApiSdk::SearchArea::Active, # SearchArea | The section to list. Every section is a separate root and a room belongs to exactly one of them at a time, so  archiving a room moves it out of the active section. The default is the active section, which leaves the  form-filling rooms to their own value.
+  search_area: DocspaceApiSdk::SearchArea::ACTIVE, # SearchArea | The section to list. Every section is a separate root and a room belongs to exactly one of them at a time, so  archiving a room moves it out of the active section. The default is the active section, which leaves the  form-filling rooms to their own value.
   without_tags: false, # Boolean | When true, keeps only the rooms that carry no tag at all, which is the complement of the tag filter. When  false or omitted, tags play no part in the selection.
   tags: '["Important"]', # String | A JSON array of tag names serialized into a single query value, for example [Important,Legal]. A room  matches when it carries any one of them. Take the names from `GET api/2.0/files/tags`; a name that is not in  the catalog simply matches nothing.
   exclude_subject: false, # Boolean | Inverts the two subject filters: when true, the rooms of the named account are the ones left out of the answer  instead of the only ones kept. It does nothing on its own.
@@ -3514,94 +2540,9 @@ end
 
 [**FileShareWrapper**](FileShareWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## get_rooms_primary_external_link_third_party
-
-> <FileShareWrapper> get_rooms_primary_external_link_third_party(id)
-
-Get the room primary external link (third-party storage)
-
-Returns the primary external link of a room, which is the one address meant to be handed out to people outside  the portal. A public room and a form filling room get such a link when they are created, and asking for it  again returns the same link rather than a new one, so the answer is stable. In a room that has no primary link  yet this call creates one instead of reporting nothing, which needs the right to manage the links of the room:  a member invited with a lower level is refused with 403, and so is anybody who is not in the room at all. A  link that was explicitly revoked stays revoked and is reported as missing rather than recreated, and an  unknown room is answered with 404 as well. An archived public room still reports its link. The answer is the  same entry that `GET api/2.0/files/rooms/{id}/links` returns with the primary flag set, including the request  token that has to travel with the address.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-primary-external-link-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-begin
-  # Get the room primary external link (third-party storage)
-  result = api_instance.get_rooms_primary_external_link_third_party(id)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->get_rooms_primary_external_link_third_party: #{e}"
-end
-```
-
-#### Using the get_rooms_primary_external_link_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<FileShareWrapper>, Integer, Hash)> get_rooms_primary_external_link_third_party_with_http_info(id)
-
-```ruby
-begin
-  # Get the room primary external link (third-party storage)
-  data, status_code, headers = api_instance.get_rooms_primary_external_link_third_party_with_http_info(id)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <FileShareWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->get_rooms_primary_external_link_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. |  |
-
-### Return type
-
-[**FileShareWrapper**](FileShareWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String`.
 
 ### Authorization
 
@@ -3785,94 +2726,9 @@ end
 
 [**FolderWrapper**](FolderWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## pin_room_third_party
-
-> <ThirdPartyFolderWrapper> pin_room_third_party(id)
-
-Pin a room (third-party storage)
-
-Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI rooms are counted separately against their own allowance; a request  over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-begin
-  # Pin a room (third-party storage)
-  result = api_instance.pin_room_third_party(id)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->pin_room_third_party: #{e}"
-end
-```
-
-#### Using the pin_room_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ThirdPartyFolderWrapper>, Integer, Hash)> pin_room_third_party_with_http_info(id)
-
-```ruby
-begin
-  # Pin a room (third-party storage)
-  data, status_code, headers = api_instance.pin_room_third_party_with_http_info(id)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ThirdPartyFolderWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->pin_room_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. |  |
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -3963,94 +2819,9 @@ end
 
 [**FolderWrapper**](FolderWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## reorder_room_third_party
-
-> <ThirdPartyFolderWrapper> reorder_room_third_party(id)
-
-Reorder room contents (third-party storage)
-
-Renumbers the manual order of the items lying directly in a room so that they run from one upwards with no  gaps and no duplicates, and returns the room. The order of the items relative to each other is preserved: only  the numbers are compacted, and nothing is moved, renamed, duplicated or deleted. Files and folders share one  sequence. Nested folders keep their own numbering and are not touched, so each level is compacted on its own.  The operation is meant for a room with indexing turned on, where the manual order is what listings follow; a  room without indexing accepts it and simply has nothing that depends on the result. Running it twice changes  nothing the second time, and an already dense sequence is left as it is, which makes the call safe to retry.  The caller must be a manager of the room; a member invited with any other level is refused, an archived room  is rejected, and an unknown or deleted room is answered as missing.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/reorder-room-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-begin
-  # Reorder room contents (third-party storage)
-  result = api_instance.reorder_room_third_party(id)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->reorder_room_third_party: #{e}"
-end
-```
-
-#### Using the reorder_room_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ThirdPartyFolderWrapper>, Integer, Hash)> reorder_room_third_party_with_http_info(id)
-
-```ruby
-begin
-  # Reorder room contents (third-party storage)
-  data, status_code, headers = api_instance.reorder_room_third_party_with_http_info(id)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ThirdPartyFolderWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->reorder_room_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. |  |
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -4142,95 +2913,9 @@ end
 
 nil (empty response body)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## resend_email_invitations_third_party
-
-> resend_email_invitations_third_party(id, user_invitation)
-
-Resend the room invitations (third-party storage)
-
-Sends the room invitation email again to members who were invited but have not joined yet. `resendAll` covers  every pending invitation of the room and makes `usersIds` irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-email-invitations-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-user_invitation = DocspaceApiSdk::UserInvitation.new # UserInvitation | Which pending invitations to send again.
-
-begin
-  # Resend the room invitations (third-party storage)
-  api_instance.resend_email_invitations_third_party(id, user_invitation)
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->resend_email_invitations_third_party: #{e}"
-end
-```
-
-#### Using the resend_email_invitations_third_party_with_http_info variant
-
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
-
-> <Array(nil, Integer, Hash)> resend_email_invitations_third_party_with_http_info(id, user_invitation)
-
-```ruby
-begin
-  # Resend the room invitations (third-party storage)
-  data, status_code, headers = api_instance.resend_email_invitations_third_party_with_http_info(id, user_invitation)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => nil
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->resend_email_invitations_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it. |  |
-| **user_invitation** | [**UserInvitation**](UserInvitation.md) | Which pending invitations to send again. |  |
-
-### Return type
-
-nil (empty response body)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String`.
 
 ### Authorization
 
@@ -4413,96 +3098,9 @@ end
 
 [**FileShareWrapper**](FileShareWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## set_room_link_third_party
-
-> <FileShareWrapper> set_room_link_third_party(id, room_link_request)
-
-Set the room external or invitation link (third-party storage)
-
-Creates, updates or deletes one sharing link of a room and returns it. `linkType` chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting `linkId` creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. `password`, `denyDownload` and `internal` apply to  external links only.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-link-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-room_link_request = DocspaceApiSdk::RoomLinkRequest.new # RoomLinkRequest | The link to create, change or revoke.
-
-begin
-  # Set the room external or invitation link (third-party storage)
-  result = api_instance.set_room_link_third_party(id, room_link_request)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->set_room_link_third_party: #{e}"
-end
-```
-
-#### Using the set_room_link_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<FileShareWrapper>, Integer, Hash)> set_room_link_third_party_with_http_info(id, room_link_request)
-
-```ruby
-begin
-  # Set the room external or invitation link (third-party storage)
-  data, status_code, headers = api_instance.set_room_link_third_party_with_http_info(id, room_link_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <FileShareWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->set_room_link_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it. |  |
-| **room_link_request** | [**RoomLinkRequest**](RoomLinkRequest.md) | The link to create, change or revoke. |  |
-
-### Return type
-
-[**FileShareWrapper**](FileShareWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String`.
 
 ### Authorization
 
@@ -4595,96 +3193,9 @@ end
 
 [**RoomSecurityWrapper**](RoomSecurityWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## set_room_security_third_party
-
-> <RoomSecurityWrapper> set_room_security_third_party(id, room_invitation_request)
-
-Set the room access rights (third-party storage)
-
-Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation  email with the optional `message`.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-security-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-room_invitation_request = DocspaceApiSdk::RoomInvitationRequest.new # RoomInvitationRequest | The membership changes to apply, together with how the people concerned are notified.
-
-begin
-  # Set the room access rights (third-party storage)
-  result = api_instance.set_room_security_third_party(id, room_invitation_request)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->set_room_security_third_party: #{e}"
-end
-```
-
-#### Using the set_room_security_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<RoomSecurityWrapper>, Integer, Hash)> set_room_security_third_party_with_http_info(id, room_invitation_request)
-
-```ruby
-begin
-  # Set the room access rights (third-party storage)
-  data, status_code, headers = api_instance.set_room_security_third_party_with_http_info(id, room_invitation_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <RoomSecurityWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->set_room_security_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it. |  |
-| **room_invitation_request** | [**RoomInvitationRequest**](RoomInvitationRequest.md) | The membership changes to apply, together with how the people concerned are notified. |  |
-
-### Return type
-
-[**RoomSecurityWrapper**](RoomSecurityWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String`.
 
 ### Authorization
 
@@ -5042,98 +3553,9 @@ end
 
 [**FileOperationWrapper**](FileOperationWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## unarchive_room_third_party
-
-> <FileOperationWrapper> unarchive_room_third_party(id, opts)
-
-Unarchive a room (third-party storage)
-
-Queues a background job that moves one room from the Archive section back to the Rooms section, and returns  the operation record of that job. The room becomes writable again with the membership, tags, logo and links it  had before, while the pinned state of its members is not restored and has to be set again with  `PUT api/2.0/files/rooms/{id}/pin`. The caller must be a manager of the room; a member who was only invited to  it is refused, a room template is answered as missing, and a room that was never archived simply stays where  it is. The room is not moved when the response arrives: poll `GET api/2.0/files/fileops` until `finished` is  true, and expect a room that is still archived until then. `deleteAfter` decides only how long the finished  record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room  id is reported as missing.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/unarchive-room-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-opts = {
-  archive_room_request: DocspaceApiSdk::ArchiveRoomRequest.new # ArchiveRoomRequest | The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
-}
-
-begin
-  # Unarchive a room (third-party storage)
-  result = api_instance.unarchive_room_third_party(id, opts)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->unarchive_room_third_party: #{e}"
-end
-```
-
-#### Using the unarchive_room_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<FileOperationWrapper>, Integer, Hash)> unarchive_room_third_party_with_http_info(id, opts)
-
-```ruby
-begin
-  # Unarchive a room (third-party storage)
-  data, status_code, headers = api_instance.unarchive_room_third_party_with_http_info(id, opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <FileOperationWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->unarchive_room_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it. |  |
-| **archive_room_request** | [**ArchiveRoomRequest**](ArchiveRoomRequest.md) | The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request. | [optional] |
-
-### Return type
-
-[**FileOperationWrapper**](FileOperationWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String`.
 
 ### Authorization
 
@@ -5224,94 +3646,9 @@ end
 
 [**FolderWrapper**](FolderWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## unpin_room_third_party
-
-> <ThirdPartyFolderWrapper> unpin_room_third_party(id)
-
-Unpin a room (third-party storage)
-
-Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  `PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/unpin-room-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-
-begin
-  # Unpin a room (third-party storage)
-  result = api_instance.unpin_room_third_party(id)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->unpin_room_third_party: #{e}"
-end
-```
-
-#### Using the unpin_room_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ThirdPartyFolderWrapper>, Integer, Hash)> unpin_room_third_party_with_http_info(id)
-
-```ruby
-begin
-  # Unpin a room (third-party storage)
-  data, status_code, headers = api_instance.unpin_room_third_party_with_http_info(id)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ThirdPartyFolderWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->unpin_room_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing. |  |
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 
@@ -5404,96 +3741,9 @@ end
 
 [**FolderWrapper**](FolderWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## update_room_third_party
-
-> <ThirdPartyFolderWrapper> update_room_third_party(id, update_room_request)
-
-Update a room (third-party storage)
-
-Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Rooms::RoomsApi.new
-id = '1' # String | The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-update_room_request = DocspaceApiSdk::UpdateRoomRequest.new # UpdateRoomRequest | The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.
-
-begin
-  # Update a room (third-party storage)
-  result = api_instance.update_room_third_party(id, update_room_request)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->update_room_third_party: #{e}"
-end
-```
-
-#### Using the update_room_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ThirdPartyFolderWrapper>, Integer, Hash)> update_room_third_party_with_http_info(id, update_room_request)
-
-```ruby
-begin
-  # Update a room (third-party storage)
-  data, status_code, headers = api_instance.update_room_third_party_with_http_info(id, update_room_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ThirdPartyFolderWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Rooms::RoomsApi->update_room_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **id** | **String** | The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it. |  |
-| **update_room_request** | [**UpdateRoomRequest**](UpdateRoomRequest.md) | The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored. |  |
-
-### Return type
-
-[**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String` and the answer is [**ThirdPartyFolderWrapper**](ThirdPartyFolderWrapper.md).
 
 ### Authorization
 

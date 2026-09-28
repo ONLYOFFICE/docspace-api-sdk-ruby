@@ -26,10 +26,10 @@ module DocspaceApiSdk
     # Attach tags to a room
     # Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels  shared by every room, and a name that the catalogue does not hold yet is created there by this call, so  attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as  they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and  does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager  of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag  has no identifier of its own and is addressed by name, so `GET api/2.0/files/tags` is what shows which names  already exist. Use `DELETE api/2.0/files/rooms/{id}/tags` to detach them again, which leaves the tags  themselves in the catalogue.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags/
-    # @param id [Integer] The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param [Hash] opts the optional parameters
     # @option opts [BatchTagsRequestDto] :batch_tags_request_dto The names to attach or to detach.
-    # @return [FolderWrapper]
+    # @return [FolderWrapper, ThirdPartyFolderWrapper]
     def add_room_tags(id, opts = {})
       data, _status_code, _headers = add_room_tags_with_http_info(id, opts)
       data
@@ -38,10 +38,10 @@ module DocspaceApiSdk
     # Attach tags to a room
     # Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels  shared by every room, and a name that the catalogue does not hold yet is created there by this call, so  attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as  they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and  does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager  of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag  has no identifier of its own and is addressed by name, so `GET api/2.0/files/tags` is what shows which names  already exist. Use `DELETE api/2.0/files/rooms/{id}/tags` to detach them again, which leaves the tags  themselves in the catalogue.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags/
-    # @param id [Integer] The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param [Hash] opts the optional parameters
     # @option opts [BatchTagsRequestDto] :batch_tags_request_dto The names to attach or to detach.
-    # @return [Array<(FolderWrapper, Integer, Hash)>] FolderWrapper data, response status code and response headers
+    # @return [Array<(FolderWrapper, ThirdPartyFolderWrapper, Integer, Hash)>] FolderWrapper, ThirdPartyFolderWrapper data, response status code and response headers
     def add_room_tags_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.add_room_tags ...'
@@ -73,7 +73,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'batch_tags_request_dto'])
 
       # return_type
-      return_type = opts[:debug_return_type] || 'FolderWrapper'
+      return_type = opts[:debug_return_type] || (id.is_a?(String) ? 'ThirdPartyFolderWrapper' : 'FolderWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -95,82 +95,10 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Attach tags to a room (third-party storage)
-    # Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels  shared by every room, and a name that the catalogue does not hold yet is created there by this call, so  attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as  they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and  does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager  of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag  has no identifier of its own and is addressed by name, so `GET api/2.0/files/tags` is what shows which names  already exist. Use `DELETE api/2.0/files/rooms/{id}/tags` to detach them again, which leaves the tags  themselves in the catalogue.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags-third-party/
-    # @param id [String] The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param [Hash] opts the optional parameters
-    # @option opts [BatchTagsRequestDto] :batch_tags_request_dto The names to attach or to detach.
-    # @return [ThirdPartyFolderWrapper]
-    def add_room_tags_third_party(id, opts = {})
-      data, _status_code, _headers = add_room_tags_third_party_with_http_info(id, opts)
-      data
-    end
-
-    # Attach tags to a room (third-party storage)
-    # Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels  shared by every room, and a name that the catalogue does not hold yet is created there by this call, so  attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as  they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and  does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager  of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag  has no identifier of its own and is addressed by name, so `GET api/2.0/files/tags` is what shows which names  already exist. Use `DELETE api/2.0/files/rooms/{id}/tags` to detach them again, which leaves the tags  themselves in the catalogue.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags-third-party/
-    # @param id [String] The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param [Hash] opts the optional parameters
-    # @option opts [BatchTagsRequestDto] :batch_tags_request_dto The names to attach or to detach.
-    # @return [Array<(ThirdPartyFolderWrapper, Integer, Hash)>] ThirdPartyFolderWrapper data, response status code and response headers
-    def add_room_tags_third_party_with_http_info(id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.add_room_tags_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.add_room_tags_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/tags'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'batch_tags_request_dto'])
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ThirdPartyFolderWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.add_room_tags_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#add_room_tags_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Archive a room
     # Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/archive-room/
-    # @param id [Integer] The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param [Hash] opts the optional parameters
     # @option opts [ArchiveRoomRequest] :archive_room_request The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
     # @return [FileOperationWrapper]
@@ -182,7 +110,7 @@ module DocspaceApiSdk
     # Archive a room
     # Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/archive-room/
-    # @param id [Integer] The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param [Hash] opts the optional parameters
     # @option opts [ArchiveRoomRequest] :archive_room_request The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
     # @return [Array<(FileOperationWrapper, Integer, Hash)>] FileOperationWrapper data, response status code and response headers
@@ -239,85 +167,13 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Archive a room (third-party storage)
-    # Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/archive-room-third-party/
-    # @param id [String] The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param [Hash] opts the optional parameters
-    # @option opts [ArchiveRoomRequest] :archive_room_request The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
-    # @return [FileOperationWrapper]
-    def archive_room_third_party(id, opts = {})
-      data, _status_code, _headers = archive_room_third_party_with_http_info(id, opts)
-      data
-    end
-
-    # Archive a room (third-party storage)
-    # Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/archive-room-third-party/
-    # @param id [String] The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param [Hash] opts the optional parameters
-    # @option opts [ArchiveRoomRequest] :archive_room_request The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
-    # @return [Array<(FileOperationWrapper, Integer, Hash)>] FileOperationWrapper data, response status code and response headers
-    def archive_room_third_party_with_http_info(id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.archive_room_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.archive_room_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/archive'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'archive_room_request'])
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'FileOperationWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.archive_room_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#archive_room_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Change the room cover
     # Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-cover/
-    # @param id [Integer] The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param cover_request_dto [CoverRequestDto] The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.
     # @param [Hash] opts the optional parameters
-    # @return [FolderWrapper]
+    # @return [FolderWrapper, ThirdPartyFolderWrapper]
     def change_room_cover(id, cover_request_dto, opts = {})
       data, _status_code, _headers = change_room_cover_with_http_info(id, cover_request_dto, opts)
       data
@@ -326,10 +182,10 @@ module DocspaceApiSdk
     # Change the room cover
     # Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-cover/
-    # @param id [Integer] The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param cover_request_dto [CoverRequestDto] The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(FolderWrapper, Integer, Hash)>] FolderWrapper data, response status code and response headers
+    # @return [Array<(FolderWrapper, ThirdPartyFolderWrapper, Integer, Hash)>] FolderWrapper, ThirdPartyFolderWrapper data, response status code and response headers
     def change_room_cover_with_http_info(id, cover_request_dto, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.change_room_cover ...'
@@ -365,7 +221,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(cover_request_dto)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'FolderWrapper'
+      return_type = opts[:debug_return_type] || (id.is_a?(String) ? 'ThirdPartyFolderWrapper' : 'FolderWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -383,82 +239,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Rooms::RoomsApi#change_room_cover\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Change the room cover (third-party storage)
-    # Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-cover-third-party/
-    # @param id [String] The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param cover_request_dto [CoverRequestDto] The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.
-    # @param [Hash] opts the optional parameters
-    # @return [ThirdPartyFolderWrapper]
-    def change_room_cover_third_party(id, cover_request_dto, opts = {})
-      data, _status_code, _headers = change_room_cover_third_party_with_http_info(id, cover_request_dto, opts)
-      data
-    end
-
-    # Change the room cover (third-party storage)
-    # Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-cover-third-party/
-    # @param id [String] The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param cover_request_dto [CoverRequestDto] The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(ThirdPartyFolderWrapper, Integer, Hash)>] ThirdPartyFolderWrapper data, response status code and response headers
-    def change_room_cover_third_party_with_http_info(id, cover_request_dto, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.change_room_cover_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.change_room_cover_third_party"
-      end
-      # verify the required parameter 'cover_request_dto' is set
-      if @api_client.config.client_side_validation && cover_request_dto.nil?
-        fail ArgumentError, "Missing the required parameter 'cover_request_dto' when calling Rooms::RoomsApi.change_room_cover_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/cover'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(cover_request_dto)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ThirdPartyFolderWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.change_room_cover_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#change_room_cover_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -598,10 +378,10 @@ module DocspaceApiSdk
     # Set the room logo
     # Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  `POST api/2.0/files/logos` first and pass the path it returns as `tmpFile`, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. `x`, `y`, `width` and  `height` crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-logo/
-    # @param id [Integer] The room the logo is set on.
+    # @param id [Integer, String] The room the logo is set on.
     # @param logo_request [LogoRequest] The uploaded picture and the piece of it to use.
     # @param [Hash] opts the optional parameters
-    # @return [FolderWrapper]
+    # @return [FolderWrapper, ThirdPartyFolderWrapper]
     def create_room_logo(id, logo_request, opts = {})
       data, _status_code, _headers = create_room_logo_with_http_info(id, logo_request, opts)
       data
@@ -610,10 +390,10 @@ module DocspaceApiSdk
     # Set the room logo
     # Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  `POST api/2.0/files/logos` first and pass the path it returns as `tmpFile`, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. `x`, `y`, `width` and  `height` crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-logo/
-    # @param id [Integer] The room the logo is set on.
+    # @param id [Integer, String] The room the logo is set on.
     # @param logo_request [LogoRequest] The uploaded picture and the piece of it to use.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(FolderWrapper, Integer, Hash)>] FolderWrapper data, response status code and response headers
+    # @return [Array<(FolderWrapper, ThirdPartyFolderWrapper, Integer, Hash)>] FolderWrapper, ThirdPartyFolderWrapper data, response status code and response headers
     def create_room_logo_with_http_info(id, logo_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.create_room_logo ...'
@@ -649,7 +429,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(logo_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'FolderWrapper'
+      return_type = opts[:debug_return_type] || (id.is_a?(String) ? 'ThirdPartyFolderWrapper' : 'FolderWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -667,82 +447,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Rooms::RoomsApi#create_room_logo\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Set the room logo (third-party storage)
-    # Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  `POST api/2.0/files/logos` first and pass the path it returns as `tmpFile`, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. `x`, `y`, `width` and  `height` crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-logo-third-party/
-    # @param id [String] The room the logo is set on.
-    # @param logo_request [LogoRequest] The uploaded picture and the piece of it to use.
-    # @param [Hash] opts the optional parameters
-    # @return [ThirdPartyFolderWrapper]
-    def create_room_logo_third_party(id, logo_request, opts = {})
-      data, _status_code, _headers = create_room_logo_third_party_with_http_info(id, logo_request, opts)
-      data
-    end
-
-    # Set the room logo (third-party storage)
-    # Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  `POST api/2.0/files/logos` first and pass the path it returns as `tmpFile`, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. `x`, `y`, `width` and  `height` crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-logo-third-party/
-    # @param id [String] The room the logo is set on.
-    # @param logo_request [LogoRequest] The uploaded picture and the piece of it to use.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(ThirdPartyFolderWrapper, Integer, Hash)>] ThirdPartyFolderWrapper data, response status code and response headers
-    def create_room_logo_third_party_with_http_info(id, logo_request, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.create_room_logo_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.create_room_logo_third_party"
-      end
-      # verify the required parameter 'logo_request' is set
-      if @api_client.config.client_side_validation && logo_request.nil?
-        fail ArgumentError, "Missing the required parameter 'logo_request' when calling Rooms::RoomsApi.create_room_logo_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/logo'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(logo_request)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ThirdPartyFolderWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.create_room_logo_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#create_room_logo_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1024,7 +728,7 @@ module DocspaceApiSdk
     # Remove a room
     # Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the `error` of the finished  operation still has to be read. Poll `GET api/2.0/files/fileops` until `finished` is true, or read the  returned record again by its `id`. The record is kept until it is read once, so one poll after completion  still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room/
-    # @param id [Integer] The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param delete_room_request [DeleteRoomRequest] The body of the request. It is required even though the deletion does not depend on what it holds.
     # @param [Hash] opts the optional parameters
     # @return [FileOperationWrapper]
@@ -1036,7 +740,7 @@ module DocspaceApiSdk
     # Remove a room
     # Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the `error` of the finished  operation still has to be read. Poll `GET api/2.0/files/fileops` until `finished` is true, or read the  returned record again by its `id`. The record is kept until it is read once, so one poll after completion  still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room/
-    # @param id [Integer] The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param delete_room_request [DeleteRoomRequest] The body of the request. It is required even though the deletion does not depend on what it holds.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FileOperationWrapper, Integer, Hash)>] FileOperationWrapper data, response status code and response headers
@@ -1097,88 +801,12 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Remove a room (third-party storage)
-    # Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the `error` of the finished  operation still has to be read. Poll `GET api/2.0/files/fileops` until `finished` is true, or read the  returned record again by its `id`. The record is kept until it is read once, so one poll after completion  still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-third-party/
-    # @param id [String] The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param delete_room_request [DeleteRoomRequest] The body of the request. It is required even though the deletion does not depend on what it holds.
-    # @param [Hash] opts the optional parameters
-    # @return [FileOperationWrapper]
-    def delete_room_third_party(id, delete_room_request, opts = {})
-      data, _status_code, _headers = delete_room_third_party_with_http_info(id, delete_room_request, opts)
-      data
-    end
-
-    # Remove a room (third-party storage)
-    # Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the `error` of the finished  operation still has to be read. Poll `GET api/2.0/files/fileops` until `finished` is true, or read the  returned record again by its `id`. The record is kept until it is read once, so one poll after completion  still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-third-party/
-    # @param id [String] The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param delete_room_request [DeleteRoomRequest] The body of the request. It is required even though the deletion does not depend on what it holds.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(FileOperationWrapper, Integer, Hash)>] FileOperationWrapper data, response status code and response headers
-    def delete_room_third_party_with_http_info(id, delete_room_request, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.delete_room_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.delete_room_third_party"
-      end
-      # verify the required parameter 'delete_room_request' is set
-      if @api_client.config.client_side_validation && delete_room_request.nil?
-        fail ArgumentError, "Missing the required parameter 'delete_room_request' when calling Rooms::RoomsApi.delete_room_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(delete_room_request)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'FileOperationWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.delete_room_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#delete_room_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Remove a room logo
     # Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-logo/
-    # @param id [Integer] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
+    # @param id [Integer, String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
     # @param [Hash] opts the optional parameters
-    # @return [FolderWrapper]
+    # @return [FolderWrapper, ThirdPartyFolderWrapper]
     def delete_room_logo(id, opts = {})
       data, _status_code, _headers = delete_room_logo_with_http_info(id, opts)
       data
@@ -1187,9 +815,9 @@ module DocspaceApiSdk
     # Remove a room logo
     # Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-logo/
-    # @param id [Integer] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
+    # @param id [Integer, String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(FolderWrapper, Integer, Hash)>] FolderWrapper data, response status code and response headers
+    # @return [Array<(FolderWrapper, ThirdPartyFolderWrapper, Integer, Hash)>] FolderWrapper, ThirdPartyFolderWrapper data, response status code and response headers
     def delete_room_logo_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.delete_room_logo ...'
@@ -1216,7 +844,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'FolderWrapper'
+      return_type = opts[:debug_return_type] || (id.is_a?(String) ? 'ThirdPartyFolderWrapper' : 'FolderWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -1238,78 +866,13 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Remove a room logo (third-party storage)
-    # Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-logo-third-party/
-    # @param id [String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-    # @param [Hash] opts the optional parameters
-    # @return [ThirdPartyFolderWrapper]
-    def delete_room_logo_third_party(id, opts = {})
-      data, _status_code, _headers = delete_room_logo_third_party_with_http_info(id, opts)
-      data
-    end
-
-    # Remove a room logo (third-party storage)
-    # Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-logo-third-party/
-    # @param id [String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(ThirdPartyFolderWrapper, Integer, Hash)>] ThirdPartyFolderWrapper data, response status code and response headers
-    def delete_room_logo_third_party_with_http_info(id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.delete_room_logo_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.delete_room_logo_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/logo'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ThirdPartyFolderWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.delete_room_logo_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#delete_room_logo_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Detach tags from a room
     # Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  `DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-tags/
-    # @param id [Integer] The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param [Hash] opts the optional parameters
     # @option opts [BatchTagsRequestDto] :batch_tags_request_dto The names to attach or to detach.
-    # @return [FolderWrapper]
+    # @return [FolderWrapper, ThirdPartyFolderWrapper]
     def delete_room_tags(id, opts = {})
       data, _status_code, _headers = delete_room_tags_with_http_info(id, opts)
       data
@@ -1318,10 +881,10 @@ module DocspaceApiSdk
     # Detach tags from a room
     # Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  `DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-tags/
-    # @param id [Integer] The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param [Hash] opts the optional parameters
     # @option opts [BatchTagsRequestDto] :batch_tags_request_dto The names to attach or to detach.
-    # @return [Array<(FolderWrapper, Integer, Hash)>] FolderWrapper data, response status code and response headers
+    # @return [Array<(FolderWrapper, ThirdPartyFolderWrapper, Integer, Hash)>] FolderWrapper, ThirdPartyFolderWrapper data, response status code and response headers
     def delete_room_tags_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.delete_room_tags ...'
@@ -1353,7 +916,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'batch_tags_request_dto'])
 
       # return_type
-      return_type = opts[:debug_return_type] || 'FolderWrapper'
+      return_type = opts[:debug_return_type] || (id.is_a?(String) ? 'ThirdPartyFolderWrapper' : 'FolderWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -1371,78 +934,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Rooms::RoomsApi#delete_room_tags\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Detach tags from a room (third-party storage)
-    # Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  `DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-tags-third-party/
-    # @param id [String] The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param [Hash] opts the optional parameters
-    # @option opts [BatchTagsRequestDto] :batch_tags_request_dto The names to attach or to detach.
-    # @return [ThirdPartyFolderWrapper]
-    def delete_room_tags_third_party(id, opts = {})
-      data, _status_code, _headers = delete_room_tags_third_party_with_http_info(id, opts)
-      data
-    end
-
-    # Detach tags from a room (third-party storage)
-    # Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  `DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-tags-third-party/
-    # @param id [String] The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param [Hash] opts the optional parameters
-    # @option opts [BatchTagsRequestDto] :batch_tags_request_dto The names to attach or to detach.
-    # @return [Array<(ThirdPartyFolderWrapper, Integer, Hash)>] ThirdPartyFolderWrapper data, response status code and response headers
-    def delete_room_tags_third_party_with_http_info(id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.delete_room_tags_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.delete_room_tags_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/tags'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'batch_tags_request_dto'])
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ThirdPartyFolderWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.delete_room_tags_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#delete_room_tags_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1515,7 +1006,7 @@ module DocspaceApiSdk
     # Get new items in a room
     # Returns what is new for the calling account in one room, grouped by the day the entry was last changed, with  the newest day first and the entries inside a day ordered from the most recent. Only files are reported: a  folder somebody else created is not an entry of its own, while a file created inside it is, however deep it  lies. What the caller changed is never new for the caller, and a file that was deleted afterwards disappears  from the answer. Reading this list leaves the badges alone, which is what makes it the operation to call  before `GET api/2.0/files/rooms/{id}`, since opening the room clears them. An empty array therefore means that  there is nothing new, not that the badges were already read. The caller needs access to the room; somebody who  is not a member is refused, and an unknown or deleted room is answered as missing. Use  `GET api/2.0/files/rooms/news` for the same report across every room at once.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-room-items/
-    # @param id [Integer] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
+    # @param id [Integer, String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
     # @param [Hash] opts the optional parameters
     # @return [NewItemsFileEntryBaseArrayWrapper]
     def get_new_room_items(id, opts = {})
@@ -1526,7 +1017,7 @@ module DocspaceApiSdk
     # Get new items in a room
     # Returns what is new for the calling account in one room, grouped by the day the entry was last changed, with  the newest day first and the entries inside a day ordered from the most recent. Only files are reported: a  folder somebody else created is not an entry of its own, while a file created inside it is, however deep it  lies. What the caller changed is never new for the caller, and a file that was deleted afterwards disappears  from the answer. Reading this list leaves the badges alone, which is what makes it the operation to call  before `GET api/2.0/files/rooms/{id}`, since opening the room clears them. An empty array therefore means that  there is nothing new, not that the badges were already read. The caller needs access to the room; somebody who  is not a member is refused, and an unknown or deleted room is answered as missing. Use  `GET api/2.0/files/rooms/news` for the same report across every room at once.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-room-items/
-    # @param id [Integer] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
+    # @param id [Integer, String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
     # @param [Hash] opts the optional parameters
     # @return [Array<(NewItemsFileEntryBaseArrayWrapper, Integer, Hash)>] NewItemsFileEntryBaseArrayWrapper data, response status code and response headers
     def get_new_room_items_with_http_info(id, opts = {})
@@ -1573,71 +1064,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Rooms::RoomsApi#get_new_room_items\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Get new items in a room (third-party storage)
-    # Returns what is new for the calling account in one room, grouped by the day the entry was last changed, with  the newest day first and the entries inside a day ordered from the most recent. Only files are reported: a  folder somebody else created is not an entry of its own, while a file created inside it is, however deep it  lies. What the caller changed is never new for the caller, and a file that was deleted afterwards disappears  from the answer. Reading this list leaves the badges alone, which is what makes it the operation to call  before `GET api/2.0/files/rooms/{id}`, since opening the room clears them. An empty array therefore means that  there is nothing new, not that the badges were already read. The caller needs access to the room; somebody who  is not a member is refused, and an unknown or deleted room is answered as missing. Use  `GET api/2.0/files/rooms/news` for the same report across every room at once.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-room-items-third-party/
-    # @param id [String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-    # @param [Hash] opts the optional parameters
-    # @return [NewItemsFileEntryBaseArrayWrapper]
-    def get_new_room_items_third_party(id, opts = {})
-      data, _status_code, _headers = get_new_room_items_third_party_with_http_info(id, opts)
-      data
-    end
-
-    # Get new items in a room (third-party storage)
-    # Returns what is new for the calling account in one room, grouped by the day the entry was last changed, with  the newest day first and the entries inside a day ordered from the most recent. Only files are reported: a  folder somebody else created is not an entry of its own, while a file created inside it is, however deep it  lies. What the caller changed is never new for the caller, and a file that was deleted afterwards disappears  from the answer. Reading this list leaves the badges alone, which is what makes it the operation to call  before `GET api/2.0/files/rooms/{id}`, since opening the room clears them. An empty array therefore means that  there is nothing new, not that the badges were already read. The caller needs access to the room; somebody who  is not a member is refused, and an unknown or deleted room is answered as missing. Use  `GET api/2.0/files/rooms/news` for the same report across every room at once.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-room-items-third-party/
-    # @param id [String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(NewItemsFileEntryBaseArrayWrapper, Integer, Hash)>] NewItemsFileEntryBaseArrayWrapper data, response status code and response headers
-    def get_new_room_items_third_party_with_http_info(id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.get_new_room_items_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.get_new_room_items_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/news'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'NewItemsFileEntryBaseArrayWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.get_new_room_items_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#get_new_room_items_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1895,9 +1321,9 @@ module DocspaceApiSdk
     # Get room information
     # Returns one room with its type, title, tags, logo, cover, colour, quota and virtual data room settings,  together with the access level the caller has in it. Reading the room is not a side-effect-free call: it  clears the caller new-item badges for that room, and `newForMe` comes back as 0, so read  `GET api/2.0/files/rooms/{id}/news` first when the new items matter. The caller needs read access to the room;  portal administrators can read a room they were never invited to, while a member without access is refused.  The operation also answers an anonymous caller, but only in the context of a valid external share link of that  room, and a plain anonymous request is rejected as unauthenticated. A room that never existed, was deleted, or  lives in a section the caller cannot see is answered as missing. Archived rooms are returned as well and are  recognised by their root section rather than by a separate flag. Use `GET api/2.0/files/rooms` to search and  page through rooms instead of guessing ids.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-info/
-    # @param id [Integer] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
+    # @param id [Integer, String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
     # @param [Hash] opts the optional parameters
-    # @return [FolderWrapper]
+    # @return [FolderWrapper, ThirdPartyFolderWrapper]
     def get_room_info(id, opts = {})
       data, _status_code, _headers = get_room_info_with_http_info(id, opts)
       data
@@ -1906,9 +1332,9 @@ module DocspaceApiSdk
     # Get room information
     # Returns one room with its type, title, tags, logo, cover, colour, quota and virtual data room settings,  together with the access level the caller has in it. Reading the room is not a side-effect-free call: it  clears the caller new-item badges for that room, and `newForMe` comes back as 0, so read  `GET api/2.0/files/rooms/{id}/news` first when the new items matter. The caller needs read access to the room;  portal administrators can read a room they were never invited to, while a member without access is refused.  The operation also answers an anonymous caller, but only in the context of a valid external share link of that  room, and a plain anonymous request is rejected as unauthenticated. A room that never existed, was deleted, or  lives in a section the caller cannot see is answered as missing. Archived rooms are returned as well and are  recognised by their root section rather than by a separate flag. Use `GET api/2.0/files/rooms` to search and  page through rooms instead of guessing ids.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-info/
-    # @param id [Integer] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
+    # @param id [Integer, String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(FolderWrapper, Integer, Hash)>] FolderWrapper data, response status code and response headers
+    # @return [Array<(FolderWrapper, ThirdPartyFolderWrapper, Integer, Hash)>] FolderWrapper, ThirdPartyFolderWrapper data, response status code and response headers
     def get_room_info_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.get_room_info ...'
@@ -1935,7 +1361,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'FolderWrapper'
+      return_type = opts[:debug_return_type] || (id.is_a?(String) ? 'ThirdPartyFolderWrapper' : 'FolderWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
@@ -1957,75 +1383,10 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Get room information (third-party storage)
-    # Returns one room with its type, title, tags, logo, cover, colour, quota and virtual data room settings,  together with the access level the caller has in it. Reading the room is not a side-effect-free call: it  clears the caller new-item badges for that room, and `newForMe` comes back as 0, so read  `GET api/2.0/files/rooms/{id}/news` first when the new items matter. The caller needs read access to the room;  portal administrators can read a room they were never invited to, while a member without access is refused.  The operation also answers an anonymous caller, but only in the context of a valid external share link of that  room, and a plain anonymous request is rejected as unauthenticated. A room that never existed, was deleted, or  lives in a section the caller cannot see is answered as missing. Archived rooms are returned as well and are  recognised by their root section rather than by a separate flag. Use `GET api/2.0/files/rooms` to search and  page through rooms instead of guessing ids.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-info-third-party/
-    # @param id [String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-    # @param [Hash] opts the optional parameters
-    # @return [ThirdPartyFolderWrapper]
-    def get_room_info_third_party(id, opts = {})
-      data, _status_code, _headers = get_room_info_third_party_with_http_info(id, opts)
-      data
-    end
-
-    # Get room information (third-party storage)
-    # Returns one room with its type, title, tags, logo, cover, colour, quota and virtual data room settings,  together with the access level the caller has in it. Reading the room is not a side-effect-free call: it  clears the caller new-item badges for that room, and `newForMe` comes back as 0, so read  `GET api/2.0/files/rooms/{id}/news` first when the new items matter. The caller needs read access to the room;  portal administrators can read a room they were never invited to, while a member without access is refused.  The operation also answers an anonymous caller, but only in the context of a valid external share link of that  room, and a plain anonymous request is rejected as unauthenticated. A room that never existed, was deleted, or  lives in a section the caller cannot see is answered as missing. Archived rooms are returned as well and are  recognised by their root section rather than by a separate flag. Use `GET api/2.0/files/rooms` to search and  page through rooms instead of guessing ids.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-info-third-party/
-    # @param id [String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(ThirdPartyFolderWrapper, Integer, Hash)>] ThirdPartyFolderWrapper data, response status code and response headers
-    def get_room_info_third_party_with_http_info(id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.get_room_info_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.get_room_info_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ThirdPartyFolderWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.get_room_info_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#get_room_info_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Get the room links
     # Returns the sharing links of a room, with the invitation and the external links mixed together unless `type`  narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag  that marks the primary external link of the room and, for invitation links, how many times it may still be  used. Public and form filling rooms come with an external link created for them, so an empty answer there  means that the link was revoked rather than that the room is private; rooms of the other kinds start with no  links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data  room can be an invitation link alone. The caller needs access to the room and the right to see its links: a  member invited without that right gets an empty list rather than an error, while somebody who is not in the  room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the  reported count is the number of entries actually sent.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-links/
-    # @param id [Integer] The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param [Hash] opts the optional parameters
     # @option opts [LinkType] :type Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together.
     # @return [FileShareArrayWrapper]
@@ -2037,7 +1398,7 @@ module DocspaceApiSdk
     # Get the room links
     # Returns the sharing links of a room, with the invitation and the external links mixed together unless `type`  narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag  that marks the primary external link of the room and, for invitation links, how many times it may still be  used. Public and form filling rooms come with an external link created for them, so an empty answer there  means that the link was revoked rather than that the room is private; rooms of the other kinds start with no  links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data  room can be an invitation link alone. The caller needs access to the room and the right to see its links: a  member invited without that right gets an empty list rather than an error, while somebody who is not in the  room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the  reported count is the number of entries actually sent.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-links/
-    # @param id [Integer] The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param [Hash] opts the optional parameters
     # @option opts [LinkType] :type Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together.
     # @return [Array<(FileShareArrayWrapper, Integer, Hash)>] FileShareArrayWrapper data, response status code and response headers
@@ -2090,78 +1451,10 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Get the room links (third-party storage)
-    # Returns the sharing links of a room, with the invitation and the external links mixed together unless `type`  narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag  that marks the primary external link of the room and, for invitation links, how many times it may still be  used. Public and form filling rooms come with an external link created for them, so an empty answer there  means that the link was revoked rather than that the room is private; rooms of the other kinds start with no  links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data  room can be an invitation link alone. The caller needs access to the room and the right to see its links: a  member invited without that right gets an empty list rather than an error, while somebody who is not in the  room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the  reported count is the number of entries actually sent.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-links-third-party/
-    # @param id [String] The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param [Hash] opts the optional parameters
-    # @option opts [LinkType] :type Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together.
-    # @return [FileShareArrayWrapper]
-    def get_room_links_third_party(id, opts = {})
-      data, _status_code, _headers = get_room_links_third_party_with_http_info(id, opts)
-      data
-    end
-
-    # Get the room links (third-party storage)
-    # Returns the sharing links of a room, with the invitation and the external links mixed together unless `type`  narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag  that marks the primary external link of the room and, for invitation links, how many times it may still be  used. Public and form filling rooms come with an external link created for them, so an empty answer there  means that the link was revoked rather than that the room is private; rooms of the other kinds start with no  links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data  room can be an invitation link alone. The caller needs access to the room and the right to see its links: a  member invited without that right gets an empty list rather than an error, while somebody who is not in the  room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the  reported count is the number of entries actually sent.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-links-third-party/
-    # @param id [String] The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param [Hash] opts the optional parameters
-    # @option opts [LinkType] :type Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together.
-    # @return [Array<(FileShareArrayWrapper, Integer, Hash)>] FileShareArrayWrapper data, response status code and response headers
-    def get_room_links_third_party_with_http_info(id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.get_room_links_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.get_room_links_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/links'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'type'] = opts[:'type'] if !opts[:'type'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'FileShareArrayWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.get_room_links_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#get_room_links_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Get the room access rights
     # Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-security-info/
-    # @param id [Integer] The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param [Hash] opts the optional parameters
     # @option opts [ShareFilterType] :filter_type What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`.
     # @option opts [Integer] :count How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed.
@@ -2176,7 +1469,7 @@ module DocspaceApiSdk
     # Get the room access rights
     # Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-security-info/
-    # @param id [Integer] The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param [Hash] opts the optional parameters
     # @option opts [ShareFilterType] :filter_type What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`.
     # @option opts [Integer] :count How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed.
@@ -2239,91 +1532,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Rooms::RoomsApi#get_room_security_info\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Get the room access rights (third-party storage)
-    # Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-security-info-third-party/
-    # @param id [String] The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param [Hash] opts the optional parameters
-    # @option opts [ShareFilterType] :filter_type What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`.
-    # @option opts [Integer] :count How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed.
-    # @option opts [Integer] :start_index How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls.
-    # @option opts [String] :filter_value Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for.
-    # @return [FileShareArrayWrapper]
-    def get_room_security_info_third_party(id, opts = {})
-      data, _status_code, _headers = get_room_security_info_third_party_with_http_info(id, opts)
-      data
-    end
-
-    # Get the room access rights (third-party storage)
-    # Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-security-info-third-party/
-    # @param id [String] The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param [Hash] opts the optional parameters
-    # @option opts [ShareFilterType] :filter_type What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`.
-    # @option opts [Integer] :count How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed.
-    # @option opts [Integer] :start_index How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls.
-    # @option opts [String] :filter_value Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for.
-    # @return [Array<(FileShareArrayWrapper, Integer, Hash)>] FileShareArrayWrapper data, response status code and response headers
-    def get_room_security_info_third_party_with_http_info(id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.get_room_security_info_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.get_room_security_info_third_party"
-      end
-      if @api_client.config.client_side_validation && !opts[:'count'].nil? && opts[:'count'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"count"]" when calling Rooms::RoomsApi.get_room_security_info_third_party, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'count'].nil? && opts[:'count'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"count"]" when calling Rooms::RoomsApi.get_room_security_info_third_party, must be greater than or equal to 1.'
-      end
-
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/share'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'filterType'] = opts[:'filter_type'] if !opts[:'filter_type'].nil?
-      query_params[:'count'] = opts[:'count'] if !opts[:'count'].nil?
-      query_params[:'startIndex'] = opts[:'start_index'] if !opts[:'start_index'].nil?
-      query_params[:'filterValue'] = opts[:'filter_value'] if !opts[:'filter_value'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'FileShareArrayWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.get_room_security_info_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#get_room_security_info_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -2651,7 +1859,7 @@ module DocspaceApiSdk
     # Get the room primary external link
     # Returns the primary external link of a room, which is the one address meant to be handed out to people outside  the portal. A public room and a form filling room get such a link when they are created, and asking for it  again returns the same link rather than a new one, so the answer is stable. In a room that has no primary link  yet this call creates one instead of reporting nothing, which needs the right to manage the links of the room:  a member invited with a lower level is refused with 403, and so is anybody who is not in the room at all. A  link that was explicitly revoked stays revoked and is reported as missing rather than recreated, and an  unknown room is answered with 404 as well. An archived public room still reports its link. The answer is the  same entry that `GET api/2.0/files/rooms/{id}/links` returns with the primary flag set, including the request  token that has to travel with the address.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-primary-external-link/
-    # @param id [Integer] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
+    # @param id [Integer, String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
     # @param [Hash] opts the optional parameters
     # @return [FileShareWrapper]
     def get_rooms_primary_external_link(id, opts = {})
@@ -2662,7 +1870,7 @@ module DocspaceApiSdk
     # Get the room primary external link
     # Returns the primary external link of a room, which is the one address meant to be handed out to people outside  the portal. A public room and a form filling room get such a link when they are created, and asking for it  again returns the same link rather than a new one, so the answer is stable. In a room that has no primary link  yet this call creates one instead of reporting nothing, which needs the right to manage the links of the room:  a member invited with a lower level is refused with 403, and so is anybody who is not in the room at all. A  link that was explicitly revoked stays revoked and is reported as missing rather than recreated, and an  unknown room is answered with 404 as well. An archived public room still reports its link. The answer is the  same entry that `GET api/2.0/files/rooms/{id}/links` returns with the primary flag set, including the request  token that has to travel with the address.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-primary-external-link/
-    # @param id [Integer] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
+    # @param id [Integer, String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FileShareWrapper, Integer, Hash)>] FileShareWrapper data, response status code and response headers
     def get_rooms_primary_external_link_with_http_info(id, opts = {})
@@ -2709,71 +1917,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Rooms::RoomsApi#get_rooms_primary_external_link\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Get the room primary external link (third-party storage)
-    # Returns the primary external link of a room, which is the one address meant to be handed out to people outside  the portal. A public room and a form filling room get such a link when they are created, and asking for it  again returns the same link rather than a new one, so the answer is stable. In a room that has no primary link  yet this call creates one instead of reporting nothing, which needs the right to manage the links of the room:  a member invited with a lower level is refused with 403, and so is anybody who is not in the room at all. A  link that was explicitly revoked stays revoked and is reported as missing rather than recreated, and an  unknown room is answered with 404 as well. An archived public room still reports its link. The answer is the  same entry that `GET api/2.0/files/rooms/{id}/links` returns with the primary flag set, including the request  token that has to travel with the address.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-primary-external-link-third-party/
-    # @param id [String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-    # @param [Hash] opts the optional parameters
-    # @return [FileShareWrapper]
-    def get_rooms_primary_external_link_third_party(id, opts = {})
-      data, _status_code, _headers = get_rooms_primary_external_link_third_party_with_http_info(id, opts)
-      data
-    end
-
-    # Get the room primary external link (third-party storage)
-    # Returns the primary external link of a room, which is the one address meant to be handed out to people outside  the portal. A public room and a form filling room get such a link when they are created, and asking for it  again returns the same link rather than a new one, so the answer is stable. In a room that has no primary link  yet this call creates one instead of reporting nothing, which needs the right to manage the links of the room:  a member invited with a lower level is refused with 403, and so is anybody who is not in the room at all. A  link that was explicitly revoked stays revoked and is reported as missing rather than recreated, and an  unknown room is answered with 404 as well. An archived public room still reports its link. The answer is the  same entry that `GET api/2.0/files/rooms/{id}/links` returns with the primary flag set, including the request  token that has to travel with the address.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-primary-external-link-third-party/
-    # @param id [String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(FileShareWrapper, Integer, Hash)>] FileShareWrapper data, response status code and response headers
-    def get_rooms_primary_external_link_third_party_with_http_info(id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.get_rooms_primary_external_link_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.get_rooms_primary_external_link_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/link'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'FileShareWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.get_rooms_primary_external_link_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#get_rooms_primary_external_link_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -2849,9 +1992,9 @@ module DocspaceApiSdk
     # Pin a room
     # Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI rooms are counted separately against their own allowance; a request  over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room/
-    # @param id [Integer] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
+    # @param id [Integer, String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
     # @param [Hash] opts the optional parameters
-    # @return [FolderWrapper]
+    # @return [FolderWrapper, ThirdPartyFolderWrapper]
     def pin_room(id, opts = {})
       data, _status_code, _headers = pin_room_with_http_info(id, opts)
       data
@@ -2860,9 +2003,9 @@ module DocspaceApiSdk
     # Pin a room
     # Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI rooms are counted separately against their own allowance; a request  over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room/
-    # @param id [Integer] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
+    # @param id [Integer, String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(FolderWrapper, Integer, Hash)>] FolderWrapper data, response status code and response headers
+    # @return [Array<(FolderWrapper, ThirdPartyFolderWrapper, Integer, Hash)>] FolderWrapper, ThirdPartyFolderWrapper data, response status code and response headers
     def pin_room_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.pin_room ...'
@@ -2889,7 +2032,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'FolderWrapper'
+      return_type = opts[:debug_return_type] || (id.is_a?(String) ? 'ThirdPartyFolderWrapper' : 'FolderWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -2911,77 +2054,12 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Pin a room (third-party storage)
-    # Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI rooms are counted separately against their own allowance; a request  over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room-third-party/
-    # @param id [String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-    # @param [Hash] opts the optional parameters
-    # @return [ThirdPartyFolderWrapper]
-    def pin_room_third_party(id, opts = {})
-      data, _status_code, _headers = pin_room_third_party_with_http_info(id, opts)
-      data
-    end
-
-    # Pin a room (third-party storage)
-    # Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI rooms are counted separately against their own allowance; a request  over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room-third-party/
-    # @param id [String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(ThirdPartyFolderWrapper, Integer, Hash)>] ThirdPartyFolderWrapper data, response status code and response headers
-    def pin_room_third_party_with_http_info(id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.pin_room_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.pin_room_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/pin'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ThirdPartyFolderWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.pin_room_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#pin_room_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Reorder room contents
     # Renumbers the manual order of the items lying directly in a room so that they run from one upwards with no  gaps and no duplicates, and returns the room. The order of the items relative to each other is preserved: only  the numbers are compacted, and nothing is moved, renamed, duplicated or deleted. Files and folders share one  sequence. Nested folders keep their own numbering and are not touched, so each level is compacted on its own.  The operation is meant for a room with indexing turned on, where the manual order is what listings follow; a  room without indexing accepts it and simply has nothing that depends on the result. Running it twice changes  nothing the second time, and an already dense sequence is left as it is, which makes the call safe to retry.  The caller must be a manager of the room; a member invited with any other level is refused, an archived room  is rejected, and an unknown or deleted room is answered as missing.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/reorder-room/
-    # @param id [Integer] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
+    # @param id [Integer, String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
     # @param [Hash] opts the optional parameters
-    # @return [FolderWrapper]
+    # @return [FolderWrapper, ThirdPartyFolderWrapper]
     def reorder_room(id, opts = {})
       data, _status_code, _headers = reorder_room_with_http_info(id, opts)
       data
@@ -2990,9 +2068,9 @@ module DocspaceApiSdk
     # Reorder room contents
     # Renumbers the manual order of the items lying directly in a room so that they run from one upwards with no  gaps and no duplicates, and returns the room. The order of the items relative to each other is preserved: only  the numbers are compacted, and nothing is moved, renamed, duplicated or deleted. Files and folders share one  sequence. Nested folders keep their own numbering and are not touched, so each level is compacted on its own.  The operation is meant for a room with indexing turned on, where the manual order is what listings follow; a  room without indexing accepts it and simply has nothing that depends on the result. Running it twice changes  nothing the second time, and an already dense sequence is left as it is, which makes the call safe to retry.  The caller must be a manager of the room; a member invited with any other level is refused, an archived room  is rejected, and an unknown or deleted room is answered as missing.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/reorder-room/
-    # @param id [Integer] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
+    # @param id [Integer, String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(FolderWrapper, Integer, Hash)>] FolderWrapper data, response status code and response headers
+    # @return [Array<(FolderWrapper, ThirdPartyFolderWrapper, Integer, Hash)>] FolderWrapper, ThirdPartyFolderWrapper data, response status code and response headers
     def reorder_room_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.reorder_room ...'
@@ -3019,7 +2097,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'FolderWrapper'
+      return_type = opts[:debug_return_type] || (id.is_a?(String) ? 'ThirdPartyFolderWrapper' : 'FolderWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -3041,75 +2119,10 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Reorder room contents (third-party storage)
-    # Renumbers the manual order of the items lying directly in a room so that they run from one upwards with no  gaps and no duplicates, and returns the room. The order of the items relative to each other is preserved: only  the numbers are compacted, and nothing is moved, renamed, duplicated or deleted. Files and folders share one  sequence. Nested folders keep their own numbering and are not touched, so each level is compacted on its own.  The operation is meant for a room with indexing turned on, where the manual order is what listings follow; a  room without indexing accepts it and simply has nothing that depends on the result. Running it twice changes  nothing the second time, and an already dense sequence is left as it is, which makes the call safe to retry.  The caller must be a manager of the room; a member invited with any other level is refused, an archived room  is rejected, and an unknown or deleted room is answered as missing.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/reorder-room-third-party/
-    # @param id [String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-    # @param [Hash] opts the optional parameters
-    # @return [ThirdPartyFolderWrapper]
-    def reorder_room_third_party(id, opts = {})
-      data, _status_code, _headers = reorder_room_third_party_with_http_info(id, opts)
-      data
-    end
-
-    # Reorder room contents (third-party storage)
-    # Renumbers the manual order of the items lying directly in a room so that they run from one upwards with no  gaps and no duplicates, and returns the room. The order of the items relative to each other is preserved: only  the numbers are compacted, and nothing is moved, renamed, duplicated or deleted. Files and folders share one  sequence. Nested folders keep their own numbering and are not touched, so each level is compacted on its own.  The operation is meant for a room with indexing turned on, where the manual order is what listings follow; a  room without indexing accepts it and simply has nothing that depends on the result. Running it twice changes  nothing the second time, and an already dense sequence is left as it is, which makes the call safe to retry.  The caller must be a manager of the room; a member invited with any other level is refused, an archived room  is rejected, and an unknown or deleted room is answered as missing.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/reorder-room-third-party/
-    # @param id [String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(ThirdPartyFolderWrapper, Integer, Hash)>] ThirdPartyFolderWrapper data, response status code and response headers
-    def reorder_room_third_party_with_http_info(id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.reorder_room_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.reorder_room_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/reorder'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ThirdPartyFolderWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.reorder_room_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#reorder_room_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Resend the room invitations
     # Sends the room invitation email again to members who were invited but have not joined yet. `resendAll` covers  every pending invitation of the room and makes `usersIds` irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-email-invitations/
-    # @param id [Integer] The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param user_invitation [UserInvitation] Which pending invitations to send again.
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -3121,7 +2134,7 @@ module DocspaceApiSdk
     # Resend the room invitations
     # Sends the room invitation email again to members who were invited but have not joined yet. `resendAll` covers  every pending invitation of the room and makes `usersIds` irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-email-invitations/
-    # @param id [Integer] The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param user_invitation [UserInvitation] Which pending invitations to send again.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -3178,82 +2191,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Rooms::RoomsApi#resend_email_invitations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Resend the room invitations (third-party storage)
-    # Sends the room invitation email again to members who were invited but have not joined yet. `resendAll` covers  every pending invitation of the room and makes `usersIds` irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-email-invitations-third-party/
-    # @param id [String] The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param user_invitation [UserInvitation] Which pending invitations to send again.
-    # @param [Hash] opts the optional parameters
-    # @return [nil]
-    def resend_email_invitations_third_party(id, user_invitation, opts = {})
-      resend_email_invitations_third_party_with_http_info(id, user_invitation, opts)
-      nil
-    end
-
-    # Resend the room invitations (third-party storage)
-    # Sends the room invitation email again to members who were invited but have not joined yet. `resendAll` covers  every pending invitation of the room and makes `usersIds` irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-email-invitations-third-party/
-    # @param id [String] The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param user_invitation [UserInvitation] Which pending invitations to send again.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def resend_email_invitations_third_party_with_http_info(id, user_invitation, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.resend_email_invitations_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.resend_email_invitations_third_party"
-      end
-      # verify the required parameter 'user_invitation' is set
-      if @api_client.config.client_side_validation && user_invitation.nil?
-        fail ArgumentError, "Missing the required parameter 'user_invitation' when calling Rooms::RoomsApi.resend_email_invitations_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/resend'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(user_invitation)
-
-      # return_type
-      return_type = opts[:debug_return_type]
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.resend_email_invitations_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#resend_email_invitations_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -3327,7 +2264,7 @@ module DocspaceApiSdk
     # Set the room external or invitation link
     # Creates, updates or deletes one sharing link of a room and returns it. `linkType` chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting `linkId` creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. `password`, `denyDownload` and `internal` apply to  external links only.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-link/
-    # @param id [Integer] The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param room_link_request [RoomLinkRequest] The link to create, change or revoke.
     # @param [Hash] opts the optional parameters
     # @return [FileShareWrapper]
@@ -3339,7 +2276,7 @@ module DocspaceApiSdk
     # Set the room external or invitation link
     # Creates, updates or deletes one sharing link of a room and returns it. `linkType` chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting `linkId` creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. `password`, `denyDownload` and `internal` apply to  external links only.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-link/
-    # @param id [Integer] The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param room_link_request [RoomLinkRequest] The link to create, change or revoke.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FileShareWrapper, Integer, Hash)>] FileShareWrapper data, response status code and response headers
@@ -3400,86 +2337,10 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Set the room external or invitation link (third-party storage)
-    # Creates, updates or deletes one sharing link of a room and returns it. `linkType` chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting `linkId` creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. `password`, `denyDownload` and `internal` apply to  external links only.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-link-third-party/
-    # @param id [String] The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param room_link_request [RoomLinkRequest] The link to create, change or revoke.
-    # @param [Hash] opts the optional parameters
-    # @return [FileShareWrapper]
-    def set_room_link_third_party(id, room_link_request, opts = {})
-      data, _status_code, _headers = set_room_link_third_party_with_http_info(id, room_link_request, opts)
-      data
-    end
-
-    # Set the room external or invitation link (third-party storage)
-    # Creates, updates or deletes one sharing link of a room and returns it. `linkType` chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting `linkId` creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. `password`, `denyDownload` and `internal` apply to  external links only.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-link-third-party/
-    # @param id [String] The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param room_link_request [RoomLinkRequest] The link to create, change or revoke.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(FileShareWrapper, Integer, Hash)>] FileShareWrapper data, response status code and response headers
-    def set_room_link_third_party_with_http_info(id, room_link_request, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.set_room_link_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.set_room_link_third_party"
-      end
-      # verify the required parameter 'room_link_request' is set
-      if @api_client.config.client_side_validation && room_link_request.nil?
-        fail ArgumentError, "Missing the required parameter 'room_link_request' when calling Rooms::RoomsApi.set_room_link_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/links'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(room_link_request)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'FileShareWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.set_room_link_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#set_room_link_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Set the room access rights
     # Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation  email with the optional `message`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-security/
-    # @param id [Integer] The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param room_invitation_request [RoomInvitationRequest] The membership changes to apply, together with how the people concerned are notified.
     # @param [Hash] opts the optional parameters
     # @return [RoomSecurityWrapper]
@@ -3491,7 +2352,7 @@ module DocspaceApiSdk
     # Set the room access rights
     # Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation  email with the optional `message`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-security/
-    # @param id [Integer] The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param room_invitation_request [RoomInvitationRequest] The membership changes to apply, together with how the people concerned are notified.
     # @param [Hash] opts the optional parameters
     # @return [Array<(RoomSecurityWrapper, Integer, Hash)>] RoomSecurityWrapper data, response status code and response headers
@@ -3548,82 +2409,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Rooms::RoomsApi#set_room_security\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Set the room access rights (third-party storage)
-    # Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation  email with the optional `message`.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-security-third-party/
-    # @param id [String] The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param room_invitation_request [RoomInvitationRequest] The membership changes to apply, together with how the people concerned are notified.
-    # @param [Hash] opts the optional parameters
-    # @return [RoomSecurityWrapper]
-    def set_room_security_third_party(id, room_invitation_request, opts = {})
-      data, _status_code, _headers = set_room_security_third_party_with_http_info(id, room_invitation_request, opts)
-      data
-    end
-
-    # Set the room access rights (third-party storage)
-    # Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation  email with the optional `message`.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-security-third-party/
-    # @param id [String] The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param room_invitation_request [RoomInvitationRequest] The membership changes to apply, together with how the people concerned are notified.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(RoomSecurityWrapper, Integer, Hash)>] RoomSecurityWrapper data, response status code and response headers
-    def set_room_security_third_party_with_http_info(id, room_invitation_request, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.set_room_security_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.set_room_security_third_party"
-      end
-      # verify the required parameter 'room_invitation_request' is set
-      if @api_client.config.client_side_validation && room_invitation_request.nil?
-        fail ArgumentError, "Missing the required parameter 'room_invitation_request' when calling Rooms::RoomsApi.set_room_security_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/share'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(room_invitation_request)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'RoomSecurityWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.set_room_security_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#set_room_security_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -3820,7 +2605,7 @@ module DocspaceApiSdk
     # Unarchive a room
     # Queues a background job that moves one room from the Archive section back to the Rooms section, and returns  the operation record of that job. The room becomes writable again with the membership, tags, logo and links it  had before, while the pinned state of its members is not restored and has to be set again with  `PUT api/2.0/files/rooms/{id}/pin`. The caller must be a manager of the room; a member who was only invited to  it is refused, a room template is answered as missing, and a room that was never archived simply stays where  it is. The room is not moved when the response arrives: poll `GET api/2.0/files/fileops` until `finished` is  true, and expect a room that is still archived until then. `deleteAfter` decides only how long the finished  record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room  id is reported as missing.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/unarchive-room/
-    # @param id [Integer] The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param [Hash] opts the optional parameters
     # @option opts [ArchiveRoomRequest] :archive_room_request The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
     # @return [FileOperationWrapper]
@@ -3832,7 +2617,7 @@ module DocspaceApiSdk
     # Unarchive a room
     # Queues a background job that moves one room from the Archive section back to the Rooms section, and returns  the operation record of that job. The room becomes writable again with the membership, tags, logo and links it  had before, while the pinned state of its members is not restored and has to be set again with  `PUT api/2.0/files/rooms/{id}/pin`. The caller must be a manager of the room; a member who was only invited to  it is refused, a room template is answered as missing, and a room that was never archived simply stays where  it is. The room is not moved when the response arrives: poll `GET api/2.0/files/fileops` until `finished` is  true, and expect a room that is still archived until then. `deleteAfter` decides only how long the finished  record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room  id is reported as missing.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/unarchive-room/
-    # @param id [Integer] The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param [Hash] opts the optional parameters
     # @option opts [ArchiveRoomRequest] :archive_room_request The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
     # @return [Array<(FileOperationWrapper, Integer, Hash)>] FileOperationWrapper data, response status code and response headers
@@ -3889,84 +2674,12 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Unarchive a room (third-party storage)
-    # Queues a background job that moves one room from the Archive section back to the Rooms section, and returns  the operation record of that job. The room becomes writable again with the membership, tags, logo and links it  had before, while the pinned state of its members is not restored and has to be set again with  `PUT api/2.0/files/rooms/{id}/pin`. The caller must be a manager of the room; a member who was only invited to  it is refused, a room template is answered as missing, and a room that was never archived simply stays where  it is. The room is not moved when the response arrives: poll `GET api/2.0/files/fileops` until `finished` is  true, and expect a room that is still archived until then. `deleteAfter` decides only how long the finished  record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room  id is reported as missing.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/unarchive-room-third-party/
-    # @param id [String] The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param [Hash] opts the optional parameters
-    # @option opts [ArchiveRoomRequest] :archive_room_request The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
-    # @return [FileOperationWrapper]
-    def unarchive_room_third_party(id, opts = {})
-      data, _status_code, _headers = unarchive_room_third_party_with_http_info(id, opts)
-      data
-    end
-
-    # Unarchive a room (third-party storage)
-    # Queues a background job that moves one room from the Archive section back to the Rooms section, and returns  the operation record of that job. The room becomes writable again with the membership, tags, logo and links it  had before, while the pinned state of its members is not restored and has to be set again with  `PUT api/2.0/files/rooms/{id}/pin`. The caller must be a manager of the room; a member who was only invited to  it is refused, a room template is answered as missing, and a room that was never archived simply stays where  it is. The room is not moved when the response arrives: poll `GET api/2.0/files/fileops` until `finished` is  true, and expect a room that is still archived until then. `deleteAfter` decides only how long the finished  record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room  id is reported as missing.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/unarchive-room-third-party/
-    # @param id [String] The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param [Hash] opts the optional parameters
-    # @option opts [ArchiveRoomRequest] :archive_room_request The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
-    # @return [Array<(FileOperationWrapper, Integer, Hash)>] FileOperationWrapper data, response status code and response headers
-    def unarchive_room_third_party_with_http_info(id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.unarchive_room_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.unarchive_room_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/unarchive'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'archive_room_request'])
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'FileOperationWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.unarchive_room_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#unarchive_room_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Unpin a room
     # Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  `PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/unpin-room/
-    # @param id [Integer] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
+    # @param id [Integer, String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
     # @param [Hash] opts the optional parameters
-    # @return [FolderWrapper]
+    # @return [FolderWrapper, ThirdPartyFolderWrapper]
     def unpin_room(id, opts = {})
       data, _status_code, _headers = unpin_room_with_http_info(id, opts)
       data
@@ -3975,9 +2688,9 @@ module DocspaceApiSdk
     # Unpin a room
     # Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  `PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/unpin-room/
-    # @param id [Integer] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
+    # @param id [Integer, String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(FolderWrapper, Integer, Hash)>] FolderWrapper data, response status code and response headers
+    # @return [Array<(FolderWrapper, ThirdPartyFolderWrapper, Integer, Hash)>] FolderWrapper, ThirdPartyFolderWrapper data, response status code and response headers
     def unpin_room_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.unpin_room ...'
@@ -4004,7 +2717,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'FolderWrapper'
+      return_type = opts[:debug_return_type] || (id.is_a?(String) ? 'ThirdPartyFolderWrapper' : 'FolderWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -4026,78 +2739,13 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Unpin a room (third-party storage)
-    # Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  `PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/unpin-room-third-party/
-    # @param id [String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-    # @param [Hash] opts the optional parameters
-    # @return [ThirdPartyFolderWrapper]
-    def unpin_room_third_party(id, opts = {})
-      data, _status_code, _headers = unpin_room_third_party_with_http_info(id, opts)
-      data
-    end
-
-    # Unpin a room (third-party storage)
-    # Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  `PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/unpin-room-third-party/
-    # @param id [String] The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(ThirdPartyFolderWrapper, Integer, Hash)>] ThirdPartyFolderWrapper data, response status code and response headers
-    def unpin_room_third_party_with_http_info(id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.unpin_room_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.unpin_room_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}/unpin'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ThirdPartyFolderWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.unpin_room_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#unpin_room_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Update a room
     # Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room/
-    # @param id [Integer] The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param update_room_request [UpdateRoomRequest] The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.
     # @param [Hash] opts the optional parameters
-    # @return [FolderWrapper]
+    # @return [FolderWrapper, ThirdPartyFolderWrapper]
     def update_room(id, update_room_request, opts = {})
       data, _status_code, _headers = update_room_with_http_info(id, update_room_request, opts)
       data
@@ -4106,10 +2754,10 @@ module DocspaceApiSdk
     # Update a room
     # Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room/
-    # @param id [Integer] The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param id [Integer, String] The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.
     # @param update_room_request [UpdateRoomRequest] The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(FolderWrapper, Integer, Hash)>] FolderWrapper data, response status code and response headers
+    # @return [Array<(FolderWrapper, ThirdPartyFolderWrapper, Integer, Hash)>] FolderWrapper, ThirdPartyFolderWrapper data, response status code and response headers
     def update_room_with_http_info(id, update_room_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.update_room ...'
@@ -4145,7 +2793,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(update_room_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'FolderWrapper'
+      return_type = opts[:debug_return_type] || (id.is_a?(String) ? 'ThirdPartyFolderWrapper' : 'FolderWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -4163,82 +2811,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Rooms::RoomsApi#update_room\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Update a room (third-party storage)
-    # Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room-third-party/
-    # @param id [String] The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param update_room_request [UpdateRoomRequest] The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.
-    # @param [Hash] opts the optional parameters
-    # @return [ThirdPartyFolderWrapper]
-    def update_room_third_party(id, update_room_request, opts = {})
-      data, _status_code, _headers = update_room_third_party_with_http_info(id, update_room_request, opts)
-      data
-    end
-
-    # Update a room (third-party storage)
-    # Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room-third-party/
-    # @param id [String] The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-    # @param update_room_request [UpdateRoomRequest] The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(ThirdPartyFolderWrapper, Integer, Hash)>] ThirdPartyFolderWrapper data, response status code and response headers
-    def update_room_third_party_with_http_info(id, update_room_request, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.update_room_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.update_room_third_party"
-      end
-      # verify the required parameter 'update_room_request' is set
-      if @api_client.config.client_side_validation && update_room_request.nil?
-        fail ArgumentError, "Missing the required parameter 'update_room_request' when calling Rooms::RoomsApi.update_room_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/rooms/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_room_request)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ThirdPartyFolderWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Rooms::RoomsApi.update_room_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Rooms::RoomsApi#update_room_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -219,7 +219,6 @@ docs/ApiKeyResponseWrapper.md
 docs/ApiKeysApi.md
 docs/AppArrayWrapper.md
 docs/AppDto.md
-docs/AppDtoSettings.md
 docs/AppWrapper.md
 docs/ApplyFilterOption.md
 docs/AppsApi.md
@@ -620,6 +619,7 @@ docs/ItemKeyValuePairObjectObject.md
 docs/ItemKeyValuePairStringBoolean.md
 docs/ItemKeyValuePairStringLogoRequestsDto.md
 docs/ItemKeyValuePairStringString.md
+docs/JsonValueWrapper.md
 docs/LinkAccountRequestDto.md
 docs/LinkType.md
 docs/Location.md
@@ -804,7 +804,6 @@ docs/ServicePriceInfoArrayWrapper.md
 docs/SessionRequest.md
 docs/SetAppEnabledBody.md
 docs/SetAppSettingsBody.md
-docs/SetAppSettingsBodySettings.md
 docs/SetManagerRequest.md
 docs/SetPublicDto.md
 docs/SetRestrictedAiModelsRequestDto.md
@@ -984,7 +983,6 @@ docs/TokenDiagnosticsWrapper.md
 docs/TopUpDepositRequestDto.md
 docs/TransactionInfo.md
 docs/TurnOnAdminMessageSettingsRequestDto.md
-docs/UnknownNullableWrapper.md
 docs/UpcomingPaymentArrayWrapper.md
 docs/UpcomingPaymentDto.md
 docs/UpdateApiKeyRequest.md
@@ -1344,7 +1342,6 @@ lib/docspace-api-sdk/models/api-key-response-array-wrapper.rb
 lib/docspace-api-sdk/models/api-key-response-dto.rb
 lib/docspace-api-sdk/models/api-key-response-wrapper.rb
 lib/docspace-api-sdk/models/app-array-wrapper.rb
-lib/docspace-api-sdk/models/app-dto-settings.rb
 lib/docspace-api-sdk/models/app-dto.rb
 lib/docspace-api-sdk/models/app-wrapper.rb
 lib/docspace-api-sdk/models/apply-filter-option.rb
@@ -1733,6 +1730,7 @@ lib/docspace-api-sdk/models/item-key-value-pair-object-object.rb
 lib/docspace-api-sdk/models/item-key-value-pair-string-boolean.rb
 lib/docspace-api-sdk/models/item-key-value-pair-string-logo-requests-dto.rb
 lib/docspace-api-sdk/models/item-key-value-pair-string-string.rb
+lib/docspace-api-sdk/models/json-value-wrapper.rb
 lib/docspace-api-sdk/models/link-account-request-dto.rb
 lib/docspace-api-sdk/models/link-type.rb
 lib/docspace-api-sdk/models/location-type.rb
@@ -1880,7 +1878,6 @@ lib/docspace-api-sdk/models/service-price-info-array-wrapper.rb
 lib/docspace-api-sdk/models/service-price-info.rb
 lib/docspace-api-sdk/models/session-request.rb
 lib/docspace-api-sdk/models/set-app-enabled-body.rb
-lib/docspace-api-sdk/models/set-app-settings-body-settings.rb
 lib/docspace-api-sdk/models/set-app-settings-body.rb
 lib/docspace-api-sdk/models/set-manager-request.rb
 lib/docspace-api-sdk/models/set-public-dto.rb
@@ -2037,7 +2034,6 @@ lib/docspace-api-sdk/models/token-diagnostics-wrapper.rb
 lib/docspace-api-sdk/models/top-up-deposit-request-dto.rb
 lib/docspace-api-sdk/models/transaction-info.rb
 lib/docspace-api-sdk/models/turn-on-admin-message-settings-request-dto.rb
-lib/docspace-api-sdk/models/unknown-nullable-wrapper.rb
 lib/docspace-api-sdk/models/upcoming-payment-array-wrapper.rb
 lib/docspace-api-sdk/models/upcoming-payment-dto.rb
 lib/docspace-api-sdk/models/update-api-key-request.rb

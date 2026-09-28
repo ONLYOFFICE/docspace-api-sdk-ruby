@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **settings** | [**SetAppSettingsBodySettings**](SetAppSettingsBodySettings.md) |  | [optional] |
+| **settings** | **Object** |  | [optional] |
 
 ## Example
 

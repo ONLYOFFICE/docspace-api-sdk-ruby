@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents the WOPI configuration of a DocsCloud tenant.
+  # Represents the WOPI configuration of a Docs Connect tenant.
   class DocsCloudWopiConfig < ApiModelBase
     # Whether WOPI is enabled.
     attr_accessor :enable

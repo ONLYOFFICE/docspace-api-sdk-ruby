@@ -28,12 +28,38 @@ module DocspaceApiSdk
     # The rooms to gather in the group, each given as a number for a room stored in the portal or as a string for a  room on a connected third-party account. Every identifier has to name a room the caller can read; repeats are  collapsed, and an element of any other shape - a decimal number, a number sent as a string, null - is refused.
     attr_accessor :rooms
 
+    # The section the group belongs to: Active for Rooms and Forms for Forms. Active when omitted.
+    attr_accessor :search_area
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
         :'icon' => :'icon',
-        :'rooms' => :'rooms'
+        :'rooms' => :'rooms',
+        :'search_area' => :'searchArea'
       }
     end
 
@@ -52,7 +78,8 @@ module DocspaceApiSdk
       {
         :'name' => :'String',
         :'icon' => :'String',
-        :'rooms' => :'Array<DuplicateRequestDtoAllOfFileIds>'
+        :'rooms' => :'Array<DuplicateRequestDtoAllOfFileIds>',
+        :'search_area' => :'SearchArea'
       }
     end
 
@@ -96,6 +123,10 @@ module DocspaceApiSdk
         end
       else
         self.rooms = nil
+      end
+
+      if attributes.key?(:'search_area')
+        self.search_area = attributes[:'search_area']
       end
     end
 
@@ -202,7 +233,8 @@ module DocspaceApiSdk
       self.class == o.class &&
           name == o.name &&
           icon == o.icon &&
-          rooms == o.rooms
+          rooms == o.rooms &&
+          search_area == o.search_area
     end
 
     # @see the `==` method
@@ -214,7 +246,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, icon, rooms].hash
+      [name, icon, rooms, search_area].hash
     end
 
     # Builds the object from hash

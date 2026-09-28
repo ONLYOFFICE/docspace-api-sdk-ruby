@@ -168,7 +168,7 @@ module DocspaceApiSdk
     # Get file encryption keys
     # Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member's public key, and the caller's own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through `POST api/2.0/privacyroom/keys`; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-access/
-    # @param file_id [Integer] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+    # @param file_id [Integer, String] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
     # @param [Hash] opts the optional parameters
     # @return [EncryptionKeyArrayWrapper]
     def get_encryption_access(file_id, opts = {})
@@ -179,7 +179,7 @@ module DocspaceApiSdk
     # Get file encryption keys
     # Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member's public key, and the caller's own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through `POST api/2.0/privacyroom/keys`; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-access/
-    # @param file_id [Integer] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+    # @param file_id [Integer, String] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(EncryptionKeyArrayWrapper, Integer, Hash)>] EncryptionKeyArrayWrapper data, response status code and response headers
     def get_encryption_access_with_http_info(file_id, opts = {})
@@ -226,71 +226,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Files::SharingApi#get_encryption_access\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Get file encryption keys (third-party storage)
-    # Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member's public key, and the caller's own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through `POST api/2.0/privacyroom/keys`; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-access-third-party/
-    # @param file_id [String] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-    # @param [Hash] opts the optional parameters
-    # @return [EncryptionKeyArrayWrapper]
-    def get_encryption_access_third_party(file_id, opts = {})
-      data, _status_code, _headers = get_encryption_access_third_party_with_http_info(file_id, opts)
-      data
-    end
-
-    # Get file encryption keys (third-party storage)
-    # Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member's public key, and the caller's own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through `POST api/2.0/privacyroom/keys`; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-access-third-party/
-    # @param file_id [String] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(EncryptionKeyArrayWrapper, Integer, Hash)>] EncryptionKeyArrayWrapper data, response status code and response headers
-    def get_encryption_access_third_party_with_http_info(file_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::SharingApi.get_encryption_access_third_party ...'
-      end
-      # verify the required parameter 'file_id' is set
-      if @api_client.config.client_side_validation && file_id.nil?
-        fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::SharingApi.get_encryption_access_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/file/{fileId}/publickeys'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'EncryptionKeyArrayWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::SharingApi.get_encryption_access_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::SharingApi#get_encryption_access_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -369,7 +304,7 @@ module DocspaceApiSdk
     # Get file sharing rights
     # Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by `GET api/2.0/files/file/{id}/links` instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use `POST api/2.0/files/share`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-security-info/
-    # @param id [Integer] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+    # @param id [Integer, String] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :count How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
     # @option opts [Integer] :start_index How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
@@ -382,7 +317,7 @@ module DocspaceApiSdk
     # Get file sharing rights
     # Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by `GET api/2.0/files/file/{id}/links` instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use `POST api/2.0/files/share`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-security-info/
-    # @param id [Integer] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+    # @param id [Integer, String] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :count How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
     # @option opts [Integer] :start_index How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
@@ -445,89 +380,10 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Get file sharing rights (third-party storage)
-    # Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by `GET api/2.0/files/file/{id}/links` instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use `POST api/2.0/files/share`.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-security-info-third-party/
-    # @param id [String] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :count How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
-    # @option opts [Integer] :start_index How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
-    # @return [FileShareArrayWrapper]
-    def get_file_security_info_third_party(id, opts = {})
-      data, _status_code, _headers = get_file_security_info_third_party_with_http_info(id, opts)
-      data
-    end
-
-    # Get file sharing rights (third-party storage)
-    # Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by `GET api/2.0/files/file/{id}/links` instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use `POST api/2.0/files/share`.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-security-info-third-party/
-    # @param id [String] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :count How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
-    # @option opts [Integer] :start_index How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
-    # @return [Array<(FileShareArrayWrapper, Integer, Hash)>] FileShareArrayWrapper data, response status code and response headers
-    def get_file_security_info_third_party_with_http_info(id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::SharingApi.get_file_security_info_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Files::SharingApi.get_file_security_info_third_party"
-      end
-      if @api_client.config.client_side_validation && !opts[:'count'].nil? && opts[:'count'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"count"]" when calling Files::SharingApi.get_file_security_info_third_party, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'count'].nil? && opts[:'count'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"count"]" when calling Files::SharingApi.get_file_security_info_third_party, must be greater than or equal to 1.'
-      end
-
-      # resource path
-      local_var_path = '/api/2.0/files/file/{id}/share'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'count'] = opts[:'count'] if !opts[:'count'].nil?
-      query_params[:'startIndex'] = opts[:'start_index'] if !opts[:'start_index'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'FileShareArrayWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::SharingApi.get_file_security_info_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::SharingApi#get_file_security_info_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Get folder sharing rights
     # Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by `GET api/2.0/files/folder/{id}/links` instead. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer `GET api/2.0/files/rooms/{id}/share`, which filters the  same subjects by kind and by name.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-security-info/
-    # @param id [Integer] The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+    # @param id [Integer, String] The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :count How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
     # @option opts [Integer] :start_index How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
@@ -540,7 +396,7 @@ module DocspaceApiSdk
     # Get folder sharing rights
     # Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by `GET api/2.0/files/folder/{id}/links` instead. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer `GET api/2.0/files/rooms/{id}/share`, which filters the  same subjects by kind and by name.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-security-info/
-    # @param id [Integer] The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+    # @param id [Integer, String] The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :count How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
     # @option opts [Integer] :start_index How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
@@ -603,89 +459,10 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Get folder sharing rights (third-party storage)
-    # Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by `GET api/2.0/files/folder/{id}/links` instead. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer `GET api/2.0/files/rooms/{id}/share`, which filters the  same subjects by kind and by name.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-security-info-third-party/
-    # @param id [String] The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :count How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
-    # @option opts [Integer] :start_index How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
-    # @return [FileShareArrayWrapper]
-    def get_folder_security_info_third_party(id, opts = {})
-      data, _status_code, _headers = get_folder_security_info_third_party_with_http_info(id, opts)
-      data
-    end
-
-    # Get folder sharing rights (third-party storage)
-    # Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by `GET api/2.0/files/folder/{id}/links` instead. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer `GET api/2.0/files/rooms/{id}/share`, which filters the  same subjects by kind and by name.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-security-info-third-party/
-    # @param id [String] The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :count How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
-    # @option opts [Integer] :start_index How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
-    # @return [Array<(FileShareArrayWrapper, Integer, Hash)>] FileShareArrayWrapper data, response status code and response headers
-    def get_folder_security_info_third_party_with_http_info(id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::SharingApi.get_folder_security_info_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Files::SharingApi.get_folder_security_info_third_party"
-      end
-      if @api_client.config.client_side_validation && !opts[:'count'].nil? && opts[:'count'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"count"]" when calling Files::SharingApi.get_folder_security_info_third_party, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'count'].nil? && opts[:'count'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"count"]" when calling Files::SharingApi.get_folder_security_info_third_party, must be greater than or equal to 1.'
-      end
-
-      # resource path
-      local_var_path = '/api/2.0/files/folder/{id}/share'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'count'] = opts[:'count'] if !opts[:'count'].nil?
-      query_params[:'startIndex'] = opts[:'start_index'] if !opts[:'start_index'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'FileShareArrayWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::SharingApi.get_folder_security_info_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::SharingApi#get_folder_security_info_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Get file access of group members
     # Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member's level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-file-security/
-    # @param file_id [Integer] The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+    # @param file_id [Integer, String] The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
     # @param group_id [String] The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :count How many members at most to answer with.
@@ -700,7 +477,7 @@ module DocspaceApiSdk
     # Get file access of group members
     # Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member's level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-file-security/
-    # @param file_id [Integer] The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+    # @param file_id [Integer, String] The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
     # @param group_id [String] The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :count How many members at most to answer with.
@@ -770,98 +547,10 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Get file access of group members (third-party storage)
-    # Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member's level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-file-security-third-party/
-    # @param file_id [String] The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
-    # @param group_id [String] The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :count How many members at most to answer with.
-    # @option opts [Integer] :start_index How many members to skip before answering, used together with `count` to page through a large group.
-    # @option opts [String] :filter_value Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
-    # @return [GroupMemberSecurityRequestArrayWrapper]
-    def get_groups_members_with_file_security_third_party(file_id, group_id, opts = {})
-      data, _status_code, _headers = get_groups_members_with_file_security_third_party_with_http_info(file_id, group_id, opts)
-      data
-    end
-
-    # Get file access of group members (third-party storage)
-    # Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member's level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-file-security-third-party/
-    # @param file_id [String] The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
-    # @param group_id [String] The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :count How many members at most to answer with.
-    # @option opts [Integer] :start_index How many members to skip before answering, used together with `count` to page through a large group.
-    # @option opts [String] :filter_value Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
-    # @return [Array<(GroupMemberSecurityRequestArrayWrapper, Integer, Hash)>] GroupMemberSecurityRequestArrayWrapper data, response status code and response headers
-    def get_groups_members_with_file_security_third_party_with_http_info(file_id, group_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::SharingApi.get_groups_members_with_file_security_third_party ...'
-      end
-      # verify the required parameter 'file_id' is set
-      if @api_client.config.client_side_validation && file_id.nil?
-        fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::SharingApi.get_groups_members_with_file_security_third_party"
-      end
-      # verify the required parameter 'group_id' is set
-      if @api_client.config.client_side_validation && group_id.nil?
-        fail ArgumentError, "Missing the required parameter 'group_id' when calling Files::SharingApi.get_groups_members_with_file_security_third_party"
-      end
-      if @api_client.config.client_side_validation && !opts[:'count'].nil? && opts[:'count'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"count"]" when calling Files::SharingApi.get_groups_members_with_file_security_third_party, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'count'].nil? && opts[:'count'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"count"]" when calling Files::SharingApi.get_groups_members_with_file_security_third_party, must be greater than or equal to 1.'
-      end
-
-      # resource path
-      local_var_path = '/api/2.0/files/file/{fileId}/group/{groupId}/share'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s)).sub('{' + 'groupId' + '}', CGI.escape(group_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'count'] = opts[:'count'] if !opts[:'count'].nil?
-      query_params[:'startIndex'] = opts[:'start_index'] if !opts[:'start_index'].nil?
-      query_params[:'filterValue'] = opts[:'filter_value'] if !opts[:'filter_value'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'GroupMemberSecurityRequestArrayWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::SharingApi.get_groups_members_with_file_security_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::SharingApi#get_groups_members_with_file_security_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Get folder access of group members
     # Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member's level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-folder-security/
-    # @param folder_id [Integer] The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+    # @param folder_id [Integer, String] The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
     # @param group_id [String] The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :count How many members at most to answer with.
@@ -876,7 +565,7 @@ module DocspaceApiSdk
     # Get folder access of group members
     # Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member's level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-folder-security/
-    # @param folder_id [Integer] The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+    # @param folder_id [Integer, String] The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
     # @param group_id [String] The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :count How many members at most to answer with.
@@ -942,94 +631,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Files::SharingApi#get_groups_members_with_folder_security\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Get folder access of group members (third-party storage)
-    # Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member's level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-folder-security-third-party/
-    # @param folder_id [String] The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
-    # @param group_id [String] The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :count How many members at most to answer with.
-    # @option opts [Integer] :start_index How many members to skip before answering, used together with `count` to page through a large group.
-    # @option opts [String] :filter_value Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
-    # @return [GroupMemberSecurityRequestArrayWrapper]
-    def get_groups_members_with_folder_security_third_party(folder_id, group_id, opts = {})
-      data, _status_code, _headers = get_groups_members_with_folder_security_third_party_with_http_info(folder_id, group_id, opts)
-      data
-    end
-
-    # Get folder access of group members (third-party storage)
-    # Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member's level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-folder-security-third-party/
-    # @param folder_id [String] The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
-    # @param group_id [String] The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :count How many members at most to answer with.
-    # @option opts [Integer] :start_index How many members to skip before answering, used together with `count` to page through a large group.
-    # @option opts [String] :filter_value Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
-    # @return [Array<(GroupMemberSecurityRequestArrayWrapper, Integer, Hash)>] GroupMemberSecurityRequestArrayWrapper data, response status code and response headers
-    def get_groups_members_with_folder_security_third_party_with_http_info(folder_id, group_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::SharingApi.get_groups_members_with_folder_security_third_party ...'
-      end
-      # verify the required parameter 'folder_id' is set
-      if @api_client.config.client_side_validation && folder_id.nil?
-        fail ArgumentError, "Missing the required parameter 'folder_id' when calling Files::SharingApi.get_groups_members_with_folder_security_third_party"
-      end
-      # verify the required parameter 'group_id' is set
-      if @api_client.config.client_side_validation && group_id.nil?
-        fail ArgumentError, "Missing the required parameter 'group_id' when calling Files::SharingApi.get_groups_members_with_folder_security_third_party"
-      end
-      if @api_client.config.client_side_validation && !opts[:'count'].nil? && opts[:'count'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"count"]" when calling Files::SharingApi.get_groups_members_with_folder_security_third_party, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'count'].nil? && opts[:'count'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"count"]" when calling Files::SharingApi.get_groups_members_with_folder_security_third_party, must be greater than or equal to 1.'
-      end
-
-      # resource path
-      local_var_path = '/api/2.0/files/folder/{folderId}/group/{groupId}/share'.sub('{' + 'folderId' + '}', CGI.escape(folder_id.to_s)).sub('{' + 'groupId' + '}', CGI.escape(group_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'count'] = opts[:'count'] if !opts[:'count'].nil?
-      query_params[:'startIndex'] = opts[:'start_index'] if !opts[:'start_index'].nil?
-      query_params[:'filterValue'] = opts[:'filter_value'] if !opts[:'filter_value'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'GroupMemberSecurityRequestArrayWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::SharingApi.get_groups_members_with_folder_security_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::SharingApi#get_groups_members_with_folder_security_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1103,7 +704,7 @@ module DocspaceApiSdk
     # Get users to mention in a file
     # Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users/
-    # @param file_id [Integer] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+    # @param file_id [Integer, String] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
     # @param [Hash] opts the optional parameters
     # @return [MentionWrapperArrayWrapper]
     def get_shared_users(file_id, opts = {})
@@ -1114,7 +715,7 @@ module DocspaceApiSdk
     # Get users to mention in a file
     # Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users/
-    # @param file_id [Integer] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+    # @param file_id [Integer, String] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(MentionWrapperArrayWrapper, Integer, Hash)>] MentionWrapperArrayWrapper data, response status code and response headers
     def get_shared_users_with_http_info(file_id, opts = {})
@@ -1161,71 +762,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Files::SharingApi#get_shared_users\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Get users to mention in a file (third-party storage)
-    # Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users-third-party/
-    # @param file_id [String] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-    # @param [Hash] opts the optional parameters
-    # @return [MentionWrapperArrayWrapper]
-    def get_shared_users_third_party(file_id, opts = {})
-      data, _status_code, _headers = get_shared_users_third_party_with_http_info(file_id, opts)
-      data
-    end
-
-    # Get users to mention in a file (third-party storage)
-    # Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users-third-party/
-    # @param file_id [String] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(MentionWrapperArrayWrapper, Integer, Hash)>] MentionWrapperArrayWrapper data, response status code and response headers
-    def get_shared_users_third_party_with_http_info(file_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::SharingApi.get_shared_users_third_party ...'
-      end
-      # verify the required parameter 'file_id' is set
-      if @api_client.config.client_side_validation && file_id.nil?
-        fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::SharingApi.get_shared_users_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/file/{fileId}/sharedusers'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'MentionWrapperArrayWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::SharingApi.get_shared_users_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::SharingApi#get_shared_users_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1299,7 +835,7 @@ module DocspaceApiSdk
     # Notify mentioned users
     # Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify/
-    # @param file_id [Integer] The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+    # @param file_id [Integer, String] The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
     # @param [Hash] opts the optional parameters
     # @option opts [MentionMessageWrapper] :mention_message_wrapper The notification to send.
     # @return [AceShortWrapperArrayWrapper]
@@ -1311,7 +847,7 @@ module DocspaceApiSdk
     # Notify mentioned users
     # Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify/
-    # @param file_id [Integer] The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+    # @param file_id [Integer, String] The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
     # @param [Hash] opts the optional parameters
     # @option opts [MentionMessageWrapper] :mention_message_wrapper The notification to send.
     # @return [Array<(AceShortWrapperArrayWrapper, Integer, Hash)>] AceShortWrapperArrayWrapper data, response status code and response headers
@@ -1368,82 +904,10 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Notify mentioned users (third-party storage)
-    # Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify-third-party/
-    # @param file_id [String] The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
-    # @param [Hash] opts the optional parameters
-    # @option opts [MentionMessageWrapper] :mention_message_wrapper The notification to send.
-    # @return [AceShortWrapperArrayWrapper]
-    def send_editor_notify_third_party(file_id, opts = {})
-      data, _status_code, _headers = send_editor_notify_third_party_with_http_info(file_id, opts)
-      data
-    end
-
-    # Notify mentioned users (third-party storage)
-    # Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify-third-party/
-    # @param file_id [String] The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
-    # @param [Hash] opts the optional parameters
-    # @option opts [MentionMessageWrapper] :mention_message_wrapper The notification to send.
-    # @return [Array<(AceShortWrapperArrayWrapper, Integer, Hash)>] AceShortWrapperArrayWrapper data, response status code and response headers
-    def send_editor_notify_third_party_with_http_info(file_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::SharingApi.send_editor_notify_third_party ...'
-      end
-      # verify the required parameter 'file_id' is set
-      if @api_client.config.client_side_validation && file_id.nil?
-        fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::SharingApi.send_editor_notify_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/file/{fileId}/sendeditornotify'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'mention_message_wrapper'])
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'AceShortWrapperArrayWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::SharingApi.send_editor_notify_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::SharingApi#send_editor_notify_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Share a file
     # Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info/
-    # @param id [Integer] The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+    # @param id [Integer, String] The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
     # @param security_info_simple_request_dto [SecurityInfoSimpleRequestDto] The rights to apply to the file, and whether to announce them by mail.
     # @param [Hash] opts the optional parameters
     # @return [FileShareArrayWrapper]
@@ -1455,7 +919,7 @@ module DocspaceApiSdk
     # Share a file
     # Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info/
-    # @param id [Integer] The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+    # @param id [Integer, String] The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
     # @param security_info_simple_request_dto [SecurityInfoSimpleRequestDto] The rights to apply to the file, and whether to announce them by mail.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FileShareArrayWrapper, Integer, Hash)>] FileShareArrayWrapper data, response status code and response headers
@@ -1516,86 +980,10 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Share a file (third-party storage)
-    # Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info-third-party/
-    # @param id [String] The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
-    # @param security_info_simple_request_dto [SecurityInfoSimpleRequestDto] The rights to apply to the file, and whether to announce them by mail.
-    # @param [Hash] opts the optional parameters
-    # @return [FileShareArrayWrapper]
-    def set_file_security_info_third_party(id, security_info_simple_request_dto, opts = {})
-      data, _status_code, _headers = set_file_security_info_third_party_with_http_info(id, security_info_simple_request_dto, opts)
-      data
-    end
-
-    # Share a file (third-party storage)
-    # Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info-third-party/
-    # @param id [String] The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
-    # @param security_info_simple_request_dto [SecurityInfoSimpleRequestDto] The rights to apply to the file, and whether to announce them by mail.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(FileShareArrayWrapper, Integer, Hash)>] FileShareArrayWrapper data, response status code and response headers
-    def set_file_security_info_third_party_with_http_info(id, security_info_simple_request_dto, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::SharingApi.set_file_security_info_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Files::SharingApi.set_file_security_info_third_party"
-      end
-      # verify the required parameter 'security_info_simple_request_dto' is set
-      if @api_client.config.client_side_validation && security_info_simple_request_dto.nil?
-        fail ArgumentError, "Missing the required parameter 'security_info_simple_request_dto' when calling Files::SharingApi.set_file_security_info_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/file/{id}/share'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(security_info_simple_request_dto)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'FileShareArrayWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::SharingApi.set_file_security_info_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::SharingApi#set_file_security_info_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Share a folder
     # Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With `notify` set, each account named is emailed about the access  it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info/
-    # @param id [Integer] The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+    # @param id [Integer, String] The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
     # @param security_info_simple_request_dto [SecurityInfoSimpleRequestDto] The rights to apply to the folder, and whether to announce them by mail.
     # @param [Hash] opts the optional parameters
     # @return [FileShareArrayWrapper]
@@ -1607,7 +995,7 @@ module DocspaceApiSdk
     # Share a folder
     # Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With `notify` set, each account named is emailed about the access  it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info/
-    # @param id [Integer] The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+    # @param id [Integer, String] The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
     # @param security_info_simple_request_dto [SecurityInfoSimpleRequestDto] The rights to apply to the folder, and whether to announce them by mail.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FileShareArrayWrapper, Integer, Hash)>] FileShareArrayWrapper data, response status code and response headers
@@ -1664,82 +1052,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Files::SharingApi#set_folder_security_info\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Share a folder (third-party storage)
-    # Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With `notify` set, each account named is emailed about the access  it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info-third-party/
-    # @param id [String] The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
-    # @param security_info_simple_request_dto [SecurityInfoSimpleRequestDto] The rights to apply to the folder, and whether to announce them by mail.
-    # @param [Hash] opts the optional parameters
-    # @return [FileShareArrayWrapper]
-    def set_folder_security_info_third_party(id, security_info_simple_request_dto, opts = {})
-      data, _status_code, _headers = set_folder_security_info_third_party_with_http_info(id, security_info_simple_request_dto, opts)
-      data
-    end
-
-    # Share a folder (third-party storage)
-    # Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With `notify` set, each account named is emailed about the access  it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info-third-party/
-    # @param id [String] The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
-    # @param security_info_simple_request_dto [SecurityInfoSimpleRequestDto] The rights to apply to the folder, and whether to announce them by mail.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(FileShareArrayWrapper, Integer, Hash)>] FileShareArrayWrapper data, response status code and response headers
-    def set_folder_security_info_third_party_with_http_info(id, security_info_simple_request_dto, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::SharingApi.set_folder_security_info_third_party ...'
-      end
-      # verify the required parameter 'id' is set
-      if @api_client.config.client_side_validation && id.nil?
-        fail ArgumentError, "Missing the required parameter 'id' when calling Files::SharingApi.set_folder_security_info_third_party"
-      end
-      # verify the required parameter 'security_info_simple_request_dto' is set
-      if @api_client.config.client_side_validation && security_info_simple_request_dto.nil?
-        fail ArgumentError, "Missing the required parameter 'security_info_simple_request_dto' when calling Files::SharingApi.set_folder_security_info_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/folder/{id}/share'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(security_info_simple_request_dto)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'FileShareArrayWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::SharingApi.set_folder_security_info_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::SharingApi#set_folder_security_info_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents the security configuration of a DocsCloud tenant.
+  # Represents the security configuration of a Docs Connect tenant.
   class DocsCloudSecurityConfig < ApiModelBase
     # The security secret.
     attr_accessor :secret

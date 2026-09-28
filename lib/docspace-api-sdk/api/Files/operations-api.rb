@@ -27,7 +27,7 @@ module DocspaceApiSdk
     # Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/abort-upload-session/
     # @param session_id [String] The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
-    # @param folder_id [Integer] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+    # @param folder_id [Integer, String] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def abort_upload_session(session_id, folder_id, opts = {})
@@ -39,7 +39,7 @@ module DocspaceApiSdk
     # Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/abort-upload-session/
     # @param session_id [String] The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
-    # @param folder_id [Integer] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+    # @param folder_id [Integer, String] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def abort_upload_session_with_http_info(session_id, folder_id, opts = {})
@@ -90,77 +90,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Files::OperationsApi#abort_upload_session\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Abort an upload session (third-party storage)
-    # Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/abort-upload-session-third-party/
-    # @param session_id [String] The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
-    # @param folder_id [String] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-    # @param [Hash] opts the optional parameters
-    # @return [nil]
-    def abort_upload_session_third_party(session_id, folder_id, opts = {})
-      abort_upload_session_third_party_with_http_info(session_id, folder_id, opts)
-      nil
-    end
-
-    # Abort an upload session (third-party storage)
-    # Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/abort-upload-session-third-party/
-    # @param session_id [String] The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
-    # @param folder_id [String] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def abort_upload_session_third_party_with_http_info(session_id, folder_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::OperationsApi.abort_upload_session_third_party ...'
-      end
-      # verify the required parameter 'session_id' is set
-      if @api_client.config.client_side_validation && session_id.nil?
-        fail ArgumentError, "Missing the required parameter 'session_id' when calling Files::OperationsApi.abort_upload_session_third_party"
-      end
-      # verify the required parameter 'folder_id' is set
-      if @api_client.config.client_side_validation && folder_id.nil?
-        fail ArgumentError, "Missing the required parameter 'folder_id' when calling Files::OperationsApi.abort_upload_session_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/{folderId}/session/{sessionId}'.sub('{' + 'sessionId' + '}', CGI.escape(session_id.to_s)).sub('{' + 'folderId' + '}', CGI.escape(folder_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type]
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::OperationsApi.abort_upload_session_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::OperationsApi#abort_upload_session_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -300,7 +229,7 @@ module DocspaceApiSdk
     # Get conversion status
     # Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for  the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the  conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  `start=true` starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-conversion-status/
-    # @param file_id [Integer] The file whose conversion is asked about.
+    # @param file_id [Integer, String] The file whose conversion is asked about.
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :start Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows.
     # @return [ConversationResultArrayWrapper]
@@ -312,7 +241,7 @@ module DocspaceApiSdk
     # Get conversion status
     # Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for  the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the  conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  `start=true` starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-conversion-status/
-    # @param file_id [Integer] The file whose conversion is asked about.
+    # @param file_id [Integer, String] The file whose conversion is asked about.
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :start Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows.
     # @return [Array<(ConversationResultArrayWrapper, Integer, Hash)>] ConversationResultArrayWrapper data, response status code and response headers
@@ -361,74 +290,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Files::OperationsApi#check_conversion_status\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Get conversion status (third-party storage)
-    # Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for  the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the  conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  `start=true` starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-conversion-status-third-party/
-    # @param file_id [String] The file whose conversion is asked about.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :start Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows.
-    # @return [ConversationResultArrayWrapper]
-    def check_conversion_status_third_party(file_id, opts = {})
-      data, _status_code, _headers = check_conversion_status_third_party_with_http_info(file_id, opts)
-      data
-    end
-
-    # Get conversion status (third-party storage)
-    # Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for  the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the  conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  `start=true` starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-conversion-status-third-party/
-    # @param file_id [String] The file whose conversion is asked about.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :start Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows.
-    # @return [Array<(ConversationResultArrayWrapper, Integer, Hash)>] ConversationResultArrayWrapper data, response status code and response headers
-    def check_conversion_status_third_party_with_http_info(file_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::OperationsApi.check_conversion_status_third_party ...'
-      end
-      # verify the required parameter 'file_id' is set
-      if @api_client.config.client_side_validation && file_id.nil?
-        fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::OperationsApi.check_conversion_status_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/file/{fileId}/checkconversion'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'start'] = opts[:'start'] if !opts[:'start'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ConversationResultArrayWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::OperationsApi.check_conversion_status_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::OperationsApi#check_conversion_status_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -626,10 +487,10 @@ module DocspaceApiSdk
     # Chunked upload
     # Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session/
-    # @param folder_id [Integer] The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+    # @param folder_id [Integer, String] The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
     # @param session_request [SessionRequest] The file the session is opened for, and how a clash with an existing name is settled.
     # @param [Hash] opts the optional parameters
-    # @return [ChunkedUploadSessionResponseWrapperWrapper]
+    # @return [ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper]
     def create_upload_session(folder_id, session_request, opts = {})
       data, _status_code, _headers = create_upload_session_with_http_info(folder_id, session_request, opts)
       data
@@ -638,10 +499,10 @@ module DocspaceApiSdk
     # Chunked upload
     # Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session/
-    # @param folder_id [Integer] The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+    # @param folder_id [Integer, String] The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
     # @param session_request [SessionRequest] The file the session is opened for, and how a clash with an existing name is settled.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ChunkedUploadSessionResponseWrapperWrapper, Integer, Hash)>] ChunkedUploadSessionResponseWrapperWrapper data, response status code and response headers
+    # @return [Array<(ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper, Integer, Hash)>] ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper data, response status code and response headers
     def create_upload_session_with_http_info(folder_id, session_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::OperationsApi.create_upload_session ...'
@@ -677,7 +538,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(session_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ChunkedUploadSessionResponseWrapperWrapper'
+      return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyChunkedUploadSessionResponseWrapperWrapper' : 'ChunkedUploadSessionResponseWrapperWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -699,89 +560,13 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Chunked upload (third-party storage)
-    # Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-third-party/
-    # @param folder_id [String] The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
-    # @param session_request [SessionRequest] The file the session is opened for, and how a clash with an existing name is settled.
-    # @param [Hash] opts the optional parameters
-    # @return [ThirdPartyChunkedUploadSessionResponseWrapperWrapper]
-    def create_upload_session_third_party(folder_id, session_request, opts = {})
-      data, _status_code, _headers = create_upload_session_third_party_with_http_info(folder_id, session_request, opts)
-      data
-    end
-
-    # Chunked upload (third-party storage)
-    # Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-third-party/
-    # @param folder_id [String] The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
-    # @param session_request [SessionRequest] The file the session is opened for, and how a clash with an existing name is settled.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(ThirdPartyChunkedUploadSessionResponseWrapperWrapper, Integer, Hash)>] ThirdPartyChunkedUploadSessionResponseWrapperWrapper data, response status code and response headers
-    def create_upload_session_third_party_with_http_info(folder_id, session_request, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::OperationsApi.create_upload_session_third_party ...'
-      end
-      # verify the required parameter 'folder_id' is set
-      if @api_client.config.client_side_validation && folder_id.nil?
-        fail ArgumentError, "Missing the required parameter 'folder_id' when calling Files::OperationsApi.create_upload_session_third_party"
-      end
-      # verify the required parameter 'session_request' is set
-      if @api_client.config.client_side_validation && session_request.nil?
-        fail ArgumentError, "Missing the required parameter 'session_request' when calling Files::OperationsApi.create_upload_session_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/{folderId}/upload/create_session'.sub('{' + 'folderId' + '}', CGI.escape(folder_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(session_request)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ThirdPartyChunkedUploadSessionResponseWrapperWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::OperationsApi.create_upload_session_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::OperationsApi#create_upload_session_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Create an upload session
     # Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder/
-    # @param folder_id [Integer] The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+    # @param folder_id [Integer, String] The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
     # @param session_request [SessionRequest] The file the session is opened for, and how a clash with an existing name is settled.
     # @param [Hash] opts the optional parameters
-    # @return [ChunkedUploadSessionResponseResponseWrapper]
+    # @return [ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper]
     def create_upload_session_in_folder(folder_id, session_request, opts = {})
       data, _status_code, _headers = create_upload_session_in_folder_with_http_info(folder_id, session_request, opts)
       data
@@ -790,10 +575,10 @@ module DocspaceApiSdk
     # Create an upload session
     # Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder/
-    # @param folder_id [Integer] The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+    # @param folder_id [Integer, String] The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
     # @param session_request [SessionRequest] The file the session is opened for, and how a clash with an existing name is settled.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ChunkedUploadSessionResponseResponseWrapper, Integer, Hash)>] ChunkedUploadSessionResponseResponseWrapper data, response status code and response headers
+    # @return [Array<(ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper, Integer, Hash)>] ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper data, response status code and response headers
     def create_upload_session_in_folder_with_http_info(folder_id, session_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::OperationsApi.create_upload_session_in_folder ...'
@@ -829,7 +614,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(session_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ChunkedUploadSessionResponseResponseWrapper'
+      return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyChunkedUploadSessionResponseResponseWrapper' : 'ChunkedUploadSessionResponseResponseWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -847,82 +632,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Files::OperationsApi#create_upload_session_in_folder\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Create an upload session (third-party storage)
-    # Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder-third-party/
-    # @param folder_id [String] The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
-    # @param session_request [SessionRequest] The file the session is opened for, and how a clash with an existing name is settled.
-    # @param [Hash] opts the optional parameters
-    # @return [ThirdPartyChunkedUploadSessionResponseResponseWrapper]
-    def create_upload_session_in_folder_third_party(folder_id, session_request, opts = {})
-      data, _status_code, _headers = create_upload_session_in_folder_third_party_with_http_info(folder_id, session_request, opts)
-      data
-    end
-
-    # Create an upload session (third-party storage)
-    # Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder-third-party/
-    # @param folder_id [String] The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
-    # @param session_request [SessionRequest] The file the session is opened for, and how a clash with an existing name is settled.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(ThirdPartyChunkedUploadSessionResponseResponseWrapper, Integer, Hash)>] ThirdPartyChunkedUploadSessionResponseResponseWrapper data, response status code and response headers
-    def create_upload_session_in_folder_third_party_with_http_info(folder_id, session_request, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::OperationsApi.create_upload_session_in_folder_third_party ...'
-      end
-      # verify the required parameter 'folder_id' is set
-      if @api_client.config.client_side_validation && folder_id.nil?
-        fail ArgumentError, "Missing the required parameter 'folder_id' when calling Files::OperationsApi.create_upload_session_in_folder_third_party"
-      end
-      # verify the required parameter 'session_request' is set
-      if @api_client.config.client_side_validation && session_request.nil?
-        fail ArgumentError, "Missing the required parameter 'session_request' when calling Files::OperationsApi.create_upload_session_in_folder_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/{folderId}/session'.sub('{' + 'folderId' + '}', CGI.escape(folder_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(session_request)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ThirdPartyChunkedUploadSessionResponseResponseWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::OperationsApi.create_upload_session_in_folder_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::OperationsApi#create_upload_session_in_folder_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1263,10 +972,10 @@ module DocspaceApiSdk
     # Finalize an upload session
     # Assembles the parts received so far into the file the session was opened for and closes the session. What  comes out depends on how the session started: one opened against an existing file through  `POST api/2.0/files/file/{fileId}/edit_session` replaces that content in place and keeps the version number,  while one opened against a folder either creates the file or, when a file of the same name was taken over,  stores the content as its next version. A form loses its filling state on the way in. The answer arrives with  201 and carries the identifiers of the file together with the file itself. The call ends the session: the  record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort  afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the  progress from the chunk calls first. An unknown, already closed or expired session id fails instead of  answering as missing.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/finalize-session/
-    # @param folder_id [Integer] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+    # @param folder_id [Integer, String] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
     # @param session_id [String] The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
     # @param [Hash] opts the optional parameters
-    # @return [UploadSessionResponseWrapper]
+    # @return [UploadSessionResponseWrapper, ThirdPartyUploadSessionResponseWrapper]
     def finalize_session(folder_id, session_id, opts = {})
       data, _status_code, _headers = finalize_session_with_http_info(folder_id, session_id, opts)
       data
@@ -1275,10 +984,10 @@ module DocspaceApiSdk
     # Finalize an upload session
     # Assembles the parts received so far into the file the session was opened for and closes the session. What  comes out depends on how the session started: one opened against an existing file through  `POST api/2.0/files/file/{fileId}/edit_session` replaces that content in place and keeps the version number,  while one opened against a folder either creates the file or, when a file of the same name was taken over,  stores the content as its next version. A form loses its filling state on the way in. The answer arrives with  201 and carries the identifiers of the file together with the file itself. The call ends the session: the  record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort  afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the  progress from the chunk calls first. An unknown, already closed or expired session id fails instead of  answering as missing.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/finalize-session/
-    # @param folder_id [Integer] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+    # @param folder_id [Integer, String] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
     # @param session_id [String] The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(UploadSessionResponseWrapper, Integer, Hash)>] UploadSessionResponseWrapper data, response status code and response headers
+    # @return [Array<(UploadSessionResponseWrapper, ThirdPartyUploadSessionResponseWrapper, Integer, Hash)>] UploadSessionResponseWrapper, ThirdPartyUploadSessionResponseWrapper data, response status code and response headers
     def finalize_session_with_http_info(folder_id, session_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::OperationsApi.finalize_session ...'
@@ -1309,7 +1018,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UploadSessionResponseWrapper'
+      return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyUploadSessionResponseWrapper' : 'UploadSessionResponseWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -1327,77 +1036,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Files::OperationsApi#finalize_session\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Finalize an upload session (third-party storage)
-    # Assembles the parts received so far into the file the session was opened for and closes the session. What  comes out depends on how the session started: one opened against an existing file through  `POST api/2.0/files/file/{fileId}/edit_session` replaces that content in place and keeps the version number,  while one opened against a folder either creates the file or, when a file of the same name was taken over,  stores the content as its next version. A form loses its filling state on the way in. The answer arrives with  201 and carries the identifiers of the file together with the file itself. The call ends the session: the  record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort  afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the  progress from the chunk calls first. An unknown, already closed or expired session id fails instead of  answering as missing.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/finalize-session-third-party/
-    # @param folder_id [String] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-    # @param session_id [String] The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
-    # @param [Hash] opts the optional parameters
-    # @return [ThirdPartyUploadSessionResponseWrapper]
-    def finalize_session_third_party(folder_id, session_id, opts = {})
-      data, _status_code, _headers = finalize_session_third_party_with_http_info(folder_id, session_id, opts)
-      data
-    end
-
-    # Finalize an upload session (third-party storage)
-    # Assembles the parts received so far into the file the session was opened for and closes the session. What  comes out depends on how the session started: one opened against an existing file through  `POST api/2.0/files/file/{fileId}/edit_session` replaces that content in place and keeps the version number,  while one opened against a folder either creates the file or, when a file of the same name was taken over,  stores the content as its next version. A form loses its filling state on the way in. The answer arrives with  201 and carries the identifiers of the file together with the file itself. The call ends the session: the  record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort  afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the  progress from the chunk calls first. An unknown, already closed or expired session id fails instead of  answering as missing.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/finalize-session-third-party/
-    # @param folder_id [String] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-    # @param session_id [String] The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(ThirdPartyUploadSessionResponseWrapper, Integer, Hash)>] ThirdPartyUploadSessionResponseWrapper data, response status code and response headers
-    def finalize_session_third_party_with_http_info(folder_id, session_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::OperationsApi.finalize_session_third_party ...'
-      end
-      # verify the required parameter 'folder_id' is set
-      if @api_client.config.client_side_validation && folder_id.nil?
-        fail ArgumentError, "Missing the required parameter 'folder_id' when calling Files::OperationsApi.finalize_session_third_party"
-      end
-      # verify the required parameter 'session_id' is set
-      if @api_client.config.client_side_validation && session_id.nil?
-        fail ArgumentError, "Missing the required parameter 'session_id' when calling Files::OperationsApi.finalize_session_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/{folderId}/session/{sessionId}/finalize'.sub('{' + 'folderId' + '}', CGI.escape(folder_id.to_s)).sub('{' + 'sessionId' + '}', CGI.escape(session_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ThirdPartyUploadSessionResponseWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::OperationsApi.finalize_session_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::OperationsApi#finalize_session_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1667,9 +1305,9 @@ module DocspaceApiSdk
     # Start file conversion
     # Queues the conversion of a file into the portal's own editable format and answers with the conversion entry  the caller is to poll. The whole body may be omitted, in which case the defaults apply. `outputType` names the  target format and, left empty, the portal's default for that kind of document is used; `password` unlocks a  protected source file; `version` converts an older version instead of the current one. `createNewIfExist`  decides where the result goes: with `true` a new file is created beside the source, while with `false`, the  default, the converted file that already exists is replaced. `sync=true` converts inside the request and  answers with the finished result instead of a queue entry, which is only sensible for small documents.  Otherwise poll `GET api/2.0/files/file/{fileId}/checkconversion` until `progress` reaches 100 and take the  converted file from `file`. Only formats the portal has to convert are accepted; anything already editable,  and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The  caller needs read access to the file. The call is mutating and not idempotent.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/start-file-conversion/
-    # @param file_id [Integer] The file to convert.
+    # @param file_id [Integer, String] The file to convert.
     # @param [Hash] opts the optional parameters
-    # @option opts [CheckConversionRequestDto] :check_conversion_request_dto The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply.
+    # @option opts [CheckConversionRequestDto, ThirdPartyCheckConversionRequestDto] :check_conversion_request_dto The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply.
     # @return [ConversationResultArrayWrapper]
     def start_file_conversion(file_id, opts = {})
       data, _status_code, _headers = start_file_conversion_with_http_info(file_id, opts)
@@ -1679,9 +1317,9 @@ module DocspaceApiSdk
     # Start file conversion
     # Queues the conversion of a file into the portal's own editable format and answers with the conversion entry  the caller is to poll. The whole body may be omitted, in which case the defaults apply. `outputType` names the  target format and, left empty, the portal's default for that kind of document is used; `password` unlocks a  protected source file; `version` converts an older version instead of the current one. `createNewIfExist`  decides where the result goes: with `true` a new file is created beside the source, while with `false`, the  default, the converted file that already exists is replaced. `sync=true` converts inside the request and  answers with the finished result instead of a queue entry, which is only sensible for small documents.  Otherwise poll `GET api/2.0/files/file/{fileId}/checkconversion` until `progress` reaches 100 and take the  converted file from `file`. Only formats the portal has to convert are accepted; anything already editable,  and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The  caller needs read access to the file. The call is mutating and not idempotent.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/start-file-conversion/
-    # @param file_id [Integer] The file to convert.
+    # @param file_id [Integer, String] The file to convert.
     # @param [Hash] opts the optional parameters
-    # @option opts [CheckConversionRequestDto] :check_conversion_request_dto The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply.
+    # @option opts [CheckConversionRequestDto, ThirdPartyCheckConversionRequestDto] :check_conversion_request_dto The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply.
     # @return [Array<(ConversationResultArrayWrapper, Integer, Hash)>] ConversationResultArrayWrapper data, response status code and response headers
     def start_file_conversion_with_http_info(file_id, opts = {})
       if @api_client.config.debugging
@@ -1732,78 +1370,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Files::OperationsApi#start_file_conversion\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Start file conversion (third-party storage)
-    # Queues the conversion of a file into the portal's own editable format and answers with the conversion entry  the caller is to poll. The whole body may be omitted, in which case the defaults apply. `outputType` names the  target format and, left empty, the portal's default for that kind of document is used; `password` unlocks a  protected source file; `version` converts an older version instead of the current one. `createNewIfExist`  decides where the result goes: with `true` a new file is created beside the source, while with `false`, the  default, the converted file that already exists is replaced. `sync=true` converts inside the request and  answers with the finished result instead of a queue entry, which is only sensible for small documents.  Otherwise poll `GET api/2.0/files/file/{fileId}/checkconversion` until `progress` reaches 100 and take the  converted file from `file`. Only formats the portal has to convert are accepted; anything already editable,  and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The  caller needs read access to the file. The call is mutating and not idempotent.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/start-file-conversion-third-party/
-    # @param file_id [String] The file to convert.
-    # @param [Hash] opts the optional parameters
-    # @option opts [ThirdPartyCheckConversionRequestDto] :third_party_check_conversion_request_dto The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply.
-    # @return [ConversationResultArrayWrapper]
-    def start_file_conversion_third_party(file_id, opts = {})
-      data, _status_code, _headers = start_file_conversion_third_party_with_http_info(file_id, opts)
-      data
-    end
-
-    # Start file conversion (third-party storage)
-    # Queues the conversion of a file into the portal's own editable format and answers with the conversion entry  the caller is to poll. The whole body may be omitted, in which case the defaults apply. `outputType` names the  target format and, left empty, the portal's default for that kind of document is used; `password` unlocks a  protected source file; `version` converts an older version instead of the current one. `createNewIfExist`  decides where the result goes: with `true` a new file is created beside the source, while with `false`, the  default, the converted file that already exists is replaced. `sync=true` converts inside the request and  answers with the finished result instead of a queue entry, which is only sensible for small documents.  Otherwise poll `GET api/2.0/files/file/{fileId}/checkconversion` until `progress` reaches 100 and take the  converted file from `file`. Only formats the portal has to convert are accepted; anything already editable,  and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The  caller needs read access to the file. The call is mutating and not idempotent.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/start-file-conversion-third-party/
-    # @param file_id [String] The file to convert.
-    # @param [Hash] opts the optional parameters
-    # @option opts [ThirdPartyCheckConversionRequestDto] :third_party_check_conversion_request_dto The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply.
-    # @return [Array<(ConversationResultArrayWrapper, Integer, Hash)>] ConversationResultArrayWrapper data, response status code and response headers
-    def start_file_conversion_third_party_with_http_info(file_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::OperationsApi.start_file_conversion_third_party ...'
-      end
-      # verify the required parameter 'file_id' is set
-      if @api_client.config.client_side_validation && file_id.nil?
-        fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::OperationsApi.start_file_conversion_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/file/{fileId}/checkconversion'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'third_party_check_conversion_request_dto'])
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ConversationResultArrayWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::OperationsApi.start_file_conversion_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::OperationsApi#start_file_conversion_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1876,7 +1442,7 @@ module DocspaceApiSdk
     # Update a comment
     # Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else's file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment/
-    # @param file_id [Integer] The file whose version comment is replaced.
+    # @param file_id [Integer, String] The file whose version comment is replaced.
     # @param update_comment [UpdateComment] The version and the comment to store on it.
     # @param [Hash] opts the optional parameters
     # @return [StringWrapper]
@@ -1888,7 +1454,7 @@ module DocspaceApiSdk
     # Update a comment
     # Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else's file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment/
-    # @param file_id [Integer] The file whose version comment is replaced.
+    # @param file_id [Integer, String] The file whose version comment is replaced.
     # @param update_comment [UpdateComment] The version and the comment to store on it.
     # @param [Hash] opts the optional parameters
     # @return [Array<(StringWrapper, Integer, Hash)>] StringWrapper data, response status code and response headers
@@ -1949,91 +1515,15 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Update a comment (third-party storage)
-    # Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else's file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment-third-party/
-    # @param file_id [String] The file whose version comment is replaced.
-    # @param update_comment [UpdateComment] The version and the comment to store on it.
-    # @param [Hash] opts the optional parameters
-    # @return [StringWrapper]
-    def update_file_comment_third_party(file_id, update_comment, opts = {})
-      data, _status_code, _headers = update_file_comment_third_party_with_http_info(file_id, update_comment, opts)
-      data
-    end
-
-    # Update a comment (third-party storage)
-    # Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else's file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment-third-party/
-    # @param file_id [String] The file whose version comment is replaced.
-    # @param update_comment [UpdateComment] The version and the comment to store on it.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(StringWrapper, Integer, Hash)>] StringWrapper data, response status code and response headers
-    def update_file_comment_third_party_with_http_info(file_id, update_comment, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::OperationsApi.update_file_comment_third_party ...'
-      end
-      # verify the required parameter 'file_id' is set
-      if @api_client.config.client_side_validation && file_id.nil?
-        fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::OperationsApi.update_file_comment_third_party"
-      end
-      # verify the required parameter 'update_comment' is set
-      if @api_client.config.client_side_validation && update_comment.nil?
-        fail ArgumentError, "Missing the required parameter 'update_comment' when calling Files::OperationsApi.update_file_comment_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/file/{fileId}/comment'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_comment)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'StringWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::OperationsApi.update_file_comment_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::OperationsApi#update_file_comment_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Upload a numbered chunk
     # Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session/
-    # @param folder_id [Integer] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+    # @param folder_id [Integer, String] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
     # @param session_id [String] The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :chunk_number The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself.
     # @option opts [File] :file The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused.
-    # @return [ChunkedUploadSessionResponseResponseWrapper]
+    # @return [ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper]
     def upload_async_session(folder_id, session_id, opts = {})
       data, _status_code, _headers = upload_async_session_with_http_info(folder_id, session_id, opts)
       data
@@ -2042,12 +1532,12 @@ module DocspaceApiSdk
     # Upload a numbered chunk
     # Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session/
-    # @param folder_id [Integer] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+    # @param folder_id [Integer, String] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
     # @param session_id [String] The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :chunk_number The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself.
     # @option opts [File] :file The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused.
-    # @return [Array<(ChunkedUploadSessionResponseResponseWrapper, Integer, Hash)>] ChunkedUploadSessionResponseResponseWrapper data, response status code and response headers
+    # @return [Array<(ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper, Integer, Hash)>] ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper data, response status code and response headers
     def upload_async_session_with_http_info(folder_id, session_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::OperationsApi.upload_async_session ...'
@@ -2085,7 +1575,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ChunkedUploadSessionResponseResponseWrapper'
+      return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyChunkedUploadSessionResponseResponseWrapper' : 'ChunkedUploadSessionResponseResponseWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -2107,96 +1597,14 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Upload a numbered chunk (third-party storage)
-    # Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session-third-party/
-    # @param folder_id [String] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-    # @param session_id [String] The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :chunk_number The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself.
-    # @option opts [File] :file The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused.
-    # @return [ThirdPartyChunkedUploadSessionResponseResponseWrapper]
-    def upload_async_session_third_party(folder_id, session_id, opts = {})
-      data, _status_code, _headers = upload_async_session_third_party_with_http_info(folder_id, session_id, opts)
-      data
-    end
-
-    # Upload a numbered chunk (third-party storage)
-    # Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session-third-party/
-    # @param folder_id [String] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-    # @param session_id [String] The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :chunk_number The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself.
-    # @option opts [File] :file The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused.
-    # @return [Array<(ThirdPartyChunkedUploadSessionResponseResponseWrapper, Integer, Hash)>] ThirdPartyChunkedUploadSessionResponseResponseWrapper data, response status code and response headers
-    def upload_async_session_third_party_with_http_info(folder_id, session_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::OperationsApi.upload_async_session_third_party ...'
-      end
-      # verify the required parameter 'folder_id' is set
-      if @api_client.config.client_side_validation && folder_id.nil?
-        fail ArgumentError, "Missing the required parameter 'folder_id' when calling Files::OperationsApi.upload_async_session_third_party"
-      end
-      # verify the required parameter 'session_id' is set
-      if @api_client.config.client_side_validation && session_id.nil?
-        fail ArgumentError, "Missing the required parameter 'session_id' when calling Files::OperationsApi.upload_async_session_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/{folderId}/session/{sessionId}/upload'.sub('{' + 'folderId' + '}', CGI.escape(folder_id.to_s)).sub('{' + 'sessionId' + '}', CGI.escape(session_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'ChunkNumber'] = opts[:'chunk_number'] if !opts[:'chunk_number'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['multipart/form-data'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-      form_params['File'] = opts[:'file'] if !opts[:'file'].nil?
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ThirdPartyChunkedUploadSessionResponseResponseWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::OperationsApi.upload_async_session_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::OperationsApi#upload_async_session_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Upload the next chunk
     # Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-session/
-    # @param folder_id [Integer] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+    # @param folder_id [Integer, String] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
     # @param session_id [String] The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel.
     # @param [Hash] opts the optional parameters
     # @option opts [File] :file The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused.
-    # @return [UploadSessionResponseWrapper]
+    # @return [UploadSessionResponseWrapper, ThirdPartyUploadSessionResponseWrapper]
     def upload_session(folder_id, session_id, opts = {})
       data, _status_code, _headers = upload_session_with_http_info(folder_id, session_id, opts)
       data
@@ -2205,11 +1613,11 @@ module DocspaceApiSdk
     # Upload the next chunk
     # Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-session/
-    # @param folder_id [Integer] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+    # @param folder_id [Integer, String] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
     # @param session_id [String] The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel.
     # @param [Hash] opts the optional parameters
     # @option opts [File] :file The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused.
-    # @return [Array<(UploadSessionResponseWrapper, Integer, Hash)>] UploadSessionResponseWrapper data, response status code and response headers
+    # @return [Array<(UploadSessionResponseWrapper, ThirdPartyUploadSessionResponseWrapper, Integer, Hash)>] UploadSessionResponseWrapper, ThirdPartyUploadSessionResponseWrapper data, response status code and response headers
     def upload_session_with_http_info(folder_id, session_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::OperationsApi.upload_session ...'
@@ -2246,7 +1654,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'UploadSessionResponseWrapper'
+      return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyUploadSessionResponseWrapper' : 'UploadSessionResponseWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -2264,85 +1672,6 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Files::OperationsApi#upload_session\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Upload the next chunk (third-party storage)
-    # Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-session-third-party/
-    # @param folder_id [String] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-    # @param session_id [String] The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel.
-    # @param [Hash] opts the optional parameters
-    # @option opts [File] :file The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused.
-    # @return [ThirdPartyUploadSessionResponseWrapper]
-    def upload_session_third_party(folder_id, session_id, opts = {})
-      data, _status_code, _headers = upload_session_third_party_with_http_info(folder_id, session_id, opts)
-      data
-    end
-
-    # Upload the next chunk (third-party storage)
-    # Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-session-third-party/
-    # @param folder_id [String] The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-    # @param session_id [String] The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel.
-    # @param [Hash] opts the optional parameters
-    # @option opts [File] :file The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused.
-    # @return [Array<(ThirdPartyUploadSessionResponseWrapper, Integer, Hash)>] ThirdPartyUploadSessionResponseWrapper data, response status code and response headers
-    def upload_session_third_party_with_http_info(folder_id, session_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: Files::OperationsApi.upload_session_third_party ...'
-      end
-      # verify the required parameter 'folder_id' is set
-      if @api_client.config.client_side_validation && folder_id.nil?
-        fail ArgumentError, "Missing the required parameter 'folder_id' when calling Files::OperationsApi.upload_session_third_party"
-      end
-      # verify the required parameter 'session_id' is set
-      if @api_client.config.client_side_validation && session_id.nil?
-        fail ArgumentError, "Missing the required parameter 'session_id' when calling Files::OperationsApi.upload_session_third_party"
-      end
-      # resource path
-      local_var_path = '/api/2.0/files/{folderId}/session/{sessionId}'.sub('{' + 'folderId' + '}', CGI.escape(folder_id.to_s)).sub('{' + 'sessionId' + '}', CGI.escape(session_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['multipart/form-data'])
-      if !content_type.nil?
-          header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-      form_params['File'] = opts[:'file'] if !opts[:'file'].nil?
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'ThirdPartyUploadSessionResponseWrapper'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
-
-      new_options = opts.merge(
-        :operation => :"Files::OperationsApi.upload_session_third_party",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: Files::OperationsApi#upload_session_third_party\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

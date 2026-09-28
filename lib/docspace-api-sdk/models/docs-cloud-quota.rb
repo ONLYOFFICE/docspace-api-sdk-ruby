@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents the current user quota of a DocsCloud tenant.
+  # Represents the current user quota of a Docs Connect tenant.
   class DocsCloudQuota < ApiModelBase
     # The editor users.
     attr_accessor :users

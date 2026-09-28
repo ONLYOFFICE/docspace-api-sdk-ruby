@@ -25,11 +25,23 @@ module DocspaceApiSdk
     # The cost of one million tokens the model writes back. It is normally the dearer of the two directions.
     attr_accessor :completion
 
+    # The cost of one million prompt tokens served from the prompt cache. It is absent when the model does not  support prompt caching.
+    attr_accessor :prompt_cache_read
+
+    # The cost of one million prompt tokens written to the prompt cache with the default lifetime. It is absent  when the model does not support prompt caching.
+    attr_accessor :prompt_cache_write
+
+    # The cost of one million prompt tokens written to the prompt cache with a one-hour lifetime. It is absent  when the model offers no such option.
+    attr_accessor :prompt_cache_write1_h
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'prompt' => :'prompt',
-        :'completion' => :'completion'
+        :'completion' => :'completion',
+        :'prompt_cache_read' => :'promptCacheRead',
+        :'prompt_cache_write' => :'promptCacheWrite',
+        :'prompt_cache_write1_h' => :'promptCacheWrite1H'
       }
     end
 
@@ -47,13 +59,19 @@ module DocspaceApiSdk
     def self.openapi_types
       {
         :'prompt' => :'Float',
-        :'completion' => :'Float'
+        :'completion' => :'Float',
+        :'prompt_cache_read' => :'Float',
+        :'prompt_cache_write' => :'Float',
+        :'prompt_cache_write1_h' => :'Float'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'prompt_cache_read',
+        :'prompt_cache_write',
+        :'prompt_cache_write1_h'
       ])
     end
 
@@ -80,6 +98,18 @@ module DocspaceApiSdk
       if attributes.key?(:'completion')
         self.completion = attributes[:'completion']
       end
+
+      if attributes.key?(:'prompt_cache_read')
+        self.prompt_cache_read = attributes[:'prompt_cache_read']
+      end
+
+      if attributes.key?(:'prompt_cache_write')
+        self.prompt_cache_write = attributes[:'prompt_cache_write']
+      end
+
+      if attributes.key?(:'prompt_cache_write1_h')
+        self.prompt_cache_write1_h = attributes[:'prompt_cache_write1_h']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -103,7 +133,10 @@ module DocspaceApiSdk
       return true if self.equal?(o)
       self.class == o.class &&
           prompt == o.prompt &&
-          completion == o.completion
+          completion == o.completion &&
+          prompt_cache_read == o.prompt_cache_read &&
+          prompt_cache_write == o.prompt_cache_write &&
+          prompt_cache_write1_h == o.prompt_cache_write1_h
     end
 
     # @see the `==` method
@@ -115,7 +148,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [prompt, completion].hash
+      [prompt, completion, prompt_cache_read, prompt_cache_write, prompt_cache_write1_h].hash
     end
 
     # Builds the object from hash

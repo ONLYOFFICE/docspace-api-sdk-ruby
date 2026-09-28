@@ -4,6 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **admin_panel** | [**CultureSpecificExternalResource**](CultureSpecificExternalResource.md) | The link to the administration panel. It is returned only to the full administrators of a licensed (Enterprise) server (standalone) portal. | [optional] |
 | **api** | [**CultureSpecificExternalResource**](CultureSpecificExternalResource.md) | The link to the product API. | [optional] |
 | **common** | [**CultureSpecificExternalResource**](CultureSpecificExternalResource.md) | The link to the common product information. | [optional] |
 | **forum** | [**CultureSpecificExternalResource**](CultureSpecificExternalResource.md) | The link to the forum. | [optional] |
@@ -20,6 +21,7 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::CultureSpecificExternalResources.new(
+  admin_panel: null,
   api: null,
   common: null,
   forum: null,

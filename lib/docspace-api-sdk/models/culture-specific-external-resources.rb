@@ -19,6 +19,9 @@ require 'time'
 module DocspaceApiSdk
   # The external resources settings.
   class CultureSpecificExternalResources < ApiModelBase
+    # The link to the administration panel. It is returned only to the full administrators of a licensed (Enterprise) server (standalone) portal.
+    attr_accessor :admin_panel
+
     # The link to the product API.
     attr_accessor :api
 
@@ -49,6 +52,7 @@ module DocspaceApiSdk
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'admin_panel' => :'adminPanel',
         :'api' => :'api',
         :'common' => :'common',
         :'forum' => :'forum',
@@ -74,6 +78,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'admin_panel' => :'CultureSpecificExternalResource',
         :'api' => :'CultureSpecificExternalResource',
         :'common' => :'CultureSpecificExternalResource',
         :'forum' => :'CultureSpecificExternalResource',
@@ -107,6 +112,10 @@ module DocspaceApiSdk
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'admin_panel')
+        self.admin_panel = attributes[:'admin_panel']
+      end
 
       if attributes.key?(:'api')
         self.api = attributes[:'api']
@@ -165,6 +174,7 @@ module DocspaceApiSdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          admin_panel == o.admin_panel &&
           api == o.api &&
           common == o.common &&
           forum == o.forum &&
@@ -185,7 +195,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [api, common, forum, helpcenter, integrations, site, social_networks, support, videoguides].hash
+      [admin_panel, api, common, forum, helpcenter, integrations, site, social_networks, support, videoguides].hash
     end
 
     # Builds the object from hash

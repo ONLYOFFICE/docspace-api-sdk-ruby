@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents the usage statistics of a DocsCloud tenant for the current period.
+  # Represents the usage statistics of a Docs Connect tenant for the current period.
   class DocsCloudStats < ApiModelBase
     # The length of the statistics period in days.
     attr_accessor :period_day

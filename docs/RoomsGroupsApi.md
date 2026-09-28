@@ -422,7 +422,8 @@ end
 
 api_instance = DocspaceApiSdk::Rooms::GroupsApi.new
 opts = {
-  include_members: true # Boolean | Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.
+  include_members: true, # Boolean | Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.
+  search_area: DocspaceApiSdk::SearchArea::ACTIVE # SearchArea | The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.
 }
 
 begin
@@ -457,6 +458,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **include_members** | **Boolean** | Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`. | [optional] |
+| **search_area** | **SearchArea** | The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted. | [optional] |
 
 ### Return type
 

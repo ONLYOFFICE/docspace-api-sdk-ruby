@@ -51,7 +51,7 @@ module DocspaceApiSdk
       {
         :'id' => :'String',
         :'enabled' => :'Boolean',
-        :'settings' => :'AppDtoSettings'
+        :'settings' => :'Object'
       }
     end
 
@@ -59,6 +59,7 @@ module DocspaceApiSdk
     def self.openapi_nullable
       Set.new([
         :'id',
+        :'settings'
       ])
     end
 

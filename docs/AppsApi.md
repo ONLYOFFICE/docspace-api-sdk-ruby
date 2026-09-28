@@ -188,7 +188,7 @@ This endpoint does not need any parameter.
 
 ## get_settings
 
-> <UnknownNullableWrapper> get_settings(id)
+> <JsonValueWrapper> get_settings(id)
 
 Get app settings
 
@@ -241,7 +241,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<UnknownNullableWrapper>, Integer, Hash)> get_settings_with_http_info(id)
+> <Array(<JsonValueWrapper>, Integer, Hash)> get_settings_with_http_info(id)
 
 ```ruby
 begin
@@ -249,7 +249,7 @@ begin
   data, status_code, headers = api_instance.get_settings_with_http_info(id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <UnknownNullableWrapper>
+  p data # => <JsonValueWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Apps::AppsApi->get_settings_with_http_info: #{e}"
 end
@@ -263,7 +263,7 @@ end
 
 ### Return type
 
-[**UnknownNullableWrapper**](UnknownNullableWrapper.md)
+[**JsonValueWrapper**](JsonValueWrapper.md)
 
 ### Authorization
 

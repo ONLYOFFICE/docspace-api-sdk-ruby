@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents the configuration of a DocsCloud tenant.
+  # Represents the configuration of a Docs Connect tenant.
   class DocsCloudConfig < ApiModelBase
     # The tenant name.
     attr_accessor :tenant_name

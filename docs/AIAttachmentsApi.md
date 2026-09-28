@@ -8,6 +8,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | [**ai_attachments_delete_many**](AIAttachmentsApi.md#ai_attachments_delete_many) | **DELETE** /api/2.0/ai/attachments/delete-many | Delete many |
 | [**ai_attachments_get**](AIAttachmentsApi.md#ai_attachments_get) | **POST** /api/2.0/ai/attachments/get | Get one attachment |
 | [**ai_attachments_get_many**](AIAttachmentsApi.md#ai_attachments_get_many) | **POST** /api/2.0/ai/attachments/get-many | Get many |
+| [**ai_attachments_get_suggested_questions**](AIAttachmentsApi.md#ai_attachments_get_suggested_questions) | **POST** /api/2.0/ai/attachments/suggested-questions | Get suggested questions |
 | [**ai_attachments_link_to_message**](AIAttachmentsApi.md#ai_attachments_link_to_message) | **POST** /api/2.0/ai/attachments/link-to-message | Link to message |
 | [**ai_attachments_save_file**](AIAttachmentsApi.md#ai_attachments_save_file) | **POST** /api/2.0/ai/attachments/save-file | Save file |
 | [**ai_attachments_save_files_many**](AIAttachmentsApi.md#ai_attachments_save_files_many) | **POST** /api/2.0/ai/attachments/save-files-many | Save files many |
@@ -306,6 +307,80 @@ end
 ### Return type
 
 [**Array&lt;AiAttachment&gt;**](AiAttachment.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## ai_attachments_get_suggested_questions
+
+> <AiSuccessResponse> ai_attachments_get_suggested_questions(request_body)
+
+Get suggested questions
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-suggested-questions/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = DocspaceApiSdk::AI::AttachmentsApi.new
+request_body = { key: 3.56} # Hash<String, Object> | 
+
+begin
+  # Get suggested questions
+  result = api_instance.ai_attachments_get_suggested_questions(request_body)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling AI::AttachmentsApi->ai_attachments_get_suggested_questions: #{e}"
+end
+```
+
+#### Using the ai_attachments_get_suggested_questions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AiSuccessResponse>, Integer, Hash)> ai_attachments_get_suggested_questions_with_http_info(request_body)
+
+```ruby
+begin
+  # Get suggested questions
+  data, status_code, headers = api_instance.ai_attachments_get_suggested_questions_with_http_info(request_body)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AiSuccessResponse>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling AI::AttachmentsApi->ai_attachments_get_suggested_questions_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **request_body** | [**Hash&lt;String, Object&gt;**](Object.md) |  |  |
+
+### Return type
+
+[**AiSuccessResponse**](AiSuccessResponse.md)
 
 ### Authorization
 

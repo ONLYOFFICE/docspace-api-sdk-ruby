@@ -302,6 +302,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-groups/
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :include_members Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.
+    # @option opts [SearchArea] :search_area The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.
     # @return [RoomGroupArrayWrapper]
     def get_room_groups(opts = {})
       data, _status_code, _headers = get_room_groups_with_http_info(opts)
@@ -313,6 +314,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-groups/
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :include_members Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.
+    # @option opts [SearchArea] :search_area The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.
     # @return [Array<(RoomGroupArrayWrapper, Integer, Hash)>] RoomGroupArrayWrapper data, response status code and response headers
     def get_room_groups_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -324,6 +326,7 @@ module DocspaceApiSdk
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'includeMembers'] = opts[:'include_members'] if !opts[:'include_members'].nil?
+      query_params[:'searchArea'] = opts[:'search_area'] if !opts[:'search_area'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

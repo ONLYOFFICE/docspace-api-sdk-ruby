@@ -5,38 +5,29 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**abort_upload_session**](FilesOperationsApi.md#abort_upload_session) | **DELETE** /api/2.0/files/{folderId}/session/{sessionId} | Abort an upload session |
-| [**abort_upload_session_third_party**](FilesOperationsApi.md#abort_upload_session_third_party) | **DELETE** /api/2.0/files/{folderId}/session/{sessionId} | Abort an upload session (third-party storage) |
 | [**add_favorites**](FilesOperationsApi.md#add_favorites) | **POST** /api/2.0/files/favorites | Add favorite files and folders |
 | [**bulk_download**](FilesOperationsApi.md#bulk_download) | **PUT** /api/2.0/files/fileops/bulkdownload | Bulk download |
 | [**check_conversion_status**](FilesOperationsApi.md#check_conversion_status) | **GET** /api/2.0/files/file/{fileId}/checkconversion | Get conversion status |
-| [**check_conversion_status_third_party**](FilesOperationsApi.md#check_conversion_status_third_party) | **GET** /api/2.0/files/file/{fileId}/checkconversion | Get conversion status (third-party storage) |
 | [**check_move_or_copy_batch_items**](FilesOperationsApi.md#check_move_or_copy_batch_items) | **GET** /api/2.0/files/fileops/move | Check move or copy conflicts |
 | [**check_move_or_copy_dest_folder**](FilesOperationsApi.md#check_move_or_copy_dest_folder) | **GET** /api/2.0/files/fileops/checkdestfolder | Check the destination folder |
 | [**copy_batch_items**](FilesOperationsApi.md#copy_batch_items) | **PUT** /api/2.0/files/fileops/copy | Copy files and folders |
 | [**create_upload_session**](FilesOperationsApi.md#create_upload_session) | **POST** /api/2.0/files/{folderId}/upload/create_session | Chunked upload |
-| [**create_upload_session_third_party**](FilesOperationsApi.md#create_upload_session_third_party) | **POST** /api/2.0/files/{folderId}/upload/create_session | Chunked upload (third-party storage) |
 | [**create_upload_session_in_folder**](FilesOperationsApi.md#create_upload_session_in_folder) | **POST** /api/2.0/files/{folderId}/session | Create an upload session |
-| [**create_upload_session_in_folder_third_party**](FilesOperationsApi.md#create_upload_session_in_folder_third_party) | **POST** /api/2.0/files/{folderId}/session | Create an upload session (third-party storage) |
 | [**delete_batch_items**](FilesOperationsApi.md#delete_batch_items) | **PUT** /api/2.0/files/fileops/delete | Delete files and folders |
 | [**delete_favorites_from_body**](FilesOperationsApi.md#delete_favorites_from_body) | **DELETE** /api/2.0/files/favorites | Delete favorite files and folders |
 | [**delete_file_versions**](FilesOperationsApi.md#delete_file_versions) | **PUT** /api/2.0/files/fileops/deleteversion | Delete file versions |
 | [**duplicate_batch_items**](FilesOperationsApi.md#duplicate_batch_items) | **PUT** /api/2.0/files/fileops/duplicate | Duplicate files and folders |
 | [**empty_trash**](FilesOperationsApi.md#empty_trash) | **PUT** /api/2.0/files/fileops/emptytrash | Empty the Trash folder |
 | [**finalize_session**](FilesOperationsApi.md#finalize_session) | **PUT** /api/2.0/files/{folderId}/session/{sessionId}/finalize | Finalize an upload session |
-| [**finalize_session_third_party**](FilesOperationsApi.md#finalize_session_third_party) | **PUT** /api/2.0/files/{folderId}/session/{sessionId}/finalize | Finalize an upload session (third-party storage) |
 | [**get_operation_statuses**](FilesOperationsApi.md#get_operation_statuses) | **GET** /api/2.0/files/fileops | Get active file operations |
 | [**get_operation_statuses_by_type**](FilesOperationsApi.md#get_operation_statuses_by_type) | **GET** /api/2.0/files/fileops/{operationType} | Get file operations by type |
 | [**mark_as_read**](FilesOperationsApi.md#mark_as_read) | **PUT** /api/2.0/files/fileops/markasread | Mark files and folders as read |
 | [**move_batch_items**](FilesOperationsApi.md#move_batch_items) | **PUT** /api/2.0/files/fileops/move | Move files and folders |
 | [**start_file_conversion**](FilesOperationsApi.md#start_file_conversion) | **PUT** /api/2.0/files/file/{fileId}/checkconversion | Start file conversion |
-| [**start_file_conversion_third_party**](FilesOperationsApi.md#start_file_conversion_third_party) | **PUT** /api/2.0/files/file/{fileId}/checkconversion | Start file conversion (third-party storage) |
 | [**terminate_tasks**](FilesOperationsApi.md#terminate_tasks) | **PUT** /api/2.0/files/fileops/terminate/{id} | Cancel file operations |
 | [**update_file_comment**](FilesOperationsApi.md#update_file_comment) | **PUT** /api/2.0/files/file/{fileId}/comment | Update a comment |
-| [**update_file_comment_third_party**](FilesOperationsApi.md#update_file_comment_third_party) | **PUT** /api/2.0/files/file/{fileId}/comment | Update a comment (third-party storage) |
 | [**upload_async_session**](FilesOperationsApi.md#upload_async_session) | **POST** /api/2.0/files/{folderId}/session/{sessionId}/upload | Upload a numbered chunk |
-| [**upload_async_session_third_party**](FilesOperationsApi.md#upload_async_session_third_party) | **POST** /api/2.0/files/{folderId}/session/{sessionId}/upload | Upload a numbered chunk (third-party storage) |
 | [**upload_session**](FilesOperationsApi.md#upload_session) | **POST** /api/2.0/files/{folderId}/session/{sessionId} | Upload the next chunk |
-| [**upload_session_third_party**](FilesOperationsApi.md#upload_session_third_party) | **POST** /api/2.0/files/{folderId}/session/{sessionId} | Upload the next chunk (third-party storage) |
 
 
 ## abort_upload_session
@@ -119,95 +110,9 @@ end
 
 nil (empty response body)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## abort_upload_session_third_party
-
-> abort_upload_session_third_party(session_id, folder_id)
-
-Abort an upload session (third-party storage)
-
-Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/abort-upload-session-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Files::OperationsApi.new
-session_id = '9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c' # String | The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
-folder_id = '1' # String | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-
-begin
-  # Abort an upload session (third-party storage)
-  api_instance.abort_upload_session_third_party(session_id, folder_id)
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->abort_upload_session_third_party: #{e}"
-end
-```
-
-#### Using the abort_upload_session_third_party_with_http_info variant
-
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
-
-> <Array(nil, Integer, Hash)> abort_upload_session_third_party_with_http_info(session_id, folder_id)
-
-```ruby
-begin
-  # Abort an upload session (third-party storage)
-  data, status_code, headers = api_instance.abort_upload_session_third_party_with_http_info(session_id, folder_id)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => nil
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->abort_upload_session_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **session_id** | **String** | The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. |  |
-| **folder_id** | **String** | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. |  |
-
-### Return type
-
-nil (empty response body)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id` as `String`.
 
 ### Authorization
 
@@ -471,98 +376,9 @@ end
 
 [**ConversationResultArrayWrapper**](ConversationResultArrayWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## check_conversion_status_third_party
-
-> <ConversationResultArrayWrapper> check_conversion_status_third_party(file_id, opts)
-
-Get conversion status (third-party storage)
-
-Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for  the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the  conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  `start=true` starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-conversion-status-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Files::OperationsApi.new
-file_id = '1' # String | The file whose conversion is asked about.
-opts = {
-  start: false # Boolean | Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows.
-}
-
-begin
-  # Get conversion status (third-party storage)
-  result = api_instance.check_conversion_status_third_party(file_id, opts)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->check_conversion_status_third_party: #{e}"
-end
-```
-
-#### Using the check_conversion_status_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ConversationResultArrayWrapper>, Integer, Hash)> check_conversion_status_third_party_with_http_info(file_id, opts)
-
-```ruby
-begin
-  # Get conversion status (third-party storage)
-  data, status_code, headers = api_instance.check_conversion_status_third_party_with_http_info(file_id, opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ConversationResultArrayWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->check_conversion_status_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **file_id** | **String** | The file whose conversion is asked about. |  |
-| **start** | **Boolean** | Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows. | [optional] |
-
-### Return type
-
-[**ConversationResultArrayWrapper**](ConversationResultArrayWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id` as `String`.
 
 ### Authorization
 
@@ -928,96 +744,9 @@ end
 
 [**ChunkedUploadSessionResponseWrapperWrapper**](ChunkedUploadSessionResponseWrapperWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## create_upload_session_third_party
-
-> <ThirdPartyChunkedUploadSessionResponseWrapperWrapper> create_upload_session_third_party(folder_id, session_request)
-
-Chunked upload (third-party storage)
-
-Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Files::OperationsApi.new
-folder_id = '1' # String | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
-session_request = DocspaceApiSdk::SessionRequest.new({file_name: 'My Document.docx'}) # SessionRequest | The file the session is opened for, and how a clash with an existing name is settled.
-
-begin
-  # Chunked upload (third-party storage)
-  result = api_instance.create_upload_session_third_party(folder_id, session_request)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->create_upload_session_third_party: #{e}"
-end
-```
-
-#### Using the create_upload_session_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ThirdPartyChunkedUploadSessionResponseWrapperWrapper>, Integer, Hash)> create_upload_session_third_party_with_http_info(folder_id, session_request)
-
-```ruby
-begin
-  # Chunked upload (third-party storage)
-  data, status_code, headers = api_instance.create_upload_session_third_party_with_http_info(folder_id, session_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ThirdPartyChunkedUploadSessionResponseWrapperWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->create_upload_session_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **folder_id** | **String** | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. |  |
-| **session_request** | [**SessionRequest**](SessionRequest.md) | The file the session is opened for, and how a clash with an existing name is settled. |  |
-
-### Return type
-
-[**ThirdPartyChunkedUploadSessionResponseWrapperWrapper**](ThirdPartyChunkedUploadSessionResponseWrapperWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id` as `String` and the answer is [**ThirdPartyChunkedUploadSessionResponseWrapperWrapper**](ThirdPartyChunkedUploadSessionResponseWrapperWrapper.md).
 
 ### Authorization
 
@@ -1110,96 +839,9 @@ end
 
 [**ChunkedUploadSessionResponseResponseWrapper**](ChunkedUploadSessionResponseResponseWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## create_upload_session_in_folder_third_party
-
-> <ThirdPartyChunkedUploadSessionResponseResponseWrapper> create_upload_session_in_folder_third_party(folder_id, session_request)
-
-Create an upload session (third-party storage)
-
-Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Files::OperationsApi.new
-folder_id = '1' # String | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
-session_request = DocspaceApiSdk::SessionRequest.new({file_name: 'My Document.docx'}) # SessionRequest | The file the session is opened for, and how a clash with an existing name is settled.
-
-begin
-  # Create an upload session (third-party storage)
-  result = api_instance.create_upload_session_in_folder_third_party(folder_id, session_request)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->create_upload_session_in_folder_third_party: #{e}"
-end
-```
-
-#### Using the create_upload_session_in_folder_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ThirdPartyChunkedUploadSessionResponseResponseWrapper>, Integer, Hash)> create_upload_session_in_folder_third_party_with_http_info(folder_id, session_request)
-
-```ruby
-begin
-  # Create an upload session (third-party storage)
-  data, status_code, headers = api_instance.create_upload_session_in_folder_third_party_with_http_info(folder_id, session_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ThirdPartyChunkedUploadSessionResponseResponseWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->create_upload_session_in_folder_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **folder_id** | **String** | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. |  |
-| **session_request** | [**SessionRequest**](SessionRequest.md) | The file the session is opened for, and how a clash with an existing name is settled. |  |
-
-### Return type
-
-[**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](ThirdPartyChunkedUploadSessionResponseResponseWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id` as `String` and the answer is [**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](ThirdPartyChunkedUploadSessionResponseResponseWrapper.md).
 
 ### Authorization
 
@@ -1749,96 +1391,9 @@ end
 
 [**UploadSessionResponseWrapper**](UploadSessionResponseWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## finalize_session_third_party
-
-> <ThirdPartyUploadSessionResponseWrapper> finalize_session_third_party(folder_id, session_id)
-
-Finalize an upload session (third-party storage)
-
-Assembles the parts received so far into the file the session was opened for and closes the session. What  comes out depends on how the session started: one opened against an existing file through  `POST api/2.0/files/file/{fileId}/edit_session` replaces that content in place and keeps the version number,  while one opened against a folder either creates the file or, when a file of the same name was taken over,  stores the content as its next version. A form loses its filling state on the way in. The answer arrives with  201 and carries the identifiers of the file together with the file itself. The call ends the session: the  record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort  afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the  progress from the chunk calls first. An unknown, already closed or expired session id fails instead of  answering as missing.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/finalize-session-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Files::OperationsApi.new
-folder_id = '1' # String | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-session_id = '9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c' # String | The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
-
-begin
-  # Finalize an upload session (third-party storage)
-  result = api_instance.finalize_session_third_party(folder_id, session_id)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->finalize_session_third_party: #{e}"
-end
-```
-
-#### Using the finalize_session_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ThirdPartyUploadSessionResponseWrapper>, Integer, Hash)> finalize_session_third_party_with_http_info(folder_id, session_id)
-
-```ruby
-begin
-  # Finalize an upload session (third-party storage)
-  data, status_code, headers = api_instance.finalize_session_third_party_with_http_info(folder_id, session_id)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ThirdPartyUploadSessionResponseWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->finalize_session_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **folder_id** | **String** | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. |  |
-| **session_id** | **String** | The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. |  |
-
-### Return type
-
-[**ThirdPartyUploadSessionResponseWrapper**](ThirdPartyUploadSessionResponseWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id` as `String` and the answer is [**ThirdPartyUploadSessionResponseWrapper**](ThirdPartyUploadSessionResponseWrapper.md).
 
 ### Authorization
 
@@ -2273,98 +1828,9 @@ end
 
 [**ConversationResultArrayWrapper**](ConversationResultArrayWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## start_file_conversion_third_party
-
-> <ConversationResultArrayWrapper> start_file_conversion_third_party(file_id, opts)
-
-Start file conversion (third-party storage)
-
-Queues the conversion of a file into the portal's own editable format and answers with the conversion entry  the caller is to poll. The whole body may be omitted, in which case the defaults apply. `outputType` names the  target format and, left empty, the portal's default for that kind of document is used; `password` unlocks a  protected source file; `version` converts an older version instead of the current one. `createNewIfExist`  decides where the result goes: with `true` a new file is created beside the source, while with `false`, the  default, the converted file that already exists is replaced. `sync=true` converts inside the request and  answers with the finished result instead of a queue entry, which is only sensible for small documents.  Otherwise poll `GET api/2.0/files/file/{fileId}/checkconversion` until `progress` reaches 100 and take the  converted file from `file`. Only formats the portal has to convert are accepted; anything already editable,  and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The  caller needs read access to the file. The call is mutating and not idempotent.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-file-conversion-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Files::OperationsApi.new
-file_id = '1' # String | The file to convert.
-opts = {
-  third_party_check_conversion_request_dto: DocspaceApiSdk::ThirdPartyCheckConversionRequestDto.new # ThirdPartyCheckConversionRequestDto | The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply.
-}
-
-begin
-  # Start file conversion (third-party storage)
-  result = api_instance.start_file_conversion_third_party(file_id, opts)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->start_file_conversion_third_party: #{e}"
-end
-```
-
-#### Using the start_file_conversion_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ConversationResultArrayWrapper>, Integer, Hash)> start_file_conversion_third_party_with_http_info(file_id, opts)
-
-```ruby
-begin
-  # Start file conversion (third-party storage)
-  data, status_code, headers = api_instance.start_file_conversion_third_party_with_http_info(file_id, opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ConversationResultArrayWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->start_file_conversion_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **file_id** | **String** | The file to convert. |  |
-| **third_party_check_conversion_request_dto** | [**ThirdPartyCheckConversionRequestDto**](ThirdPartyCheckConversionRequestDto.md) | The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply. | [optional] |
-
-### Return type
-
-[**ConversationResultArrayWrapper**](ConversationResultArrayWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id` as `String` `third_party_check_conversion_request_dto` as `ThirdPartyCheckConversionRequestDto`.
 
 ### Authorization
 
@@ -2533,96 +1999,9 @@ end
 
 [**StringWrapper**](StringWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## update_file_comment_third_party
-
-> <StringWrapper> update_file_comment_third_party(file_id, update_comment)
-
-Update a comment (third-party storage)
-
-Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else's file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Files::OperationsApi.new
-file_id = '1' # String | The file whose version comment is replaced.
-update_comment = DocspaceApiSdk::UpdateComment.new({version: 1}) # UpdateComment | The version and the comment to store on it.
-
-begin
-  # Update a comment (third-party storage)
-  result = api_instance.update_file_comment_third_party(file_id, update_comment)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->update_file_comment_third_party: #{e}"
-end
-```
-
-#### Using the update_file_comment_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<StringWrapper>, Integer, Hash)> update_file_comment_third_party_with_http_info(file_id, update_comment)
-
-```ruby
-begin
-  # Update a comment (third-party storage)
-  data, status_code, headers = api_instance.update_file_comment_third_party_with_http_info(file_id, update_comment)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <StringWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->update_file_comment_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **file_id** | **String** | The file whose version comment is replaced. |  |
-| **update_comment** | [**UpdateComment**](UpdateComment.md) | The version and the comment to store on it. |  |
-
-### Return type
-
-[**StringWrapper**](StringWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id` as `String`.
 
 ### Authorization
 
@@ -2721,102 +2100,9 @@ end
 
 [**ChunkedUploadSessionResponseResponseWrapper**](ChunkedUploadSessionResponseResponseWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: multipart/form-data
-- **Accept**: application/json
-
-
-## upload_async_session_third_party
-
-> <ThirdPartyChunkedUploadSessionResponseResponseWrapper> upload_async_session_third_party(folder_id, session_id, opts)
-
-Upload a numbered chunk (third-party storage)
-
-Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Files::OperationsApi.new
-folder_id = '1' # String | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-session_id = '9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c' # String | The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string.
-opts = {
-  chunk_number: 1, # Integer | The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself.
-  file: File.new('/path/to/some/file') # File | The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused.
-}
-
-begin
-  # Upload a numbered chunk (third-party storage)
-  result = api_instance.upload_async_session_third_party(folder_id, session_id, opts)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->upload_async_session_third_party: #{e}"
-end
-```
-
-#### Using the upload_async_session_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ThirdPartyChunkedUploadSessionResponseResponseWrapper>, Integer, Hash)> upload_async_session_third_party_with_http_info(folder_id, session_id, opts)
-
-```ruby
-begin
-  # Upload a numbered chunk (third-party storage)
-  data, status_code, headers = api_instance.upload_async_session_third_party_with_http_info(folder_id, session_id, opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ThirdPartyChunkedUploadSessionResponseResponseWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->upload_async_session_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **folder_id** | **String** | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. |  |
-| **session_id** | **String** | The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string. |  |
-| **chunk_number** | **Integer** | The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself. | [optional] |
-| **file** | **File** | The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused. | [optional] |
-
-### Return type
-
-[**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](ThirdPartyChunkedUploadSessionResponseResponseWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id` as `String` and the answer is [**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](ThirdPartyChunkedUploadSessionResponseResponseWrapper.md).
 
 ### Authorization
 
@@ -2913,100 +2199,9 @@ end
 
 [**UploadSessionResponseWrapper**](UploadSessionResponseWrapper.md)
 
-### Authorization
+### Third-party storage
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### HTTP request headers
-
-- **Content-Type**: multipart/form-data
-- **Accept**: application/json
-
-
-## upload_session_third_party
-
-> <ThirdPartyUploadSessionResponseWrapper> upload_session_third_party(folder_id, session_id, opts)
-
-Upload the next chunk (third-party storage)
-
-Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-session-third-party/).
-
-### Examples
-
-```ruby
-require 'time'
-require 'docspace-api-sdk'
-# setup authorization
-DocspaceApiSdk.configure do |config|
-  # Configure HTTP basic authorization: Basic
-  config.username = 'YOUR USERNAME'
-  config.password = 'YOUR PASSWORD'
-
-  # Configure OAuth2 access token for authorization: OAuth2
-  config.access_token = 'YOUR ACCESS TOKEN'
-
-  # Configure API key authorization: ApiKeyBearer
-  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
-
-  # Configure API key authorization: asc_auth_key
-  config.api_key['asc_auth_key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
-
-  # Configure Bearer authorization (JWT): Bearer
-  config.access_token = 'YOUR_BEARER_TOKEN'
-
-end
-
-api_instance = DocspaceApiSdk::Files::OperationsApi.new
-folder_id = '1' # String | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
-session_id = '9f1c7a2b4d3e4f5a8b6c0d1e2f3a4b5c' # String | The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel.
-opts = {
-  file: File.new('/path/to/some/file') # File | The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused.
-}
-
-begin
-  # Upload the next chunk (third-party storage)
-  result = api_instance.upload_session_third_party(folder_id, session_id, opts)
-  p result
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->upload_session_third_party: #{e}"
-end
-```
-
-#### Using the upload_session_third_party_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<ThirdPartyUploadSessionResponseWrapper>, Integer, Hash)> upload_session_third_party_with_http_info(folder_id, session_id, opts)
-
-```ruby
-begin
-  # Upload the next chunk (third-party storage)
-  data, status_code, headers = api_instance.upload_session_third_party_with_http_info(folder_id, session_id, opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <ThirdPartyUploadSessionResponseWrapper>
-rescue DocspaceApiSdk::ApiError => e
-  puts "Error when calling Files::OperationsApi->upload_session_third_party_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **folder_id** | **String** | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. |  |
-| **session_id** | **String** | The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel. |  |
-| **file** | **File** | The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused. | [optional] |
-
-### Return type
-
-[**ThirdPartyUploadSessionResponseWrapper**](ThirdPartyUploadSessionResponseWrapper.md)
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id` as `String` and the answer is [**ThirdPartyUploadSessionResponseWrapper**](ThirdPartyUploadSessionResponseWrapper.md).
 
 ### Authorization
 

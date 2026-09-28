@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents a single user entry of a DocsCloud quota.
+  # Represents a single user entry of a Docs Connect quota.
   class DocsCloudQuotaUser < ApiModelBase
     # The user ID.
     attr_accessor :user_id

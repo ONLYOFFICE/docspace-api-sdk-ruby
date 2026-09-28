@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents the payment information of a DocsCloud tenant.
+  # Represents the payment information of a Docs Connect tenant.
   class DocsCloudPayment < ApiModelBase
     # The cart ID.
     attr_accessor :cart_id
