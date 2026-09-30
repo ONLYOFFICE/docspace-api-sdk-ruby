@@ -14,7 +14,7 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiPromptMutationResult.new(
-  success: null,
+  success: true,
   prompt: null,
   error: null
 )

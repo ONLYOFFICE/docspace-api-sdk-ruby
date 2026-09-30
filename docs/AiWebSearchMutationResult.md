@@ -14,7 +14,7 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiWebSearchMutationResult.new(
-  success: null,
+  success: true,
   config: null,
   error: null
 )

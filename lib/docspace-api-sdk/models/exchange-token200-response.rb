@@ -18,16 +18,16 @@ require 'time'
 
 module DocspaceApiSdk
   class ExchangeToken200Response < ApiModelBase
-    # The access token issued by the authorization server.
+    # The token to send as a Bearer credential when calling the portal on the user behalf.
     attr_accessor :access_token
 
-    # The type of token issued, typically 'Bearer'.
+    # How the access token is to be presented. It is always Bearer.
     attr_accessor :token_type
 
-    # The number of seconds until the access token expires.
+    # How many seconds the access token stays valid, counted from the moment it was issued.
     attr_accessor :expires_in
 
-    # The token used to obtain a new access token when the current one expires.
+    # The token that buys a new access token once the current one expires. It is present only when the client is registered for the refresh token grant.
     attr_accessor :refresh_token
 
     # Attribute mapping from ruby-style variable name to JSON key.

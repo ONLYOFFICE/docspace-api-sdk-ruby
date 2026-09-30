@@ -17,15 +17,15 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The XLSX report task response parameters.
+  # The answer to a report generation request: the queued task, the form whose answers are collected, and whether the  report file is being created or refreshed.
   class XlsxReportResponseDto < ApiModelBase
-    # The original form file information.
+    # The original form the answers are collected from. It is not the produced spreadsheet - that one arrives with  the task, once the task reports completion.
     attr_accessor :form
 
-    # The Document Builder task information.
+    # The queued generation. Poll it with `GET api/2.0/files/file/{fileId}/xlsx` until it reports completion, and  take the produced file from it then.
     attr_accessor :task
 
-    # Specifies whether the XLSX report file is newly created or an existing file will be updated.
+    # True when this run creates the report file, false when an existing report is rewritten in place, which means  it keeps its id and the links already shared for it.
     attr_accessor :is_new_file
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -50,7 +50,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'form' => :'FileDtoInteger',
+        :'form' => :'FileDto',
         :'task' => :'DocumentBuilderTaskDto',
         :'is_new_file' => :'Boolean'
       }

@@ -17,24 +17,24 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The file history information.
+  # One record of the activity log of a file or a folder.
   class HistoryDto < ApiModelBase
-    # The unique identifier for the file history entry.
+    # The identifier of the record, which tells two records of the same action apart and stays stable as long as the  portal keeps the log.
     attr_accessor :id
 
-    # The action performed on the file.
+    # What happened - the kind of event the record stands for, such as a file being uploaded, renamed, moved or  shared - with the key a client can key its own wording off.
     attr_accessor :action
 
-    # The action initiator.
+    # Who caused the event. For an event caused by a visitor following an external link only the name they gave is  filled in, the account fields staying empty.
     attr_accessor :initiator
 
-    # The date and time when an action on the file was performed.
+    # When the event happened, written with the offset of the portal's time zone.
     attr_accessor :date
 
-    # The history data.
+    # The history data. Absent for actions that carry no payload of their own - changing a room's  logo, icon colour or cover, whose interpreter returns no data (see  `RoomLogoChangedInterpreter`). It used to be declared required, which put it in the  OpenAPI document's required list while the null-dropping serializer left it out of the  response, so a generated client threw on any history page holding one of those entries.
     attr_accessor :data
 
-    # The list of related history.
+    # The records folded into this one because they belong to the same action, the separate files of one upload for  instance. It is empty when the record stands alone, and the records inside it carry no further nesting.
     attr_accessor :related
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -65,7 +65,7 @@ module DocspaceApiSdk
         :'id' => :'Integer',
         :'action' => :'HistoryAction',
         :'initiator' => :'EmployeeDto',
-        :'date' => :'Time',
+        :'date' => :'ApiDateTime',
         :'data' => :'HistoryData',
         :'related' => :'Array<HistoryDto>'
       }
@@ -74,7 +74,6 @@ module DocspaceApiSdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'date',
         :'related'
       ])
     end
@@ -121,8 +120,6 @@ module DocspaceApiSdk
 
       if attributes.key?(:'data')
         self.data = attributes[:'data']
-      else
-        self.data = nil
       end
 
       if attributes.key?(:'related')
@@ -149,8 +146,8 @@ module DocspaceApiSdk
         invalid_properties.push('invalid value for "initiator", initiator cannot be nil.')
       end
 
-      if @data.nil?
-        invalid_properties.push('invalid value for "data", data cannot be nil.')
+      if @date.nil?
+        invalid_properties.push('invalid value for "date", date cannot be nil.')
       end
 
       invalid_properties
@@ -163,7 +160,7 @@ module DocspaceApiSdk
       return false if @id.nil?
       return false if @action.nil?
       return false if @initiator.nil?
-      return false if @data.nil?
+      return false if @date.nil?
       true
     end
 
@@ -198,13 +195,13 @@ module DocspaceApiSdk
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] data Value to be assigned
-    def data=(data)
-      if data.nil?
-        fail ArgumentError, 'data cannot be nil'
+    # @param [Object] date Value to be assigned
+    def date=(date)
+      if date.nil?
+        fail ArgumentError, 'date cannot be nil'
       end
 
-      @data = data
+      @date = date
     end
 
     # Checks equality by comparing each attribute.

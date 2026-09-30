@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for configuring notification settings.
+  # Which kind of notification the calling user switches, and which way.
   class NotificationSettingsRequestsDto < ApiModelBase
-    # The notification to be configured.
+    # The kind of notification being switched. A value outside the defined set is echoed back while nothing is  stored, so confirm the result with `GET api/2.0/settings/notification/{type}` rather than trusting the  answer.
     attr_accessor :type
 
-    # Specifies if the specified notification type is enabled or not.
+    # Whether that kind reaches the calling account. It applies to the caller own account alone and to every room  at once; a single room is silenced with `POST api/2.0/settings/notification/rooms` instead.
     attr_accessor :is_enabled
 
     class EnumAttributeValidator

@@ -17,45 +17,45 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # A shareable link for a file with its configuration and status.
+  # A sharing link of a file, a folder or a room, with everything set on it.
   class FileShareLink < ApiModelBase
-    # The unique identifier of the shared link.
+    # The identifier of the link, the one to send back as `linkId` to change or delete it.
     attr_accessor :id
 
-    # The title of the shared content.
+    # The name the link is listed under, which its author is free to choose and to leave empty.
     attr_accessor :title
 
-    # The URL for accessing the shared content.
+    # The shortened address to hand out. Opening it is what turns the link into access; the address stays the same  while the link exists.
     attr_accessor :share_link
 
-    # The date when the shared link expires.
+    # The moment the link stops working, written with the offset of the portal time zone. Null when the link was  left without an end.
     attr_accessor :expiration_date
 
-    # The sharing link type (e.g., Invitation).
+    # Which of the two jobs the link does: letting somebody into the room as a member, or handing out the entry  itself. The counters of uses are filled in for the first kind only.
     attr_accessor :link_type
 
-    # The password protection for accessing the shared content.
+    # The password a visitor has to send before the link resolves, readable only by those who may manage the link.  Empty when the link asks for none.
     attr_accessor :password
 
-    # Indicates whether downloading of the shared content is prohibited.
+    # Whether visitors coming through this link may only read the entry in the editor and not download or print it.
     attr_accessor :deny_download
 
-    # Indicates whether the shared link has expired.
+    # Whether the moment in `expirationDate` has already passed, which leaves the link in place but refuses  everybody who opens it.
     attr_accessor :is_expired
 
-    # Indicates whether this is the primary shared link.
+    # Whether this is the one link the entry always keeps: a public or a form-filling room is given it at creation,  and deleting it there only makes a new one.
     attr_accessor :primary
 
-    # Indicates whether the link is for the internal sharing only.
+    # Whether the visitor has to sign in to the portal before the link resolves, as opposed to it being open to  anybody who has the address.
     attr_accessor :internal
 
-    # The token for validating access requests.
+    # The key that stands for this link in the calls that resolve it, such as `GET api/2.0/files/share/{key}`. It is  filled in for links that hand out the entry, and empty for the ones that invite into a room.
     attr_accessor :request_token
 
-    # The maximum number of times the invitation link can be used.
+    # How many accounts may still join the room through this invitation link in total. Null on a link that hands out  the entry, where nothing is counted.
     attr_accessor :max_use_count
 
-    # The current number of times the invitation link has been used.
+    # How many accounts have already joined through this invitation link. Once it reaches `maxUseCount` the link  stops letting anybody else in. Null on a link that hands out the entry.
     attr_accessor :current_use_count
 
     class EnumAttributeValidator
@@ -115,7 +115,7 @@ module DocspaceApiSdk
         :'id' => :'String',
         :'title' => :'String',
         :'share_link' => :'String',
-        :'expiration_date' => :'Time',
+        :'expiration_date' => :'ApiDateTime',
         :'link_type' => :'LinkType',
         :'password' => :'String',
         :'deny_download' => :'Boolean',
@@ -133,7 +133,6 @@ module DocspaceApiSdk
       Set.new([
         :'title',
         :'share_link',
-        :'expiration_date',
         :'password',
         :'deny_download',
         :'is_expired',

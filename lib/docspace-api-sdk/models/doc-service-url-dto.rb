@@ -17,33 +17,33 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The document service URL parameters.
+  # The document service location as this portal has it configured, together with the editor entry points a client  needs in order to open a document.
   class DocServiceUrlDto < ApiModelBase
-    # The version of the document service.
+    # The editor version the running Document Server reported. It is filled in only when the version was asked for,  and comes back empty otherwise. When the Document Server does not answer, a fallback version is reported  rather than an error, so a value here is no proof that the server is reachable.
     attr_accessor :version
 
-    # The document service URL API.
+    # The absolute URL of the editor api script that a client has to load before it can open a document. It is  derived from the public Document Server address unless the deployment overrides it separately.
     attr_accessor :doc_service_url_api
 
-    # The document service URL.
+    # The public Document Server address a browser loads the editor from. Empty means no document server is  configured for this portal, and documents cannot be opened for editing or viewing.
     attr_accessor :doc_service_url
 
-    # The URL used to preload the document service scripts.
+    # The absolute URL of a page a client may load in advance to warm the editor scripts up. Loading it is optional  and changes nothing on the portal.
     attr_accessor :doc_service_preload_url
 
-    # The internal document service URL.
+    # The address the portal uses for its own server-to-server calls to the Document Server. When no private-network  address is configured, it repeats the public one.
     attr_accessor :doc_service_url_internal
 
-    # The document service portal URL.
+    # The address the Document Server is told to call this portal back on. Empty means nothing overrides it and the  portal's own resolved address is used.
     attr_accessor :doc_service_portal_url
 
-    # The document service signature header.
+    # The name of the HTTP header that carries the signature on requests between the portal and the Document Server.  The secret itself is not part of the answer, so this only tells a client whether request signing is set up and  under which header.
     attr_accessor :doc_service_signature_header
 
-    # Specifies if the document service SSL verification is enabled.
+    # Whether the portal validates the TLS certificate of the Document Server. False means any certificate is  accepted, which is expected only in a test deployment.
     attr_accessor :doc_service_ssl_verification
 
-    # Specifies if the document service is default.
+    # Whether every one of these settings is still the one the deployment ships with. False means at least one of  the addresses, the signature settings or SSL verification has been overridden for this portal.
     attr_accessor :is_default
 
     # Attribute mapping from ruby-style variable name to JSON key.

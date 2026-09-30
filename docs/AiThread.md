@@ -17,11 +17,11 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiThread.new(
-  thread_id: null,
-  title: null,
-  last_edit_date: null,
+  thread_id: 11111111-1111-1111-1111-111111111111,
+  title: Contract review,
+  last_edit_date: 1767225600000,
   provider: null,
   model: null,
-  profile_id: null
+  profile_id: 00000000-0000-0000-0000-000000000000
 )
 ```

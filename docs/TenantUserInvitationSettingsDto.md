@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **allow_inviting_members** | **Boolean** | Specifies whether to allow inviting new DocSpace members through the Contacts section. |  |
-| **allow_inviting_guests** | **Boolean** | Specifies whether to allow all DocSpace members to invite external guests to the rooms. |  |
+| **allow_inviting_members** | **Boolean** | Whether new members may be invited through the Contacts section. Switching it off stops new invitations  from being created; links already handed out keep working and members already invited stay. |  |
+| **allow_inviting_guests** | **Boolean** | Whether every member, and not only an administrator, may invite an outside guest into a room. It is  independent of `allowInvitingMembers`, and switching it off has the same forward-only effect. |  |
 
 ## Example
 

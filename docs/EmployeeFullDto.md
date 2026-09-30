@@ -21,7 +21,7 @@
 | **contacts** | [**Array&lt;Contact&gt;**](Contact.md) | The list of user contacts. | [optional] |
 | **status** | [**EmployeeStatus**](EmployeeStatus.md) | The user status. | [optional] |
 | **activation_status** | [**EmployeeActivationStatus**](EmployeeActivationStatus.md) | The user activation status. | [optional] |
-| **terminated** | **Time** | The date when the user account was terminated. | [optional] |
+| **terminated** | [**ApiDateTime**](ApiDateTime.md) | The date when the user account was terminated. | [optional] |
 | **department** | **String** | The user department. | [optional] |
 | **groups** | [**Array&lt;GroupSummaryDto&gt;**](GroupSummaryDto.md) | The list of user groups. | [optional] |
 | **location** | **String** | The user location. | [optional] |
@@ -45,7 +45,7 @@
 | **login_event_id** | **Integer** | The current login event ID. | [optional] |
 | **auth_cookie_lifetime** | **Float** | The auth cookie lifetime in seconds. | [optional] |
 | **created_by** | [**EmployeeDto**](EmployeeDto.md) | The user who created the current user. | [optional] |
-| **registration_date** | **Time** | The user registration date. | [optional] |
+| **registration_date** | [**ApiDateTime**](ApiDateTime.md) | The user registration date. | [optional] |
 | **has_personal_folder** | **Boolean** | Specifies if the user has a personal folder or not. | [optional] |
 | **tfa_app_enabled** | **Boolean** | Indicates whether the user has enabled two-factor authentication (TFA) using an authentication app. | [optional] |
 
@@ -72,7 +72,7 @@ instance = DocspaceApiSdk::EmployeeFullDto.new(
   contacts: [{type=email, value=user@example.com}],
   status: null,
   activation_status: null,
-  terminated: 2025-06-01T00:00:00.0000000Z,
+  terminated: null,
   department: Marketing,
   groups: [{id=00000000-0000-0000-0000-000000000000, name=Marketing}],
   location: Palo Alto,
@@ -96,7 +96,7 @@ instance = DocspaceApiSdk::EmployeeFullDto.new(
   login_event_id: 123,
   auth_cookie_lifetime: 3600,
   created_by: null,
-  registration_date: 2020-01-01T00:00:00.0000000Z,
+  registration_date: null,
   has_personal_folder: true,
   tfa_app_enabled: false
 )

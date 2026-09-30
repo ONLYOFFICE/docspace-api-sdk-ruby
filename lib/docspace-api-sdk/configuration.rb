@@ -247,6 +247,20 @@ module DocspaceApiSdk
     # Returns Auth Settings hash for api client.
     def auth_settings
       {
+        'cookieAuth' =>
+          {
+            type: 'api_key',
+            in: 'cookie',
+            key: 'asc_auth_key',
+            value: api_key_with_prefix('asc_auth_key')
+          },
+        'bearerAuth' =>
+          {
+            type: 'bearer',
+            in: 'header',
+            key: 'Authorization',
+            value: "Bearer #{access_token_with_refresh}"
+          },
         'asc_auth_key' =>
           {
             type: 'api_key',
@@ -279,20 +293,6 @@ module DocspaceApiSdk
         'OAuth2' =>
           {
             type: 'oauth2',
-            in: 'header',
-            key: 'Authorization',
-            value: "Bearer #{access_token_with_refresh}"
-          },
-        'cookieAuth' =>
-          {
-            type: 'api_key',
-            in: 'cookie',
-            key: 'asc_auth_key',
-            value: api_key_with_prefix('asc_auth_key')
-          },
-        'bearerAuth' =>
-          {
-            type: 'bearer',
             in: 'header',
             key: 'Authorization',
             value: "Bearer #{access_token_with_refresh}"

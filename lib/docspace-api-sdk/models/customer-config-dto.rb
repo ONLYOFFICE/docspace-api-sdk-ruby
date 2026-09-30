@@ -17,24 +17,24 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The customer config parameters.
+  # The branding of the organization running the portal, as the editor About panel shows it. It is reported on a  server installation only.
   class CustomerConfigDto < ApiModelBase
-    # The address of the customer configuration.
+    # The postal address from the portal branding settings; empty when none was entered.
     attr_accessor :address
 
-    # The logo of the customer configuration.
+    # The About-panel logo of the organization.
     attr_accessor :logo
 
-    # The dark logo of the customer configuration.
+    # The About-panel logo for a dark interface theme.
     attr_accessor :logo_dark
 
-    # The mail address of the customer configuration.
+    # The contact address from the portal branding settings.
     attr_accessor :mail
 
-    # The name of the customer configuration.
+    # The organization name shown in the editor.
     attr_accessor :name
 
-    # The site web address of the customer configuration.
+    # The website of the organization.
     attr_accessor :www
 
     # Attribute mapping from ruby-style variable name to JSON key.

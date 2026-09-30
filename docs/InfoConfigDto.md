@@ -4,12 +4,12 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **favorite** | **Boolean** | Specifies if the file is favorite or not. | [optional] |
-| **folder** | **String** | The folder of the file. | [optional] |
-| **owner** | **String** | The file owner. | [optional] |
-| **sharing_settings** | [**Array&lt;AceShortWrapper&gt;**](AceShortWrapper.md) | The sharing settings of the file. | [optional] |
-| **type** | [**EditorType**](EditorType.md) | The editor type of the file. | [optional] |
-| **uploaded** | **String** | The uploaded file. | [optional] |
+| **favorite** | **Boolean** | Whether the caller has this document among their favorites. It is empty when favorites do not apply - for an  anonymous caller, for a guest, and for an encrypted document. | [optional] |
+| **folder** | **String** | The place of the document as a readable path, its folders joined from the root downwards. It is empty in the  embedded layout, which shows no such panel. | [optional] |
+| **owner** | **String** | The display name of the owner of the document. It is empty for an anonymous session. | [optional] |
+| **sharing_settings** | [**Array&lt;AceShortWrapper&gt;**](AceShortWrapper.md) | Who the document is shared with, as the information panel lists it. An empty list means it is shared with  nobody beyond its owner. | [optional] |
+| **type** | [**EditorType**](EditorType.md) | The layout the information panel is rendered for. | [optional] |
+| **uploaded** | **String** | When the document was created on the portal, already formatted for reading in the culture of the caller rather  than as a machine timestamp. | [optional] |
 
 ## Example
 
@@ -18,10 +18,10 @@ require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::InfoConfigDto.new(
   favorite: false,
-  folder: My Documents,
+  folder: My documents \\ Reports,
   owner: John Doe,
   sharing_settings: [],
   type: null,
-  uploaded: 2025-01-01T00:00:00
+  uploaded: 01/01/2026 12:00 PM
 )
 ```

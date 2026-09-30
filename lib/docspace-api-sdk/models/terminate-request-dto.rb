@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for terminating the reassignment/deletion process.
+  # The request parameters that address the queued job of a single user - a data reassignment, a data deletion or a  user type change.
   class TerminateRequestDto < ApiModelBase
-    # The user ID whose data is reassigned/removed.
+    # The ID of the user whose job is addressed. For a terminate operation it has to be the same ID that was passed  when the job was started.
     attr_accessor :user_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

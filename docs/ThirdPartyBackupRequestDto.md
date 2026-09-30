@@ -4,12 +4,12 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **url** | **String** | The connection URL for the sharepoint. | [optional] |
-| **login** | **String** | The login. | [optional] |
-| **password** | **String** | The password. | [optional] |
-| **token** | **String** | The authentication token. | [optional] |
-| **customer_title** | **String** | The customer title. | [optional] |
-| **provider_key** | **String** | The provider key. | [optional] |
+| **url** | **String** | The address of the storage server to connect to. It is needed by the WebDAV presets whose server is not known  in advance (`WebDav`, `Nextcloud`, `ownCloud`), where it points at the WebDAV endpoint of that server, and by  `SharePoint`; the presets with a fixed address and the OAuth services ignore it. | [optional] |
+| **login** | **String** | The account name at the storage service, used by the services that authenticate by login and password. A login  sent without a password is rejected as an invalid request. | [optional] |
+| **password** | **String** | The password, or the application password, for `login` at the storage service. Either this or `token` has to  be sent, and the credentials are verified against the service before the account is saved. | [optional] |
+| **token** | **String** | The OAuth 2.0 authorization code from the consent screen of `Box`, `DropboxV2`, `GoogleDrive` or `OneDrive` -  not an access token: the portal exchanges the code for its own token and keeps that. The client ID and  redirect URL the consent screen URL is built from come from `GET api/2.0/files/thirdparty/capabilities`. | [optional] |
+| **customer_title** | **String** | The name the backup account is shown under in the portal. Characters that a folder title cannot hold are  replaced and the value is truncated; on the first connection a title that comes out of that empty is refused. | [optional] |
+| **provider_key** | **String** | The storage service to connect, as the `key` of `GET api/2.0/files/thirdparty/providers`; the value is matched  case-insensitively. `Nextcloud` and `ownCloud` are presets over WebDAV and are stored and reported back as  `WebDav`. | [optional] |
 
 ## Example
 
@@ -17,11 +17,11 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::ThirdPartyBackupRequestDto.new(
-  url: https://sharepoint.example.com,
+  url: https://cloud.example.com/remote.php/dav/files/admin/,
   login: admin,
-  password: P@ssw0rd,
-  token: abc123def456,
-  customer_title: My Cloud Storage,
-  provider_key: SharePoint
+  password: p@ssw0rd!,
+  token: 4/0AY0e-g5Tn8vQrM2kZs7xB1pLd9,
+  customer_title: Backup storage,
+  provider_key: Nextcloud
 )
 ```

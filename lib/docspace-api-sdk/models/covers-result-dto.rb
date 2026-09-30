@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The result of the cover request containing the cover image data.
+  # One drawing of the built-in gallery of room covers.
   class CoversResultDto < ApiModelBase
-    # The cover unique identifier.
+    # The name of the cover, and the value to send as `cover` when a room is created or changed. The names are the  same on every portal and do not change with the language of the request.
     attr_accessor :id
 
-    # The cover image data.
+    # The drawing itself, as inline vector markup ready to be rendered as it is. It is the default size of the  cover, and it may change between product versions while the name stays.
     attr_accessor :data
 
     # Attribute mapping from ruby-style variable name to JSON key.

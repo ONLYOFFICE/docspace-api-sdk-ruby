@@ -17,27 +17,27 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The form gallery parameters.
+  # Where the ready-made form templates are served from, for browsing them and for submitting new ones.
   class FormGalleryDto < ApiModelBase
-    # The form gallery path.
+    # The path under `domain` that the gallery's own listing API is reached at. It is joined to `domain` by the  client; the portal only relays the values from its configuration.
     attr_accessor :path
 
-    # The form gallery domain.
+    # The address of the gallery service, which is a service of the vendor rather than part of the portal. Every  field of this object is empty on an installation that configures no gallery, and a client should then not  offer the gallery at all.
     attr_accessor :domain
 
-    # The form gallery extension.
+    # The file extension to ask the gallery for, which decides which rendition of a template is downloaded when  several are published.
     attr_accessor :ext
 
-    # The form gallery upload path.
+    # The path used for submitting a form of one's own to the gallery, the counterpart of `path` for the upload  side. The four `upload` fields are empty when the installation allows browsing but not submitting.
     attr_accessor :upload_path
 
-    # The form gallery upload domain.
+    # The address the submission is sent to, which may differ from `domain`.
     attr_accessor :upload_domain
 
-    # The form gallery upload extension.
+    # The file extension a submitted form has to carry.
     attr_accessor :upload_ext
 
-    # The form gallery upload dashboard.
+    # The page a person is sent to in order to follow up on a submission, joined to `uploadDomain` the same way  as `uploadPath`.
     attr_accessor :upload_dashboard
 
     # Attribute mapping from ruby-style variable name to JSON key.

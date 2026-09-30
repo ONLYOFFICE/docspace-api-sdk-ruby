@@ -24,7 +24,7 @@ module DocspaceApiSdk
       @api_client = api_client
     end
     # Approve a guest sharing link
-    # Approves a guest sharing link and returns the detailed information about a guest.
+    # Accepts a guest that another member shared, which links that guest to the calling account and makes it  visible in the caller's list of guests.  Everything the operation needs comes from the confirmation token of the link produced by  `GET api/2.0/people/guests/{userid}/share`: the request body is not read at all, so there is nothing to fill  in, and an expired or already used token is answered with 401.  The caller has to be a room admin or a DocSpace admin; a member or a guest gets 403.  The account the token names has to exist and still be a guest, otherwise the operation answers 404 or 400.  The call is idempotent: a guest that is already linked to the caller is simply returned again.  The answer is the full profile of the guest.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/approve-guest-share-link/
     # @param [Hash] opts the optional parameters
     # @option opts [EmailMemberRequestDto] :email_member_request_dto 
@@ -35,7 +35,7 @@ module DocspaceApiSdk
     end
 
     # Approve a guest sharing link
-    # Approves a guest sharing link and returns the detailed information about a guest.
+    # Accepts a guest that another member shared, which links that guest to the calling account and makes it  visible in the caller's list of guests.  Everything the operation needs comes from the confirmation token of the link produced by  `GET api/2.0/people/guests/{userid}/share`: the request body is not read at all, so there is nothing to fill  in, and an expired or already used token is answered with 401.  The caller has to be a room admin or a DocSpace admin; a member or a guest gets 403.  The account the token names has to exist and still be a guest, otherwise the operation answers 404 or 400.  The call is idempotent: a guest that is already linked to the caller is simply returned again.  The answer is the full profile of the guest.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/approve-guest-share-link/
     # @param [Hash] opts the optional parameters
     # @option opts [EmailMemberRequestDto] :email_member_request_dto 
@@ -89,8 +89,8 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Delete guests
-    # Deletes guests from the list and excludes them from rooms to which they were invited.
+    # Remove guest relations
+    # Removes the listed guests from the caller's own list of guests and withdraws the access the caller had  granted them.  It does not delete the accounts: each guest keeps its profile and any access other members gave it, and only  the link to the caller and the caller's own shares disappear.  The caller has to be a room admin or a DocSpace admin, and every listed account has to exist, be an active  guest and be one of the caller's own guests - a single entry that is not rejects the whole call with 403 and  changes nothing.  The call returns no body; read `GET api/2.0/people/filter` with `area` set to `Guests` to see what is left.  To delete a guest account for good, disable it and then use `DELETE api/2.0/people/{userid}`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-guests/
     # @param [Hash] opts the optional parameters
     # @option opts [UpdateMembersRequestDto] :update_members_request_dto 
@@ -100,8 +100,8 @@ module DocspaceApiSdk
       nil
     end
 
-    # Delete guests
-    # Deletes guests from the list and excludes them from rooms to which they were invited.
+    # Remove guest relations
+    # Removes the listed guests from the caller's own list of guests and withdraws the access the caller had  granted them.  It does not delete the accounts: each guest keeps its profile and any access other members gave it, and only  the link to the caller and the caller's own shares disappear.  The caller has to be a room admin or a DocSpace admin, and every listed account has to exist, be an active  guest and be one of the caller's own guests - a single entry that is not rejects the whole call with 403 and  changes nothing.  The call returns no body; read `GET api/2.0/people/filter` with `area` set to `Guests` to see what is left.  To delete a guest account for good, disable it and then use `DELETE api/2.0/people/{userid}`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-guests/
     # @param [Hash] opts the optional parameters
     # @option opts [UpdateMembersRequestDto] :update_members_request_dto 

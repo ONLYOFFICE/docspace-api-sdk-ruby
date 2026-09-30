@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents the license and server information of a DocsCloud tenant, with usage statistics for the current period.
+  # Represents the license and server information of a Docs Connect tenant, with usage statistics for the current period.
   class DocsCloudTenantInfo < ApiModelBase
     # The license information.
     attr_accessor :license
 
-    # The DocsCloud server information.
+    # The Docs Connect server information.
     attr_accessor :server
 
     # The user limits of the license.

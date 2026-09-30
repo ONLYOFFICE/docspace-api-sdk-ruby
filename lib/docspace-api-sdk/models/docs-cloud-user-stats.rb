@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents the usage statistics of a single DocsCloud user category (editor or viewer).
+  # Represents the usage statistics of a single Docs Connect user category (editor or viewer).
   class DocsCloudUserStats < ApiModelBase
     # The number of active users.
     attr_accessor :active

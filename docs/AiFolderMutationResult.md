@@ -14,7 +14,7 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiFolderMutationResult.new(
-  success: null,
+  success: true,
   folder: null,
   error: null
 )

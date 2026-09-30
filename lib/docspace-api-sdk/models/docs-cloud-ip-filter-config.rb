@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents the IP filter configuration of a DocsCloud tenant.
+  # Represents the IP filter configuration of a Docs Connect tenant.
   class DocsCloudIpFilterConfig < ApiModelBase
     # The IP filter rules.
     attr_accessor :rules

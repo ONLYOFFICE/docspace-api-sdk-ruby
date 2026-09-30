@@ -17,21 +17,21 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The confirmation parameters.
+  # Whether a confirmation link may still be used, and what it leads to when it invites into a room.
   class ConfirmDto < ApiModelBase
-    # The confirmation result.
+    # The outcome of the check. Only `Ok` means the action behind the link may be carried out: `Invalid` and  `Expired` fault the key itself, while `UserExisted`, `UserExcluded`, `TariffLimit` and `QuotaFailed` mean  the key is sound but the invitation behind it cannot be accepted as it stands.
     attr_accessor :result
 
-    # The confirmation room ID.
+    # The room the invitation leads into - a numeric folder ID for a room of the portal, a provider-specific  string for a third-party one. It is empty for an invitation to the portal as a whole, for a room that has  been removed or that the invited account may not see, and whenever `result` is neither `Ok` nor  `UserExisted`.
     attr_accessor :room_id
 
-    # The confirmation title.
+    # The title of that room, present exactly when `roomId` is and meant to be shown on the confirmation page.
     attr_accessor :title
 
-    # The confirmation email.
+    # The address the link was issued for, echoed back only when `result` is `Ok` so that a sign-up form can be  prefilled with it. Every other outcome leaves it empty, `UserExisted` included.
     attr_accessor :email
 
-    # The confirmation is agent.
+    # Whether the room behind the link is an AI room rather than an ordinary one, which decides where the invited  person is taken. It is `false` whenever `roomId` is empty.
     attr_accessor :is_agent
 
     class EnumAttributeValidator

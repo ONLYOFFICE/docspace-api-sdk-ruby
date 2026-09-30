@@ -17,18 +17,18 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The room template status.
+  # The progress of the job that builds a room template out of an existing room.
   class RoomTemplateStatusDto < ApiModelBase
-    # The room template ID.
+    # The template the job is building. It is meaningful once the job has created the template folder, and the  template can be opened with the room operations only after `isCompleted` turns true.
     attr_accessor :template_id
 
-    # The progress of the room template creation process.
+    # How far the job has got. The value climbs while the contents of the room are being copied and reaches its  maximum at the very end, so it is an indication of life rather than a reliable estimate of the time left.
     attr_accessor :progress
 
-    # The error message that is sent when the room template is not created successfully.
+    # Why the job stopped. It is empty while the job runs and after a successful one; when it is filled the  half-built template has already been removed, so nothing has to be cleaned up by the caller.
     attr_accessor :error
 
-    # Specifies whether the process of creating the room template is completed.
+    # Whether the job has ended. It is set both after a successful build and after a failure, so `error` is what  tells the two apart, and the record keeps answering with the same values until another job is started.
     attr_accessor :is_completed
 
     # Attribute mapping from ruby-style variable name to JSON key.

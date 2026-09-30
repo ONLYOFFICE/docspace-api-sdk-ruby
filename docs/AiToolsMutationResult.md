@@ -13,7 +13,7 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiToolsMutationResult.new(
-  success: null,
+  success: true,
   error: null
 )
 ```

@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The number of backups.
+  # The backups of a portal, split by who paid for them.
   class BackupsCountResultDto < ApiModelBase
-    # The number of free backups.
+    # The number of backups covered by the free monthly allowance.
     attr_accessor :free
 
-    # The number of paid backups.
+    # The number of backups charged to the portal wallet.
     attr_accessor :paid
 
     # Attribute mapping from ruby-style variable name to JSON key.

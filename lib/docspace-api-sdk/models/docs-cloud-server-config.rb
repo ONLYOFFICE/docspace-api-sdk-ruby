@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents the server configuration of a DocsCloud tenant.
+  # Represents the server configuration of a Docs Connect tenant.
   class DocsCloudServerConfig < ApiModelBase
     # Whether anonymous access is supported.
     attr_accessor :is_anonymous_support

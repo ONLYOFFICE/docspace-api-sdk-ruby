@@ -14,8 +14,8 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiImportError.new(
-  kind: null,
-  ref: null,
-  error: null
+  kind: prompt,
+  ref: 33333333-3333-3333-3333-333333333333,
+  error: a prompt of that name already exists
 )
 ```

@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The quota in JSON format.
+  # The personal storage limit in bytes, as a whole number. A value of 0 or more becomes the limit, and any  negative value switches the personal limit off so that the portal default applies again. It is read only by  `PUT api/2.0/people/userquota`.
   module UpdateMembersQuotaRequestDtoQuota
     class << self
       # List of class defined in oneOf (OpenAPI v3)

@@ -4,16 +4,16 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_scopes**](OAuth20ScopeManagementApi.md#get_scopes) | **GET** /api/2.0/scopes | List available OAuth2 scopes |
+| [**get_scopes**](OAuth20ScopeManagementApi.md#get_scopes) | **GET** /api/2.0/oauth2/scopes | List available OAuth2 scopes |
 
 
 ## get_scopes
 
-> <ScopeResponse> get_scopes
+> <Array<ScopeResponse>> get_scopes
 
 List available OAuth2 scopes
 
-Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first.
+Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first. It is a read-only catalogue that does not depend on which clients exist: a valid portal signature is the only requirement, with no role restriction, and every caller of the portal sees the same list.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-scopes/).
 
@@ -45,7 +45,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ScopeResponse>, Integer, Hash)> get_scopes_with_http_info
+> <Array(<Array<ScopeResponse>>, Integer, Hash)> get_scopes_with_http_info
 
 ```ruby
 begin
@@ -53,7 +53,7 @@ begin
   data, status_code, headers = api_instance.get_scopes_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ScopeResponse>
+  p data # => <Array<ScopeResponse>>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling OAuth20::ScopeManagementApi->get_scopes_with_http_info: #{e}"
 end
@@ -65,7 +65,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ScopeResponse**](ScopeResponse.md)
+[**Array&lt;ScopeResponse&gt;**](ScopeResponse.md)
 
 ### Authorization
 

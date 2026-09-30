@@ -24,7 +24,7 @@ module DocspaceApiSdk
       @api_client = api_client
     end
     # Change the portal theme
-    # Changes the current portal theme.
+    # Sets the interface theme of the calling account to `Base` for the light theme, `Dark` for the dark one, or  `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it changes  nothing for anybody else and cannot be set on another account.  It needs no permission, takes effect at once and is idempotent - sending the theme that is already in use  changes nothing.  The answer echoes the theme that was stored, which is the value the request asked for.  The same value is reported as `theme` by `GET api/2.0/people/@self`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-portal-theme/
     # @param [Hash] opts the optional parameters
     # @option opts [DarkThemeSettingsRequestDto] :dark_theme_settings_request_dto 
@@ -35,7 +35,7 @@ module DocspaceApiSdk
     end
 
     # Change the portal theme
-    # Changes the current portal theme.
+    # Sets the interface theme of the calling account to `Base` for the light theme, `Dark` for the dark one, or  `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it changes  nothing for anybody else and cannot be set on another account.  It needs no permission, takes effect at once and is idempotent - sending the theme that is already in use  changes nothing.  The answer echoes the theme that was stored, which is the value the request asked for.  The same value is reported as `theme` by `GET api/2.0/people/@self`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-portal-theme/
     # @param [Hash] opts the optional parameters
     # @option opts [DarkThemeSettingsRequestDto] :dark_theme_settings_request_dto 
@@ -90,7 +90,7 @@ module DocspaceApiSdk
     end
 
     # Get the portal theme
-    # Returns a theme which is set to the current portal.
+    # Returns the interface theme the calling account has chosen: `Base` for the light theme, `Dark` for the dark  one, or `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it describes the  caller alone and cannot be read for anybody else.  It needs no permission and is read-only.  A caller that has never chosen a theme gets the portal default rather than an empty answer.  The same value is also reported as `theme` by `GET api/2.0/people/@self`, so a client that reads the profile  on start-up does not need this operation as well.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-theme/
     # @param [Hash] opts the optional parameters
     # @return [DarkThemeSettingsWrapper]
@@ -100,7 +100,7 @@ module DocspaceApiSdk
     end
 
     # Get the portal theme
-    # Returns a theme which is set to the current portal.
+    # Returns the interface theme the calling account has chosen: `Base` for the light theme, `Dark` for the dark  one, or `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it describes the  caller alone and cannot be read for anybody else.  It needs no permission and is read-only.  A caller that has never chosen a theme gets the portal default rather than an empty answer.  The same value is also reported as `theme` by `GET api/2.0/people/@self`, so a client that reads the profile  on start-up does not need this operation as well.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-theme/
     # @param [Hash] opts the optional parameters
     # @return [Array<(DarkThemeSettingsWrapper, Integer, Hash)>] DarkThemeSettingsWrapper data, response status code and response headers

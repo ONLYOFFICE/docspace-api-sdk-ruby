@@ -24,29 +24,29 @@ module DocspaceApiSdk
       @api_client = api_client
     end
     # Start a vectorization task
-    # Starts a vectorization task over the supplied portal files. The indexing itself runs asynchronously on the .NET side.
+    # Queues the indexing of the portal files named in the body so their contents can be retrieved during a chat round. The body is proxied unchanged to the DocSpace AI service, which validates it and owns the job. Indexing is asynchronous and fire-and-forget: the answer acknowledges the request without carrying a job handle, so there is nothing to poll and progress is not reported here. The embedding provider used is the one in `GET api/2.0/ai/config/vectorization`, and changing that setting does not re-index anything already indexed - queue it again for that.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-vectorization-start-task/
-    # @param request_body [Hash<String, Object>] 
+    # @param ai_vectorization_start_task_request [AiVectorizationStartTaskRequest] The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape.
     # @param [Hash] opts the optional parameters
-    # @return [AiSuccessResponse]
-    def ai_vectorization_start_task(request_body, opts = {})
-      data, _status_code, _headers = ai_vectorization_start_task_with_http_info(request_body, opts)
+    # @return [AiVectorizationStartTask200Response]
+    def ai_vectorization_start_task(ai_vectorization_start_task_request, opts = {})
+      data, _status_code, _headers = ai_vectorization_start_task_with_http_info(ai_vectorization_start_task_request, opts)
       data
     end
 
     # Start a vectorization task
-    # Starts a vectorization task over the supplied portal files. The indexing itself runs asynchronously on the .NET side.
+    # Queues the indexing of the portal files named in the body so their contents can be retrieved during a chat round. The body is proxied unchanged to the DocSpace AI service, which validates it and owns the job. Indexing is asynchronous and fire-and-forget: the answer acknowledges the request without carrying a job handle, so there is nothing to poll and progress is not reported here. The embedding provider used is the one in `GET api/2.0/ai/config/vectorization`, and changing that setting does not re-index anything already indexed - queue it again for that.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-vectorization-start-task/
-    # @param request_body [Hash<String, Object>] 
+    # @param ai_vectorization_start_task_request [AiVectorizationStartTaskRequest] The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
-    def ai_vectorization_start_task_with_http_info(request_body, opts = {})
+    # @return [Array<(AiVectorizationStartTask200Response, Integer, Hash)>] AiVectorizationStartTask200Response data, response status code and response headers
+    def ai_vectorization_start_task_with_http_info(ai_vectorization_start_task_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::VectorizationApi.ai_vectorization_start_task ...'
       end
-      # verify the required parameter 'request_body' is set
-      if @api_client.config.client_side_validation && request_body.nil?
-        fail ArgumentError, "Missing the required parameter 'request_body' when calling AI::VectorizationApi.ai_vectorization_start_task"
+      # verify the required parameter 'ai_vectorization_start_task_request' is set
+      if @api_client.config.client_side_validation && ai_vectorization_start_task_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_vectorization_start_task_request' when calling AI::VectorizationApi.ai_vectorization_start_task"
       end
       # resource path
       local_var_path = '/api/2.0/ai/vectorization/tasks'
@@ -68,13 +68,13 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(request_body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_vectorization_start_task_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiSuccessResponse'
+      return_type = opts[:debug_return_type] || 'AiVectorizationStartTask200Response'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::VectorizationApi.ai_vectorization_start_task",

@@ -19,40 +19,40 @@ require 'time'
 module DocspaceApiSdk
   # The request parameters for updating the user information.
   class UpdateMemberRequestDto < ApiModelBase
-    # The user ID.
+    # The account the change applies to. It is read from this body by `POST api/2.0/people/email`, while  `PUT api/2.0/people/{userid}` takes the account from the route and ignores this field.
     attr_accessor :user_id
 
-    # Specifies whether to disable a user or not.
+    # Set it to true to give the account the `Terminated` status and end every session it has, and to false to  bring it back. It is applied only when the caller edits somebody else, and omitting it keeps the current  status.
     attr_accessor :disable
 
-    # The user email address.
+    # The new email address, up to 255 characters. It is read only by `POST api/2.0/people/email`, which either  mails a confirmation letter or, for an administrator acting on somebody else, applies the address at once;  `PUT api/2.0/people/{userid}` ignores it.
     attr_accessor :email
 
-    # Specifies if this is a guest or a user.
+    # Set it to true to turn the account into a guest and to false to turn it back into a member. Either direction  takes a seat and can answer 402, it is applied only when the caller edits somebody else, and a request to  make the portal owner, a DocSpace administrator or a module administrator a guest is ignored.
     attr_accessor :is_user
 
-    # The user first name.
+    # The new first name, up to 255 characters. It is applied only to the caller's own profile, is left alone on an  LDAP or SSO account, and a pair the portal does not accept as a name answers 400.
     attr_accessor :first_name
 
-    # The user last name.
+    # The new last name, up to 255 characters. It is applied only to the caller's own profile, is left alone on an  LDAP or SSO account, and a pair the portal does not accept as a name answers 400.
     attr_accessor :last_name
 
-    # The list of the user departments.
+    # The groups the profile should belong to, by group ID, replacing the current ones. It is applied only to the  caller's own profile.
     attr_accessor :department
 
-    # The user location.
+    # The new free-text location shown on the profile. It is applied only to the caller's own profile and is left  alone on an LDAP or SSO account.
     attr_accessor :location
 
-    # The user comment.
+    # The new free-text note kept with the profile. It is applied only to the caller's own profile.
     attr_accessor :comment
 
-    # The list of the user contacts.
+    # The additional ways to reach the person, replacing the current ones. Each entry is a free-text type such as  `email`, `phone`, `skype` or `telegram` and its value, an entry with an empty value is dropped, and the field  is applied only to the caller's own profile.
     attr_accessor :contacts
 
-    # The user avatar photo URL.
+    # The address the portal downloads the new avatar from. It is applied only to the caller's own profile, has to  use HTTPS unless the request itself came over HTTP, and passing the address the profile already uses  downloads nothing.
     attr_accessor :files
 
-    # Specifies if tips, updates and offers are allowed to be sent to the user or not.
+    # Whether the account agrees to receive tips, updates and offers. It is applied only to the caller's own  profile, and omitting it on such a request stores false rather than keeping the current value.
     attr_accessor :spam
 
     # Attribute mapping from ruby-style variable name to JSON key.

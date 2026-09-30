@@ -24,7 +24,7 @@ module DocspaceApiSdk
     # Provider API base URL.
     attr_accessor :base_url
 
-    # Provider API key.
+    # Provider API key. Omit it for a provider that needs none; the request is then made without one.
     attr_accessor :api_key
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -91,8 +91,6 @@ module DocspaceApiSdk
 
       if attributes.key?(:'api_key')
         self.api_key = attributes[:'api_key']
-      else
-        self.api_key = nil
       end
     end
 
@@ -109,10 +107,6 @@ module DocspaceApiSdk
         invalid_properties.push('invalid value for "base_url", base_url cannot be nil.')
       end
 
-      if @api_key.nil?
-        invalid_properties.push('invalid value for "api_key", api_key cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -122,7 +116,6 @@ module DocspaceApiSdk
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @provider_type.nil?
       return false if @base_url.nil?
-      return false if @api_key.nil?
       true
     end
 
@@ -144,16 +137,6 @@ module DocspaceApiSdk
       end
 
       @base_url = base_url
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] api_key Value to be assigned
-    def api_key=(api_key)
-      if api_key.nil?
-        fail ArgumentError, 'api_key cannot be nil'
-      end
-
-      @api_key = api_key
     end
 
     # Checks equality by comparing each attribute.

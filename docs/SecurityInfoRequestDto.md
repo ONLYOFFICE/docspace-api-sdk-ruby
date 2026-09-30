@@ -4,11 +4,11 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **folder_ids** | [**Array&lt;DuplicateRequestDtoAllOfFileIds&gt;**](DuplicateRequestDtoAllOfFileIds.md) | The list of the shared folder IDs. | [optional] |
-| **file_ids** | [**Array&lt;DuplicateRequestDtoAllOfFileIds&gt;**](DuplicateRequestDtoAllOfFileIds.md) | The list of the shared file IDs. | [optional] |
-| **share** | [**Array&lt;FileShareParams&gt;**](FileShareParams.md) | The collection of sharing parameters. | [optional] |
-| **notify** | **Boolean** | Specifies whether to notify users about the shared file or not. | [optional] |
-| **sharing_message** | **String** | The message to send when notifying about the shared file. | [optional] |
+| **folder_ids** | [**Array&lt;DuplicateRequestDtoAllOfFileIds&gt;**](DuplicateRequestDtoAllOfFileIds.md) | The folders and rooms whose rights are being changed, identified as a listing operation returns them - a  number on the portal, a string on a connected third-party account. | [optional] |
+| **file_ids** | [**Array&lt;DuplicateRequestDtoAllOfFileIds&gt;**](DuplicateRequestDtoAllOfFileIds.md) | The files whose rights are being changed, identified as a listing operation returns them - a number on the  portal, a string on a connected third-party account. | [optional] |
+| **share** | [**Array&lt;FileShareParams&gt;**](FileShareParams.md) | One record per account or group whose rights are being set, each naming the subject and the level it gets on  all of the listed entries; a level of `None` takes the access away. An empty collection makes the call change  nothing. | [optional] |
+| **notify** | **Boolean** | Set to true to have every account named in `share` emailed about the access it just received; false changes  the rights without telling anyone. | [optional] |
+| **sharing_message** | **String** | The text put into that email, ignored while `notify` is false. Markup is stripped before sending, so only the  plain text of the value survives. | [optional] |
 
 ## Example
 
@@ -17,8 +17,8 @@ require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::SecurityInfoRequestDto.new(
   folder_ids: [1, 2, 3],
-  file_ids: [1, 2, 3],
-  share: [{access=1, shareTo=00000000-0000-0000-0000-000000000000}],
+  file_ids: [7, 8],
+  share: [{access=2, shareTo=9924256a-739c-462b-af15-e652a3b1b6eb}],
   notify: true,
   sharing_message: You have been granted access to the file
 )

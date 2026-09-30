@@ -17,24 +17,24 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents an active wallet service (quota) of the current portal.
+  # One wallet service the portal is running right now, with the allowance it grants where that is counted.
   class ActiveServiceDto < ApiModelBase
-    # The name of the service.
+    # The stable key of the service, which is what `POST api/2.0/portal/payment/servicestate` takes to switch  it off again.
     attr_accessor :service
 
-    # The unit of measurement for the service.
+    # What `limit` and `used` count, in the portal language - gigabytes, editor seats, credits.
     attr_accessor :service_unit
 
-    # Indicates whether the service is subscription-based.
+    # Whether the service is billed as a standing subscription rather than per unit consumed. Only a  subscription can carry `limit` and `used`.
     attr_accessor :subscription
 
-    # The title of the service.
+    # The service name in the portal language, for printing rather than matching.
     attr_accessor :title
 
-    # The service limit. Populated only for the subscription-based services.
+    # How much of the service the portal is entitled to. It is empty for a service whose consumption is not  counted this way, which is not the same as a service without a limit.
     attr_accessor :limit
 
-    # The current service usage. Populated only for the subscription-based services.
+    # How much of that allowance is in use - the editors currently active for the cloud editors, the units  already consumed for disk storage. Empty under the same conditions as `limit`.
     attr_accessor :used
 
     # Attribute mapping from ruby-style variable name to JSON key.

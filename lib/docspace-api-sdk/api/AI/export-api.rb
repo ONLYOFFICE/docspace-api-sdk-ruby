@@ -23,23 +23,23 @@ module DocspaceApiSdk
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Start markdown → docx export
-    # Starts an asynchronous markdown-to-docx export. The response only acknowledges the task: the AI Worker converts the content and saves the .docx into the target folder (an agent room resolves to its result-storage subfolder), and completion reaches the client as the usual folder-modified socket event.
+    # Start markdown export
+    # Queues a markdown export and answers 202 as soon as the job is accepted, without waiting for it. `title`, `content` and `folderId` are all required, and a `content` of only whitespace counts as missing even though it is not empty. `format` is optional and selects the output - `Docx` (the default), `Pdf`, or `Md`, which stores the markdown verbatim instead of converting it. The conversion runs in the AI worker, which saves the .docx into the target folder - an agent room resolves to its own result-storage subfolder - so there is nothing to poll here: completion arrives as the ordinary folder-modified socket event. This route accepts a body of up to 15 MB rather than the 100 KB the rest of the API allows, because a whole thread transcript is sent in one request.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-export-text-to-docx/
     # @param ai_export_text_to_docx_request [AiExportTextToDocxRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [AiExportTextToDocx200Response]
+    # @return [AiExportTextToDocx202Response]
     def ai_export_text_to_docx(ai_export_text_to_docx_request, opts = {})
       data, _status_code, _headers = ai_export_text_to_docx_with_http_info(ai_export_text_to_docx_request, opts)
       data
     end
 
-    # Start markdown → docx export
-    # Starts an asynchronous markdown-to-docx export. The response only acknowledges the task: the AI Worker converts the content and saves the .docx into the target folder (an agent room resolves to its result-storage subfolder), and completion reaches the client as the usual folder-modified socket event.
+    # Start markdown export
+    # Queues a markdown export and answers 202 as soon as the job is accepted, without waiting for it. `title`, `content` and `folderId` are all required, and a `content` of only whitespace counts as missing even though it is not empty. `format` is optional and selects the output - `Docx` (the default), `Pdf`, or `Md`, which stores the markdown verbatim instead of converting it. The conversion runs in the AI worker, which saves the .docx into the target folder - an agent room resolves to its own result-storage subfolder - so there is nothing to poll here: completion arrives as the ordinary folder-modified socket event. This route accepts a body of up to 15 MB rather than the 100 KB the rest of the API allows, because a whole thread transcript is sent in one request.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-export-text-to-docx/
     # @param ai_export_text_to_docx_request [AiExportTextToDocxRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiExportTextToDocx200Response, Integer, Hash)>] AiExportTextToDocx200Response data, response status code and response headers
+    # @return [Array<(AiExportTextToDocx202Response, Integer, Hash)>] AiExportTextToDocx202Response data, response status code and response headers
     def ai_export_text_to_docx_with_http_info(ai_export_text_to_docx_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::ExportApi.ai_export_text_to_docx ...'
@@ -71,10 +71,10 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_export_text_to_docx_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiExportTextToDocx200Response'
+      return_type = opts[:debug_return_type] || 'AiExportTextToDocx202Response'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::ExportApi.ai_export_text_to_docx",

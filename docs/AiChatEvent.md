@@ -20,11 +20,11 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiChatEvent.new(
-  type: null,
+  type: message-delta,
   message: null,
-  message_id: null,
+  message_id: 22222222-2222-2222-2222-222222222222,
   idx: null,
-  thread_id: null,
+  thread_id: 11111111-1111-1111-1111-111111111111,
   auto_allow: null,
   server_executed: null,
   title: null,

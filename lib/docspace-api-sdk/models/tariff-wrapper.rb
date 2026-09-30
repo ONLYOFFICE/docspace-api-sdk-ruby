@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The successful API response containing the Tariff object.
+  # The successful API response containing the TariffDto object.
   class TariffWrapper < ApiModelBase
-    # The Tariff object returned by the operation.
+    # The TariffDto object returned by the operation.
     attr_accessor :response
 
     # The total number of items in the response
@@ -58,7 +58,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'response' => :'Tariff',
+        :'response' => :'TariffDto',
         :'count' => :'Integer',
         :'links' => :'Array<GetPortalPrices200ResponseLinksInner>',
         :'status' => :'Integer',

@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The information about the file editing history author.
+  # The person a saved revision of a file, or one single change in it, is attributed to.
   class EditHistoryAuthor < ApiModelBase
-    # The author ID.
+    # The account the revision or the change is attributed to, as the editing service stored it. It is normally the  identifier of a portal account; the empty identifier stands for a change nobody could be named for.
     attr_accessor :id
 
-    # The author name.
+    # The display name of that account as the portal spells it now, which need not be the name that was stored with  the revision. An account that cannot be resolved - one removed from the portal, or a change made through an  anonymous link - is reported as a guest.
     attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.

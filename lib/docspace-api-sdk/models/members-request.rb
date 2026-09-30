@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The member request.
+  # The accounts a member operation applies to.
   class MembersRequest < ApiModelBase
-    # The list of group member IDs.
+    # The accounts the operation applies to. When adding or replacing members, an account that is a guest, is  disabled or does not exist is skipped without an error; when removing them, an ID that is not a member is  skipped as well.
     attr_accessor :members
 
     # Attribute mapping from ruby-style variable name to JSON key.

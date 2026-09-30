@@ -14,8 +14,8 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiImportResult.new(
-  success: null,
+  success: true,
   imported: null,
-  errors: null
+  errors: []
 )
 ```

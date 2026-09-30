@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for generating a customer monthly usage report.
+  # The period covered by the monthly wallet spending report.
   class CustomerMonthlyUsageReportRequestDto < ApiModelBase
-    # The report start date.
+    # The beginning of the reported period, inclusive. The months are cut in the portal time zone rather than in  UTC, so spending at the turn of a month falls where the portal sees it; defaults to the portal creation date.
     attr_accessor :start_date
 
-    # The report end date.
+    # The end of the reported period, inclusive. Cut in the portal time zone in the same way as `startDate`, and  defaults to the moment the call is made.
     attr_accessor :end_date
 
     # Attribute mapping from ruby-style variable name to JSON key.

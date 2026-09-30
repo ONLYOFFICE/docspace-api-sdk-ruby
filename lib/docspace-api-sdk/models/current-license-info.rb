@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The current license information.
+  # The two facts about the subscription in force that a payment page needs.
   class CurrentLicenseInfo < ApiModelBase
-    # Specifies whether the license is trial or not.
+    # Whether the portal is on a trial rather than a paid subscription. A trial expires at `dueDate` and is not  extended by paying - a plan has to be bought instead.
     attr_accessor :trial
 
-    # The date when the license expires.
+    # The day the subscription runs out, with the time of day cut off. The largest value a date can hold means  it never runs out, which is how a free or unlimited plan is expressed.
     attr_accessor :due_date
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -21,3 +21,5 @@
 
 * `VISION` (value: `"Vision"`)
 
+* `FORM_ANALYSIS` (value: `"FormAnalysis"`)
+

@@ -17,48 +17,54 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents an operation.
+  # One movement on the portal wallet: what it was for, who caused it, and how much money it moved.
   class OperationDto < ApiModelBase
-    # The date when the operation took place.
+    # When the movement was booked, in the portal time zone - the same zone the `startDate` and `endDate`  filters are read in, so the two do line up here.
     attr_accessor :date
 
-    # The service related to the operation.
+    # The wallet service the movement belongs to, by its stable key. It is what the `serviceName` filter  matches on, and it is empty for a movement that belongs to no service, such as a top-up.
     attr_accessor :service
 
-    # The brief operation description.
+    # A one-line summary of the movement in the portal language, already composed from the service and the  quantity - meant to be printed as it is rather than parsed.
     attr_accessor :description
 
-    # The detailed information about the operation.
+    # The longer explanation of the same movement, where the service recorded one. It is empty for a movement  that has nothing to add to `description`.
     attr_accessor :details
 
-    # The service unit.
+    # What `quantity` counts for this service, in the portal language. AI consumption is reported in tokens  here rather than in the AI credits the service is sold in.
     attr_accessor :service_unit
 
-    # The quantity of the service used.
+    # How many units the movement covers, in the unit named by `serviceUnit`. It is `0` for a movement that  moves money without consuming a service.
     attr_accessor :quantity
 
-    # The three-character ISO 4217 currency symbol of the operation.
+    # The currency `credit` and `debit` are expressed in, as a three-letter ISO 4217 code. It is the accounting  currency of the wallet, which need not be the currency the subscription is priced in.
     attr_accessor :currency
 
-    # The credit amount of the operation.
+    # The amount that went into the wallet. It is `0` on a movement that only took money out, so the pair of  `credit` and `debit` is what shows which way the money went; the `credit` and `debit` filters of the  operation select the two directions by exactly this.
     attr_accessor :credit
 
-    # The debit amount of the operation.
+    # The amount that was taken out of the wallet, `0` on a movement that put money in.
     attr_accessor :debit
 
-    # The participant original name.
+    # Who caused the movement, as the billing service records them - an internal name, which is what the  `participantName` filter matches on. Show `participantDisplayName` instead.
     attr_accessor :participant_name
 
-    # The participant display name.
+    # The same person as their portal display name. It falls back to `participantName` when the name belongs to  no portal account, so it is never empty while `participantName` is filled.
     attr_accessor :participant_display_name
 
-    # AI Agent id.
-    attr_accessor :agent_id
+    # What kind of thing an AI operation was run on - an agent, a file, a folder, a room or a form. It is empty  on any movement that is not an AI charge.
+    attr_accessor :source_type
 
-    # AI Agent name.
-    attr_accessor :agent_title
+    # The title that thing had when the operation ran, kept as recorded, so it does not follow a later rename.  Empty under the same conditions as `sourceType`.
+    attr_accessor :source_title
 
-    # Type of the operation
+    # The identifier of that thing, to look it up in the module it belongs to. Empty under the same conditions  as `sourceType`.
+    attr_accessor :source_id
+
+    # The tokens an AI operation consumed, broken down by kind - prompt, completion, cache reads and writes,  reasoning, images. It is `null` on any movement that is not an AI charge, and on an AI charge the billing  service recorded without token counts.
+    attr_accessor :token_usage
+
+    # What kind of movement this is - a payment, a charge, a refund, a correction. It is what the `type` filter  matches on, and `Unknown` covers a movement the billing service reported under a kind this build does not  recognise.
     attr_accessor :type
 
     class EnumAttributeValidator
@@ -97,8 +103,10 @@ module DocspaceApiSdk
         :'debit' => :'debit',
         :'participant_name' => :'participantName',
         :'participant_display_name' => :'participantDisplayName',
-        :'agent_id' => :'agentId',
-        :'agent_title' => :'agentTitle',
+        :'source_type' => :'sourceType',
+        :'source_title' => :'sourceTitle',
+        :'source_id' => :'sourceId',
+        :'token_usage' => :'tokenUsage',
         :'type' => :'type'
       }
     end
@@ -116,7 +124,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'date' => :'Time',
+        :'date' => :'ApiDateTime',
         :'service' => :'String',
         :'description' => :'String',
         :'details' => :'String',
@@ -127,8 +135,10 @@ module DocspaceApiSdk
         :'debit' => :'Float',
         :'participant_name' => :'String',
         :'participant_display_name' => :'String',
-        :'agent_id' => :'String',
-        :'agent_title' => :'String',
+        :'source_type' => :'String',
+        :'source_title' => :'String',
+        :'source_id' => :'String',
+        :'token_usage' => :'OperationTokenUsage',
         :'type' => :'OperationType'
       }
     end
@@ -136,7 +146,6 @@ module DocspaceApiSdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'date',
         :'service',
         :'description',
         :'details',
@@ -144,8 +153,9 @@ module DocspaceApiSdk
         :'currency',
         :'participant_name',
         :'participant_display_name',
-        :'agent_id',
-        :'agent_title',
+        :'source_type',
+        :'source_title',
+        :'source_id',
       ])
     end
 
@@ -209,12 +219,20 @@ module DocspaceApiSdk
         self.participant_display_name = attributes[:'participant_display_name']
       end
 
-      if attributes.key?(:'agent_id')
-        self.agent_id = attributes[:'agent_id']
+      if attributes.key?(:'source_type')
+        self.source_type = attributes[:'source_type']
       end
 
-      if attributes.key?(:'agent_title')
-        self.agent_title = attributes[:'agent_title']
+      if attributes.key?(:'source_title')
+        self.source_title = attributes[:'source_title']
+      end
+
+      if attributes.key?(:'source_id')
+        self.source_id = attributes[:'source_id']
+      end
+
+      if attributes.key?(:'token_usage')
+        self.token_usage = attributes[:'token_usage']
       end
 
       if attributes.key?(:'type')
@@ -253,8 +271,10 @@ module DocspaceApiSdk
           debit == o.debit &&
           participant_name == o.participant_name &&
           participant_display_name == o.participant_display_name &&
-          agent_id == o.agent_id &&
-          agent_title == o.agent_title &&
+          source_type == o.source_type &&
+          source_title == o.source_title &&
+          source_id == o.source_id &&
+          token_usage == o.token_usage &&
           type == o.type
     end
 
@@ -267,7 +287,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [date, service, description, details, service_unit, quantity, currency, credit, debit, participant_name, participant_display_name, agent_id, agent_title, type].hash
+      [date, service, description, details, service_unit, quantity, currency, credit, debit, participant_name, participant_display_name, source_type, source_title, source_id, token_usage, type].hash
     end
 
     # Builds the object from hash

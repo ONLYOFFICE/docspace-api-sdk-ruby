@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Request body for saving application-specific settings.
+  # The configuration document a portal application keeps.
   class SetAppSettingsBody < ApiModelBase
     attr_accessor :settings
 
@@ -41,13 +41,14 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'settings' => :'SetAppSettingsBodySettings'
+        :'settings' => :'Object'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'settings'
       ])
     end
 

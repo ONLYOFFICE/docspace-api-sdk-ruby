@@ -17,21 +17,21 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Aggregated customer spending for a single calendar month.
+  # What the portal spent from its wallet in one calendar month, added up across every service.
   class CustomerMonthlyUsageDto < ApiModelBase
-    # The calendar year.
+    # The year the month belongs to. Months are cut in the portal time zone, so a movement at the edge of a  month falls where the portal sees it and not where UTC does.
     attr_accessor :year
 
-    # The calendar month (1-12).
+    # The month itself, January being 1. Only months that had spending appear at all, so a gap in the list is a  month with nothing in it rather than missing data.
     attr_accessor :month
 
-    # The three-character ISO 4217 currency symbol of the amounts.
+    # The currency `totalAmount` is expressed in, as a three-letter ISO 4217 code - the accounting currency of  the wallet.
     attr_accessor :currency
 
-    # The total amount charged across all services in this month.
+    # What the month came to across every service, as a positive amount spent rather than a signed balance.
     attr_accessor :total_amount
 
-    # The number of individual purchase operations in this month.
+    # How many separate movements that total was added up from, for a client that wants to show the weight  behind a figure. The movements themselves are in `GET api/2.0/portal/payment/customer/operations`.
     attr_accessor :operation_count
 
     # Attribute mapping from ruby-style variable name to JSON key.

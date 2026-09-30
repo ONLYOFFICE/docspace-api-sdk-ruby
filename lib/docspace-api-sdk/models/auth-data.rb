@@ -17,24 +17,24 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The authentication data.
+  # The credentials of a third-party storage account. The portal takes them when an account is connected and does not  give them back afterwards.
   class AuthData < ApiModelBase
-    # The authentication login.
+    # The account name at the storage service.
     attr_accessor :login
 
-    # The authentication password.
+    # The password of the account at the storage service.
     attr_accessor :password
 
-    # The authentication raw token.
+    # The token of the account, kept as the raw JSON document the storage service issued it in.
     attr_accessor :raw_token
 
-    # The authentication URL.
+    # The address of the storage server the account lives on.
     attr_accessor :url
 
-    # The authentication provider.
+    # The storage service the credentials belong to, as the provider key the account was connected with.
     attr_accessor :provider
 
-    # The authentication token.
+    # The same token as in `rawToken`, parsed into its OAuth 2.0 fields.
     attr_accessor :token
 
     # Attribute mapping from ruby-style variable name to JSON key.

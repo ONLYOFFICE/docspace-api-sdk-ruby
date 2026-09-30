@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **delete_after** | **Boolean** | Specifies whether to delete a folder after the editing session is finished or not. | [optional] |
-| **immediately** | **Boolean** | Specifies whether to move a folder to the \\Trash\\ folder or delete it immediately. | [optional] |
+| **delete_after** | **Boolean** | Whether the deletion waits for the editing sessions on the contents to end: with true a folder somebody is  working in is removed once they are done, with false the deletion starts at once. | [optional] |
+| **immediately** | **Boolean** | Whether the folder is discarded for good instead of being moved to the Trash section: with false it can be  restored from Trash, with true it cannot be recovered. Inside a room there is no Trash and the deletion is  final either way. | [optional] |
 
 ## Example
 

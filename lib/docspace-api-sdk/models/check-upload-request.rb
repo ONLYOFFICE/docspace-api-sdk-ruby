@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for checking file uploads.
+  # The names to test against the files the folder already holds.
   class CheckUploadRequest < ApiModelBase
-    # The list of file titles.
+    # The names to test, extensions included, spelled as they would be sent to the upload. Matching ignores case,  and a name repeated in the list is answered once.
     attr_accessor :files_title
 
     # Attribute mapping from ruby-style variable name to JSON key.

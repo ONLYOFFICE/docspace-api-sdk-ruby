@@ -18,19 +18,19 @@ require 'time'
 
 module DocspaceApiSdk
   class SearchArea
-    Active = 0.freeze
-    Archive = 1.freeze
-    Any = 2.freeze
-    RecentByLinks = 3.freeze
-    Templates = 4.freeze
-    Knowledge = 5.freeze
-    ResultStorage = 6.freeze
-    AiAgents = 7.freeze
-    Forms = 8.freeze
-    FormTemplates = 9.freeze
+    ACTIVE = "Active".freeze
+    ARCHIVE = "Archive".freeze
+    ANY = "Any".freeze
+    RECENT_BY_LINKS = "RecentByLinks".freeze
+    TEMPLATES = "Templates".freeze
+    KNOWLEDGE = "Knowledge".freeze
+    RESULT_STORAGE = "ResultStorage".freeze
+    AI_AGENTS = "AiAgents".freeze
+    FORMS = "Forms".freeze
+    FORM_TEMPLATES = "FormTemplates".freeze
 
     def self.all_vars
-      @all_vars ||= [Active, Archive, Any, RecentByLinks, Templates, Knowledge, ResultStorage, AiAgents, Forms, FormTemplates].freeze
+      @all_vars ||= [ACTIVE, ARCHIVE, ANY, RECENT_BY_LINKS, TEMPLATES, KNOWLEDGE, RESULT_STORAGE, AI_AGENTS, FORMS, FORM_TEMPLATES].freeze
     end
 
     # Builds the enum from string

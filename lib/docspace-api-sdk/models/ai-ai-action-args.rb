@@ -17,21 +17,46 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Wire-serializable subset of the engine's `ActionArgs` — drops the engine-injected `signal`/`fetch`; `profile`/`messages` are owned by the engine and never sent by the caller.
   class AiAiActionArgs < ApiModelBase
     # Extra tools offered to the model for this request.
     attr_accessor :tools
 
-    # Enable extended thinking / reasoning for this request.
+    # Legacy extended-thinking switch; stands for `medium`. `reasoningLevel` wins when both are set.
     attr_accessor :is_reasoning
 
+    # Depth of extended thinking for the round; providers clamp it to what the model accepts.
+    attr_accessor :reasoning_level
+
     attr_accessor :prompt
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'tools' => :'tools',
         :'is_reasoning' => :'isReasoning',
+        :'reasoning_level' => :'reasoningLevel',
         :'prompt' => :'prompt'
       }
     end
@@ -51,6 +76,7 @@ module DocspaceApiSdk
       {
         :'tools' => :'Array<AiTMCPItem>',
         :'is_reasoning' => :'Boolean',
+        :'reasoning_level' => :'AiAiReasoningLevel',
         :'prompt' => :'AiAiActionArgsPrompt'
       }
     end
@@ -87,6 +113,10 @@ module DocspaceApiSdk
         self.is_reasoning = attributes[:'is_reasoning']
       end
 
+      if attributes.key?(:'reasoning_level')
+        self.reasoning_level = attributes[:'reasoning_level']
+      end
+
       if attributes.key?(:'prompt')
         self.prompt = attributes[:'prompt']
       end
@@ -114,6 +144,7 @@ module DocspaceApiSdk
       self.class == o.class &&
           tools == o.tools &&
           is_reasoning == o.is_reasoning &&
+          reasoning_level == o.reasoning_level &&
           prompt == o.prompt
     end
 
@@ -126,7 +157,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [tools, is_reasoning, prompt].hash
+      [tools, is_reasoning, reasoning_level, prompt].hash
     end
 
     # Builds the object from hash

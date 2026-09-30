@@ -24,7 +24,7 @@ module DocspaceApiSdk
       @api_client = api_client
     end
     # Close the admin helper
-    # Closes the administrator helper notification.
+    # Dismisses the administrator helper tip for the caller, so it is not shown again on this account. Available  only to a DocSpace administrator, which includes the portal Owner, on a Standalone (self-hosted) installation  running outside white-label custom mode; every other caller is refused. This is a mutating, idempotent call  scoped to the calling account only; it never affects other administrators. It returns no data on success.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/close-admin-helper/
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -34,7 +34,7 @@ module DocspaceApiSdk
     end
 
     # Close the admin helper
-    # Closes the administrator helper notification.
+    # Dismisses the administrator helper tip for the caller, so it is not shown again on this account. Available  only to a DocSpace administrator, which includes the portal Owner, on a Standalone (self-hosted) installation  running outside white-label custom mode; every other caller is refused. This is a mutating, idempotent call  scoped to the calling account only; it never affects other administrators. It returns no data on success.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/close-admin-helper/
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -83,7 +83,7 @@ module DocspaceApiSdk
     end
 
     # Complete the Wizard settings
-    # Completes the Wizard settings.
+    # Finishes the initial portal setup wizard: sets the owner's password and locale, applies the supplied license  if one is required, and marks the wizard as completed so it is not shown again. This call is not for a normal  logged-in session: it requires a confirmation link bearing the Wizard claim, of the kind issued when a new  portal is created, and the link is consumed as part of authenticating the request; the caller must also hold  the EditPortalSettings permission. An empty password or a malformed email address is rejected without  completing the wizard, and so is a missing, invalid, or expired license, or a license whose user quota does  not cover the portal. This call is meant to run once per portal; running it again is accepted but has no  further effect once the wizard is already completed. It returns the resulting wizard settings, including the  completed flag.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/complete-wizard/
     # @param [Hash] opts the optional parameters
     # @option opts [WizardRequestsDto] :wizard_requests_dto 
@@ -94,7 +94,7 @@ module DocspaceApiSdk
     end
 
     # Complete the Wizard settings
-    # Completes the Wizard settings.
+    # Finishes the initial portal setup wizard: sets the owner's password and locale, applies the supplied license  if one is required, and marks the wizard as completed so it is not shown again. This call is not for a normal  logged-in session: it requires a confirmation link bearing the Wizard claim, of the kind issued when a new  portal is created, and the link is consumed as part of authenticating the request; the caller must also hold  the EditPortalSettings permission. An empty password or a malformed email address is rejected without  completing the wizard, and so is a missing, invalid, or expired license, or a license whose user quota does  not cover the portal. This call is meant to run once per portal; running it again is accepted but has no  further effect once the wizard is already completed. It returns the resulting wizard settings, including the  completed flag.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/complete-wizard/
     # @param [Hash] opts the optional parameters
     # @option opts [WizardRequestsDto] :wizard_requests_dto 
@@ -149,7 +149,7 @@ module DocspaceApiSdk
     end
 
     # Configure the deep link settings
-    # Saves the deep link configuration settings for the portal.
+    # Sets how the portal responds when a client opens a DocSpace link on a mobile device: always in the browser,  always in the native app, or asking the user to choose each time. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The handling mode must be one of the documented enum values; anything else is  rejected without being saved. This is a mutating, idempotent call: sending the same mode again leaves the  setting unchanged. It returns the saved deep link settings, including the timestamp of the last change; read  the current value at any time, including anonymously, from `GET api/2.0/settings/deeplink`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-deep-link/
     # @param [Hash] opts the optional parameters
     # @option opts [DeepLinkConfigurationRequestsDto] :deep_link_configuration_requests_dto 
@@ -160,7 +160,7 @@ module DocspaceApiSdk
     end
 
     # Configure the deep link settings
-    # Saves the deep link configuration settings for the portal.
+    # Sets how the portal responds when a client opens a DocSpace link on a mobile device: always in the browser,  always in the native app, or asking the user to choose each time. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The handling mode must be one of the documented enum values; anything else is  rejected without being saved. This is a mutating, idempotent call: sending the same mode again leaves the  setting unchanged. It returns the saved deep link settings, including the timestamp of the last change; read  the current value at any time, including anonymously, from `GET api/2.0/settings/deeplink`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-deep-link/
     # @param [Hash] opts the optional parameters
     # @option opts [DeepLinkConfigurationRequestsDto] :deep_link_configuration_requests_dto 
@@ -215,9 +215,9 @@ module DocspaceApiSdk
     end
 
     # Delete a color theme
-    # Deletes the portal color theme with the ID specified in the request.
+    # Removes a custom color theme from the portal by its ID. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). An ID belonging to one of the built-in default themes is not removable; the  call succeeds but leaves the theme list unchanged. If the deleted theme was the currently selected one, the  theme with the lowest remaining ID is selected automatically. This is a mutating, idempotent call: deleting an  ID that is already gone succeeds without error and again leaves nothing changed. It returns the full updated  theme configuration, including the (possibly new) selected theme.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-portal-color-theme/
-    # @param id [Integer] The ID of the portal theme to delete.
+    # @param id [Integer] The theme to remove, by theme ID. An ID belonging to a built-in theme leaves the list untouched, and so does  one that is already gone - neither is reported as an error. Removing the theme currently in use moves the  portal to the remaining theme with the lowest ID.
     # @param [Hash] opts the optional parameters
     # @return [CustomColorThemesSettingsWrapper]
     def delete_portal_color_theme(id, opts = {})
@@ -226,9 +226,9 @@ module DocspaceApiSdk
     end
 
     # Delete a color theme
-    # Deletes the portal color theme with the ID specified in the request.
+    # Removes a custom color theme from the portal by its ID. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). An ID belonging to one of the built-in default themes is not removable; the  call succeeds but leaves the theme list unchanged. If the deleted theme was the currently selected one, the  theme with the lowest remaining ID is selected automatically. This is a mutating, idempotent call: deleting an  ID that is already gone succeeds without error and again leaves nothing changed. It returns the full updated  theme configuration, including the (possibly new) selected theme.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-portal-color-theme/
-    # @param id [Integer] The ID of the portal theme to delete.
+    # @param id [Integer] The theme to remove, by theme ID. An ID belonging to a built-in theme leaves the list untouched, and so does  one that is already gone - neither is reported as an error. Removing the theme currently in use moves the  portal to the remaining theme with the lowest ID.
     # @param [Hash] opts the optional parameters
     # @return [Array<(CustomColorThemesSettingsWrapper, Integer, Hash)>] CustomColorThemesSettingsWrapper data, response status code and response headers
     def delete_portal_color_theme_with_http_info(id, opts = {})
@@ -281,7 +281,7 @@ module DocspaceApiSdk
     end
 
     # Get the deep link settings
-    # Returns the deep link settings.
+    # Returns how the portal currently responds when a client opens a DocSpace link on a mobile device: always in  the browser, always in the native app, or asking the user to choose. No permission is required; anonymous  callers can read it too. This is a read-only, idempotent call. The response supports conditional requests:  send the standard If-Modified-Since header with the previous `lastModified` value, and an unchanged response  comes back empty instead of resending the settings. Change the mode with `POST api/2.0/settings/deeplink`,  which requires the EditPortalSettings permission.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-deep-link-settings/
     # @param [Hash] opts the optional parameters
     # @return [TenantDeepLinkSettingsWrapper]
@@ -291,7 +291,7 @@ module DocspaceApiSdk
     end
 
     # Get the deep link settings
-    # Returns the deep link settings.
+    # Returns how the portal currently responds when a client opens a DocSpace link on a mobile device: always in  the browser, always in the native app, or asking the user to choose. No permission is required; anonymous  callers can read it too. This is a read-only, idempotent call. The response supports conditional requests:  send the standard If-Modified-Since header with the previous `lastModified` value, and an unchanged response  comes back empty instead of resending the settings. Change the mode with `POST api/2.0/settings/deeplink`,  which requires the EditPortalSettings permission.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-deep-link-settings/
     # @param [Hash] opts the optional parameters
     # @return [Array<(TenantDeepLinkSettingsWrapper, Integer, Hash)>] TenantDeepLinkSettingsWrapper data, response status code and response headers
@@ -320,7 +320,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'TenantDeepLinkSettingsWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
 
       new_options = opts.merge(
         :operation => :"Settings::CommonSettingsApi.get_deep_link_settings",
@@ -340,7 +340,7 @@ module DocspaceApiSdk
     end
 
     # Get the payment settings
-    # Returns the portal payment settings.
+    # Returns the portal's payment-related configuration: the sales contact email, the URL to buy or extend a  subscription, whether the portal is Standalone, the current license's trial status and expiration date, and  the maximum quota quantity that can be purchased at once. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). This is a read-only, idempotent call. It remains reachable even while the  portal's own subscription payment is overdue, since this is how the caller finds the link to resolve it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-settings/
     # @param [Hash] opts the optional parameters
     # @return [PaymentSettingsWrapper]
@@ -350,7 +350,7 @@ module DocspaceApiSdk
     end
 
     # Get the payment settings
-    # Returns the portal payment settings.
+    # Returns the portal's payment-related configuration: the sales contact email, the URL to buy or extend a  subscription, whether the portal is Standalone, the current license's trial status and expiration date, and  the maximum quota quantity that can be purchased at once. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). This is a read-only, idempotent call. It remains reachable even while the  portal's own subscription payment is overdue, since this is how the caller finds the link to resolve it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-payment-settings/
     # @param [Hash] opts the optional parameters
     # @return [Array<(PaymentSettingsWrapper, Integer, Hash)>] PaymentSettingsWrapper data, response status code and response headers
@@ -399,7 +399,7 @@ module DocspaceApiSdk
     end
 
     # Get a color theme
-    # Returns the portal color theme.
+    # Returns the portal's color theme configuration: every saved custom theme, which one is currently selected, and  how many custom themes the plan still allows. No permission is required; anonymous callers can read it too.  This is a read-only, idempotent call. The response supports conditional requests: send the standard  If-Modified-Since header with the previous `lastModified` value, and an unchanged response comes back empty  instead of resending the same settings. A `limit` of `0` means the plan does not cap the number of custom  themes.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-color-theme/
     # @param [Hash] opts the optional parameters
     # @return [CustomColorThemesSettingsWrapper]
@@ -409,7 +409,7 @@ module DocspaceApiSdk
     end
 
     # Get a color theme
-    # Returns the portal color theme.
+    # Returns the portal's color theme configuration: every saved custom theme, which one is currently selected, and  how many custom themes the plan still allows. No permission is required; anonymous callers can read it too.  This is a read-only, idempotent call. The response supports conditional requests: send the standard  If-Modified-Since header with the previous `lastModified` value, and an unchanged response comes back empty  instead of resending the same settings. A `limit` of `0` means the plan does not cap the number of custom  themes.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-color-theme/
     # @param [Hash] opts the optional parameters
     # @return [Array<(CustomColorThemesSettingsWrapper, Integer, Hash)>] CustomColorThemesSettingsWrapper data, response status code and response headers
@@ -438,7 +438,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'CustomColorThemesSettingsWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
 
       new_options = opts.merge(
         :operation => :"Settings::CommonSettingsApi.get_portal_color_theme",
@@ -457,21 +457,21 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Get hostname
-    # Returns the portal hostname.
+    # Get the portal hostname
+    # Returns the hostname the current request arrived on, exactly as sent in the HTTP Host header, so a client  mid-setup can learn the address the portal is actually reachable at. This call is not for a normal logged-in  session: it requires a confirmation link bearing the Wizard claim, of the kind generated during initial portal  setup, and the link is consumed as part of authenticating the request. This is a read-only, idempotent call.  The value reflects whatever the caller connected through, including a reverse proxy's public name, and is not  necessarily the tenant's configured alias or mapped domain.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-hostname/
     # @param [Hash] opts the optional parameters
-    # @return [ObjectWrapper]
+    # @return [StringWrapper]
     def get_portal_hostname(opts = {})
       data, _status_code, _headers = get_portal_hostname_with_http_info(opts)
       data
     end
 
-    # Get hostname
-    # Returns the portal hostname.
+    # Get the portal hostname
+    # Returns the hostname the current request arrived on, exactly as sent in the HTTP Host header, so a client  mid-setup can learn the address the portal is actually reachable at. This call is not for a normal logged-in  session: it requires a confirmation link bearing the Wizard claim, of the kind generated during initial portal  setup, and the link is consumed as part of authenticating the request. This is a read-only, idempotent call.  The value reflects whatever the caller connected through, including a reverse proxy's public name, and is not  necessarily the tenant's configured alias or mapped domain.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-hostname/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ObjectWrapper, Integer, Hash)>] ObjectWrapper data, response status code and response headers
+    # @return [Array<(StringWrapper, Integer, Hash)>] StringWrapper data, response status code and response headers
     def get_portal_hostname_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Settings::CommonSettingsApi.get_portal_hostname ...'
@@ -494,7 +494,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ObjectWrapper'
+      return_type = opts[:debug_return_type] || 'StringWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -517,7 +517,7 @@ module DocspaceApiSdk
     end
 
     # Get a portal logo
-    # Returns the portal logo image URL.
+    # Returns the absolute URL of the portal's current logo image, already resolved against the active white-label  branding. Requires an authenticated session; every role, including Guest, can read it. This is a read-only,  idempotent call. The response supports conditional requests: send the standard If-Modified-Since header with  the previous `lastModified` value, and an unchanged response comes back empty instead of resending the same  URL. The URL points at whatever image is currently configured, including the default DocSpace logo when no  custom branding has been set.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-logo/
     # @param [Hash] opts the optional parameters
     # @return [StringWrapper]
@@ -527,7 +527,7 @@ module DocspaceApiSdk
     end
 
     # Get a portal logo
-    # Returns the portal logo image URL.
+    # Returns the absolute URL of the portal's current logo image, already resolved against the active white-label  branding. Requires an authenticated session; every role, including Guest, can read it. This is a read-only,  idempotent call. The response supports conditional requests: send the standard If-Modified-Since header with  the previous `lastModified` value, and an unchanged response comes back empty instead of resending the same  URL. The URL points at whatever image is currently configured, including the default DocSpace logo when no  custom branding has been set.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-logo/
     # @param [Hash] opts the optional parameters
     # @return [Array<(StringWrapper, Integer, Hash)>] StringWrapper data, response status code and response headers
@@ -576,10 +576,10 @@ module DocspaceApiSdk
     end
 
     # Get the portal settings
-    # Returns a list of all the available portal settings with the current values for each parameter.
+    # Returns the current portal's general configuration: branding, culture, feature flags, and DocSpace/Standalone  mode, everything the client needs to render its shell before or after login. No permission is required, but  the response shape depends on the caller's identity. An anonymous caller receives only the public subset  (culture, branding, DocSpace/Standalone flags, deep link data, setup-wizard and join-by-domain hints); once  authenticated, the response also includes tenant-specific fields such as the owner ID, time zone, invitation  limit, AI/banner/dev-tools flags, and, for a DocSpace administrator, the tenant wallet's low-balance flag.  This is a read-only, idempotent call. Pass `withPassword=true` to also receive the parameters (`salt`,  iteration count, hash size) used to hash the password client-side before it is sent to the authentication  endpoints; these are only added for an anonymous caller or when explicitly requested, never as part of the  default authenticated response.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :withpassword Specifies whether to include the password hashing configuration in the response.
+    # @option opts [Boolean] :withpassword Whether the answer also carries the salt, iteration count and hash size a client needs to hash a password  before sending it to the authentication operations. They are included for an anonymous caller anyway; for a  signed-in one they are left out unless this is set.
     # @return [SettingsWrapper]
     def get_portal_settings(opts = {})
       data, _status_code, _headers = get_portal_settings_with_http_info(opts)
@@ -587,10 +587,10 @@ module DocspaceApiSdk
     end
 
     # Get the portal settings
-    # Returns a list of all the available portal settings with the current values for each parameter.
+    # Returns the current portal's general configuration: branding, culture, feature flags, and DocSpace/Standalone  mode, everything the client needs to render its shell before or after login. No permission is required, but  the response shape depends on the caller's identity. An anonymous caller receives only the public subset  (culture, branding, DocSpace/Standalone flags, deep link data, setup-wizard and join-by-domain hints); once  authenticated, the response also includes tenant-specific fields such as the owner ID, time zone, invitation  limit, AI/banner/dev-tools flags, and, for a DocSpace administrator, the tenant wallet's low-balance flag.  This is a read-only, idempotent call. Pass `withPassword=true` to also receive the parameters (`salt`,  iteration count, hash size) used to hash the password client-side before it is sent to the authentication  endpoints; these are only added for an anonymous caller or when explicitly requested, never as part of the  default authenticated response.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :withpassword Specifies whether to include the password hashing configuration in the response.
+    # @option opts [Boolean] :withpassword Whether the answer also carries the salt, iteration count and hash size a client needs to hash a password  before sending it to the authentication operations. They are included for an anonymous caller anyway; for a  signed-in one they are left out unless this is set.
     # @return [Array<(SettingsWrapper, Integer, Hash)>] SettingsWrapper data, response status code and response headers
     def get_portal_settings_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -618,7 +618,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'SettingsWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
 
       new_options = opts.merge(
         :operation => :"Settings::CommonSettingsApi.get_portal_settings",
@@ -638,20 +638,20 @@ module DocspaceApiSdk
     end
 
     # Get the socket settings
-    # Returns the socket settings.
+    # Returns the base URL of the portal's real-time notification hub (Socket.IO), which the client connects to for  live updates such as file changes, presence, or quota alerts. Requires an authenticated session; every role  can read it. This is a read-only, idempotent call. The value comes from server-side configuration and cannot  be changed through this API; an empty `url` means the portal has no notification hub configured and the client  should not attempt to connect.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-socket-settings/
     # @param [Hash] opts the optional parameters
-    # @return [ObjectWrapper]
+    # @return [SocketSettingsWrapper]
     def get_socket_settings(opts = {})
       data, _status_code, _headers = get_socket_settings_with_http_info(opts)
       data
     end
 
     # Get the socket settings
-    # Returns the socket settings.
+    # Returns the base URL of the portal's real-time notification hub (Socket.IO), which the client connects to for  live updates such as file changes, presence, or quota alerts. Requires an authenticated session; every role  can read it. This is a read-only, idempotent call. The value comes from server-side configuration and cannot  be changed through this API; an empty `url` means the portal has no notification hub configured and the client  should not attempt to connect.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-socket-settings/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ObjectWrapper, Integer, Hash)>] ObjectWrapper data, response status code and response headers
+    # @return [Array<(SocketSettingsWrapper, Integer, Hash)>] SocketSettingsWrapper data, response status code and response headers
     def get_socket_settings_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Settings::CommonSettingsApi.get_socket_settings ...'
@@ -674,7 +674,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ObjectWrapper'
+      return_type = opts[:debug_return_type] || 'SocketSettingsWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -697,7 +697,7 @@ module DocspaceApiSdk
     end
 
     # Get supported languages
-    # Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. de, en-US, etc.).
+    # Returns the two- or four-letter language codes of every culture currently enabled on the portal (for example  `en-US`), used to populate a language picker before or after login. No permission is required; anonymous  callers can read it too. This is a read-only, idempotent call, and the list is not paginated. The response  supports conditional requests: an unchanged result is signaled instead of resending the same list. The set of  enabled cultures is a portal-wide configuration value, not a per-user preference.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-supported-cultures/
     # @param [Hash] opts the optional parameters
     # @return [STRINGArrayWrapper]
@@ -707,7 +707,7 @@ module DocspaceApiSdk
     end
 
     # Get supported languages
-    # Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. de, en-US, etc.).
+    # Returns the two- or four-letter language codes of every culture currently enabled on the portal (for example  `en-US`), used to populate a language picker before or after login. No permission is required; anonymous  callers can read it too. This is a read-only, idempotent call, and the list is not paginated. The response  supports conditional requests: an unchanged result is signaled instead of resending the same list. The set of  enabled cultures is a portal-wide configuration value, not a per-user preference.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-supported-cultures/
     # @param [Hash] opts the optional parameters
     # @return [Array<(STRINGArrayWrapper, Integer, Hash)>] STRINGArrayWrapper data, response status code and response headers
@@ -736,7 +736,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'STRINGArrayWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
 
       new_options = opts.merge(
         :operation => :"Settings::CommonSettingsApi.get_supported_cultures",
@@ -755,8 +755,8 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Get the AI access settings for the portal
-    # Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
+    # Get the AI access settings
+    # Returns whether AI functionality (chat, agents, vectorization) is currently available on the portal at all; AI  is enabled by default. Requires an authenticated session; every role can read it. This is a read-only,  idempotent call. When the setting is disabled, every AI-specific endpoint and folder is unavailable regardless  of the caller's own permissions; this call only reports the portal-wide switch, not any per-user entitlement.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-ai-access-settings/
     # @param [Hash] opts the optional parameters
     # @return [TenantAiAccessSettingsWrapper]
@@ -765,8 +765,8 @@ module DocspaceApiSdk
       data
     end
 
-    # Get the AI access settings for the portal
-    # Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
+    # Get the AI access settings
+    # Returns whether AI functionality (chat, agents, vectorization) is currently available on the portal at all; AI  is enabled by default. Requires an authenticated session; every role can read it. This is a read-only,  idempotent call. When the setting is disabled, every AI-specific endpoint and folder is unavailable regardless  of the caller's own permissions; this call only reports the portal-wide switch, not any per-user entitlement.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-ai-access-settings/
     # @param [Hash] opts the optional parameters
     # @return [Array<(TenantAiAccessSettingsWrapper, Integer, Hash)>] TenantAiAccessSettingsWrapper data, response status code and response headers
@@ -815,7 +815,7 @@ module DocspaceApiSdk
     end
 
     # Get the user invitation settings
-    # Returns the portal user invitation settings.
+    # Returns whether the portal currently allows inviting new members and new guests at all. No permission is  required; anonymous callers can read it too, since the invitation flow itself may run before the caller has  signed in. This is a read-only, idempotent call. The response supports conditional requests: send the standard  If-Modified-Since header with the previous `lastModified` value, and an unchanged response comes back empty  instead of resending the same settings.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-user-invitation-settings/
     # @param [Hash] opts the optional parameters
     # @return [TenantUserInvitationSettingsWrapper]
@@ -825,7 +825,7 @@ module DocspaceApiSdk
     end
 
     # Get the user invitation settings
-    # Returns the portal user invitation settings.
+    # Returns whether the portal currently allows inviting new members and new guests at all. No permission is  required; anonymous callers can read it too, since the invitation flow itself may run before the caller has  signed in. This is a read-only, idempotent call. The response supports conditional requests: send the standard  If-Modified-Since header with the previous `lastModified` value, and an unchanged response comes back empty  instead of resending the same settings.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-user-invitation-settings/
     # @param [Hash] opts the optional parameters
     # @return [Array<(TenantUserInvitationSettingsWrapper, Integer, Hash)>] TenantUserInvitationSettingsWrapper data, response status code and response headers
@@ -854,7 +854,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'TenantUserInvitationSettingsWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
 
       new_options = opts.merge(
         :operation => :"Settings::CommonSettingsApi.get_tenant_user_invitation_settings",
@@ -874,7 +874,7 @@ module DocspaceApiSdk
     end
 
     # Get time zones
-    # Returns a list of all the available portal time zones.
+    # Returns every time zone known to the host machine, each with its IANA identifier and a human-readable display  name, ordered from the most negative to the most positive UTC offset. This call is not for a normal logged-in  session: it requires a confirmation link bearing the Wizard or Administrators claim, of the kind generated  during initial portal setup or issued by an administrator, and the link is consumed as part of authenticating  the request. This is a read-only, idempotent call, and the list is not paginated. Use the returned `id` values  wherever the portal expects a time zone identifier; an unrecognized value is rejected there, not here.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-time-zones/
     # @param [Hash] opts the optional parameters
     # @return [TimezonesRequestsArrayWrapper]
@@ -884,7 +884,7 @@ module DocspaceApiSdk
     end
 
     # Get time zones
-    # Returns a list of all the available portal time zones.
+    # Returns every time zone known to the host machine, each with its IANA identifier and a human-readable display  name, ordered from the most negative to the most positive UTC offset. This call is not for a normal logged-in  session: it requires a confirmation link bearing the Wizard or Administrators claim, of the kind generated  during initial portal setup or issued by an administrator, and the link is consumed as part of authenticating  the request. This is a read-only, idempotent call, and the list is not paginated. Use the returned `id` values  wherever the portal expects a time zone identifier; an unrecognized value is rejected there, not here.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-time-zones/
     # @param [Hash] opts the optional parameters
     # @return [Array<(TimezonesRequestsArrayWrapper, Integer, Hash)>] TimezonesRequestsArrayWrapper data, response status code and response headers
@@ -933,7 +933,7 @@ module DocspaceApiSdk
     end
 
     # Set the default folder
-    # Sets the default folder.
+    # Sets which folder the current user's account opens into by default, such as My Documents, the rooms list, or  favorites. Requires an authenticated session; every role may set its own default, and the change never affects  any other user. Only folder types the client actually offers as a landing page are accepted; picking My  Documents (`USER`) as a Guest is rejected too, since guests have no personal storage. This is a mutating,  idempotent call. It returns the saved setting.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-default-folder/
     # @param [Hash] opts the optional parameters
     # @option opts [DefaultProductRequestDto] :default_product_request_dto 
@@ -944,7 +944,7 @@ module DocspaceApiSdk
     end
 
     # Set the default folder
-    # Sets the default folder.
+    # Sets which folder the current user's account opens into by default, such as My Documents, the rooms list, or  favorites. Requires an authenticated session; every role may set its own default, and the change never affects  any other user. Only folder types the client actually offers as a landing page are accepted; picking My  Documents (`USER`) as a Guest is rejected too, since guests have no personal storage. This is a mutating,  idempotent call. It returns the saved setting.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-default-folder/
     # @param [Hash] opts the optional parameters
     # @option opts [DefaultProductRequestDto] :default_product_request_dto 
@@ -999,7 +999,7 @@ module DocspaceApiSdk
     end
 
     # Save the DNS settings
-    # Saves the DNS settings specified in the request to the current portal.
+    # Maps a custom domain name onto the current tenant, or clears the mapping, so the portal becomes reachable  under the caller's own DNS name instead of only its default alias. Available only on a Standalone  (self-hosted) installation; on SaaS the call is always refused. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disable the mapping by passing `enable=false`, in which case the domain name  in the request is ignored. A domain that collides with the portal's reserved base domain, or otherwise fails  validation, is rejected without changing the current mapping. This is a mutating, idempotent call. On success  the previous domain also stops answering, and any CSP configuration referencing it is updated to the new one.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-dns-settings/
     # @param [Hash] opts the optional parameters
     # @option opts [DnsSettingsRequestsDto] :dns_settings_requests_dto 
@@ -1010,7 +1010,7 @@ module DocspaceApiSdk
     end
 
     # Save the DNS settings
-    # Saves the DNS settings specified in the request to the current portal.
+    # Maps a custom domain name onto the current tenant, or clears the mapping, so the portal becomes reachable  under the caller's own DNS name instead of only its default alias. Available only on a Standalone  (self-hosted) installation; on SaaS the call is always refused. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disable the mapping by passing `enable=false`, in which case the domain name  in the request is ignored. A domain that collides with the portal's reserved base domain, or otherwise fails  validation, is rejected without changing the current mapping. This is a mutating, idempotent call. On success  the previous domain also stops answering, and any CSP configuration referencing it is updated to the new one.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-dns-settings/
     # @param [Hash] opts the optional parameters
     # @option opts [DnsSettingsRequestsDto] :dns_settings_requests_dto 
@@ -1065,7 +1065,7 @@ module DocspaceApiSdk
     end
 
     # Save the mail domain settings
-    # Saves the mail domain settings specified in the request to the portal.
+    # Overwrites the portal's trusted mail domain configuration, which controls which email domains are treated as  already verified when a user is invited or self-registers. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). When the requested mode is a custom domain list, every domain is normalized to  lowercase and checked against the expected hostname format; a domain that fails the check, or an empty custom  list, causes the whole call to be rejected without saving anything. For the other modes the domain list in the  request is ignored. The `inviteUsersAsVisitors` flag controls whether users who join through a trusted domain  are added as full members or as visitors, and takes effect on the next join rather than retroactively. This is  a mutating, idempotent call: repeating it with the same body leaves the portal in the same state. On success  it returns a confirmation message, not the saved settings themselves; read them back from  `GET api/2.0/settings`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mail-domain-settings/
     # @param [Hash] opts the optional parameters
     # @option opts [MailDomainSettingsRequestsDto] :mail_domain_settings_requests_dto 
@@ -1076,7 +1076,7 @@ module DocspaceApiSdk
     end
 
     # Save the mail domain settings
-    # Saves the mail domain settings specified in the request to the portal.
+    # Overwrites the portal's trusted mail domain configuration, which controls which email domains are treated as  already verified when a user is invited or self-registers. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). When the requested mode is a custom domain list, every domain is normalized to  lowercase and checked against the expected hostname format; a domain that fails the check, or an empty custom  list, causes the whole call to be rejected without saving anything. For the other modes the domain list in the  request is ignored. The `inviteUsersAsVisitors` flag controls whether users who join through a trusted domain  are added as full members or as visitors, and takes effect on the next join rather than retroactively. This is  a mutating, idempotent call: repeating it with the same body leaves the portal in the same state. On success  it returns a confirmation message, not the saved settings themselves; read them back from  `GET api/2.0/settings`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mail-domain-settings/
     # @param [Hash] opts the optional parameters
     # @option opts [MailDomainSettingsRequestsDto] :mail_domain_settings_requests_dto 
@@ -1131,7 +1131,7 @@ module DocspaceApiSdk
     end
 
     # Save a color theme
-    # Saves the portal color theme specified in the request.
+    # Adds or updates a custom color theme, or changes which theme is selected, for the whole portal. Requires Owner  or DocSpaceAdmin (the EditPortalSettings permission). Pass `theme` to create or edit one: an existing theme is  matched and updated by its ID, a new one is appended, and an ID that collides with a built-in default theme is  treated as a request to create a new custom theme instead of overwriting the default. Once the plan's  custom-theme limit is reached, a new theme is silently not added rather than rejected with an error, so check  the returned `themes` count against `limit` before assuming it was saved. Pass `selected` to switch the active  theme; an ID that does not match any existing theme is ignored. This is a mutating call, not strictly  idempotent once the limit has been reached. It returns the full updated theme configuration.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-portal-color-theme/
     # @param [Hash] opts the optional parameters
     # @option opts [CustomColorThemesSettingsRequestsDto] :custom_color_themes_settings_requests_dto 
@@ -1142,7 +1142,7 @@ module DocspaceApiSdk
     end
 
     # Save a color theme
-    # Saves the portal color theme specified in the request.
+    # Adds or updates a custom color theme, or changes which theme is selected, for the whole portal. Requires Owner  or DocSpaceAdmin (the EditPortalSettings permission). Pass `theme` to create or edit one: an existing theme is  matched and updated by its ID, a new one is appended, and an ID that collides with a built-in default theme is  treated as a request to create a new custom theme instead of overwriting the default. Once the plan's  custom-theme limit is reached, a new theme is silently not added rather than rejected with an error, so check  the returned `themes` count against `limit` before assuming it was saved. Pass `selected` to switch the active  theme; an ID that does not match any existing theme is ignored. This is a mutating call, not strictly  idempotent once the limit has been reached. It returns the full updated theme configuration.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-portal-color-theme/
     # @param [Hash] opts the optional parameters
     # @option opts [CustomColorThemesSettingsRequestsDto] :custom_color_themes_settings_requests_dto 
@@ -1196,8 +1196,8 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Set the AI access for the portal
-    # Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
+    # Set the AI access settings
+    # Turns AI functionality (chat, agents, vectorization) on or off for the whole portal; AI is enabled by default.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other caller is refused. Disabling  it immediately hides the AI Agents folder from root folder listings, makes AI status checks report disabled,  and makes AI chat endpoints unreachable for every user on the tenant, not only the caller. This is a mutating,  idempotent, portal-wide call, and the change is pushed to already-connected clients over the real-time  notification hub rather than waiting for their next request. It returns the saved setting.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-ai-access-settings/
     # @param [Hash] opts the optional parameters
     # @option opts [TenantAiAccessSettingsDto] :tenant_ai_access_settings_dto 
@@ -1207,8 +1207,8 @@ module DocspaceApiSdk
       data
     end
 
-    # Set the AI access for the portal
-    # Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
+    # Set the AI access settings
+    # Turns AI functionality (chat, agents, vectorization) on or off for the whole portal; AI is enabled by default.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other caller is refused. Disabling  it immediately hides the AI Agents folder from root folder listings, makes AI status checks report disabled,  and makes AI chat endpoints unreachable for every user on the tenant, not only the caller. This is a mutating,  idempotent, portal-wide call, and the change is pushed to already-connected clients over the real-time  notification hub rather than waiting for their next request. It returns the saved setting.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-ai-access-settings/
     # @param [Hash] opts the optional parameters
     # @option opts [TenantAiAccessSettingsDto] :tenant_ai_access_settings_dto 
@@ -1263,7 +1263,7 @@ module DocspaceApiSdk
     end
 
     # Update the email activation settings
-    # Updates the email activation settings.
+    # Updates the current user's own preference for whether the email confirmation prompt is displayed on their  account. Requires an authenticated session; every role may change its own setting, and the change never  affects any other user. This is a mutating, idempotent call. It returns the settings exactly as submitted,  without validating them against the account's actual email confirmation state, so `show` can be set to `true`  even after the address is already confirmed.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-email-activation-settings/
     # @param [Hash] opts the optional parameters
     # @option opts [EmailActivationSettings] :email_activation_settings 
@@ -1274,7 +1274,7 @@ module DocspaceApiSdk
     end
 
     # Update the email activation settings
-    # Updates the email activation settings.
+    # Updates the current user's own preference for whether the email confirmation prompt is displayed on their  account. Requires an authenticated session; every role may change its own setting, and the change never  affects any other user. This is a mutating, idempotent call. It returns the settings exactly as submitted,  without validating them against the account's actual email confirmation state, so `show` can be set to `true`  even after the address is already confirmed.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-email-activation-settings/
     # @param [Hash] opts the optional parameters
     # @option opts [EmailActivationSettings] :email_activation_settings 
@@ -1328,8 +1328,8 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Update user invitation settings
-    # Updates the portal user invitation settings.
+    # Update the user invitation settings
+    # Sets whether the portal allows inviting new members and new guests. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disabling member or guest invitations only blocks creating new invitations  going forward; it does not revoke links already issued or remove members already invited. This is a mutating,  idempotent, portal-wide call. It returns the saved setting; read the current value at any time, including  anonymously, from `GET api/2.0/settings/invitationsettings`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-invitation-settings/
     # @param [Hash] opts the optional parameters
     # @option opts [TenantUserInvitationSettingsRequestDto] :tenant_user_invitation_settings_request_dto 
@@ -1339,8 +1339,8 @@ module DocspaceApiSdk
       data
     end
 
-    # Update user invitation settings
-    # Updates the portal user invitation settings.
+    # Update the user invitation settings
+    # Sets whether the portal allows inviting new members and new guests. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disabling member or guest invitations only blocks creating new invitations  going forward; it does not revoke links already issued or remove members already invited. This is a mutating,  idempotent, portal-wide call. It returns the saved setting; read the current value at any time, including  anonymously, from `GET api/2.0/settings/invitationsettings`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-invitation-settings/
     # @param [Hash] opts the optional parameters
     # @option opts [TenantUserInvitationSettingsRequestDto] :tenant_user_invitation_settings_request_dto 

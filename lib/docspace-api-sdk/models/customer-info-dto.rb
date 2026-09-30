@@ -17,18 +17,24 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The customer information.
+  # The billing customer behind the portal, and which portal member pays for it.
   class CustomerInfoDto < ApiModelBase
-    # The portal ID.
+    # The portal's identifier in the billing system, which is what support and invoices refer to. It is not the  portal alias.
     attr_accessor :portal_id
 
-    # The customer's payment method.
+    # Whether a payment method is stored for the account and usable. Without one the portal can hold a wallet  balance but cannot be charged automatically.
     attr_accessor :payment_method_status
 
-    # The customer email address.
+    # The customer's payment method type.
+    attr_accessor :payment_method_type
+
+    # Indicates whether the customer's payment method is delayed, i.e. the money reaches the wallet only after  the transfer settles rather than immediately.
+    attr_accessor :is_delayed_payment_method
+
+    # The address the billing account is registered to, lower-cased. It need not belong to a portal member,  which is exactly when `payer` stays empty.
     attr_accessor :email
 
-    # The paying user.
+    # The portal member whose account is behind the billing address. It is empty when `email` matches no member  of this portal, and while it is empty every operation of this group that only the payer may call is out  of reach for everybody.
     attr_accessor :payer
 
     class EnumAttributeValidator
@@ -58,6 +64,8 @@ module DocspaceApiSdk
       {
         :'portal_id' => :'portalId',
         :'payment_method_status' => :'paymentMethodStatus',
+        :'payment_method_type' => :'paymentMethodType',
+        :'is_delayed_payment_method' => :'isDelayedPaymentMethod',
         :'email' => :'email',
         :'payer' => :'payer'
       }
@@ -78,6 +86,8 @@ module DocspaceApiSdk
       {
         :'portal_id' => :'String',
         :'payment_method_status' => :'PaymentMethodStatus',
+        :'payment_method_type' => :'String',
+        :'is_delayed_payment_method' => :'Boolean',
         :'email' => :'String',
         :'payer' => :'EmployeeDto'
       }
@@ -87,6 +97,7 @@ module DocspaceApiSdk
     def self.openapi_nullable
       Set.new([
         :'portal_id',
+        :'payment_method_type',
         :'email',
       ])
     end
@@ -113,6 +124,14 @@ module DocspaceApiSdk
 
       if attributes.key?(:'payment_method_status')
         self.payment_method_status = attributes[:'payment_method_status']
+      end
+
+      if attributes.key?(:'payment_method_type')
+        self.payment_method_type = attributes[:'payment_method_type']
+      end
+
+      if attributes.key?(:'is_delayed_payment_method')
+        self.is_delayed_payment_method = attributes[:'is_delayed_payment_method']
       end
 
       if attributes.key?(:'email')
@@ -146,6 +165,8 @@ module DocspaceApiSdk
       self.class == o.class &&
           portal_id == o.portal_id &&
           payment_method_status == o.payment_method_status &&
+          payment_method_type == o.payment_method_type &&
+          is_delayed_payment_method == o.is_delayed_payment_method &&
           email == o.email &&
           payer == o.payer
     end
@@ -159,7 +180,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [portal_id, payment_method_status, email, payer].hash
+      [portal_id, payment_method_status, payment_method_type, is_delayed_payment_method, email, payer].hash
     end
 
     # Builds the object from hash

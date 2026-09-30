@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)"]
   s.email       = ["support@onlyoffice.com"]
   s.homepage    = "https://www.onlyoffice.com"
-  s.summary     = "Api Ruby Gem"
+  s.summary     = "ONLYOFFICE DocSpace API Ruby Gem"
   s.description = "A simple Ruby SDK for integrating with the ONLYOFFICE DocSpace API"
   s.license     = "Apache-2.0"
   s.required_ruby_version = ">= 2.7"

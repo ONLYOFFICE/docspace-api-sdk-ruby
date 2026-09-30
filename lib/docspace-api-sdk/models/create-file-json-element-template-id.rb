@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The template file ID for creation.
+  # An existing file the new one copies its content from, as a number for a file in the portal and as a string for  one in a connected third-party storage; the caller has to be able to read it. Left out, a blank template for  the format and the language of the caller is used.
   module CreateFileJsonElementTemplateId
     class << self
       # List of class defined in oneOf (OpenAPI v3)

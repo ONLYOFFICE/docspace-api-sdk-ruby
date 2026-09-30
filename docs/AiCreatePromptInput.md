@@ -14,8 +14,8 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiCreatePromptInput.new(
-  name: null,
-  text: null,
-  folder_id: null
+  name: Contract summary,
+  text: Summarise the key obligations and dates in the attached contract.,
+  folder_id: 44444444-4444-4444-4444-444444444444
 )
 ```

@@ -17,11 +17,11 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiTMCPItem.new(
-  name: null,
-  description: null,
-  input_schema: null,
-  enabled: null,
-  server_type: null,
-  require_approval: null
+  name: docspace_get_folder,
+  description: Read the contents of a DocSpace folder.,
+  input_schema: {type=object, properties={folderId={type=string}}, required=[folderId]},
+  enabled: true,
+  server_type: docspace,
+  require_approval: false
 )
 ```

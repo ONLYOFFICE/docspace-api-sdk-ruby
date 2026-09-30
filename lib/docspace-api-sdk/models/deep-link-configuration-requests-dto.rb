@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for managing the deep link configuration.
+  # How the portal opens its links on a mobile device.
   class DeepLinkConfigurationRequestsDto < ApiModelBase
-    # The deep link settings for the specified tenant.
+    # The deep link configuration to store. Only its `handlingMode` is read - whether a link always opens in the  browser, always in the native application, or asks the user each time - and a mode outside the defined set is  refused with 400 before anything is stored.
     attr_accessor :deep_link_settings
 
     # Attribute mapping from ruby-style variable name to JSON key.

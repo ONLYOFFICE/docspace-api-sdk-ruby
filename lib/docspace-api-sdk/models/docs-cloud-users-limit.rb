@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents the user limits of a DocsCloud license.
+  # Represents the user limits of a Docs Connect license.
   class DocsCloudUsersLimit < ApiModelBase
     # The maximum number of users who can edit documents.
     attr_accessor :edit

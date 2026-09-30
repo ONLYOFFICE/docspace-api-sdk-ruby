@@ -22,7 +22,7 @@ module DocspaceApiSdk
     # The absolute URL to the website address which will be opened when clicking the Feedback & Support menu button.
     attr_accessor :url
 
-    # Shows or hides the Feedback & Support menu button.
+    # Whether the support button is shown. The portal always asks for it to be shown.
     attr_accessor :visible
 
     # Attribute mapping from ruby-style variable name to JSON key.

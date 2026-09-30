@@ -17,33 +17,33 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The module information.
+  # The descriptor of a portal module: what it is called, where it starts and how it is pictured.
   class ModelModule < ApiModelBase
-    # The module ID.
+    # The identifier of the module. It is the same in every portal and in every language, so use it rather than the  title to tell modules apart.
     attr_accessor :id
 
-    # The module product class name.
+    # The short system name of the module, the one that appears in its addresses and in the portal configuration.  Unlike the title it is not translated.
     attr_accessor :app_name
 
-    # The module product class name.
+    # The display name of the module, already translated for the calling account, so it changes with the language  and must not be compared against a fixed string.
     attr_accessor :title
 
-    # The URL to the module start page.
+    # The address of the start page of the module, to be opened in a browser rather than called as an API.
     attr_accessor :link
 
-    # The module icon URL.
+    # The address of the small icon of the module, meant for a menu entry.
     attr_accessor :icon_url
 
-    # The module large image URL.
+    # The address of the large image of the module, meant for a tile or a start screen.
     attr_accessor :image_url
 
-    # The module help URL.
+    # The address of the help section of the module. It is empty when the portal publishes no help for it.
     attr_accessor :help_url
 
-    # The module description.
+    # The one-line description of the module shown next to its title, translated for the calling account.
     attr_accessor :description
 
-    # Specifies if the module is primary or not.
+    # Whether the portal opens this module first when no other destination is given.
     attr_accessor :is_primary
 
     # Attribute mapping from ruby-style variable name to JSON key.

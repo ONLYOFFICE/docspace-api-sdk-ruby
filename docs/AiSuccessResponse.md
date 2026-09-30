@@ -12,6 +12,6 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiSuccessResponse.new(
-  success: null
+  success: true
 )
 ```

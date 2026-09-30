@@ -148,13 +148,13 @@ module DocspaceApiSdk
     # Specifies if the AI search enabled as a wallet service or not.
     attr_accessor :ai_search
 
-    # The number of DocsCloud users.
+    # The number of Docs Connect users.
     attr_accessor :docs_cloud
 
-    # Specifies if the DocsCloudDevPack enabled or not.
+    # Specifies if the Docs Connect Dev Pack enabled or not.
     attr_accessor :docs_cloud_dev_pack
 
-    # Specifies if the DocsCloudTrial enabled or not.
+    # Specifies if the Docs Connect trial enabled or not.
     attr_accessor :docs_cloud_trial
 
     # Attribute mapping from ruby-style variable name to JSON key.

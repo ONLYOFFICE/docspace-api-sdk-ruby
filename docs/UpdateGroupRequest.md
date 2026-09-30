@@ -4,10 +4,10 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **members_to_add** | **Array&lt;String&gt;** | The list of user IDs to add to the group. | [optional] |
-| **members_to_remove** | **Array&lt;String&gt;** | The list of user IDs to remove from the group. | [optional] |
-| **group_manager** | **String** | The group manager ID. | [optional] |
-| **group_name** | **String** | The group name. | [optional] |
+| **members_to_add** | **Array&lt;String&gt;** | The accounts to add to the group. An account that is a guest, is disabled or does not exist is skipped  without an error, so the answer has to be read to see what was applied. | [optional] |
+| **members_to_remove** | **Array&lt;String&gt;** | The accounts to remove from the group. Removals are applied after the additions, so an account named in both  lists ends up removed, and an ID that is not a member is skipped without an error. | [optional] |
+| **group_manager** | **String** | The account to make the manager of the group, which also adds it to the group. Omit it to keep the current  manager - it cannot be cleared through this operation. | [optional] |
+| **group_name** | **String** | The new name of the group, up to 128 characters. Omit it to keep the current name. | [optional] |
 
 ## Example
 

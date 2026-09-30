@@ -12,6 +12,6 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::RestrictedModelsResponse.new(
-  models: null
+  models: [gpt-4o, claude-3-opus]
 )
 ```

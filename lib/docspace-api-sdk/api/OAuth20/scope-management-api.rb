@@ -24,26 +24,26 @@ module DocspaceApiSdk
       @api_client = api_client
     end
     # List available OAuth2 scopes
-    # Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first.
+    # Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first. It is a read-only catalogue that does not depend on which clients exist: a valid portal signature is the only requirement, with no role restriction, and every caller of the portal sees the same list.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-scopes/
     # @param [Hash] opts the optional parameters
-    # @return [ScopeResponse]
+    # @return [Array<ScopeResponse>]
     def get_scopes(opts = {})
       data, _status_code, _headers = get_scopes_with_http_info(opts)
       data
     end
 
     # List available OAuth2 scopes
-    # Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first.
+    # Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the 'openid' scope always appearing first. It is a read-only catalogue that does not depend on which clients exist: a valid portal signature is the only requirement, with no role restriction, and every caller of the portal sees the same list.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-scopes/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ScopeResponse, Integer, Hash)>] ScopeResponse data, response status code and response headers
+    # @return [Array<(Array<ScopeResponse>, Integer, Hash)>] Array<ScopeResponse> data, response status code and response headers
     def get_scopes_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: OAuth20::ScopeManagementApi.get_scopes ...'
       end
       # resource path
-      local_var_path = '/api/2.0/scopes'
+      local_var_path = '/api/2.0/oauth2/scopes'
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -60,7 +60,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ScopeResponse'
+      return_type = opts[:debug_return_type] || 'Array<ScopeResponse>'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['x-signature']

@@ -17,30 +17,30 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The form role parameters.
+  # One role of a PDF form, with the state the turn of that role is in.
   class FormRoleDto < ApiModelBase
-    # The role name.
+    # The name the role was given when the form was laid out, unique within that form. It is the value that names  the role in the calls which change or stop the filling.
     attr_accessor :role_name
 
-    # The role color.
+    # The colour a client paints the role with, as a hexadecimal RGB value; empty when the role mapping assigned  none.
     attr_accessor :role_color
 
-    # The user of the role.
+    # The account the role was assigned to, which is the person expected to fill this part of the form.
     attr_accessor :user
 
-    # The role sequence.
+    # The turn this role takes: the roles come back ordered by this number, roles sharing a number are filled in  parallel, and a role with a higher number waits until every lower one has been submitted.
     attr_accessor :sequence
 
-    # Specifies if the role is submitted.
+    # Reports whether this role has already handed in its part. The lowest sequence number that still holds an  unsubmitted role is the turn the form as a whole is waiting on.
     attr_accessor :submitted
 
-    # The user who stopped the role.
+    # The account that interrupted the filling. It is filled in on the one role the filling was stopped at and stays  empty on every other role, and on all of them while the filling runs normally.
     attr_accessor :stoped_by
 
-    # The role history.
+    # When the role passed through the stages of its turn, keyed by stage: 0 is the moment the form was opened for  it, 1 the moment it was submitted and 2 the moment the filling was stopped at it. The times are given in the  time zone of the portal, and only the stages that have actually happened are present, so an empty object means  the role has not been opened yet.
     attr_accessor :history
 
-    # The role status.
+    # Where the role stands in the queue: roles of earlier turns are reported as complete, roles of later turns as a  draft, and the role whose turn it is as either yours to fill or in progress, depending on whether that person  has already opened the form. The role the filling was stopped at is reported as stopped whatever its turn.
     attr_accessor :role_status
 
     class EnumAttributeValidator

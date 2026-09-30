@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The parameters for archiving a room.
+  # The body of a room archiving request.
   class ArchiveRoomRequest < ApiModelBase
-    # Specifies whether to archive a room after the editing session is finished or not.
+    # Whether the record of the finished job may be dropped without being read. With it off the record waits for the  first poll, which is what lets the caller learn how the move ended; it has no effect on the room itself.
     attr_accessor :delete_after
 
     # Attribute mapping from ruby-style variable name to JSON key.

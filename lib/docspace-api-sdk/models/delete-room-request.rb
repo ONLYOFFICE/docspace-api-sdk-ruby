@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The parameters for deleting a room.
+  # The body of a room deletion request.
   class DeleteRoomRequest < ApiModelBase
-    # Specifies whether to delete a room after the editing session is finished or not.
+    # Carried by the contract but not acted upon: the deletion behaves the same either way, and the record of the  finished job is kept until it is read once.
     attr_accessor :delete_after
 
     # Attribute mapping from ruby-style variable name to JSON key.

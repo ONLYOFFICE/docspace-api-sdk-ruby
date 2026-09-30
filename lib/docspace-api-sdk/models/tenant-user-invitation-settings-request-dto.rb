@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for updating the user invitation settings.
+  # Whether the portal still lets its members invite new members and new guests.
   class TenantUserInvitationSettingsRequestDto < ApiModelBase
-    # Specifies whether to allow inviting new DocSpace members through the Contacts section.
+    # Whether new DocSpace members may be invited through the Contacts section. Switching it off only stops new  invitations being created; links already issued keep working and members already invited stay.
     attr_accessor :allow_inviting_members
 
-    # Specifies whether to allow all DocSpace members to invite external guests to the rooms.
+    # Whether every DocSpace member, and not only an administrator, may invite external guests into rooms.  Switching it off leaves the guests already invited in place.
     attr_accessor :allow_inviting_guests
 
     # Attribute mapping from ruby-style variable name to JSON key.

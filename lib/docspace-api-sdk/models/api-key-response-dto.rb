@@ -19,34 +19,34 @@ require 'time'
 module DocspaceApiSdk
   # The response data for the API key operations.
   class ApiKeyResponseDto < ApiModelBase
-    # The API key unique identifier.
+    # The ID of the key. This is the value to pass to `PUT api/2.0/keys/{keyId}` and  `DELETE api/2.0/keys/{keyId}`.
     attr_accessor :id
 
-    # The API key name.
+    # The label given to the key when it was created or last updated.
     attr_accessor :name
 
-    # The full API key value (only returned when creating a new key).
+    # The secret to send in the `Authorization` header as `Bearer sk-...`. It is filled in only by the answer of  `POST api/2.0/keys` and cannot be read again afterwards, so it has to be stored at that moment.
     attr_accessor :key
 
-    # The API key postfix (used for identification).
+    # The last four characters of the secret. It is the only part of the secret that later reads expose, and it is  meant for telling keys apart in a list.
     attr_accessor :key_postfix
 
-    # The list of permissions granted to the API key.
+    # The scopes the key may use, as accepted by `GET api/2.0/keys/permissions`. An empty list means the key has no  scope restrictions.
     attr_accessor :permissions
 
-    # The date and time when the API key was last used.
+    # The UTC moment the key was last used to authenticate a request. It is empty for a key that has never been  used.
     attr_accessor :last_used
 
-    # The date and time when the API key was created.
+    # The UTC moment the key was created.
     attr_accessor :create_on
 
-    # The identifier of the user who created the API key.
+    # The portal member who created the key, and whose access the key acts with.
     attr_accessor :create_by
 
-    # The date and time when the API key expires.
+    # The UTC moment the key stops working. It is empty for a key created without `expiresInDays`, which never  expires.
     attr_accessor :expires_at
 
-    # Indicates whether the API key is active or not.
+    # Whether the key may authenticate requests. A key deactivated through `PUT api/2.0/keys/{keyId}` stays in the  list with this field set to false.
     attr_accessor :is_active
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -83,10 +83,10 @@ module DocspaceApiSdk
         :'key' => :'String',
         :'key_postfix' => :'String',
         :'permissions' => :'Array<String>',
-        :'last_used' => :'Time',
-        :'create_on' => :'Time',
+        :'last_used' => :'ApiDateTime',
+        :'create_on' => :'ApiDateTime',
         :'create_by' => :'EmployeeDto',
-        :'expires_at' => :'Time',
+        :'expires_at' => :'ApiDateTime',
         :'is_active' => :'Boolean'
       }
     end
@@ -98,9 +98,6 @@ module DocspaceApiSdk
         :'key',
         :'key_postfix',
         :'permissions',
-        :'last_used',
-        :'create_on',
-        :'expires_at',
       ])
     end
 

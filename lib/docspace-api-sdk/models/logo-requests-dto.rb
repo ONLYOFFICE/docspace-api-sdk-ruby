@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for the theme-specific logo configurations.
+  # The two theme variants of one branding logo.
   class LogoRequestsDto < ApiModelBase
-    # The URL or base64-encoded image data for the light theme logo.
+    # The image used on a light background, either as a `data:image/png;base64,...` payload - `png`, `jpg` and  `svg` are accepted - or as the name of a file already put in the temporary store.
     attr_accessor :light
 
-    # The URL or base64-encoded image data for the dark theme logo.
+    # The image used on a dark background, in the same two forms as `light`. It is only stored for the slots that  have a dark variant and is ignored for the favicon and the editor logos.
     attr_accessor :dark
 
     # Attribute mapping from ruby-style variable name to JSON key.

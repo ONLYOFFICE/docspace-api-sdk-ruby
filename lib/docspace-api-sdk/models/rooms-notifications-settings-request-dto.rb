@@ -17,11 +17,11 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for configuring notification settings for the chat or collaboration rooms.
+  # Which single room the calling user silences, and which way.
   class RoomsNotificationsSettingsRequestDto < ApiModelBase
     attr_accessor :rooms_id
 
-    # Specifies whether the notifications will be delivered to the specified room or not.
+    # Which way the room goes: `true` adds it to the caller silenced list, `false` takes it off again. While a room  is silenced its activity is left out of the hourly and daily digests, the letters it would send at once are  not sent, and its new-item counters are hidden.
     attr_accessor :mute
 
     # Attribute mapping from ruby-style variable name to JSON key.

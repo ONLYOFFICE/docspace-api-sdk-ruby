@@ -19,7 +19,7 @@ require 'time'
 module DocspaceApiSdk
   # The request parameters for linking accounts.
   class LinkAccountRequestDto < ApiModelBase
-    # The third-party profile in the serialized format.
+    # The profile a completed provider authorization produced, in the serialized form the login flow hands back.  Pass that value unchanged; it carries the provider, the third-party account ID and the authorization result,  and a hand-written object is not accepted.
     attr_accessor :serialized_profile
 
     # Attribute mapping from ruby-style variable name to JSON key.

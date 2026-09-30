@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for creating a tag.
+  # The parameters for adding a custom tag to the portal catalog of room tags.
   class CreateTagRequestDto < ApiModelBase
-    # The tag name.
+    # The name of the tag to create, which is also its identity: tags are addressed by name everywhere, there is no  separate identifier. It is stored exactly as sent, spacing and case included, and a name that is already in  the catalog gives back that tag instead of a second one.
     attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.

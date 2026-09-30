@@ -17,14 +17,14 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The upload result parameters.
+  # The outcome of storing an image in temporary storage before it is used as a room logo.
   class UploadResultDto < ApiModelBase
-    # Specifies if the upload operation is successful or not.
+    # True when the image was stored and its path is in the data field. A rejected image is reported with an error  response rather than with a false here, so this field is true in every answer that carries a body.
     attr_accessor :success
 
     attr_accessor :data
 
-    # The message sent after the successful upload operation.
+    # Left empty by this operation: nothing is reported here, and a refused image comes back as an error response  instead.
     attr_accessor :message
 
     # Attribute mapping from ruby-style variable name to JSON key.

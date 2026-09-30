@@ -23,30 +23,30 @@ module DocspaceApiSdk
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Execute a DocSpace tool on behalf of the editor AI plugin
-    # Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and with the caller's forwarded credentials. Whatever the tool produced is returned for the plugin to relay to the model; a failure comes back as an error payload.
+    # Call an editor tool
+    # Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and under the caller's own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-editor-tools-call/
-    # @param request_body [Hash<String, Object>] 
+    # @param ai_editor_tools_call_request [AiEditorToolsCallRequest] The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool's input schema, and an optional `entityId` for the room to run it in.
     # @param [Hash] opts the optional parameters
-    # @return [AiSuccessResponse]
-    def ai_editor_tools_call(request_body, opts = {})
-      data, _status_code, _headers = ai_editor_tools_call_with_http_info(request_body, opts)
+    # @return [AiEditorToolsCall200Response]
+    def ai_editor_tools_call(ai_editor_tools_call_request, opts = {})
+      data, _status_code, _headers = ai_editor_tools_call_with_http_info(ai_editor_tools_call_request, opts)
       data
     end
 
-    # Execute a DocSpace tool on behalf of the editor AI plugin
-    # Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and with the caller's forwarded credentials. Whatever the tool produced is returned for the plugin to relay to the model; a failure comes back as an error payload.
+    # Call an editor tool
+    # Executes one DocSpace tool on behalf of the document editor's AI plugin, server-side and under the caller's own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-editor-tools-call/
-    # @param request_body [Hash<String, Object>] 
+    # @param ai_editor_tools_call_request [AiEditorToolsCallRequest] The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool's input schema, and an optional `entityId` for the room to run it in.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
-    def ai_editor_tools_call_with_http_info(request_body, opts = {})
+    # @return [Array<(AiEditorToolsCall200Response, Integer, Hash)>] AiEditorToolsCall200Response data, response status code and response headers
+    def ai_editor_tools_call_with_http_info(ai_editor_tools_call_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::EditorToolsApi.ai_editor_tools_call ...'
       end
-      # verify the required parameter 'request_body' is set
-      if @api_client.config.client_side_validation && request_body.nil?
-        fail ArgumentError, "Missing the required parameter 'request_body' when calling AI::EditorToolsApi.ai_editor_tools_call"
+      # verify the required parameter 'ai_editor_tools_call_request' is set
+      if @api_client.config.client_side_validation && ai_editor_tools_call_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_editor_tools_call_request' when calling AI::EditorToolsApi.ai_editor_tools_call"
       end
       # resource path
       local_var_path = '/api/2.0/ai/editor-tools/call'
@@ -68,13 +68,13 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(request_body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_editor_tools_call_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiSuccessResponse'
+      return_type = opts[:debug_return_type] || 'AiEditorToolsCall200Response'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::EditorToolsApi.ai_editor_tools_call",
@@ -93,21 +93,21 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Sanitized DocSpace tool catalog for the editor AI plugin
-    # Returns the sanitized catalog of DocSpace tools available to the document editor's AI plugin - the same composed tool set the DocSpace chat sees, minus the web-search pair the editor already has through its own passthrough. Only the name, description, parameters and approval flag of each tool are exposed; transport details never reach the browser.
+    # List editor tools
+    # Returns the catalogue of DocSpace tools the document editor's AI plugin may offer the model - the same composed set the DocSpace chat sees, minus the two web-search tools the editor already reaches through its own passthrough. `entityId` scopes the catalogue to a room, which decides the room-specific tools it contains. Each entry carries exactly four fields: the tool name, its description, its input schema, and whether calling it requires an approval dialog; nothing else is exposed, because the raw listings of system servers carry transport details that must not reach a browser. The approval flag follows the same policy the chat engine applies, and a read-only tool comes back needing none - execute a tool with `POST api/2.0/ai/editor-tools/call`, which accepts only the names this catalogue reports.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-editor-tools-list/
     # @param [Hash] opts the optional parameters
-    # @return [AiSuccessResponse]
+    # @return [AiEditorToolsList200Response]
     def ai_editor_tools_list(opts = {})
       data, _status_code, _headers = ai_editor_tools_list_with_http_info(opts)
       data
     end
 
-    # Sanitized DocSpace tool catalog for the editor AI plugin
-    # Returns the sanitized catalog of DocSpace tools available to the document editor's AI plugin - the same composed tool set the DocSpace chat sees, minus the web-search pair the editor already has through its own passthrough. Only the name, description, parameters and approval flag of each tool are exposed; transport details never reach the browser.
+    # List editor tools
+    # Returns the catalogue of DocSpace tools the document editor's AI plugin may offer the model - the same composed set the DocSpace chat sees, minus the two web-search tools the editor already reaches through its own passthrough. `entityId` scopes the catalogue to a room, which decides the room-specific tools it contains. Each entry carries exactly four fields: the tool name, its description, its input schema, and whether calling it requires an approval dialog; nothing else is exposed, because the raw listings of system servers carry transport details that must not reach a browser. The approval flag follows the same policy the chat engine applies, and a read-only tool comes back needing none - execute a tool with `POST api/2.0/ai/editor-tools/call`, which accepts only the names this catalogue reports.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-editor-tools-list/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
+    # @return [Array<(AiEditorToolsList200Response, Integer, Hash)>] AiEditorToolsList200Response data, response status code and response headers
     def ai_editor_tools_list_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::EditorToolsApi.ai_editor_tools_list ...'
@@ -130,10 +130,10 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiSuccessResponse'
+      return_type = opts[:debug_return_type] || 'AiEditorToolsList200Response'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::EditorToolsApi.ai_editor_tools_list",

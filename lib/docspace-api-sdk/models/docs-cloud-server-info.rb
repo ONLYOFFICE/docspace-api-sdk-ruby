@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents the DocsCloud server information.
+  # Represents the Docs Connect server information.
   class DocsCloudServerInfo < ApiModelBase
     # The server version.
     attr_accessor :version

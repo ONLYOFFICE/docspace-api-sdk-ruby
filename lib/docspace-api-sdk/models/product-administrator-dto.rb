@@ -17,15 +17,15 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The product administrator parameters.
+  # Whether one user administers one portal module, echoing back the pair that was asked about.
   class ProductAdministratorDto < ApiModelBase
-    # The product ID.
+    # The module the verdict is about, echoed from the request. The all-zero GUID stands for the portal as a  whole rather than for any single module.
     attr_accessor :product_id
 
-    # The user unique identifier.
+    # The user the verdict is about, echoed from the request unchanged - it is not checked for existing.
     attr_accessor :user_id
 
-    # Indicates whether the user has administrator privileges for the product.
+    # Whether that user administers that module. It is `true` for a DocSpace administrator whatever the module,  since the portal-wide role covers every one of them. A `false` can also mean the identifiers name no user  or no module at all, so it is not proof that the user exists, and it says nothing about whether the module  is enabled for the portal - `GET api/2.0/settings/security/{id}` reports that.
     attr_accessor :administrator
 
     # Attribute mapping from ruby-style variable name to JSON key.

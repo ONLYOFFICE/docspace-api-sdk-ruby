@@ -17,39 +17,39 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The active connection item parameters.
+  # One open connection of a user: where the sign-in behind it came from, and the ID it can be closed by.
   class ActiveConnectionsItemDto < ApiModelBase
-    # The active connection ID.
+    # The ID of the sign-in this connection was opened by. Pass it as `loginEventId` to  `PUT api/2.0/security/activeconnections/logout/{loginEventId}` to end this one connection; the item whose  value equals `loginEvent` is the connection the current request uses.
     attr_accessor :id
 
-    # The tenant ID.
+    # The portal the sign-in was made on. The operation never crosses portals, so it is the current one on every  item.
     attr_accessor :tenant_id
 
-    # The user ID.
+    # The user the connection belongs to, which is the calling user on every item - the operation cannot report  anyone else's connections.
     attr_accessor :user_id
 
-    # Specifies if the active connection has a mobile phone or not.
+    # Whether the sign-in came from a mobile client. No mobile marker is stored with a connection, so the value  is `false` on every item and tells a caller nothing about the device.
     attr_accessor :mobile
 
-    # The IP address of the active connection.
+    # The IP address the sign-in came from, with the port stripped off. On the item that matches `loginEvent` it  is taken from the address the current request arrives from instead of the one stored at sign-in.
     attr_accessor :ip
 
-    # The active connection country.
+    # The English name of the country the IP address is located in. It is empty when the address cannot be  located, which is the normal outcome for private and loopback addresses.
     attr_accessor :country
 
-    # The active connection city.
+    # The city the IP address is located in, empty under the same conditions as `country`.
     attr_accessor :city
 
-    # The active connection browser.
+    # The browser and its version as parsed from the user agent of the sign-in, empty when the client sent no  recognisable one. It is refreshed from the current request on the item that matches `loginEvent`.
     attr_accessor :browser
 
-    # The active connection platform.
+    # The operating system as parsed from the user agent of the sign-in, refreshed and left empty under the same  conditions as `browser`.
     attr_accessor :platform
 
-    # The active connection date.
+    # When the sign-in happened, in the portal time zone rather than in UTC.
     attr_accessor :date
 
-    # The active connection page.
+    # Where in the portal the sign-in was made from: the referrer of the request that created it, or that  request's own path when it carried no referrer. Long values are cut off at 512 characters.
     attr_accessor :page
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -91,7 +91,7 @@ module DocspaceApiSdk
         :'city' => :'String',
         :'browser' => :'String',
         :'platform' => :'String',
-        :'date' => :'Time',
+        :'date' => :'ApiDateTime',
         :'page' => :'String'
       }
     end
@@ -104,7 +104,6 @@ module DocspaceApiSdk
         :'city',
         :'browser',
         :'platform',
-        :'date',
         :'page'
       ])
     end

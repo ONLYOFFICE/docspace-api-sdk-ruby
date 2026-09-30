@@ -17,39 +17,39 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The room template parameters.
+  # The parameters of a room template built from an existing room.
   class RoomTemplateDto < ApiModelBase
-    # The room template ID.
+    # The identifier of the room the template is built from. Take it from the room listing of  `GET api/2.0/files/rooms`; a folder identifier is not accepted.
     attr_accessor :room_id
 
-    # The room template title.
+    # The title the template is saved under in the Templates section. Characters that a folder name cannot contain  are replaced with an underscore on save, and two templates may share a title.
     attr_accessor :title
 
-    # The room template logo.
+    # A picture of the caller's own for the template, cropped out of an image already placed in the temporary  storage.
     attr_accessor :logo
 
-    # Specifies whether to copy room logo or not.
+    # Whether the template takes over the picture already set on the source room. When false the template gets no  picture from that room.
     attr_accessor :copy_logo
 
-    # The collection of email addresses of users with whom to share a room.
+    # The email addresses of the portal members who are granted read access to the finished template.
     attr_accessor :share
 
-    # The collection of groups with whom to share a room.
+    # The identifiers of the portal groups whose members are granted read access to the finished template.
     attr_accessor :groups
 
-    # Specifies whether the room template is public or not.
+    # Whether the finished template is shared with everyone allowed to create rooms. When false it stays reachable  only for the recipients named for it.
     attr_accessor :public
 
-    # The collection of tags.
+    # The labels attached to the template and shown next to it in listings.
     attr_accessor :tags
 
-    # The color of the room template.
+    # The accent colour of the generated cover, written as six hexadecimal digits with no leading hash sign. When it  is left empty a colour is picked at random.
     attr_accessor :color
 
-    # The cover of the room template.
+    # The identifier of a built-in cover picture, as listed by `GET api/2.0/files/rooms/covers`. When it is left  empty the template gets no cover.
     attr_accessor :cover
 
-    # Room quota
+    # The storage limit assigned to the template, in bytes. When it is not set the template keeps the limit of the  source room.
     attr_accessor :quota
 
     # Attribute mapping from ruby-style variable name to JSON key.

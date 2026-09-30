@@ -24,7 +24,7 @@ module DocspaceApiSdk
       @api_client = api_client
     end
     # Get the banners visibility
-    # Returns the visibility settings of the promotional banners in the portal.
+    # Returns whether the portal's promotional banners are currently hidden from every user's interface. Requires an  authenticated session; every role can read it, since the flag affects what they see regardless of their own  permissions. This is a read-only, idempotent call. The flag only takes effect on a Standalone (self-hosted)  installation; on SaaS, banners are always shown no matter what is saved here. Change the setting with  `POST api/2.0/settings/banner`, which additionally requires an Enterprise license.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-banner-settings/
     # @param [Hash] opts the optional parameters
     # @return [TenantBannerSettingsWrapper]
@@ -34,7 +34,7 @@ module DocspaceApiSdk
     end
 
     # Get the banners visibility
-    # Returns the visibility settings of the promotional banners in the portal.
+    # Returns whether the portal's promotional banners are currently hidden from every user's interface. Requires an  authenticated session; every role can read it, since the flag affects what they see regardless of their own  permissions. This is a read-only, idempotent call. The flag only takes effect on a Standalone (self-hosted)  installation; on SaaS, banners are always shown no matter what is saved here. Change the setting with  `POST api/2.0/settings/banner`, which additionally requires an Enterprise license.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-banner-settings/
     # @param [Hash] opts the optional parameters
     # @return [Array<(TenantBannerSettingsWrapper, Integer, Hash)>] TenantBannerSettingsWrapper data, response status code and response headers

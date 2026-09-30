@@ -19,28 +19,28 @@ require 'time'
 module DocspaceApiSdk
   # The OAuth 2.0 token issued by a third-party provider.
   class OAuth20Token < ApiModelBase
-    # Access token
+    # The token sent to the provider with every request made on behalf of the account.
     attr_accessor :access_token
 
-    # Refresh token
+    # The token used to obtain a new access token when the current one expires. A provider that issues no refresh  token leaves it empty, and the account then has to be connected again to keep working.
     attr_accessor :refresh_token
 
-    # Expires in
+    # How long the access token stays usable, in seconds counted from `timestamp`. Zero means the provider did not  say, and the token is then treated as expired.
     attr_accessor :expires_in
 
-    # Client id
+    # The OAuth 2.0 client ID of the application the token was issued to.
     attr_accessor :client_id
 
-    # Client secret
+    # The client secret of the application the token was issued to, needed when the token is refreshed.
     attr_accessor :client_secret
 
-    # Redirect uri
+    # The redirect URL the authorization code behind this token was obtained with; providers require the same value  again when the token is refreshed.
     attr_accessor :redirect_uri
 
-    # Timestamp
+    # When the token was issued, in UTC. This is the point `expires_in` is counted from.
     attr_accessor :timestamp
 
-    # Is expired
+    # Whether the access token can no longer be used and has to be refreshed. It is also true when the provider did  not say how long the token lives.
     attr_accessor :is_expired
 
     # Attribute mapping from ruby-style variable name to JSON key.

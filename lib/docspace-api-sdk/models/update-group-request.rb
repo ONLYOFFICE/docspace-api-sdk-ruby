@@ -19,16 +19,16 @@ require 'time'
 module DocspaceApiSdk
   # The request for updating a group.
   class UpdateGroupRequest < ApiModelBase
-    # The list of user IDs to add to the group.
+    # The accounts to add to the group. An account that is a guest, is disabled or does not exist is skipped  without an error, so the answer has to be read to see what was applied.
     attr_accessor :members_to_add
 
-    # The list of user IDs to remove from the group.
+    # The accounts to remove from the group. Removals are applied after the additions, so an account named in both  lists ends up removed, and an ID that is not a member is skipped without an error.
     attr_accessor :members_to_remove
 
-    # The group manager ID.
+    # The account to make the manager of the group, which also adds it to the group. Omit it to keep the current  manager - it cannot be cleared through this operation.
     attr_accessor :group_manager
 
-    # The group name.
+    # The new name of the group, up to 128 characters. Omit it to keep the current name.
     attr_accessor :group_name
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The external data parameters.
+  # The password that unlocks a protected external share link.
   class ExternalShareRequestParam < ApiModelBase
-    # The password to share external data.
+    # The password chosen by the member who shared the entry, spelled exactly as they typed it. It is compared  against the stored value and never returned back; a mismatch is reported through the answer's status instead  of an error.
     attr_accessor :password
 
     # Attribute mapping from ruby-style variable name to JSON key.

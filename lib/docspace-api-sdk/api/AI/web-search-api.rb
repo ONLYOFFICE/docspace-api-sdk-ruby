@@ -23,10 +23,10 @@ module DocspaceApiSdk
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Clear
-    # Removes the web-search configuration of the scope. Does nothing when web search was not configured there.
+    # Clear the web-search configuration
+    # Removes the portal's web-search configuration, after which web search is unavailable everywhere it was not configured separately. This is not scoped: it takes no `entityId` and any body sent with it is ignored, so it cannot be used to clear one room's configuration. Clearing an already-unconfigured portal is not an error and the call answers success either way. The stored provider key is destroyed with the configuration and has to be entered again.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-clear/
-    # @param body [String] 
+    # @param body [String] Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
     # @param [Hash] opts the optional parameters
     # @return [AiSuccessResponse]
     def ai_web_search_clear(body, opts = {})
@@ -34,10 +34,10 @@ module DocspaceApiSdk
       data
     end
 
-    # Clear
-    # Removes the web-search configuration of the scope. Does nothing when web search was not configured there.
+    # Clear the web-search configuration
+    # Removes the portal's web-search configuration, after which web search is unavailable everywhere it was not configured separately. This is not scoped: it takes no `entityId` and any body sent with it is ignored, so it cannot be used to clear one room's configuration. Clearing an already-unconfigured portal is not an error and the call answers success either way. The stored provider key is destroyed with the configuration and has to be entered again.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-clear/
-    # @param body [String] 
+    # @param body [String] Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
     def ai_web_search_clear_with_http_info(body, opts = {})
@@ -74,7 +74,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::WebSearchApi.ai_web_search_clear",
@@ -93,8 +93,8 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Configure
-    # Validates a web-search configuration against the live provider and stores it only when the provider answers, replacing the previous one in a single write.
+    # Configure and verify web search
+    # Validates a web-search configuration against the live provider and stores it only if the provider answers, which makes it the safe way to save a form in one step. `entityId` scopes the configuration to a room and has to name one the caller can open; omitting it configures the portal. A `baseUrl` pointing at a private network address is refused. Use `PUT api/2.0/ai/web-search/set-active-config` when the configuration should be stored without a provider round trip.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-configure/
     # @param ai_web_search_configure_request [AiWebSearchConfigureRequest] 
     # @param [Hash] opts the optional parameters
@@ -104,8 +104,8 @@ module DocspaceApiSdk
       data
     end
 
-    # Configure
-    # Validates a web-search configuration against the live provider and stores it only when the provider answers, replacing the previous one in a single write.
+    # Configure and verify web search
+    # Validates a web-search configuration against the live provider and stores it only if the provider answers, which makes it the safe way to save a form in one step. `entityId` scopes the configuration to a room and has to name one the caller can open; omitting it configures the portal. A `baseUrl` pointing at a private network address is refused. Use `PUT api/2.0/ai/web-search/set-active-config` when the configuration should be stored without a provider round trip.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-configure/
     # @param ai_web_search_configure_request [AiWebSearchConfigureRequest] 
     # @param [Hash] opts the optional parameters
@@ -144,7 +144,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiWebSearchMutationResult'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::WebSearchApi.ai_web_search_configure",
@@ -164,7 +164,7 @@ module DocspaceApiSdk
     end
 
     # Get active config
-    # Returns the web-search configuration active in the scope, or an empty result when web search is not configured.
+    # Returns the web-search configuration in force for a scope - the provider, its endpoint and its settings. `entityId` picks a room and has to name one the caller can open; omitting it reads the portal-wide configuration, and a room with none of its own falls back to that. An unconfigured scope answers an empty result rather than 404. The provider key is not part of the answer, so a client cannot read it back after storing it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-get-active-config/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
@@ -175,7 +175,7 @@ module DocspaceApiSdk
     end
 
     # Get active config
-    # Returns the web-search configuration active in the scope, or an empty result when web search is not configured.
+    # Returns the web-search configuration in force for a scope - the provider, its endpoint and its settings. `entityId` picks a room and has to name one the caller can open; omitting it reads the portal-wide configuration, and a room with none of its own falls back to that. An unconfigured scope answers an empty result rather than 404. The provider key is not part of the answer, so a client cannot read it back after storing it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-get-active-config/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
@@ -206,7 +206,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiWebSearchConfig'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::WebSearchApi.ai_web_search_get_active_config",
@@ -226,7 +226,7 @@ module DocspaceApiSdk
     end
 
     # Is configured
-    # Tells whether web search is configured in the scope.
+    # Tells whether web search is available in a scope, as a bare boolean, which is the cheap check for hiding or showing the feature. `entityId` picks a room and has to name one the caller can open. It reports the same state as `GET api/2.0/ai/web-search/get-active-config` without transferring the configuration itself. A true answer means a provider is stored, not that the provider is currently reachable - probe that with `POST api/2.0/ai/web-search/test-connection`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-is-configured/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
@@ -237,7 +237,7 @@ module DocspaceApiSdk
     end
 
     # Is configured
-    # Tells whether web search is configured in the scope.
+    # Tells whether web search is available in a scope, as a bare boolean, which is the cheap check for hiding or showing the feature. `entityId` picks a room and has to name one the caller can open. It reports the same state as `GET api/2.0/ai/web-search/get-active-config` without transferring the configuration itself. A true answer means a provider is stored, not that the provider is currently reachable - probe that with `POST api/2.0/ai/web-search/test-connection`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-is-configured/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
@@ -268,7 +268,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'Boolean'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::WebSearchApi.ai_web_search_is_configured",
@@ -287,23 +287,23 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Web page contents proxied to the portal's active web-search provider
-    # Fetches web page contents on behalf of the document editor's AI plugin, against the portal's active web-search provider, the same way as the search passthrough.
+    # Web page contents passthrough
+    # Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider's status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-contents/
-    # @param request_body [Hash<String, Object>] 
+    # @param request_body [Hash<String, Object>] A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.
     # @param [Hash] opts the optional parameters
-    # @return [AiSuccessResponse]
+    # @return [Hash<String, Object>]
     def ai_web_search_passthrough_contents(request_body, opts = {})
       data, _status_code, _headers = ai_web_search_passthrough_contents_with_http_info(request_body, opts)
       data
     end
 
-    # Web page contents proxied to the portal's active web-search provider
-    # Fetches web page contents on behalf of the document editor's AI plugin, against the portal's active web-search provider, the same way as the search passthrough.
+    # Web page contents passthrough
+    # Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider's status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-contents/
-    # @param request_body [Hash<String, Object>] 
+    # @param request_body [Hash<String, Object>] A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
+    # @return [Array<(Hash<String, Object>, Integer, Hash)>] Hash<String, Object> data, response status code and response headers
     def ai_web_search_passthrough_contents_with_http_info(request_body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::WebSearchApi.ai_web_search_passthrough_contents ...'
@@ -335,10 +335,10 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(request_body)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiSuccessResponse'
+      return_type = opts[:debug_return_type] || 'Hash<String, Object>'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::WebSearchApi.ai_web_search_passthrough_contents",
@@ -357,23 +357,23 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Web search proxied to the portal's active web-search provider
-    # Runs a web search on behalf of the document editor's AI plugin. The plugin only holds a placeholder configuration; the portal's active provider and its key are resolved here and never reach the browser.
+    # Web search passthrough
+    # Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider's own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-search/
-    # @param request_body [Hash<String, Object>] 
+    # @param request_body [Hash<String, Object>] A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.
     # @param [Hash] opts the optional parameters
-    # @return [AiSuccessResponse]
+    # @return [Hash<String, Object>]
     def ai_web_search_passthrough_search(request_body, opts = {})
       data, _status_code, _headers = ai_web_search_passthrough_search_with_http_info(request_body, opts)
       data
     end
 
-    # Web search proxied to the portal's active web-search provider
-    # Runs a web search on behalf of the document editor's AI plugin. The plugin only holds a placeholder configuration; the portal's active provider and its key are resolved here and never reach the browser.
+    # Web search passthrough
+    # Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider's own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-search/
-    # @param request_body [Hash<String, Object>] 
+    # @param request_body [Hash<String, Object>] A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
+    # @return [Array<(Hash<String, Object>, Integer, Hash)>] Hash<String, Object> data, response status code and response headers
     def ai_web_search_passthrough_search_with_http_info(request_body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::WebSearchApi.ai_web_search_passthrough_search ...'
@@ -405,10 +405,10 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(request_body)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiSuccessResponse'
+      return_type = opts[:debug_return_type] || 'Hash<String, Object>'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::WebSearchApi.ai_web_search_passthrough_search",
@@ -428,7 +428,7 @@ module DocspaceApiSdk
     end
 
     # Set active config
-    # Stores a web-search configuration without contacting the provider first, for forms that validate locally.
+    # Stores a web-search configuration without contacting the provider first, for a form that has already validated its input or for restoring a known-good configuration. `entityId` scopes it to a room and has to name one the caller can open. A `baseUrl` pointing at a private network address is still refused, because that check is local. Nothing guarantees the stored provider works: follow up with `POST api/2.0/ai/web-search/test-connection`, or use `PUT api/2.0/ai/web-search/configure` to have the store gated on a live probe.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-set-active-config/
     # @param ai_web_search_configure_request [AiWebSearchConfigureRequest] 
     # @param [Hash] opts the optional parameters
@@ -439,7 +439,7 @@ module DocspaceApiSdk
     end
 
     # Set active config
-    # Stores a web-search configuration without contacting the provider first, for forms that validate locally.
+    # Stores a web-search configuration without contacting the provider first, for a form that has already validated its input or for restoring a known-good configuration. `entityId` scopes it to a room and has to name one the caller can open. A `baseUrl` pointing at a private network address is still refused, because that check is local. Nothing guarantees the stored provider works: follow up with `POST api/2.0/ai/web-search/test-connection`, or use `PUT api/2.0/ai/web-search/configure` to have the store gated on a live probe.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-set-active-config/
     # @param ai_web_search_configure_request [AiWebSearchConfigureRequest] 
     # @param [Hash] opts the optional parameters
@@ -478,7 +478,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::WebSearchApi.ai_web_search_set_active_config",
@@ -497,8 +497,8 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Test connection
-    # Checks a web-search configuration against the live provider without storing it - for a Test button that must not commit on success.
+    # Test a web-search provider
+    # Probes a web-search configuration against the live provider and reports the outcome, storing nothing - this is what a Test button calls so that a failure commits no state. The configuration is taken from the request rather than from storage, so credentials that were never saved can be checked. A `baseUrl` pointing at a private network address is refused before any request leaves the portal. The verdict is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-test-connection/
     # @param ai_web_search_config [AiWebSearchConfig] 
     # @param [Hash] opts the optional parameters
@@ -508,8 +508,8 @@ module DocspaceApiSdk
       data
     end
 
-    # Test connection
-    # Checks a web-search configuration against the live provider without storing it - for a Test button that must not commit on success.
+    # Test a web-search provider
+    # Probes a web-search configuration against the live provider and reports the outcome, storing nothing - this is what a Test button calls so that a failure commits no state. The configuration is taken from the request rather than from storage, so credentials that were never saved can be checked. A `baseUrl` pointing at a private network address is refused before any request leaves the portal. The verdict is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-test-connection/
     # @param ai_web_search_config [AiWebSearchConfig] 
     # @param [Hash] opts the optional parameters
@@ -548,7 +548,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiProfilesTestConnection200Response'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::WebSearchApi.ai_web_search_test_connection",

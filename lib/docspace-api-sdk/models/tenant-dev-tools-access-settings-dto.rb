@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for managing the Developer Tools access settings for the current tenant.
+  # Whether the `User` role is barred from the portal developer tools.
   class TenantDevToolsAccessSettingsDto < ApiModelBase
-    # Determines if users have restricted access to the Developer Tools.
+    # Whether members holding the `User` role are barred from the developer tools - API keys, OAuth applications  and webhooks. Room administrators and DocSpace administrators keep their access either way.
     attr_accessor :limited_access_for_users
 
     # Attribute mapping from ruby-style variable name to JSON key.

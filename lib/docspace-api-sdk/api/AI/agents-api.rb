@@ -24,22 +24,22 @@ module DocspaceApiSdk
       @api_client = api_client
     end
     # Create an agent
-    # Creates an AI agent room in the .NET AI service and binds the supplied `profileId` to it as a `Chat` assignment. The instruction is stored on the room as a prompt-only chat setting; a failed binding is reported as an error even though the room already exists.
+    # Creates an AI agent room and binds a model to it, in that order. `profileId` is required, has to be a UUID, has to name an existing profile, and that profile has to support chat - an image-only model is refused here rather than failing on every later request. `prompt` is required and is stored on the room as its standing instruction with any markup stripped, so it cannot round-trip HTML into another user's reply. The two steps are not atomic: when the room is created but the model binding fails, the call reports an error and the room is left behind, so re-bind it with `PUT api/2.0/ai/agents/{id}` rather than creating a second one.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-create/
     # @param ai_agents_create_request [AiAgentsCreateRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [AiFolderIntegerWrapper]
+    # @return [AiFolderWrapper]
     def ai_agents_create(ai_agents_create_request, opts = {})
       data, _status_code, _headers = ai_agents_create_with_http_info(ai_agents_create_request, opts)
       data
     end
 
     # Create an agent
-    # Creates an AI agent room in the .NET AI service and binds the supplied `profileId` to it as a `Chat` assignment. The instruction is stored on the room as a prompt-only chat setting; a failed binding is reported as an error even though the room already exists.
+    # Creates an AI agent room and binds a model to it, in that order. `profileId` is required, has to be a UUID, has to name an existing profile, and that profile has to support chat - an image-only model is refused here rather than failing on every later request. `prompt` is required and is stored on the room as its standing instruction with any markup stripped, so it cannot round-trip HTML into another user's reply. The two steps are not atomic: when the room is created but the model binding fails, the call reports an error and the room is left behind, so re-bind it with `PUT api/2.0/ai/agents/{id}` rather than creating a second one.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-create/
     # @param ai_agents_create_request [AiAgentsCreateRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiFolderIntegerWrapper, Integer, Hash)>] AiFolderIntegerWrapper data, response status code and response headers
+    # @return [Array<(AiFolderWrapper, Integer, Hash)>] AiFolderWrapper data, response status code and response headers
     def ai_agents_create_with_http_info(ai_agents_create_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::AgentsApi.ai_agents_create ...'
@@ -71,10 +71,10 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_agents_create_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiFolderIntegerWrapper'
+      return_type = opts[:debug_return_type] || 'AiFolderWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::AgentsApi.ai_agents_create",
@@ -94,7 +94,7 @@ module DocspaceApiSdk
     end
 
     # Delete an agent
-    # Deletes an AI agent room.
+    # Deletes an AI agent room. The ID has to be the room's integer identifier, and the body is forwarded to the DocSpace AI service unchanged, so it accepts the same options as deleting an ordinary room - `deleteAfter` among them. Deletion is asynchronous there: the answer is a file-operation payload to poll, not a completed result. The agent's model binding is deliberately left behind, because the upstream assignment API has no per-entry delete, so an orphaned assignment row survives the room.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-delete/
     # @param id [String] The agent identifier.
     # @param ai_agents_delete_request [AiAgentsDeleteRequest] 
@@ -106,7 +106,7 @@ module DocspaceApiSdk
     end
 
     # Delete an agent
-    # Deletes an AI agent room.
+    # Deletes an AI agent room. The ID has to be the room's integer identifier, and the body is forwarded to the DocSpace AI service unchanged, so it accepts the same options as deleting an ordinary room - `deleteAfter` among them. Deletion is asynchronous there: the answer is a file-operation payload to poll, not a completed result. The agent's model binding is deliberately left behind, because the upstream assignment API has no per-entry delete, so an orphaned assignment row survives the room.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-delete/
     # @param id [String] The agent identifier.
     # @param ai_agents_delete_request [AiAgentsDeleteRequest] 
@@ -150,7 +150,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiFileOperationWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::AgentsApi.ai_agents_delete",
@@ -170,22 +170,22 @@ module DocspaceApiSdk
     end
 
     # Get an agent
-    # Returns one AI agent room, enriched with the `profileId` bound to it so an edit form can prefill the profile selector. A missing assignment simply leaves `profileId` out.
+    # Returns one AI agent room, enriched with the `profileId` currently bound to it so an edit form can prefill its model selector. The ID is the room's integer identifier, and a non-integer value is refused rather than passed on to fail opaquely upstream. The binding lives in an assignment rather than on the room, so it is looked up separately: a missing or unreadable assignment simply leaves `profileId` out of the answer instead of failing the call. The standing instruction comes back on the room as `chatSettings.prompt`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-get/
     # @param id [String] The agent identifier.
     # @param [Hash] opts the optional parameters
-    # @return [AiFolderIntegerWrapper]
+    # @return [AiAgentsGet200Response]
     def ai_agents_get(id, opts = {})
       data, _status_code, _headers = ai_agents_get_with_http_info(id, opts)
       data
     end
 
     # Get an agent
-    # Returns one AI agent room, enriched with the `profileId` bound to it so an edit form can prefill the profile selector. A missing assignment simply leaves `profileId` out.
+    # Returns one AI agent room, enriched with the `profileId` currently bound to it so an edit form can prefill its model selector. The ID is the room's integer identifier, and a non-integer value is refused rather than passed on to fail opaquely upstream. The binding lives in an assignment rather than on the room, so it is looked up separately: a missing or unreadable assignment simply leaves `profileId` out of the answer instead of failing the call. The standing instruction comes back on the room as `chatSettings.prompt`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-get/
     # @param id [String] The agent identifier.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiFolderIntegerWrapper, Integer, Hash)>] AiFolderIntegerWrapper data, response status code and response headers
+    # @return [Array<(AiAgentsGet200Response, Integer, Hash)>] AiAgentsGet200Response data, response status code and response headers
     def ai_agents_get_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::AgentsApi.ai_agents_get ...'
@@ -212,10 +212,10 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiFolderIntegerWrapper'
+      return_type = opts[:debug_return_type] || 'AiAgentsGet200Response'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::AgentsApi.ai_agents_get",
@@ -235,20 +235,42 @@ module DocspaceApiSdk
     end
 
     # List agents
-    # Lists the portal's AI agent rooms. Query parameters are forwarded unchanged to the .NET AI service, which answers with its folder-content payload.
+    # Lists the portal's AI agent rooms. The query is forwarded unchanged to the DocSpace AI service, so it takes the same paging, sorting and filtering parameters as an ordinary room listing, and the answer is that service's folder-content payload rather than a shape of this API's own. Array and object query values are dropped rather than guessed at, so send flat strings. The profile bound to each agent is not included here - read one agent with `GET api/2.0/ai/agents/{id}` for that.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-list/
     # @param [Hash] opts the optional parameters
-    # @return [AiFolderContentIntegerWrapper]
+    # @option opts [String] :subject_id Show only the agent rooms this user takes part in.
+    # @option opts [String] :subject_owner_id Show only the agent rooms owned by this user.
+    # @option opts [Boolean] :exclude_subject Invert the user filter: leave out what `subjectId` selects instead of keeping it.
+    # @option opts [String] :tags Show only the agent rooms carrying these tags, comma-separated.
+    # @option opts [Boolean] :without_tags Show only the agent rooms that carry no tags at all.
+    # @option opts [Integer] :quota_filter Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one.
+    # @option opts [String] :filter_value Show only the agent rooms whose title matches this text.
+    # @option opts [String] :sort_by Field to sort by, for example `DateAndTime`.
+    # @option opts [String] :sort_order Sort direction, `ascending` or `descending`.
+    # @option opts [Integer] :start_index Index of the first entry to return; 0 starts at the beginning.
+    # @option opts [Integer] :count How many entries to return. The internal service applies its own default.
+    # @return [AiFolderContentWrapper]
     def ai_agents_list(opts = {})
       data, _status_code, _headers = ai_agents_list_with_http_info(opts)
       data
     end
 
     # List agents
-    # Lists the portal's AI agent rooms. Query parameters are forwarded unchanged to the .NET AI service, which answers with its folder-content payload.
+    # Lists the portal's AI agent rooms. The query is forwarded unchanged to the DocSpace AI service, so it takes the same paging, sorting and filtering parameters as an ordinary room listing, and the answer is that service's folder-content payload rather than a shape of this API's own. Array and object query values are dropped rather than guessed at, so send flat strings. The profile bound to each agent is not included here - read one agent with `GET api/2.0/ai/agents/{id}` for that.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-list/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiFolderContentIntegerWrapper, Integer, Hash)>] AiFolderContentIntegerWrapper data, response status code and response headers
+    # @option opts [String] :subject_id Show only the agent rooms this user takes part in.
+    # @option opts [String] :subject_owner_id Show only the agent rooms owned by this user.
+    # @option opts [Boolean] :exclude_subject Invert the user filter: leave out what `subjectId` selects instead of keeping it.
+    # @option opts [String] :tags Show only the agent rooms carrying these tags, comma-separated.
+    # @option opts [Boolean] :without_tags Show only the agent rooms that carry no tags at all.
+    # @option opts [Integer] :quota_filter Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one.
+    # @option opts [String] :filter_value Show only the agent rooms whose title matches this text.
+    # @option opts [String] :sort_by Field to sort by, for example `DateAndTime`.
+    # @option opts [String] :sort_order Sort direction, `ascending` or `descending`.
+    # @option opts [Integer] :start_index Index of the first entry to return; 0 starts at the beginning.
+    # @option opts [Integer] :count How many entries to return. The internal service applies its own default.
+    # @return [Array<(AiFolderContentWrapper, Integer, Hash)>] AiFolderContentWrapper data, response status code and response headers
     def ai_agents_list_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::AgentsApi.ai_agents_list ...'
@@ -258,6 +280,17 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'subjectId'] = opts[:'subject_id'] if !opts[:'subject_id'].nil?
+      query_params[:'subjectOwnerId'] = opts[:'subject_owner_id'] if !opts[:'subject_owner_id'].nil?
+      query_params[:'excludeSubject'] = opts[:'exclude_subject'] if !opts[:'exclude_subject'].nil?
+      query_params[:'tags'] = opts[:'tags'] if !opts[:'tags'].nil?
+      query_params[:'withoutTags'] = opts[:'without_tags'] if !opts[:'without_tags'].nil?
+      query_params[:'quotaFilter'] = opts[:'quota_filter'] if !opts[:'quota_filter'].nil?
+      query_params[:'filterValue'] = opts[:'filter_value'] if !opts[:'filter_value'].nil?
+      query_params[:'sortBy'] = opts[:'sort_by'] if !opts[:'sort_by'].nil?
+      query_params[:'sortOrder'] = opts[:'sort_order'] if !opts[:'sort_order'].nil?
+      query_params[:'startIndex'] = opts[:'start_index'] if !opts[:'start_index'].nil?
+      query_params[:'count'] = opts[:'count'] if !opts[:'count'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -271,10 +304,10 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiFolderContentIntegerWrapper'
+      return_type = opts[:debug_return_type] || 'AiFolderContentWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::AgentsApi.ai_agents_list",
@@ -294,7 +327,7 @@ module DocspaceApiSdk
     end
 
     # List agent news items
-    # Lists the new items across the caller's AI agent rooms.
+    # Lists the unread items across the caller's AI agent rooms, so a badge can be rendered without walking each room. It takes no parameters and is scoped to the caller by the DocSpace AI service. The answer is that service's new-items payload. This is a read-only operation and does not mark anything as seen.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-news/
     # @param [Hash] opts the optional parameters
     # @return [AiNewItemsAgentNewItemsArrayWrapper]
@@ -304,7 +337,7 @@ module DocspaceApiSdk
     end
 
     # List agent news items
-    # Lists the new items across the caller's AI agent rooms.
+    # Lists the unread items across the caller's AI agent rooms, so a badge can be rendered without walking each room. It takes no parameters and is scoped to the caller by the DocSpace AI service. The answer is that service's new-items payload. This is a read-only operation and does not mark anything as seen.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-news/
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiNewItemsAgentNewItemsArrayWrapper, Integer, Hash)>] AiNewItemsAgentNewItemsArrayWrapper data, response status code and response headers
@@ -333,7 +366,7 @@ module DocspaceApiSdk
       return_type = opts[:debug_return_type] || 'AiNewItemsAgentNewItemsArrayWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::AgentsApi.ai_agents_news",
@@ -353,22 +386,22 @@ module DocspaceApiSdk
     end
 
     # Reset agents' quota
-    # Resets the storage quota of the given AI agent rooms.
+    # Returns the listed AI agent rooms to the portal's default storage quota, forwarding `roomIds` to the DocSpace AI service unchanged. The answer is that service's payload, one updated room per entry. This is the counterpart of `PUT api/2.0/ai/agents/agentquota` and takes no quota value of its own. Rooms already on the default are unaffected.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-reset-quota/
     # @param ai_agents_reset_quota_request [AiAgentsResetQuotaRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [AiFolderIntegerArrayWrapper]
+    # @return [AiFolderArrayWrapper]
     def ai_agents_reset_quota(ai_agents_reset_quota_request, opts = {})
       data, _status_code, _headers = ai_agents_reset_quota_with_http_info(ai_agents_reset_quota_request, opts)
       data
     end
 
     # Reset agents' quota
-    # Resets the storage quota of the given AI agent rooms.
+    # Returns the listed AI agent rooms to the portal's default storage quota, forwarding `roomIds` to the DocSpace AI service unchanged. The answer is that service's payload, one updated room per entry. This is the counterpart of `PUT api/2.0/ai/agents/agentquota` and takes no quota value of its own. Rooms already on the default are unaffected.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-reset-quota/
     # @param ai_agents_reset_quota_request [AiAgentsResetQuotaRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiFolderIntegerArrayWrapper, Integer, Hash)>] AiFolderIntegerArrayWrapper data, response status code and response headers
+    # @return [Array<(AiFolderArrayWrapper, Integer, Hash)>] AiFolderArrayWrapper data, response status code and response headers
     def ai_agents_reset_quota_with_http_info(ai_agents_reset_quota_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::AgentsApi.ai_agents_reset_quota ...'
@@ -400,10 +433,10 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_agents_reset_quota_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiFolderIntegerArrayWrapper'
+      return_type = opts[:debug_return_type] || 'AiFolderArrayWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::AgentsApi.ai_agents_reset_quota",
@@ -423,24 +456,24 @@ module DocspaceApiSdk
     end
 
     # Update an agent
-    # Updates an AI agent room - title, tags, instruction. `profileId` is not part of the room contract: it is stripped from the forwarded body and re-bound as the agent's assignment afterwards.
+    # Changes an AI agent room - its title, tags or standing instruction - and optionally rebinds its model. The ID has to be the room's integer identifier. `profileId` is not part of the room contract: it is taken out of the forwarded body and applied afterwards as the agent's assignment, and it has to be a UUID naming an existing chat-capable profile. An instruction sent as `chatSettings.prompt` has its markup stripped, as on create; note that when `chatSettings` is present the upstream service still requires the rest of that object to be valid, so send it whole.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update/
     # @param id [String] The agent identifier.
     # @param ai_agents_update_request [AiAgentsUpdateRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [AiFolderIntegerWrapper]
+    # @return [AiFolderWrapper]
     def ai_agents_update(id, ai_agents_update_request, opts = {})
       data, _status_code, _headers = ai_agents_update_with_http_info(id, ai_agents_update_request, opts)
       data
     end
 
     # Update an agent
-    # Updates an AI agent room - title, tags, instruction. `profileId` is not part of the room contract: it is stripped from the forwarded body and re-bound as the agent's assignment afterwards.
+    # Changes an AI agent room - its title, tags or standing instruction - and optionally rebinds its model. The ID has to be the room's integer identifier. `profileId` is not part of the room contract: it is taken out of the forwarded body and applied afterwards as the agent's assignment, and it has to be a UUID naming an existing chat-capable profile. An instruction sent as `chatSettings.prompt` has its markup stripped, as on create; note that when `chatSettings` is present the upstream service still requires the rest of that object to be valid, so send it whole.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update/
     # @param id [String] The agent identifier.
     # @param ai_agents_update_request [AiAgentsUpdateRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiFolderIntegerWrapper, Integer, Hash)>] AiFolderIntegerWrapper data, response status code and response headers
+    # @return [Array<(AiFolderWrapper, Integer, Hash)>] AiFolderWrapper data, response status code and response headers
     def ai_agents_update_with_http_info(id, ai_agents_update_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::AgentsApi.ai_agents_update ...'
@@ -476,10 +509,10 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_agents_update_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiFolderIntegerWrapper'
+      return_type = opts[:debug_return_type] || 'AiFolderWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::AgentsApi.ai_agents_update",
@@ -499,22 +532,22 @@ module DocspaceApiSdk
     end
 
     # Update agents' quota
-    # Changes the storage quota of the given AI agent rooms.
+    # Sets the storage quota of the listed AI agent rooms in one call, forwarding `roomIds` and `quota` to the DocSpace AI service unchanged. The answer is that service's payload, one updated room per entry. A quota applies to the room's stored files, not to the model usage of its chats. Use `PUT api/2.0/ai/agents/resetquota` to return rooms to the portal default instead of naming a number.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update-quota/
     # @param ai_agents_update_quota_request [AiAgentsUpdateQuotaRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [AiFolderIntegerArrayWrapper]
+    # @return [AiFolderArrayWrapper]
     def ai_agents_update_quota(ai_agents_update_quota_request, opts = {})
       data, _status_code, _headers = ai_agents_update_quota_with_http_info(ai_agents_update_quota_request, opts)
       data
     end
 
     # Update agents' quota
-    # Changes the storage quota of the given AI agent rooms.
+    # Sets the storage quota of the listed AI agent rooms in one call, forwarding `roomIds` and `quota` to the DocSpace AI service unchanged. The answer is that service's payload, one updated room per entry. A quota applies to the room's stored files, not to the model usage of its chats. Use `PUT api/2.0/ai/agents/resetquota` to return rooms to the portal default instead of naming a number.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update-quota/
     # @param ai_agents_update_quota_request [AiAgentsUpdateQuotaRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiFolderIntegerArrayWrapper, Integer, Hash)>] AiFolderIntegerArrayWrapper data, response status code and response headers
+    # @return [Array<(AiFolderArrayWrapper, Integer, Hash)>] AiFolderArrayWrapper data, response status code and response headers
     def ai_agents_update_quota_with_http_info(ai_agents_update_quota_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::AgentsApi.ai_agents_update_quota ...'
@@ -546,10 +579,10 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_agents_update_quota_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiFolderIntegerArrayWrapper'
+      return_type = opts[:debug_return_type] || 'AiFolderArrayWrapper'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
 
       new_options = opts.merge(
         :operation => :"AI::AgentsApi.ai_agents_update_quota",

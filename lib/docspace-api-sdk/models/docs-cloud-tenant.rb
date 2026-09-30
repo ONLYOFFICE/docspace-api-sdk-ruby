@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Represents a DocsCloud tenant of a portal.
+  # Represents a Docs Connect tenant of a portal.
   class DocsCloudTenant < ApiModelBase
     # The external ID of the dedicated resource the tenant is hosted on.
     attr_accessor :dedicated_resource_ex_id

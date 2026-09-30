@@ -17,21 +17,21 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The thumbnail request.
+  # The crop rectangle to apply to an avatar image.
   class ThumbnailsRequest < ApiModelBase
-    # The path to the temporary thumbnail file.
+    # The temporary image to crop, as returned in the `data` of an upload made with `autosave` off. Only the file  name part of the value is used. Omit it to re-crop the photo the profile already has.
     attr_accessor :tmp_file
 
-    # The thumbnail horizontal coordinate.
+    # The distance in pixels from the left edge of the original image to the left edge of the crop rectangle.
     attr_accessor :x
 
-    # The thumbnail vertical coordinate.
+    # The distance in pixels from the top edge of the original image to the top edge of the crop rectangle.
     attr_accessor :y
 
-    # The thumbnail width.
+    # The width of the crop rectangle in pixels. Passing 0 together with `height` and `tmpFile` keeps the whole  uploaded image instead of cropping it.
     attr_accessor :width
 
-    # The thumbnail height.
+    # The height of the crop rectangle in pixels. Passing 0 together with `width` and `tmpFile` keeps the whole  uploaded image instead of cropping it.
     attr_accessor :height
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -17,11 +17,11 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Default templates settings request parameters.
+  # The document to use as the blank the portal creates for one extension.
   class DefaultTemplateSettingsRequestDto < ApiModelBase
     attr_accessor :selected_file
 
-    # File extension of a template to replace
+    # The extension the blank is set for, written in lower case with the leading dot. Only the extensions the  portal's built-in template set covers are accepted, and `GET api/2.0/files/settings/defaulttemplate` returns  exactly that list; an extension outside it leaves the settings unchanged instead of failing.
     attr_accessor :file_extension
 
     # Attribute mapping from ruby-style variable name to JSON key.

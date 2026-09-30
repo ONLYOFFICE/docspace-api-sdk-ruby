@@ -17,15 +17,15 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The request parameters for configuring login security and performance settings.
+  # The brute-force protection of the sign-in form: how many failures, over how long, cost how long a block.
   class LoginSettingsRequestDto < ApiModelBase
-    # The maximum number of consecutive failed login attempts allowed before triggering account suspension.
+    # How many failed sign-in attempts inside one window are tolerated before the offender is blocked. Attempts are  counted per user name and client address together, so one member being blocked leaves the rest of the portal  signing in normally.
     attr_accessor :attempt_count
 
-    # The duration (in minutes) for which an account remains suspended after exceeding maximum login attempts.
+    # How long, in seconds, a blocked user name and address pair stays refused. While the block lasts the sign-in  is refused even when the password is finally correct.
     attr_accessor :block_time
 
-    # The maximum time (in seconds) allowed for server to process and respond to login requests.
+    # The length, in seconds, of the rolling window the failed attempts are counted over. A wider window makes the  same `attemptCount` stricter, because failures further apart still add up.
     attr_accessor :check_period
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -17,18 +17,18 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The migration status parameters.
+  # How far the parse or the import queued for this portal has got, and what it produced once it stopped.
   class MigrationStatusDto < ApiModelBase
-    # The migration progress.
+    # The share of the job that is done, from 0 to 100. It advances unevenly, since the stages differ in  length, so poll `isCompleted` rather than waiting for this to reach 100.
     attr_accessor :progress
 
-    # The migration error.
+    # The message that ended the job, in the portal language. It stays empty while nothing has gone wrong, so  once `isCompleted` is `true` this field is what tells success from failure.
     attr_accessor :error
 
-    # The migration API information.
+    # What the migrator has read so far. After a parse pass it holds the users, the groups and the archives it  could not read, which is the body to edit and post to `POST api/2.0/migration/migrate`; during an import it  also carries the accounts that were created and the ones that failed. Its own `operation` field, `parse`  or `migration`, is what tells the two stages apart.
     attr_accessor :parse_result
 
-    # Specifies whether the migration is completed or not.
+    # Whether the job has stopped, successfully or not. It is the field to poll on; the whole body comes back  empty instead when the portal has no job at all, which is not an error.
     attr_accessor :is_completed
 
     # Attribute mapping from ruby-style variable name to JSON key.

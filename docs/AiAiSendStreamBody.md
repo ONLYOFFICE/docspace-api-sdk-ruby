@@ -16,10 +16,10 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiAiSendStreamBody.new(
-  thread_id: null,
-  user_message: null,
-  action_args: null,
-  entity_id: null,
-  profile_id: null
+  thread_id: 11111111-1111-1111-1111-111111111111,
+  user_message: {role=user, content=Summarise the attached contract.},
+  action_args: {isReasoning=false},
+  entity_id: 1234,
+  profile_id: 00000000-0000-0000-0000-000000000000
 )
 ```

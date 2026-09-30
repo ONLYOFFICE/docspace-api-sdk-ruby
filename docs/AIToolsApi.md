@@ -25,7 +25,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Add custom server
 
-Registers a custom MCP server in the scope under the given name.
+Registers a custom MCP server under the given name so the model may call its tools. The name becomes a URL path segment, so it may not be `.`, `..`, or contain a path separator or a control character. `config` may be omitted in two cases: a name matching a host-configured system server pins the entry to that server's canonical settings as a whitelist marker, and a name already registered portal-wide copies the portal-level configuration into this scope; anything else without a config is rejected. `entityId` scopes the registration and has to name a room the caller can open - a room that is not an agent room folds to the portal-wide scope, while an unreachable one is refused so it cannot silently rewrite the portal's own registry.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-add-custom-server/).
 
@@ -34,6 +34,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::ToolsApi.new
 ai_tools_add_custom_server_request = DocspaceApiSdk::AiToolsAddCustomServerRequest.new({name: 'name_example', config: 3.56}) # AiToolsAddCustomServerRequest | 
@@ -77,7 +87,7 @@ end
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -91,7 +101,7 @@ No authorization required
 
 Get allow always
 
-Lists the tools on the always-allow list of the scope.
+Returns the always-allow list of the scope - the tools whose calls run without pausing the round for approval. `entityId` picks the scope and omitting it reads the portal-wide setting. An empty answer means every tool call has to be approved through `POST api/2.0/ai/ai/approve-tool-call`. Use `GET api/2.0/ai/tools/is-allow-always` to ask about a single tool.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-allow-always/).
 
@@ -100,10 +110,20 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::ToolsApi.new
 opts = {
-  entity_id: 'entity_id_example' # String | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+  entity_id: '1234' # String | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
 }
 
 begin
@@ -145,7 +165,7 @@ end
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -159,7 +179,7 @@ No authorization required
 
 Get custom server
 
-Returns the configuration of one custom MCP server, or an empty result when it is not registered.
+Returns the stored configuration of one registered custom MCP server. The name is required and is read from the query; `entityId` picks the scope, and omitting it reads the portal-wide registry. A name that is not registered answers a null body with status 200 rather than 404. The configuration of a system server is returned empty on purpose: those run server-side only, so neither their endpoint nor their credentials are handed to a browser.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-custom-server/).
 
@@ -168,11 +188,21 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::ToolsApi.new
-name = 'name_example' # String | The custom MCP server name.
+name = 'acme-mcp' # String | The custom MCP server name.
 opts = {
-  entity_id: 'entity_id_example' # String | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+  entity_id: '1234' # String | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
 }
 
 begin
@@ -215,7 +245,7 @@ end
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -229,7 +259,7 @@ No authorization required
 
 Get disabled
 
-Returns the switched-off tools of the scope, grouped by server type.
+Returns the tools switched off in the scope, as a map of server type to tool names. `entityId` picks the scope and omitting it reads the portal-wide setting. An absent server type means nothing is switched off for it, so an empty answer means every tool is on offer. Use `GET api/2.0/ai/tools/is-tool-disabled` to ask about one tool instead of reading the whole map.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-disabled/).
 
@@ -238,10 +268,20 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::ToolsApi.new
 opts = {
-  entity_id: 'entity_id_example' # String | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+  entity_id: '1234' # String | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
 }
 
 begin
@@ -283,7 +323,7 @@ end
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -297,7 +337,7 @@ No authorization required
 
 Is allow always
 
-Tells whether one tool is on the always-allow list.
+Tells whether one named tool runs without an approval pause in the scope. Both `serverType` and `toolName` are required and are read from the query; `entityId` picks the scope. The answer is a bare boolean. A false answer means a call to that tool pauses the round, and the caller resumes it with the approve or deny operation.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-is-allow-always/).
 
@@ -306,12 +346,22 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::ToolsApi.new
-server_type = 'server_type_example' # String | The MCP server type the tool belongs to.
-tool_name = 'tool_name_example' # String | The tool name.
+server_type = 'docspace' # String | The MCP server type the tool belongs to.
+tool_name = 'docspace_get_folder' # String | The tool name.
 opts = {
-  entity_id: 'entity_id_example' # String | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+  entity_id: '1234' # String | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
 }
 
 begin
@@ -355,7 +405,7 @@ end
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -369,7 +419,7 @@ No authorization required
 
 Is tool disabled
 
-Tells whether one tool of a server type is switched off.
+Tells whether one named tool of one server type is switched off in the scope. Both `serverType` and `toolName` are required and are read from the query; `entityId` picks the scope. The answer is a bare boolean. It reflects only the disable list - a tool that is on offer may still require approval, which `GET api/2.0/ai/tools/is-allow-always` reports.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-is-tool-disabled/).
 
@@ -378,12 +428,22 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::ToolsApi.new
-server_type = 'server_type_example' # String | The MCP server type the tool belongs to.
-tool_name = 'tool_name_example' # String | The tool name.
+server_type = 'docspace' # String | The MCP server type the tool belongs to.
+tool_name = 'docspace_get_folder' # String | The tool name.
 opts = {
-  entity_id: 'entity_id_example' # String | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+  entity_id: '1234' # String | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
 }
 
 begin
@@ -427,7 +487,7 @@ end
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -441,7 +501,7 @@ No authorization required
 
 List custom servers
 
-Lists the custom MCP servers registered in the scope, keyed by name.
+Lists the custom MCP servers registered in the scope as a map of name to configuration. `entityId` picks the scope and omitting it lists the portal-wide registry. The configuration of any entry that names a host-configured system server comes back empty, for the same reason as in the single-server read, and the portal's own built-in MCP server is left out of the list entirely because it is always enabled and cannot be configured. The names in the answer are what the disable and always-allow operations accept as `serverType`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-list-custom-servers/).
 
@@ -450,10 +510,20 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::ToolsApi.new
 opts = {
-  entity_id: 'entity_id_example' # String | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+  entity_id: '1234' # String | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
 }
 
 begin
@@ -495,7 +565,7 @@ end
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -505,11 +575,11 @@ No authorization required
 
 ## ai_tools_list_system_tools
 
-> Hash&lt;String, Array&lt;AiTMCPItem&gt;&gt; ai_tools_list_system_tools(opts)
+> <AiToolsListSystemTools200Response> ai_tools_list_system_tools(opts)
 
 List system tools
 
-Lists the tools of the host-configured system MCP servers, grouped by server type. The servers are connected and listed server-side, so the client renders its permission cards from one request and never opens an MCP connection of its own.
+Lists every tool the scope can offer the model, as a map of server type to tool group. The answer merges two sources - the host-configured system servers and the live tools of the scope's registered custom MCP servers - and names the system ones separately in `system`, so a client can tell the two apart. `errors` carries the reason a registered server delivered no tools, which is the text to show on a permission card, because the browser cannot reach a server-executed MCP server to find out for itself. The connections are opened server-side, so one request is enough and the client never speaks MCP itself; the portal's own built-in server is left out because it is always enabled.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-list-system-tools/).
 
@@ -518,10 +588,20 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::ToolsApi.new
 opts = {
-  entity_id: 'entity_id_example' # String | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+  entity_id: '1234' # String | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
 }
 
 begin
@@ -537,7 +617,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(Hash&lt;String, Array&lt;AiTMCPItem&gt;&gt;, Integer, Hash)> ai_tools_list_system_tools_with_http_info(opts)
+> <Array(<AiToolsListSystemTools200Response>, Integer, Hash)> ai_tools_list_system_tools_with_http_info(opts)
 
 ```ruby
 begin
@@ -545,7 +625,7 @@ begin
   data, status_code, headers = api_instance.ai_tools_list_system_tools_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => Hash&lt;String, Array&lt;AiTMCPItem&gt;&gt;
+  p data # => <AiToolsListSystemTools200Response>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::ToolsApi->ai_tools_list_system_tools_with_http_info: #{e}"
 end
@@ -559,11 +639,11 @@ end
 
 ### Return type
 
-**Hash&lt;String, Array&lt;AiTMCPItem&gt;&gt;**
+[**AiToolsListSystemTools200Response**](AiToolsListSystemTools200Response.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -577,7 +657,7 @@ No authorization required
 
 Remove custom server
 
-Removes a custom MCP server from the registry.
+Unregisters a custom MCP server from the scope, so the model is no longer offered its tools. The name is required and may be sent in the body or as a query parameter, and `entityId` has to name a room the caller can open. A name that is not registered is not reported: the call answers success without removing anything. The server itself is untouched - only this portal's registration is dropped.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-remove-custom-server/).
 
@@ -586,6 +666,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::ToolsApi.new
 ai_tools_remove_custom_server_request = DocspaceApiSdk::AiToolsRemoveCustomServerRequest.new({name: 'name_example'}) # AiToolsRemoveCustomServerRequest | 
@@ -629,7 +719,7 @@ end
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -643,7 +733,7 @@ No authorization required
 
 Replace all custom servers
 
-Replaces the whole custom MCP server registry of the scope with the supplied map.
+Replaces the whole custom MCP server registry of the scope with the supplied map in one write, which makes it the operation a settings screen saves with. `map` is required: without it the registry would be emptied, so a missing or non-object value is rejected rather than treated as none. Every name in the map is validated as a routable path segment and every configuration is resolved before anything is written, so a map with one bad entry changes nothing. `entityId` has to name a room the caller can open - this is the operation where an unreachable one would otherwise have wiped the portal-wide registry.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-replace-all-custom-servers/).
 
@@ -652,6 +742,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::ToolsApi.new
 ai_tools_replace_all_custom_servers_request = DocspaceApiSdk::AiToolsReplaceAllCustomServersRequest.new({map: { key: 3.56}}) # AiToolsReplaceAllCustomServersRequest | 
@@ -695,7 +795,7 @@ end
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -709,7 +809,7 @@ No authorization required
 
 Set allow always
 
-Adds a tool to the always-allow list, or removes it - the tools on that list run without an approval dialog.
+Adds one tool to the scope's always-allow list, or takes it off, which decides whether a call to it pauses the round for approval. `value` is coerced to a boolean, so any truthy value adds and any falsy one removes. Unlike the disable operation, `serverType` is not validated here: an unknown one is stored and then simply never matches, so a wrong value fails silently. `entityId` has to name a room the caller can open.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-set-allow-always/).
 
@@ -718,6 +818,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::ToolsApi.new
 ai_tools_set_allow_always_request = DocspaceApiSdk::AiToolsSetAllowAlwaysRequest.new({server_type: 'server_type_example', tool_name: 'tool_name_example', value: false}) # AiToolsSetAllowAlwaysRequest | 
@@ -761,7 +871,7 @@ end
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -775,7 +885,7 @@ No authorization required
 
 Set disabled
 
-Marks the listed tools of one server type as switched off, so the model is no longer offered them.
+Switches off the listed tools of one server type in the scope, so the model is no longer offered them. `serverType` has to be a key the round's tool filter actually matches - a host-configured system server, one of the two DocSpace integration groups, web search, image generation, or one of the scope's registered custom servers - and an unknown value is rejected with the list of valid ones in the message, rather than stored and silently ignored. `toolNames` replaces the previous selection for that server type, so send the full list and pass an empty one to switch everything back on. `entityId` has to name a room the caller can open.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-set-disabled/).
 
@@ -784,6 +894,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::ToolsApi.new
 ai_tools_set_disabled_request = DocspaceApiSdk::AiToolsSetDisabledRequest.new({server_type: 'server_type_example', tool_names: ['tool_names_example']}) # AiToolsSetDisabledRequest | 
@@ -827,7 +947,7 @@ end
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -841,7 +961,7 @@ No authorization required
 
 Update custom server
 
-Updates the configuration of a registered custom MCP server.
+Replaces the stored configuration of a registered custom MCP server, under the same name and scope rules as the add operation. The name is re-validated as a routable path segment, and an omitted `config` resolves the same way - to a system server's canonical settings, or to the portal-level entry of that name. `entityId` has to name a room the caller can open. The answer carries the stored registry entry.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-update-custom-server/).
 
@@ -850,6 +970,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ```ruby
 require 'time'
 require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
 
 api_instance = DocspaceApiSdk::AI::ToolsApi.new
 ai_tools_update_custom_server_request = DocspaceApiSdk::AiToolsUpdateCustomServerRequest.new({name: 'name_example', config: 3.56}) # AiToolsUpdateCustomServerRequest | 
@@ -893,7 +1023,7 @@ end
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **user_ids** | **Array&lt;String&gt;** | The list of user IDs. | [optional] |
+| **user_ids** | **Array&lt;String&gt;** | The accounts the operation applies to. System accounts are dropped from the list without an error. | [optional] |
 | **quota** | [**UpdateMembersQuotaRequestDtoQuota**](UpdateMembersQuotaRequestDtoQuota.md) |  | [optional] |
 
 ## Example

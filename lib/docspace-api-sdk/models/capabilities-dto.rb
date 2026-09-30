@@ -17,27 +17,27 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The capabilities parameters.
+  # The sign-in methods this portal offers, as a login client needs them before anyone has signed in.
   class CapabilitiesDto < ApiModelBase
-    # Specifies if the LDAP settings are enabled or not.
+    # Whether members may sign in with their directory credentials. It is `false` both when LDAP sign-in is  switched off and when the pricing plan or the installation does not include it, and also when the settings  could not be read at all - a `false` here means the method is not offered, never that it is unknown.
     attr_accessor :ldap_enabled
 
-    # The LDAP domain.
+    # The directory domain members authenticate against, to be shown next to the login field. It is empty  whenever `ldapEnabled` is `false`, and also while the portal has not completed a directory synchronisation.
     attr_accessor :ldap_domain
 
-    # The list of providers.
+    # The keys of the external identity providers to offer, ordered for the country the caller's IP address  resolves to and reduced to those this installation has credentials for. Pass one of them as `provider` to  `POST api/2.0/authentication`. An empty list means external sign-in is not on offer.
     attr_accessor :providers
 
-    # The SP login label.
+    # The caption for the single sign-on button in the portal language, empty whenever `ssoUrl` is.
     attr_accessor :sso_label
 
-    # Specifies if OAuth is enabled or not.
+    # Whether external identity providers may be used on this portal at all. While it is `false`, `providers` is  empty because the list is not even assembled.
     attr_accessor :oauth_enabled
 
-    # The SSO URL. If this parameter is empty, then the SSO settings are disabled.
+    # The address to send the browser to for SAML single sign-on. It is empty when single sign-on is not on  offer, which is the one thing to test - there is no separate flag for it.
     attr_accessor :sso_url
 
-    # Specifies if an identity server is enabled or not.
+    # Whether the installation exposes its built-in identity server, which is what the portal's own OAuth  applications authenticate against. It concerns third-party applications signing in to the portal, not  portal members signing in to an external provider - that is `providers`.
     attr_accessor :identity_server_enabled
 
     # Attribute mapping from ruby-style variable name to JSON key.

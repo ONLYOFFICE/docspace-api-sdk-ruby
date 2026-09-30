@@ -19,13 +19,13 @@ require 'time'
 module DocspaceApiSdk
   # The account information parameters.
   class AccountInfoDto < ApiModelBase
-    # The account provider.
+    # The name of the identity provider, in lowercase, as every other operation of this group expects it: `google`,  `zoom`, `linkedin`, `facebook`, `twitter`, `microsoft`, `appleid`, `weixin` or `nextcloud`.
     attr_accessor :provider
 
-    # The account URL.
+    # The URL that starts the login with this provider. Open it as it is - it already carries the provider and the  popup or redirect mode the request asked for.
     attr_accessor :url
 
-    # Specifies if an account is linked with other profiles or not.
+    # Whether this provider is already linked to the calling profile. It is always false for an anonymous caller,  because there is no profile to compare against.
     attr_accessor :linked
 
     # Attribute mapping from ruby-style variable name to JSON key.
