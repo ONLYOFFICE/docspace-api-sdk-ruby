@@ -60,7 +60,7 @@ module DocspaceApiSdk
       {
         :'id' => :'String',
         :'title' => :'String',
-        :'properties' => :'Array<AuthKey>',
+        :'properties' => :'Array<AuthKeyDto>',
         :'current' => :'Boolean',
         :'is_set' => :'Boolean'
       }

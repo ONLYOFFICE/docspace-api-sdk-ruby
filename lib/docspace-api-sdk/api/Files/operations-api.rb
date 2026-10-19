@@ -298,7 +298,14 @@ module DocspaceApiSdk
     # Reports which of the requested files and folders already have a same-named entry in `destFolderId`, so that  the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the  call, although the address is shared with `PUT api/2.0/files/fileops/move`: the answer is the part of the  request that clashes, and an empty array means the batch would go through without one. The  `conflictResolveType` of the request is not taken into account — clashing items are reported whatever it says  — and encrypted files are left out of the report. A source id that resolves to nothing is not an error and is  passed over. The caller needs create access to the destination: an archived room and a room the caller cannot  write to are refused with 403, a destination that does not exist is answered as missing, and a request without  `destFolderId` is rejected as an invalid request. To learn whether the destination accepts the files at all  use `GET api/2.0/files/fileops/checkdestfolder`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-batch-items/
     # @param [Hash] opts the optional parameters
-    # @option opts [BatchRequestDto] :in_dto The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
+    # @option opts [Boolean] :return_single_operation Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+    # @option opts [Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>] :folder_ids The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+    # @option opts [Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>] :file_ids The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+    # @option opts [CheckMoveOrCopyBatchItemsDestFolderIdParameter] :dest_folder_id The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+    # @option opts [FileConflictResolveType] :conflict_resolve_type What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+    # @option opts [Boolean] :delete_after Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+    # @option opts [Boolean] :content What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+    # @option opts [Boolean] :to_fill_out Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
     # @return [FileEntryBaseArrayWrapper]
     def check_move_or_copy_batch_items(opts = {})
       data, _status_code, _headers = check_move_or_copy_batch_items_with_http_info(opts)
@@ -309,7 +316,14 @@ module DocspaceApiSdk
     # Reports which of the requested files and folders already have a same-named entry in `destFolderId`, so that  the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the  call, although the address is shared with `PUT api/2.0/files/fileops/move`: the answer is the part of the  request that clashes, and an empty array means the batch would go through without one. The  `conflictResolveType` of the request is not taken into account — clashing items are reported whatever it says  — and encrypted files are left out of the report. A source id that resolves to nothing is not an error and is  passed over. The caller needs create access to the destination: an archived room and a room the caller cannot  write to are refused with 403, a destination that does not exist is answered as missing, and a request without  `destFolderId` is rejected as an invalid request. To learn whether the destination accepts the files at all  use `GET api/2.0/files/fileops/checkdestfolder`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-batch-items/
     # @param [Hash] opts the optional parameters
-    # @option opts [BatchRequestDto] :in_dto The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
+    # @option opts [Boolean] :return_single_operation Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+    # @option opts [Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>] :folder_ids The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+    # @option opts [Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>] :file_ids The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+    # @option opts [CheckMoveOrCopyBatchItemsDestFolderIdParameter] :dest_folder_id The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+    # @option opts [FileConflictResolveType] :conflict_resolve_type What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+    # @option opts [Boolean] :delete_after Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+    # @option opts [Boolean] :content What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+    # @option opts [Boolean] :to_fill_out Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
     # @return [Array<(FileEntryBaseArrayWrapper, Integer, Hash)>] FileEntryBaseArrayWrapper data, response status code and response headers
     def check_move_or_copy_batch_items_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -320,7 +334,14 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'inDto'] = opts[:'in_dto'] if !opts[:'in_dto'].nil?
+      query_params[:'returnSingleOperation'] = opts[:'return_single_operation'] if !opts[:'return_single_operation'].nil?
+      query_params[:'folderIds'] = @api_client.build_collection_param(opts[:'folder_ids'], :multi) if !opts[:'folder_ids'].nil?
+      query_params[:'fileIds'] = @api_client.build_collection_param(opts[:'file_ids'], :multi) if !opts[:'file_ids'].nil?
+      query_params[:'destFolderId'] = opts[:'dest_folder_id'] if !opts[:'dest_folder_id'].nil?
+      query_params[:'conflictResolveType'] = opts[:'conflict_resolve_type'] if !opts[:'conflict_resolve_type'].nil?
+      query_params[:'deleteAfter'] = opts[:'delete_after'] if !opts[:'delete_after'].nil?
+      query_params[:'content'] = opts[:'content'] if !opts[:'content'].nil?
+      query_params[:'toFillOut'] = opts[:'to_fill_out'] if !opts[:'to_fill_out'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -360,7 +381,14 @@ module DocspaceApiSdk
     # Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without `destFolderId` is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  `GET api/2.0/files/fileops/move`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-dest-folder/
     # @param [Hash] opts the optional parameters
-    # @option opts [BatchRequestDto] :in_dto The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
+    # @option opts [Boolean] :return_single_operation Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+    # @option opts [Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>] :folder_ids The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+    # @option opts [Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>] :file_ids The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+    # @option opts [CheckMoveOrCopyBatchItemsDestFolderIdParameter] :dest_folder_id The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+    # @option opts [FileConflictResolveType] :conflict_resolve_type What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+    # @option opts [Boolean] :delete_after Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+    # @option opts [Boolean] :content What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+    # @option opts [Boolean] :to_fill_out Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
     # @return [CheckDestFolderWrapper]
     def check_move_or_copy_dest_folder(opts = {})
       data, _status_code, _headers = check_move_or_copy_dest_folder_with_http_info(opts)
@@ -371,7 +399,14 @@ module DocspaceApiSdk
     # Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without `destFolderId` is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  `GET api/2.0/files/fileops/move`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-dest-folder/
     # @param [Hash] opts the optional parameters
-    # @option opts [BatchRequestDto] :in_dto The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
+    # @option opts [Boolean] :return_single_operation Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+    # @option opts [Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>] :folder_ids The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+    # @option opts [Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>] :file_ids The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+    # @option opts [CheckMoveOrCopyBatchItemsDestFolderIdParameter] :dest_folder_id The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+    # @option opts [FileConflictResolveType] :conflict_resolve_type What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+    # @option opts [Boolean] :delete_after Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+    # @option opts [Boolean] :content What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+    # @option opts [Boolean] :to_fill_out Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
     # @return [Array<(CheckDestFolderWrapper, Integer, Hash)>] CheckDestFolderWrapper data, response status code and response headers
     def check_move_or_copy_dest_folder_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -382,7 +417,14 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'inDto'] = opts[:'in_dto'] if !opts[:'in_dto'].nil?
+      query_params[:'returnSingleOperation'] = opts[:'return_single_operation'] if !opts[:'return_single_operation'].nil?
+      query_params[:'folderIds'] = @api_client.build_collection_param(opts[:'folder_ids'], :multi) if !opts[:'folder_ids'].nil?
+      query_params[:'fileIds'] = @api_client.build_collection_param(opts[:'file_ids'], :multi) if !opts[:'file_ids'].nil?
+      query_params[:'destFolderId'] = opts[:'dest_folder_id'] if !opts[:'dest_folder_id'].nil?
+      query_params[:'conflictResolveType'] = opts[:'conflict_resolve_type'] if !opts[:'conflict_resolve_type'].nil?
+      query_params[:'deleteAfter'] = opts[:'delete_after'] if !opts[:'delete_after'].nil?
+      query_params[:'content'] = opts[:'content'] if !opts[:'content'].nil?
+      query_params[:'toFillOut'] = opts[:'to_fill_out'] if !opts[:'to_fill_out'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -490,7 +532,7 @@ module DocspaceApiSdk
     # @param folder_id [Integer, String] The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
     # @param session_request [SessionRequest] The file the session is opened for, and how a clash with an existing name is settled.
     # @param [Hash] opts the optional parameters
-    # @return [ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper]
+    # @return [ChunkedUploadSessionResultWrapper, ThirdPartyChunkedUploadSessionResultWrapper]
     def create_upload_session(folder_id, session_request, opts = {})
       data, _status_code, _headers = create_upload_session_with_http_info(folder_id, session_request, opts)
       data
@@ -502,7 +544,7 @@ module DocspaceApiSdk
     # @param folder_id [Integer, String] The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
     # @param session_request [SessionRequest] The file the session is opened for, and how a clash with an existing name is settled.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper, Integer, Hash)>] ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper data, response status code and response headers
+    # @return [Array<(ChunkedUploadSessionResultWrapper, ThirdPartyChunkedUploadSessionResultWrapper, Integer, Hash)>] ChunkedUploadSessionResultWrapper, ThirdPartyChunkedUploadSessionResultWrapper data, response status code and response headers
     def create_upload_session_with_http_info(folder_id, session_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::OperationsApi.create_upload_session ...'
@@ -538,7 +580,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(session_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyChunkedUploadSessionResponseWrapperWrapper' : 'ChunkedUploadSessionResponseWrapperWrapper')
+      return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyChunkedUploadSessionResultWrapper' : 'ChunkedUploadSessionResultWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -566,7 +608,7 @@ module DocspaceApiSdk
     # @param folder_id [Integer, String] The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
     # @param session_request [SessionRequest] The file the session is opened for, and how a clash with an existing name is settled.
     # @param [Hash] opts the optional parameters
-    # @return [ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper]
+    # @return [ChunkedUploadSessionWrapper, ThirdPartyChunkedUploadSessionWrapper]
     def create_upload_session_in_folder(folder_id, session_request, opts = {})
       data, _status_code, _headers = create_upload_session_in_folder_with_http_info(folder_id, session_request, opts)
       data
@@ -578,7 +620,7 @@ module DocspaceApiSdk
     # @param folder_id [Integer, String] The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
     # @param session_request [SessionRequest] The file the session is opened for, and how a clash with an existing name is settled.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper, Integer, Hash)>] ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper data, response status code and response headers
+    # @return [Array<(ChunkedUploadSessionWrapper, ThirdPartyChunkedUploadSessionWrapper, Integer, Hash)>] ChunkedUploadSessionWrapper, ThirdPartyChunkedUploadSessionWrapper data, response status code and response headers
     def create_upload_session_in_folder_with_http_info(folder_id, session_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::OperationsApi.create_upload_session_in_folder ...'
@@ -614,7 +656,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(session_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyChunkedUploadSessionResponseResponseWrapper' : 'ChunkedUploadSessionResponseResponseWrapper')
+      return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyChunkedUploadSessionWrapper' : 'ChunkedUploadSessionWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -923,7 +965,7 @@ module DocspaceApiSdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::OperationsApi.empty_trash ...'
       end
-      allowable_values = [0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
+      allowable_values = [0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37]
       if @api_client.config.client_side_validation && opts[:'folder_type'] && !opts[:'folder_type'].all? { |item| allowable_values.include?(item) }
         fail ArgumentError, "invalid value for \"folder_type\", must include one of #{allowable_values}"
       end
@@ -932,7 +974,7 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'Single'] = opts[:'single'] if !opts[:'single'].nil?
+      query_params[:'single'] = opts[:'single'] if !opts[:'single'].nil?
       query_params[:'folderType'] = @api_client.build_collection_param(opts[:'folder_type'], :multi) if !opts[:'folder_type'].nil?
 
       # header parameters
@@ -1041,7 +1083,7 @@ module DocspaceApiSdk
     end
 
     # Get active file operations
-    # Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads and  mark-as-read. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller's  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
+    # Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads, mark-as-read  and builder runs. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller's  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-operation-statuses/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :id The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller's operations gives an empty answer rather than an error.
@@ -1052,7 +1094,7 @@ module DocspaceApiSdk
     end
 
     # Get active file operations
-    # Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads and  mark-as-read. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller's  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
+    # Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads, mark-as-read  and builder runs. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller's  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-operation-statuses/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :id The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller's operations gives an empty answer rather than an error.
@@ -1103,7 +1145,7 @@ module DocspaceApiSdk
     end
 
     # Get file operations by type
-    # Returns the background file operations of the caller that are of one kind, named by the number in the route:  `1` for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read and `7` for a duplication. The  answer carries the same records as `GET api/2.0/files/fileops`, with the same rule that a finished operation  is reported once and then dropped, and `id` narrows it further to a single operation. Moves, kind `0`, cannot  be read through this route: the address `api/2.0/files/fileops/move` belongs to another operation, so read  moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind that has no queue  of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty array, while a  number outside the operation type is rejected as an invalid request. The call changes nothing and never shows  another account's operations.
+    # Returns the background file operations of the caller that are of one kind, named by the number in the route: `1`  for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read, `7` for a duplication and `8` for a  document builder run. The answer carries the same records as `GET api/2.0/files/fileops`, with the same rule  that a finished operation is reported once and then dropped, and `id` narrows it further to a single operation.  Moves, kind `0`, cannot be read through this route: the address `api/2.0/files/fileops/move` belongs to another  operation, so read moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind  that has no queue of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty  array, while a number outside the operation type is rejected as an invalid request. The call changes nothing and  never shows another account's operations.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-operation-statuses-by-type/
     # @param operation_type [FileOperationType] The kind of operation the answer is limited to. Only the kinds that have a queue of their own ever carry  records — a copy, a deletion, a download, a mark-as-read and a duplication — and moves cannot be read through  this route at all, because its address belongs to another operation.
     # @param [Hash] opts the optional parameters
@@ -1115,7 +1157,7 @@ module DocspaceApiSdk
     end
 
     # Get file operations by type
-    # Returns the background file operations of the caller that are of one kind, named by the number in the route:  `1` for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read and `7` for a duplication. The  answer carries the same records as `GET api/2.0/files/fileops`, with the same rule that a finished operation  is reported once and then dropped, and `id` narrows it further to a single operation. Moves, kind `0`, cannot  be read through this route: the address `api/2.0/files/fileops/move` belongs to another operation, so read  moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind that has no queue  of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty array, while a  number outside the operation type is rejected as an invalid request. The call changes nothing and never shows  another account's operations.
+    # Returns the background file operations of the caller that are of one kind, named by the number in the route: `1`  for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read, `7` for a duplication and `8` for a  document builder run. The answer carries the same records as `GET api/2.0/files/fileops`, with the same rule  that a finished operation is reported once and then dropped, and `id` narrows it further to a single operation.  Moves, kind `0`, cannot be read through this route: the address `api/2.0/files/fileops/move` belongs to another  operation, so read moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind  that has no queue of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty  array, while a number outside the operation type is rejected as an invalid request. The call changes nothing and  never shows another account's operations.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-operation-statuses-by-type/
     # @param operation_type [FileOperationType] The kind of operation the answer is limited to. Only the kinds that have a queue of their own ever carry  records — a copy, a deletion, a download, a mark-as-read and a duplication — and moves cannot be read through  this route at all, because its address belongs to another operation.
     # @param [Hash] opts the optional parameters
@@ -1443,11 +1485,11 @@ module DocspaceApiSdk
     # Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else's file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment/
     # @param file_id [Integer, String] The file whose version comment is replaced.
-    # @param update_comment [UpdateComment] The version and the comment to store on it.
+    # @param update_comment_request [UpdateCommentRequest] The version and the comment to store on it.
     # @param [Hash] opts the optional parameters
     # @return [StringWrapper]
-    def update_file_comment(file_id, update_comment, opts = {})
-      data, _status_code, _headers = update_file_comment_with_http_info(file_id, update_comment, opts)
+    def update_file_comment(file_id, update_comment_request, opts = {})
+      data, _status_code, _headers = update_file_comment_with_http_info(file_id, update_comment_request, opts)
       data
     end
 
@@ -1455,10 +1497,10 @@ module DocspaceApiSdk
     # Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else's file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment/
     # @param file_id [Integer, String] The file whose version comment is replaced.
-    # @param update_comment [UpdateComment] The version and the comment to store on it.
+    # @param update_comment_request [UpdateCommentRequest] The version and the comment to store on it.
     # @param [Hash] opts the optional parameters
     # @return [Array<(StringWrapper, Integer, Hash)>] StringWrapper data, response status code and response headers
-    def update_file_comment_with_http_info(file_id, update_comment, opts = {})
+    def update_file_comment_with_http_info(file_id, update_comment_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::OperationsApi.update_file_comment ...'
       end
@@ -1466,9 +1508,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && file_id.nil?
         fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::OperationsApi.update_file_comment"
       end
-      # verify the required parameter 'update_comment' is set
-      if @api_client.config.client_side_validation && update_comment.nil?
-        fail ArgumentError, "Missing the required parameter 'update_comment' when calling Files::OperationsApi.update_file_comment"
+      # verify the required parameter 'update_comment_request' is set
+      if @api_client.config.client_side_validation && update_comment_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_comment_request' when calling Files::OperationsApi.update_file_comment"
       end
       # resource path
       local_var_path = '/api/2.0/files/file/{fileId}/comment'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
@@ -1490,7 +1532,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_comment)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_comment_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'StringWrapper'
@@ -1523,7 +1565,7 @@ module DocspaceApiSdk
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :chunk_number The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself.
     # @option opts [File] :file The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused.
-    # @return [ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper]
+    # @return [ChunkedUploadSessionWrapper, ThirdPartyChunkedUploadSessionWrapper]
     def upload_async_session(folder_id, session_id, opts = {})
       data, _status_code, _headers = upload_async_session_with_http_info(folder_id, session_id, opts)
       data
@@ -1537,7 +1579,7 @@ module DocspaceApiSdk
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :chunk_number The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself.
     # @option opts [File] :file The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused.
-    # @return [Array<(ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper, Integer, Hash)>] ChunkedUploadSessionResponseResponseWrapper, ThirdPartyChunkedUploadSessionResponseResponseWrapper data, response status code and response headers
+    # @return [Array<(ChunkedUploadSessionWrapper, ThirdPartyChunkedUploadSessionWrapper, Integer, Hash)>] ChunkedUploadSessionWrapper, ThirdPartyChunkedUploadSessionWrapper data, response status code and response headers
     def upload_async_session_with_http_info(folder_id, session_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::OperationsApi.upload_async_session ...'
@@ -1555,7 +1597,7 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'ChunkNumber'] = opts[:'chunk_number'] if !opts[:'chunk_number'].nil?
+      query_params[:'chunkNumber'] = opts[:'chunk_number'] if !opts[:'chunk_number'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1569,13 +1611,13 @@ module DocspaceApiSdk
 
       # form parameters
       form_params = opts[:form_params] || {}
-      form_params['File'] = opts[:'file'] if !opts[:'file'].nil?
+      form_params['file'] = opts[:'file'] if !opts[:'file'].nil?
 
       # http body (model)
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyChunkedUploadSessionResponseResponseWrapper' : 'ChunkedUploadSessionResponseResponseWrapper')
+      return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyChunkedUploadSessionWrapper' : 'ChunkedUploadSessionWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -1648,7 +1690,7 @@ module DocspaceApiSdk
 
       # form parameters
       form_params = opts[:form_params] || {}
-      form_params['File'] = opts[:'file'] if !opts[:'file'].nil?
+      form_params['file'] = opts[:'file'] if !opts[:'file'].nil?
 
       # http body (model)
       post_body = opts[:debug_body]

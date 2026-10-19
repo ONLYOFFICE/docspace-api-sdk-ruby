@@ -47,7 +47,7 @@ module DocspaceApiSdk
     def self.openapi_types
       {
         :'create_on' => :'Time',
-        :'forms_data' => :'Array<FormsItemData>'
+        :'forms_data' => :'Array<FormsItemDataDto>'
       }
     end
 

@@ -27,7 +27,7 @@ module DocspaceApiSdk
     # Sets whether the portal's promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller's role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from `GET api/2.0/settings/banner`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-banner-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [TenantBannerSettingsDto] :tenant_banner_settings_dto 
+    # @option opts [TenantBannerSettingsRequestDto] :tenant_banner_settings_request_dto 
     # @return [TenantBannerSettingsWrapper]
     def set_tenant_banner_settings(opts = {})
       data, _status_code, _headers = set_tenant_banner_settings_with_http_info(opts)
@@ -38,7 +38,7 @@ module DocspaceApiSdk
     # Sets whether the portal's promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller's role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from `GET api/2.0/settings/banner`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-banner-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [TenantBannerSettingsDto] :tenant_banner_settings_dto 
+    # @option opts [TenantBannerSettingsRequestDto] :tenant_banner_settings_request_dto 
     # @return [Array<(TenantBannerSettingsWrapper, Integer, Hash)>] TenantBannerSettingsWrapper data, response status code and response headers
     def set_tenant_banner_settings_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -64,7 +64,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'tenant_banner_settings_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'tenant_banner_settings_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'TenantBannerSettingsWrapper'

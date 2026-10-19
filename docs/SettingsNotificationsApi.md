@@ -313,7 +313,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::NotificationsApi.new
 opts = {
-  notification_settings_requests_dto: DocspaceApiSdk::NotificationSettingsRequestsDto.new({type: DocspaceApiSdk::NotificationType::Badges}) # NotificationSettingsRequestsDto | 
+  notification_settings_request_dto: DocspaceApiSdk::NotificationSettingsRequestDto.new({type: DocspaceApiSdk::NotificationType::Badges}) # NotificationSettingsRequestDto | 
 }
 
 begin
@@ -347,7 +347,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **notification_settings_requests_dto** | [**NotificationSettingsRequestsDto**](NotificationSettingsRequestsDto.md) |  | [optional] |
+| **notification_settings_request_dto** | [**NotificationSettingsRequestDto**](NotificationSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 

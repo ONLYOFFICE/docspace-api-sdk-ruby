@@ -243,7 +243,7 @@ module DocspaceApiSdk
 
       # form parameters
       form_params = opts[:form_params] || {}
-      form_params['Files'] = @api_client.build_collection_param(files, :multi)
+      form_params['files'] = @api_client.build_collection_param(files, :multi)
 
       # http body (model)
       post_body = opts[:debug_body]

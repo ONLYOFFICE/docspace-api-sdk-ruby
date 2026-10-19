@@ -66,7 +66,7 @@ module DocspaceApiSdk
     def self.openapi_types
       {
         :'action_type' => :'AiActionType',
-        :'error' => :'AiTErrorData'
+        :'error' => :'AiErrorData'
       }
     end
 

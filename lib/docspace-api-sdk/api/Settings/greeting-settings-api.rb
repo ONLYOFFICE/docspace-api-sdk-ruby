@@ -204,7 +204,7 @@ module DocspaceApiSdk
     # Replaces the greeting title of the current portal with the `title` from the request, storing it as the portal  name. The caller needs the portal-settings right of a DocSpace administrator, otherwise the call is refused.  The new caption takes effect at once for every user of the portal and the change is written to the audit  trail; repeating the call with the same title leaves the portal in the same state. A missing `title` or one  longer than 255 characters is rejected as an invalid request before the handler runs. On a cloud portal with a  free or trial plan the title is also matched against the character rule configured for the installation and a  title that breaks it is refused, while a paid cloud plan and a server installation apply no character check.  An empty `title` clears the greeting: the portal falls back to the built-in default caption and  `GET api/2.0/settings/greetingsettings/isdefault` starts answering `true`. What comes back is a localized  confirmation message, not the stored title - read the title with `GET api/2.0/settings/greetingsettings`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-greeting-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [GreetingSettingsRequestsDto] :greeting_settings_requests_dto 
+    # @option opts [GreetingSettingsRequestDto] :greeting_settings_request_dto 
     # @return [StringWrapper]
     def save_greeting_settings(opts = {})
       data, _status_code, _headers = save_greeting_settings_with_http_info(opts)
@@ -215,7 +215,7 @@ module DocspaceApiSdk
     # Replaces the greeting title of the current portal with the `title` from the request, storing it as the portal  name. The caller needs the portal-settings right of a DocSpace administrator, otherwise the call is refused.  The new caption takes effect at once for every user of the portal and the change is written to the audit  trail; repeating the call with the same title leaves the portal in the same state. A missing `title` or one  longer than 255 characters is rejected as an invalid request before the handler runs. On a cloud portal with a  free or trial plan the title is also matched against the character rule configured for the installation and a  title that breaks it is refused, while a paid cloud plan and a server installation apply no character check.  An empty `title` clears the greeting: the portal falls back to the built-in default caption and  `GET api/2.0/settings/greetingsettings/isdefault` starts answering `true`. What comes back is a localized  confirmation message, not the stored title - read the title with `GET api/2.0/settings/greetingsettings`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-greeting-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [GreetingSettingsRequestsDto] :greeting_settings_requests_dto 
+    # @option opts [GreetingSettingsRequestDto] :greeting_settings_request_dto 
     # @return [Array<(StringWrapper, Integer, Hash)>] StringWrapper data, response status code and response headers
     def save_greeting_settings_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -241,7 +241,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'greeting_settings_requests_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'greeting_settings_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'StringWrapper'

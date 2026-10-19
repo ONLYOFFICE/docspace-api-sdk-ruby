@@ -277,15 +277,80 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
+    # Refresh a web plugin
+    # Picks up a web plugin whose files were replaced in storage without an upload, for example a new version of an  installation-wide plugin put in place during a deployment. The `name` is the manifest name published by  `GET api/2.0/settings/webplugins`, matched without regard to case. Editing the portal settings is required, so  a portal owner or administrator, and the installation has to have web plugins enabled in its configuration.  The server compares the version of the plugin it serves with the `version` of the manifest in storage and,  only when they differ or the plugin appeared in or vanished from storage, re-reads the plugin list on every  server: for all portals when the plugin is installation-wide, for this portal alone otherwise, and notifies  the connected clients of this portal. The call is idempotent: with matching versions nothing changes, so a  repeat is safe. The response is the plugin as served after the check. The stored state, the settings and the  Content Security Policy of the portal are left as they are. To install a new version use  `POST api/2.0/settings/webplugins` instead.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/refresh-web-plugin/
+    # @param name [String] The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404.
+    # @param [Hash] opts the optional parameters
+    # @return [WebPluginWrapper]
+    def refresh_web_plugin(name, opts = {})
+      data, _status_code, _headers = refresh_web_plugin_with_http_info(name, opts)
+      data
+    end
+
+    # Refresh a web plugin
+    # Picks up a web plugin whose files were replaced in storage without an upload, for example a new version of an  installation-wide plugin put in place during a deployment. The `name` is the manifest name published by  `GET api/2.0/settings/webplugins`, matched without regard to case. Editing the portal settings is required, so  a portal owner or administrator, and the installation has to have web plugins enabled in its configuration.  The server compares the version of the plugin it serves with the `version` of the manifest in storage and,  only when they differ or the plugin appeared in or vanished from storage, re-reads the plugin list on every  server: for all portals when the plugin is installation-wide, for this portal alone otherwise, and notifies  the connected clients of this portal. The call is idempotent: with matching versions nothing changes, so a  repeat is safe. The response is the plugin as served after the check. The stored state, the settings and the  Content Security Policy of the portal are left as they are. To install a new version use  `POST api/2.0/settings/webplugins` instead.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/refresh-web-plugin/
+    # @param name [String] The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(WebPluginWrapper, Integer, Hash)>] WebPluginWrapper data, response status code and response headers
+    def refresh_web_plugin_with_http_info(name, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: Settings::WebpluginsApi.refresh_web_plugin ...'
+      end
+      # verify the required parameter 'name' is set
+      if @api_client.config.client_side_validation && name.nil?
+        fail ArgumentError, "Missing the required parameter 'name' when calling Settings::WebpluginsApi.refresh_web_plugin"
+      end
+      # resource path
+      local_var_path = '/api/2.0/settings/webplugins/{name}/refresh'.sub('{' + 'name' + '}', CGI.escape(name.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'WebPluginWrapper'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
+
+      new_options = opts.merge(
+        :operation => :"Settings::WebpluginsApi.refresh_web_plugin",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: Settings::WebpluginsApi#refresh_web_plugin\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Update a web plugin
     # Switches a web plugin of the current portal on or off and stores the settings string the portal keeps for it.  The plugin has to be installed already, so upload its package with `POST api/2.0/settings/webplugins` first,  and `name` is its manifest name as published by `GET api/2.0/settings/webplugins`, matched without regard to  case. Editing the portal settings is required, so a portal owner or administrator, and the installation has to  have web plugins enabled in its configuration. The body replaces the stored state instead of merging into it,  which makes the call idempotent; `settings` is required, so send `{}` when there is nothing to keep, and it is  limited to 255 characters and stored encrypted for this portal alone. Switching the plugin on adds the domains  its manifest declares to the portal Content Security Policy and switching it off takes them away again, and  the connected clients are notified of the new state. Nothing is returned on success. A name that is not  installed is rejected as not found, and 403 means web plugins are switched off or the caller may not edit the  portal settings.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-web-plugin/
     # @param name [String] The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404.
-    # @param web_plugin_requests [WebPluginRequests] The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.
+    # @param web_plugin_request [WebPluginRequest] The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def update_web_plugin(name, web_plugin_requests, opts = {})
-      update_web_plugin_with_http_info(name, web_plugin_requests, opts)
+    def update_web_plugin(name, web_plugin_request, opts = {})
+      update_web_plugin_with_http_info(name, web_plugin_request, opts)
       nil
     end
 
@@ -293,10 +358,10 @@ module DocspaceApiSdk
     # Switches a web plugin of the current portal on or off and stores the settings string the portal keeps for it.  The plugin has to be installed already, so upload its package with `POST api/2.0/settings/webplugins` first,  and `name` is its manifest name as published by `GET api/2.0/settings/webplugins`, matched without regard to  case. Editing the portal settings is required, so a portal owner or administrator, and the installation has to  have web plugins enabled in its configuration. The body replaces the stored state instead of merging into it,  which makes the call idempotent; `settings` is required, so send `{}` when there is nothing to keep, and it is  limited to 255 characters and stored encrypted for this portal alone. Switching the plugin on adds the domains  its manifest declares to the portal Content Security Policy and switching it off takes them away again, and  the connected clients are notified of the new state. Nothing is returned on success. A name that is not  installed is rejected as not found, and 403 means web plugins are switched off or the caller may not edit the  portal settings.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-web-plugin/
     # @param name [String] The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404.
-    # @param web_plugin_requests [WebPluginRequests] The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.
+    # @param web_plugin_request [WebPluginRequest] The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def update_web_plugin_with_http_info(name, web_plugin_requests, opts = {})
+    def update_web_plugin_with_http_info(name, web_plugin_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Settings::WebpluginsApi.update_web_plugin ...'
       end
@@ -304,9 +369,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && name.nil?
         fail ArgumentError, "Missing the required parameter 'name' when calling Settings::WebpluginsApi.update_web_plugin"
       end
-      # verify the required parameter 'web_plugin_requests' is set
-      if @api_client.config.client_side_validation && web_plugin_requests.nil?
-        fail ArgumentError, "Missing the required parameter 'web_plugin_requests' when calling Settings::WebpluginsApi.update_web_plugin"
+      # verify the required parameter 'web_plugin_request' is set
+      if @api_client.config.client_side_validation && web_plugin_request.nil?
+        fail ArgumentError, "Missing the required parameter 'web_plugin_request' when calling Settings::WebpluginsApi.update_web_plugin"
       end
       # resource path
       local_var_path = '/api/2.0/settings/webplugins/{name}'.sub('{' + 'name' + '}', CGI.escape(name.to_s))
@@ -328,7 +393,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(web_plugin_requests)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(web_plugin_request)
 
       # return_type
       return_type = opts[:debug_return_type]

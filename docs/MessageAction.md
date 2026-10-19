@@ -443,6 +443,28 @@
 
 * `DocumentsShowQuickActionsUpdated` (value: `5207`)
 
+* `FileOpenedByDocumentBuilder` (value: `5208`)
+
+* `MetadataTemplateCreated` (value: `5300`)
+
+* `MetadataTemplateUpdated` (value: `5301`)
+
+* `MetadataTemplateDeleted` (value: `5302`)
+
+* `MetadataFieldCreated` (value: `5303`)
+
+* `MetadataFieldUpdated` (value: `5304`)
+
+* `MetadataFieldDeleted` (value: `5305`)
+
+* `MetadataTemplateAssigned` (value: `5306`)
+
+* `MetadataTemplateUnassigned` (value: `5307`)
+
+* `MetadataValuesUpdated` (value: `5308`)
+
+* `MetadataCascadeStarted` (value: `5309`)
+
 * `LdapEnabled` (value: `5501`)
 
 * `LdapDisabled` (value: `5502`)
@@ -668,6 +690,10 @@
 * `AiAgentProfileAssigned` (value: `6108`)
 
 * `UpdatedServerOfAgent` (value: `6109`)
+
+* `PortalBlocked` (value: `6110`)
+
+* `PortalUnblocked` (value: `6111`)
 
 * `ContactAdminMailSent` (value: `7000`)
 

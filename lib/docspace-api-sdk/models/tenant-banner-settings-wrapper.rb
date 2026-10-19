@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The successful API response containing the TenantBannerSettings object.
+  # The successful API response containing the TenantBannerSettingsDto object.
   class TenantBannerSettingsWrapper < ApiModelBase
-    # The TenantBannerSettings object returned by the operation.
+    # The TenantBannerSettingsDto object returned by the operation.
     attr_accessor :response
 
     # The total number of items in the response
@@ -58,7 +58,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'response' => :'TenantBannerSettings',
+        :'response' => :'TenantBannerSettingsDto',
         :'count' => :'Integer',
         :'links' => :'Array<GetPortalPrices200ResponseLinksInner>',
         :'status' => :'Integer',

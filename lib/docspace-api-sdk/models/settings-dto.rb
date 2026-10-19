@@ -91,7 +91,7 @@ module DocspaceApiSdk
     # The address of the socket service that pushes live updates to a client. It is filled in for a signed-in  caller and for an anonymous one who arrives with an external sharing link, and is empty when the  installation runs no socket service - a client then has to poll.
     attr_accessor :socket_url
 
-    # The lifecycle state of the portal. Anything other than active means most operations are refused for the  moment, because the portal is being transferred, restored, encrypted or removed.
+    # The lifecycle state of the portal. Anything other than active means most operations are refused: the  portal is being transferred, restored, encrypted or removed, its owner has deactivated it, or the  retention policy has blocked it after a long period without use.
     attr_accessor :tenant_status
 
     # The portal's own name within the installation, which together with `baseDomain` forms the address it is  reached at. `PUT api/2.0/portal/portalrename` changes it.
@@ -261,7 +261,7 @@ module DocspaceApiSdk
         :'is_ami' => :'Boolean',
         :'base_domain' => :'String',
         :'wizard_token' => :'String',
-        :'password_hash' => :'PasswordHasher',
+        :'password_hash' => :'PasswordHashSettingsDto',
         :'firebase' => :'FirebaseDto',
         :'version' => :'String',
         :'recaptcha_type' => :'RecaptchaType',
@@ -271,7 +271,7 @@ module DocspaceApiSdk
         :'tenant_status' => :'TenantStatus',
         :'tenant_alias' => :'String',
         :'display_about' => :'Boolean',
-        :'domain_validator' => :'TenantDomainValidator',
+        :'domain_validator' => :'DomainNameRulesDto',
         :'zendesk_key' => :'String',
         :'tag_manager_id' => :'String',
         :'cookie_settings_enabled' => :'Boolean',
@@ -287,7 +287,7 @@ module DocspaceApiSdk
         :'form_gallery' => :'FormGalleryDto',
         :'max_image_upload_size' => :'Integer',
         :'logo_text' => :'String',
-        :'external_resources' => :'CultureSpecificExternalResources',
+        :'external_resources' => :'ExternalResourcesDto',
         :'default_folder_type' => :'FolderType',
         :'external_db_enabled' => :'Boolean'
       }

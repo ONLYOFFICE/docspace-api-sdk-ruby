@@ -83,10 +83,10 @@ module DocspaceApiSdk
     end
 
     # Create the backup schedule
-    # Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and because an omitted `day` is stored as 0, which neither period accepts, a weekly or  monthly schedule sent without it fails instead of falling back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
+    # Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and a weekly or monthly schedule sent without it is rejected with 400 instead of falling  back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-backup-schedule/
     # @param [Hash] opts the optional parameters
-    # @option opts [BackupScheduleDto] :backup_schedule_dto 
+    # @option opts [CreateBackupScheduleRequestDto] :create_backup_schedule_request_dto 
     # @return [BooleanWrapper]
     def create_backup_schedule(opts = {})
       data, _status_code, _headers = create_backup_schedule_with_http_info(opts)
@@ -94,10 +94,10 @@ module DocspaceApiSdk
     end
 
     # Create the backup schedule
-    # Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and because an omitted `day` is stored as 0, which neither period accepts, a weekly or  monthly schedule sent without it fails instead of falling back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
+    # Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and a weekly or monthly schedule sent without it is rejected with 400 instead of falling  back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-backup-schedule/
     # @param [Hash] opts the optional parameters
-    # @option opts [BackupScheduleDto] :backup_schedule_dto 
+    # @option opts [CreateBackupScheduleRequestDto] :create_backup_schedule_request_dto 
     # @return [Array<(BooleanWrapper, Integer, Hash)>] BooleanWrapper data, response status code and response headers
     def create_backup_schedule_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -123,7 +123,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'backup_schedule_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'create_backup_schedule_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'BooleanWrapper'
@@ -149,7 +149,7 @@ module DocspaceApiSdk
     end
 
     # Delete the backup
-    # Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it.
+    # Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it. An ID that no backup has ever had is answered with 404.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-backup/
     # @param id [String] The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with.
     # @param [Hash] opts the optional parameters
@@ -160,7 +160,7 @@ module DocspaceApiSdk
     end
 
     # Delete the backup
-    # Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it.
+    # Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it. An ID that no backup has ever had is answered with 404.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-backup/
     # @param id [String] The ID of the backup to delete, taken from the route. It is the `id` of a record listed by  `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the backup was started with.
     # @param [Hash] opts the optional parameters
@@ -239,7 +239,7 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'Dump'] = opts[:'dump'] if !opts[:'dump'].nil?
+      query_params[:'dump'] = opts[:'dump'] if !opts[:'dump'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -301,7 +301,7 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'Dump'] = opts[:'dump'] if !opts[:'dump'].nil?
+      query_params[:'dump'] = opts[:'dump'] if !opts[:'dump'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -363,7 +363,7 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'Dump'] = opts[:'dump'] if !opts[:'dump'].nil?
+      query_params[:'dump'] = opts[:'dump'] if !opts[:'dump'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -425,7 +425,7 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'Dump'] = opts[:'dump'] if !opts[:'dump'].nil?
+      query_params[:'dump'] = opts[:'dump'] if !opts[:'dump'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -487,7 +487,7 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'Dump'] = opts[:'dump'] if !opts[:'dump'].nil?
+      query_params[:'dump'] = opts[:'dump'] if !opts[:'dump'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -744,7 +744,7 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'Dump'] = opts[:'dump'] if !opts[:'dump'].nil?
+      query_params[:'dump'] = opts[:'dump'] if !opts[:'dump'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -784,7 +784,7 @@ module DocspaceApiSdk
     # Queues a backup of the current portal and returns straight away: the archive itself is written by the  separate backup worker service, which picks the job up from an integration event, so the response  reports a progress of 0 and the `Created` status, and its `taskId` is the handle to poll with  `GET api/2.0/backup/getbackupprogress`. The caller needs the portal settings permission, and  `dump` - a backup of the whole server instead of this one portal - additionally requires the space  access permission and is rejected outside a standalone installation.  The keys expected in `storageParams` depend on `storageType`: `Documents` takes an integer `folderId`,  `ThridpartyDocuments` takes a provider-specific non-integer `folderId`, `Local` takes `filePath` and  works on a standalone installation only, `ThirdPartyConsumer` takes `module` together with the settings  of that consumer, and `DataStore` takes no keys at all; the `subdir` key is added by the operation  itself and must not be sent.  A portal that has already used up the free backups of the current calendar month is charged through the  paid backup service instead, and the call is rejected with 402 when that service is not available to it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/start-backup/
     # @param [Hash] opts the optional parameters
-    # @option opts [BackupDto] :backup_dto 
+    # @option opts [StartBackupRequestDto] :start_backup_request_dto 
     # @return [BackupProgressWrapper]
     def start_backup(opts = {})
       data, _status_code, _headers = start_backup_with_http_info(opts)
@@ -795,7 +795,7 @@ module DocspaceApiSdk
     # Queues a backup of the current portal and returns straight away: the archive itself is written by the  separate backup worker service, which picks the job up from an integration event, so the response  reports a progress of 0 and the `Created` status, and its `taskId` is the handle to poll with  `GET api/2.0/backup/getbackupprogress`. The caller needs the portal settings permission, and  `dump` - a backup of the whole server instead of this one portal - additionally requires the space  access permission and is rejected outside a standalone installation.  The keys expected in `storageParams` depend on `storageType`: `Documents` takes an integer `folderId`,  `ThridpartyDocuments` takes a provider-specific non-integer `folderId`, `Local` takes `filePath` and  works on a standalone installation only, `ThirdPartyConsumer` takes `module` together with the settings  of that consumer, and `DataStore` takes no keys at all; the `subdir` key is added by the operation  itself and must not be sent.  A portal that has already used up the free backups of the current calendar month is charged through the  paid backup service instead, and the call is rejected with 402 when that service is not available to it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/start-backup/
     # @param [Hash] opts the optional parameters
-    # @option opts [BackupDto] :backup_dto 
+    # @option opts [StartBackupRequestDto] :start_backup_request_dto 
     # @return [Array<(BackupProgressWrapper, Integer, Hash)>] BackupProgressWrapper data, response status code and response headers
     def start_backup_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -821,7 +821,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'backup_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'start_backup_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'BackupProgressWrapper'
@@ -850,7 +850,7 @@ module DocspaceApiSdk
     # Queues the restoring of the current portal from a backup and returns straight away: the work itself is  done by the separate backup worker service, which picks the job up from an integration event, so the  response reports a progress of 0 and the `Created` status, and the returned `taskId` is the handle to  poll with `GET api/2.0/backup/getrestoreprogress` - the one operation of this service that stays  reachable while the portal is being restored, because every other one answers 403 in that state.  The source is given either by `backupId`, which is the ID of a record from  `GET api/2.0/backup/getbackuphistory`, or, when `backupId` is not a GUID, by the `filePath` key of  `storageParams` together with the matching `storageType`; an all-zero GUID is parsed as a GUID and  therefore reaches neither branch.  The caller needs the portal settings permission, restoring has to be allowed by the pricing plan of a  portal that is not a standalone installation, and `dump` - restoring the whole server rather than this  one portal - additionally requires the space access permission.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/start-backup-restore/
     # @param [Hash] opts the optional parameters
-    # @option opts [BackupRestoreDto] :backup_restore_dto 
+    # @option opts [StartBackupRestoreRequestDto] :start_backup_restore_request_dto 
     # @return [BackupProgressWrapper]
     def start_backup_restore(opts = {})
       data, _status_code, _headers = start_backup_restore_with_http_info(opts)
@@ -861,7 +861,7 @@ module DocspaceApiSdk
     # Queues the restoring of the current portal from a backup and returns straight away: the work itself is  done by the separate backup worker service, which picks the job up from an integration event, so the  response reports a progress of 0 and the `Created` status, and the returned `taskId` is the handle to  poll with `GET api/2.0/backup/getrestoreprogress` - the one operation of this service that stays  reachable while the portal is being restored, because every other one answers 403 in that state.  The source is given either by `backupId`, which is the ID of a record from  `GET api/2.0/backup/getbackuphistory`, or, when `backupId` is not a GUID, by the `filePath` key of  `storageParams` together with the matching `storageType`; an all-zero GUID is parsed as a GUID and  therefore reaches neither branch.  The caller needs the portal settings permission, restoring has to be allowed by the pricing plan of a  portal that is not a standalone installation, and `dump` - restoring the whole server rather than this  one portal - additionally requires the space access permission.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/start-backup-restore/
     # @param [Hash] opts the optional parameters
-    # @option opts [BackupRestoreDto] :backup_restore_dto 
+    # @option opts [StartBackupRestoreRequestDto] :start_backup_restore_request_dto 
     # @return [Array<(BackupProgressWrapper, Integer, Hash)>] BackupProgressWrapper data, response status code and response headers
     def start_backup_restore_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -887,7 +887,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'backup_restore_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'start_backup_restore_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'BackupProgressWrapper'

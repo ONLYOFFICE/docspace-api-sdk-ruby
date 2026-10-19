@@ -52,7 +52,7 @@ module DocspaceApiSdk
       {
         :'success' => :'Boolean',
         :'config' => :'AiWebSearchConfig',
-        :'error' => :'AiTErrorData'
+        :'error' => :'AiErrorData'
       }
     end
 

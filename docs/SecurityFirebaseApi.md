@@ -10,7 +10,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 ## doc_register_pusn_notification_device
 
-> <FireBaseUserWrapper> doc_register_pusn_notification_device(opts)
+> <FirebaseDeviceWrapper> doc_register_pusn_notification_device(opts)
 
 Register a push device
 
@@ -49,7 +49,7 @@ end
 
 api_instance = DocspaceApiSdk::Security::FirebaseApi.new
 opts = {
-  firebase_requests_dto: DocspaceApiSdk::FirebaseRequestsDto.new # FirebaseRequestsDto | 
+  firebase_request_dto: DocspaceApiSdk::FirebaseRequestDto.new # FirebaseRequestDto | 
 }
 
 begin
@@ -65,7 +65,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<FireBaseUserWrapper>, Integer, Hash)> doc_register_pusn_notification_device_with_http_info(opts)
+> <Array(<FirebaseDeviceWrapper>, Integer, Hash)> doc_register_pusn_notification_device_with_http_info(opts)
 
 ```ruby
 begin
@@ -73,7 +73,7 @@ begin
   data, status_code, headers = api_instance.doc_register_pusn_notification_device_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <FireBaseUserWrapper>
+  p data # => <FirebaseDeviceWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Security::FirebaseApi->doc_register_pusn_notification_device_with_http_info: #{e}"
 end
@@ -83,11 +83,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **firebase_requests_dto** | [**FirebaseRequestsDto**](FirebaseRequestsDto.md) |  | [optional] |
+| **firebase_request_dto** | [**FirebaseRequestDto**](FirebaseRequestDto.md) |  | [optional] |
 
 ### Return type
 
-[**FireBaseUserWrapper**](FireBaseUserWrapper.md)
+[**FirebaseDeviceWrapper**](FirebaseDeviceWrapper.md)
 
 ### Authorization
 
@@ -101,7 +101,7 @@ end
 
 ## subscribe_documents_push_notification
 
-> <FireBaseUserWrapper> subscribe_documents_push_notification(opts)
+> <FirebaseDeviceWrapper> subscribe_documents_push_notification(opts)
 
 Set push subscription
 
@@ -140,7 +140,7 @@ end
 
 api_instance = DocspaceApiSdk::Security::FirebaseApi.new
 opts = {
-  firebase_requests_dto: DocspaceApiSdk::FirebaseRequestsDto.new # FirebaseRequestsDto | 
+  firebase_request_dto: DocspaceApiSdk::FirebaseRequestDto.new # FirebaseRequestDto | 
 }
 
 begin
@@ -156,7 +156,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<FireBaseUserWrapper>, Integer, Hash)> subscribe_documents_push_notification_with_http_info(opts)
+> <Array(<FirebaseDeviceWrapper>, Integer, Hash)> subscribe_documents_push_notification_with_http_info(opts)
 
 ```ruby
 begin
@@ -164,7 +164,7 @@ begin
   data, status_code, headers = api_instance.subscribe_documents_push_notification_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <FireBaseUserWrapper>
+  p data # => <FirebaseDeviceWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Security::FirebaseApi->subscribe_documents_push_notification_with_http_info: #{e}"
 end
@@ -174,11 +174,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **firebase_requests_dto** | [**FirebaseRequestsDto**](FirebaseRequestsDto.md) |  | [optional] |
+| **firebase_request_dto** | [**FirebaseRequestDto**](FirebaseRequestDto.md) |  | [optional] |
 
 ### Return type
 
-[**FireBaseUserWrapper**](FireBaseUserWrapper.md)
+[**FirebaseDeviceWrapper**](FirebaseDeviceWrapper.md)
 
 ### Authorization
 

@@ -502,7 +502,7 @@ end
 
 ## get_accounting_service_prices
 
-> <ServicePriceInfoArrayWrapper> get_accounting_service_prices(service_name, opts)
+> <ServicePriceArrayWrapper> get_accounting_service_prices(service_name, opts)
 
 Get the service prices from the accounting service
 
@@ -558,7 +558,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ServicePriceInfoArrayWrapper>, Integer, Hash)> get_accounting_service_prices_with_http_info(service_name, opts)
+> <Array(<ServicePriceArrayWrapper>, Integer, Hash)> get_accounting_service_prices_with_http_info(service_name, opts)
 
 ```ruby
 begin
@@ -566,7 +566,7 @@ begin
   data, status_code, headers = api_instance.get_accounting_service_prices_with_http_info(service_name, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ServicePriceInfoArrayWrapper>
+  p data # => <ServicePriceArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Portal::PaymentApi->get_accounting_service_prices_with_http_info: #{e}"
 end
@@ -581,7 +581,7 @@ end
 
 ### Return type
 
-[**ServicePriceInfoArrayWrapper**](ServicePriceInfoArrayWrapper.md)
+[**ServicePriceArrayWrapper**](ServicePriceArrayWrapper.md)
 
 ### Authorization
 
@@ -2151,7 +2151,7 @@ end
 
 ## get_restricted_ai_models
 
-> <RestrictedModelsResponseWrapper> get_restricted_ai_models
+> <RestrictedAiModelsWrapper> get_restricted_ai_models
 
 Get restricted AI models
 
@@ -2203,7 +2203,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<RestrictedModelsResponseWrapper>, Integer, Hash)> get_restricted_ai_models_with_http_info
+> <Array(<RestrictedAiModelsWrapper>, Integer, Hash)> get_restricted_ai_models_with_http_info
 
 ```ruby
 begin
@@ -2211,7 +2211,7 @@ begin
   data, status_code, headers = api_instance.get_restricted_ai_models_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <RestrictedModelsResponseWrapper>
+  p data # => <RestrictedAiModelsWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Portal::PaymentApi->get_restricted_ai_models_with_http_info: #{e}"
 end
@@ -2223,7 +2223,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**RestrictedModelsResponseWrapper**](RestrictedModelsResponseWrapper.md)
+[**RestrictedAiModelsWrapper**](RestrictedAiModelsWrapper.md)
 
 ### Authorization
 
@@ -2237,7 +2237,7 @@ This endpoint does not need any parameter.
 
 ## get_subscription_balance_info
 
-> <SubscriptionBalanceInfoWrapper> get_subscription_balance_info
+> <SubscriptionBalanceWrapper> get_subscription_balance_info
 
 Get the subscription balance information
 
@@ -2289,7 +2289,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SubscriptionBalanceInfoWrapper>, Integer, Hash)> get_subscription_balance_info_with_http_info
+> <Array(<SubscriptionBalanceWrapper>, Integer, Hash)> get_subscription_balance_info_with_http_info
 
 ```ruby
 begin
@@ -2297,7 +2297,7 @@ begin
   data, status_code, headers = api_instance.get_subscription_balance_info_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <SubscriptionBalanceInfoWrapper>
+  p data # => <SubscriptionBalanceWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Portal::PaymentApi->get_subscription_balance_info_with_http_info: #{e}"
 end
@@ -2309,7 +2309,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SubscriptionBalanceInfoWrapper**](SubscriptionBalanceInfoWrapper.md)
+[**SubscriptionBalanceWrapper**](SubscriptionBalanceWrapper.md)
 
 ### Authorization
 
@@ -2409,11 +2409,11 @@ This endpoint does not need any parameter.
 
 ## get_tenant_wallet_settings
 
-> <TenantWalletSettingsResponseWrapper> get_tenant_wallet_settings
+> <TenantWalletSettingsWrapper> get_tenant_wallet_settings
 
 Get the auto top-up settings
 
-Returns the portal's automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but ignored when the settings are written.
+Returns the portal's automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but cannot be written.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-settings/).
 
@@ -2461,7 +2461,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<TenantWalletSettingsResponseWrapper>, Integer, Hash)> get_tenant_wallet_settings_with_http_info
+> <Array(<TenantWalletSettingsWrapper>, Integer, Hash)> get_tenant_wallet_settings_with_http_info
 
 ```ruby
 begin
@@ -2469,7 +2469,7 @@ begin
   data, status_code, headers = api_instance.get_tenant_wallet_settings_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <TenantWalletSettingsResponseWrapper>
+  p data # => <TenantWalletSettingsWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Portal::PaymentApi->get_tenant_wallet_settings_with_http_info: #{e}"
 end
@@ -2481,7 +2481,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**TenantWalletSettingsResponseWrapper**](TenantWalletSettingsResponseWrapper.md)
+[**TenantWalletSettingsWrapper**](TenantWalletSettingsWrapper.md)
 
 ### Authorization
 
@@ -2800,7 +2800,7 @@ end
 
 api_instance = DocspaceApiSdk::Portal::PaymentApi.new
 opts = {
-  sales_requests_dto: DocspaceApiSdk::SalesRequestsDto.new({user_name: 'John Doe', email: 'user@example.com', message: 'I would like to inquire about pricing'}) # SalesRequestsDto | 
+  sales_request_dto: DocspaceApiSdk::SalesRequestDto.new({user_name: 'John Doe', email: 'user@example.com', message: 'I would like to inquire about pricing'}) # SalesRequestDto | 
 }
 
 begin
@@ -2833,7 +2833,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **sales_requests_dto** | [**SalesRequestsDto**](SalesRequestsDto.md) |  | [optional] |
+| **sales_request_dto** | [**SalesRequestDto**](SalesRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -2851,11 +2851,11 @@ nil (empty response body)
 
 ## set_restricted_ai_models
 
-> <RestrictedModelsResponseWrapper> set_restricted_ai_models(opts)
+> <RestrictedAiModelsWrapper> set_restricted_ai_models(opts)
 
 Set restricted AI models
 
-Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer, and the caller needs the permission to edit the  portal settings as well as DocSpace administrator rights. The call is mutating and idempotent - sending the  same set twice leaves the same state - and it is written to the portal audit trail. It takes effect on the  next AI request, so a conversation already open on a model that has just been barred cannot go on with it. The  stored set comes back in the answer.
+Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer and the AI tools wallet service switched on with  `POST api/2.0/portal/payment/servicestate`, and the caller needs the permission to edit the portal settings as  well as DocSpace administrator rights. The call is mutating and idempotent - sending the same set twice leaves  the same state - and it is written to the portal audit trail. It takes effect on the next AI request, so a  conversation already open on a model that has just been barred cannot go on with it. The stored set comes  back in the answer. While AI tools is off the call is refused with 403 instead of being stored, because the  read reports an empty set then and nothing written could be read back.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-restricted-ai-models/).
 
@@ -2906,7 +2906,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<RestrictedModelsResponseWrapper>, Integer, Hash)> set_restricted_ai_models_with_http_info(opts)
+> <Array(<RestrictedAiModelsWrapper>, Integer, Hash)> set_restricted_ai_models_with_http_info(opts)
 
 ```ruby
 begin
@@ -2914,7 +2914,7 @@ begin
   data, status_code, headers = api_instance.set_restricted_ai_models_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <RestrictedModelsResponseWrapper>
+  p data # => <RestrictedAiModelsWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Portal::PaymentApi->set_restricted_ai_models_with_http_info: #{e}"
 end
@@ -2928,7 +2928,7 @@ end
 
 ### Return type
 
-[**RestrictedModelsResponseWrapper**](RestrictedModelsResponseWrapper.md)
+[**RestrictedAiModelsWrapper**](RestrictedAiModelsWrapper.md)
 
 ### Authorization
 
@@ -2942,11 +2942,11 @@ end
 
 ## set_tenant_wallet_settings
 
-> <TenantWalletSettingsResponseWrapper> set_tenant_wallet_settings(opts)
+> <TenantWalletSettingsWrapper> set_tenant_wallet_settings(opts)
 
 Set the auto top-up settings
 
-Switches the portal's automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, while `lowBalanceThreshold` and `lowBalanceNotified` are ignored on the way in and kept as the portal  had them. The call is mutating and idempotent, it charges nothing by itself, it is written to the portal audit  trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
+Switches the portal's automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, and `upToBalance` has to be greater than `minBalance`, so that a top-up lifts the wallet above the balance  that triggers it. The low-balance warning state (`lowBalanceThreshold`, `lowBalanceNotified`) and `lastModified` may be  sent for compatibility but are ignored: the portal keeps the values it had. The call is mutating and  idempotent, it charges nothing by itself, it is written to the portal audit trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings/).
 
@@ -2981,7 +2981,7 @@ end
 
 api_instance = DocspaceApiSdk::Portal::PaymentApi.new
 opts = {
-  tenant_wallet_settings_wrapper: DocspaceApiSdk::TenantWalletSettingsWrapper.new # TenantWalletSettingsWrapper | 
+  tenant_wallet_settings_request_dto: DocspaceApiSdk::TenantWalletSettingsRequestDto.new # TenantWalletSettingsRequestDto | 
 }
 
 begin
@@ -2997,7 +2997,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<TenantWalletSettingsResponseWrapper>, Integer, Hash)> set_tenant_wallet_settings_with_http_info(opts)
+> <Array(<TenantWalletSettingsWrapper>, Integer, Hash)> set_tenant_wallet_settings_with_http_info(opts)
 
 ```ruby
 begin
@@ -3005,7 +3005,7 @@ begin
   data, status_code, headers = api_instance.set_tenant_wallet_settings_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <TenantWalletSettingsResponseWrapper>
+  p data # => <TenantWalletSettingsWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Portal::PaymentApi->set_tenant_wallet_settings_with_http_info: #{e}"
 end
@@ -3015,11 +3015,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **tenant_wallet_settings_wrapper** | [**TenantWalletSettingsWrapper**](TenantWalletSettingsWrapper.md) |  | [optional] |
+| **tenant_wallet_settings_request_dto** | [**TenantWalletSettingsRequestDto**](TenantWalletSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 
-[**TenantWalletSettingsResponseWrapper**](TenantWalletSettingsResponseWrapper.md)
+[**TenantWalletSettingsWrapper**](TenantWalletSettingsWrapper.md)
 
 ### Authorization
 

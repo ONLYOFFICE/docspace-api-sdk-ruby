@@ -25,12 +25,38 @@ module DocspaceApiSdk
 
     attr_accessor :entity_id
 
+    # The list the write lands in; omitted means the caller's own.
+    attr_accessor :scope
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'server_type' => :'serverType',
         :'tool_names' => :'toolNames',
-        :'entity_id' => :'entityId'
+        :'entity_id' => :'entityId',
+        :'scope' => :'scope'
       }
     end
 
@@ -49,7 +75,8 @@ module DocspaceApiSdk
       {
         :'server_type' => :'String',
         :'tool_names' => :'Array<String>',
-        :'entity_id' => :'String'
+        :'entity_id' => :'String',
+        :'scope' => :'AiChatToolPrefsScope'
       }
     end
 
@@ -91,6 +118,10 @@ module DocspaceApiSdk
 
       if attributes.key?(:'entity_id')
         self.entity_id = attributes[:'entity_id']
+      end
+
+      if attributes.key?(:'scope')
+        self.scope = attributes[:'scope']
       end
     end
 
@@ -146,7 +177,8 @@ module DocspaceApiSdk
       self.class == o.class &&
           server_type == o.server_type &&
           tool_names == o.tool_names &&
-          entity_id == o.entity_id
+          entity_id == o.entity_id &&
+          scope == o.scope
     end
 
     # @see the `==` method
@@ -158,7 +190,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [server_type, tool_names, entity_id].hash
+      [server_type, tool_names, entity_id, scope].hash
     end
 
     # Builds the object from hash

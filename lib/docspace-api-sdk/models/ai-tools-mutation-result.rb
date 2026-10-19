@@ -47,7 +47,7 @@ module DocspaceApiSdk
     def self.openapi_types
       {
         :'success' => :'Boolean',
-        :'error' => :'AiTErrorData'
+        :'error' => :'AiErrorData'
       }
     end
 

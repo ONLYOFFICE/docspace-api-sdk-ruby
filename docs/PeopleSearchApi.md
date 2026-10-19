@@ -19,7 +19,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 ## get_accounts_entries_with_files_shared
 
-> <IAccountEntryArrayWrapper> get_accounts_entries_with_files_shared(id, opts)
+> <AccountEntryArrayWrapper> get_accounts_entries_with_files_shared(id, opts)
 
 Search accounts for a file
 
@@ -65,7 +65,7 @@ opts = {
   include_shared: false, # Boolean | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
   invited_by_me: false, # Boolean | Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
   inviter_id: '00000000-0000-0000-0000-000000000000', # String | Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-  area: DocspaceApiSdk::Area::All, # Area | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+  area: DocspaceApiSdk::AccountSearchArea::All, # AccountSearchArea | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
   employee_types: [DocspaceApiSdk::EmployeeType::ALL], # Array<EmployeeType> | Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
   count: 25, # Integer | The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
   start_index: 0, # Integer | The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
@@ -86,7 +86,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<IAccountEntryArrayWrapper>, Integer, Hash)> get_accounts_entries_with_files_shared_with_http_info(id, opts)
+> <Array(<AccountEntryArrayWrapper>, Integer, Hash)> get_accounts_entries_with_files_shared_with_http_info(id, opts)
 
 ```ruby
 begin
@@ -94,7 +94,7 @@ begin
   data, status_code, headers = api_instance.get_accounts_entries_with_files_shared_with_http_info(id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <IAccountEntryArrayWrapper>
+  p data # => <AccountEntryArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling People::SearchApi->get_accounts_entries_with_files_shared_with_http_info: #{e}"
 end
@@ -111,7 +111,7 @@ end
 | **include_shared** | **Boolean** | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set. | [optional] |
 | **invited_by_me** | **Boolean** | Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation. | [optional] |
 | **inviter_id** | **String** | Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | [optional] |
-| **area** | **Area** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | [optional] |
+| **area** | **AccountSearchArea** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | [optional] |
 | **employee_types** | [**Array&lt;EmployeeType&gt;**](EmployeeType.md) | Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | [optional] |
 | **count** | **Integer** | The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts. | [optional] |
 | **start_index** | **Integer** | The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response. | [optional] |
@@ -120,7 +120,7 @@ end
 
 ### Return type
 
-[**IAccountEntryArrayWrapper**](IAccountEntryArrayWrapper.md)
+[**AccountEntryArrayWrapper**](AccountEntryArrayWrapper.md)
 
 ### Third-party storage
 
@@ -138,7 +138,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ## get_accounts_entries_with_folders_shared
 
-> <IAccountEntryArrayWrapper> get_accounts_entries_with_folders_shared(id, opts)
+> <AccountEntryArrayWrapper> get_accounts_entries_with_folders_shared(id, opts)
 
 Search accounts for a folder
 
@@ -184,7 +184,7 @@ opts = {
   include_shared: false, # Boolean | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
   invited_by_me: false, # Boolean | Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
   inviter_id: '00000000-0000-0000-0000-000000000000', # String | Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-  area: DocspaceApiSdk::Area::All, # Area | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+  area: DocspaceApiSdk::AccountSearchArea::All, # AccountSearchArea | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
   employee_types: [DocspaceApiSdk::EmployeeType::ALL], # Array<EmployeeType> | Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
   count: 25, # Integer | The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
   start_index: 0, # Integer | The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
@@ -205,7 +205,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<IAccountEntryArrayWrapper>, Integer, Hash)> get_accounts_entries_with_folders_shared_with_http_info(id, opts)
+> <Array(<AccountEntryArrayWrapper>, Integer, Hash)> get_accounts_entries_with_folders_shared_with_http_info(id, opts)
 
 ```ruby
 begin
@@ -213,7 +213,7 @@ begin
   data, status_code, headers = api_instance.get_accounts_entries_with_folders_shared_with_http_info(id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <IAccountEntryArrayWrapper>
+  p data # => <AccountEntryArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling People::SearchApi->get_accounts_entries_with_folders_shared_with_http_info: #{e}"
 end
@@ -230,7 +230,7 @@ end
 | **include_shared** | **Boolean** | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set. | [optional] |
 | **invited_by_me** | **Boolean** | Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation. | [optional] |
 | **inviter_id** | **String** | Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | [optional] |
-| **area** | **Area** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | [optional] |
+| **area** | **AccountSearchArea** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | [optional] |
 | **employee_types** | [**Array&lt;EmployeeType&gt;**](EmployeeType.md) | Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | [optional] |
 | **count** | **Integer** | The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts. | [optional] |
 | **start_index** | **Integer** | The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response. | [optional] |
@@ -239,7 +239,7 @@ end
 
 ### Return type
 
-[**IAccountEntryArrayWrapper**](IAccountEntryArrayWrapper.md)
+[**AccountEntryArrayWrapper**](AccountEntryArrayWrapper.md)
 
 ### Third-party storage
 
@@ -257,7 +257,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ## get_accounts_entries_with_rooms_shared
 
-> <IAccountEntryArrayWrapper> get_accounts_entries_with_rooms_shared(id, opts)
+> <AccountEntryArrayWrapper> get_accounts_entries_with_rooms_shared(id, opts)
 
 Search accounts for a room
 
@@ -303,7 +303,7 @@ opts = {
   include_shared: false, # Boolean | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
   invited_by_me: false, # Boolean | Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
   inviter_id: '00000000-0000-0000-0000-000000000000', # String | Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-  area: DocspaceApiSdk::Area::All, # Area | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+  area: DocspaceApiSdk::AccountSearchArea::All, # AccountSearchArea | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
   employee_types: [DocspaceApiSdk::EmployeeType::ALL], # Array<EmployeeType> | Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
   count: 25, # Integer | The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
   start_index: 0, # Integer | The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
@@ -324,7 +324,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<IAccountEntryArrayWrapper>, Integer, Hash)> get_accounts_entries_with_rooms_shared_with_http_info(id, opts)
+> <Array(<AccountEntryArrayWrapper>, Integer, Hash)> get_accounts_entries_with_rooms_shared_with_http_info(id, opts)
 
 ```ruby
 begin
@@ -332,7 +332,7 @@ begin
   data, status_code, headers = api_instance.get_accounts_entries_with_rooms_shared_with_http_info(id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <IAccountEntryArrayWrapper>
+  p data # => <AccountEntryArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling People::SearchApi->get_accounts_entries_with_rooms_shared_with_http_info: #{e}"
 end
@@ -349,7 +349,7 @@ end
 | **include_shared** | **Boolean** | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set. | [optional] |
 | **invited_by_me** | **Boolean** | Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation. | [optional] |
 | **inviter_id** | **String** | Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | [optional] |
-| **area** | **Area** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | [optional] |
+| **area** | **AccountSearchArea** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | [optional] |
 | **employee_types** | [**Array&lt;EmployeeType&gt;**](EmployeeType.md) | Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | [optional] |
 | **count** | **Integer** | The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts. | [optional] |
 | **start_index** | **Integer** | The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response. | [optional] |
@@ -358,7 +358,7 @@ end
 
 ### Return type
 
-[**IAccountEntryArrayWrapper**](IAccountEntryArrayWrapper.md)
+[**AccountEntryArrayWrapper**](AccountEntryArrayWrapper.md)
 
 ### Third-party storage
 
@@ -523,7 +523,7 @@ opts = {
   exclude_group: false, # Boolean | Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`.
   invited_by_me: false, # Boolean | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
   inviter_id: '00000000-0000-0000-0000-000000000000', # String | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-  area: DocspaceApiSdk::Area::All, # Area | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
+  area: DocspaceApiSdk::AccountSearchArea::All, # AccountSearchArea | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
   count: 25, # Integer | The size of the page. It defaults to 100, which is also the largest value the operation accepts.
   start_index: 0, # Integer | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
   sort_by: 'DisplayName', # String | What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.
@@ -576,7 +576,7 @@ end
 | **exclude_group** | **Boolean** | Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`. | [optional] |
 | **invited_by_me** | **Boolean** | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. | [optional] |
 | **inviter_id** | **String** | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | [optional] |
-| **area** | **Area** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. | [optional] |
+| **area** | **AccountSearchArea** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. | [optional] |
 | **count** | **Integer** | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | [optional] |
 | **start_index** | **Integer** | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | [optional] |
 | **sort_by** | **String** | What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`. | [optional] |
@@ -646,7 +646,7 @@ opts = {
   include_shared: false, # Boolean | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
   invited_by_me: false, # Boolean | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
   inviter_id: '00000000-0000-0000-0000-000000000000', # String | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-  area: DocspaceApiSdk::Area::All, # Area | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+  area: DocspaceApiSdk::AccountSearchArea::All, # AccountSearchArea | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
   employee_types: [DocspaceApiSdk::EmployeeType::ALL], # Array<EmployeeType> | Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
   count: 25, # Integer | The size of the page. It defaults to 100, which is also the largest value the operation accepts.
   start_index: 0, # Integer | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
@@ -692,7 +692,7 @@ end
 | **include_shared** | **Boolean** | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set. | [optional] |
 | **invited_by_me** | **Boolean** | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. | [optional] |
 | **inviter_id** | **String** | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | [optional] |
-| **area** | **Area** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | [optional] |
+| **area** | **AccountSearchArea** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | [optional] |
 | **employee_types** | [**Array&lt;EmployeeType&gt;**](EmployeeType.md) | Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | [optional] |
 | **count** | **Integer** | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | [optional] |
 | **start_index** | **Integer** | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | [optional] |
@@ -765,7 +765,7 @@ opts = {
   include_shared: false, # Boolean | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
   invited_by_me: false, # Boolean | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
   inviter_id: '00000000-0000-0000-0000-000000000000', # String | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-  area: DocspaceApiSdk::Area::All, # Area | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+  area: DocspaceApiSdk::AccountSearchArea::All, # AccountSearchArea | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
   employee_types: [DocspaceApiSdk::EmployeeType::ALL], # Array<EmployeeType> | Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
   count: 25, # Integer | The size of the page. It defaults to 100, which is also the largest value the operation accepts.
   start_index: 0, # Integer | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
@@ -811,7 +811,7 @@ end
 | **include_shared** | **Boolean** | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set. | [optional] |
 | **invited_by_me** | **Boolean** | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. | [optional] |
 | **inviter_id** | **String** | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | [optional] |
-| **area** | **Area** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | [optional] |
+| **area** | **AccountSearchArea** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | [optional] |
 | **employee_types** | [**Array&lt;EmployeeType&gt;**](EmployeeType.md) | Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | [optional] |
 | **count** | **Integer** | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | [optional] |
 | **start_index** | **Integer** | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | [optional] |
@@ -884,7 +884,7 @@ opts = {
   include_shared: false, # Boolean | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
   invited_by_me: false, # Boolean | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
   inviter_id: '00000000-0000-0000-0000-000000000000', # String | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-  area: DocspaceApiSdk::Area::All, # Area | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+  area: DocspaceApiSdk::AccountSearchArea::All, # AccountSearchArea | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
   employee_types: [DocspaceApiSdk::EmployeeType::ALL], # Array<EmployeeType> | Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
   count: 25, # Integer | The size of the page. It defaults to 100, which is also the largest value the operation accepts.
   start_index: 0, # Integer | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
@@ -930,7 +930,7 @@ end
 | **include_shared** | **Boolean** | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set. | [optional] |
 | **invited_by_me** | **Boolean** | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. | [optional] |
 | **inviter_id** | **String** | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | [optional] |
-| **area** | **Area** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | [optional] |
+| **area** | **AccountSearchArea** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | [optional] |
 | **employee_types** | [**Array&lt;EmployeeType&gt;**](EmployeeType.md) | Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | [optional] |
 | **count** | **Integer** | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | [optional] |
 | **start_index** | **Integer** | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | [optional] |
@@ -1009,7 +1009,7 @@ opts = {
   exclude_group: false, # Boolean | Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`.
   invited_by_me: false, # Boolean | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
   inviter_id: '00000000-0000-0000-0000-000000000000', # String | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-  area: DocspaceApiSdk::Area::All, # Area | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
+  area: DocspaceApiSdk::AccountSearchArea::All, # AccountSearchArea | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
   count: 25, # Integer | The size of the page. It defaults to 100, which is also the largest value the operation accepts.
   start_index: 0, # Integer | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
   sort_by: 'DisplayName', # String | What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.
@@ -1062,7 +1062,7 @@ end
 | **exclude_group** | **Boolean** | Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`. | [optional] |
 | **invited_by_me** | **Boolean** | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. | [optional] |
 | **inviter_id** | **String** | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | [optional] |
-| **area** | **Area** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. | [optional] |
+| **area** | **AccountSearchArea** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. | [optional] |
 | **count** | **Integer** | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | [optional] |
 | **start_index** | **Integer** | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | [optional] |
 | **sort_by** | **String** | What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`. | [optional] |

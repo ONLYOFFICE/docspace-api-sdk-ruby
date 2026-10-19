@@ -438,6 +438,65 @@ module DocspaceApiSdk
       end
       return data, status_code, headers
     end
+
+    # Unblock a portal
+    # Unblocks this portal, blocked by the retention policy after a long period without use, so its users can sign in  again. The portal must be blocked. The call is authorized only by the unblocking link the retention letters send  to the owner; it works for the current block only. The call is mutating: it makes the portal active, records the  unblocking in the audit trail, refreshes its Content Security Policy and restarts the retention count. Nothing  is returned in the body; to check the status, read `tenantStatus` from `GET api/2.0/settings`, which a blocked  portal still answers. A lapsed paid tariff stays unpaid after the unblocking, so renewing it is the next step.  The letters of a free portal carry no such link: support unblocks it. The call does not bring back a portal  deleted at the end of its retention period, or one its owner deactivated, which `PUT api/2.0/portal/continue`  brings back. An invalid link, a link of an earlier block, or a portal that is no longer blocked, a repeated call  included, is refused with 401; an ordinary sign-in token instead of the link is refused with 403.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/unblock-portal/
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def unblock_portal(opts = {})
+      unblock_portal_with_http_info(opts)
+      nil
+    end
+
+    # Unblock a portal
+    # Unblocks this portal, blocked by the retention policy after a long period without use, so its users can sign in  again. The portal must be blocked. The call is authorized only by the unblocking link the retention letters send  to the owner; it works for the current block only. The call is mutating: it makes the portal active, records the  unblocking in the audit trail, refreshes its Content Security Policy and restarts the retention count. Nothing  is returned in the body; to check the status, read `tenantStatus` from `GET api/2.0/settings`, which a blocked  portal still answers. A lapsed paid tariff stays unpaid after the unblocking, so renewing it is the next step.  The letters of a free portal carry no such link: support unblocks it. The call does not bring back a portal  deleted at the end of its retention period, or one its owner deactivated, which `PUT api/2.0/portal/continue`  brings back. An invalid link, a link of an earlier block, or a portal that is no longer blocked, a repeated call  included, is refused with 401; an ordinary sign-in token instead of the link is refused with 403.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/unblock-portal/
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def unblock_portal_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: Portal::SettingsApi.unblock_portal ...'
+      end
+      # resource path
+      local_var_path = '/api/2.0/portal/unblock'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
+
+      new_options = opts.merge(
+        :operation => :"Portal::SettingsApi.unblock_portal",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: Portal::SettingsApi#unblock_portal\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
     end
   end
 end

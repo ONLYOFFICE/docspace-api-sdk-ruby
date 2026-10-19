@@ -447,7 +447,7 @@ This endpoint does not need any parameter.
 
 ## list_migrations
 
-> <STRINGArrayWrapper> list_migrations
+> <StringArrayWrapper> list_migrations
 
 Get available migrators
 
@@ -499,7 +499,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<STRINGArrayWrapper>, Integer, Hash)> list_migrations_with_http_info
+> <Array(<StringArrayWrapper>, Integer, Hash)> list_migrations_with_http_info
 
 ```ruby
 begin
@@ -507,7 +507,7 @@ begin
   data, status_code, headers = api_instance.list_migrations_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <STRINGArrayWrapper>
+  p data # => <StringArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Migration::MigrationApi->list_migrations_with_http_info: #{e}"
 end
@@ -519,7 +519,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**STRINGArrayWrapper**](STRINGArrayWrapper.md)
+[**StringArrayWrapper**](StringArrayWrapper.md)
 
 ### Authorization
 

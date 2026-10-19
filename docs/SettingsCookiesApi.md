@@ -135,7 +135,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::CookiesApi.new
 opts = {
-  cookie_settings_requests_dto: DocspaceApiSdk::CookieSettingsRequestsDto.new # CookieSettingsRequestsDto | 
+  cookie_settings_request_dto: DocspaceApiSdk::CookieSettingsRequestDto.new # CookieSettingsRequestDto | 
 }
 
 begin
@@ -169,7 +169,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **cookie_settings_requests_dto** | [**CookieSettingsRequestsDto**](CookieSettingsRequestsDto.md) |  | [optional] |
+| **cookie_settings_request_dto** | [**CookieSettingsRequestDto**](CookieSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 

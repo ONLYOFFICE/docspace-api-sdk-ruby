@@ -27,7 +27,7 @@ module DocspaceApiSdk
     # Reports the portal's AI configuration and whether AI is usable at all, which is the first call a client makes before offering any AI feature. It takes no parameters and is proxied unchanged to the DocSpace AI service, so the answer is that service's settings payload. Among other things it says whether the portal runs on the central AI gateway, which decides whether provider profiles can be edited here at all. This is a read-only operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get/
     # @param [Hash] opts the optional parameters
-    # @return [AiAiSettingsWrapper]
+    # @return [AiSettingsWrapper]
     def ai_settings_get(opts = {})
       data, _status_code, _headers = ai_settings_get_with_http_info(opts)
       data
@@ -37,7 +37,7 @@ module DocspaceApiSdk
     # Reports the portal's AI configuration and whether AI is usable at all, which is the first call a client makes before offering any AI feature. It takes no parameters and is proxied unchanged to the DocSpace AI service, so the answer is that service's settings payload. Among other things it says whether the portal runs on the central AI gateway, which decides whether provider profiles can be edited here at all. This is a read-only operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiAiSettingsWrapper, Integer, Hash)>] AiAiSettingsWrapper data, response status code and response headers
+    # @return [Array<(AiSettingsWrapper, Integer, Hash)>] AiSettingsWrapper data, response status code and response headers
     def ai_settings_get_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::SettingsApi.ai_settings_get ...'
@@ -60,7 +60,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiAiSettingsWrapper'
+      return_type = opts[:debug_return_type] || 'AiSettingsWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
@@ -82,11 +82,70 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
+    # Get the tool permission mode
+    # Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-tool-mode/
+    # @param [Hash] opts the optional parameters
+    # @return [AiSuccessResponse]
+    def ai_settings_get_tool_mode(opts = {})
+      data, _status_code, _headers = ai_settings_get_tool_mode_with_http_info(opts)
+      data
+    end
+
+    # Get the tool permission mode
+    # Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-tool-mode/
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
+    def ai_settings_get_tool_mode_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AI::SettingsApi.ai_settings_get_tool_mode ...'
+      end
+      # resource path
+      local_var_path = '/api/2.0/ai/config/tool-mode'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AiSuccessResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AI::SettingsApi.ai_settings_get_tool_mode",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AI::SettingsApi#ai_settings_get_tool_mode\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get user AI settings
     # Returns the AI settings of the calling user, as opposed to the portal-wide ones. It takes no parameters - the user is the authenticated caller, and there is no way to read somebody else's settings - and is proxied unchanged to the DocSpace AI service. Use `GET api/2.0/ai/config` for the portal-wide configuration. This is a read-only operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-user/
     # @param [Hash] opts the optional parameters
-    # @return [AiAiUserSettingsWrapper]
+    # @return [AiUserSettingsWrapper]
     def ai_settings_get_user(opts = {})
       data, _status_code, _headers = ai_settings_get_user_with_http_info(opts)
       data
@@ -96,7 +155,7 @@ module DocspaceApiSdk
     # Returns the AI settings of the calling user, as opposed to the portal-wide ones. It takes no parameters - the user is the authenticated caller, and there is no way to read somebody else's settings - and is proxied unchanged to the DocSpace AI service. Use `GET api/2.0/ai/config` for the portal-wide configuration. This is a read-only operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-user/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiAiUserSettingsWrapper, Integer, Hash)>] AiAiUserSettingsWrapper data, response status code and response headers
+    # @return [Array<(AiUserSettingsWrapper, Integer, Hash)>] AiUserSettingsWrapper data, response status code and response headers
     def ai_settings_get_user_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::SettingsApi.ai_settings_get_user ...'
@@ -119,7 +178,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiAiUserSettingsWrapper'
+      return_type = opts[:debug_return_type] || 'AiUserSettingsWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
@@ -200,30 +259,100 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
-    # Update user AI settings
-    # Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
-    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-user/
-    # @param request_body [Hash<String, Object>] The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
+    # Set the tool permission mode
+    # Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-tool-mode/
+    # @param ai_settings_set_tool_mode_request [Hash<String, Object>] `{ mode }` with the AI service's `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum.
     # @param [Hash] opts the optional parameters
-    # @return [AiAiUserSettingsWrapper]
-    def ai_settings_set_user(request_body, opts = {})
-      data, _status_code, _headers = ai_settings_set_user_with_http_info(request_body, opts)
+    # @return [AiSuccessResponse]
+    def ai_settings_set_tool_mode(ai_settings_set_tool_mode_request, opts = {})
+      data, _status_code, _headers = ai_settings_set_tool_mode_with_http_info(ai_settings_set_tool_mode_request, opts)
+      data
+    end
+
+    # Set the tool permission mode
+    # Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-tool-mode/
+    # @param ai_settings_set_tool_mode_request [Hash<String, Object>] `{ mode }` with the AI service's `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
+    def ai_settings_set_tool_mode_with_http_info(ai_settings_set_tool_mode_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AI::SettingsApi.ai_settings_set_tool_mode ...'
+      end
+      # verify the required parameter 'ai_settings_set_tool_mode_request' is set
+      if @api_client.config.client_side_validation && ai_settings_set_tool_mode_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_settings_set_tool_mode_request' when calling AI::SettingsApi.ai_settings_set_tool_mode"
+      end
+      # resource path
+      local_var_path = '/api/2.0/ai/config/tool-mode'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_settings_set_tool_mode_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AiSuccessResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AI::SettingsApi.ai_settings_set_tool_mode",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AI::SettingsApi#ai_settings_set_tool_mode\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update user AI settings
+    # Replaces the AI settings of the calling user and returns the stored result. `chatRecommendedModelVisible` is required and has to be a real boolean - a body the JSON parser cannot read, such as one sent as text/plain, used to arrive empty and answer 200 having stored nothing. The body is then proxied to the DocSpace AI service, which validates the rest, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-user/
+    # @param ai_settings_set_user_request [Hash<String, Object>] The user's AI settings: `chatRecommendedModelVisible` as a boolean, required. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
+    # @param [Hash] opts the optional parameters
+    # @return [AiUserSettingsWrapper]
+    def ai_settings_set_user(ai_settings_set_user_request, opts = {})
+      data, _status_code, _headers = ai_settings_set_user_with_http_info(ai_settings_set_user_request, opts)
       data
     end
 
     # Update user AI settings
-    # Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
+    # Replaces the AI settings of the calling user and returns the stored result. `chatRecommendedModelVisible` is required and has to be a real boolean - a body the JSON parser cannot read, such as one sent as text/plain, used to arrive empty and answer 200 having stored nothing. The body is then proxied to the DocSpace AI service, which validates the rest, so a rejected value comes back with that service's verdict. Only the caller's own settings can be written. Portal-wide configuration is not touched by this operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-user/
-    # @param request_body [Hash<String, Object>] The user's AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
+    # @param ai_settings_set_user_request [Hash<String, Object>] The user's AI settings: `chatRecommendedModelVisible` as a boolean, required. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiAiUserSettingsWrapper, Integer, Hash)>] AiAiUserSettingsWrapper data, response status code and response headers
-    def ai_settings_set_user_with_http_info(request_body, opts = {})
+    # @return [Array<(AiUserSettingsWrapper, Integer, Hash)>] AiUserSettingsWrapper data, response status code and response headers
+    def ai_settings_set_user_with_http_info(ai_settings_set_user_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::SettingsApi.ai_settings_set_user ...'
       end
-      # verify the required parameter 'request_body' is set
-      if @api_client.config.client_side_validation && request_body.nil?
-        fail ArgumentError, "Missing the required parameter 'request_body' when calling AI::SettingsApi.ai_settings_set_user"
+      # verify the required parameter 'ai_settings_set_user_request' is set
+      if @api_client.config.client_side_validation && ai_settings_set_user_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_settings_set_user_request' when calling AI::SettingsApi.ai_settings_set_user"
       end
       # resource path
       local_var_path = '/api/2.0/ai/config/user'
@@ -245,10 +374,10 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(request_body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_settings_set_user_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiAiUserSettingsWrapper'
+      return_type = opts[:debug_return_type] || 'AiUserSettingsWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
@@ -273,27 +402,27 @@ module DocspaceApiSdk
     # Update vectorization settings
     # Replaces the portal's vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service's own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with `POST api/2.0/ai/vectorization/tasks`. This is a portal-wide setting and requires the permissions the AI service demands for it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-vectorization/
-    # @param request_body [Hash<String, Object>] The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.
+    # @param ai_settings_set_vectorization_request [Hash<String, Object>] The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.
     # @param [Hash] opts the optional parameters
     # @return [AiVectorizationSettingsWrapper]
-    def ai_settings_set_vectorization(request_body, opts = {})
-      data, _status_code, _headers = ai_settings_set_vectorization_with_http_info(request_body, opts)
+    def ai_settings_set_vectorization(ai_settings_set_vectorization_request, opts = {})
+      data, _status_code, _headers = ai_settings_set_vectorization_with_http_info(ai_settings_set_vectorization_request, opts)
       data
     end
 
     # Update vectorization settings
     # Replaces the portal's vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service's own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with `POST api/2.0/ai/vectorization/tasks`. This is a portal-wide setting and requires the permissions the AI service demands for it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-vectorization/
-    # @param request_body [Hash<String, Object>] The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.
+    # @param ai_settings_set_vectorization_request [Hash<String, Object>] The portal's vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiVectorizationSettingsWrapper, Integer, Hash)>] AiVectorizationSettingsWrapper data, response status code and response headers
-    def ai_settings_set_vectorization_with_http_info(request_body, opts = {})
+    def ai_settings_set_vectorization_with_http_info(ai_settings_set_vectorization_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::SettingsApi.ai_settings_set_vectorization ...'
       end
-      # verify the required parameter 'request_body' is set
-      if @api_client.config.client_side_validation && request_body.nil?
-        fail ArgumentError, "Missing the required parameter 'request_body' when calling AI::SettingsApi.ai_settings_set_vectorization"
+      # verify the required parameter 'ai_settings_set_vectorization_request' is set
+      if @api_client.config.client_side_validation && ai_settings_set_vectorization_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_settings_set_vectorization_request' when calling AI::SettingsApi.ai_settings_set_vectorization"
       end
       # resource path
       local_var_path = '/api/2.0/ai/config/vectorization'
@@ -315,7 +444,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(request_body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_settings_set_vectorization_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AiVectorizationSettingsWrapper'

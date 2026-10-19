@@ -26,27 +26,27 @@ module DocspaceApiSdk
     # Clear deep mode
     # Removes the stored extended-thinking setting of a scope (the depth and, with it, the deep-mode toggle), after which reads fall back to the configured default rather than to false. `entityId` picks a room and omitting it clears the portal-wide preference. Clearing a scope that has no stored value is not an error. This differs from storing false, which is an explicit choice a later read reports as set.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-clear-deep-mode/
-    # @param body [String] The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.
+    # @param ai_preferences_clear_deep_mode_request [String] The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.
     # @param [Hash] opts the optional parameters
     # @return [AiSuccessResponse]
-    def ai_preferences_clear_deep_mode(body, opts = {})
-      data, _status_code, _headers = ai_preferences_clear_deep_mode_with_http_info(body, opts)
+    def ai_preferences_clear_deep_mode(ai_preferences_clear_deep_mode_request, opts = {})
+      data, _status_code, _headers = ai_preferences_clear_deep_mode_with_http_info(ai_preferences_clear_deep_mode_request, opts)
       data
     end
 
     # Clear deep mode
     # Removes the stored extended-thinking setting of a scope (the depth and, with it, the deep-mode toggle), after which reads fall back to the configured default rather than to false. `entityId` picks a room and omitting it clears the portal-wide preference. Clearing a scope that has no stored value is not an error. This differs from storing false, which is an explicit choice a later read reports as set.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-clear-deep-mode/
-    # @param body [String] The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.
+    # @param ai_preferences_clear_deep_mode_request [String] The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
-    def ai_preferences_clear_deep_mode_with_http_info(body, opts = {})
+    def ai_preferences_clear_deep_mode_with_http_info(ai_preferences_clear_deep_mode_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::PreferencesApi.ai_preferences_clear_deep_mode ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling AI::PreferencesApi.ai_preferences_clear_deep_mode"
+      # verify the required parameter 'ai_preferences_clear_deep_mode_request' is set
+      if @api_client.config.client_side_validation && ai_preferences_clear_deep_mode_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_preferences_clear_deep_mode_request' when calling AI::PreferencesApi.ai_preferences_clear_deep_mode"
       end
       # resource path
       local_var_path = '/api/2.0/ai/preferences/clear-deep-mode'
@@ -68,7 +68,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_preferences_clear_deep_mode_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'
@@ -94,7 +94,7 @@ module DocspaceApiSdk
     end
 
     # Get deep mode
-    # Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
+    # Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400, as it is on the write. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-get-deep-mode/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
@@ -105,7 +105,7 @@ module DocspaceApiSdk
     end
 
     # Get deep mode
-    # Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
+    # Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400, as it is on the write. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-get-deep-mode/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
@@ -156,22 +156,22 @@ module DocspaceApiSdk
     end
 
     # Get reasoning level
-    # Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference. Providers clamp the depth to what the model accepts.
+    # Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400. Providers clamp the depth to what the model accepts.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-get-reasoning-level/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
-    # @return [AiAiReasoningLevel]
+    # @return [AiReasoningLevel]
     def ai_preferences_get_reasoning_level(opts = {})
       data, _status_code, _headers = ai_preferences_get_reasoning_level_with_http_info(opts)
       data
     end
 
     # Get reasoning level
-    # Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference. Providers clamp the depth to what the model accepts.
+    # Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400. Providers clamp the depth to what the model accepts.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-get-reasoning-level/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
-    # @return [Array<(AiAiReasoningLevel, Integer, Hash)>] AiAiReasoningLevel data, response status code and response headers
+    # @return [Array<(AiReasoningLevel, Integer, Hash)>] AiReasoningLevel data, response status code and response headers
     def ai_preferences_get_reasoning_level_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::PreferencesApi.ai_preferences_get_reasoning_level ...'
@@ -195,7 +195,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiAiReasoningLevel'
+      return_type = opts[:debug_return_type] || 'AiReasoningLevel'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
@@ -217,8 +217,70 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
+    # Get tool permission mode
+    # Returns how a tool call the model makes is approved for the calling user, in the chat library's spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user's AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service's enum); `entityId` is accepted for symmetry with the depth routes and ignored, though a value that is not a room ID is still refused with 400. The AI service's default is `auto`.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-get-tool-permission-mode/
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @return [AiChatToolPermissionMode]
+    def ai_preferences_get_tool_permission_mode(opts = {})
+      data, _status_code, _headers = ai_preferences_get_tool_permission_mode_with_http_info(opts)
+      data
+    end
+
+    # Get tool permission mode
+    # Returns how a tool call the model makes is approved for the calling user, in the chat library's spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user's AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service's enum); `entityId` is accepted for symmetry with the depth routes and ignored, though a value that is not a room ID is still refused with 400. The AI service's default is `auto`.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-get-tool-permission-mode/
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @return [Array<(AiChatToolPermissionMode, Integer, Hash)>] AiChatToolPermissionMode data, response status code and response headers
+    def ai_preferences_get_tool_permission_mode_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AI::PreferencesApi.ai_preferences_get_tool_permission_mode ...'
+      end
+      # resource path
+      local_var_path = '/api/2.0/ai/preferences/get-tool-permission-mode'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'entityId'] = opts[:'entity_id'] if !opts[:'entity_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AiChatToolPermissionMode'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AI::PreferencesApi.ai_preferences_get_tool_permission_mode",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AI::PreferencesApi#ai_preferences_get_tool_permission_mode\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Is deep mode set
-    # Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
+    # Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference; a value that is not a room ID is refused with 400. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-is-deep-mode-set/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
@@ -229,7 +291,7 @@ module DocspaceApiSdk
     end
 
     # Is deep mode set
-    # Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
+    # Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference; a value that is not a room ID is refused with 400. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-is-deep-mode-set/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
@@ -415,6 +477,76 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AI::PreferencesApi#ai_preferences_set_reasoning_level\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Set tool permission mode
+    # Persists the tool permission mode of the calling user. `value` has to be one of `ask`, `auto`, `allow`: anything else is rejected rather than coerced, so an absent or mistyped value can never overwrite the stored mode. `entityId` is validated like on the other writes and otherwise ignored - the mode applies to every chat of the user. Idempotent.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-set-tool-permission-mode/
+    # @param ai_preferences_set_tool_permission_mode_request [AiPreferencesSetToolPermissionModeRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [AiSuccessResponse]
+    def ai_preferences_set_tool_permission_mode(ai_preferences_set_tool_permission_mode_request, opts = {})
+      data, _status_code, _headers = ai_preferences_set_tool_permission_mode_with_http_info(ai_preferences_set_tool_permission_mode_request, opts)
+      data
+    end
+
+    # Set tool permission mode
+    # Persists the tool permission mode of the calling user. `value` has to be one of `ask`, `auto`, `allow`: anything else is rejected rather than coerced, so an absent or mistyped value can never overwrite the stored mode. `entityId` is validated like on the other writes and otherwise ignored - the mode applies to every chat of the user. Idempotent.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-set-tool-permission-mode/
+    # @param ai_preferences_set_tool_permission_mode_request [AiPreferencesSetToolPermissionModeRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
+    def ai_preferences_set_tool_permission_mode_with_http_info(ai_preferences_set_tool_permission_mode_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AI::PreferencesApi.ai_preferences_set_tool_permission_mode ...'
+      end
+      # verify the required parameter 'ai_preferences_set_tool_permission_mode_request' is set
+      if @api_client.config.client_side_validation && ai_preferences_set_tool_permission_mode_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_preferences_set_tool_permission_mode_request' when calling AI::PreferencesApi.ai_preferences_set_tool_permission_mode"
+      end
+      # resource path
+      local_var_path = '/api/2.0/ai/preferences/set-tool-permission-mode'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_preferences_set_tool_permission_mode_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AiSuccessResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
+
+      new_options = opts.merge(
+        :operation => :"AI::PreferencesApi.ai_preferences_set_tool_permission_mode",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AI::PreferencesApi#ai_preferences_set_tool_permission_mode\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

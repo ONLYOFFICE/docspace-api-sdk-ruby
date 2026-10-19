@@ -141,7 +141,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::MessagesApi.new
 opts = {
-  admin_message_settings_requests_dto: DocspaceApiSdk::AdminMessageSettingsRequestsDto.new({message: 'Hello, this is a test message from the administrator.', email: 'user@example.com'}) # AdminMessageSettingsRequestsDto | 
+  admin_message_settings_request_dto: DocspaceApiSdk::AdminMessageSettingsRequestDto.new({message: 'Hello, this is a test message from the administrator.', email: 'user@example.com'}) # AdminMessageSettingsRequestDto | 
 }
 
 begin
@@ -175,7 +175,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **admin_message_settings_requests_dto** | [**AdminMessageSettingsRequestsDto**](AdminMessageSettingsRequestsDto.md) |  | [optional] |
+| **admin_message_settings_request_dto** | [**AdminMessageSettingsRequestDto**](AdminMessageSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -232,7 +232,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::MessagesApi.new
 opts = {
-  admin_message_base_settings_requests_dto: DocspaceApiSdk::AdminMessageBaseSettingsRequestsDto.new({email: 'admin@example.com'}) # AdminMessageBaseSettingsRequestsDto | 
+  admin_message_base_settings_request_dto: DocspaceApiSdk::AdminMessageBaseSettingsRequestDto.new({email: 'admin@example.com'}) # AdminMessageBaseSettingsRequestDto | 
 }
 
 begin
@@ -266,7 +266,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **admin_message_base_settings_requests_dto** | [**AdminMessageBaseSettingsRequestsDto**](AdminMessageBaseSettingsRequestsDto.md) |  | [optional] |
+| **admin_message_base_settings_request_dto** | [**AdminMessageBaseSettingsRequestDto**](AdminMessageBaseSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 

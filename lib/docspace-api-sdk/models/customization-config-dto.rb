@@ -89,15 +89,15 @@ module DocspaceApiSdk
         :'about' => :'Boolean',
         :'customer' => :'CustomerConfigDto',
         :'anonymous' => :'AnonymousConfigDto',
-        :'feedback' => :'FeedbackConfig',
+        :'feedback' => :'FeedbackConfigDto',
         :'forcesave' => :'Boolean',
-        :'goback' => :'GobackConfig',
-        :'review' => :'ReviewConfig',
+        :'goback' => :'GobackConfigDto',
+        :'review' => :'ReviewConfigDto',
         :'logo' => :'LogoConfigDto',
         :'mention_share' => :'Boolean',
-        :'submit_form' => :'SubmitForm',
+        :'submit_form' => :'SubmitFormDto',
         :'start_filling_form' => :'StartFillingForm',
-        :'ai' => :'AIConfig'
+        :'ai' => :'AiConfigDto'
       }
     end
 

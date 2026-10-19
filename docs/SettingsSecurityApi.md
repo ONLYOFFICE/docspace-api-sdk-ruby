@@ -7,7 +7,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | [**get_enabled_modules**](SettingsSecurityApi.md#get_enabled_modules) | **GET** /api/2.0/settings/security/modules | Get enabled modules |
 | [**get_is_product_administrator**](SettingsSecurityApi.md#get_is_product_administrator) | **GET** /api/2.0/settings/security/administrator | Check product administrator |
 | [**get_password_settings**](SettingsSecurityApi.md#get_password_settings) | **GET** /api/2.0/settings/security/password | Get password settings |
-| [**get_product_administrators**](SettingsSecurityApi.md#get_product_administrators) | **GET** /api/2.0/settings/security/administrator/{productid} | Get product administrators |
+| [**get_product_administrators**](SettingsSecurityApi.md#get_product_administrators) | **GET** /api/2.0/settings/security/administrator/{productId} | Get product administrators |
 | [**get_web_item_security_info**](SettingsSecurityApi.md#get_web_item_security_info) | **GET** /api/2.0/settings/security/{id} | Check module availability |
 | [**get_web_item_settings_security_info**](SettingsSecurityApi.md#get_web_item_settings_security_info) | **GET** /api/2.0/settings/security | Get module access settings |
 | [**set_access_to_web_items**](SettingsSecurityApi.md#set_access_to_web_items) | **PUT** /api/2.0/settings/security/access | Set access to modules in bulk |
@@ -104,11 +104,11 @@ This endpoint does not need any parameter.
 
 ## get_is_product_administrator
 
-> <ProductAdministratorWrapper> get_is_product_administrator(productid, userid)
+> <ProductAdministratorWrapper> get_is_product_administrator(product_id, user_id)
 
 Check product administrator
 
-Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`  flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks  about the portal itself rather than about a single module. The caller needs the portal-settings right of a  DocSpace administrator, otherwise the call is refused. The operation is read-only. The flag is `true` when the  user belongs to the DocSpace administrator group or to the module's own group, so a portal-wide administrator  is reported as an administrator of every module, whatever the module identifier says. Identifiers that name no  user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.  The verdict is read out of group membership alone and says nothing about whether the module is enabled for  this portal, which `GET api/2.0/settings/security/{id}` reports. Use  `GET api/2.0/settings/security/administrator/{productid}` to list everyone who administers a module, and  `PUT api/2.0/settings/security/administrator` to change the membership.
+Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`  flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks  about the portal itself rather than about a single module. The caller needs the portal-settings right of a  DocSpace administrator, otherwise the call is refused. The operation is read-only. The flag is `true` when the  user belongs to the DocSpace administrator group or to the module's own group, so a portal-wide administrator  is reported as an administrator of every module, whatever the module identifier says. Identifiers that name no  user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.  The verdict is read out of group membership alone and says nothing about whether the module is enabled for  this portal, which `GET api/2.0/settings/security/{id}` reports. Use  `GET api/2.0/settings/security/administrator/{productId}` to list everyone who administers a module, and  `PUT api/2.0/settings/security/administrator` to change the membership.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-product-administrator/).
 
@@ -142,12 +142,12 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::Settings::SecurityApi.new
-productid = '00000000-0000-0000-0000-000000000000' # String | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.
-userid = '00000000-0000-0000-0000-000000000000' # String | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.
+product_id = '00000000-0000-0000-0000-000000000000' # String | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.
+user_id = '00000000-0000-0000-0000-000000000000' # String | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.
 
 begin
   # Check product administrator
-  result = api_instance.get_is_product_administrator(productid, userid)
+  result = api_instance.get_is_product_administrator(product_id, user_id)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::SecurityApi->get_is_product_administrator: #{e}"
@@ -158,12 +158,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ProductAdministratorWrapper>, Integer, Hash)> get_is_product_administrator_with_http_info(productid, userid)
+> <Array(<ProductAdministratorWrapper>, Integer, Hash)> get_is_product_administrator_with_http_info(product_id, user_id)
 
 ```ruby
 begin
   # Check product administrator
-  data, status_code, headers = api_instance.get_is_product_administrator_with_http_info(productid, userid)
+  data, status_code, headers = api_instance.get_is_product_administrator_with_http_info(product_id, user_id)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <ProductAdministratorWrapper>
@@ -176,8 +176,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **productid** | **String** | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. |  |
-| **userid** | **String** | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. |  |
+| **product_id** | **String** | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. |  |
+| **user_id** | **String** | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. |  |
 
 ### Return type
 
@@ -281,7 +281,7 @@ This endpoint does not need any parameter.
 
 ## get_product_administrators
 
-> <EmployeeArrayWrapper> get_product_administrators(productid)
+> <EmployeeArrayWrapper> get_product_administrators(product_id)
 
 Get product administrators
 
@@ -319,11 +319,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::Settings::SecurityApi.new
-productid = '00000000-0000-0000-0000-000000000000' # String | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.
+product_id = '00000000-0000-0000-0000-000000000000' # String | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.
 
 begin
   # Get product administrators
-  result = api_instance.get_product_administrators(productid)
+  result = api_instance.get_product_administrators(product_id)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::SecurityApi->get_product_administrators: #{e}"
@@ -334,12 +334,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<EmployeeArrayWrapper>, Integer, Hash)> get_product_administrators_with_http_info(productid)
+> <Array(<EmployeeArrayWrapper>, Integer, Hash)> get_product_administrators_with_http_info(product_id)
 
 ```ruby
 begin
   # Get product administrators
-  data, status_code, headers = api_instance.get_product_administrators_with_http_info(productid)
+  data, status_code, headers = api_instance.get_product_administrators_with_http_info(product_id)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <EmployeeArrayWrapper>
@@ -352,7 +352,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **productid** | **String** | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. |  |
+| **product_id** | **String** | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. |  |
 
 ### Return type
 
@@ -589,7 +589,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::SecurityApi.new
 opts = {
-  web_items_security_requests_dto: DocspaceApiSdk::WebItemsSecurityRequestsDto.new # WebItemsSecurityRequestsDto | 
+  web_items_security_request_dto: DocspaceApiSdk::WebItemsSecurityRequestDto.new # WebItemsSecurityRequestDto | 
 }
 
 begin
@@ -623,7 +623,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **web_items_security_requests_dto** | [**WebItemsSecurityRequestsDto**](WebItemsSecurityRequestsDto.md) |  | [optional] |
+| **web_items_security_request_dto** | [**WebItemsSecurityRequestDto**](WebItemsSecurityRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -680,7 +680,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::SecurityApi.new
 opts = {
-  security_requests_dto: DocspaceApiSdk::SecurityRequestsDto.new({product_id: '00000000-0000-0000-0000-000000000000', user_id: '00000000-0000-0000-0000-000000000000'}) # SecurityRequestsDto | 
+  security_request_dto: DocspaceApiSdk::SecurityRequestDto.new({product_id: '00000000-0000-0000-0000-000000000000', user_id: '00000000-0000-0000-0000-000000000000'}) # SecurityRequestDto | 
 }
 
 begin
@@ -714,7 +714,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **security_requests_dto** | [**SecurityRequestsDto**](SecurityRequestsDto.md) |  | [optional] |
+| **security_request_dto** | [**SecurityRequestDto**](SecurityRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -771,7 +771,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::SecurityApi.new
 opts = {
-  web_item_security_requests_dto: DocspaceApiSdk::WebItemSecurityRequestsDto.new({id: '00000000-0000-0000-0000-000000000000'}) # WebItemSecurityRequestsDto | 
+  web_item_security_request_dto: DocspaceApiSdk::WebItemSecurityRequestDto.new({id: '00000000-0000-0000-0000-000000000000'}) # WebItemSecurityRequestDto | 
 }
 
 begin
@@ -805,7 +805,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **web_item_security_requests_dto** | [**WebItemSecurityRequestsDto**](WebItemSecurityRequestsDto.md) |  | [optional] |
+| **web_item_security_request_dto** | [**WebItemSecurityRequestDto**](WebItemSecurityRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -862,7 +862,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::SecurityApi.new
 opts = {
-  password_settings_requests_dto: DocspaceApiSdk::PasswordSettingsRequestsDto.new({min_length: 8}) # PasswordSettingsRequestsDto | 
+  password_settings_request_dto: DocspaceApiSdk::PasswordSettingsRequestDto.new({min_length: 8}) # PasswordSettingsRequestDto | 
 }
 
 begin
@@ -896,7 +896,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **password_settings_requests_dto** | [**PasswordSettingsRequestsDto**](PasswordSettingsRequestsDto.md) |  | [optional] |
+| **password_settings_request_dto** | [**PasswordSettingsRequestDto**](PasswordSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 

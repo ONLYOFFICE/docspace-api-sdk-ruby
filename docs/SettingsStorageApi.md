@@ -622,7 +622,7 @@ nil (empty response body)
 
 ## update_cdn_storage
 
-> <CdnStorageSettingsWrapper> update_cdn_storage(opts)
+> <StorageSettingsWrapper> update_cdn_storage(opts)
 
 Update the CDN storage
 
@@ -661,7 +661,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::StorageApi.new
 opts = {
-  storage_requests_dto: DocspaceApiSdk::StorageRequestsDto.new({_module: 'default'}) # StorageRequestsDto | 
+  storage_request_dto: DocspaceApiSdk::StorageRequestDto.new({_module: 'default'}) # StorageRequestDto | 
 }
 
 begin
@@ -677,7 +677,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CdnStorageSettingsWrapper>, Integer, Hash)> update_cdn_storage_with_http_info(opts)
+> <Array(<StorageSettingsWrapper>, Integer, Hash)> update_cdn_storage_with_http_info(opts)
 
 ```ruby
 begin
@@ -685,7 +685,7 @@ begin
   data, status_code, headers = api_instance.update_cdn_storage_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <CdnStorageSettingsWrapper>
+  p data # => <StorageSettingsWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::StorageApi->update_cdn_storage_with_http_info: #{e}"
 end
@@ -695,11 +695,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **storage_requests_dto** | [**StorageRequestsDto**](StorageRequestsDto.md) |  | [optional] |
+| **storage_request_dto** | [**StorageRequestDto**](StorageRequestDto.md) |  | [optional] |
 
 ### Return type
 
-[**CdnStorageSettingsWrapper**](CdnStorageSettingsWrapper.md)
+[**StorageSettingsWrapper**](StorageSettingsWrapper.md)
 
 ### Authorization
 
@@ -752,7 +752,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::StorageApi.new
 opts = {
-  storage_requests_dto: DocspaceApiSdk::StorageRequestsDto.new({_module: 'default'}) # StorageRequestsDto | 
+  storage_request_dto: DocspaceApiSdk::StorageRequestDto.new({_module: 'default'}) # StorageRequestDto | 
 }
 
 begin
@@ -786,7 +786,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **storage_requests_dto** | [**StorageRequestsDto**](StorageRequestsDto.md) |  | [optional] |
+| **storage_request_dto** | [**StorageRequestDto**](StorageRequestDto.md) |  | [optional] |
 
 ### Return type
 

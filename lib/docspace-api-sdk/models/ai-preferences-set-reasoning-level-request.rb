@@ -66,7 +66,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'value' => :'AiAiReasoningLevel',
+        :'value' => :'AiReasoningLevel',
         :'entity_id' => :'String'
       }
     end

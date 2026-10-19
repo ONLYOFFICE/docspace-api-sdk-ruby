@@ -444,7 +444,14 @@ end
 
 api_instance = DocspaceApiSdk::Files::OperationsApi.new
 opts = {
-  in_dto: DocspaceApiSdk::BatchRequestDto.new # BatchRequestDto | The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
+  return_single_operation: false, # Boolean | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+  folder_ids: [DocspaceApiSdk::CheckMoveOrCopyBatchItemsFolderIdsParameterInner.new], # Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+  file_ids: [DocspaceApiSdk::CheckMoveOrCopyBatchItemsFolderIdsParameterInner.new], # Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+  dest_folder_id: nil, # CheckMoveOrCopyBatchItemsDestFolderIdParameter | The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+  conflict_resolve_type: DocspaceApiSdk::FileConflictResolveType::SKIP, # FileConflictResolveType | What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+  delete_after: false, # Boolean | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+  content: false, # Boolean | What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+  to_fill_out: false # Boolean | Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
 }
 
 begin
@@ -478,7 +485,14 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **in_dto** | **BatchRequestDto** | The files and folders to move or copy, the folder they go to, and the way name clashes are settled. | [optional] |
+| **return_single_operation** | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] |
+| **folder_ids** | [**Array&lt;CheckMoveOrCopyBatchItemsFolderIdsParameterInner&gt;**](CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md) | The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list. | [optional] |
+| **file_ids** | [**Array&lt;CheckMoveOrCopyBatchItemsFolderIdsParameterInner&gt;**](CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md) | The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list. | [optional] |
+| **dest_folder_id** | **CheckMoveOrCopyBatchItemsDestFolderIdParameter** | The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room. | [optional] |
+| **conflict_resolve_type** | **FileConflictResolveType** | What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. | [optional] |
+| **delete_after** | **Boolean** | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. | [optional] |
+| **content** | **Boolean** | What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. | [optional] |
+| **to_fill_out** | **Boolean** | Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected. | [optional] |
 
 ### Return type
 
@@ -535,7 +549,14 @@ end
 
 api_instance = DocspaceApiSdk::Files::OperationsApi.new
 opts = {
-  in_dto: DocspaceApiSdk::BatchRequestDto.new # BatchRequestDto | The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
+  return_single_operation: false, # Boolean | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+  folder_ids: [DocspaceApiSdk::CheckMoveOrCopyBatchItemsFolderIdsParameterInner.new], # Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+  file_ids: [DocspaceApiSdk::CheckMoveOrCopyBatchItemsFolderIdsParameterInner.new], # Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+  dest_folder_id: nil, # CheckMoveOrCopyBatchItemsDestFolderIdParameter | The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+  conflict_resolve_type: DocspaceApiSdk::FileConflictResolveType::SKIP, # FileConflictResolveType | What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+  delete_after: false, # Boolean | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+  content: false, # Boolean | What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+  to_fill_out: false # Boolean | Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
 }
 
 begin
@@ -569,7 +590,14 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **in_dto** | **BatchRequestDto** | The files and folders to move or copy, the folder they go to, and the way name clashes are settled. | [optional] |
+| **return_single_operation** | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] |
+| **folder_ids** | [**Array&lt;CheckMoveOrCopyBatchItemsFolderIdsParameterInner&gt;**](CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md) | The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list. | [optional] |
+| **file_ids** | [**Array&lt;CheckMoveOrCopyBatchItemsFolderIdsParameterInner&gt;**](CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md) | The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list. | [optional] |
+| **dest_folder_id** | **CheckMoveOrCopyBatchItemsDestFolderIdParameter** | The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room. | [optional] |
+| **conflict_resolve_type** | **FileConflictResolveType** | What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. | [optional] |
+| **delete_after** | **Boolean** | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. | [optional] |
+| **content** | **Boolean** | What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. | [optional] |
+| **to_fill_out** | **Boolean** | Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected. | [optional] |
 
 ### Return type
 
@@ -678,7 +706,7 @@ end
 
 ## create_upload_session
 
-> <ChunkedUploadSessionResponseWrapperWrapper> create_upload_session(folder_id, session_request)
+> <ChunkedUploadSessionResultWrapper> create_upload_session(folder_id, session_request)
 
 Chunked upload
 
@@ -732,7 +760,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ChunkedUploadSessionResponseWrapperWrapper>, Integer, Hash)> create_upload_session_with_http_info(folder_id, session_request)
+> <Array(<ChunkedUploadSessionResultWrapper>, Integer, Hash)> create_upload_session_with_http_info(folder_id, session_request)
 
 ```ruby
 begin
@@ -740,7 +768,7 @@ begin
   data, status_code, headers = api_instance.create_upload_session_with_http_info(folder_id, session_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ChunkedUploadSessionResponseWrapperWrapper>
+  p data # => <ChunkedUploadSessionResultWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::OperationsApi->create_upload_session_with_http_info: #{e}"
 end
@@ -755,11 +783,11 @@ end
 
 ### Return type
 
-[**ChunkedUploadSessionResponseWrapperWrapper**](ChunkedUploadSessionResponseWrapperWrapper.md)
+[**ChunkedUploadSessionResultWrapper**](ChunkedUploadSessionResultWrapper.md)
 
 ### Third-party storage
 
-The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id` as `String` and the answer is [**ThirdPartyChunkedUploadSessionResponseWrapperWrapper**](ThirdPartyChunkedUploadSessionResponseWrapperWrapper.md).
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id` as `String` and the answer is [**ThirdPartyChunkedUploadSessionResultWrapper**](ThirdPartyChunkedUploadSessionResultWrapper.md).
 
 ### Authorization
 
@@ -773,7 +801,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ## create_upload_session_in_folder
 
-> <ChunkedUploadSessionResponseResponseWrapper> create_upload_session_in_folder(folder_id, session_request)
+> <ChunkedUploadSessionWrapper> create_upload_session_in_folder(folder_id, session_request)
 
 Create an upload session
 
@@ -827,7 +855,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ChunkedUploadSessionResponseResponseWrapper>, Integer, Hash)> create_upload_session_in_folder_with_http_info(folder_id, session_request)
+> <Array(<ChunkedUploadSessionWrapper>, Integer, Hash)> create_upload_session_in_folder_with_http_info(folder_id, session_request)
 
 ```ruby
 begin
@@ -835,7 +863,7 @@ begin
   data, status_code, headers = api_instance.create_upload_session_in_folder_with_http_info(folder_id, session_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ChunkedUploadSessionResponseResponseWrapper>
+  p data # => <ChunkedUploadSessionWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::OperationsApi->create_upload_session_in_folder_with_http_info: #{e}"
 end
@@ -850,11 +878,11 @@ end
 
 ### Return type
 
-[**ChunkedUploadSessionResponseResponseWrapper**](ChunkedUploadSessionResponseResponseWrapper.md)
+[**ChunkedUploadSessionWrapper**](ChunkedUploadSessionWrapper.md)
 
 ### Third-party storage
 
-The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id` as `String` and the answer is [**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](ThirdPartyChunkedUploadSessionResponseResponseWrapper.md).
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id` as `String` and the answer is [**ThirdPartyChunkedUploadSessionWrapper**](ThirdPartyChunkedUploadSessionWrapper.md).
 
 ### Authorization
 
@@ -1424,7 +1452,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 Get active file operations
 
-Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads and  mark-as-read. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller's  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
+Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads, mark-as-read  and builder runs. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller's  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-operation-statuses/).
 
@@ -1515,7 +1543,7 @@ end
 
 Get file operations by type
 
-Returns the background file operations of the caller that are of one kind, named by the number in the route:  `1` for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read and `7` for a duplication. The  answer carries the same records as `GET api/2.0/files/fileops`, with the same rule that a finished operation  is reported once and then dropped, and `id` narrows it further to a single operation. Moves, kind `0`, cannot  be read through this route: the address `api/2.0/files/fileops/move` belongs to another operation, so read  moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind that has no queue  of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty array, while a  number outside the operation type is rejected as an invalid request. The call changes nothing and never shows  another account's operations.
+Returns the background file operations of the caller that are of one kind, named by the number in the route: `1`  for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read, `7` for a duplication and `8` for a  document builder run. The answer carries the same records as `GET api/2.0/files/fileops`, with the same rule  that a finished operation is reported once and then dropped, and `id` narrows it further to a single operation.  Moves, kind `0`, cannot be read through this route: the address `api/2.0/files/fileops/move` belongs to another  operation, so read moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind  that has no queue of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty  array, while a number outside the operation type is rejected as an invalid request. The call changes nothing and  never shows another account's operations.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-operation-statuses-by-type/).
 
@@ -1972,7 +2000,7 @@ end
 
 ## update_file_comment
 
-> <StringWrapper> update_file_comment(file_id, update_comment)
+> <StringWrapper> update_file_comment(file_id, update_comment_request)
 
 Update a comment
 
@@ -2011,11 +2039,11 @@ end
 
 api_instance = DocspaceApiSdk::Files::OperationsApi.new
 file_id = 1 # Integer | The file whose version comment is replaced.
-update_comment = DocspaceApiSdk::UpdateComment.new({version: 1}) # UpdateComment | The version and the comment to store on it.
+update_comment_request = DocspaceApiSdk::UpdateCommentRequest.new({version: 1}) # UpdateCommentRequest | The version and the comment to store on it.
 
 begin
   # Update a comment
-  result = api_instance.update_file_comment(file_id, update_comment)
+  result = api_instance.update_file_comment(file_id, update_comment_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::OperationsApi->update_file_comment: #{e}"
@@ -2026,12 +2054,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<StringWrapper>, Integer, Hash)> update_file_comment_with_http_info(file_id, update_comment)
+> <Array(<StringWrapper>, Integer, Hash)> update_file_comment_with_http_info(file_id, update_comment_request)
 
 ```ruby
 begin
   # Update a comment
-  data, status_code, headers = api_instance.update_file_comment_with_http_info(file_id, update_comment)
+  data, status_code, headers = api_instance.update_file_comment_with_http_info(file_id, update_comment_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <StringWrapper>
@@ -2045,7 +2073,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **file_id** | **Integer** | The file whose version comment is replaced. |  |
-| **update_comment** | [**UpdateComment**](UpdateComment.md) | The version and the comment to store on it. |  |
+| **update_comment_request** | [**UpdateCommentRequest**](UpdateCommentRequest.md) | The version and the comment to store on it. |  |
 
 ### Return type
 
@@ -2067,7 +2095,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ## upload_async_session
 
-> <ChunkedUploadSessionResponseResponseWrapper> upload_async_session(folder_id, session_id, opts)
+> <ChunkedUploadSessionWrapper> upload_async_session(folder_id, session_id, opts)
 
 Upload a numbered chunk
 
@@ -2125,7 +2153,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ChunkedUploadSessionResponseResponseWrapper>, Integer, Hash)> upload_async_session_with_http_info(folder_id, session_id, opts)
+> <Array(<ChunkedUploadSessionWrapper>, Integer, Hash)> upload_async_session_with_http_info(folder_id, session_id, opts)
 
 ```ruby
 begin
@@ -2133,7 +2161,7 @@ begin
   data, status_code, headers = api_instance.upload_async_session_with_http_info(folder_id, session_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ChunkedUploadSessionResponseResponseWrapper>
+  p data # => <ChunkedUploadSessionWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::OperationsApi->upload_async_session_with_http_info: #{e}"
 end
@@ -2150,11 +2178,11 @@ end
 
 ### Return type
 
-[**ChunkedUploadSessionResponseResponseWrapper**](ChunkedUploadSessionResponseResponseWrapper.md)
+[**ChunkedUploadSessionWrapper**](ChunkedUploadSessionWrapper.md)
 
 ### Third-party storage
 
-The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id` as `String` and the answer is [**ThirdPartyChunkedUploadSessionResponseResponseWrapper**](ThirdPartyChunkedUploadSessionResponseResponseWrapper.md).
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folder_id` as `String` and the answer is [**ThirdPartyChunkedUploadSessionWrapper**](ThirdPartyChunkedUploadSessionWrapper.md).
 
 ### Authorization
 

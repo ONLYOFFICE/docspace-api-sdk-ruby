@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The successful API response containing the BackupProgress object.
+  # The successful API response containing the BackupProgressDto object.
   class BackupProgressWrapper < ApiModelBase
-    # The BackupProgress object returned by the operation.
+    # The BackupProgressDto object returned by the operation.
     attr_accessor :response
 
     # The total number of items in the response
@@ -58,7 +58,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'response' => :'BackupProgress',
+        :'response' => :'BackupProgressDto',
         :'count' => :'Integer',
         :'links' => :'Array<GetPortalPrices200ResponseLinksInner>',
         :'status' => :'Integer',

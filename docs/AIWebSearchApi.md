@@ -16,7 +16,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 ## ai_web_search_clear
 
-> <AiSuccessResponse> ai_web_search_clear(body)
+> <AiSuccessResponse> ai_web_search_clear(ai_web_search_clear_request)
 
 Clear the web-search configuration
 
@@ -41,11 +41,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::WebSearchApi.new
-body = 'body_example' # String | Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
+ai_web_search_clear_request = 'ai_web_search_clear_request_example' # String | Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
 
 begin
   # Clear the web-search configuration
-  result = api_instance.ai_web_search_clear(body)
+  result = api_instance.ai_web_search_clear(ai_web_search_clear_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::WebSearchApi->ai_web_search_clear: #{e}"
@@ -56,12 +56,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AiSuccessResponse>, Integer, Hash)> ai_web_search_clear_with_http_info(body)
+> <Array(<AiSuccessResponse>, Integer, Hash)> ai_web_search_clear_with_http_info(ai_web_search_clear_request)
 
 ```ruby
 begin
   # Clear the web-search configuration
-  data, status_code, headers = api_instance.ai_web_search_clear_with_http_info(body)
+  data, status_code, headers = api_instance.ai_web_search_clear_with_http_info(ai_web_search_clear_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AiSuccessResponse>
@@ -74,7 +74,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **body** | **String** | Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room. |  |
+| **ai_web_search_clear_request** | **String** | Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room. |  |
 
 ### Return type
 
@@ -324,11 +324,11 @@ end
 
 ## ai_web_search_passthrough_contents
 
-> Hash&lt;String, Object&gt; ai_web_search_passthrough_contents(request_body)
+> Hash&lt;String, Object&gt; ai_web_search_passthrough_contents(ai_web_search_passthrough_contents_request)
 
 Web page contents passthrough
 
-Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider's status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
+Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. `urls` has to be a non-empty array of strings, or the call answers 400 naming the field. The provider's 4xx status, body and content type are relayed, so its 429 surfaces unchanged, while a 5xx is replaced by a fixed 502 with the detail kept in the server log. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-contents/).
 
@@ -349,11 +349,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::WebSearchApi.new
-request_body = { key: 3.56} # Hash<String, Object> | A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.
+ai_web_search_passthrough_contents_request = { key: 3.56} # Hash<String, Object> | A page-contents request in the shape the portal's active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration.
 
 begin
   # Web page contents passthrough
-  result = api_instance.ai_web_search_passthrough_contents(request_body)
+  result = api_instance.ai_web_search_passthrough_contents(ai_web_search_passthrough_contents_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::WebSearchApi->ai_web_search_passthrough_contents: #{e}"
@@ -364,12 +364,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(Hash&lt;String, Object&gt;, Integer, Hash)> ai_web_search_passthrough_contents_with_http_info(request_body)
+> <Array(Hash&lt;String, Object&gt;, Integer, Hash)> ai_web_search_passthrough_contents_with_http_info(ai_web_search_passthrough_contents_request)
 
 ```ruby
 begin
   # Web page contents passthrough
-  data, status_code, headers = api_instance.ai_web_search_passthrough_contents_with_http_info(request_body)
+  data, status_code, headers = api_instance.ai_web_search_passthrough_contents_with_http_info(ai_web_search_passthrough_contents_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Hash&lt;String, Object&gt;
@@ -382,7 +382,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **request_body** | [**Hash&lt;String, Object&gt;**](Object.md) | A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration. |  |
+| **ai_web_search_passthrough_contents_request** | [**Hash&lt;String, Object&gt;**](Object.md) | A page-contents request in the shape the portal's active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration. |  |
 
 ### Return type
 
@@ -400,11 +400,11 @@ end
 
 ## ai_web_search_passthrough_search
 
-> Hash&lt;String, Object&gt; ai_web_search_passthrough_search(request_body)
+> Hash&lt;String, Object&gt; ai_web_search_passthrough_search(ai_web_search_passthrough_search_request)
 
 Web search passthrough
 
-Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider's own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
+Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. `query` has to be a non-empty string and `numResults`, when sent, a positive integer; a body failing that answers 400 naming the field, before anything is sent on. The provider's own 4xx status, body and content type are relayed as they stand, so a provider that rate-limits answers 429; a 5xx from the provider or from the hop in front of it is not relayed, its detail stays in the server log and the call answers a fixed 502, which is also what an unreachable provider answers. Closing the connection aborts the upstream request.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-search/).
 
@@ -425,11 +425,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::WebSearchApi.new
-request_body = { key: 3.56} # Hash<String, Object> | A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.
+ai_web_search_passthrough_search_request = { key: 3.56} # Hash<String, Object> | A search request in the shape the portal's active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here.
 
 begin
   # Web search passthrough
-  result = api_instance.ai_web_search_passthrough_search(request_body)
+  result = api_instance.ai_web_search_passthrough_search(ai_web_search_passthrough_search_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::WebSearchApi->ai_web_search_passthrough_search: #{e}"
@@ -440,12 +440,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(Hash&lt;String, Object&gt;, Integer, Hash)> ai_web_search_passthrough_search_with_http_info(request_body)
+> <Array(Hash&lt;String, Object&gt;, Integer, Hash)> ai_web_search_passthrough_search_with_http_info(ai_web_search_passthrough_search_request)
 
 ```ruby
 begin
   # Web search passthrough
-  data, status_code, headers = api_instance.ai_web_search_passthrough_search_with_http_info(request_body)
+  data, status_code, headers = api_instance.ai_web_search_passthrough_search_with_http_info(ai_web_search_passthrough_search_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => Hash&lt;String, Object&gt;
@@ -458,7 +458,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **request_body** | [**Hash&lt;String, Object&gt;**](Object.md) | A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here. |  |
+| **ai_web_search_passthrough_search_request** | [**Hash&lt;String, Object&gt;**](Object.md) | A search request in the shape the portal's active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here. |  |
 
 ### Return type
 
@@ -476,7 +476,7 @@ end
 
 ## ai_web_search_set_active_config
 
-> <AiSuccessResponse> ai_web_search_set_active_config(ai_web_search_configure_request)
+> <AiSuccessResponse> ai_web_search_set_active_config(ai_web_search_set_active_config_request)
 
 Set active config
 
@@ -501,11 +501,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::WebSearchApi.new
-ai_web_search_configure_request = DocspaceApiSdk::AiWebSearchConfigureRequest.new({config: DocspaceApiSdk::AiWebSearchConfig.new({provider: 'exa'})}) # AiWebSearchConfigureRequest | 
+ai_web_search_set_active_config_request = DocspaceApiSdk::AiWebSearchSetActiveConfigRequest.new({config: DocspaceApiSdk::AiWebSearchConfig.new({provider: 'exa'})}) # AiWebSearchSetActiveConfigRequest | 
 
 begin
   # Set active config
-  result = api_instance.ai_web_search_set_active_config(ai_web_search_configure_request)
+  result = api_instance.ai_web_search_set_active_config(ai_web_search_set_active_config_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::WebSearchApi->ai_web_search_set_active_config: #{e}"
@@ -516,12 +516,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AiSuccessResponse>, Integer, Hash)> ai_web_search_set_active_config_with_http_info(ai_web_search_configure_request)
+> <Array(<AiSuccessResponse>, Integer, Hash)> ai_web_search_set_active_config_with_http_info(ai_web_search_set_active_config_request)
 
 ```ruby
 begin
   # Set active config
-  data, status_code, headers = api_instance.ai_web_search_set_active_config_with_http_info(ai_web_search_configure_request)
+  data, status_code, headers = api_instance.ai_web_search_set_active_config_with_http_info(ai_web_search_set_active_config_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AiSuccessResponse>
@@ -534,7 +534,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **ai_web_search_configure_request** | [**AiWebSearchConfigureRequest**](AiWebSearchConfigureRequest.md) |  |  |
+| **ai_web_search_set_active_config_request** | [**AiWebSearchSetActiveConfigRequest**](AiWebSearchSetActiveConfigRequest.md) |  |  |
 
 ### Return type
 

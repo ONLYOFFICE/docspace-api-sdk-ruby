@@ -24,12 +24,12 @@ end
 
 begin
   auth_api = DocspaceApiSdk::Authentication::AuthenticationApi.new
-  auth_request = DocspaceApiSdk::AuthRequestsDto.new(
+  auth_request = DocspaceApiSdk::AuthRequestDto.new(
     user_name: 'example@onlyoffice.com',
     password: '11111111'
   )
 
-  auth_response = auth_api.authenticate_me(auth_requests_dto: auth_request)
+  auth_response = auth_api.authenticate_me(auth_request_dto: auth_request)
   token = auth_response.response.token
 
   DocspaceApiSdk.configure do |config|
@@ -40,7 +40,7 @@ begin
   my_folder = folders_api.get_my_folder
   parent_folder_id = my_folder.response.current.id
 
-  create_folder_payload = DocspaceApiSdk::CreateFolder.new(title: 'SDK Sample Folder')
+  create_folder_payload = DocspaceApiSdk::CreateFolderRequest.new(title: 'SDK Sample Folder')
   created_folder = folders_api.create_folder(parent_folder_id, create_folder_payload)
 
   puts "Created folder ID: #{created_folder.response.id}"

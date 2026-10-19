@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The successful API response containing the DocsCloudUsage object.
+  # The successful API response containing the DocsCloudUsageDto object.
   class DocsCloudUsageWrapper < ApiModelBase
-    # The DocsCloudUsage object returned by the operation.
+    # The DocsCloudUsageDto object returned by the operation.
     attr_accessor :response
 
     # The total number of items in the response
@@ -58,7 +58,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'response' => :'DocsCloudUsage',
+        :'response' => :'DocsCloudUsageDto',
         :'count' => :'Integer',
         :'links' => :'Array<GetPortalPrices200ResponseLinksInner>',
         :'status' => :'Integer',

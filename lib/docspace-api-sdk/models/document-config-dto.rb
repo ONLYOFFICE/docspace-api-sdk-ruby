@@ -90,14 +90,14 @@ module DocspaceApiSdk
         :'info' => :'InfoConfigDto',
         :'is_linked_for_me' => :'Boolean',
         :'key' => :'String',
-        :'permissions' => :'PermissionsConfig',
+        :'permissions' => :'PermissionsConfigDto',
         :'shared_link_param' => :'String',
         :'shared_link_key' => :'String',
-        :'reference_data' => :'FileReferenceData',
+        :'reference_data' => :'FileReferenceDataDto',
         :'title' => :'String',
         :'url' => :'String',
         :'is_form' => :'Boolean',
-        :'options' => :'Options'
+        :'options' => :'DocumentOptionsDto'
       }
     end
 

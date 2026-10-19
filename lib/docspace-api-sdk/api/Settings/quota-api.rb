@@ -27,7 +27,7 @@ module DocspaceApiSdk
     # Returns the portal's per-user default storage quota: whether it is enabled and, if so, its size in bytes.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other authenticated role, and an  anonymous caller, is refused. This is a read-only, idempotent call. When `enableQuota` is false, the size  value is not enforced and users get unlimited personal storage regardless of what it holds. The response  supports conditional requests: send the standard If-Modified-Since header with the previous `lastModified`  value, and an unchanged response comes back empty instead of resending the settings.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-quota-settings/
     # @param [Hash] opts the optional parameters
-    # @return [TenantUserQuotaSettingsWrapper]
+    # @return [EntityQuotaSettingsWrapper]
     def get_user_quota_settings(opts = {})
       data, _status_code, _headers = get_user_quota_settings_with_http_info(opts)
       data
@@ -37,7 +37,7 @@ module DocspaceApiSdk
     # Returns the portal's per-user default storage quota: whether it is enabled and, if so, its size in bytes.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other authenticated role, and an  anonymous caller, is refused. This is a read-only, idempotent call. When `enableQuota` is false, the size  value is not enforced and users get unlimited personal storage regardless of what it holds. The response  supports conditional requests: send the standard If-Modified-Since header with the previous `lastModified`  value, and an unchanged response comes back empty instead of resending the settings.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-quota-settings/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(TenantUserQuotaSettingsWrapper, Integer, Hash)>] TenantUserQuotaSettingsWrapper data, response status code and response headers
+    # @return [Array<(EntityQuotaSettingsWrapper, Integer, Hash)>] EntityQuotaSettingsWrapper data, response status code and response headers
     def get_user_quota_settings_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Settings::QuotaApi.get_user_quota_settings ...'
@@ -60,7 +60,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'TenantUserQuotaSettingsWrapper'
+      return_type = opts[:debug_return_type] || 'EntityQuotaSettingsWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -86,8 +86,8 @@ module DocspaceApiSdk
     # Sets the portal's default storage quota for AI agents, applied as the starting limit for newly created agents.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal's  plan must include the statistics feature, or the call is rejected as not covered by the plan. The requested  size cannot exceed the portal's own total storage quota, nor, on a Standalone install with a portal-wide quota  enabled, that quota's size. Disable enforcement by passing `enableQuota=false`; the size is then ignored for  new agents. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved settings, not any agent's current usage.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-ai-agent-quota-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [QuotaSettingsRequestsDto] :quota_settings_requests_dto 
-    # @return [TenantAiAgentQuotaSettingsWrapper]
+    # @option opts [QuotaSettingsRequestDto] :quota_settings_request_dto 
+    # @return [EntityQuotaSettingsWrapper]
     def save_ai_agent_quota_settings(opts = {})
       data, _status_code, _headers = save_ai_agent_quota_settings_with_http_info(opts)
       data
@@ -97,8 +97,8 @@ module DocspaceApiSdk
     # Sets the portal's default storage quota for AI agents, applied as the starting limit for newly created agents.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal's  plan must include the statistics feature, or the call is rejected as not covered by the plan. The requested  size cannot exceed the portal's own total storage quota, nor, on a Standalone install with a portal-wide quota  enabled, that quota's size. Disable enforcement by passing `enableQuota=false`; the size is then ignored for  new agents. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved settings, not any agent's current usage.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-ai-agent-quota-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [QuotaSettingsRequestsDto] :quota_settings_requests_dto 
-    # @return [Array<(TenantAiAgentQuotaSettingsWrapper, Integer, Hash)>] TenantAiAgentQuotaSettingsWrapper data, response status code and response headers
+    # @option opts [QuotaSettingsRequestDto] :quota_settings_request_dto 
+    # @return [Array<(EntityQuotaSettingsWrapper, Integer, Hash)>] EntityQuotaSettingsWrapper data, response status code and response headers
     def save_ai_agent_quota_settings_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Settings::QuotaApi.save_ai_agent_quota_settings ...'
@@ -123,10 +123,10 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'quota_settings_requests_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'quota_settings_request_dto'])
 
       # return_type
-      return_type = opts[:debug_return_type] || 'TenantAiAgentQuotaSettingsWrapper'
+      return_type = opts[:debug_return_type] || 'EntityQuotaSettingsWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -152,8 +152,8 @@ module DocspaceApiSdk
     # Sets the portal's default per-room storage quota, applied to newly created rooms as their starting limit.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal's  plan must include the statistics feature, or the call is rejected as not covered by the plan. The requested  size cannot exceed the portal's own total storage quota, nor, on a Standalone install with a portal-wide quota  enabled, that quota's size. Disable enforcement by passing `enableQuota=false`; the size is then ignored for  new rooms. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved settings, not the individual rooms' current usage.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-room-quota-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [QuotaSettingsRequestsDto] :quota_settings_requests_dto 
-    # @return [TenantRoomQuotaSettingsWrapper]
+    # @option opts [QuotaSettingsRequestDto] :quota_settings_request_dto 
+    # @return [EntityQuotaSettingsWrapper]
     def save_room_quota_settings(opts = {})
       data, _status_code, _headers = save_room_quota_settings_with_http_info(opts)
       data
@@ -163,8 +163,8 @@ module DocspaceApiSdk
     # Sets the portal's default per-room storage quota, applied to newly created rooms as their starting limit.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal's  plan must include the statistics feature, or the call is rejected as not covered by the plan. The requested  size cannot exceed the portal's own total storage quota, nor, on a Standalone install with a portal-wide quota  enabled, that quota's size. Disable enforcement by passing `enableQuota=false`; the size is then ignored for  new rooms. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved settings, not the individual rooms' current usage.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-room-quota-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [QuotaSettingsRequestsDto] :quota_settings_requests_dto 
-    # @return [Array<(TenantRoomQuotaSettingsWrapper, Integer, Hash)>] TenantRoomQuotaSettingsWrapper data, response status code and response headers
+    # @option opts [QuotaSettingsRequestDto] :quota_settings_request_dto 
+    # @return [Array<(EntityQuotaSettingsWrapper, Integer, Hash)>] EntityQuotaSettingsWrapper data, response status code and response headers
     def save_room_quota_settings_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Settings::QuotaApi.save_room_quota_settings ...'
@@ -189,10 +189,10 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'quota_settings_requests_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'quota_settings_request_dto'])
 
       # return_type
-      return_type = opts[:debug_return_type] || 'TenantRoomQuotaSettingsWrapper'
+      return_type = opts[:debug_return_type] || 'EntityQuotaSettingsWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -218,7 +218,7 @@ module DocspaceApiSdk
     # Sets or removes the storage quota for a given tenant. Available only on a Standalone (self-hosted)  installation; on SaaS the call is always refused. Requires a DocSpace administrator, and the portal's plan  must include the statistics feature or the call is rejected as not covered by the plan. Pass a non-negative  `quota` in bytes to enable the limit for the tenant identified by `tenantId`, or a negative value to remove  any limit. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved quota settings for that tenant, not its current usage.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-quota-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [TenantQuotaSettingsRequestsDto] :tenant_quota_settings_requests_dto 
+    # @option opts [TenantQuotaSettingsRequestDto] :tenant_quota_settings_request_dto 
     # @return [TenantQuotaSettingsWrapper]
     def set_tenant_quota_settings(opts = {})
       data, _status_code, _headers = set_tenant_quota_settings_with_http_info(opts)
@@ -229,7 +229,7 @@ module DocspaceApiSdk
     # Sets or removes the storage quota for a given tenant. Available only on a Standalone (self-hosted)  installation; on SaaS the call is always refused. Requires a DocSpace administrator, and the portal's plan  must include the statistics feature or the call is rejected as not covered by the plan. Pass a non-negative  `quota` in bytes to enable the limit for the tenant identified by `tenantId`, or a negative value to remove  any limit. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved quota settings for that tenant, not its current usage.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-quota-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [TenantQuotaSettingsRequestsDto] :tenant_quota_settings_requests_dto 
+    # @option opts [TenantQuotaSettingsRequestDto] :tenant_quota_settings_request_dto 
     # @return [Array<(TenantQuotaSettingsWrapper, Integer, Hash)>] TenantQuotaSettingsWrapper data, response status code and response headers
     def set_tenant_quota_settings_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -255,7 +255,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'tenant_quota_settings_requests_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'tenant_quota_settings_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'TenantQuotaSettingsWrapper'

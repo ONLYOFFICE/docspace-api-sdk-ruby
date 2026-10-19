@@ -24,10 +24,12 @@ module DocspaceApiSdk
       @api_client = api_client
     end
     # Start audit trail report
-    # Queues a report of the portal's audit trail and returns the state of the background job that builds it. The  report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports and is never filtered: the query parameters of  `GET api/2.0/security/audit/events/filter` do not apply here. The caller needs the portal-settings right of a  DocSpace administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with  402. The file is not ready when the response arrives - poll `GET api/2.0/security/audit/events/report` until  `isCompleted` is true, then take `resultFileUrl`, and treat a non-empty `error` as a failed build. The  finished file is saved to the caller's My documents section, as an XLSX workbook by default or as CSV when  `format=Csv`, in which case `resultFileId` stays empty and only the name and the URL identify it. One job runs  per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
+    # Queues a report of the portal's audit trail and returns the state of the background job that builds it. By  default the report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports; `from` and `to` narrow it, a `from` older than that  window is moved up to its start, a `to` in the future is moved back to now, and a period that ends before it  starts is answered with 400. No other filter of `GET api/2.0/security/audit/events/filter` applies here. The  caller needs the portal-settings right of a DocSpace administrator plus the audit option of the portal's pricing  plan, otherwise the call is answered with 402. The file is not ready when the response arrives - poll  `GET api/2.0/security/audit/events/report` until `isCompleted` is true, then take `resultFileUrl`, and treat a  non-empty `error` as a failed build. The finished file is saved to the caller's My documents section, as an XLSX  workbook by default or as CSV when `format=Csv`, and `resultFileId` identifies it in either format;  `resultFileUrl` opens it in the editor, except for a CSV file too large for the editor, which it downloads  instead. An XLSX report keeps only the most recent events, at most 200,000 by default and fewer when the events  are long, and its header says how many were left out; `format=Csv` exports every event of the period. One job  runs per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-audit-trail-report/
     # @param [Hash] opts the optional parameters
-    # @option opts [AuditReportFormat] :format The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.
+    # @option opts [AuditReportFormat] :format The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file.
+    # @option opts [Time] :from The earliest moment a reported event may have been recorded at, read as a UTC instant.
+    # @option opts [Time] :to The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`.
     # @return [DocumentBuilderTaskWrapper]
     def create_audit_trail_report(opts = {})
       data, _status_code, _headers = create_audit_trail_report_with_http_info(opts)
@@ -35,10 +37,12 @@ module DocspaceApiSdk
     end
 
     # Start audit trail report
-    # Queues a report of the portal's audit trail and returns the state of the background job that builds it. The  report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports and is never filtered: the query parameters of  `GET api/2.0/security/audit/events/filter` do not apply here. The caller needs the portal-settings right of a  DocSpace administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with  402. The file is not ready when the response arrives - poll `GET api/2.0/security/audit/events/report` until  `isCompleted` is true, then take `resultFileUrl`, and treat a non-empty `error` as a failed build. The  finished file is saved to the caller's My documents section, as an XLSX workbook by default or as CSV when  `format=Csv`, in which case `resultFileId` stays empty and only the name and the URL identify it. One job runs  per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
+    # Queues a report of the portal's audit trail and returns the state of the background job that builds it. By  default the report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports; `from` and `to` narrow it, a `from` older than that  window is moved up to its start, a `to` in the future is moved back to now, and a period that ends before it  starts is answered with 400. No other filter of `GET api/2.0/security/audit/events/filter` applies here. The  caller needs the portal-settings right of a DocSpace administrator plus the audit option of the portal's pricing  plan, otherwise the call is answered with 402. The file is not ready when the response arrives - poll  `GET api/2.0/security/audit/events/report` until `isCompleted` is true, then take `resultFileUrl`, and treat a  non-empty `error` as a failed build. The finished file is saved to the caller's My documents section, as an XLSX  workbook by default or as CSV when `format=Csv`, and `resultFileId` identifies it in either format;  `resultFileUrl` opens it in the editor, except for a CSV file too large for the editor, which it downloads  instead. An XLSX report keeps only the most recent events, at most 200,000 by default and fewer when the events  are long, and its header says how many were left out; `format=Csv` exports every event of the period. One job  runs per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-audit-trail-report/
     # @param [Hash] opts the optional parameters
-    # @option opts [AuditReportFormat] :format The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.
+    # @option opts [AuditReportFormat] :format The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file.
+    # @option opts [Time] :from The earliest moment a reported event may have been recorded at, read as a UTC instant.
+    # @option opts [Time] :to The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`.
     # @return [Array<(DocumentBuilderTaskWrapper, Integer, Hash)>] DocumentBuilderTaskWrapper data, response status code and response headers
     def create_audit_trail_report_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -50,6 +54,8 @@ module DocspaceApiSdk
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'format'] = opts[:'format'] if !opts[:'format'].nil?
+      query_params[:'from'] = opts[:'from'] if !opts[:'from'].nil?
+      query_params[:'to'] = opts[:'to'] if !opts[:'to'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -186,7 +192,7 @@ module DocspaceApiSdk
     # Returns how long this portal keeps its two security logs: `loginHistoryLifeTime` for login events and  `auditTrailLifeTime` for audit events, both counted in days, together with `lastModified`, the moment the pair  was last saved. The caller needs the portal-settings right of a DocSpace administrator, and in a cloud  installation the login history and audit trail section must be enabled for the portal, otherwise the call is  answered with 402; the audit option of the pricing plan is not required to read the values. Both numbers lie  between 1 and 180 days, and a portal that never changed them reports the default of 180. They define the  window the rest of the audit operations work in: `GET api/2.0/security/audit/events/last` looks exactly this  far back, and the reports started by `POST api/2.0/security/audit/login/report` and  `POST api/2.0/security/audit/events/report` cover exactly this period. The operation is read-only; change the  values with `POST api/2.0/security/audit/settings/lifetime`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-settings/
     # @param [Hash] opts the optional parameters
-    # @return [TenantAuditSettingsResponseWrapper]
+    # @return [TenantAuditSettingsWrapper]
     def get_audit_settings(opts = {})
       data, _status_code, _headers = get_audit_settings_with_http_info(opts)
       data
@@ -196,7 +202,7 @@ module DocspaceApiSdk
     # Returns how long this portal keeps its two security logs: `loginHistoryLifeTime` for login events and  `auditTrailLifeTime` for audit events, both counted in days, together with `lastModified`, the moment the pair  was last saved. The caller needs the portal-settings right of a DocSpace administrator, and in a cloud  installation the login history and audit trail section must be enabled for the portal, otherwise the call is  answered with 402; the audit option of the pricing plan is not required to read the values. Both numbers lie  between 1 and 180 days, and a portal that never changed them reports the default of 180. They define the  window the rest of the audit operations work in: `GET api/2.0/security/audit/events/last` looks exactly this  far back, and the reports started by `POST api/2.0/security/audit/login/report` and  `POST api/2.0/security/audit/events/report` cover exactly this period. The operation is read-only; change the  values with `POST api/2.0/security/audit/settings/lifetime`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-settings/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(TenantAuditSettingsResponseWrapper, Integer, Hash)>] TenantAuditSettingsResponseWrapper data, response status code and response headers
+    # @return [Array<(TenantAuditSettingsWrapper, Integer, Hash)>] TenantAuditSettingsWrapper data, response status code and response headers
     def get_audit_settings_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Security::AuditTrailDataApi.get_audit_settings ...'
@@ -219,7 +225,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'TenantAuditSettingsResponseWrapper'
+      return_type = opts[:debug_return_type] || 'TenantAuditSettingsWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -247,7 +253,7 @@ module DocspaceApiSdk
     # @param [Hash] opts the optional parameters
     # @option opts [ProductType] :product_type The product to keep, spelled as `GET api/2.0/security/audit/types` lists it under `productTypes`. Omitting  it keeps every product; a value no product matches yields an empty list rather than an error.
     # @option opts [LocationType] :module_type The module to keep inside the products that survive `productType`, spelled as  `GET api/2.0/security/audit/types` lists it under `moduleTypes`. Omitting it keeps every module of those  products.
-    # @return [AuditTrailProductMapperArrayWrapper]
+    # @return [AuditTrailProductArrayWrapper]
     def get_audit_trail_mappers(opts = {})
       data, _status_code, _headers = get_audit_trail_mappers_with_http_info(opts)
       data
@@ -259,7 +265,7 @@ module DocspaceApiSdk
     # @param [Hash] opts the optional parameters
     # @option opts [ProductType] :product_type The product to keep, spelled as `GET api/2.0/security/audit/types` lists it under `productTypes`. Omitting  it keeps every product; a value no product matches yields an empty list rather than an error.
     # @option opts [LocationType] :module_type The module to keep inside the products that survive `productType`, spelled as  `GET api/2.0/security/audit/types` lists it under `moduleTypes`. Omitting it keeps every module of those  products.
-    # @return [Array<(AuditTrailProductMapperArrayWrapper, Integer, Hash)>] AuditTrailProductMapperArrayWrapper data, response status code and response headers
+    # @return [Array<(AuditTrailProductArrayWrapper, Integer, Hash)>] AuditTrailProductArrayWrapper data, response status code and response headers
     def get_audit_trail_mappers_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Security::AuditTrailDataApi.get_audit_trail_mappers ...'
@@ -284,7 +290,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AuditTrailProductMapperArrayWrapper'
+      return_type = opts[:debug_return_type] || 'AuditTrailProductArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -307,7 +313,7 @@ module DocspaceApiSdk
     end
 
     # Get audit trail report status
-    # Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with 402.  Jobs are kept per user and per report kind: this operation never shows another administrator's report, nor the  login history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is  empty when no report of this kind is known for the caller; otherwise `percentage` grows towards 100,  `isCompleted` turns true when the build has ended, `error` carries the failure message when it ended badly,  and `resultFileName` and `resultFileUrl` point at the file saved to the caller's My documents section, while  `resultFileId` is filled for an XLSX report only. The operation is read-only and safe to poll every few  seconds; a finished job is dropped as soon as the next report of this kind is started.
+    # Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with 402. Jobs  are kept per user and per report kind: this operation never shows another administrator's report, nor the login  history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is empty when  no report of this kind is known for the caller; otherwise `percentage` grows towards 100, `isCompleted` turns  true when the build has ended, `error` carries the failure message when it ended badly, and `resultFileId`,  `resultFileName` and `resultFileUrl` point at the file saved to the caller's My documents section. The operation  is read-only and safe to poll every few seconds; a finished job is dropped as soon as the next report of this  kind is started.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-report/
     # @param [Hash] opts the optional parameters
     # @return [DocumentBuilderTaskWrapper]
@@ -317,7 +323,7 @@ module DocspaceApiSdk
     end
 
     # Get audit trail report status
-    # Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with 402.  Jobs are kept per user and per report kind: this operation never shows another administrator's report, nor the  login history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is  empty when no report of this kind is known for the caller; otherwise `percentage` grows towards 100,  `isCompleted` turns true when the build has ended, `error` carries the failure message when it ended badly,  and `resultFileName` and `resultFileUrl` point at the file saved to the caller's My documents section, while  `resultFileId` is filled for an XLSX report only. The operation is read-only and safe to poll every few  seconds; a finished job is dropped as soon as the next report of this kind is started.
+    # Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal's pricing plan, otherwise the call is answered with 402. Jobs  are kept per user and per report kind: this operation never shows another administrator's report, nor the login  history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is empty when  no report of this kind is known for the caller; otherwise `percentage` grows towards 100, `isCompleted` turns  true when the build has ended, `error` carries the failure message when it ended badly, and `resultFileId`,  `resultFileName` and `resultFileUrl` point at the file saved to the caller's My documents section. The operation  is read-only and safe to poll every few seconds; a finished job is dropped as soon as the next report of this  kind is started.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-report/
     # @param [Hash] opts the optional parameters
     # @return [Array<(DocumentBuilderTaskWrapper, Integer, Hash)>] DocumentBuilderTaskWrapper data, response status code and response headers
@@ -487,8 +493,8 @@ module DocspaceApiSdk
     # Sets how long this portal keeps its login history and its audit trail, in days, and returns the pair as it was  stored. The caller needs the portal-settings right of a DocSpace administrator plus the audit option of the  portal's pricing plan, otherwise the call is answered with 402. Send both numbers inside `settings`: each has  to be between 1 and 180 days, and a value outside that range is refused with 400 without either number being  saved, so read the current pair from `GET api/2.0/security/audit/settings/lifetime` and resend the one that  should stay as it is. The call replaces the stored settings rather than merging them, is idempotent, and takes  effect at once: the period covered by `GET api/2.0/security/audit/events/last` and by both audit reports  shrinks or grows with it, and events older than the new lifetime stop being reported. The change is itself  recorded in the audit trail.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-audit-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [TenantAuditSettingsWrapper] :tenant_audit_settings_wrapper 
-    # @return [TenantAuditSettingsResponseWrapper]
+    # @option opts [TenantAuditSettingsRequestDto] :tenant_audit_settings_request_dto 
+    # @return [TenantAuditSettingsWrapper]
     def set_audit_settings(opts = {})
       data, _status_code, _headers = set_audit_settings_with_http_info(opts)
       data
@@ -498,8 +504,8 @@ module DocspaceApiSdk
     # Sets how long this portal keeps its login history and its audit trail, in days, and returns the pair as it was  stored. The caller needs the portal-settings right of a DocSpace administrator plus the audit option of the  portal's pricing plan, otherwise the call is answered with 402. Send both numbers inside `settings`: each has  to be between 1 and 180 days, and a value outside that range is refused with 400 without either number being  saved, so read the current pair from `GET api/2.0/security/audit/settings/lifetime` and resend the one that  should stay as it is. The call replaces the stored settings rather than merging them, is idempotent, and takes  effect at once: the period covered by `GET api/2.0/security/audit/events/last` and by both audit reports  shrinks or grows with it, and events older than the new lifetime stop being reported. The change is itself  recorded in the audit trail.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-audit-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [TenantAuditSettingsWrapper] :tenant_audit_settings_wrapper 
-    # @return [Array<(TenantAuditSettingsResponseWrapper, Integer, Hash)>] TenantAuditSettingsResponseWrapper data, response status code and response headers
+    # @option opts [TenantAuditSettingsRequestDto] :tenant_audit_settings_request_dto 
+    # @return [Array<(TenantAuditSettingsWrapper, Integer, Hash)>] TenantAuditSettingsWrapper data, response status code and response headers
     def set_audit_settings_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Security::AuditTrailDataApi.set_audit_settings ...'
@@ -524,10 +530,10 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'tenant_audit_settings_wrapper'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'tenant_audit_settings_request_dto'])
 
       # return_type
-      return_type = opts[:debug_return_type] || 'TenantAuditSettingsResponseWrapper'
+      return_type = opts[:debug_return_type] || 'TenantAuditSettingsWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']

@@ -49,7 +49,7 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'Dump'] = opts[:'dump'] if !opts[:'dump'].nil?
+      query_params[:'dump'] = opts[:'dump'] if !opts[:'dump'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -443,8 +443,8 @@ module DocspaceApiSdk
     # Selects the content delivery network that serves the static content of the portal and saves the credentials it  needs: `module` is the identifier of one of the entries of `GET api/2.0/settings/storage/cdn`, and `props`  carries that provider's authentication keys as name and value pairs. The provider has to be available on the  server, which the `isSet` flag of the listing tells, otherwise the request is rejected as invalid. Sending the  module the portal already uses changes nothing and returns the saved settings as they are. Any other module is  saved and the upload of the static content is handed to the storage service; the settings come back only when  that hand-over succeeds, a failure being reported as a server error. Unlike the portal storage this has no  progress operation, so there is nothing to poll: the content appears on the CDN once the service has copied  it. Only static content is affected here, never documents; for those use `PUT api/2.0/settings/storage`. The  caller needs the permission to edit portal settings, which in practice means the portal owner or a DocSpace  admin, on a server installation with an unrestricted access space. The response is the stored CDN  configuration.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-cdn-storage/
     # @param [Hash] opts the optional parameters
-    # @option opts [StorageRequestsDto] :storage_requests_dto 
-    # @return [CdnStorageSettingsWrapper]
+    # @option opts [StorageRequestDto] :storage_request_dto 
+    # @return [StorageSettingsWrapper]
     def update_cdn_storage(opts = {})
       data, _status_code, _headers = update_cdn_storage_with_http_info(opts)
       data
@@ -454,8 +454,8 @@ module DocspaceApiSdk
     # Selects the content delivery network that serves the static content of the portal and saves the credentials it  needs: `module` is the identifier of one of the entries of `GET api/2.0/settings/storage/cdn`, and `props`  carries that provider's authentication keys as name and value pairs. The provider has to be available on the  server, which the `isSet` flag of the listing tells, otherwise the request is rejected as invalid. Sending the  module the portal already uses changes nothing and returns the saved settings as they are. Any other module is  saved and the upload of the static content is handed to the storage service; the settings come back only when  that hand-over succeeds, a failure being reported as a server error. Unlike the portal storage this has no  progress operation, so there is nothing to poll: the content appears on the CDN once the service has copied  it. Only static content is affected here, never documents; for those use `PUT api/2.0/settings/storage`. The  caller needs the permission to edit portal settings, which in practice means the portal owner or a DocSpace  admin, on a server installation with an unrestricted access space. The response is the stored CDN  configuration.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-cdn-storage/
     # @param [Hash] opts the optional parameters
-    # @option opts [StorageRequestsDto] :storage_requests_dto 
-    # @return [Array<(CdnStorageSettingsWrapper, Integer, Hash)>] CdnStorageSettingsWrapper data, response status code and response headers
+    # @option opts [StorageRequestDto] :storage_request_dto 
+    # @return [Array<(StorageSettingsWrapper, Integer, Hash)>] StorageSettingsWrapper data, response status code and response headers
     def update_cdn_storage_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Settings::StorageApi.update_cdn_storage ...'
@@ -480,10 +480,10 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'storage_requests_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'storage_request_dto'])
 
       # return_type
-      return_type = opts[:debug_return_type] || 'CdnStorageSettingsWrapper'
+      return_type = opts[:debug_return_type] || 'StorageSettingsWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -509,7 +509,7 @@ module DocspaceApiSdk
     # Points the current portal at another storage and saves the credentials it needs: `module` is the identifier of  one of the storages listed by `GET api/2.0/settings/storage`, and `props` carries that provider's  authentication keys as name and value pairs, for example the bucket, region and access key of an Amazon S3  storage. The provider has to be available on the server, which the `isSet` flag of the listing tells,  otherwise the request is rejected as invalid. Sending the module the portal already uses changes nothing and  returns the saved settings as they are. Any other module starts an asynchronous migration of the portal data:  the portal moves into the migrating state and stays unavailable until the transfer ends, so follow it with  `GET api/2.0/settings/storage/progress` and do not send a second switch while it runs. The caller needs the  permission to edit portal settings, which in practice means the portal owner or a DocSpace admin, on a server  installation with an unrestricted access space. The response is the stored configuration, module and  properties, not the state of the migration. To return to the built-in local storage call  `DELETE api/2.0/settings/storage`, and for the CDN use `PUT api/2.0/settings/storage/cdn`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-storage/
     # @param [Hash] opts the optional parameters
-    # @option opts [StorageRequestsDto] :storage_requests_dto 
+    # @option opts [StorageRequestDto] :storage_request_dto 
     # @return [StorageSettingsWrapper]
     def update_storage(opts = {})
       data, _status_code, _headers = update_storage_with_http_info(opts)
@@ -520,7 +520,7 @@ module DocspaceApiSdk
     # Points the current portal at another storage and saves the credentials it needs: `module` is the identifier of  one of the storages listed by `GET api/2.0/settings/storage`, and `props` carries that provider's  authentication keys as name and value pairs, for example the bucket, region and access key of an Amazon S3  storage. The provider has to be available on the server, which the `isSet` flag of the listing tells,  otherwise the request is rejected as invalid. Sending the module the portal already uses changes nothing and  returns the saved settings as they are. Any other module starts an asynchronous migration of the portal data:  the portal moves into the migrating state and stays unavailable until the transfer ends, so follow it with  `GET api/2.0/settings/storage/progress` and do not send a second switch while it runs. The caller needs the  permission to edit portal settings, which in practice means the portal owner or a DocSpace admin, on a server  installation with an unrestricted access space. The response is the stored configuration, module and  properties, not the state of the migration. To return to the built-in local storage call  `DELETE api/2.0/settings/storage`, and for the CDN use `PUT api/2.0/settings/storage/cdn`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-storage/
     # @param [Hash] opts the optional parameters
-    # @option opts [StorageRequestsDto] :storage_requests_dto 
+    # @option opts [StorageRequestDto] :storage_request_dto 
     # @return [Array<(StorageSettingsWrapper, Integer, Hash)>] StorageSettingsWrapper data, response status code and response headers
     def update_storage_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -546,7 +546,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'storage_requests_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'storage_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'StorageSettingsWrapper'

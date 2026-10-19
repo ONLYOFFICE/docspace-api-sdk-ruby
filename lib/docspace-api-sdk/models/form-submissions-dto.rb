@@ -46,7 +46,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'metadata' => :'Array<FormMetadata>',
+        :'metadata' => :'Array<FormMetadataDto>',
         :'submissions' => :'Array<FormResultsDto>'
       }
     end

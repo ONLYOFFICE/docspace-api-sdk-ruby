@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The successful API response containing the TenantWalletServiceSettings object.
+  # The successful API response containing the TenantWalletServiceSettingsDto object.
   class TenantWalletServiceSettingsWrapper < ApiModelBase
-    # The TenantWalletServiceSettings object returned by the operation.
+    # The TenantWalletServiceSettingsDto object returned by the operation.
     attr_accessor :response
 
     # The total number of items in the response
@@ -58,7 +58,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'response' => :'TenantWalletServiceSettings',
+        :'response' => :'TenantWalletServiceSettingsDto',
         :'count' => :'Integer',
         :'links' => :'Array<GetPortalPrices200ResponseLinksInner>',
         :'status' => :'Integer',

@@ -34,7 +34,7 @@ module DocspaceApiSdk
     # The thread the event belongs to.
     attr_accessor :thread_id
 
-    # The consumer should execute the tool without prompting the user. True when the tool is in the persisted always-allow list, or the tool itself opts in via `TMCPItem.requireApproval === false` (host tools default to this). For a client-side tool with a server-side engine, this lets the engine return the pending call already flagged auto-allow so the client runs it and streams the result back without a dialog round-trip.
+    # The consumer should execute the tool without prompting the user. Decided by the tool permission mode (`resolveAutoAllow`): under ask never; under auto a tool in the persisted always-allow list or one that opts in via `TMCPItem.requireApproval === false` (host tools default to this); under allow every tool. For a client-side tool with a server-side engine, this lets the engine return the pending call already flagged auto-allow so the client runs it and streams the result back without a dialog round-trip.
     attr_accessor :auto_allow
 
     # Set when the tool is served by a server-side system source: the consumer must NOT execute it locally — only show the approval UI (unless `autoAllow`) and resume via `approveToolCall` (no `result` needed) / `denyToolCall`. The engine runs it in-engine.

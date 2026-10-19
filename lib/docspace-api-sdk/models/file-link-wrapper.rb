@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The successful API response containing the FileLink object.
+  # The successful API response containing the FileLinkDto object.
   class FileLinkWrapper < ApiModelBase
-    # The FileLink object returned by the operation.
+    # The FileLinkDto object returned by the operation.
     attr_accessor :response
 
     # The total number of items in the response
@@ -58,7 +58,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'response' => :'FileLink',
+        :'response' => :'FileLinkDto',
         :'count' => :'Integer',
         :'links' => :'Array<GetPortalPrices200ResponseLinksInner>',
         :'status' => :'Integer',

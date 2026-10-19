@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **status** | [**Status**](Status.md) | How validating the link went. It is the first field to read: a refused link is reported here with the answer  still arriving as a success. A link that resolved describes both the entry and the link, one that is waiting  for its password describes only the entry, and one that failed outright leaves the rest of the object empty. |  |
+| **status** | [**ExternalShareStatus**](ExternalShareStatus.md) | How validating the link went. It is the first field to read: a refused link is reported here with the answer  still arriving as a success. A link that resolved describes both the entry and the link, one that is waiting  for its password describes only the entry, and one that failed outright leaves the rest of the object empty. |  |
 | **id** | **String** | The identifier of the room, folder or file the link points at, always rendered as a string even where the  portal stores it as a number. It is null when the link could not be resolved. | [optional] |
 | **title** | **String** | The title of the entry the link points at, suitable for showing to the visitor before they are let in. It is  null when the link could not be resolved. | [optional] |
 | **type** | [**FileEntryType**](FileEntryType.md) | Whether the link points at a folder - a room counts as one - or at a single file. It is null when the link  could not be resolved. | [optional] |

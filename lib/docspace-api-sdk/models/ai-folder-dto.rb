@@ -124,13 +124,19 @@ module DocspaceApiSdk
     # Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved.
     attr_accessor :is_link_expired
 
+    # The IDs of the metadata templates assigned to the file entry.
+    attr_accessor :assigned_metadata_templates
+
+    # Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here.
+    attr_accessor :metadata_matches
+
     # The folder this one is listed in. For a room it is the root of the section the room lives in, and for an entry  opened through a sharing link whose real parent the caller may not read it is the root of the section with the  entries shared with them.
     attr_accessor :parent_id
 
-    # How many files lie directly in the folder, without counting the subfolders. The roots of the `Rooms`, room  templates and default templates sections always report 0, because the number is not collected for them.
+    # How many files lie directly in the folder, without counting the subfolders. The roots of the `Rooms`, room  templates, default templates and AI agents sections always report 0, because the number is not collected for  them.
     attr_accessor :files_count
 
-    # How many subfolders lie directly in the folder. For an AI room the two service subfolders it always holds are  subtracted, so the number matches what a listing of it shows, and the roots of the `Rooms` and templates  sections report 0.
+    # How many subfolders lie directly in the folder. For an AI room the two service subfolders it always holds are  subtracted, so the number matches what a listing of it shows, and the roots of the `Rooms`, templates and AI  agents sections report 0.
     attr_accessor :folders_count
 
     # Whether the caller may hand out access to the folder. It is filled in only for the folder a folder-contents  answer is about, and is null in every other answer, so null says nothing about the sharing rights.
@@ -175,7 +181,7 @@ module DocspaceApiSdk
     # Whether the caller holds the room through an invitation of their own: true for the account that created it and  for a member invited personally, false when the access comes from a group they belong to, and null for a  folder that is not a room.
     attr_accessor :in_room
 
-    # How much space the files of the room may take, in bytes. It is the limit set on this room, or the portal  default for rooms when none was set. Null when the tariff of the portal does not count room statistics, when  room quotas are switched off, when the room lies in the archive or the trash, or when the caller may only read  it.
+    # How much space the files of the room may take, in bytes. It is the limit set on this room, or the portal  default for rooms when none was set. Null when the tariff of the portal does not count room statistics, when  room quotas are switched off, when the room lies in the archive or the trash, or when the role of the caller  in the room carries no editing rights - a viewer, a commenter, a reviewer and a form filler do not see the  figure, a room manager, a content creator and an editor do.
     attr_accessor :quota_limit
 
     # Whether `quotaLimit` is a limit set on this room (true) or the portal default for rooms (false). Null exactly  when `quotaLimit` is null.
@@ -266,6 +272,8 @@ module DocspaceApiSdk
         :'external' => :'external',
         :'expiration_date' => :'expirationDate',
         :'is_link_expired' => :'isLinkExpired',
+        :'assigned_metadata_templates' => :'assignedMetadataTemplates',
+        :'metadata_matches' => :'metadataMatches',
         :'parent_id' => :'parentId',
         :'files_count' => :'filesCount',
         :'folders_count' => :'foldersCount',
@@ -345,6 +353,8 @@ module DocspaceApiSdk
         :'external' => :'Boolean',
         :'expiration_date' => :'AiApiDateTime',
         :'is_link_expired' => :'Boolean',
+        :'assigned_metadata_templates' => :'Array<Integer>',
+        :'metadata_matches' => :'Array<AiMetadataMatchDto>',
         :'parent_id' => :'Integer',
         :'files_count' => :'Integer',
         :'folders_count' => :'Integer',
@@ -352,7 +362,7 @@ module DocspaceApiSdk
         :'new' => :'Integer',
         :'mute' => :'Boolean',
         :'tags' => :'Array<String>',
-        :'logo' => :'AiLogo',
+        :'logo' => :'AiLogoDto',
         :'pinned' => :'Boolean',
         :'room_type' => :'AiRoomType',
         :'private' => :'Boolean',
@@ -562,6 +572,18 @@ module DocspaceApiSdk
         self.is_link_expired = attributes[:'is_link_expired']
       end
 
+      if attributes.key?(:'assigned_metadata_templates')
+        if (value = attributes[:'assigned_metadata_templates']).is_a?(Array)
+          self.assigned_metadata_templates = value
+        end
+      end
+
+      if attributes.key?(:'metadata_matches')
+        if (value = attributes[:'metadata_matches']).is_a?(Array)
+          self.metadata_matches = value
+        end
+      end
+
       if attributes.key?(:'parent_id')
         self.parent_id = attributes[:'parent_id']
       end
@@ -729,6 +751,8 @@ module DocspaceApiSdk
           external == o.external &&
           expiration_date == o.expiration_date &&
           is_link_expired == o.is_link_expired &&
+          assigned_metadata_templates == o.assigned_metadata_templates &&
+          metadata_matches == o.metadata_matches &&
           parent_id == o.parent_id &&
           files_count == o.files_count &&
           folders_count == o.folders_count &&
@@ -767,7 +791,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, access, shared_by, owned_by, shared, shared_for_user, shared_external, parent_shared, short_web_url, created, created_by, updated, auto_delete, root_folder_type, parent_room_type, updated_by, provider_item, provider_key, provider_id, order, is_favorite, file_entry_type, id, root_folder_id, origin_id, origin_room_id, origin_title, origin_room_title, can_share, share_settings, security, available_share_rights, request_token, external, expiration_date, is_link_expired, parent_id, files_count, folders_count, is_shareable, new, mute, tags, logo, pinned, room_type, private, indexing, deny_download, lifetime, watermark, type, in_room, quota_limit, is_custom_quota, used_space, password_protected, expired, chat_settings, root_room_type, save_form_as_xlsx, send_form_to_external_db, original_form_id].hash
+      [title, access, shared_by, owned_by, shared, shared_for_user, shared_external, parent_shared, short_web_url, created, created_by, updated, auto_delete, root_folder_type, parent_room_type, updated_by, provider_item, provider_key, provider_id, order, is_favorite, file_entry_type, id, root_folder_id, origin_id, origin_room_id, origin_title, origin_room_title, can_share, share_settings, security, available_share_rights, request_token, external, expiration_date, is_link_expired, assigned_metadata_templates, metadata_matches, parent_id, files_count, folders_count, is_shareable, new, mute, tags, logo, pinned, room_type, private, indexing, deny_download, lifetime, watermark, type, in_room, quota_limit, is_custom_quota, used_space, password_protected, expired, chat_settings, root_room_type, save_form_as_xlsx, send_form_to_external_db, original_form_id].hash
     end
 
     # Builds the object from hash

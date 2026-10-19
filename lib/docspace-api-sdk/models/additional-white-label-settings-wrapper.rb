@@ -17,15 +17,31 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The additional white label settings wrapper.
+  # The successful API response containing the AdditionalWhiteLabelSettingsDto object.
   class AdditionalWhiteLabelSettingsWrapper < ApiModelBase
-    # The additional white label settings.
-    attr_accessor :settings
+    # The AdditionalWhiteLabelSettingsDto object returned by the operation.
+    attr_accessor :response
+
+    # The total number of items in the response
+    attr_accessor :count
+
+    # List of links related to the response
+    attr_accessor :links
+
+    # HTTP status code of the response
+    attr_accessor :status
+
+    # HTTP status code of the response (duplicate of status)
+    attr_accessor :status_code
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'settings' => :'settings'
+        :'response' => :'response',
+        :'count' => :'count',
+        :'links' => :'links',
+        :'status' => :'status',
+        :'status_code' => :'statusCode'
       }
     end
 
@@ -42,7 +58,11 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'settings' => :'AdditionalWhiteLabelSettings'
+        :'response' => :'AdditionalWhiteLabelSettingsDto',
+        :'count' => :'Integer',
+        :'links' => :'Array<GetPortalPrices200ResponseLinksInner>',
+        :'status' => :'Integer',
+        :'status_code' => :'Integer'
       }
     end
 
@@ -68,8 +88,26 @@ module DocspaceApiSdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'settings')
-        self.settings = attributes[:'settings']
+      if attributes.key?(:'response')
+        self.response = attributes[:'response']
+      end
+
+      if attributes.key?(:'count')
+        self.count = attributes[:'count']
+      end
+
+      if attributes.key?(:'links')
+        if (value = attributes[:'links']).is_a?(Array)
+          self.links = value
+        end
+      end
+
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'status_code')
+        self.status_code = attributes[:'status_code']
       end
     end
 
@@ -93,7 +131,11 @@ module DocspaceApiSdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          settings == o.settings
+          response == o.response &&
+          count == o.count &&
+          links == o.links &&
+          status == o.status &&
+          status_code == o.status_code
     end
 
     # @see the `==` method
@@ -105,7 +147,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [settings].hash
+      [response, count, links, status, status_code].hash
     end
 
     # Builds the object from hash

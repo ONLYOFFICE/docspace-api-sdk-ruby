@@ -124,6 +124,12 @@ module DocspaceApiSdk
     # Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved.
     attr_accessor :is_link_expired
 
+    # The IDs of the metadata templates assigned to the file entry.
+    attr_accessor :assigned_metadata_templates
+
+    # Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here.
+    attr_accessor :metadata_matches
+
     # The folder the file is stored in. When the file was reached through a share and the caller cannot open its  real parent, the identifier of the Shared with me section is reported instead, so this is where the file is  visible rather than where it physically sits.
     attr_accessor :folder_id
 
@@ -289,6 +295,8 @@ module DocspaceApiSdk
         :'external' => :'external',
         :'expiration_date' => :'expirationDate',
         :'is_link_expired' => :'isLinkExpired',
+        :'assigned_metadata_templates' => :'assignedMetadataTemplates',
+        :'metadata_matches' => :'metadataMatches',
         :'folder_id' => :'folderId',
         :'version' => :'version',
         :'version_group' => :'versionGroup',
@@ -376,6 +384,8 @@ module DocspaceApiSdk
         :'external' => :'Boolean',
         :'expiration_date' => :'ApiDateTime',
         :'is_link_expired' => :'Boolean',
+        :'assigned_metadata_templates' => :'Array<Integer>',
+        :'metadata_matches' => :'Array<MetadataMatchDto>',
         :'folder_id' => :'Integer',
         :'version' => :'Integer',
         :'version_group' => :'Integer',
@@ -410,7 +420,7 @@ module DocspaceApiSdk
         :'expired' => :'ApiDateTime',
         :'vectorization_status' => :'VectorizationStatus',
         :'external_db_table_name' => :'String',
-        :'dimensions' => :'Size'
+        :'dimensions' => :'ImageSizeDto'
       }
     end
 
@@ -609,6 +619,18 @@ module DocspaceApiSdk
 
       if attributes.key?(:'is_link_expired')
         self.is_link_expired = attributes[:'is_link_expired']
+      end
+
+      if attributes.key?(:'assigned_metadata_templates')
+        if (value = attributes[:'assigned_metadata_templates']).is_a?(Array)
+          self.assigned_metadata_templates = value
+        end
+      end
+
+      if attributes.key?(:'metadata_matches')
+        if (value = attributes[:'metadata_matches']).is_a?(Array)
+          self.metadata_matches = value
+        end
       end
 
       if attributes.key?(:'folder_id')
@@ -810,6 +832,8 @@ module DocspaceApiSdk
           external == o.external &&
           expiration_date == o.expiration_date &&
           is_link_expired == o.is_link_expired &&
+          assigned_metadata_templates == o.assigned_metadata_templates &&
+          metadata_matches == o.metadata_matches &&
           folder_id == o.folder_id &&
           version == o.version &&
           version_group == o.version_group &&
@@ -856,7 +880,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, access, shared_by, owned_by, shared, shared_for_user, shared_external, parent_shared, short_web_url, created, created_by, updated, auto_delete, root_folder_type, parent_room_type, updated_by, provider_item, provider_key, provider_id, order, is_favorite, file_entry_type, id, root_folder_id, origin_id, origin_room_id, origin_title, origin_room_title, can_share, share_settings, security, available_share_rights, request_token, external, expiration_date, is_link_expired, folder_id, version, version_group, content_length, pure_content_length, file_status, editing_by, mute, view_url, web_url, file_type, file_exst, comment, encrypted, thumbnail_url, thumbnail_status, locked, locked_by, has_draft, form_filling_status, is_form, custom_filter_enabled, custom_filter_enabled_by, start_filling, is_filling_preparing, in_process_folder_id, in_process_folder_title, results_folder_id, draft_location, view_accessibility, last_opened, expired, vectorization_status, external_db_table_name, dimensions].hash
+      [title, access, shared_by, owned_by, shared, shared_for_user, shared_external, parent_shared, short_web_url, created, created_by, updated, auto_delete, root_folder_type, parent_room_type, updated_by, provider_item, provider_key, provider_id, order, is_favorite, file_entry_type, id, root_folder_id, origin_id, origin_room_id, origin_title, origin_room_title, can_share, share_settings, security, available_share_rights, request_token, external, expiration_date, is_link_expired, assigned_metadata_templates, metadata_matches, folder_id, version, version_group, content_length, pure_content_length, file_status, editing_by, mute, view_url, web_url, file_type, file_exst, comment, encrypted, thumbnail_url, thumbnail_status, locked, locked_by, has_draft, form_filling_status, is_form, custom_filter_enabled, custom_filter_enabled_by, start_filling, is_filling_preparing, in_process_folder_id, in_process_folder_title, results_folder_id, draft_location, view_accessibility, last_opened, expired, vectorization_status, external_db_table_name, dimensions].hash
     end
 
     # Builds the object from hash

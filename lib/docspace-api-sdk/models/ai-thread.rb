@@ -65,7 +65,7 @@ module DocspaceApiSdk
         :'thread_id' => :'String',
         :'title' => :'String',
         :'last_edit_date' => :'Float',
-        :'provider' => :'AiTProvider',
+        :'provider' => :'AiProvider',
         :'model' => :'AiModel',
         :'profile_id' => :'String'
       }

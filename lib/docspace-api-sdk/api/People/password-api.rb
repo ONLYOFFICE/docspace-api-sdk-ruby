@@ -26,36 +26,36 @@ module DocspaceApiSdk
     # Change a user password
     # Sets a new password on an account, which is the step that completes a password change or a password  recovery.  The request has to carry the confirmation token from the emailed link rather than an ordinary session, and an  expired or already used token is answered with 401.  The account has to exist and be `Active`, so the password of a disabled account or of an open invitation  cannot be set, and only the portal owner may set the owner's own password.  Send either `passwordHash`, which is taken as it is, or a plain `password`, which is checked against the  portal password policy; sending neither, or a password the policy rejects, answers 400.  The change ends every other session of that account and emails it a notice that the password was changed.  The answer is the profile, which does not carry the password in any form.  To have the recovery link sent in the first place, use `POST api/2.0/people/password`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-password/
-    # @param userid [String] The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
+    # @param user_id [String] The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
     # @param change_password_request [ChangePasswordRequest] The new password, sent either in plain text or already hashed. Exactly one of the two fields is needed.
     # @param [Hash] opts the optional parameters
     # @return [EmployeeFullWrapper]
-    def change_user_password(userid, change_password_request, opts = {})
-      data, _status_code, _headers = change_user_password_with_http_info(userid, change_password_request, opts)
+    def change_user_password(user_id, change_password_request, opts = {})
+      data, _status_code, _headers = change_user_password_with_http_info(user_id, change_password_request, opts)
       data
     end
 
     # Change a user password
     # Sets a new password on an account, which is the step that completes a password change or a password  recovery.  The request has to carry the confirmation token from the emailed link rather than an ordinary session, and an  expired or already used token is answered with 401.  The account has to exist and be `Active`, so the password of a disabled account or of an open invitation  cannot be set, and only the portal owner may set the owner's own password.  Send either `passwordHash`, which is taken as it is, or a plain `password`, which is checked against the  portal password policy; sending neither, or a password the policy rejects, answers 400.  The change ends every other session of that account and emails it a notice that the password was changed.  The answer is the profile, which does not carry the password in any form.  To have the recovery link sent in the first place, use `POST api/2.0/people/password`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-password/
-    # @param userid [String] The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
+    # @param user_id [String] The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
     # @param change_password_request [ChangePasswordRequest] The new password, sent either in plain text or already hashed. Exactly one of the two fields is needed.
     # @param [Hash] opts the optional parameters
     # @return [Array<(EmployeeFullWrapper, Integer, Hash)>] EmployeeFullWrapper data, response status code and response headers
-    def change_user_password_with_http_info(userid, change_password_request, opts = {})
+    def change_user_password_with_http_info(user_id, change_password_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: People::PasswordApi.change_user_password ...'
       end
-      # verify the required parameter 'userid' is set
-      if @api_client.config.client_side_validation && userid.nil?
-        fail ArgumentError, "Missing the required parameter 'userid' when calling People::PasswordApi.change_user_password"
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling People::PasswordApi.change_user_password"
       end
       # verify the required parameter 'change_password_request' is set
       if @api_client.config.client_side_validation && change_password_request.nil?
         fail ArgumentError, "Missing the required parameter 'change_password_request' when calling People::PasswordApi.change_user_password"
       end
       # resource path
-      local_var_path = '/api/2.0/people/{userid}/password'.sub('{' + 'userid' + '}', CGI.escape(userid.to_s))
+      local_var_path = '/api/2.0/people/{userId}/password'.sub('{' + 'userId' + '}', CGI.escape(user_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -100,7 +100,7 @@ module DocspaceApiSdk
     end
 
     # Remind a user password
-    # Emails a password recovery link to an address, and is the entry point of the recovery flow rather than the  operation that changes anything.  It needs no authentication, which is how a person who cannot sign in uses it; when the portal has a CAPTCHA  configured, an unauthenticated request has to pass it and answers 403 if it does not.  An unauthenticated caller always gets the same success message, whether or not the address belongs to an  account, so the answer cannot be used to find out which addresses are registered.  An authenticated caller does get told: a failure is answered with 403, and asking for somebody else requires  DocSpace administrator rights, while the owner's password can be asked for by the owner alone and another  administrator's only by the owner.  The link that is sent leads to `PUT api/2.0/people/{userid}/password`, which is where the new password is  set; no password is ever sent by email despite the wording of the message.  Repeated calls are throttled.
+    # Emails a password recovery link to an address, and is the entry point of the recovery flow rather than the  operation that changes anything.  It needs no authentication, which is how a person who cannot sign in uses it; when the portal has a CAPTCHA  configured, an unauthenticated request has to pass it and answers 403 if it does not.  An unauthenticated caller always gets the same success message, whether or not the address belongs to an  account, so the answer cannot be used to find out which addresses are registered.  An authenticated caller does get told: a failure is answered with 403, and asking for somebody else requires  DocSpace administrator rights, while the owner's password can be asked for by the owner alone and another  administrator's only by the owner.  The link that is sent leads to `PUT api/2.0/people/{userId}/password`, which is where the new password is  set; no password is ever sent by email despite the wording of the message.  Repeated calls are throttled.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/send-user-password/
     # @param [Hash] opts the optional parameters
     # @option opts [EmailMemberRequestDto] :email_member_request_dto 
@@ -111,7 +111,7 @@ module DocspaceApiSdk
     end
 
     # Remind a user password
-    # Emails a password recovery link to an address, and is the entry point of the recovery flow rather than the  operation that changes anything.  It needs no authentication, which is how a person who cannot sign in uses it; when the portal has a CAPTCHA  configured, an unauthenticated request has to pass it and answers 403 if it does not.  An unauthenticated caller always gets the same success message, whether or not the address belongs to an  account, so the answer cannot be used to find out which addresses are registered.  An authenticated caller does get told: a failure is answered with 403, and asking for somebody else requires  DocSpace administrator rights, while the owner's password can be asked for by the owner alone and another  administrator's only by the owner.  The link that is sent leads to `PUT api/2.0/people/{userid}/password`, which is where the new password is  set; no password is ever sent by email despite the wording of the message.  Repeated calls are throttled.
+    # Emails a password recovery link to an address, and is the entry point of the recovery flow rather than the  operation that changes anything.  It needs no authentication, which is how a person who cannot sign in uses it; when the portal has a CAPTCHA  configured, an unauthenticated request has to pass it and answers 403 if it does not.  An unauthenticated caller always gets the same success message, whether or not the address belongs to an  account, so the answer cannot be used to find out which addresses are registered.  An authenticated caller does get told: a failure is answered with 403, and asking for somebody else requires  DocSpace administrator rights, while the owner's password can be asked for by the owner alone and another  administrator's only by the owner.  The link that is sent leads to `PUT api/2.0/people/{userId}/password`, which is where the new password is  set; no password is ever sent by email despite the wording of the message.  Repeated calls are throttled.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/send-user-password/
     # @param [Hash] opts the optional parameters
     # @option opts [EmailMemberRequestDto] :email_member_request_dto 

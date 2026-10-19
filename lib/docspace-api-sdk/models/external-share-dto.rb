@@ -112,7 +112,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'Status',
+        :'status' => :'ExternalShareStatus',
         :'id' => :'String',
         :'title' => :'String',
         :'type' => :'FileEntryType',

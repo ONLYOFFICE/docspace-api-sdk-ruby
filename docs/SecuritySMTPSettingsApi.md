@@ -13,7 +13,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 ## get_smtp_operation_status
 
-> <SmtpOperationStatusRequestsWrapper> get_smtp_operation_status
+> <SmtpOperationStatusWrapper> get_smtp_operation_status
 
 Get SMTP test status
 
@@ -65,7 +65,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SmtpOperationStatusRequestsWrapper>, Integer, Hash)> get_smtp_operation_status_with_http_info
+> <Array(<SmtpOperationStatusWrapper>, Integer, Hash)> get_smtp_operation_status_with_http_info
 
 ```ruby
 begin
@@ -73,7 +73,7 @@ begin
   data, status_code, headers = api_instance.get_smtp_operation_status_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <SmtpOperationStatusRequestsWrapper>
+  p data # => <SmtpOperationStatusWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Security::SMTPSettingsApi->get_smtp_operation_status_with_http_info: #{e}"
 end
@@ -85,7 +85,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SmtpOperationStatusRequestsWrapper**](SmtpOperationStatusRequestsWrapper.md)
+[**SmtpOperationStatusWrapper**](SmtpOperationStatusWrapper.md)
 
 ### Authorization
 
@@ -362,7 +362,7 @@ end
 
 ## test_smtp_settings
 
-> <SmtpOperationStatusRequestsWrapper> test_smtp_settings
+> <SmtpOperationStatusWrapper> test_smtp_settings
 
 Test SMTP settings
 
@@ -414,7 +414,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SmtpOperationStatusRequestsWrapper>, Integer, Hash)> test_smtp_settings_with_http_info
+> <Array(<SmtpOperationStatusWrapper>, Integer, Hash)> test_smtp_settings_with_http_info
 
 ```ruby
 begin
@@ -422,7 +422,7 @@ begin
   data, status_code, headers = api_instance.test_smtp_settings_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <SmtpOperationStatusRequestsWrapper>
+  p data # => <SmtpOperationStatusWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Security::SMTPSettingsApi->test_smtp_settings_with_http_info: #{e}"
 end
@@ -434,7 +434,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SmtpOperationStatusRequestsWrapper**](SmtpOperationStatusRequestsWrapper.md)
+[**SmtpOperationStatusWrapper**](SmtpOperationStatusWrapper.md)
 
 ### Authorization
 

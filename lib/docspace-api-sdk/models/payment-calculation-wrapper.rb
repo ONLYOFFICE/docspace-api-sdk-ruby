@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The successful API response containing the PaymentCalculation object.
+  # The successful API response containing the PaymentCalculationDto object.
   class PaymentCalculationWrapper < ApiModelBase
-    # The PaymentCalculation object returned by the operation.
+    # The PaymentCalculationDto object returned by the operation.
     attr_accessor :response
 
     # The total number of items in the response
@@ -58,7 +58,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'response' => :'PaymentCalculation',
+        :'response' => :'PaymentCalculationDto',
         :'count' => :'Integer',
         :'links' => :'Array<GetPortalPrices200ResponseLinksInner>',
         :'status' => :'Integer',

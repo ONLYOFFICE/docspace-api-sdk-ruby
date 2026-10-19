@@ -48,7 +48,7 @@ end
 
 api_instance = DocspaceApiSdk::Security::BannersVisibilityApi.new
 opts = {
-  tenant_banner_settings_dto: DocspaceApiSdk::TenantBannerSettingsDto.new # TenantBannerSettingsDto | 
+  tenant_banner_settings_request_dto: DocspaceApiSdk::TenantBannerSettingsRequestDto.new # TenantBannerSettingsRequestDto | 
 }
 
 begin
@@ -82,7 +82,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **tenant_banner_settings_dto** | [**TenantBannerSettingsDto**](TenantBannerSettingsDto.md) |  | [optional] |
+| **tenant_banner_settings_request_dto** | [**TenantBannerSettingsRequestDto**](TenantBannerSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 

@@ -1,0 +1,29 @@
+# DocspaceApiSdk::MetadataFilterConditionRequest
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **field_id** | **Integer** | The ID of the template field the condition is on. A custom field is addressed by ASC.Files.Core.MetadataFilterConditionRequest.Name instead. | [optional] |
+| **name** | **String** | The name of a custom field, for the conditions on the custom fields, which have no identifier outside. Either the  field ID or the name is given; the name is matched without regard to case. | [optional] |
+| **op** | **String** | The operator, one of ASC.Files.Core.MetadataFilterOperators: eq or contains for a string field, eq, range,  gt, gte, lt or lte for a number field, range, gt, gte, lt or lte for a date field, in for a  choice field. Optional: an omitted operator is read as eq for a string, as range for a date, as in for a  choice, and for a number as eq when a value is given or as range when a bound is. A present one has to belong  to the field type and to the arguments: eq takes a value, range takes bounds. | [optional] |
+| **value** | **String** | The value of a single-valued condition: the whole or a part of a string field, the exact value of a number field,  or the bound of a gt, gte, lt or lte condition on a number or a date field. A JSON number is accepted as  well as a string. A date given without a time (2026-06-30) names the whole day (UTC). | [optional] |
+| **from** | **String** | The inclusive lower bound of a range. A date given without a time (2026-06-01) is the start of that day (UTC). | [optional] |
+| **to** | **String** | The inclusive upper bound of a range. A date given without a time (2026-06-30) covers the whole day (UTC);  a value with a time is an instant and is taken as is. | [optional] |
+| **option_ids** | **Array&lt;String&gt;** | The options any of which the choice field must hold. | [optional] |
+
+## Example
+
+```ruby
+require 'docspace-api-sdk'
+
+instance = DocspaceApiSdk::MetadataFilterConditionRequest.new(
+  field_id: 1,
+  name: Client,
+  op: eq,
+  value: ACME,
+  from: 2026-01-01,
+  to: 2026-06-30,
+  option_ids: [4f1e2d3c-5b6a-4788-99aa-0c1d2e3f4a55]
+)
+```

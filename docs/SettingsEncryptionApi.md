@@ -101,7 +101,7 @@ This endpoint does not need any parameter.
 
 Get the storage encryption settings
 
-Returns the encryption state of the installation storage: the status, which is one of decrypted, encryption  started, encrypted or decryption started, and the flag saying whether users are mailed when an encryption run  begins. The password is deliberately blanked out, so the field always comes back empty even on an encrypted  installation. The caller is expected to have the permission to edit portal settings, which in practice means  the portal owner or a DocSpace admin, on a server installation with an unrestricted access space; on any other  installation, and whenever the check fails, the operation answers with an empty body instead of an error. An  empty answer is therefore not proof that encryption is off, only that the settings cannot be read in this  context. Nothing is written and the call is safe to repeat. Use `GET api/2.0/settings/encryption/progress` to  follow a run that is in flight, and `POST api/2.0/settings/encryption/start` to encrypt or decrypt the  storage.
+Returns the encryption state of the installation storage: the status, which is one of decrypted, encryption  started, encrypted or decryption started, and the flag saying whether users are mailed when an encryption run  begins. The encryption password is never returned. The caller is expected to have the permission to edit portal settings, which in practice means  the portal owner or a DocSpace admin, on a server installation with an unrestricted access space; on any other  installation, and whenever the check fails, the operation answers with an empty body instead of an error. An  empty answer is therefore not proof that encryption is off, only that the settings cannot be read in this  context. Nothing is written and the call is safe to repeat. Use `GET api/2.0/settings/encryption/progress` to  follow a run that is in flight, and `POST api/2.0/settings/encryption/start` to encrypt or decrypt the  storage.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-storage-encryption-settings/).
 
@@ -222,7 +222,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::EncryptionApi.new
 opts = {
-  storage_encryption_requests_dto: DocspaceApiSdk::StorageEncryptionRequestsDto.new # StorageEncryptionRequestsDto | 
+  storage_encryption_request_dto: DocspaceApiSdk::StorageEncryptionRequestDto.new # StorageEncryptionRequestDto | 
 }
 
 begin
@@ -256,7 +256,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **storage_encryption_requests_dto** | [**StorageEncryptionRequestsDto**](StorageEncryptionRequestsDto.md) |  | [optional] |
+| **storage_encryption_request_dto** | [**StorageEncryptionRequestDto**](StorageEncryptionRequestDto.md) |  | [optional] |
 
 ### Return type
 

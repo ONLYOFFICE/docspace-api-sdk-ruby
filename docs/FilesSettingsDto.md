@@ -49,14 +49,14 @@
 | **hide_confirm_convert_save** | **Boolean** | Whether the prompt that offers to keep a copy in the original format on conversion is hidden for the caller.  Once true it cannot be turned back through the API. | [optional] |
 | **hide_confirm_convert_open** | **Boolean** | Whether the prompt that offers to open the conversion result is hidden for the caller. Once true it cannot be  turned back through the API. | [optional] |
 | **hide_confirm_room_lifetime** | **Boolean** | Whether the warning shown before the lifetime settings of a room are changed is hidden for the caller. | [optional] |
-| **default_order** | [**OrderBy**](OrderBy.md) | The ordering the listing operations fall back to when a request names none. It follows the last order the  caller asked a listing for, so it changes on its own as the account is used. | [optional] |
+| **default_order** | [**OrderByDto**](OrderByDto.md) | The ordering the listing operations fall back to when a request names none. It follows the last order the  caller asked a listing for, so it changes on its own as the account is used. | [optional] |
 | **forcesave** | **Boolean** | Whether the editor writes a document back to storage while the session is still open. It is on for every  portal and cannot be switched off. | [optional] |
 | **store_forcesave** | **Boolean** | Whether those intermediate saves are kept as separate versions. They are not, in any portal: they update the  current version instead. | [optional] |
 | **recent_section** | **Boolean** | Whether the Recent section is offered to the caller among the section roots. | [optional] |
 | **favorites_section** | **Boolean** | Whether the Favorites section is offered to the caller among the section roots. | [optional] |
 | **templates_section** | **Boolean** | Whether the Templates section is offered to the caller among the section roots. | [optional] |
 | **download_tar_gz** | **Boolean** | The archive format the caller's multi-item downloads are packed into: true for `.tar.gz`, false for `.zip`. | [optional] |
-| **automatically_clean_up** | [**AutoCleanUpData**](AutoCleanUpData.md) | The trash auto-clearing setting of the caller, the same pair `GET api/2.0/files/settings/autocleanup` returns. | [optional] |
+| **automatically_clean_up** | [**AutoCleanUpDataDto**](AutoCleanUpDataDto.md) | The trash auto-clearing setting of the caller, the same pair `GET api/2.0/files/settings/autocleanup` returns. | [optional] |
 | **can_search_by_content** | **Boolean** | Whether documents in this portal can be searched by what is inside them and not only by title. It depends on  the full-text search service being configured and having indexed the portal. | [optional] |
 | **default_sharing_access_rights** | **Array&lt;Integer&gt;** | The access rights the sharing dialog offers the caller by default. The portal normalises the set it stores, so  this can be shorter than what was last sent. | [optional] |
 | **max_upload_thread_count** | **Integer** | How many upload requests the portal accepts from one account at a time. Sending more than this in parallel  gets the extra ones refused rather than queued. | [optional] |

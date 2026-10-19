@@ -24,7 +24,7 @@ module DocspaceApiSdk
       @api_client = api_client
     end
     # Append user message
-    # Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
+    # Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. `threadId` is required, the message has to carry `role: user` and a content that is a non-blank string or a part list with at least one real part - text, a file or image attachment - so an empty or role-less body is rejected rather than stored. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-append-user-message/
     # @param ai_threads_append_user_message_request [AiThreadsAppendUserMessageRequest] 
     # @param [Hash] opts the optional parameters
@@ -35,7 +35,7 @@ module DocspaceApiSdk
     end
 
     # Append user message
-    # Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
+    # Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. `threadId` is required, the message has to carry `role: user` and a content that is a non-blank string or a part list with at least one real part - text, a file or image attachment - so an empty or role-less body is rejected rather than stored. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-append-user-message/
     # @param ai_threads_append_user_message_request [AiThreadsAppendUserMessageRequest] 
     # @param [Hash] opts the optional parameters
@@ -96,27 +96,27 @@ module DocspaceApiSdk
     # Clear messages
     # Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike `delete` this does not verify that the thread exists, so clearing an unknown `threadId` reports success rather than 404. The answer only confirms the write.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-clear-messages/
-    # @param body [String] The ID of the thread to empty, as a bare JSON string.
+    # @param ai_threads_clear_messages_request [String] The ID of the thread to empty, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [AiSuccessResponse]
-    def ai_threads_clear_messages(body, opts = {})
-      data, _status_code, _headers = ai_threads_clear_messages_with_http_info(body, opts)
+    def ai_threads_clear_messages(ai_threads_clear_messages_request, opts = {})
+      data, _status_code, _headers = ai_threads_clear_messages_with_http_info(ai_threads_clear_messages_request, opts)
       data
     end
 
     # Clear messages
     # Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike `delete` this does not verify that the thread exists, so clearing an unknown `threadId` reports success rather than 404. The answer only confirms the write.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-clear-messages/
-    # @param body [String] The ID of the thread to empty, as a bare JSON string.
+    # @param ai_threads_clear_messages_request [String] The ID of the thread to empty, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
-    def ai_threads_clear_messages_with_http_info(body, opts = {})
+    def ai_threads_clear_messages_with_http_info(ai_threads_clear_messages_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::ThreadsApi.ai_threads_clear_messages ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling AI::ThreadsApi.ai_threads_clear_messages"
+      # verify the required parameter 'ai_threads_clear_messages_request' is set
+      if @api_client.config.client_side_validation && ai_threads_clear_messages_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_threads_clear_messages_request' when calling AI::ThreadsApi.ai_threads_clear_messages"
       end
       # resource path
       local_var_path = '/api/2.0/ai/threads/clear-messages'
@@ -138,7 +138,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_threads_clear_messages_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'
@@ -236,27 +236,27 @@ module DocspaceApiSdk
     # Delete a chat thread
     # Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a `threadId`, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use `DELETE api/2.0/ai/threads/clear-messages`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-delete/
-    # @param body [String] The ID of the thread to delete, as a bare JSON string.
+    # @param ai_threads_delete_request [String] The ID of the thread to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [AiSuccessResponse]
-    def ai_threads_delete(body, opts = {})
-      data, _status_code, _headers = ai_threads_delete_with_http_info(body, opts)
+    def ai_threads_delete(ai_threads_delete_request, opts = {})
+      data, _status_code, _headers = ai_threads_delete_with_http_info(ai_threads_delete_request, opts)
       data
     end
 
     # Delete a chat thread
     # Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a `threadId`, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use `DELETE api/2.0/ai/threads/clear-messages`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-delete/
-    # @param body [String] The ID of the thread to delete, as a bare JSON string.
+    # @param ai_threads_delete_request [String] The ID of the thread to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
-    def ai_threads_delete_with_http_info(body, opts = {})
+    def ai_threads_delete_with_http_info(ai_threads_delete_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::ThreadsApi.ai_threads_delete ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling AI::ThreadsApi.ai_threads_delete"
+      # verify the required parameter 'ai_threads_delete_request' is set
+      if @api_client.config.client_side_validation && ai_threads_delete_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_threads_delete_request' when calling AI::ThreadsApi.ai_threads_delete"
       end
       # resource path
       local_var_path = '/api/2.0/ai/threads/delete'
@@ -278,7 +278,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_threads_delete_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'
@@ -306,27 +306,27 @@ module DocspaceApiSdk
     # Delete message
     # Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-delete-message/
-    # @param body [String] The ID of the message to delete, as a bare JSON string.
+    # @param ai_threads_delete_message_request [String] The ID of the message to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [AiSuccessResponse]
-    def ai_threads_delete_message(body, opts = {})
-      data, _status_code, _headers = ai_threads_delete_message_with_http_info(body, opts)
+    def ai_threads_delete_message(ai_threads_delete_message_request, opts = {})
+      data, _status_code, _headers = ai_threads_delete_message_with_http_info(ai_threads_delete_message_request, opts)
       data
     end
 
     # Delete message
     # Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-delete-message/
-    # @param body [String] The ID of the message to delete, as a bare JSON string.
+    # @param ai_threads_delete_message_request [String] The ID of the message to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
-    def ai_threads_delete_message_with_http_info(body, opts = {})
+    def ai_threads_delete_message_with_http_info(ai_threads_delete_message_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::ThreadsApi.ai_threads_delete_message ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling AI::ThreadsApi.ai_threads_delete_message"
+      # verify the required parameter 'ai_threads_delete_message_request' is set
+      if @api_client.config.client_side_validation && ai_threads_delete_message_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_threads_delete_message_request' when calling AI::ThreadsApi.ai_threads_delete_message"
       end
       # resource path
       local_var_path = '/api/2.0/ai/threads/delete-message'
@@ -348,7 +348,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_threads_delete_message_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'
@@ -440,7 +440,7 @@ module DocspaceApiSdk
     end
 
     # Get one chat message
-    # Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required. Unlike `GET api/2.0/ai/threads/get-by-id` an unknown ID is not reported as 404: the answer is an empty body with status 200, so a client has to treat a missing payload as no such message. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
+    # Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required and, as with `GET api/2.0/ai/threads/get-by-id`, an unknown or deleted ID answers 404, so the result is never an empty body. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-get-message-by-id/
     # @param message_id [String] The globally unique chat message identifier.
     # @param [Hash] opts the optional parameters
@@ -451,7 +451,7 @@ module DocspaceApiSdk
     end
 
     # Get one chat message
-    # Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required. Unlike `GET api/2.0/ai/threads/get-by-id` an unknown ID is not reported as 404: the answer is an empty body with status 200, so a client has to treat a missing payload as no such message. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
+    # Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required and, as with `GET api/2.0/ai/threads/get-by-id`, an unknown or deleted ID answers 404, so the result is never an empty body. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-get-message-by-id/
     # @param message_id [String] The globally unique chat message identifier.
     # @param [Hash] opts the optional parameters
@@ -647,7 +647,7 @@ module DocspaceApiSdk
     end
 
     # Read messages
-    # Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. Omitting `threadId` is not an error: the call answers 200 with an empty list, so an empty result does not distinguish a thread with no messages from a request that forgot the ID. A malformed cursor is ignored and the read starts from the beginning.
+    # Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. `threadId` is required and a missing one answers 400, so an empty list always means a thread with no messages. A malformed cursor is ignored and the read starts from the beginning.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-read-messages/
     # @param thread_id [String] The chat thread identifier.
     # @param [Hash] opts the optional parameters
@@ -661,7 +661,7 @@ module DocspaceApiSdk
     end
 
     # Read messages
-    # Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. Omitting `threadId` is not an error: the call answers 200 with an empty list, so an empty result does not distinguish a thread with no messages from a request that forgot the ID. A malformed cursor is ignored and the read starts from the beginning.
+    # Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. `threadId` is required and a missing one answers 400, so an empty list always means a thread with no messages. A malformed cursor is ignored and the read starts from the beginning.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-read-messages/
     # @param thread_id [String] The chat thread identifier.
     # @param [Hash] opts the optional parameters
@@ -932,7 +932,7 @@ module DocspaceApiSdk
     end
 
     # Update message
-    # Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object. Neither the ID nor the payload is validated here, so a malformed request surfaces as an error relayed from storage rather than as a 400. The answer only confirms the write.
+    # Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object with a known `role` and a content that is a non-blank string or a part list with at least one real part - a tool-call-only assistant message counts, an empty list does not. The role has to match the stored message's: a user message cannot be turned into an assistant one. An unknown `messageId` answers 404. The answer only confirms the write.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-update-message/
     # @param ai_threads_update_message_request [AiThreadsUpdateMessageRequest] 
     # @param [Hash] opts the optional parameters
@@ -943,7 +943,7 @@ module DocspaceApiSdk
     end
 
     # Update message
-    # Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object. Neither the ID nor the payload is validated here, so a malformed request surfaces as an error relayed from storage rather than as a 400. The answer only confirms the write.
+    # Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object with a known `role` and a content that is a non-blank string or a part list with at least one real part - a tool-call-only assistant message counts, an empty list does not. The role has to match the stored message's: a user message cannot be turned into an assistant one. An unknown `messageId` answers 404. The answer only confirms the write.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-update-message/
     # @param ai_threads_update_message_request [AiThreadsUpdateMessageRequest] 
     # @param [Hash] opts the optional parameters

@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **response** | [**DocsCloudTenantInfo**](DocsCloudTenantInfo.md) | The DocsCloudTenantInfo object returned by the operation. | [optional] |
+| **response** | [**DocsCloudTenantInfoDto**](DocsCloudTenantInfoDto.md) | The DocsCloudTenantInfoDto object returned by the operation. | [optional] |
 | **count** | **Integer** | The total number of items in the response | [optional] |
 | **links** | [**Array&lt;GetPortalPrices200ResponseLinksInner&gt;**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] |
 | **status** | **Integer** | HTTP status code of the response | [optional] |

@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The successful API response containing the FileReference object.
+  # The successful API response containing the FileReferenceDto object.
   class FileReferenceWrapper < ApiModelBase
-    # The FileReference object returned by the operation.
+    # The FileReferenceDto object returned by the operation.
     attr_accessor :response
 
     # The total number of items in the response
@@ -58,7 +58,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'response' => :'FileReference',
+        :'response' => :'FileReferenceDto',
         :'count' => :'Integer',
         :'links' => :'Array<GetPortalPrices200ResponseLinksInner>',
         :'status' => :'Integer',

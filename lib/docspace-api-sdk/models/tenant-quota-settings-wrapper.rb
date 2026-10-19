@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The successful API response containing the TenantQuotaSettings object.
+  # The successful API response containing the TenantQuotaSettingsDto object.
   class TenantQuotaSettingsWrapper < ApiModelBase
-    # The TenantQuotaSettings object returned by the operation.
+    # The TenantQuotaSettingsDto object returned by the operation.
     attr_accessor :response
 
     # The total number of items in the response
@@ -58,7 +58,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'response' => :'TenantQuotaSettings',
+        :'response' => :'TenantQuotaSettingsDto',
         :'count' => :'Integer',
         :'links' => :'Array<GetPortalPrices200ResponseLinksInner>',
         :'status' => :'Integer',

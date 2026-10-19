@@ -26,30 +26,30 @@ module DocspaceApiSdk
     # Get a guest sharing link
     # Builds a link that lets another member of the portal take over the caller's guest, so that the guest becomes  visible to them as well.  The account in the route has to exist and be a guest - any other type is rejected with 400 - and the caller  has to be able to see it and must not be a guest itself.  The call is read-only: it only mints the link and changes nothing, and it can be repeated as often as needed.  The answer is a shortened confirmation URL as plain text; hand it to the person who should get the guest, and  their client completes the hand-over with `POST api/2.0/people/guests/share/approve`.  The link carries a confirmation token and therefore expires, so mint it when it is about to be used rather  than storing it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-guest-sharing-link/
-    # @param userid [String] The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
+    # @param user_id [String] The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
     # @param [Hash] opts the optional parameters
     # @return [StringWrapper]
-    def get_guest_sharing_link(userid, opts = {})
-      data, _status_code, _headers = get_guest_sharing_link_with_http_info(userid, opts)
+    def get_guest_sharing_link(user_id, opts = {})
+      data, _status_code, _headers = get_guest_sharing_link_with_http_info(user_id, opts)
       data
     end
 
     # Get a guest sharing link
     # Builds a link that lets another member of the portal take over the caller's guest, so that the guest becomes  visible to them as well.  The account in the route has to exist and be a guest - any other type is rejected with 400 - and the caller  has to be able to see it and must not be a guest itself.  The call is read-only: it only mints the link and changes nothing, and it can be repeated as often as needed.  The answer is a shortened confirmation URL as plain text; hand it to the person who should get the guest, and  their client completes the hand-over with `POST api/2.0/people/guests/share/approve`.  The link carries a confirmation token and therefore expires, so mint it when it is about to be used rather  than storing it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-guest-sharing-link/
-    # @param userid [String] The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
+    # @param user_id [String] The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
     # @param [Hash] opts the optional parameters
     # @return [Array<(StringWrapper, Integer, Hash)>] StringWrapper data, response status code and response headers
-    def get_guest_sharing_link_with_http_info(userid, opts = {})
+    def get_guest_sharing_link_with_http_info(user_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Portal::GuestsApi.get_guest_sharing_link ...'
       end
-      # verify the required parameter 'userid' is set
-      if @api_client.config.client_side_validation && userid.nil?
-        fail ArgumentError, "Missing the required parameter 'userid' when calling Portal::GuestsApi.get_guest_sharing_link"
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling Portal::GuestsApi.get_guest_sharing_link"
       end
       # resource path
-      local_var_path = '/api/2.0/people/guests/{userid}/share'.sub('{' + 'userid' + '}', CGI.escape(userid.to_s))
+      local_var_path = '/api/2.0/people/guests/{userId}/share'.sub('{' + 'userId' + '}', CGI.escape(user_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}

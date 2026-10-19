@@ -225,31 +225,38 @@ module DocspaceApiSdk
     end
 
     # Get disabled
-    # Returns the tools switched off in the scope, as a map of server type to tool names. `entityId` picks the scope and omitting it reads the portal-wide setting. An absent server type means nothing is switched off for it, so an empty answer means every tool is on offer. Use `GET api/2.0/ai/tools/is-tool-disabled` to ask about one tool instead of reading the whole map.
+    # Returns the tools switched off in the scope, as a map of server type to tool names. `entityId` picks the scope and omitting it reads the portal-wide setting. Without `scope` the answer is the caller's effective list, with the tools an administrator switched off for everyone folded in; `scope=tenant` reads that administrator list alone, which is what the settings page shows. An absent server type means nothing is switched off for it, so an empty answer means every tool is on offer. Use `GET api/2.0/ai/tools/is-tool-disabled` to ask about one tool instead of reading the whole map.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-disabled/
+    # @param scope [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
     # @return [Hash<String, Array<String>>]
-    def ai_tools_get_disabled(opts = {})
-      data, _status_code, _headers = ai_tools_get_disabled_with_http_info(opts)
+    def ai_tools_get_disabled(scope, opts = {})
+      data, _status_code, _headers = ai_tools_get_disabled_with_http_info(scope, opts)
       data
     end
 
     # Get disabled
-    # Returns the tools switched off in the scope, as a map of server type to tool names. `entityId` picks the scope and omitting it reads the portal-wide setting. An absent server type means nothing is switched off for it, so an empty answer means every tool is on offer. Use `GET api/2.0/ai/tools/is-tool-disabled` to ask about one tool instead of reading the whole map.
+    # Returns the tools switched off in the scope, as a map of server type to tool names. `entityId` picks the scope and omitting it reads the portal-wide setting. Without `scope` the answer is the caller's effective list, with the tools an administrator switched off for everyone folded in; `scope=tenant` reads that administrator list alone, which is what the settings page shows. An absent server type means nothing is switched off for it, so an empty answer means every tool is on offer. Use `GET api/2.0/ai/tools/is-tool-disabled` to ask about one tool instead of reading the whole map.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-disabled/
+    # @param scope [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
     # @return [Array<(Hash<String, Array<String>>, Integer, Hash)>] Hash<String, Array<String>> data, response status code and response headers
-    def ai_tools_get_disabled_with_http_info(opts = {})
+    def ai_tools_get_disabled_with_http_info(scope, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::ToolsApi.ai_tools_get_disabled ...'
+      end
+      # verify the required parameter 'scope' is set
+      if @api_client.config.client_side_validation && scope.nil?
+        fail ArgumentError, "Missing the required parameter 'scope' when calling AI::ToolsApi.ai_tools_get_disabled"
       end
       # resource path
       local_var_path = '/api/2.0/ai/tools/get-disabled'
 
       # query parameters
       query_params = opts[:query_params] || {}
+      query_params[:'scope'] = scope
       query_params[:'entityId'] = opts[:'entity_id'] if !opts[:'entity_id'].nil?
 
       # header parameters
@@ -501,7 +508,7 @@ module DocspaceApiSdk
     end
 
     # List system tools
-    # Lists every tool the scope can offer the model, as a map of server type to tool group. The answer merges two sources - the host-configured system servers and the live tools of the scope's registered custom MCP servers - and names the system ones separately in `system`, so a client can tell the two apart. `errors` carries the reason a registered server delivered no tools, which is the text to show on a permission card, because the browser cannot reach a server-executed MCP server to find out for itself. The connections are opened server-side, so one request is enough and the client never speaks MCP itself; the portal's own built-in server is left out because it is always enabled.
+    # Lists every tool the scope can offer the model, as a map of server type to tool group. The answer merges two sources - the host-configured system servers and the live tools of the scope's registered custom MCP servers; for an agent room those are the servers enabled for that agent alone, never the portal-wide registry - and names the system ones separately in `system`, so a client can tell the two apart. `errors` carries the reason a registered server delivered no tools, which is the text to show on a permission card, because the browser cannot reach a server-executed MCP server to find out for itself. The connections are opened server-side, so one request is enough and the client never speaks MCP itself; the portal's own built-in server is left out because it is always enabled.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-list-system-tools/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
@@ -512,7 +519,7 @@ module DocspaceApiSdk
     end
 
     # List system tools
-    # Lists every tool the scope can offer the model, as a map of server type to tool group. The answer merges two sources - the host-configured system servers and the live tools of the scope's registered custom MCP servers - and names the system ones separately in `system`, so a client can tell the two apart. `errors` carries the reason a registered server delivered no tools, which is the text to show on a permission card, because the browser cannot reach a server-executed MCP server to find out for itself. The connections are opened server-side, so one request is enough and the client never speaks MCP itself; the portal's own built-in server is left out because it is always enabled.
+    # Lists every tool the scope can offer the model, as a map of server type to tool group. The answer merges two sources - the host-configured system servers and the live tools of the scope's registered custom MCP servers; for an agent room those are the servers enabled for that agent alone, never the portal-wide registry - and names the system ones separately in `system`, so a client can tell the two apart. `errors` carries the reason a registered server delivered no tools, which is the text to show on a permission card, because the browser cannot reach a server-executed MCP server to find out for itself. The connections are opened server-side, so one request is enough and the client never speaks MCP itself; the portal's own built-in server is left out because it is always enabled.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-list-system-tools/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
@@ -703,7 +710,7 @@ module DocspaceApiSdk
     end
 
     # Set allow always
-    # Adds one tool to the scope's always-allow list, or takes it off, which decides whether a call to it pauses the round for approval. `value` is coerced to a boolean, so any truthy value adds and any falsy one removes. Unlike the disable operation, `serverType` is not validated here: an unknown one is stored and then simply never matches, so a wrong value fails silently. `entityId` has to name a room the caller can open.
+    # Adds one tool to the scope's always-allow list, or takes it off, which decides whether a call to it pauses the round for approval. `serverType` and `toolName` have to be non-empty strings and `value` a real boolean - `true` adds, `false` removes - and anything else is rejected before the list is touched, so a malformed body can no longer grant a permanent approval. Unlike the disable operation, `serverType` is not checked against the known server types: an unknown one is stored and then simply never matches. `entityId` has to name a room the caller can open.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-set-allow-always/
     # @param ai_tools_set_allow_always_request [AiToolsSetAllowAlwaysRequest] 
     # @param [Hash] opts the optional parameters
@@ -714,7 +721,7 @@ module DocspaceApiSdk
     end
 
     # Set allow always
-    # Adds one tool to the scope's always-allow list, or takes it off, which decides whether a call to it pauses the round for approval. `value` is coerced to a boolean, so any truthy value adds and any falsy one removes. Unlike the disable operation, `serverType` is not validated here: an unknown one is stored and then simply never matches, so a wrong value fails silently. `entityId` has to name a room the caller can open.
+    # Adds one tool to the scope's always-allow list, or takes it off, which decides whether a call to it pauses the round for approval. `serverType` and `toolName` have to be non-empty strings and `value` a real boolean - `true` adds, `false` removes - and anything else is rejected before the list is touched, so a malformed body can no longer grant a permanent approval. Unlike the disable operation, `serverType` is not checked against the known server types: an unknown one is stored and then simply never matches. `entityId` has to name a room the caller can open.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-set-allow-always/
     # @param ai_tools_set_allow_always_request [AiToolsSetAllowAlwaysRequest] 
     # @param [Hash] opts the optional parameters
@@ -773,7 +780,7 @@ module DocspaceApiSdk
     end
 
     # Set disabled
-    # Switches off the listed tools of one server type in the scope, so the model is no longer offered them. `serverType` has to be a key the round's tool filter actually matches - a host-configured system server, one of the two DocSpace integration groups, web search, image generation, or one of the scope's registered custom servers - and an unknown value is rejected with the list of valid ones in the message, rather than stored and silently ignored. `toolNames` replaces the previous selection for that server type, so send the full list and pass an empty one to switch everything back on. `entityId` has to name a room the caller can open.
+    # Switches off the listed tools of one server type in the scope, so the model is no longer offered them. `serverType` has to be a key the round's tool filter actually matches - a host-configured system server, one of the two DocSpace integration groups, web search, image generation, or one of the scope's registered custom servers - and an unknown value is rejected with the list of valid ones in the message, rather than stored and silently ignored. `toolNames` is required and replaces the previous selection for that server type, so send the full list and pass an empty one to switch everything back on; a missing or non-array value is rejected rather than read as a request to clear, and so is one with anything but non-empty tool names in it. `entityId` has to name a room the caller can open. `scope` picks the list the write lands in: omitted or `user`, the caller's own; `tenant`, the list an administrator keeps for everyone, which every user's reads fold in - the portal settings page writes that one, the composer's own toggles the first.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-set-disabled/
     # @param ai_tools_set_disabled_request [AiToolsSetDisabledRequest] 
     # @param [Hash] opts the optional parameters
@@ -784,7 +791,7 @@ module DocspaceApiSdk
     end
 
     # Set disabled
-    # Switches off the listed tools of one server type in the scope, so the model is no longer offered them. `serverType` has to be a key the round's tool filter actually matches - a host-configured system server, one of the two DocSpace integration groups, web search, image generation, or one of the scope's registered custom servers - and an unknown value is rejected with the list of valid ones in the message, rather than stored and silently ignored. `toolNames` replaces the previous selection for that server type, so send the full list and pass an empty one to switch everything back on. `entityId` has to name a room the caller can open.
+    # Switches off the listed tools of one server type in the scope, so the model is no longer offered them. `serverType` has to be a key the round's tool filter actually matches - a host-configured system server, one of the two DocSpace integration groups, web search, image generation, or one of the scope's registered custom servers - and an unknown value is rejected with the list of valid ones in the message, rather than stored and silently ignored. `toolNames` is required and replaces the previous selection for that server type, so send the full list and pass an empty one to switch everything back on; a missing or non-array value is rejected rather than read as a request to clear, and so is one with anything but non-empty tool names in it. `entityId` has to name a room the caller can open. `scope` picks the list the write lands in: omitted or `user`, the caller's own; `tenant`, the list an administrator keeps for everyone, which every user's reads fold in - the portal settings page writes that one, the composer's own toggles the first.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-set-disabled/
     # @param ai_tools_set_disabled_request [AiToolsSetDisabledRequest] 
     # @param [Hash] opts the optional parameters

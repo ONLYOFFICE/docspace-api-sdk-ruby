@@ -11,7 +11,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 ## get_auth_services
 
-> <AuthServiceRequestsArrayWrapper> get_auth_services
+> <AuthServiceArrayWrapper> get_auth_services
 
 Get the authorization services
 
@@ -63,7 +63,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AuthServiceRequestsArrayWrapper>, Integer, Hash)> get_auth_services_with_http_info
+> <Array(<AuthServiceArrayWrapper>, Integer, Hash)> get_auth_services_with_http_info
 
 ```ruby
 begin
@@ -71,7 +71,7 @@ begin
   data, status_code, headers = api_instance.get_auth_services_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <AuthServiceRequestsArrayWrapper>
+  p data # => <AuthServiceArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::AuthorizationApi->get_auth_services_with_http_info: #{e}"
 end
@@ -83,7 +83,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**AuthServiceRequestsArrayWrapper**](AuthServiceRequestsArrayWrapper.md)
+[**AuthServiceArrayWrapper**](AuthServiceArrayWrapper.md)
 
 ### Authorization
 
@@ -136,7 +136,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::AuthorizationApi.new
 opts = {
-  auth_service_requests_dto: DocspaceApiSdk::AuthServiceRequestsDto.new # AuthServiceRequestsDto | 
+  save_auth_keys_request_dto: DocspaceApiSdk::SaveAuthKeysRequestDto.new # SaveAuthKeysRequestDto | 
 }
 
 begin
@@ -170,7 +170,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **auth_service_requests_dto** | [**AuthServiceRequestsDto**](AuthServiceRequestsDto.md) |  | [optional] |
+| **save_auth_keys_request_dto** | [**SaveAuthKeysRequestDto**](SaveAuthKeysRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -227,7 +227,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::AuthorizationApi.new
 opts = {
-  external_database_settings: DocspaceApiSdk::ExternalDatabaseSettings.new # ExternalDatabaseSettings | 
+  external_database_connection_request_dto: DocspaceApiSdk::ExternalDatabaseConnectionRequestDto.new # ExternalDatabaseConnectionRequestDto | 
 }
 
 begin
@@ -261,7 +261,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **external_database_settings** | [**ExternalDatabaseSettings**](ExternalDatabaseSettings.md) |  | [optional] |
+| **external_database_connection_request_dto** | [**ExternalDatabaseConnectionRequestDto**](ExternalDatabaseConnectionRequestDto.md) |  | [optional] |
 
 ### Return type
 

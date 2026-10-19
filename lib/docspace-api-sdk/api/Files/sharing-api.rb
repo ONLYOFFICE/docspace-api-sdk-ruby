@@ -468,7 +468,7 @@ module DocspaceApiSdk
     # @option opts [Integer] :count How many members at most to answer with.
     # @option opts [Integer] :start_index How many members to skip before answering, used together with `count` to page through a large group.
     # @option opts [String] :filter_value Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
-    # @return [GroupMemberSecurityRequestArrayWrapper]
+    # @return [GroupMemberSecurityArrayWrapper]
     def get_groups_members_with_file_security(file_id, group_id, opts = {})
       data, _status_code, _headers = get_groups_members_with_file_security_with_http_info(file_id, group_id, opts)
       data
@@ -483,7 +483,7 @@ module DocspaceApiSdk
     # @option opts [Integer] :count How many members at most to answer with.
     # @option opts [Integer] :start_index How many members to skip before answering, used together with `count` to page through a large group.
     # @option opts [String] :filter_value Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
-    # @return [Array<(GroupMemberSecurityRequestArrayWrapper, Integer, Hash)>] GroupMemberSecurityRequestArrayWrapper data, response status code and response headers
+    # @return [Array<(GroupMemberSecurityArrayWrapper, Integer, Hash)>] GroupMemberSecurityArrayWrapper data, response status code and response headers
     def get_groups_members_with_file_security_with_http_info(file_id, group_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::SharingApi.get_groups_members_with_file_security ...'
@@ -525,7 +525,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'GroupMemberSecurityRequestArrayWrapper'
+      return_type = opts[:debug_return_type] || 'GroupMemberSecurityArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -556,7 +556,7 @@ module DocspaceApiSdk
     # @option opts [Integer] :count How many members at most to answer with.
     # @option opts [Integer] :start_index How many members to skip before answering, used together with `count` to page through a large group.
     # @option opts [String] :filter_value Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
-    # @return [GroupMemberSecurityRequestArrayWrapper]
+    # @return [GroupMemberSecurityArrayWrapper]
     def get_groups_members_with_folder_security(folder_id, group_id, opts = {})
       data, _status_code, _headers = get_groups_members_with_folder_security_with_http_info(folder_id, group_id, opts)
       data
@@ -571,7 +571,7 @@ module DocspaceApiSdk
     # @option opts [Integer] :count How many members at most to answer with.
     # @option opts [Integer] :start_index How many members to skip before answering, used together with `count` to page through a large group.
     # @option opts [String] :filter_value Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
-    # @return [Array<(GroupMemberSecurityRequestArrayWrapper, Integer, Hash)>] GroupMemberSecurityRequestArrayWrapper data, response status code and response headers
+    # @return [Array<(GroupMemberSecurityArrayWrapper, Integer, Hash)>] GroupMemberSecurityArrayWrapper data, response status code and response headers
     def get_groups_members_with_folder_security_with_http_info(folder_id, group_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::SharingApi.get_groups_members_with_folder_security ...'
@@ -613,7 +613,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'GroupMemberSecurityRequestArrayWrapper'
+      return_type = opts[:debug_return_type] || 'GroupMemberSecurityArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -706,7 +706,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users/
     # @param file_id [Integer, String] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
     # @param [Hash] opts the optional parameters
-    # @return [MentionWrapperArrayWrapper]
+    # @return [MentionArrayWrapper]
     def get_shared_users(file_id, opts = {})
       data, _status_code, _headers = get_shared_users_with_http_info(file_id, opts)
       data
@@ -717,7 +717,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users/
     # @param file_id [Integer, String] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(MentionWrapperArrayWrapper, Integer, Hash)>] MentionWrapperArrayWrapper data, response status code and response headers
+    # @return [Array<(MentionArrayWrapper, Integer, Hash)>] MentionArrayWrapper data, response status code and response headers
     def get_shared_users_with_http_info(file_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::SharingApi.get_shared_users ...'
@@ -744,7 +744,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'MentionWrapperArrayWrapper'
+      return_type = opts[:debug_return_type] || 'MentionArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -837,8 +837,8 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify/
     # @param file_id [Integer, String] The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
     # @param [Hash] opts the optional parameters
-    # @option opts [MentionMessageWrapper] :mention_message_wrapper The notification to send.
-    # @return [AceShortWrapperArrayWrapper]
+    # @option opts [MentionMessageRequest] :mention_message_request The notification to send.
+    # @return [AceShortArrayWrapper]
     def send_editor_notify(file_id, opts = {})
       data, _status_code, _headers = send_editor_notify_with_http_info(file_id, opts)
       data
@@ -849,8 +849,8 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify/
     # @param file_id [Integer, String] The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
     # @param [Hash] opts the optional parameters
-    # @option opts [MentionMessageWrapper] :mention_message_wrapper The notification to send.
-    # @return [Array<(AceShortWrapperArrayWrapper, Integer, Hash)>] AceShortWrapperArrayWrapper data, response status code and response headers
+    # @option opts [MentionMessageRequest] :mention_message_request The notification to send.
+    # @return [Array<(AceShortArrayWrapper, Integer, Hash)>] AceShortArrayWrapper data, response status code and response headers
     def send_editor_notify_with_http_info(file_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::SharingApi.send_editor_notify ...'
@@ -879,10 +879,10 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'mention_message_wrapper'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'mention_message_request'])
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AceShortWrapperArrayWrapper'
+      return_type = opts[:debug_return_type] || 'AceShortArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']

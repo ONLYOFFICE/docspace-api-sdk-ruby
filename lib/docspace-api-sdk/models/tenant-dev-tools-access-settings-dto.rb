@@ -17,15 +17,19 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Whether the `User` role is barred from the portal developer tools.
+  # Whether the developer tools are closed to the portal's users with the `User` role.
   class TenantDevToolsAccessSettingsDto < ApiModelBase
-    # Whether members holding the `User` role are barred from the developer tools - API keys, OAuth applications  and webhooks. Room administrators and DocSpace administrators keep their access either way.
+    # Specifies if the Developer Tools access are limited for users or not.
     attr_accessor :limited_access_for_users
+
+    # The timestamp indicating when the settings were last modified.
+    attr_accessor :last_modified
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'limited_access_for_users' => :'limitedAccessForUsers'
+        :'limited_access_for_users' => :'limitedAccessForUsers',
+        :'last_modified' => :'lastModified'
       }
     end
 
@@ -42,7 +46,8 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'limited_access_for_users' => :'Boolean'
+        :'limited_access_for_users' => :'Boolean',
+        :'last_modified' => :'Time'
       }
     end
 
@@ -71,6 +76,10 @@ module DocspaceApiSdk
       if attributes.key?(:'limited_access_for_users')
         self.limited_access_for_users = attributes[:'limited_access_for_users']
       end
+
+      if attributes.key?(:'last_modified')
+        self.last_modified = attributes[:'last_modified']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -93,7 +102,8 @@ module DocspaceApiSdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          limited_access_for_users == o.limited_access_for_users
+          limited_access_for_users == o.limited_access_for_users &&
+          last_modified == o.last_modified
     end
 
     # @see the `==` method
@@ -105,7 +115,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [limited_access_for_users].hash
+      [limited_access_for_users, last_modified].hash
     end
 
     # Builds the object from hash

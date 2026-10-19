@@ -37,6 +37,9 @@ module DocspaceApiSdk
     # Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per `ActionType`.
     attr_accessor :capabilities
 
+    # Release date as a Unix timestamp in **seconds**, when the provider's catalogue reports one (OpenAI-shaped `/models` responses and OpenRouter carry `created`; Anthropic carries an ISO `created_at`). The model picker sorts on it so the newest releases come first; entries without it fall back to alphabetical order.
+    attr_accessor :created
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -45,7 +48,8 @@ module DocspaceApiSdk
         :'provider' => :'provider',
         :'reasoning' => :'reasoning',
         :'reasoning_support' => :'reasoningSupport',
-        :'capabilities' => :'capabilities'
+        :'capabilities' => :'capabilities',
+        :'created' => :'created'
       }
     end
 
@@ -67,7 +71,8 @@ module DocspaceApiSdk
         :'provider' => :'AiProviderType',
         :'reasoning' => :'Boolean',
         :'reasoning_support' => :'AiReasoningSupport',
-        :'capabilities' => :'Float'
+        :'capabilities' => :'Float',
+        :'created' => :'Float'
       }
     end
 
@@ -121,6 +126,10 @@ module DocspaceApiSdk
 
       if attributes.key?(:'capabilities')
         self.capabilities = attributes[:'capabilities']
+      end
+
+      if attributes.key?(:'created')
+        self.created = attributes[:'created']
       end
     end
 
@@ -194,7 +203,8 @@ module DocspaceApiSdk
           provider == o.provider &&
           reasoning == o.reasoning &&
           reasoning_support == o.reasoning_support &&
-          capabilities == o.capabilities
+          capabilities == o.capabilities &&
+          created == o.created
     end
 
     # @see the `==` method
@@ -206,7 +216,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, provider, reasoning, reasoning_support, capabilities].hash
+      [id, name, provider, reasoning, reasoning_support, capabilities, created].hash
     end
 
     # Builds the object from hash

@@ -63,10 +63,10 @@ module DocspaceApiSdk
     def self.openapi_types
       {
         :'id' => :'Integer',
-        :'action' => :'HistoryAction',
+        :'action' => :'HistoryActionDto',
         :'initiator' => :'EmployeeDto',
         :'date' => :'ApiDateTime',
-        :'data' => :'HistoryData',
+        :'data' => :'HistoryDataDto',
         :'related' => :'Array<HistoryDto>'
       }
     end

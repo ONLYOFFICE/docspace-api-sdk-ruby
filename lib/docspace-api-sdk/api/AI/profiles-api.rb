@@ -96,27 +96,27 @@ module DocspaceApiSdk
     # Delete a provider profile
     # Deletes an AI provider profile and cleans up every assignment pointing at it: the `Default` slot moves to the first remaining profile and the other slots are left unbound. The ID is required and may be sent in the body or as a query parameter. An unknown ID is not reported - the call answers success without deleting anything. Threads already bound to the profile keep the stored reference, so a round on such a thread falls back to whatever the scope resolves to.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-delete/
-    # @param body [String] The ID of the profile to delete, as a bare JSON string.
+    # @param ai_profiles_delete_request [String] The ID of the profile to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [AiSuccessResponse]
-    def ai_profiles_delete(body, opts = {})
-      data, _status_code, _headers = ai_profiles_delete_with_http_info(body, opts)
+    def ai_profiles_delete(ai_profiles_delete_request, opts = {})
+      data, _status_code, _headers = ai_profiles_delete_with_http_info(ai_profiles_delete_request, opts)
       data
     end
 
     # Delete a provider profile
     # Deletes an AI provider profile and cleans up every assignment pointing at it: the `Default` slot moves to the first remaining profile and the other slots are left unbound. The ID is required and may be sent in the body or as a query parameter. An unknown ID is not reported - the call answers success without deleting anything. Threads already bound to the profile keep the stored reference, so a round on such a thread falls back to whatever the scope resolves to.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-delete/
-    # @param body [String] The ID of the profile to delete, as a bare JSON string.
+    # @param ai_profiles_delete_request [String] The ID of the profile to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
-    def ai_profiles_delete_with_http_info(body, opts = {})
+    def ai_profiles_delete_with_http_info(ai_profiles_delete_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::ProfilesApi.ai_profiles_delete ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling AI::ProfilesApi.ai_profiles_delete"
+      # verify the required parameter 'ai_profiles_delete_request' is set
+      if @api_client.config.client_side_validation && ai_profiles_delete_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_profiles_delete_request' when calling AI::ProfilesApi.ai_profiles_delete"
       end
       # resource path
       local_var_path = '/api/2.0/ai/profiles/delete'
@@ -138,7 +138,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_profiles_delete_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'
@@ -230,7 +230,7 @@ module DocspaceApiSdk
     end
 
     # List provider profiles
-    # Lists the portal's AI provider profiles with their secrets stripped, the same way the single-profile read does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway's own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round's `profileId` accept.
+    # Lists the portal's AI provider profiles. A portal administrator receives each profile in full, `key` and `headers` included, because the settings page edits them; every other caller gets them with those secrets stripped, as the single-profile read always does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway's own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round's `profileId` accept.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-list/
     # @param [Hash] opts the optional parameters
     # @return [Array<AiProfile>]
@@ -240,7 +240,7 @@ module DocspaceApiSdk
     end
 
     # List provider profiles
-    # Lists the portal's AI provider profiles with their secrets stripped, the same way the single-profile read does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway's own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round's `profileId` accept.
+    # Lists the portal's AI provider profiles. A portal administrator receives each profile in full, `key` and `headers` included, because the settings page edits them; every other caller gets them with those secrets stripped, as the single-profile read always does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway's own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round's `profileId` accept.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-list/
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<AiProfile>, Integer, Hash)>] Array<AiProfile> data, response status code and response headers
@@ -289,7 +289,7 @@ module DocspaceApiSdk
     end
 
     # List models
-    # Lists the models a stored profile's provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider's own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a missing profile or a caller without access keeps the status the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
+    # Lists the models a stored profile's provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider's own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a profile the caller cannot see answers 404 before the provider is asked and a caller without access keeps the 403 the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-list-models/
     # @param profile_id [String] The AI provider profile identifier.
     # @param [Hash] opts the optional parameters
@@ -300,7 +300,7 @@ module DocspaceApiSdk
     end
 
     # List models
-    # Lists the models a stored profile's provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider's own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a missing profile or a caller without access keeps the status the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
+    # Lists the models a stored profile's provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider's own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a profile the caller cannot see answers 404 before the provider is asked and a caller without access keeps the 403 the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-list-models/
     # @param profile_id [String] The AI provider profile identifier.
     # @param [Hash] opts the optional parameters
@@ -355,7 +355,7 @@ module DocspaceApiSdk
     end
 
     # List provider models
-    # Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well. For `providerType: onlyoffice` the answer comes from the portal gateway's catalogue, which carries richer capability data than the provider's own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
+    # Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well, and so is an `apiKey` with characters that cannot travel in an HTTP header (anything outside printable ASCII), since no provider could ever accept it. For `providerType: onlyoffice` the answer comes from the portal gateway's catalogue, which carries richer capability data than the provider's own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-list-provider-models/
     # @param ai_profiles_list_provider_models_request [AiProfilesListProviderModelsRequest] 
     # @param [Hash] opts the optional parameters
@@ -366,7 +366,7 @@ module DocspaceApiSdk
     end
 
     # List provider models
-    # Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well. For `providerType: onlyoffice` the answer comes from the portal gateway's catalogue, which carries richer capability data than the provider's own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
+    # Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well, and so is an `apiKey` with characters that cannot travel in an HTTP header (anything outside printable ASCII), since no provider could ever accept it. For `providerType: onlyoffice` the answer comes from the portal gateway's catalogue, which carries richer capability data than the provider's own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-list-provider-models/
     # @param ai_profiles_list_provider_models_request [AiProfilesListProviderModelsRequest] 
     # @param [Hash] opts the optional parameters
@@ -425,29 +425,29 @@ module DocspaceApiSdk
     end
 
     # Test a profile's provider
-    # Probes a stored profile's credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter. The result is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
+    # Probes a stored profile's credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter, and a profile the caller cannot see answers 404 before anything is probed. The result of the probe itself is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-test-connection/
-    # @param body [String] The ID of the profile to probe, as a bare JSON string.
+    # @param ai_profiles_test_connection_request [String] The ID of the profile to probe, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [AiProfilesTestConnection200Response]
-    def ai_profiles_test_connection(body, opts = {})
-      data, _status_code, _headers = ai_profiles_test_connection_with_http_info(body, opts)
+    def ai_profiles_test_connection(ai_profiles_test_connection_request, opts = {})
+      data, _status_code, _headers = ai_profiles_test_connection_with_http_info(ai_profiles_test_connection_request, opts)
       data
     end
 
     # Test a profile's provider
-    # Probes a stored profile's credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter. The result is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
+    # Probes a stored profile's credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter, and a profile the caller cannot see answers 404 before anything is probed. The result of the probe itself is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-test-connection/
-    # @param body [String] The ID of the profile to probe, as a bare JSON string.
+    # @param ai_profiles_test_connection_request [String] The ID of the profile to probe, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiProfilesTestConnection200Response, Integer, Hash)>] AiProfilesTestConnection200Response data, response status code and response headers
-    def ai_profiles_test_connection_with_http_info(body, opts = {})
+    def ai_profiles_test_connection_with_http_info(ai_profiles_test_connection_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::ProfilesApi.ai_profiles_test_connection ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling AI::ProfilesApi.ai_profiles_test_connection"
+      # verify the required parameter 'ai_profiles_test_connection_request' is set
+      if @api_client.config.client_side_validation && ai_profiles_test_connection_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_profiles_test_connection_request' when calling AI::ProfilesApi.ai_profiles_test_connection"
       end
       # resource path
       local_var_path = '/api/2.0/ai/profiles/test-connection'
@@ -469,7 +469,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_profiles_test_connection_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AiProfilesTestConnection200Response'

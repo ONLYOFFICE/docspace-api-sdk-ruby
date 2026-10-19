@@ -329,7 +329,7 @@ module DocspaceApiSdk
     # Lists the source products this installation can import a portal from, as the migrator names every other  operation in this group expects. Nothing has to be called first, a DocSpace administrator is required as  everywhere here, and the call is read-only and idempotent. The answer is a plain list of names such as  `GoogleWorkspace`, `Nextcloud` or `Workspace`, never localized and ordered as the migrators are registered;  pass one of them as `migratorName` to `POST api/2.0/migration/init/{migratorName}`, where the match ignores  case. The list depends on the installation rather than on the portal, so it does not change while the portal  runs, and a name that is not in it is not rejected by the operation that takes it - the queued job ends with  the failure reported in `error` of `GET api/2.0/migration/status`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/list-migrations/
     # @param [Hash] opts the optional parameters
-    # @return [STRINGArrayWrapper]
+    # @return [StringArrayWrapper]
     def list_migrations(opts = {})
       data, _status_code, _headers = list_migrations_with_http_info(opts)
       data
@@ -339,7 +339,7 @@ module DocspaceApiSdk
     # Lists the source products this installation can import a portal from, as the migrator names every other  operation in this group expects. Nothing has to be called first, a DocSpace administrator is required as  everywhere here, and the call is read-only and idempotent. The answer is a plain list of names such as  `GoogleWorkspace`, `Nextcloud` or `Workspace`, never localized and ordered as the migrators are registered;  pass one of them as `migratorName` to `POST api/2.0/migration/init/{migratorName}`, where the match ignores  case. The list depends on the installation rather than on the portal, so it does not change while the portal  runs, and a name that is not in it is not rejected by the operation that takes it - the queued job ends with  the failure reported in `error` of `GET api/2.0/migration/status`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/list-migrations/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(STRINGArrayWrapper, Integer, Hash)>] STRINGArrayWrapper data, response status code and response headers
+    # @return [Array<(StringArrayWrapper, Integer, Hash)>] StringArrayWrapper data, response status code and response headers
     def list_migrations_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Migration::MigrationApi.list_migrations ...'
@@ -362,7 +362,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'STRINGArrayWrapper'
+      return_type = opts[:debug_return_type] || 'StringArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']

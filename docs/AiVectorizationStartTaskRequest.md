@@ -12,6 +12,6 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiVectorizationStartTaskRequest.new(
-  files: [1234,1235]
+  files: [1234, 1235]
 )
 ```

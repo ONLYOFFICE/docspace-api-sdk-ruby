@@ -34,13 +34,13 @@ module DocspaceApiSdk
     # @option opts [Boolean] :include_shared Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
     # @option opts [Boolean] :invited_by_me Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
     # @option opts [String] :inviter_id Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-    # @option opts [Area] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+    # @option opts [AccountSearchArea] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
     # @option opts [Array<EmployeeType>] :employee_types Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
     # @option opts [Integer] :count The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
     # @option opts [Integer] :start_index The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
     # @option opts [String] :filter_separator The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
     # @option opts [String] :filter_value The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
-    # @return [IAccountEntryArrayWrapper]
+    # @return [AccountEntryArrayWrapper]
     def get_accounts_entries_with_files_shared(id, opts = {})
       data, _status_code, _headers = get_accounts_entries_with_files_shared_with_http_info(id, opts)
       data
@@ -57,13 +57,13 @@ module DocspaceApiSdk
     # @option opts [Boolean] :include_shared Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
     # @option opts [Boolean] :invited_by_me Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
     # @option opts [String] :inviter_id Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-    # @option opts [Area] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+    # @option opts [AccountSearchArea] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
     # @option opts [Array<EmployeeType>] :employee_types Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
     # @option opts [Integer] :count The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
     # @option opts [Integer] :start_index The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
     # @option opts [String] :filter_separator The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
     # @option opts [String] :filter_value The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
-    # @return [Array<(IAccountEntryArrayWrapper, Integer, Hash)>] IAccountEntryArrayWrapper data, response status code and response headers
+    # @return [Array<(AccountEntryArrayWrapper, Integer, Hash)>] AccountEntryArrayWrapper data, response status code and response headers
     def get_accounts_entries_with_files_shared_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: People::SearchApi.get_accounts_entries_with_files_shared ...'
@@ -110,7 +110,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'IAccountEntryArrayWrapper'
+      return_type = opts[:debug_return_type] || 'AccountEntryArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -143,13 +143,13 @@ module DocspaceApiSdk
     # @option opts [Boolean] :include_shared Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
     # @option opts [Boolean] :invited_by_me Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
     # @option opts [String] :inviter_id Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-    # @option opts [Area] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+    # @option opts [AccountSearchArea] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
     # @option opts [Array<EmployeeType>] :employee_types Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
     # @option opts [Integer] :count The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
     # @option opts [Integer] :start_index The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
     # @option opts [String] :filter_separator The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
     # @option opts [String] :filter_value The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
-    # @return [IAccountEntryArrayWrapper]
+    # @return [AccountEntryArrayWrapper]
     def get_accounts_entries_with_folders_shared(id, opts = {})
       data, _status_code, _headers = get_accounts_entries_with_folders_shared_with_http_info(id, opts)
       data
@@ -166,13 +166,13 @@ module DocspaceApiSdk
     # @option opts [Boolean] :include_shared Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
     # @option opts [Boolean] :invited_by_me Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
     # @option opts [String] :inviter_id Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-    # @option opts [Area] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+    # @option opts [AccountSearchArea] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
     # @option opts [Array<EmployeeType>] :employee_types Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
     # @option opts [Integer] :count The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
     # @option opts [Integer] :start_index The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
     # @option opts [String] :filter_separator The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
     # @option opts [String] :filter_value The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
-    # @return [Array<(IAccountEntryArrayWrapper, Integer, Hash)>] IAccountEntryArrayWrapper data, response status code and response headers
+    # @return [Array<(AccountEntryArrayWrapper, Integer, Hash)>] AccountEntryArrayWrapper data, response status code and response headers
     def get_accounts_entries_with_folders_shared_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: People::SearchApi.get_accounts_entries_with_folders_shared ...'
@@ -219,7 +219,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'IAccountEntryArrayWrapper'
+      return_type = opts[:debug_return_type] || 'AccountEntryArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -252,13 +252,13 @@ module DocspaceApiSdk
     # @option opts [Boolean] :include_shared Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
     # @option opts [Boolean] :invited_by_me Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
     # @option opts [String] :inviter_id Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-    # @option opts [Area] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+    # @option opts [AccountSearchArea] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
     # @option opts [Array<EmployeeType>] :employee_types Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
     # @option opts [Integer] :count The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
     # @option opts [Integer] :start_index The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
     # @option opts [String] :filter_separator The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
     # @option opts [String] :filter_value The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
-    # @return [IAccountEntryArrayWrapper]
+    # @return [AccountEntryArrayWrapper]
     def get_accounts_entries_with_rooms_shared(id, opts = {})
       data, _status_code, _headers = get_accounts_entries_with_rooms_shared_with_http_info(id, opts)
       data
@@ -275,13 +275,13 @@ module DocspaceApiSdk
     # @option opts [Boolean] :include_shared Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
     # @option opts [Boolean] :invited_by_me Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
     # @option opts [String] :inviter_id Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-    # @option opts [Area] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+    # @option opts [AccountSearchArea] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
     # @option opts [Array<EmployeeType>] :employee_types Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
     # @option opts [Integer] :count The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
     # @option opts [Integer] :start_index The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
     # @option opts [String] :filter_separator The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
     # @option opts [String] :filter_value The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
-    # @return [Array<(IAccountEntryArrayWrapper, Integer, Hash)>] IAccountEntryArrayWrapper data, response status code and response headers
+    # @return [Array<(AccountEntryArrayWrapper, Integer, Hash)>] AccountEntryArrayWrapper data, response status code and response headers
     def get_accounts_entries_with_rooms_shared_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: People::SearchApi.get_accounts_entries_with_rooms_shared ...'
@@ -328,7 +328,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'IAccountEntryArrayWrapper'
+      return_type = opts[:debug_return_type] || 'AccountEntryArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -438,7 +438,7 @@ module DocspaceApiSdk
     # @option opts [Boolean] :exclude_group Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`.
     # @option opts [Boolean] :invited_by_me Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
     # @option opts [String] :inviter_id Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-    # @option opts [Area] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
+    # @option opts [AccountSearchArea] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
     # @option opts [Integer] :count The size of the page. It defaults to 100, which is also the largest value the operation accepts.
     # @option opts [Integer] :start_index The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
     # @option opts [String] :sort_by What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.
@@ -468,7 +468,7 @@ module DocspaceApiSdk
     # @option opts [Boolean] :exclude_group Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`.
     # @option opts [Boolean] :invited_by_me Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
     # @option opts [String] :inviter_id Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-    # @option opts [Area] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
+    # @option opts [AccountSearchArea] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
     # @option opts [Integer] :count The size of the page. It defaults to 100, which is also the largest value the operation accepts.
     # @option opts [Integer] :start_index The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
     # @option opts [String] :sort_by What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.
@@ -563,7 +563,7 @@ module DocspaceApiSdk
     # @option opts [Boolean] :include_shared Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
     # @option opts [Boolean] :invited_by_me Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
     # @option opts [String] :inviter_id Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-    # @option opts [Area] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+    # @option opts [AccountSearchArea] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
     # @option opts [Array<EmployeeType>] :employee_types Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
     # @option opts [Integer] :count The size of the page. It defaults to 100, which is also the largest value the operation accepts.
     # @option opts [Integer] :start_index The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
@@ -586,7 +586,7 @@ module DocspaceApiSdk
     # @option opts [Boolean] :include_shared Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
     # @option opts [Boolean] :invited_by_me Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
     # @option opts [String] :inviter_id Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-    # @option opts [Area] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+    # @option opts [AccountSearchArea] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
     # @option opts [Array<EmployeeType>] :employee_types Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
     # @option opts [Integer] :count The size of the page. It defaults to 100, which is also the largest value the operation accepts.
     # @option opts [Integer] :start_index The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
@@ -672,7 +672,7 @@ module DocspaceApiSdk
     # @option opts [Boolean] :include_shared Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
     # @option opts [Boolean] :invited_by_me Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
     # @option opts [String] :inviter_id Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-    # @option opts [Area] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+    # @option opts [AccountSearchArea] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
     # @option opts [Array<EmployeeType>] :employee_types Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
     # @option opts [Integer] :count The size of the page. It defaults to 100, which is also the largest value the operation accepts.
     # @option opts [Integer] :start_index The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
@@ -695,7 +695,7 @@ module DocspaceApiSdk
     # @option opts [Boolean] :include_shared Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
     # @option opts [Boolean] :invited_by_me Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
     # @option opts [String] :inviter_id Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-    # @option opts [Area] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+    # @option opts [AccountSearchArea] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
     # @option opts [Array<EmployeeType>] :employee_types Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
     # @option opts [Integer] :count The size of the page. It defaults to 100, which is also the largest value the operation accepts.
     # @option opts [Integer] :start_index The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
@@ -781,7 +781,7 @@ module DocspaceApiSdk
     # @option opts [Boolean] :include_shared Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
     # @option opts [Boolean] :invited_by_me Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
     # @option opts [String] :inviter_id Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-    # @option opts [Area] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+    # @option opts [AccountSearchArea] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
     # @option opts [Array<EmployeeType>] :employee_types Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
     # @option opts [Integer] :count The size of the page. It defaults to 100, which is also the largest value the operation accepts.
     # @option opts [Integer] :start_index The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
@@ -804,7 +804,7 @@ module DocspaceApiSdk
     # @option opts [Boolean] :include_shared Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
     # @option opts [Boolean] :invited_by_me Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
     # @option opts [String] :inviter_id Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-    # @option opts [Area] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
+    # @option opts [AccountSearchArea] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
     # @option opts [Array<EmployeeType>] :employee_types Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
     # @option opts [Integer] :count The size of the page. It defaults to 100, which is also the largest value the operation accepts.
     # @option opts [Integer] :start_index The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
@@ -896,7 +896,7 @@ module DocspaceApiSdk
     # @option opts [Boolean] :exclude_group Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`.
     # @option opts [Boolean] :invited_by_me Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
     # @option opts [String] :inviter_id Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-    # @option opts [Area] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
+    # @option opts [AccountSearchArea] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
     # @option opts [Integer] :count The size of the page. It defaults to 100, which is also the largest value the operation accepts.
     # @option opts [Integer] :start_index The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
     # @option opts [String] :sort_by What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.
@@ -926,7 +926,7 @@ module DocspaceApiSdk
     # @option opts [Boolean] :exclude_group Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`.
     # @option opts [Boolean] :invited_by_me Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
     # @option opts [String] :inviter_id Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-    # @option opts [Area] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
+    # @option opts [AccountSearchArea] :area The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it.
     # @option opts [Integer] :count The size of the page. It defaults to 100, which is also the largest value the operation accepts.
     # @option opts [Integer] :start_index The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
     # @option opts [String] :sort_by What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`.

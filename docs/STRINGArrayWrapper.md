@@ -1,4 +1,4 @@
-# DocspaceApiSdk::STRINGArrayWrapper
+# DocspaceApiSdk::StringArrayWrapper
 
 ## Properties
 
@@ -15,7 +15,7 @@
 ```ruby
 require 'docspace-api-sdk'
 
-instance = DocspaceApiSdk::STRINGArrayWrapper.new(
+instance = DocspaceApiSdk::StringArrayWrapper.new(
   response: null,
   count: null,
   links: null,

@@ -244,7 +244,7 @@ end
 
 ## change_version_history
 
-> <FileArrayWrapper> change_version_history(file_id, change_history)
+> <FileArrayWrapper> change_version_history(file_id, change_history_request)
 
 Change version history
 
@@ -283,11 +283,11 @@ end
 
 api_instance = DocspaceApiSdk::Files::FilesApi.new
 file_id = 1 # Integer | The file whose version history is changed.
-change_history = DocspaceApiSdk::ChangeHistory.new({version: 1}) # ChangeHistory | The change to make to the revision group.
+change_history_request = DocspaceApiSdk::ChangeHistoryRequest.new({version: 1}) # ChangeHistoryRequest | The change to make to the revision group.
 
 begin
   # Change version history
-  result = api_instance.change_version_history(file_id, change_history)
+  result = api_instance.change_version_history(file_id, change_history_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FilesApi->change_version_history: #{e}"
@@ -298,12 +298,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<FileArrayWrapper>, Integer, Hash)> change_version_history_with_http_info(file_id, change_history)
+> <Array(<FileArrayWrapper>, Integer, Hash)> change_version_history_with_http_info(file_id, change_history_request)
 
 ```ruby
 begin
   # Change version history
-  data, status_code, headers = api_instance.change_version_history_with_http_info(file_id, change_history)
+  data, status_code, headers = api_instance.change_version_history_with_http_info(file_id, change_history_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <FileArrayWrapper>
@@ -317,7 +317,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **file_id** | **Integer** | The file whose version history is changed. |  |
-| **change_history** | [**ChangeHistory**](ChangeHistory.md) | The change to make to the revision group. |  |
+| **change_history_request** | [**ChangeHistoryRequest**](ChangeHistoryRequest.md) | The change to make to the revision group. |  |
 
 ### Return type
 
@@ -339,7 +339,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ## check_fill_form_draft
 
-> <StringWrapper> check_fill_form_draft(file_id, check_fill_form_draft)
+> <StringWrapper> check_fill_form_draft(file_id, check_fill_form_draft_request)
 
 Open a form draft for filling
 
@@ -378,11 +378,11 @@ end
 
 api_instance = DocspaceApiSdk::Files::FilesApi.new
 file_id = 1 # Integer | The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.
-check_fill_form_draft = DocspaceApiSdk::CheckFillFormDraft.new({version: 0}) # CheckFillFormDraft | The revision of the form to open and what the caller intends to do with it.
+check_fill_form_draft_request = DocspaceApiSdk::CheckFillFormDraftRequest.new({version: 0}) # CheckFillFormDraftRequest | The revision of the form to open and what the caller intends to do with it.
 
 begin
   # Open a form draft for filling
-  result = api_instance.check_fill_form_draft(file_id, check_fill_form_draft)
+  result = api_instance.check_fill_form_draft(file_id, check_fill_form_draft_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FilesApi->check_fill_form_draft: #{e}"
@@ -393,12 +393,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<StringWrapper>, Integer, Hash)> check_fill_form_draft_with_http_info(file_id, check_fill_form_draft)
+> <Array(<StringWrapper>, Integer, Hash)> check_fill_form_draft_with_http_info(file_id, check_fill_form_draft_request)
 
 ```ruby
 begin
   # Open a form draft for filling
-  data, status_code, headers = api_instance.check_fill_form_draft_with_http_info(file_id, check_fill_form_draft)
+  data, status_code, headers = api_instance.check_fill_form_draft_with_http_info(file_id, check_fill_form_draft_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <StringWrapper>
@@ -412,7 +412,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **file_id** | **Integer** | The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well. |  |
-| **check_fill_form_draft** | [**CheckFillFormDraft**](CheckFillFormDraft.md) | The revision of the form to open and what the caller intends to do with it. |  |
+| **check_fill_form_draft_request** | [**CheckFillFormDraftRequest**](CheckFillFormDraftRequest.md) | The revision of the form to open and what the caller intends to do with it. |  |
 
 ### Return type
 
@@ -434,7 +434,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ## copy_file_as
 
-> <FileEntryBaseWrapper> copy_file_as(file_id, copy_as_json_element)
+> <FileEntryBaseWrapper> copy_file_as(file_id, copy_as_request)
 
 Copy a file
 
@@ -473,11 +473,11 @@ end
 
 api_instance = DocspaceApiSdk::Files::FilesApi.new
 file_id = 1 # Integer | The file to copy.
-copy_as_json_element = DocspaceApiSdk::CopyAsJsonElement.new({dest_title: 'Document Copy.docx', dest_folder_id: nil}) # CopyAsJsonElement | The title, the destination and the conversion options of the copy.
+copy_as_request = DocspaceApiSdk::CopyAsRequest.new({dest_title: 'Document Copy.docx', dest_folder_id: nil}) # CopyAsRequest | The title, the destination and the conversion options of the copy.
 
 begin
   # Copy a file
-  result = api_instance.copy_file_as(file_id, copy_as_json_element)
+  result = api_instance.copy_file_as(file_id, copy_as_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FilesApi->copy_file_as: #{e}"
@@ -488,12 +488,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<FileEntryBaseWrapper>, Integer, Hash)> copy_file_as_with_http_info(file_id, copy_as_json_element)
+> <Array(<FileEntryBaseWrapper>, Integer, Hash)> copy_file_as_with_http_info(file_id, copy_as_request)
 
 ```ruby
 begin
   # Copy a file
-  data, status_code, headers = api_instance.copy_file_as_with_http_info(file_id, copy_as_json_element)
+  data, status_code, headers = api_instance.copy_file_as_with_http_info(file_id, copy_as_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <FileEntryBaseWrapper>
@@ -507,7 +507,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **file_id** | **Integer** | The file to copy. |  |
-| **copy_as_json_element** | [**CopyAsJsonElement**](CopyAsJsonElement.md) | The title, the destination and the conversion options of the copy. |  |
+| **copy_as_request** | [**CopyAsRequest**](CopyAsRequest.md) | The title, the destination and the conversion options of the copy. |  |
 
 ### Return type
 
@@ -529,7 +529,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ## create_edit_session
 
-> <ChunkedUploadSessionResponseWrapperWrapper> create_edit_session(file_id, opts)
+> <ChunkedUploadSessionResultWrapper> create_edit_session(file_id, opts)
 
 Create the editing session
 
@@ -585,7 +585,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ChunkedUploadSessionResponseWrapperWrapper>, Integer, Hash)> create_edit_session_with_http_info(file_id, opts)
+> <Array(<ChunkedUploadSessionResultWrapper>, Integer, Hash)> create_edit_session_with_http_info(file_id, opts)
 
 ```ruby
 begin
@@ -593,7 +593,7 @@ begin
   data, status_code, headers = api_instance.create_edit_session_with_http_info(file_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ChunkedUploadSessionResponseWrapperWrapper>
+  p data # => <ChunkedUploadSessionResultWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FilesApi->create_edit_session_with_http_info: #{e}"
 end
@@ -608,11 +608,11 @@ end
 
 ### Return type
 
-[**ChunkedUploadSessionResponseWrapperWrapper**](ChunkedUploadSessionResponseWrapperWrapper.md)
+[**ChunkedUploadSessionResultWrapper**](ChunkedUploadSessionResultWrapper.md)
 
 ### Third-party storage
 
-The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id` as `String` and the answer is [**ThirdPartyChunkedUploadSessionResponseWrapperWrapper**](ThirdPartyChunkedUploadSessionResponseWrapperWrapper.md).
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `file_id` as `String` and the answer is [**ThirdPartyChunkedUploadSessionResultWrapper**](ThirdPartyChunkedUploadSessionResultWrapper.md).
 
 ### Authorization
 
@@ -626,7 +626,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ## create_file
 
-> <FileWrapper> create_file(folder_id, create_file_json_element)
+> <FileWrapper> create_file(folder_id, create_file_request)
 
 Create a file
 
@@ -665,11 +665,11 @@ end
 
 api_instance = DocspaceApiSdk::Files::FilesApi.new
 folder_id = 1 # Integer | The folder the file is created in.
-create_file_json_element = DocspaceApiSdk::CreateFileJsonElement.new({title: 'New Document.docx'}) # CreateFileJsonElement | The title of the new file and the source of its content.
+create_file_request = DocspaceApiSdk::CreateFileRequest.new({title: 'New Document.docx'}) # CreateFileRequest | The title of the new file and the source of its content.
 
 begin
   # Create a file
-  result = api_instance.create_file(folder_id, create_file_json_element)
+  result = api_instance.create_file(folder_id, create_file_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FilesApi->create_file: #{e}"
@@ -680,12 +680,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<FileWrapper>, Integer, Hash)> create_file_with_http_info(folder_id, create_file_json_element)
+> <Array(<FileWrapper>, Integer, Hash)> create_file_with_http_info(folder_id, create_file_request)
 
 ```ruby
 begin
   # Create a file
-  data, status_code, headers = api_instance.create_file_with_http_info(folder_id, create_file_json_element)
+  data, status_code, headers = api_instance.create_file_with_http_info(folder_id, create_file_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <FileWrapper>
@@ -699,7 +699,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **folder_id** | **Integer** | The folder the file is created in. |  |
-| **create_file_json_element** | [**CreateFileJsonElement**](CreateFileJsonElement.md) | The title of the new file and the source of its content. |  |
+| **create_file_request** | [**CreateFileRequest**](CreateFileRequest.md) | The title of the new file and the source of its content. |  |
 
 ### Return type
 
@@ -760,7 +760,7 @@ end
 
 api_instance = DocspaceApiSdk::Files::FilesApi.new
 opts = {
-  create_file_json_element: DocspaceApiSdk::CreateFileJsonElement.new({title: 'New Document.docx'}) # CreateFileJsonElement | 
+  create_file_request: DocspaceApiSdk::CreateFileRequest.new({title: 'New Document.docx'}) # CreateFileRequest | 
 }
 
 begin
@@ -794,7 +794,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **create_file_json_element** | [**CreateFileJsonElement**](CreateFileJsonElement.md) |  | [optional] |
+| **create_file_request** | [**CreateFileRequest**](CreateFileRequest.md) |  | [optional] |
 
 ### Return type
 
@@ -907,7 +907,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ## create_html_file
 
-> <FileWrapper> create_html_file(folder_id, create_text_or_html_file)
+> <FileWrapper> create_html_file(folder_id, create_text_or_html_file_request)
 
 Create an HTML file
 
@@ -946,11 +946,11 @@ end
 
 api_instance = DocspaceApiSdk::Files::FilesApi.new
 folder_id = 1 # Integer | The folder the file is created in.
-create_text_or_html_file = DocspaceApiSdk::CreateTextOrHtmlFile.new({title: 'Document.txt'}) # CreateTextOrHtmlFile | The title, the content and the collision behaviour of the new file.
+create_text_or_html_file_request = DocspaceApiSdk::CreateTextOrHtmlFileRequest.new({title: 'Document.txt'}) # CreateTextOrHtmlFileRequest | The title, the content and the collision behaviour of the new file.
 
 begin
   # Create an HTML file
-  result = api_instance.create_html_file(folder_id, create_text_or_html_file)
+  result = api_instance.create_html_file(folder_id, create_text_or_html_file_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FilesApi->create_html_file: #{e}"
@@ -961,12 +961,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<FileWrapper>, Integer, Hash)> create_html_file_with_http_info(folder_id, create_text_or_html_file)
+> <Array(<FileWrapper>, Integer, Hash)> create_html_file_with_http_info(folder_id, create_text_or_html_file_request)
 
 ```ruby
 begin
   # Create an HTML file
-  data, status_code, headers = api_instance.create_html_file_with_http_info(folder_id, create_text_or_html_file)
+  data, status_code, headers = api_instance.create_html_file_with_http_info(folder_id, create_text_or_html_file_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <FileWrapper>
@@ -980,7 +980,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **folder_id** | **Integer** | The folder the file is created in. |  |
-| **create_text_or_html_file** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md) | The title, the content and the collision behaviour of the new file. |  |
+| **create_text_or_html_file_request** | [**CreateTextOrHtmlFileRequest**](CreateTextOrHtmlFileRequest.md) | The title, the content and the collision behaviour of the new file. |  |
 
 ### Return type
 
@@ -1041,7 +1041,7 @@ end
 
 api_instance = DocspaceApiSdk::Files::FilesApi.new
 opts = {
-  create_text_or_html_file: DocspaceApiSdk::CreateTextOrHtmlFile.new({title: 'Document.txt'}) # CreateTextOrHtmlFile | 
+  create_text_or_html_file_request: DocspaceApiSdk::CreateTextOrHtmlFileRequest.new({title: 'Document.txt'}) # CreateTextOrHtmlFileRequest | 
 }
 
 begin
@@ -1075,7 +1075,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **create_text_or_html_file** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md) |  | [optional] |
+| **create_text_or_html_file_request** | [**CreateTextOrHtmlFileRequest**](CreateTextOrHtmlFileRequest.md) |  | [optional] |
 
 ### Return type
 
@@ -1093,7 +1093,7 @@ end
 
 ## create_text_file
 
-> <FileWrapper> create_text_file(folder_id, create_text_or_html_file)
+> <FileWrapper> create_text_file(folder_id, create_text_or_html_file_request)
 
 Create a text file
 
@@ -1132,11 +1132,11 @@ end
 
 api_instance = DocspaceApiSdk::Files::FilesApi.new
 folder_id = 1 # Integer | The folder the file is created in.
-create_text_or_html_file = DocspaceApiSdk::CreateTextOrHtmlFile.new({title: 'Document.txt'}) # CreateTextOrHtmlFile | The title, the content and the collision behaviour of the new file.
+create_text_or_html_file_request = DocspaceApiSdk::CreateTextOrHtmlFileRequest.new({title: 'Document.txt'}) # CreateTextOrHtmlFileRequest | The title, the content and the collision behaviour of the new file.
 
 begin
   # Create a text file
-  result = api_instance.create_text_file(folder_id, create_text_or_html_file)
+  result = api_instance.create_text_file(folder_id, create_text_or_html_file_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FilesApi->create_text_file: #{e}"
@@ -1147,12 +1147,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<FileWrapper>, Integer, Hash)> create_text_file_with_http_info(folder_id, create_text_or_html_file)
+> <Array(<FileWrapper>, Integer, Hash)> create_text_file_with_http_info(folder_id, create_text_or_html_file_request)
 
 ```ruby
 begin
   # Create a text file
-  data, status_code, headers = api_instance.create_text_file_with_http_info(folder_id, create_text_or_html_file)
+  data, status_code, headers = api_instance.create_text_file_with_http_info(folder_id, create_text_or_html_file_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <FileWrapper>
@@ -1166,7 +1166,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **folder_id** | **Integer** | The folder the file is created in. |  |
-| **create_text_or_html_file** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md) | The title, the content and the collision behaviour of the new file. |  |
+| **create_text_or_html_file_request** | [**CreateTextOrHtmlFileRequest**](CreateTextOrHtmlFileRequest.md) | The title, the content and the collision behaviour of the new file. |  |
 
 ### Return type
 
@@ -1227,7 +1227,7 @@ end
 
 api_instance = DocspaceApiSdk::Files::FilesApi.new
 opts = {
-  create_text_or_html_file: DocspaceApiSdk::CreateTextOrHtmlFile.new({title: 'Document.txt'}) # CreateTextOrHtmlFile | 
+  create_text_or_html_file_request: DocspaceApiSdk::CreateTextOrHtmlFileRequest.new({title: 'Document.txt'}) # CreateTextOrHtmlFileRequest | 
 }
 
 begin
@@ -1261,7 +1261,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **create_text_or_html_file** | [**CreateTextOrHtmlFile**](CreateTextOrHtmlFile.md) |  | [optional] |
+| **create_text_or_html_file_request** | [**CreateTextOrHtmlFileRequest**](CreateTextOrHtmlFileRequest.md) |  | [optional] |
 
 ### Return type
 
@@ -1370,7 +1370,7 @@ end
 
 ## delete_file
 
-> <FileOperationArrayWrapper> delete_file(file_id, delete, opts)
+> <FileOperationArrayWrapper> delete_file(file_id, delete_file_request, opts)
 
 Delete a file
 
@@ -1409,14 +1409,14 @@ end
 
 api_instance = DocspaceApiSdk::Files::FilesApi.new
 file_id = 1 # Integer | The file to delete.
-delete = DocspaceApiSdk::Delete.new # Delete | When and how the file is deleted.
+delete_file_request = DocspaceApiSdk::DeleteFileRequest.new # DeleteFileRequest | When and how the file is deleted.
 opts = {
   return_single_operation: false # Boolean | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
 }
 
 begin
   # Delete a file
-  result = api_instance.delete_file(file_id, delete, opts)
+  result = api_instance.delete_file(file_id, delete_file_request, opts)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FilesApi->delete_file: #{e}"
@@ -1427,12 +1427,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<FileOperationArrayWrapper>, Integer, Hash)> delete_file_with_http_info(file_id, delete, opts)
+> <Array(<FileOperationArrayWrapper>, Integer, Hash)> delete_file_with_http_info(file_id, delete_file_request, opts)
 
 ```ruby
 begin
   # Delete a file
-  data, status_code, headers = api_instance.delete_file_with_http_info(file_id, delete, opts)
+  data, status_code, headers = api_instance.delete_file_with_http_info(file_id, delete_file_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <FileOperationArrayWrapper>
@@ -1446,7 +1446,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **file_id** | **Integer** | The file to delete. |  |
-| **delete** | [**Delete**](Delete.md) | When and how the file is deleted. |  |
+| **delete_file_request** | [**DeleteFileRequest**](DeleteFileRequest.md) | When and how the file is deleted. |  |
 | **return_single_operation** | **Boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] |
 
 ### Return type
@@ -1473,7 +1473,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 Delete recent files
 
-Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member's history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. Only numeric file ids are honoured, so a file on a connected third-party account cannot be  cleared this way, and folder ids are accepted but change nothing because the section lists files only. The  answer carries no body and reports nothing about how many entries were found: an empty request and an id that  was never in the section are accepted alike. Repeating the call is safe, but an entry returns the next time  the file is opened or `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section  instead, call `PUT api/2.0/files/displayrecent`.
+Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member's history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. A file on a connected third-party account is cleared by its string id too, but only while  the storage can still find it: the entry of a file removed from the storage stays in the history. Folder ids  are accepted but change nothing because the section lists files only. The answer carries no body and reports  nothing about how many entries were found: an empty request and an id that was never in the section are  accepted alike. Repeating the call is safe, but an entry returns the next time the file is opened or  `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section instead, call  `PUT api/2.0/files/displayrecent`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-recent/).
 
@@ -1598,7 +1598,7 @@ end
 
 api_instance = DocspaceApiSdk::Files::FilesApi.new
 opts = {
-  request_body: [37] # Array<Integer> | The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
+  delete_template_files_request_dto: [37] # Array<Integer> | The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
 }
 
 begin
@@ -1632,7 +1632,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **request_body** | [**Array&lt;Integer&gt;**](Integer.md) | The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric. | [optional] |
+| **delete_template_files_request_dto** | [**Array&lt;Integer&gt;**](Integer.md) | The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric. | [optional] |
 
 ### Return type
 
@@ -2968,7 +2968,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ## get_protected_file_users
 
-> <MentionWrapperArrayWrapper> get_protected_file_users(file_id)
+> <MentionArrayWrapper> get_protected_file_users(file_id)
 
 Get users for document protection
 
@@ -3021,7 +3021,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<MentionWrapperArrayWrapper>, Integer, Hash)> get_protected_file_users_with_http_info(file_id)
+> <Array(<MentionArrayWrapper>, Integer, Hash)> get_protected_file_users_with_http_info(file_id)
 
 ```ruby
 begin
@@ -3029,7 +3029,7 @@ begin
   data, status_code, headers = api_instance.get_protected_file_users_with_http_info(file_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <MentionWrapperArrayWrapper>
+  p data # => <MentionArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FilesApi->get_protected_file_users_with_http_info: #{e}"
 end
@@ -3043,7 +3043,7 @@ end
 
 ### Return type
 
-[**MentionWrapperArrayWrapper**](MentionWrapperArrayWrapper.md)
+[**MentionArrayWrapper**](MentionArrayWrapper.md)
 
 ### Third-party storage
 
@@ -3334,7 +3334,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ## lock_file
 
-> <FileWrapper> lock_file(file_id, lock_file_parameters)
+> <FileWrapper> lock_file(file_id, lock_file_request)
 
 Lock a file
 
@@ -3373,11 +3373,11 @@ end
 
 api_instance = DocspaceApiSdk::Files::FilesApi.new
 file_id = 1 # Integer | The file to lock or unlock.
-lock_file_parameters = DocspaceApiSdk::LockFileParameters.new # LockFileParameters | The lock state to reach.
+lock_file_request = DocspaceApiSdk::LockFileRequest.new # LockFileRequest | The lock state to reach.
 
 begin
   # Lock a file
-  result = api_instance.lock_file(file_id, lock_file_parameters)
+  result = api_instance.lock_file(file_id, lock_file_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FilesApi->lock_file: #{e}"
@@ -3388,12 +3388,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<FileWrapper>, Integer, Hash)> lock_file_with_http_info(file_id, lock_file_parameters)
+> <Array(<FileWrapper>, Integer, Hash)> lock_file_with_http_info(file_id, lock_file_request)
 
 ```ruby
 begin
   # Lock a file
-  data, status_code, headers = api_instance.lock_file_with_http_info(file_id, lock_file_parameters)
+  data, status_code, headers = api_instance.lock_file_with_http_info(file_id, lock_file_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <FileWrapper>
@@ -3407,7 +3407,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **file_id** | **Integer** | The file to lock or unlock. |  |
-| **lock_file_parameters** | [**LockFileParameters**](LockFileParameters.md) | The lock state to reach. |  |
+| **lock_file_request** | [**LockFileRequest**](LockFileRequest.md) | The lock state to reach. |  |
 
 ### Return type
 
@@ -3828,7 +3828,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ## save_file_as_pdf
 
-> <FileWrapper> save_file_as_pdf(id, save_as_pdf)
+> <FileWrapper> save_file_as_pdf(id, save_as_pdf_request)
 
 Save a file as PDF
 
@@ -3867,11 +3867,11 @@ end
 
 api_instance = DocspaceApiSdk::Files::FilesApi.new
 id = 1 # Integer | The file to convert; it is left untouched.
-save_as_pdf = DocspaceApiSdk::SaveAsPdf.new({folder_id: 1, title: 'My Document'}) # SaveAsPdf | The destination folder and the name of the PDF.
+save_as_pdf_request = DocspaceApiSdk::SaveAsPdfRequest.new({folder_id: 1, title: 'My Document'}) # SaveAsPdfRequest | The destination folder and the name of the PDF.
 
 begin
   # Save a file as PDF
-  result = api_instance.save_file_as_pdf(id, save_as_pdf)
+  result = api_instance.save_file_as_pdf(id, save_as_pdf_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FilesApi->save_file_as_pdf: #{e}"
@@ -3882,12 +3882,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<FileWrapper>, Integer, Hash)> save_file_as_pdf_with_http_info(id, save_as_pdf)
+> <Array(<FileWrapper>, Integer, Hash)> save_file_as_pdf_with_http_info(id, save_as_pdf_request)
 
 ```ruby
 begin
   # Save a file as PDF
-  data, status_code, headers = api_instance.save_file_as_pdf_with_http_info(id, save_as_pdf)
+  data, status_code, headers = api_instance.save_file_as_pdf_with_http_info(id, save_as_pdf_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <FileWrapper>
@@ -3901,7 +3901,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **Integer** | The file to convert; it is left untouched. |  |
-| **save_as_pdf** | [**SaveAsPdf**](SaveAsPdf.md) | The destination folder and the name of the PDF. |  |
+| **save_as_pdf_request** | [**SaveAsPdfRequest**](SaveAsPdfRequest.md) | The destination folder and the name of the PDF. |  |
 
 ### Return type
 
@@ -3909,7 +3909,7 @@ end
 
 ### Third-party storage
 
-The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String` `save_as_pdf` as `ThirdPartySaveAsPdf` and the answer is [**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md).
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id` as `String` `save_as_pdf_request` as `ThirdPartySaveAsPdfRequest` and the answer is [**ThirdPartyFileWrapper**](ThirdPartyFileWrapper.md).
 
 ### Authorization
 
@@ -4015,7 +4015,7 @@ nil (empty response body)
 
 ## set_custom_filter_tag
 
-> <FileWrapper> set_custom_filter_tag(file_id, custom_filter_parameters)
+> <FileWrapper> set_custom_filter_tag(file_id, custom_filter_request)
 
 Set the Custom Filter editing mode
 
@@ -4054,11 +4054,11 @@ end
 
 api_instance = DocspaceApiSdk::Files::FilesApi.new
 file_id = 1 # Integer | The spreadsheet whose Custom Filter mode is switched.
-custom_filter_parameters = DocspaceApiSdk::CustomFilterParameters.new # CustomFilterParameters | The Custom Filter state to reach.
+custom_filter_request = DocspaceApiSdk::CustomFilterRequest.new # CustomFilterRequest | The Custom Filter state to reach.
 
 begin
   # Set the Custom Filter editing mode
-  result = api_instance.set_custom_filter_tag(file_id, custom_filter_parameters)
+  result = api_instance.set_custom_filter_tag(file_id, custom_filter_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FilesApi->set_custom_filter_tag: #{e}"
@@ -4069,12 +4069,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<FileWrapper>, Integer, Hash)> set_custom_filter_tag_with_http_info(file_id, custom_filter_parameters)
+> <Array(<FileWrapper>, Integer, Hash)> set_custom_filter_tag_with_http_info(file_id, custom_filter_request)
 
 ```ruby
 begin
   # Set the Custom Filter editing mode
-  data, status_code, headers = api_instance.set_custom_filter_tag_with_http_info(file_id, custom_filter_parameters)
+  data, status_code, headers = api_instance.set_custom_filter_tag_with_http_info(file_id, custom_filter_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <FileWrapper>
@@ -4088,7 +4088,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **file_id** | **Integer** | The spreadsheet whose Custom Filter mode is switched. |  |
-| **custom_filter_parameters** | [**CustomFilterParameters**](CustomFilterParameters.md) | The Custom Filter state to reach. |  |
+| **custom_filter_request** | [**CustomFilterRequest**](CustomFilterRequest.md) | The Custom Filter state to reach. |  |
 
 ### Return type
 
@@ -4489,7 +4489,7 @@ end
 
 ## start_edit_file
 
-> <StringWrapper> start_edit_file(file_id, start_edit)
+> <StringWrapper> start_edit_file(file_id, start_edit_request)
 
 Open an editing session
 
@@ -4528,11 +4528,11 @@ end
 
 api_instance = DocspaceApiSdk::Files::FilesApi.new
 file_id = 1 # Integer | The file to open the editing session on. The caller needs edit access to it.
-start_edit = DocspaceApiSdk::StartEdit.new # StartEdit | The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
+start_edit_request = DocspaceApiSdk::StartEditRequest.new # StartEditRequest | The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
 
 begin
   # Open an editing session
-  result = api_instance.start_edit_file(file_id, start_edit)
+  result = api_instance.start_edit_file(file_id, start_edit_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FilesApi->start_edit_file: #{e}"
@@ -4543,12 +4543,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<StringWrapper>, Integer, Hash)> start_edit_file_with_http_info(file_id, start_edit)
+> <Array(<StringWrapper>, Integer, Hash)> start_edit_file_with_http_info(file_id, start_edit_request)
 
 ```ruby
 begin
   # Open an editing session
-  data, status_code, headers = api_instance.start_edit_file_with_http_info(file_id, start_edit)
+  data, status_code, headers = api_instance.start_edit_file_with_http_info(file_id, start_edit_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <StringWrapper>
@@ -4562,7 +4562,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **file_id** | **Integer** | The file to open the editing session on. The caller needs edit access to it. |  |
-| **start_edit** | [**StartEdit**](StartEdit.md) | The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. |  |
+| **start_edit_request** | [**StartEditRequest**](StartEditRequest.md) | The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. |  |
 
 ### Return type
 
@@ -4875,7 +4875,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ## update_file
 
-> <FileWrapper> update_file(file_id, update_file)
+> <FileWrapper> update_file(file_id, update_file_request)
 
 Update a file
 
@@ -4914,11 +4914,11 @@ end
 
 api_instance = DocspaceApiSdk::Files::FilesApi.new
 file_id = 1 # Integer | The file to update.
-update_file = DocspaceApiSdk::UpdateFile.new # UpdateFile | The new title and the version to restore.
+update_file_request = DocspaceApiSdk::UpdateFileRequest.new # UpdateFileRequest | The new title and the version to restore.
 
 begin
   # Update a file
-  result = api_instance.update_file(file_id, update_file)
+  result = api_instance.update_file(file_id, update_file_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::FilesApi->update_file: #{e}"
@@ -4929,12 +4929,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<FileWrapper>, Integer, Hash)> update_file_with_http_info(file_id, update_file)
+> <Array(<FileWrapper>, Integer, Hash)> update_file_with_http_info(file_id, update_file_request)
 
 ```ruby
 begin
   # Update a file
-  data, status_code, headers = api_instance.update_file_with_http_info(file_id, update_file)
+  data, status_code, headers = api_instance.update_file_with_http_info(file_id, update_file_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <FileWrapper>
@@ -4948,7 +4948,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **file_id** | **Integer** | The file to update. |  |
-| **update_file** | [**UpdateFile**](UpdateFile.md) | The new title and the version to restore. |  |
+| **update_file_request** | [**UpdateFileRequest**](UpdateFileRequest.md) | The new title and the version to restore. |  |
 
 ### Return type
 

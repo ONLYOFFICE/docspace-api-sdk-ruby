@@ -17,15 +17,19 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Whether AI functionality is available on the portal.
+  # Whether AI functionality is switched on for the portal.
   class TenantAiAccessSettingsDto < ApiModelBase
-    # Whether AI is available on the portal at all - chat, agents and vectorization together. Switching it off  hides the AI Agents folder and makes every AI endpoint unreachable for all members at once, not only for the  caller, and the change is pushed to connected clients rather than waiting for their next request.
+    # Specifies whether AI functionality is enabled for the tenant.  When set to `false`, all AI features (chat, agents, vectorization) are disabled tenant-wide.
     attr_accessor :enabled
+
+    # The timestamp indicating when the settings were last modified.
+    attr_accessor :last_modified
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'enabled' => :'enabled'
+        :'enabled' => :'enabled',
+        :'last_modified' => :'lastModified'
       }
     end
 
@@ -42,7 +46,8 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'enabled' => :'Boolean'
+        :'enabled' => :'Boolean',
+        :'last_modified' => :'Time'
       }
     end
 
@@ -71,6 +76,10 @@ module DocspaceApiSdk
       if attributes.key?(:'enabled')
         self.enabled = attributes[:'enabled']
       end
+
+      if attributes.key?(:'last_modified')
+        self.last_modified = attributes[:'last_modified']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -93,7 +102,8 @@ module DocspaceApiSdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          enabled == o.enabled
+          enabled == o.enabled &&
+          last_modified == o.last_modified
     end
 
     # @see the `==` method
@@ -105,7 +115,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [enabled].hash
+      [enabled, last_modified].hash
     end
 
     # Builds the object from hash

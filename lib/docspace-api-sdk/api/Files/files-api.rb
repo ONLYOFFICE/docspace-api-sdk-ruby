@@ -158,11 +158,11 @@ module DocspaceApiSdk
     # Closes or reopens a revision group in the version history of a file and answers with every stored version of  that file, newest first. With `continueVersion=false` the named version is completed: its content is stored  again as a fresh version that opens a new revision group, so the editing that follows no longer extends the  previous one. With `continueVersion=true` the last revision group is folded back into the group before it, so  the next save continues that revision instead of becoming a version of its own; a file that has only one group  is left as it is. A `version` of 0 means the current version. The caller needs the right to edit the history  of the file, which the room admin, a DocSpace admin acting as room manager and a member with content-creator  rights have; plain editing access is refused with 403, as are a guest and a member without access to the room.  The call is mutating and not idempotent. A file that is locked, lies in Trash, is open in an editing session  or is kept in a connected third-party storage is refused.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-version-history/
     # @param file_id [Integer, String] The file whose version history is changed.
-    # @param change_history [ChangeHistory] The change to make to the revision group.
+    # @param change_history_request [ChangeHistoryRequest] The change to make to the revision group.
     # @param [Hash] opts the optional parameters
     # @return [FileArrayWrapper, ThirdPartyFileArrayWrapper]
-    def change_version_history(file_id, change_history, opts = {})
-      data, _status_code, _headers = change_version_history_with_http_info(file_id, change_history, opts)
+    def change_version_history(file_id, change_history_request, opts = {})
+      data, _status_code, _headers = change_version_history_with_http_info(file_id, change_history_request, opts)
       data
     end
 
@@ -170,10 +170,10 @@ module DocspaceApiSdk
     # Closes or reopens a revision group in the version history of a file and answers with every stored version of  that file, newest first. With `continueVersion=false` the named version is completed: its content is stored  again as a fresh version that opens a new revision group, so the editing that follows no longer extends the  previous one. With `continueVersion=true` the last revision group is folded back into the group before it, so  the next save continues that revision instead of becoming a version of its own; a file that has only one group  is left as it is. A `version` of 0 means the current version. The caller needs the right to edit the history  of the file, which the room admin, a DocSpace admin acting as room manager and a member with content-creator  rights have; plain editing access is refused with 403, as are a guest and a member without access to the room.  The call is mutating and not idempotent. A file that is locked, lies in Trash, is open in an editing session  or is kept in a connected third-party storage is refused.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-version-history/
     # @param file_id [Integer, String] The file whose version history is changed.
-    # @param change_history [ChangeHistory] The change to make to the revision group.
+    # @param change_history_request [ChangeHistoryRequest] The change to make to the revision group.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FileArrayWrapper, ThirdPartyFileArrayWrapper, Integer, Hash)>] FileArrayWrapper, ThirdPartyFileArrayWrapper data, response status code and response headers
-    def change_version_history_with_http_info(file_id, change_history, opts = {})
+    def change_version_history_with_http_info(file_id, change_history_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FilesApi.change_version_history ...'
       end
@@ -181,9 +181,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && file_id.nil?
         fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::FilesApi.change_version_history"
       end
-      # verify the required parameter 'change_history' is set
-      if @api_client.config.client_side_validation && change_history.nil?
-        fail ArgumentError, "Missing the required parameter 'change_history' when calling Files::FilesApi.change_version_history"
+      # verify the required parameter 'change_history_request' is set
+      if @api_client.config.client_side_validation && change_history_request.nil?
+        fail ArgumentError, "Missing the required parameter 'change_history_request' when calling Files::FilesApi.change_version_history"
       end
       # resource path
       local_var_path = '/api/2.0/files/file/{fileId}/history'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
@@ -205,7 +205,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(change_history)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(change_history_request)
 
       # return_type
       return_type = opts[:debug_return_type] || (file_id.is_a?(String) ? 'ThirdPartyFileArrayWrapper' : 'FileArrayWrapper')
@@ -234,11 +234,11 @@ module DocspaceApiSdk
     # Resolves the editor address the caller must open to fill out the given PDF form, and provisions the personal  draft that filling needs. The form has to live in a form-filling room and filling has to be started for it  with `PUT api/2.0/files/file/{fileId}/manageformfilling`; a caller who may edit the form, a form whose filling  has not started, and a request naming `view` or `embedded` as the action are all sent straight to the form  itself. Read access to the form is enough to get an address, fill-forms access is what puts the caller into  the filling flow, and a holder of an external link may call it without signing in, while a caller with neither  a session nor a link key is rejected. In the filling case the call is not read-only: it copies the form into  the room's in-progress folder under the caller's name, clears the new-item badge, closes the editing session  of the original, and answers with the address of that copy. A repeated call reuses that copy, and a call  naming an existing draft adds a discard notice when that draft is no longer valid. The answer is one URL  string that may carry a `#message/...` fragment the editor renders as a notice. For the full editor  configuration use `GET api/2.0/files/file/{fileId}/openedit`. A form the caller cannot open is refused with  403, and one that does not exist is answered as missing.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-fill-form-draft/
     # @param file_id [Integer, String] The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.
-    # @param check_fill_form_draft [CheckFillFormDraft] The revision of the form to open and what the caller intends to do with it.
+    # @param check_fill_form_draft_request [CheckFillFormDraftRequest] The revision of the form to open and what the caller intends to do with it.
     # @param [Hash] opts the optional parameters
     # @return [StringWrapper]
-    def check_fill_form_draft(file_id, check_fill_form_draft, opts = {})
-      data, _status_code, _headers = check_fill_form_draft_with_http_info(file_id, check_fill_form_draft, opts)
+    def check_fill_form_draft(file_id, check_fill_form_draft_request, opts = {})
+      data, _status_code, _headers = check_fill_form_draft_with_http_info(file_id, check_fill_form_draft_request, opts)
       data
     end
 
@@ -246,10 +246,10 @@ module DocspaceApiSdk
     # Resolves the editor address the caller must open to fill out the given PDF form, and provisions the personal  draft that filling needs. The form has to live in a form-filling room and filling has to be started for it  with `PUT api/2.0/files/file/{fileId}/manageformfilling`; a caller who may edit the form, a form whose filling  has not started, and a request naming `view` or `embedded` as the action are all sent straight to the form  itself. Read access to the form is enough to get an address, fill-forms access is what puts the caller into  the filling flow, and a holder of an external link may call it without signing in, while a caller with neither  a session nor a link key is rejected. In the filling case the call is not read-only: it copies the form into  the room's in-progress folder under the caller's name, clears the new-item badge, closes the editing session  of the original, and answers with the address of that copy. A repeated call reuses that copy, and a call  naming an existing draft adds a discard notice when that draft is no longer valid. The answer is one URL  string that may carry a `#message/...` fragment the editor renders as a notice. For the full editor  configuration use `GET api/2.0/files/file/{fileId}/openedit`. A form the caller cannot open is refused with  403, and one that does not exist is answered as missing.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-fill-form-draft/
     # @param file_id [Integer, String] The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.
-    # @param check_fill_form_draft [CheckFillFormDraft] The revision of the form to open and what the caller intends to do with it.
+    # @param check_fill_form_draft_request [CheckFillFormDraftRequest] The revision of the form to open and what the caller intends to do with it.
     # @param [Hash] opts the optional parameters
     # @return [Array<(StringWrapper, Integer, Hash)>] StringWrapper data, response status code and response headers
-    def check_fill_form_draft_with_http_info(file_id, check_fill_form_draft, opts = {})
+    def check_fill_form_draft_with_http_info(file_id, check_fill_form_draft_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FilesApi.check_fill_form_draft ...'
       end
@@ -257,9 +257,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && file_id.nil?
         fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::FilesApi.check_fill_form_draft"
       end
-      # verify the required parameter 'check_fill_form_draft' is set
-      if @api_client.config.client_side_validation && check_fill_form_draft.nil?
-        fail ArgumentError, "Missing the required parameter 'check_fill_form_draft' when calling Files::FilesApi.check_fill_form_draft"
+      # verify the required parameter 'check_fill_form_draft_request' is set
+      if @api_client.config.client_side_validation && check_fill_form_draft_request.nil?
+        fail ArgumentError, "Missing the required parameter 'check_fill_form_draft_request' when calling Files::FilesApi.check_fill_form_draft"
       end
       # resource path
       local_var_path = '/api/2.0/files/masterform/{fileId}/checkfillformdraft'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
@@ -281,7 +281,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(check_fill_form_draft)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(check_fill_form_draft_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'StringWrapper'
@@ -310,11 +310,11 @@ module DocspaceApiSdk
     # Copies one file into another folder under a new title, converting its content when the new title names a  different format, and answers with the copy that was created. The extension of `destTitle` decides what  happens: the same extension as the source copies the bytes as they are, a different one has the document  service convert them first, and `toForm=true` converts a document into a PDF form. `password` unlocks a source  file that is protected by one. `destFolderId` is read as a number for a folder inside the portal and as a  string for a folder in a connected third-party storage; anything else is answered with an empty body and  nothing is copied. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused with 403; a missing file or folder is answered with 404, and a  format that cannot be converted with 400. The call is mutating and not idempotent - each call adds another  copy. To copy many items at once, and without converting, use `PUT api/2.0/files/fileops/copy`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/copy-file-as/
     # @param file_id [Integer, String] The file to copy.
-    # @param copy_as_json_element [CopyAsJsonElement] The title, the destination and the conversion options of the copy.
+    # @param copy_as_request [CopyAsRequest] The title, the destination and the conversion options of the copy.
     # @param [Hash] opts the optional parameters
     # @return [FileEntryBaseWrapper]
-    def copy_file_as(file_id, copy_as_json_element, opts = {})
-      data, _status_code, _headers = copy_file_as_with_http_info(file_id, copy_as_json_element, opts)
+    def copy_file_as(file_id, copy_as_request, opts = {})
+      data, _status_code, _headers = copy_file_as_with_http_info(file_id, copy_as_request, opts)
       data
     end
 
@@ -322,10 +322,10 @@ module DocspaceApiSdk
     # Copies one file into another folder under a new title, converting its content when the new title names a  different format, and answers with the copy that was created. The extension of `destTitle` decides what  happens: the same extension as the source copies the bytes as they are, a different one has the document  service convert them first, and `toForm=true` converts a document into a PDF form. `password` unlocks a source  file that is protected by one. `destFolderId` is read as a number for a folder inside the portal and as a  string for a folder in a connected third-party storage; anything else is answered with an empty body and  nothing is copied. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused with 403; a missing file or folder is answered with 404, and a  format that cannot be converted with 400. The call is mutating and not idempotent - each call adds another  copy. To copy many items at once, and without converting, use `PUT api/2.0/files/fileops/copy`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/copy-file-as/
     # @param file_id [Integer, String] The file to copy.
-    # @param copy_as_json_element [CopyAsJsonElement] The title, the destination and the conversion options of the copy.
+    # @param copy_as_request [CopyAsRequest] The title, the destination and the conversion options of the copy.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FileEntryBaseWrapper, Integer, Hash)>] FileEntryBaseWrapper data, response status code and response headers
-    def copy_file_as_with_http_info(file_id, copy_as_json_element, opts = {})
+    def copy_file_as_with_http_info(file_id, copy_as_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FilesApi.copy_file_as ...'
       end
@@ -333,9 +333,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && file_id.nil?
         fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::FilesApi.copy_file_as"
       end
-      # verify the required parameter 'copy_as_json_element' is set
-      if @api_client.config.client_side_validation && copy_as_json_element.nil?
-        fail ArgumentError, "Missing the required parameter 'copy_as_json_element' when calling Files::FilesApi.copy_file_as"
+      # verify the required parameter 'copy_as_request' is set
+      if @api_client.config.client_side_validation && copy_as_request.nil?
+        fail ArgumentError, "Missing the required parameter 'copy_as_request' when calling Files::FilesApi.copy_file_as"
       end
       # resource path
       local_var_path = '/api/2.0/files/file/{fileId}/copyas'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
@@ -357,7 +357,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(copy_as_json_element)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(copy_as_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'FileEntryBaseWrapper'
@@ -388,7 +388,7 @@ module DocspaceApiSdk
     # @param file_id [Integer, String] The file whose content the session will replace; take the id from a folder listing or from the file itself.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :file_size The number of bytes the new content will take. It is checked against the portal limit for chunked uploads  before the session opens, and a session left at 0 takes the whole content in a single part.
-    # @return [ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper]
+    # @return [ChunkedUploadSessionResultWrapper, ThirdPartyChunkedUploadSessionResultWrapper]
     def create_edit_session(file_id, opts = {})
       data, _status_code, _headers = create_edit_session_with_http_info(file_id, opts)
       data
@@ -400,7 +400,7 @@ module DocspaceApiSdk
     # @param file_id [Integer, String] The file whose content the session will replace; take the id from a folder listing or from the file itself.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :file_size The number of bytes the new content will take. It is checked against the portal limit for chunked uploads  before the session opens, and a session left at 0 takes the whole content in a single part.
-    # @return [Array<(ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper, Integer, Hash)>] ChunkedUploadSessionResponseWrapperWrapper, ThirdPartyChunkedUploadSessionResponseWrapperWrapper data, response status code and response headers
+    # @return [Array<(ChunkedUploadSessionResultWrapper, ThirdPartyChunkedUploadSessionResultWrapper, Integer, Hash)>] ChunkedUploadSessionResultWrapper, ThirdPartyChunkedUploadSessionResultWrapper data, response status code and response headers
     def create_edit_session_with_http_info(file_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FilesApi.create_edit_session ...'
@@ -428,7 +428,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || (file_id.is_a?(String) ? 'ThirdPartyChunkedUploadSessionResponseWrapperWrapper' : 'ChunkedUploadSessionResponseWrapperWrapper')
+      return_type = opts[:debug_return_type] || (file_id.is_a?(String) ? 'ThirdPartyChunkedUploadSessionResultWrapper' : 'ChunkedUploadSessionResultWrapper')
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -454,11 +454,11 @@ module DocspaceApiSdk
     # Creates a file in the folder named in the route and answers with the stored file. The extension in the title  decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to the  portal's own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown extension  and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the title  verbatim and skips that rewriting. The content comes from one of three sources, tried in this order: `formId`  copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read - a  number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal's blank template for that format and the caller's language is used. The caller needs the right  to create files in the folder, and the room roots, Archive and the template sections are refused even to an  admin. The call is mutating and not idempotent. To create the file in the caller's own section use  `POST api/2.0/files/@my/file`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file/
     # @param folder_id [Integer, String] The folder the file is created in.
-    # @param create_file_json_element [CreateFileJsonElement] The title of the new file and the source of its content.
+    # @param create_file_request [CreateFileRequest] The title of the new file and the source of its content.
     # @param [Hash] opts the optional parameters
     # @return [FileWrapper, ThirdPartyFileWrapper]
-    def create_file(folder_id, create_file_json_element, opts = {})
-      data, _status_code, _headers = create_file_with_http_info(folder_id, create_file_json_element, opts)
+    def create_file(folder_id, create_file_request, opts = {})
+      data, _status_code, _headers = create_file_with_http_info(folder_id, create_file_request, opts)
       data
     end
 
@@ -466,10 +466,10 @@ module DocspaceApiSdk
     # Creates a file in the folder named in the route and answers with the stored file. The extension in the title  decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to the  portal's own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown extension  and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the title  verbatim and skips that rewriting. The content comes from one of three sources, tried in this order: `formId`  copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read - a  number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal's blank template for that format and the caller's language is used. The caller needs the right  to create files in the folder, and the room roots, Archive and the template sections are refused even to an  admin. The call is mutating and not idempotent. To create the file in the caller's own section use  `POST api/2.0/files/@my/file`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file/
     # @param folder_id [Integer, String] The folder the file is created in.
-    # @param create_file_json_element [CreateFileJsonElement] The title of the new file and the source of its content.
+    # @param create_file_request [CreateFileRequest] The title of the new file and the source of its content.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FileWrapper, ThirdPartyFileWrapper, Integer, Hash)>] FileWrapper, ThirdPartyFileWrapper data, response status code and response headers
-    def create_file_with_http_info(folder_id, create_file_json_element, opts = {})
+    def create_file_with_http_info(folder_id, create_file_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FilesApi.create_file ...'
       end
@@ -477,9 +477,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && folder_id.nil?
         fail ArgumentError, "Missing the required parameter 'folder_id' when calling Files::FilesApi.create_file"
       end
-      # verify the required parameter 'create_file_json_element' is set
-      if @api_client.config.client_side_validation && create_file_json_element.nil?
-        fail ArgumentError, "Missing the required parameter 'create_file_json_element' when calling Files::FilesApi.create_file"
+      # verify the required parameter 'create_file_request' is set
+      if @api_client.config.client_side_validation && create_file_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_file_request' when calling Files::FilesApi.create_file"
       end
       # resource path
       local_var_path = '/api/2.0/files/{folderId}/file'.sub('{' + 'folderId' + '}', CGI.escape(folder_id.to_s))
@@ -501,7 +501,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_file_json_element)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_file_request)
 
       # return_type
       return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyFileWrapper' : 'FileWrapper')
@@ -530,7 +530,7 @@ module DocspaceApiSdk
     # Creates a file in the caller's own My documents section and answers with the stored file. The extension in  the title decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to  the portal's own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown  extension and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the  title verbatim and skips that rewriting. The content comes from one of three sources, tried in this order:  `formId` copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read  - a number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal's blank template for that format and the caller's language is used. The call is mutating and  not idempotent: each call adds another file. A guest has no My documents section of their own, so a guest  cannot use this operation at all, and a template the caller cannot read is refused. To create a file in a  room or any other folder use  `POST api/2.0/files/{folderId}/file`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-in-my-documents/
     # @param [Hash] opts the optional parameters
-    # @option opts [CreateFileJsonElement] :create_file_json_element 
+    # @option opts [CreateFileRequest] :create_file_request 
     # @return [FileWrapper]
     def create_file_in_my_documents(opts = {})
       data, _status_code, _headers = create_file_in_my_documents_with_http_info(opts)
@@ -541,7 +541,7 @@ module DocspaceApiSdk
     # Creates a file in the caller's own My documents section and answers with the stored file. The extension in  the title decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to  the portal's own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown  extension and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the  title verbatim and skips that rewriting. The content comes from one of three sources, tried in this order:  `formId` copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read  - a number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal's blank template for that format and the caller's language is used. The call is mutating and  not idempotent: each call adds another file. A guest has no My documents section of their own, so a guest  cannot use this operation at all, and a template the caller cannot read is refused. To create a file in a  room or any other folder use  `POST api/2.0/files/{folderId}/file`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-in-my-documents/
     # @param [Hash] opts the optional parameters
-    # @option opts [CreateFileJsonElement] :create_file_json_element 
+    # @option opts [CreateFileRequest] :create_file_request 
     # @return [Array<(FileWrapper, Integer, Hash)>] FileWrapper data, response status code and response headers
     def create_file_in_my_documents_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -567,7 +567,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'create_file_json_element'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'create_file_request'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'FileWrapper'
@@ -672,11 +672,11 @@ module DocspaceApiSdk
     # Creates an HTML file in the folder named in the route out of the markup passed as the content, and answers  with the stored file. The `.html` extension is added to the title unless the title already ends with it, and a  request carrying no content is rejected as an invalid request. `createNewIfExist` acts the other way round  than its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The caller needs the right to create files in the folder and is otherwise  refused with 403. The call is mutating. To create the file in the caller's own section use  `POST api/2.0/files/@my/html`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file/
     # @param folder_id [Integer, String] The folder the file is created in.
-    # @param create_text_or_html_file [CreateTextOrHtmlFile] The title, the content and the collision behaviour of the new file.
+    # @param create_text_or_html_file_request [CreateTextOrHtmlFileRequest] The title, the content and the collision behaviour of the new file.
     # @param [Hash] opts the optional parameters
     # @return [FileWrapper, ThirdPartyFileWrapper]
-    def create_html_file(folder_id, create_text_or_html_file, opts = {})
-      data, _status_code, _headers = create_html_file_with_http_info(folder_id, create_text_or_html_file, opts)
+    def create_html_file(folder_id, create_text_or_html_file_request, opts = {})
+      data, _status_code, _headers = create_html_file_with_http_info(folder_id, create_text_or_html_file_request, opts)
       data
     end
 
@@ -684,10 +684,10 @@ module DocspaceApiSdk
     # Creates an HTML file in the folder named in the route out of the markup passed as the content, and answers  with the stored file. The `.html` extension is added to the title unless the title already ends with it, and a  request carrying no content is rejected as an invalid request. `createNewIfExist` acts the other way round  than its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The caller needs the right to create files in the folder and is otherwise  refused with 403. The call is mutating. To create the file in the caller's own section use  `POST api/2.0/files/@my/html`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file/
     # @param folder_id [Integer, String] The folder the file is created in.
-    # @param create_text_or_html_file [CreateTextOrHtmlFile] The title, the content and the collision behaviour of the new file.
+    # @param create_text_or_html_file_request [CreateTextOrHtmlFileRequest] The title, the content and the collision behaviour of the new file.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FileWrapper, ThirdPartyFileWrapper, Integer, Hash)>] FileWrapper, ThirdPartyFileWrapper data, response status code and response headers
-    def create_html_file_with_http_info(folder_id, create_text_or_html_file, opts = {})
+    def create_html_file_with_http_info(folder_id, create_text_or_html_file_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FilesApi.create_html_file ...'
       end
@@ -695,9 +695,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && folder_id.nil?
         fail ArgumentError, "Missing the required parameter 'folder_id' when calling Files::FilesApi.create_html_file"
       end
-      # verify the required parameter 'create_text_or_html_file' is set
-      if @api_client.config.client_side_validation && create_text_or_html_file.nil?
-        fail ArgumentError, "Missing the required parameter 'create_text_or_html_file' when calling Files::FilesApi.create_html_file"
+      # verify the required parameter 'create_text_or_html_file_request' is set
+      if @api_client.config.client_side_validation && create_text_or_html_file_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_text_or_html_file_request' when calling Files::FilesApi.create_html_file"
       end
       # resource path
       local_var_path = '/api/2.0/files/{folderId}/html'.sub('{' + 'folderId' + '}', CGI.escape(folder_id.to_s))
@@ -719,7 +719,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_text_or_html_file)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_text_or_html_file_request)
 
       # return_type
       return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyFileWrapper' : 'FileWrapper')
@@ -748,7 +748,7 @@ module DocspaceApiSdk
     # Creates an HTML file in the caller's own My documents section out of the markup passed as the content, and  answers with the stored file. The `.html` extension is added to the title unless the title already ends with  it, and a request carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than  its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The call is mutating: repeating it with `true` keeps a single file and grows  its history, repeating it with `false` fills the section with numbered copies. A guest has no My documents  section and is refused. To create the file in a room or another folder use  `POST api/2.0/files/{folderId}/html`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file-in-my-documents/
     # @param [Hash] opts the optional parameters
-    # @option opts [CreateTextOrHtmlFile] :create_text_or_html_file 
+    # @option opts [CreateTextOrHtmlFileRequest] :create_text_or_html_file_request 
     # @return [FileWrapper]
     def create_html_file_in_my_documents(opts = {})
       data, _status_code, _headers = create_html_file_in_my_documents_with_http_info(opts)
@@ -759,7 +759,7 @@ module DocspaceApiSdk
     # Creates an HTML file in the caller's own My documents section out of the markup passed as the content, and  answers with the stored file. The `.html` extension is added to the title unless the title already ends with  it, and a request carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than  its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The call is mutating: repeating it with `true` keeps a single file and grows  its history, repeating it with `false` fills the section with numbered copies. A guest has no My documents  section and is refused. To create the file in a room or another folder use  `POST api/2.0/files/{folderId}/html`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file-in-my-documents/
     # @param [Hash] opts the optional parameters
-    # @option opts [CreateTextOrHtmlFile] :create_text_or_html_file 
+    # @option opts [CreateTextOrHtmlFileRequest] :create_text_or_html_file_request 
     # @return [Array<(FileWrapper, Integer, Hash)>] FileWrapper data, response status code and response headers
     def create_html_file_in_my_documents_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -785,7 +785,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'create_text_or_html_file'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'create_text_or_html_file_request'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'FileWrapper'
@@ -814,11 +814,11 @@ module DocspaceApiSdk
     # Creates a text file in the folder named in the route out of the text passed as the content, and answers with  the stored file. The extension follows the content rather than the request: `.txt` normally, but `.html` as  soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends up as an  HTML file; the extension is added to the title unless the title already ends with it. A request carrying no  content is rejected as an invalid request. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in Notes  (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a new file  appears beside it instead. The caller needs the right to create files in the folder. The call is mutating. To  create the file in the caller's own section use `POST api/2.0/files/@my/text`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file/
     # @param folder_id [Integer, String] The folder the file is created in.
-    # @param create_text_or_html_file [CreateTextOrHtmlFile] The title, the content and the collision behaviour of the new file.
+    # @param create_text_or_html_file_request [CreateTextOrHtmlFileRequest] The title, the content and the collision behaviour of the new file.
     # @param [Hash] opts the optional parameters
     # @return [FileWrapper, ThirdPartyFileWrapper]
-    def create_text_file(folder_id, create_text_or_html_file, opts = {})
-      data, _status_code, _headers = create_text_file_with_http_info(folder_id, create_text_or_html_file, opts)
+    def create_text_file(folder_id, create_text_or_html_file_request, opts = {})
+      data, _status_code, _headers = create_text_file_with_http_info(folder_id, create_text_or_html_file_request, opts)
       data
     end
 
@@ -826,10 +826,10 @@ module DocspaceApiSdk
     # Creates a text file in the folder named in the route out of the text passed as the content, and answers with  the stored file. The extension follows the content rather than the request: `.txt` normally, but `.html` as  soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends up as an  HTML file; the extension is added to the title unless the title already ends with it. A request carrying no  content is rejected as an invalid request. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in Notes  (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a new file  appears beside it instead. The caller needs the right to create files in the folder. The call is mutating. To  create the file in the caller's own section use `POST api/2.0/files/@my/text`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file/
     # @param folder_id [Integer, String] The folder the file is created in.
-    # @param create_text_or_html_file [CreateTextOrHtmlFile] The title, the content and the collision behaviour of the new file.
+    # @param create_text_or_html_file_request [CreateTextOrHtmlFileRequest] The title, the content and the collision behaviour of the new file.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FileWrapper, ThirdPartyFileWrapper, Integer, Hash)>] FileWrapper, ThirdPartyFileWrapper data, response status code and response headers
-    def create_text_file_with_http_info(folder_id, create_text_or_html_file, opts = {})
+    def create_text_file_with_http_info(folder_id, create_text_or_html_file_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FilesApi.create_text_file ...'
       end
@@ -837,9 +837,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && folder_id.nil?
         fail ArgumentError, "Missing the required parameter 'folder_id' when calling Files::FilesApi.create_text_file"
       end
-      # verify the required parameter 'create_text_or_html_file' is set
-      if @api_client.config.client_side_validation && create_text_or_html_file.nil?
-        fail ArgumentError, "Missing the required parameter 'create_text_or_html_file' when calling Files::FilesApi.create_text_file"
+      # verify the required parameter 'create_text_or_html_file_request' is set
+      if @api_client.config.client_side_validation && create_text_or_html_file_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_text_or_html_file_request' when calling Files::FilesApi.create_text_file"
       end
       # resource path
       local_var_path = '/api/2.0/files/{folderId}/text'.sub('{' + 'folderId' + '}', CGI.escape(folder_id.to_s))
@@ -861,7 +861,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_text_or_html_file)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_text_or_html_file_request)
 
       # return_type
       return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyFileWrapper' : 'FileWrapper')
@@ -890,7 +890,7 @@ module DocspaceApiSdk
     # Creates a text file in the caller's own My documents section out of the text passed as the content, and  answers with the stored file. The extension follows the content rather than the request: `.txt` normally, but  `.html` as soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends  up as an HTML file; the extension is added to the title unless the title already ends with it. A request  carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in  Notes (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a  new file appears beside it instead. The call is mutating. A guest has no My documents section and is  refused. To create the file in a room or another folder use `POST api/2.0/files/{folderId}/text`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file-in-my-documents/
     # @param [Hash] opts the optional parameters
-    # @option opts [CreateTextOrHtmlFile] :create_text_or_html_file 
+    # @option opts [CreateTextOrHtmlFileRequest] :create_text_or_html_file_request 
     # @return [FileWrapper]
     def create_text_file_in_my_documents(opts = {})
       data, _status_code, _headers = create_text_file_in_my_documents_with_http_info(opts)
@@ -901,7 +901,7 @@ module DocspaceApiSdk
     # Creates a text file in the caller's own My documents section out of the text passed as the content, and  answers with the stored file. The extension follows the content rather than the request: `.txt` normally, but  `.html` as soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends  up as an HTML file; the extension is added to the title unless the title already ends with it. A request  carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in  Notes (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a  new file appears beside it instead. The call is mutating. A guest has no My documents section and is  refused. To create the file in a room or another folder use `POST api/2.0/files/{folderId}/text`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file-in-my-documents/
     # @param [Hash] opts the optional parameters
-    # @option opts [CreateTextOrHtmlFile] :create_text_or_html_file 
+    # @option opts [CreateTextOrHtmlFileRequest] :create_text_or_html_file_request 
     # @return [Array<(FileWrapper, Integer, Hash)>] FileWrapper data, response status code and response headers
     def create_text_file_in_my_documents_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -927,7 +927,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'create_text_or_html_file'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'create_text_or_html_file_request'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'FileWrapper'
@@ -1022,12 +1022,12 @@ module DocspaceApiSdk
     # Queues the deletion of one file and answers with the caller's file operations, the one just created among  them. The file is not gone when the response arrives: poll `GET api/2.0/files/fileops` until the operation  reports `finished`, and read its `error` to learn whether the deletion succeeded. By default the file is moved  to Trash, from where it can be restored; `immediately=true` deletes it for good instead, and inside a room,  where there is no Trash, deletion is always final. `deleteAfter=true` postpones the deletion until the editing  session on the file has ended, so a file somebody is working on is not pulled away.  `returnSingleOperation=true` narrows the answer to this deletion instead of listing every active operation of  the caller. The caller needs the right to delete the file, which the room admin, a DocSpace admin acting as  room manager and a content creator acting on their own file have; editing access alone, read access, a guest  and a member without access to the room are all refused. The call is destructive. To delete several items at  once use `PUT api/2.0/files/fileops/delete`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file/
     # @param file_id [Integer, String] The file to delete.
-    # @param delete [Delete] When and how the file is deleted.
+    # @param delete_file_request [DeleteFileRequest] When and how the file is deleted.
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :return_single_operation Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
     # @return [FileOperationArrayWrapper]
-    def delete_file(file_id, delete, opts = {})
-      data, _status_code, _headers = delete_file_with_http_info(file_id, delete, opts)
+    def delete_file(file_id, delete_file_request, opts = {})
+      data, _status_code, _headers = delete_file_with_http_info(file_id, delete_file_request, opts)
       data
     end
 
@@ -1035,11 +1035,11 @@ module DocspaceApiSdk
     # Queues the deletion of one file and answers with the caller's file operations, the one just created among  them. The file is not gone when the response arrives: poll `GET api/2.0/files/fileops` until the operation  reports `finished`, and read its `error` to learn whether the deletion succeeded. By default the file is moved  to Trash, from where it can be restored; `immediately=true` deletes it for good instead, and inside a room,  where there is no Trash, deletion is always final. `deleteAfter=true` postpones the deletion until the editing  session on the file has ended, so a file somebody is working on is not pulled away.  `returnSingleOperation=true` narrows the answer to this deletion instead of listing every active operation of  the caller. The caller needs the right to delete the file, which the room admin, a DocSpace admin acting as  room manager and a content creator acting on their own file have; editing access alone, read access, a guest  and a member without access to the room are all refused. The call is destructive. To delete several items at  once use `PUT api/2.0/files/fileops/delete`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file/
     # @param file_id [Integer, String] The file to delete.
-    # @param delete [Delete] When and how the file is deleted.
+    # @param delete_file_request [DeleteFileRequest] When and how the file is deleted.
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :return_single_operation Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
     # @return [Array<(FileOperationArrayWrapper, Integer, Hash)>] FileOperationArrayWrapper data, response status code and response headers
-    def delete_file_with_http_info(file_id, delete, opts = {})
+    def delete_file_with_http_info(file_id, delete_file_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FilesApi.delete_file ...'
       end
@@ -1047,16 +1047,16 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && file_id.nil?
         fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::FilesApi.delete_file"
       end
-      # verify the required parameter 'delete' is set
-      if @api_client.config.client_side_validation && delete.nil?
-        fail ArgumentError, "Missing the required parameter 'delete' when calling Files::FilesApi.delete_file"
+      # verify the required parameter 'delete_file_request' is set
+      if @api_client.config.client_side_validation && delete_file_request.nil?
+        fail ArgumentError, "Missing the required parameter 'delete_file_request' when calling Files::FilesApi.delete_file"
       end
       # resource path
       local_var_path = '/api/2.0/files/file/{fileId}'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'ReturnSingleOperation'] = opts[:'return_single_operation'] if !opts[:'return_single_operation'].nil?
+      query_params[:'returnSingleOperation'] = opts[:'return_single_operation'] if !opts[:'return_single_operation'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1072,7 +1072,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(delete)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(delete_file_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'FileOperationArrayWrapper'
@@ -1098,7 +1098,7 @@ module DocspaceApiSdk
     end
 
     # Delete recent files
-    # Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member's history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. Only numeric file ids are honoured, so a file on a connected third-party account cannot be  cleared this way, and folder ids are accepted but change nothing because the section lists files only. The  answer carries no body and reports nothing about how many entries were found: an empty request and an id that  was never in the section are accepted alike. Repeating the call is safe, but an entry returns the next time  the file is opened or `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section  instead, call `PUT api/2.0/files/displayrecent`.
+    # Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member's history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. A file on a connected third-party account is cleared by its string id too, but only while  the storage can still find it: the entry of a file removed from the storage stays in the history. Folder ids  are accepted but change nothing because the section lists files only. The answer carries no body and reports  nothing about how many entries were found: an empty request and an id that was never in the section are  accepted alike. Repeating the call is safe, but an entry returns the next time the file is opened or  `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section instead, call  `PUT api/2.0/files/displayrecent`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-recent/
     # @param [Hash] opts the optional parameters
     # @option opts [BaseBatchRequestDto] :base_batch_request_dto 
@@ -1109,7 +1109,7 @@ module DocspaceApiSdk
     end
 
     # Delete recent files
-    # Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member's history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. Only numeric file ids are honoured, so a file on a connected third-party account cannot be  cleared this way, and folder ids are accepted but change nothing because the section lists files only. The  answer carries no body and reports nothing about how many entries were found: an empty request and an id that  was never in the section are accepted alike. Repeating the call is safe, but an entry returns the next time  the file is opened or `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section  instead, call `PUT api/2.0/files/displayrecent`.
+    # Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member's history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. A file on a connected third-party account is cleared by its string id too, but only while  the storage can still find it: the entry of a file removed from the storage stays in the history. Folder ids  are accepted but change nothing because the section lists files only. The answer carries no body and reports  nothing about how many entries were found: an empty request and an id that was never in the section are  accepted alike. Repeating the call is safe, but an entry returns the next time the file is opened or  `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section instead, call  `PUT api/2.0/files/displayrecent`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-recent/
     # @param [Hash] opts the optional parameters
     # @option opts [BaseBatchRequestDto] :base_batch_request_dto 
@@ -1167,7 +1167,7 @@ module DocspaceApiSdk
     # Takes the listed files off the personal template list of the calling account, leaving the files themselves  untouched: only the template mark is dropped. The body of this request is a bare JSON array of numeric file  ids rather than an object with a field, and a request that carries no array at all is rejected as an invalid  request. Every authenticated member type may manage their own list, a guest is refused, and read access to a  file is required for its mark to be dropped. The answer is `true` whenever the array was understood, which an  empty array, an id that does not exist and a file that was never a template all achieve, so it confirms  nothing about what was removed. Repeating the call is safe. Use `POST api/2.0/files/templates` to put a file  back on the list; that operation expects an object with a `fileIds` field, so the two bodies are not  interchangeable.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-templates/
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<Integer>] :request_body The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
+    # @option opts [Array<Integer>] :delete_template_files_request_dto The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
     # @return [BooleanWrapper]
     def delete_templates(opts = {})
       data, _status_code, _headers = delete_templates_with_http_info(opts)
@@ -1178,7 +1178,7 @@ module DocspaceApiSdk
     # Takes the listed files off the personal template list of the calling account, leaving the files themselves  untouched: only the template mark is dropped. The body of this request is a bare JSON array of numeric file  ids rather than an object with a field, and a request that carries no array at all is rejected as an invalid  request. Every authenticated member type may manage their own list, a guest is refused, and read access to a  file is required for its mark to be dropped. The answer is `true` whenever the array was understood, which an  empty array, an id that does not exist and a file that was never a template all achieve, so it confirms  nothing about what was removed. Repeating the call is safe. Use `POST api/2.0/files/templates` to put a file  back on the list; that operation expects an object with a `fileIds` field, so the two bodies are not  interchangeable.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-templates/
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<Integer>] :request_body The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
+    # @option opts [Array<Integer>] :delete_template_files_request_dto The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
     # @return [Array<(BooleanWrapper, Integer, Hash)>] BooleanWrapper data, response status code and response headers
     def delete_templates_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -1204,7 +1204,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'request_body'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'delete_template_files_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'BooleanWrapper'
@@ -2195,7 +2195,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-protected-file-users/
     # @param file_id [Integer, String] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
     # @param [Hash] opts the optional parameters
-    # @return [MentionWrapperArrayWrapper]
+    # @return [MentionArrayWrapper]
     def get_protected_file_users(file_id, opts = {})
       data, _status_code, _headers = get_protected_file_users_with_http_info(file_id, opts)
       data
@@ -2206,7 +2206,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-protected-file-users/
     # @param file_id [Integer, String] The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(MentionWrapperArrayWrapper, Integer, Hash)>] MentionWrapperArrayWrapper data, response status code and response headers
+    # @return [Array<(MentionArrayWrapper, Integer, Hash)>] MentionArrayWrapper data, response status code and response headers
     def get_protected_file_users_with_http_info(file_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FilesApi.get_protected_file_users ...'
@@ -2233,7 +2233,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'MentionWrapperArrayWrapper'
+      return_type = opts[:debug_return_type] || 'MentionArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -2455,11 +2455,11 @@ module DocspaceApiSdk
     # Locks a file so that nobody else can change it, or releases that lock, and answers with the file as it now  stands. With `lockFile=true` the lock is put on the file and everybody else who is editing it at that moment  is dropped out of the session, the caller excepted; the lock then blocks editing, renaming and deleting for  everybody but the account that set it and the room admins. With `lockFile=false` the lock is removed and a  note about the unlocking is appended to the current version comment, unless the file lives in a connected  third-party storage. Locking a file that is already locked, or unlocking one that is not, changes nothing and  still answers with the file, so the call is idempotent in effect while remaining a mutating one. The caller  needs the right to lock the file, which the room admin, a DocSpace admin acting as room manager and a member  with content-creator rights have; a member without access to the room and a guest are refused, and so is a  file in Trash. A lock set by somebody else can only be released by a room manager.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/lock-file/
     # @param file_id [Integer, String] The file to lock or unlock.
-    # @param lock_file_parameters [LockFileParameters] The lock state to reach.
+    # @param lock_file_request [LockFileRequest] The lock state to reach.
     # @param [Hash] opts the optional parameters
     # @return [FileWrapper, ThirdPartyFileWrapper]
-    def lock_file(file_id, lock_file_parameters, opts = {})
-      data, _status_code, _headers = lock_file_with_http_info(file_id, lock_file_parameters, opts)
+    def lock_file(file_id, lock_file_request, opts = {})
+      data, _status_code, _headers = lock_file_with_http_info(file_id, lock_file_request, opts)
       data
     end
 
@@ -2467,10 +2467,10 @@ module DocspaceApiSdk
     # Locks a file so that nobody else can change it, or releases that lock, and answers with the file as it now  stands. With `lockFile=true` the lock is put on the file and everybody else who is editing it at that moment  is dropped out of the session, the caller excepted; the lock then blocks editing, renaming and deleting for  everybody but the account that set it and the room admins. With `lockFile=false` the lock is removed and a  note about the unlocking is appended to the current version comment, unless the file lives in a connected  third-party storage. Locking a file that is already locked, or unlocking one that is not, changes nothing and  still answers with the file, so the call is idempotent in effect while remaining a mutating one. The caller  needs the right to lock the file, which the room admin, a DocSpace admin acting as room manager and a member  with content-creator rights have; a member without access to the room and a guest are refused, and so is a  file in Trash. A lock set by somebody else can only be released by a room manager.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/lock-file/
     # @param file_id [Integer, String] The file to lock or unlock.
-    # @param lock_file_parameters [LockFileParameters] The lock state to reach.
+    # @param lock_file_request [LockFileRequest] The lock state to reach.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FileWrapper, ThirdPartyFileWrapper, Integer, Hash)>] FileWrapper, ThirdPartyFileWrapper data, response status code and response headers
-    def lock_file_with_http_info(file_id, lock_file_parameters, opts = {})
+    def lock_file_with_http_info(file_id, lock_file_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FilesApi.lock_file ...'
       end
@@ -2478,9 +2478,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && file_id.nil?
         fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::FilesApi.lock_file"
       end
-      # verify the required parameter 'lock_file_parameters' is set
-      if @api_client.config.client_side_validation && lock_file_parameters.nil?
-        fail ArgumentError, "Missing the required parameter 'lock_file_parameters' when calling Files::FilesApi.lock_file"
+      # verify the required parameter 'lock_file_request' is set
+      if @api_client.config.client_side_validation && lock_file_request.nil?
+        fail ArgumentError, "Missing the required parameter 'lock_file_request' when calling Files::FilesApi.lock_file"
       end
       # resource path
       local_var_path = '/api/2.0/files/file/{fileId}/lock'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
@@ -2502,7 +2502,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(lock_file_parameters)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(lock_file_request)
 
       # return_type
       return_type = opts[:debug_return_type] || (file_id.is_a?(String) ? 'ThirdPartyFileWrapper' : 'FileWrapper')
@@ -2788,7 +2788,7 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'DownloadUri'] = opts[:'download_uri'] if !opts[:'download_uri'].nil?
+      query_params[:'downloadUri'] = opts[:'download_uri'] if !opts[:'download_uri'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -2802,9 +2802,9 @@ module DocspaceApiSdk
 
       # form parameters
       form_params = opts[:form_params] || {}
-      form_params['FileExtension'] = opts[:'file_extension'] if !opts[:'file_extension'].nil?
-      form_params['File'] = opts[:'file'] if !opts[:'file'].nil?
-      form_params['Forcesave'] = opts[:'forcesave'] if !opts[:'forcesave'].nil?
+      form_params['fileExtension'] = opts[:'file_extension'] if !opts[:'file_extension'].nil?
+      form_params['file'] = opts[:'file'] if !opts[:'file'].nil?
+      form_params['forcesave'] = opts[:'forcesave'] if !opts[:'forcesave'].nil?
 
       # http body (model)
       post_body = opts[:debug_body]
@@ -2836,11 +2836,11 @@ module DocspaceApiSdk
     # Converts a file into a PDF, stores that PDF as a new file in the folder named in the body, and answers with  the file that was created. The source is left untouched, so the two files then live side by side. `title`  names the result without an extension - the `.pdf` extension is added to it - and an empty title reuses the  name of the source with its extension replaced. The conversion is done by the document service while the  request waits, so the call takes as long as the document needs and answers with the finished file rather than  with a queue entry. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused; a source file or a destination folder that does not exist is  answered with 404. The call is mutating and not idempotent: each call adds another PDF, its title made unique  when one of that name is already there. The result is marked as new for the room, and for a form the portal  recognises it is stored as a PDF form. To convert in place instead use  `PUT api/2.0/files/file/{fileId}/checkconversion`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-file-as-pdf/
     # @param id [Integer, String] The file to convert; it is left untouched.
-    # @param save_as_pdf [SaveAsPdf, ThirdPartySaveAsPdf] The destination folder and the name of the PDF.
+    # @param save_as_pdf_request [SaveAsPdfRequest, ThirdPartySaveAsPdfRequest] The destination folder and the name of the PDF.
     # @param [Hash] opts the optional parameters
     # @return [FileWrapper, ThirdPartyFileWrapper]
-    def save_file_as_pdf(id, save_as_pdf, opts = {})
-      data, _status_code, _headers = save_file_as_pdf_with_http_info(id, save_as_pdf, opts)
+    def save_file_as_pdf(id, save_as_pdf_request, opts = {})
+      data, _status_code, _headers = save_file_as_pdf_with_http_info(id, save_as_pdf_request, opts)
       data
     end
 
@@ -2848,10 +2848,10 @@ module DocspaceApiSdk
     # Converts a file into a PDF, stores that PDF as a new file in the folder named in the body, and answers with  the file that was created. The source is left untouched, so the two files then live side by side. `title`  names the result without an extension - the `.pdf` extension is added to it - and an empty title reuses the  name of the source with its extension replaced. The conversion is done by the document service while the  request waits, so the call takes as long as the document needs and answers with the finished file rather than  with a queue entry. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused; a source file or a destination folder that does not exist is  answered with 404. The call is mutating and not idempotent: each call adds another PDF, its title made unique  when one of that name is already there. The result is marked as new for the room, and for a form the portal  recognises it is stored as a PDF form. To convert in place instead use  `PUT api/2.0/files/file/{fileId}/checkconversion`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-file-as-pdf/
     # @param id [Integer, String] The file to convert; it is left untouched.
-    # @param save_as_pdf [SaveAsPdf, ThirdPartySaveAsPdf] The destination folder and the name of the PDF.
+    # @param save_as_pdf_request [SaveAsPdfRequest, ThirdPartySaveAsPdfRequest] The destination folder and the name of the PDF.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FileWrapper, ThirdPartyFileWrapper, Integer, Hash)>] FileWrapper, ThirdPartyFileWrapper data, response status code and response headers
-    def save_file_as_pdf_with_http_info(id, save_as_pdf, opts = {})
+    def save_file_as_pdf_with_http_info(id, save_as_pdf_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FilesApi.save_file_as_pdf ...'
       end
@@ -2859,9 +2859,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling Files::FilesApi.save_file_as_pdf"
       end
-      # verify the required parameter 'save_as_pdf' is set
-      if @api_client.config.client_side_validation && save_as_pdf.nil?
-        fail ArgumentError, "Missing the required parameter 'save_as_pdf' when calling Files::FilesApi.save_file_as_pdf"
+      # verify the required parameter 'save_as_pdf_request' is set
+      if @api_client.config.client_side_validation && save_as_pdf_request.nil?
+        fail ArgumentError, "Missing the required parameter 'save_as_pdf_request' when calling Files::FilesApi.save_file_as_pdf"
       end
       # resource path
       local_var_path = '/api/2.0/files/file/{id}/saveaspdf'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -2883,7 +2883,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(save_as_pdf)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(save_as_pdf_request)
 
       # return_type
       return_type = opts[:debug_return_type] || (id.is_a?(String) ? 'ThirdPartyFileWrapper' : 'FileWrapper')
@@ -2984,11 +2984,11 @@ module DocspaceApiSdk
     # Turns the Custom Filter editing mode of a spreadsheet on or off and answers with the file as it now stands. In  that mode the sorting and filtering one person applies to the sheet is visible to that person alone, so that  several people can work on the same data without moving the rows under each other; with the mode off,  filtering is shared again, as everywhere else. Turning it on also drops everybody else out of the running  editing session, the caller excepted, because the mode has to be established before the sheet is opened. Only  formats that support the mode are accepted; anything else is rejected as an invalid request. The caller needs  the right to use the mode in the room, which the room admin and a DocSpace admin acting as room manager have;  read-only access, a member without access to the room and an anonymous caller are refused. Once the mode has  been switched on by one person, only that person, a room manager or a DocSpace admin can switch it off again.  The call is mutating and, called twice with the same value, changes nothing the second time.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-custom-filter-tag/
     # @param file_id [Integer, String] The spreadsheet whose Custom Filter mode is switched.
-    # @param custom_filter_parameters [CustomFilterParameters] The Custom Filter state to reach.
+    # @param custom_filter_request [CustomFilterRequest] The Custom Filter state to reach.
     # @param [Hash] opts the optional parameters
     # @return [FileWrapper, ThirdPartyFileWrapper]
-    def set_custom_filter_tag(file_id, custom_filter_parameters, opts = {})
-      data, _status_code, _headers = set_custom_filter_tag_with_http_info(file_id, custom_filter_parameters, opts)
+    def set_custom_filter_tag(file_id, custom_filter_request, opts = {})
+      data, _status_code, _headers = set_custom_filter_tag_with_http_info(file_id, custom_filter_request, opts)
       data
     end
 
@@ -2996,10 +2996,10 @@ module DocspaceApiSdk
     # Turns the Custom Filter editing mode of a spreadsheet on or off and answers with the file as it now stands. In  that mode the sorting and filtering one person applies to the sheet is visible to that person alone, so that  several people can work on the same data without moving the rows under each other; with the mode off,  filtering is shared again, as everywhere else. Turning it on also drops everybody else out of the running  editing session, the caller excepted, because the mode has to be established before the sheet is opened. Only  formats that support the mode are accepted; anything else is rejected as an invalid request. The caller needs  the right to use the mode in the room, which the room admin and a DocSpace admin acting as room manager have;  read-only access, a member without access to the room and an anonymous caller are refused. Once the mode has  been switched on by one person, only that person, a room manager or a DocSpace admin can switch it off again.  The call is mutating and, called twice with the same value, changes nothing the second time.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-custom-filter-tag/
     # @param file_id [Integer, String] The spreadsheet whose Custom Filter mode is switched.
-    # @param custom_filter_parameters [CustomFilterParameters] The Custom Filter state to reach.
+    # @param custom_filter_request [CustomFilterRequest] The Custom Filter state to reach.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FileWrapper, ThirdPartyFileWrapper, Integer, Hash)>] FileWrapper, ThirdPartyFileWrapper data, response status code and response headers
-    def set_custom_filter_tag_with_http_info(file_id, custom_filter_parameters, opts = {})
+    def set_custom_filter_tag_with_http_info(file_id, custom_filter_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FilesApi.set_custom_filter_tag ...'
       end
@@ -3007,9 +3007,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && file_id.nil?
         fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::FilesApi.set_custom_filter_tag"
       end
-      # verify the required parameter 'custom_filter_parameters' is set
-      if @api_client.config.client_side_validation && custom_filter_parameters.nil?
-        fail ArgumentError, "Missing the required parameter 'custom_filter_parameters' when calling Files::FilesApi.set_custom_filter_tag"
+      # verify the required parameter 'custom_filter_request' is set
+      if @api_client.config.client_side_validation && custom_filter_request.nil?
+        fail ArgumentError, "Missing the required parameter 'custom_filter_request' when calling Files::FilesApi.set_custom_filter_tag"
       end
       # resource path
       local_var_path = '/api/2.0/files/file/{fileId}/customfilter'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
@@ -3031,7 +3031,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(custom_filter_parameters)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(custom_filter_request)
 
       # return_type
       return_type = opts[:debug_return_type] || (file_id.is_a?(String) ? 'ThirdPartyFileWrapper' : 'FileWrapper')
@@ -3346,11 +3346,11 @@ module DocspaceApiSdk
     # Opens an editing session on the file and answers with the document key that identifies it, the value an editor  client passes to the document service in order to join the co-editing session for that exact revision. The  file is marked as being edited for as long as the session lasts, which keeps it from being deleted or moved.  With `editingAlone=false` the portal builds the editor configuration, requires write mode plus at least one of  the edit, review, comment, form-filling or filter permissions, and asks the document service to start tracking  the document. With `editingAlone=true` the caller claims the file for itself, and the call is refused with 403  when anybody is already editing it. The caller needs edit access: a member with read access, a guest and an  anonymous caller whose external link does not grant editing are all refused. The call is mutating and not  idempotent. Keep the session alive with `GET api/2.0/files/file/{fileId}/trackeditfile`, and end it by calling  that operation with `isFinish=true`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/start-edit-file/
     # @param file_id [Integer, String] The file to open the editing session on. The caller needs edit access to it.
-    # @param start_edit [StartEdit] The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
+    # @param start_edit_request [StartEditRequest] The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
     # @param [Hash] opts the optional parameters
     # @return [StringWrapper]
-    def start_edit_file(file_id, start_edit, opts = {})
-      data, _status_code, _headers = start_edit_file_with_http_info(file_id, start_edit, opts)
+    def start_edit_file(file_id, start_edit_request, opts = {})
+      data, _status_code, _headers = start_edit_file_with_http_info(file_id, start_edit_request, opts)
       data
     end
 
@@ -3358,10 +3358,10 @@ module DocspaceApiSdk
     # Opens an editing session on the file and answers with the document key that identifies it, the value an editor  client passes to the document service in order to join the co-editing session for that exact revision. The  file is marked as being edited for as long as the session lasts, which keeps it from being deleted or moved.  With `editingAlone=false` the portal builds the editor configuration, requires write mode plus at least one of  the edit, review, comment, form-filling or filter permissions, and asks the document service to start tracking  the document. With `editingAlone=true` the caller claims the file for itself, and the call is refused with 403  when anybody is already editing it. The caller needs edit access: a member with read access, a guest and an  anonymous caller whose external link does not grant editing are all refused. The call is mutating and not  idempotent. Keep the session alive with `GET api/2.0/files/file/{fileId}/trackeditfile`, and end it by calling  that operation with `isFinish=true`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/start-edit-file/
     # @param file_id [Integer, String] The file to open the editing session on. The caller needs edit access to it.
-    # @param start_edit [StartEdit] The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
+    # @param start_edit_request [StartEditRequest] The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
     # @param [Hash] opts the optional parameters
     # @return [Array<(StringWrapper, Integer, Hash)>] StringWrapper data, response status code and response headers
-    def start_edit_file_with_http_info(file_id, start_edit, opts = {})
+    def start_edit_file_with_http_info(file_id, start_edit_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FilesApi.start_edit_file ...'
       end
@@ -3369,9 +3369,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && file_id.nil?
         fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::FilesApi.start_edit_file"
       end
-      # verify the required parameter 'start_edit' is set
-      if @api_client.config.client_side_validation && start_edit.nil?
-        fail ArgumentError, "Missing the required parameter 'start_edit' when calling Files::FilesApi.start_edit_file"
+      # verify the required parameter 'start_edit_request' is set
+      if @api_client.config.client_side_validation && start_edit_request.nil?
+        fail ArgumentError, "Missing the required parameter 'start_edit_request' when calling Files::FilesApi.start_edit_file"
       end
       # resource path
       local_var_path = '/api/2.0/files/file/{fileId}/startedit'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
@@ -3393,7 +3393,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(start_edit)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(start_edit_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'StringWrapper'
@@ -3629,11 +3629,11 @@ module DocspaceApiSdk
     # Renames a file, restores one of its versions, or both at once, and answers with the file as it now stands. A  non-empty `title` renames the file, keeping the stored extension whatever the new title says, so a rename  cannot change the format; an empty or missing title leaves the name alone. A `lastVersion` above 0 restores  that version the way `POST api/2.0/files/file/{fileId}/restoreversion` does, storing its content again on top  of the history, while 0 or less leaves the versions untouched and answers with the file as it is - which makes  this operation a read of the file when both fields are left out. The caller needs edit access, and renaming  somebody else's file additionally needs room-manager rights: a member or room admin with plain editing access,  read-only access, a guest and a DocSpace admin who is not a member of the room are all refused with 403, while  a content creator may rename a file of their own. The call is mutating. Renaming marks the file as new for  everybody else who can read it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file/
     # @param file_id [Integer, String] The file to update.
-    # @param update_file [UpdateFile] The new title and the version to restore.
+    # @param update_file_request [UpdateFileRequest] The new title and the version to restore.
     # @param [Hash] opts the optional parameters
     # @return [FileWrapper, ThirdPartyFileWrapper]
-    def update_file(file_id, update_file, opts = {})
-      data, _status_code, _headers = update_file_with_http_info(file_id, update_file, opts)
+    def update_file(file_id, update_file_request, opts = {})
+      data, _status_code, _headers = update_file_with_http_info(file_id, update_file_request, opts)
       data
     end
 
@@ -3641,10 +3641,10 @@ module DocspaceApiSdk
     # Renames a file, restores one of its versions, or both at once, and answers with the file as it now stands. A  non-empty `title` renames the file, keeping the stored extension whatever the new title says, so a rename  cannot change the format; an empty or missing title leaves the name alone. A `lastVersion` above 0 restores  that version the way `POST api/2.0/files/file/{fileId}/restoreversion` does, storing its content again on top  of the history, while 0 or less leaves the versions untouched and answers with the file as it is - which makes  this operation a read of the file when both fields are left out. The caller needs edit access, and renaming  somebody else's file additionally needs room-manager rights: a member or room admin with plain editing access,  read-only access, a guest and a DocSpace admin who is not a member of the room are all refused with 403, while  a content creator may rename a file of their own. The call is mutating. Renaming marks the file as new for  everybody else who can read it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file/
     # @param file_id [Integer, String] The file to update.
-    # @param update_file [UpdateFile] The new title and the version to restore.
+    # @param update_file_request [UpdateFileRequest] The new title and the version to restore.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FileWrapper, ThirdPartyFileWrapper, Integer, Hash)>] FileWrapper, ThirdPartyFileWrapper data, response status code and response headers
-    def update_file_with_http_info(file_id, update_file, opts = {})
+    def update_file_with_http_info(file_id, update_file_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FilesApi.update_file ...'
       end
@@ -3652,9 +3652,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && file_id.nil?
         fail ArgumentError, "Missing the required parameter 'file_id' when calling Files::FilesApi.update_file"
       end
-      # verify the required parameter 'update_file' is set
-      if @api_client.config.client_side_validation && update_file.nil?
-        fail ArgumentError, "Missing the required parameter 'update_file' when calling Files::FilesApi.update_file"
+      # verify the required parameter 'update_file_request' is set
+      if @api_client.config.client_side_validation && update_file_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_file_request' when calling Files::FilesApi.update_file"
       end
       # resource path
       local_var_path = '/api/2.0/files/file/{fileId}'.sub('{' + 'fileId' + '}', CGI.escape(file_id.to_s))
@@ -3676,7 +3676,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_file)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_file_request)
 
       # return_type
       return_type = opts[:debug_return_type] || (file_id.is_a?(String) ? 'ThirdPartyFileWrapper' : 'FileWrapper')

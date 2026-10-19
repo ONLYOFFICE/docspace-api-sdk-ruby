@@ -86,7 +86,7 @@ module DocspaceApiSdk
     # Stores how long an authentication session of this portal stays valid: `lifeTime` in minutes together with the  `enabled` flag that switches the limit on. The caller needs the portal-settings right of a DocSpace  administrator - the portal owner and a DocSpace administrator qualify, any other member is refused - and on an  installation whose configuration hides the cookie section nothing is stored and the call is answered with 402.  A `lifeTime` above 9999 minutes is not rejected but clamped to 9999, while 0 or less clears the number  instead, which with `enabled` true leaves sessions that never expire on their own. Any positive `lifeTime`  raises the session version of the portal: every session issued before the call stops being accepted, and with  `enabled` true the connections behind them are dropped as well. The caller is signed in again inside the same  call and gets a fresh session cookie in the response, so a client that keeps sending the token it held before  this call is the one locked out. The change is recorded in the audit trail. What comes back is a localized  confirmation message; read the stored pair with `GET api/2.0/settings/cookiesettings`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-cookie-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [CookieSettingsRequestsDto] :cookie_settings_requests_dto 
+    # @option opts [CookieSettingsRequestDto] :cookie_settings_request_dto 
     # @return [StringWrapper]
     def update_cookie_settings(opts = {})
       data, _status_code, _headers = update_cookie_settings_with_http_info(opts)
@@ -97,7 +97,7 @@ module DocspaceApiSdk
     # Stores how long an authentication session of this portal stays valid: `lifeTime` in minutes together with the  `enabled` flag that switches the limit on. The caller needs the portal-settings right of a DocSpace  administrator - the portal owner and a DocSpace administrator qualify, any other member is refused - and on an  installation whose configuration hides the cookie section nothing is stored and the call is answered with 402.  A `lifeTime` above 9999 minutes is not rejected but clamped to 9999, while 0 or less clears the number  instead, which with `enabled` true leaves sessions that never expire on their own. Any positive `lifeTime`  raises the session version of the portal: every session issued before the call stops being accepted, and with  `enabled` true the connections behind them are dropped as well. The caller is signed in again inside the same  call and gets a fresh session cookie in the response, so a client that keeps sending the token it held before  this call is the one locked out. The change is recorded in the audit trail. What comes back is a localized  confirmation message; read the stored pair with `GET api/2.0/settings/cookiesettings`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-cookie-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [CookieSettingsRequestsDto] :cookie_settings_requests_dto 
+    # @option opts [CookieSettingsRequestDto] :cookie_settings_request_dto 
     # @return [Array<(StringWrapper, Integer, Hash)>] StringWrapper data, response status code and response headers
     def update_cookie_settings_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -123,7 +123,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'cookie_settings_requests_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'cookie_settings_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'StringWrapper'

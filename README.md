@@ -64,15 +64,15 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::AIApi.new
-ai_ai_approve_tool_call_request = DocspaceApiSdk::AiAiApproveToolCallRequest.new({result: 3.56, thread_id: 'thread_id_example', message_id: 'message_id_example', idx: 3.56, message: DocspaceApiSdk::AiThreadMessageLike.new({role: 'user', content: DocspaceApiSdk::AiThreadMessageLikeContent.new})}) # AiAiApproveToolCallRequest | 
+ai_approve_tool_call_request = DocspaceApiSdk::AiApproveToolCallRequest.new({result: 3.56, thread_id: 'thread_id_example', message_id: 'message_id_example', idx: 3.56, message: DocspaceApiSdk::AiThreadMessageLike.new({role: 'user', content: DocspaceApiSdk::AiThreadMessageLikeContent.new})}) # AiApproveToolCallRequest | 
 
 
 begin
   # Approve tool call
-  result = api_instance.ai_ai_approve_tool_call(ai_ai_approve_tool_call_request)
+  result = api_instance.ai_approve_tool_call(ai_approve_tool_call_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
-  puts "Exception when calling AI::AIApi->ai_ai_approve_tool_call: #{e}"
+  puts "Exception when calling AI::AIApi->ai_approve_tool_call: #{e}"
 end
 
 ```
@@ -173,37 +173,37 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td colspan="3" style="text-align: center;"><strong>AI::AIApi</strong></td>
       </tr>
       <tr>
-        <td><a href="docs/AIAIApi.md#ai_ai_approve_tool_call"><strong>ai_ai_approve_tool_call</strong></a></td>
+        <td><a href="docs/AIAIApi.md#ai_approve_tool_call"><strong>ai_approve_tool_call</strong></a></td>
         <td><strong>POST</strong> /api/2.0/ai/ai/approve-tool-call</td>
         <td>Approve tool call</td>
       </tr>
       <tr>
-        <td><a href="docs/AIAIApi.md#ai_ai_deny_tool_call"><strong>ai_ai_deny_tool_call</strong></a></td>
+        <td><a href="docs/AIAIApi.md#ai_deny_tool_call"><strong>ai_deny_tool_call</strong></a></td>
         <td><strong>POST</strong> /api/2.0/ai/ai/deny-tool-call</td>
         <td>Deny tool call</td>
       </tr>
       <tr>
-        <td><a href="docs/AIAIApi.md#ai_ai_regenerate_stream"><strong>ai_ai_regenerate_stream</strong></a></td>
+        <td><a href="docs/AIAIApi.md#ai_regenerate_stream"><strong>ai_regenerate_stream</strong></a></td>
         <td><strong>POST</strong> /api/2.0/ai/ai/regenerate-stream</td>
         <td>Regenerate stream</td>
       </tr>
       <tr>
-        <td><a href="docs/AIAIApi.md#ai_ai_send"><strong>ai_ai_send</strong></a></td>
+        <td><a href="docs/AIAIApi.md#ai_send"><strong>ai_send</strong></a></td>
         <td><strong>POST</strong> /api/2.0/ai/ai/send</td>
         <td>Run an AI action</td>
       </tr>
       <tr>
-        <td><a href="docs/AIAIApi.md#ai_ai_send_custom"><strong>ai_ai_send_custom</strong></a></td>
+        <td><a href="docs/AIAIApi.md#ai_send_custom"><strong>ai_send_custom</strong></a></td>
         <td><strong>POST</strong> /api/2.0/ai/ai/send-custom</td>
         <td>Send custom</td>
       </tr>
       <tr>
-        <td><a href="docs/AIAIApi.md#ai_ai_send_with_stream"><strong>ai_ai_send_with_stream</strong></a></td>
+        <td><a href="docs/AIAIApi.md#ai_send_with_stream"><strong>ai_send_with_stream</strong></a></td>
         <td><strong>POST</strong> /api/2.0/ai/ai/send-with-stream</td>
         <td>Send with stream</td>
       </tr>
       <tr>
-        <td><a href="docs/AIAIApi.md#ai_ai_send_with_stream_open_ai"><strong>ai_ai_send_with_stream_open_ai</strong></a></td>
+        <td><a href="docs/AIAIApi.md#ai_send_with_stream_open_ai"><strong>ai_send_with_stream_open_ai</strong></a></td>
         <td><strong>POST</strong> /api/2.0/ai/ai/send-with-stream-openai</td>
         <td>Stream a chat in OpenAI format</td>
       </tr>
@@ -337,6 +337,24 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Save files many</td>
       </tr>
       <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::ContextApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIContextApi.md#ai_context_get_context_folders"><strong>ai_context_get_context_folders</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/context/get-context-folders</td>
+        <td>Get context folders</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIContextApi.md#ai_context_get_room_skill"><strong>ai_context_get_room_skill</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/context/get-room-skill</td>
+        <td>Get room skill</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIContextApi.md#ai_context_get_room_skills"><strong>ai_context_get_room_skills</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/context/get-room-skills</td>
+        <td>Get room skills</td>
+      </tr>
+      <tr>
         <td colspan="3" style="text-align: center;"><strong>AI::EditorToolsApi</strong></td>
       </tr>
       <tr>
@@ -389,6 +407,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get reasoning level</td>
       </tr>
       <tr>
+        <td><a href="docs/AIPreferencesApi.md#ai_preferences_get_tool_permission_mode"><strong>ai_preferences_get_tool_permission_mode</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/preferences/get-tool-permission-mode</td>
+        <td>Get tool permission mode</td>
+      </tr>
+      <tr>
         <td><a href="docs/AIPreferencesApi.md#ai_preferences_is_deep_mode_set"><strong>ai_preferences_is_deep_mode_set</strong></a></td>
         <td><strong>GET</strong> /api/2.0/ai/preferences/is-deep-mode-set</td>
         <td>Is deep mode set</td>
@@ -402,6 +425,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/AIPreferencesApi.md#ai_preferences_set_reasoning_level"><strong>ai_preferences_set_reasoning_level</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/ai/preferences/set-reasoning-level</td>
         <td>Set reasoning level</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPreferencesApi.md#ai_preferences_set_tool_permission_mode"><strong>ai_preferences_set_tool_permission_mode</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/preferences/set-tool-permission-mode</td>
+        <td>Set tool permission mode</td>
       </tr>
       <tr>
         <td colspan="3" style="text-align: center;"><strong>AI::ProfilesApi</strong></td>
@@ -523,6 +551,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get AI settings</td>
       </tr>
       <tr>
+        <td><a href="docs/AISettingsApi.md#ai_settings_get_tool_mode"><strong>ai_settings_get_tool_mode</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/config/tool-mode</td>
+        <td>Get the tool permission mode</td>
+      </tr>
+      <tr>
         <td><a href="docs/AISettingsApi.md#ai_settings_get_user"><strong>ai_settings_get_user</strong></a></td>
         <td><strong>GET</strong> /api/2.0/ai/config/user</td>
         <td>Get user AI settings</td>
@@ -531,6 +564,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/AISettingsApi.md#ai_settings_get_vectorization"><strong>ai_settings_get_vectorization</strong></a></td>
         <td><strong>GET</strong> /api/2.0/ai/config/vectorization</td>
         <td>Get vectorization settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AISettingsApi.md#ai_settings_set_tool_mode"><strong>ai_settings_set_tool_mode</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/config/tool-mode</td>
+        <td>Set the tool permission mode</td>
       </tr>
       <tr>
         <td><a href="docs/AISettingsApi.md#ai_settings_set_user"><strong>ai_settings_set_user</strong></a></td>
@@ -989,6 +1027,33 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 </details>
 <details>
+  <summary>Docs</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Docs::DocsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/DocsApi.md#convert_file"><strong>convert_file</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/docs/converter</td>
+        <td>Convert a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/DocsApi.md#run_builder_script"><strong>run_builder_script</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/docs/builder</td>
+        <td>Run a document builder script</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
   <summary>Files</summary>
 
   <table>
@@ -1395,6 +1460,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Rename a folder</td>
       </tr>
       <tr>
+        <td><a href="docs/FilesFoldersApi.md#search_folder"><strong>search_folder</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/{folderId}/search</td>
+        <td>Search a folder by metadata</td>
+      </tr>
+      <tr>
         <td><a href="docs/FilesFoldersApi.md#set_folder_order"><strong>set_folder_order</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/files/folder/{folderId}/order</td>
         <td>Set folder order</td>
@@ -1418,6 +1488,109 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/FilesFoldersApi.md#upload_file_to_my"><strong>upload_file_to_my</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/@my/upload</td>
         <td>Upload a file to My documents</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Files::MetadataApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#assign_file_templates"><strong>assign_file_templates</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/file/{fileId}/templates</td>
+        <td>Assign templates to a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#assign_folder_templates"><strong>assign_folder_templates</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/folder/{folderId}/templates</td>
+        <td>Assign templates to a folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#create_field"><strong>create_field</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/metadata/templates/{templateId}/fields</td>
+        <td>Add a metadata field</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#create_template"><strong>create_template</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/metadata/templates</td>
+        <td>Create a metadata template</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#delete_field"><strong>delete_field</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/metadata/templates/{templateId}/fields/{fieldId}</td>
+        <td>Delete a metadata field</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#delete_template"><strong>delete_template</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/metadata/templates/{templateId}</td>
+        <td>Delete a metadata template</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#get_cascade_progress"><strong>get_cascade_progress</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/metadata/folder/{folderId}/templates/progress</td>
+        <td>Get cascade progress</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#get_file_metadata"><strong>get_file_metadata</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/metadata/file/{fileId}</td>
+        <td>Get file metadata</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#get_folder_metadata"><strong>get_folder_metadata</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/metadata/folder/{folderId}</td>
+        <td>Get folder metadata</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#get_template"><strong>get_template</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/metadata/templates/{templateId}</td>
+        <td>Get a metadata template</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#get_templates"><strong>get_templates</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/metadata/templates</td>
+        <td>Get metadata templates</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#set_file_custom_fields"><strong>set_file_custom_fields</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/file/{fileId}/customfields</td>
+        <td>Set file custom fields</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#set_file_values"><strong>set_file_values</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/file/{fileId}/values</td>
+        <td>Set file metadata values</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#set_folder_custom_fields"><strong>set_folder_custom_fields</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/folder/{folderId}/customfields</td>
+        <td>Set folder custom fields</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#set_folder_values"><strong>set_folder_values</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/folder/{folderId}/values</td>
+        <td>Set folder metadata values</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#unassign_file_template"><strong>unassign_file_template</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/metadata/file/{fileId}/templates/{templateId}</td>
+        <td>Unassign a template from a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#unassign_folder_template"><strong>unassign_folder_template</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/metadata/folder/{folderId}/templates/{templateId}</td>
+        <td>Unassign a template from a folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#update_field"><strong>update_field</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/templates/{templateId}/fields/{fieldId}</td>
+        <td>Update a metadata field</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#update_folder_template"><strong>update_folder_template</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/folder/{folderId}/templates/{templateId}</td>
+        <td>Update a template assignment on a folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#update_template"><strong>update_template</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/templates/{templateId}</td>
+        <td>Update a metadata template</td>
       </tr>
       <tr>
         <td colspan="3" style="text-align: center;"><strong>Files::OperationsApi</strong></td>
@@ -1868,7 +2041,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/GroupApi.md#get_group_by_user_id"><strong>get_group_by_user_id</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/group/user/{userid}</td>
+        <td><strong>GET</strong> /api/2.0/group/user/{userId}</td>
         <td>Get user groups</td>
       </tr>
       <tr>
@@ -2119,7 +2292,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/PeopleEmailApi.md#change_user_email"><strong>change_user_email</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/people/{userid}/email</td>
+        <td><strong>PUT</strong> /api/2.0/people/{userId}/email</td>
         <td>Change a user email</td>
       </tr>
       <tr>
@@ -2145,7 +2318,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/PeoplePasswordApi.md#change_user_password"><strong>change_user_password</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/people/{userid}/password</td>
+        <td><strong>PUT</strong> /api/2.0/people/{userId}/password</td>
         <td>Change a user password</td>
       </tr>
       <tr>
@@ -2158,27 +2331,27 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/PeoplePhotosApi.md#create_member_photo_thumbnails"><strong>create_member_photo_thumbnails</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/people/{userid}/photo/thumbnails</td>
+        <td><strong>POST</strong> /api/2.0/people/{userId}/photo/thumbnails</td>
         <td>Create photo thumbnails</td>
       </tr>
       <tr>
         <td><a href="docs/PeoplePhotosApi.md#delete_member_photo"><strong>delete_member_photo</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/people/{userid}/photo</td>
+        <td><strong>DELETE</strong> /api/2.0/people/{userId}/photo</td>
         <td>Delete a user photo</td>
       </tr>
       <tr>
         <td><a href="docs/PeoplePhotosApi.md#get_member_photo"><strong>get_member_photo</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/people/{userid}/photo</td>
+        <td><strong>GET</strong> /api/2.0/people/{userId}/photo</td>
         <td>Get a user photo</td>
       </tr>
       <tr>
         <td><a href="docs/PeoplePhotosApi.md#update_member_photo"><strong>update_member_photo</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/people/{userid}/photo</td>
+        <td><strong>PUT</strong> /api/2.0/people/{userId}/photo</td>
         <td>Update a user photo</td>
       </tr>
       <tr>
         <td><a href="docs/PeoplePhotosApi.md#upload_member_photo"><strong>upload_member_photo</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/people/{userid}/photo</td>
+        <td><strong>POST</strong> /api/2.0/people/{userId}/photo</td>
         <td>Upload a user photo</td>
       </tr>
       <tr>
@@ -2196,7 +2369,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/PeopleProfilesApi.md#delete_member"><strong>delete_member</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/people/{userid}</td>
+        <td><strong>DELETE</strong> /api/2.0/people/{userId}</td>
         <td>Delete a user</td>
       </tr>
       <tr>
@@ -2221,7 +2394,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/PeopleProfilesApi.md#get_profile_by_user_id"><strong>get_profile_by_user_id</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/people/{userid}</td>
+        <td><strong>GET</strong> /api/2.0/people/{userId}</td>
         <td>Get a profile by user ID</td>
       </tr>
       <tr>
@@ -2246,12 +2419,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/PeopleProfilesApi.md#update_member"><strong>update_member</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/people/{userid}</td>
+        <td><strong>PUT</strong> /api/2.0/people/{userId}</td>
         <td>Update a user</td>
       </tr>
       <tr>
         <td><a href="docs/PeopleProfilesApi.md#update_member_culture"><strong>update_member_culture</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/people/{userid}/culture</td>
+        <td><strong>PUT</strong> /api/2.0/people/{userId}/culture</td>
         <td>Update a user culture</td>
       </tr>
       <tr>
@@ -2371,12 +2544,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/PeopleUserDataApi.md#get_reassign_progress"><strong>get_reassign_progress</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/people/reassign/progress/{userid}</td>
+        <td><strong>GET</strong> /api/2.0/people/reassign/progress/{userId}</td>
         <td>Get the reassignment progress</td>
       </tr>
       <tr>
         <td><a href="docs/PeopleUserDataApi.md#get_remove_progress"><strong>get_remove_progress</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/people/remove/progress/{userid}</td>
+        <td><strong>GET</strong> /api/2.0/people/remove/progress/{userId}</td>
         <td>Get the deletion progress</td>
       </tr>
       <tr>
@@ -2424,7 +2597,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/PeopleUserStatusApi.md#update_user_activation_status"><strong>update_user_activation_status</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/people/activationstatus/{activationstatus}</td>
+        <td><strong>PUT</strong> /api/2.0/people/activationstatus/{activationStatus}</td>
         <td>Set my activation status</td>
       </tr>
       <tr>
@@ -2437,7 +2610,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/PeopleUserTypeApi.md#get_user_type_update_progress"><strong>get_user_type_update_progress</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/people/type/progress/{userid}</td>
+        <td><strong>GET</strong> /api/2.0/people/type/progress/{userId}</td>
         <td>Get the user type change progress</td>
       </tr>
       <tr>
@@ -2474,7 +2647,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/PortalGuestsApi.md#get_guest_sharing_link"><strong>get_guest_sharing_link</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/people/guests/{userid}/share</td>
+        <td><strong>GET</strong> /api/2.0/people/guests/{userId}/share</td>
         <td>Get a guest sharing link</td>
       </tr>
       <tr>
@@ -2742,6 +2915,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Deactivate a portal</td>
       </tr>
       <tr>
+        <td><a href="docs/PortalSettingsApi.md#unblock_portal"><strong>unblock_portal</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/portal/unblock</td>
+        <td>Unblock a portal</td>
+      </tr>
+      <tr>
         <td colspan="3" style="text-align: center;"><strong>Portal::UsersApi</strong></td>
       </tr>
       <tr>
@@ -2771,7 +2949,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/PortalUsersApi.md#get_user_by_id"><strong>get_user_by_id</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/portal/users/{userID}</td>
+        <td><strong>GET</strong> /api/2.0/portal/users/{userId}</td>
         <td>Get a portal user</td>
       </tr>
       <tr>
@@ -2887,6 +3065,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get room template public access</td>
       </tr>
       <tr>
+        <td><a href="docs/RoomsApi.md#get_room_ai_folder"><strong>get_room_ai_folder</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms/{id}/ai</td>
+        <td>Get the .ai folder of a room</td>
+      </tr>
+      <tr>
         <td><a href="docs/RoomsApi.md#get_room_covers"><strong>get_room_covers</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/rooms/covers</td>
         <td>Get room cover gallery</td>
@@ -2960,6 +3143,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/RoomsApi.md#resend_email_invitations"><strong>resend_email_invitations</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/rooms/{id}/resend</td>
         <td>Resend the room invitations</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#search_rooms"><strong>search_rooms</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/rooms/search</td>
+        <td>Search the rooms by metadata</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#set_public_settings"><strong>set_public_settings</strong></a></td>
@@ -3833,7 +4021,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       </tr>
       <tr>
         <td><a href="docs/SettingsSecurityApi.md#get_product_administrators"><strong>get_product_administrators</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/settings/security/administrator/{productid}</td>
+        <td><strong>GET</strong> /api/2.0/settings/security/administrator/{productId}</td>
         <td>Get product administrators</td>
       </tr>
       <tr>
@@ -4060,6 +4248,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Get web plugins</td>
       </tr>
       <tr>
+        <td><a href="docs/SettingsWebpluginsApi.md#refresh_web_plugin"><strong>refresh_web_plugin</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/webplugins/{name}/refresh</td>
+        <td>Refresh a web plugin</td>
+      </tr>
+      <tr>
         <td><a href="docs/SettingsWebpluginsApi.md#update_web_plugin"><strong>update_web_plugin</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/settings/webplugins/{name}</td>
         <td>Update a web plugin</td>
@@ -4095,28 +4288,32 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 <details><summary>Models list</summary>
 
- - [DocspaceApiSdk::AIConfig](docs/AIConfig.md)
  - [DocspaceApiSdk::AccessRequestKeyDto](docs/AccessRequestKeyDto.md)
+ - [DocspaceApiSdk::AccountEntryArrayWrapper](docs/AccountEntryArrayWrapper.md)
+ - [DocspaceApiSdk::AccountEntryDto](docs/AccountEntryDto.md)
  - [DocspaceApiSdk::AccountInfoArrayWrapper](docs/AccountInfoArrayWrapper.md)
  - [DocspaceApiSdk::AccountInfoDto](docs/AccountInfoDto.md)
  - [DocspaceApiSdk::AccountLoginType](docs/AccountLoginType.md)
- - [DocspaceApiSdk::AceShortWrapper](docs/AceShortWrapper.md)
- - [DocspaceApiSdk::AceShortWrapperArrayWrapper](docs/AceShortWrapperArrayWrapper.md)
- - [DocspaceApiSdk::ActionConfig](docs/ActionConfig.md)
- - [DocspaceApiSdk::ActionLinkConfig](docs/ActionLinkConfig.md)
+ - [DocspaceApiSdk::AccountSearchArea](docs/AccountSearchArea.md)
+ - [DocspaceApiSdk::AceShortArrayWrapper](docs/AceShortArrayWrapper.md)
+ - [DocspaceApiSdk::AceShortDto](docs/AceShortDto.md)
+ - [DocspaceApiSdk::ActionLinkActionRequest](docs/ActionLinkActionRequest.md)
+ - [DocspaceApiSdk::ActionLinkRequest](docs/ActionLinkRequest.md)
  - [DocspaceApiSdk::ActionType](docs/ActionType.md)
  - [DocspaceApiSdk::ActiveConnectionsDto](docs/ActiveConnectionsDto.md)
  - [DocspaceApiSdk::ActiveConnectionsItemDto](docs/ActiveConnectionsItemDto.md)
  - [DocspaceApiSdk::ActiveConnectionsWrapper](docs/ActiveConnectionsWrapper.md)
  - [DocspaceApiSdk::ActiveServiceArrayWrapper](docs/ActiveServiceArrayWrapper.md)
  - [DocspaceApiSdk::ActiveServiceDto](docs/ActiveServiceDto.md)
- - [DocspaceApiSdk::AdditionalWhiteLabelSettings](docs/AdditionalWhiteLabelSettings.md)
+ - [DocspaceApiSdk::AdditionalResourcesDto](docs/AdditionalResourcesDto.md)
+ - [DocspaceApiSdk::AdditionalResourcesWrapper](docs/AdditionalResourcesWrapper.md)
  - [DocspaceApiSdk::AdditionalWhiteLabelSettingsDto](docs/AdditionalWhiteLabelSettingsDto.md)
- - [DocspaceApiSdk::AdditionalWhiteLabelSettingsDtoWrapper](docs/AdditionalWhiteLabelSettingsDtoWrapper.md)
- - [DocspaceApiSdk::AdditionalWhiteLabelSettingsResponseWrapper](docs/AdditionalWhiteLabelSettingsResponseWrapper.md)
+ - [DocspaceApiSdk::AdditionalWhiteLabelSettingsRequestDto](docs/AdditionalWhiteLabelSettingsRequestDto.md)
  - [DocspaceApiSdk::AdditionalWhiteLabelSettingsWrapper](docs/AdditionalWhiteLabelSettingsWrapper.md)
- - [DocspaceApiSdk::AdminMessageBaseSettingsRequestsDto](docs/AdminMessageBaseSettingsRequestsDto.md)
- - [DocspaceApiSdk::AdminMessageSettingsRequestsDto](docs/AdminMessageSettingsRequestsDto.md)
+ - [DocspaceApiSdk::AdminMessageBaseSettingsRequestDto](docs/AdminMessageBaseSettingsRequestDto.md)
+ - [DocspaceApiSdk::AdminMessageSettingsRequestDto](docs/AdminMessageSettingsRequestDto.md)
+ - [DocspaceApiSdk::AiActionArgs](docs/AiActionArgs.md)
+ - [DocspaceApiSdk::AiActionArgsPrompt](docs/AiActionArgsPrompt.md)
  - [DocspaceApiSdk::AiActionType](docs/AiActionType.md)
  - [DocspaceApiSdk::AiAgentNewItemsDto](docs/AiAgentNewItemsDto.md)
  - [DocspaceApiSdk::AiAgentsCreateRequest](docs/AiAgentsCreateRequest.md)
@@ -4127,20 +4324,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::AiAgentsUpdateQuotaRequest](docs/AiAgentsUpdateQuotaRequest.md)
  - [DocspaceApiSdk::AiAgentsUpdateQuotaRequestRoomIdsInner](docs/AiAgentsUpdateQuotaRequestRoomIdsInner.md)
  - [DocspaceApiSdk::AiAgentsUpdateRequest](docs/AiAgentsUpdateRequest.md)
- - [DocspaceApiSdk::AiAiActionArgs](docs/AiAiActionArgs.md)
- - [DocspaceApiSdk::AiAiActionArgsPrompt](docs/AiAiActionArgsPrompt.md)
- - [DocspaceApiSdk::AiAiApproveToolCallRequest](docs/AiAiApproveToolCallRequest.md)
- - [DocspaceApiSdk::AiAiReasoningLevel](docs/AiAiReasoningLevel.md)
- - [DocspaceApiSdk::AiAiRegenerateStreamRequest](docs/AiAiRegenerateStreamRequest.md)
- - [DocspaceApiSdk::AiAiSendCustomRequest](docs/AiAiSendCustomRequest.md)
- - [DocspaceApiSdk::AiAiSendRequest](docs/AiAiSendRequest.md)
- - [DocspaceApiSdk::AiAiSendStreamBody](docs/AiAiSendStreamBody.md)
- - [DocspaceApiSdk::AiAiSettingsDto](docs/AiAiSettingsDto.md)
- - [DocspaceApiSdk::AiAiSettingsWrapper](docs/AiAiSettingsWrapper.md)
- - [DocspaceApiSdk::AiAiToolCallData](docs/AiAiToolCallData.md)
- - [DocspaceApiSdk::AiAiUserSettingsDto](docs/AiAiUserSettingsDto.md)
- - [DocspaceApiSdk::AiAiUserSettingsWrapper](docs/AiAiUserSettingsWrapper.md)
  - [DocspaceApiSdk::AiApiDateTime](docs/AiApiDateTime.md)
+ - [DocspaceApiSdk::AiApproveToolCallRequest](docs/AiApproveToolCallRequest.md)
  - [DocspaceApiSdk::AiAssignmentMutationResult](docs/AiAssignmentMutationResult.md)
  - [DocspaceApiSdk::AiAssignmentsAssignRequest](docs/AiAssignmentsAssignRequest.md)
  - [DocspaceApiSdk::AiAssignmentsCascadeProfileDeleteRequest](docs/AiAssignmentsCascadeProfileDeleteRequest.md)
@@ -4156,6 +4341,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::AiChatEvent](docs/AiChatEvent.md)
  - [DocspaceApiSdk::AiChatPriceDto](docs/AiChatPriceDto.md)
  - [DocspaceApiSdk::AiChatSettingsDto](docs/AiChatSettingsDto.md)
+ - [DocspaceApiSdk::AiChatToolPermissionMode](docs/AiChatToolPermissionMode.md)
+ - [DocspaceApiSdk::AiChatToolPrefsScope](docs/AiChatToolPrefsScope.md)
+ - [DocspaceApiSdk::AiConfigDto](docs/AiConfigDto.md)
  - [DocspaceApiSdk::AiCreateProfileInput](docs/AiCreateProfileInput.md)
  - [DocspaceApiSdk::AiCreatePromptInput](docs/AiCreatePromptInput.md)
  - [DocspaceApiSdk::AiDistributedTaskStatus](docs/AiDistributedTaskStatus.md)
@@ -4170,6 +4358,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::AiEntryPricingDtoAiEmbeddingPriceDto](docs/AiEntryPricingDtoAiEmbeddingPriceDto.md)
  - [DocspaceApiSdk::AiEntryPricingDtoAiImagePriceDto](docs/AiEntryPricingDtoAiImagePriceDto.md)
  - [DocspaceApiSdk::AiEntryPricingDtoDecimal](docs/AiEntryPricingDtoDecimal.md)
+ - [DocspaceApiSdk::AiErrorCode](docs/AiErrorCode.md)
+ - [DocspaceApiSdk::AiErrorData](docs/AiErrorData.md)
  - [DocspaceApiSdk::AiErrorResponse](docs/AiErrorResponse.md)
  - [DocspaceApiSdk::AiExportTextToDocx202Response](docs/AiExportTextToDocx202Response.md)
  - [DocspaceApiSdk::AiExportTextToDocxRequest](docs/AiExportTextToDocxRequest.md)
@@ -4196,8 +4386,10 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::AiImportMode](docs/AiImportMode.md)
  - [DocspaceApiSdk::AiImportResult](docs/AiImportResult.md)
  - [DocspaceApiSdk::AiImportResultImported](docs/AiImportResultImported.md)
- - [DocspaceApiSdk::AiLogo](docs/AiLogo.md)
- - [DocspaceApiSdk::AiLogoCover](docs/AiLogoCover.md)
+ - [DocspaceApiSdk::AiLogoCoverDto](docs/AiLogoCoverDto.md)
+ - [DocspaceApiSdk::AiLogoDto](docs/AiLogoDto.md)
+ - [DocspaceApiSdk::AiMCPItem](docs/AiMCPItem.md)
+ - [DocspaceApiSdk::AiMetadataMatchDto](docs/AiMetadataMatchDto.md)
  - [DocspaceApiSdk::AiModel](docs/AiModel.md)
  - [DocspaceApiSdk::AiNewItemsAgentNewItemsArrayWrapper](docs/AiNewItemsAgentNewItemsArrayWrapper.md)
  - [DocspaceApiSdk::AiNewItemsDtoAgentNewItemsDto](docs/AiNewItemsDtoAgentNewItemsDto.md)
@@ -4213,12 +4405,17 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::AiOpenOrCreateResult](docs/AiOpenOrCreateResult.md)
  - [DocspaceApiSdk::AiOpenaiChatCompletions403Response](docs/AiOpenaiChatCompletions403Response.md)
  - [DocspaceApiSdk::AiOpenaiChatCompletions403ResponseError](docs/AiOpenaiChatCompletions403ResponseError.md)
+ - [DocspaceApiSdk::AiOpenaiImagesGenerations403Response](docs/AiOpenaiImagesGenerations403Response.md)
+ - [DocspaceApiSdk::AiOpenaiImagesGenerations403ResponseError](docs/AiOpenaiImagesGenerations403ResponseError.md)
  - [DocspaceApiSdk::AiPreferencesSetDeepModeRequest](docs/AiPreferencesSetDeepModeRequest.md)
  - [DocspaceApiSdk::AiPreferencesSetReasoningLevelRequest](docs/AiPreferencesSetReasoningLevelRequest.md)
+ - [DocspaceApiSdk::AiPreferencesSetToolPermissionModeRequest](docs/AiPreferencesSetToolPermissionModeRequest.md)
+ - [DocspaceApiSdk::AiPriceCurrencyDto](docs/AiPriceCurrencyDto.md)
  - [DocspaceApiSdk::AiPricesDto](docs/AiPricesDto.md)
  - [DocspaceApiSdk::AiPricesWrapper](docs/AiPricesWrapper.md)
  - [DocspaceApiSdk::AiProfile](docs/AiProfile.md)
  - [DocspaceApiSdk::AiProfileMutationResult](docs/AiProfileMutationResult.md)
+ - [DocspaceApiSdk::AiProfilesCreate400Response](docs/AiProfilesCreate400Response.md)
  - [DocspaceApiSdk::AiProfilesGetById200Response](docs/AiProfilesGetById200Response.md)
  - [DocspaceApiSdk::AiProfilesListProviderModels400Response](docs/AiProfilesListProviderModels400Response.md)
  - [DocspaceApiSdk::AiProfilesListProviderModels400ResponseAnyOf](docs/AiProfilesListProviderModels400ResponseAnyOf.md)
@@ -4235,17 +4432,22 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::AiPromptsRenameFolderRequest](docs/AiPromptsRenameFolderRequest.md)
  - [DocspaceApiSdk::AiPromptsUpdateRequest](docs/AiPromptsUpdateRequest.md)
  - [DocspaceApiSdk::AiPromptsUpdateRequestUpdates](docs/AiPromptsUpdateRequestUpdates.md)
+ - [DocspaceApiSdk::AiProvider](docs/AiProvider.md)
  - [DocspaceApiSdk::AiProviderType](docs/AiProviderType.md)
  - [DocspaceApiSdk::AiReasoningDepth](docs/AiReasoningDepth.md)
+ - [DocspaceApiSdk::AiReasoningLevel](docs/AiReasoningLevel.md)
  - [DocspaceApiSdk::AiReasoningSupport](docs/AiReasoningSupport.md)
+ - [DocspaceApiSdk::AiRegenerateStreamRequest](docs/AiRegenerateStreamRequest.md)
  - [DocspaceApiSdk::AiResolvedAssignment](docs/AiResolvedAssignment.md)
  - [DocspaceApiSdk::AiRoomDataLifetimeDto](docs/AiRoomDataLifetimeDto.md)
  - [DocspaceApiSdk::AiRoomDataLifetimePeriod](docs/AiRoomDataLifetimePeriod.md)
  - [DocspaceApiSdk::AiRoomType](docs/AiRoomType.md)
+ - [DocspaceApiSdk::AiSendCustomRequest](docs/AiSendCustomRequest.md)
+ - [DocspaceApiSdk::AiSendRequest](docs/AiSendRequest.md)
+ - [DocspaceApiSdk::AiSendStreamBody](docs/AiSendStreamBody.md)
+ - [DocspaceApiSdk::AiSettingsDto](docs/AiSettingsDto.md)
+ - [DocspaceApiSdk::AiSettingsWrapper](docs/AiSettingsWrapper.md)
  - [DocspaceApiSdk::AiSuccessResponse](docs/AiSuccessResponse.md)
- - [DocspaceApiSdk::AiTErrorData](docs/AiTErrorData.md)
- - [DocspaceApiSdk::AiTMCPItem](docs/AiTMCPItem.md)
- - [DocspaceApiSdk::AiTProvider](docs/AiTProvider.md)
  - [DocspaceApiSdk::AiThread](docs/AiThread.md)
  - [DocspaceApiSdk::AiThreadMessageLike](docs/AiThreadMessageLike.md)
  - [DocspaceApiSdk::AiThreadMessageLikeContent](docs/AiThreadMessageLikeContent.md)
@@ -4261,6 +4463,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::AiThreadsRenameRequest](docs/AiThreadsRenameRequest.md)
  - [DocspaceApiSdk::AiThreadsTouchRequest](docs/AiThreadsTouchRequest.md)
  - [DocspaceApiSdk::AiThreadsUpdateMessageRequest](docs/AiThreadsUpdateMessageRequest.md)
+ - [DocspaceApiSdk::AiToolAnnotations](docs/AiToolAnnotations.md)
+ - [DocspaceApiSdk::AiToolCallData](docs/AiToolCallData.md)
+ - [DocspaceApiSdk::AiToolPermissionMode](docs/AiToolPermissionMode.md)
  - [DocspaceApiSdk::AiToolsAddCustomServerRequest](docs/AiToolsAddCustomServerRequest.md)
  - [DocspaceApiSdk::AiToolsBulkResult](docs/AiToolsBulkResult.md)
  - [DocspaceApiSdk::AiToolsBulkResultErrorsInner](docs/AiToolsBulkResultErrorsInner.md)
@@ -4271,6 +4476,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::AiToolsSetAllowAlwaysRequest](docs/AiToolsSetAllowAlwaysRequest.md)
  - [DocspaceApiSdk::AiToolsSetDisabledRequest](docs/AiToolsSetDisabledRequest.md)
  - [DocspaceApiSdk::AiToolsUpdateCustomServerRequest](docs/AiToolsUpdateCustomServerRequest.md)
+ - [DocspaceApiSdk::AiUserSettingsDto](docs/AiUserSettingsDto.md)
+ - [DocspaceApiSdk::AiUserSettingsWrapper](docs/AiUserSettingsWrapper.md)
  - [DocspaceApiSdk::AiVectorizationSettingsDto](docs/AiVectorizationSettingsDto.md)
  - [DocspaceApiSdk::AiVectorizationSettingsWrapper](docs/AiVectorizationSettingsWrapper.md)
  - [DocspaceApiSdk::AiVectorizationStartTask200Response](docs/AiVectorizationStartTask200Response.md)
@@ -4278,8 +4485,10 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::AiWatermarkAdditions](docs/AiWatermarkAdditions.md)
  - [DocspaceApiSdk::AiWatermarkDto](docs/AiWatermarkDto.md)
  - [DocspaceApiSdk::AiWebSearchConfig](docs/AiWebSearchConfig.md)
+ - [DocspaceApiSdk::AiWebSearchConfigure400Response](docs/AiWebSearchConfigure400Response.md)
  - [DocspaceApiSdk::AiWebSearchConfigureRequest](docs/AiWebSearchConfigureRequest.md)
  - [DocspaceApiSdk::AiWebSearchMutationResult](docs/AiWebSearchMutationResult.md)
+ - [DocspaceApiSdk::AiWebSearchSetActiveConfigRequest](docs/AiWebSearchSetActiveConfigRequest.md)
  - [DocspaceApiSdk::AmazonS3RegionArrayWrapper](docs/AmazonS3RegionArrayWrapper.md)
  - [DocspaceApiSdk::AmazonS3RegionDto](docs/AmazonS3RegionDto.md)
  - [DocspaceApiSdk::AnonymousConfigDto](docs/AnonymousConfigDto.md)
@@ -4292,43 +4501,41 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::AppWrapper](docs/AppWrapper.md)
  - [DocspaceApiSdk::ApplyFilterOption](docs/ApplyFilterOption.md)
  - [DocspaceApiSdk::ArchiveRoomRequest](docs/ArchiveRoomRequest.md)
- - [DocspaceApiSdk::Area](docs/Area.md)
  - [DocspaceApiSdk::ArrayArrayWrapper](docs/ArrayArrayWrapper.md)
+ - [DocspaceApiSdk::AssignMetadataTemplates](docs/AssignMetadataTemplates.md)
  - [DocspaceApiSdk::AuditEventArrayWrapper](docs/AuditEventArrayWrapper.md)
  - [DocspaceApiSdk::AuditEventDto](docs/AuditEventDto.md)
  - [DocspaceApiSdk::AuditReportFormat](docs/AuditReportFormat.md)
- - [DocspaceApiSdk::AuditTrailActionMapperDto](docs/AuditTrailActionMapperDto.md)
- - [DocspaceApiSdk::AuditTrailModuleMapperDto](docs/AuditTrailModuleMapperDto.md)
- - [DocspaceApiSdk::AuditTrailProductMapperArrayWrapper](docs/AuditTrailProductMapperArrayWrapper.md)
- - [DocspaceApiSdk::AuditTrailProductMapperDto](docs/AuditTrailProductMapperDto.md)
+ - [DocspaceApiSdk::AuditTrailActionDto](docs/AuditTrailActionDto.md)
+ - [DocspaceApiSdk::AuditTrailModuleDto](docs/AuditTrailModuleDto.md)
+ - [DocspaceApiSdk::AuditTrailProductArrayWrapper](docs/AuditTrailProductArrayWrapper.md)
+ - [DocspaceApiSdk::AuditTrailProductDto](docs/AuditTrailProductDto.md)
  - [DocspaceApiSdk::AuditTrailTypesDto](docs/AuditTrailTypesDto.md)
  - [DocspaceApiSdk::AuditTrailTypesWrapper](docs/AuditTrailTypesWrapper.md)
- - [DocspaceApiSdk::AuthData](docs/AuthData.md)
- - [DocspaceApiSdk::AuthKey](docs/AuthKey.md)
- - [DocspaceApiSdk::AuthRequestsDto](docs/AuthRequestsDto.md)
- - [DocspaceApiSdk::AuthServiceRequestsArrayWrapper](docs/AuthServiceRequestsArrayWrapper.md)
- - [DocspaceApiSdk::AuthServiceRequestsDto](docs/AuthServiceRequestsDto.md)
- - [DocspaceApiSdk::AuthWithCodeRequestsDto](docs/AuthWithCodeRequestsDto.md)
+ - [DocspaceApiSdk::AuthKeyDto](docs/AuthKeyDto.md)
+ - [DocspaceApiSdk::AuthKeyRequest](docs/AuthKeyRequest.md)
+ - [DocspaceApiSdk::AuthRequestDto](docs/AuthRequestDto.md)
+ - [DocspaceApiSdk::AuthServiceArrayWrapper](docs/AuthServiceArrayWrapper.md)
+ - [DocspaceApiSdk::AuthServiceDto](docs/AuthServiceDto.md)
+ - [DocspaceApiSdk::AuthWithCodeRequestDto](docs/AuthWithCodeRequestDto.md)
  - [DocspaceApiSdk::AuthenticationTokenDto](docs/AuthenticationTokenDto.md)
  - [DocspaceApiSdk::AuthenticationTokenWrapper](docs/AuthenticationTokenWrapper.md)
- - [DocspaceApiSdk::AutoCleanUpData](docs/AutoCleanUpData.md)
+ - [DocspaceApiSdk::AutoCleanUpDataDto](docs/AutoCleanUpDataDto.md)
  - [DocspaceApiSdk::AutoCleanUpDataWrapper](docs/AutoCleanUpDataWrapper.md)
  - [DocspaceApiSdk::AutoCleanupRequestDto](docs/AutoCleanupRequestDto.md)
- - [DocspaceApiSdk::BackupDto](docs/BackupDto.md)
- - [DocspaceApiSdk::BackupHistoryRecord](docs/BackupHistoryRecord.md)
+ - [DocspaceApiSdk::BackupCronRequest](docs/BackupCronRequest.md)
  - [DocspaceApiSdk::BackupHistoryRecordArrayWrapper](docs/BackupHistoryRecordArrayWrapper.md)
+ - [DocspaceApiSdk::BackupHistoryRecordDto](docs/BackupHistoryRecordDto.md)
  - [DocspaceApiSdk::BackupPeriod](docs/BackupPeriod.md)
- - [DocspaceApiSdk::BackupProgress](docs/BackupProgress.md)
+ - [DocspaceApiSdk::BackupProgressDto](docs/BackupProgressDto.md)
  - [DocspaceApiSdk::BackupProgressEnum](docs/BackupProgressEnum.md)
  - [DocspaceApiSdk::BackupProgressWrapper](docs/BackupProgressWrapper.md)
- - [DocspaceApiSdk::BackupRestoreDto](docs/BackupRestoreDto.md)
- - [DocspaceApiSdk::BackupScheduleDto](docs/BackupScheduleDto.md)
  - [DocspaceApiSdk::BackupServiceStateDto](docs/BackupServiceStateDto.md)
  - [DocspaceApiSdk::BackupServiceStateWrapper](docs/BackupServiceStateWrapper.md)
  - [DocspaceApiSdk::BackupStorageType](docs/BackupStorageType.md)
  - [DocspaceApiSdk::BackupsCountResultDto](docs/BackupsCountResultDto.md)
  - [DocspaceApiSdk::BackupsCountResultWrapper](docs/BackupsCountResultWrapper.md)
- - [DocspaceApiSdk::Balance](docs/Balance.md)
+ - [DocspaceApiSdk::BalanceDto](docs/BalanceDto.md)
  - [DocspaceApiSdk::BalanceWrapper](docs/BalanceWrapper.md)
  - [DocspaceApiSdk::BaseBatchRequestDto](docs/BaseBatchRequestDto.md)
  - [DocspaceApiSdk::BaseBatchRequestDtoAllOfFileIds](docs/BaseBatchRequestDtoAllOfFileIds.md)
@@ -4341,37 +4548,37 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::BooleanWrapper](docs/BooleanWrapper.md)
  - [DocspaceApiSdk::CapabilitiesDto](docs/CapabilitiesDto.md)
  - [DocspaceApiSdk::CapabilitiesWrapper](docs/CapabilitiesWrapper.md)
- - [DocspaceApiSdk::CdnStorageSettings](docs/CdnStorageSettings.md)
- - [DocspaceApiSdk::CdnStorageSettingsWrapper](docs/CdnStorageSettingsWrapper.md)
  - [DocspaceApiSdk::ChangeClientActivationRequest](docs/ChangeClientActivationRequest.md)
  - [DocspaceApiSdk::ChangeEmailRequest](docs/ChangeEmailRequest.md)
- - [DocspaceApiSdk::ChangeHistory](docs/ChangeHistory.md)
+ - [DocspaceApiSdk::ChangeHistoryRequest](docs/ChangeHistoryRequest.md)
  - [DocspaceApiSdk::ChangeOwnerRequestDto](docs/ChangeOwnerRequestDto.md)
  - [DocspaceApiSdk::ChangePasswordRequest](docs/ChangePasswordRequest.md)
  - [DocspaceApiSdk::ChangeWalletServiceStateRequestDto](docs/ChangeWalletServiceStateRequestDto.md)
  - [DocspaceApiSdk::ChatSettings](docs/ChatSettings.md)
  - [DocspaceApiSdk::ChatSettingsDto](docs/ChatSettingsDto.md)
+ - [DocspaceApiSdk::CheckConfirmRequestDto](docs/CheckConfirmRequestDto.md)
  - [DocspaceApiSdk::CheckConversionRequestDto](docs/CheckConversionRequestDto.md)
  - [DocspaceApiSdk::CheckDestFolderDto](docs/CheckDestFolderDto.md)
  - [DocspaceApiSdk::CheckDestFolderResult](docs/CheckDestFolderResult.md)
  - [DocspaceApiSdk::CheckDestFolderWrapper](docs/CheckDestFolderWrapper.md)
  - [DocspaceApiSdk::CheckDocServiceUrlRequestDto](docs/CheckDocServiceUrlRequestDto.md)
- - [DocspaceApiSdk::CheckFillFormDraft](docs/CheckFillFormDraft.md)
+ - [DocspaceApiSdk::CheckFillFormDraftRequest](docs/CheckFillFormDraftRequest.md)
+ - [DocspaceApiSdk::CheckMoveOrCopyBatchItemsDestFolderIdParameter](docs/CheckMoveOrCopyBatchItemsDestFolderIdParameter.md)
+ - [DocspaceApiSdk::CheckMoveOrCopyBatchItemsFolderIdsParameterInner](docs/CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md)
  - [DocspaceApiSdk::CheckUploadRequest](docs/CheckUploadRequest.md)
- - [DocspaceApiSdk::ChunkedUploadSessionResponse](docs/ChunkedUploadSessionResponse.md)
- - [DocspaceApiSdk::ChunkedUploadSessionResponseResponseWrapper](docs/ChunkedUploadSessionResponseResponseWrapper.md)
- - [DocspaceApiSdk::ChunkedUploadSessionResponseWrapper](docs/ChunkedUploadSessionResponseWrapper.md)
- - [DocspaceApiSdk::ChunkedUploadSessionResponseWrapperWrapper](docs/ChunkedUploadSessionResponseWrapperWrapper.md)
+ - [DocspaceApiSdk::ChunkedUploadSessionDto](docs/ChunkedUploadSessionDto.md)
+ - [DocspaceApiSdk::ChunkedUploadSessionResultDto](docs/ChunkedUploadSessionResultDto.md)
+ - [DocspaceApiSdk::ChunkedUploadSessionResultWrapper](docs/ChunkedUploadSessionResultWrapper.md)
+ - [DocspaceApiSdk::ChunkedUploadSessionWrapper](docs/ChunkedUploadSessionWrapper.md)
  - [DocspaceApiSdk::ClientInfoResponse](docs/ClientInfoResponse.md)
  - [DocspaceApiSdk::ClientResponse](docs/ClientResponse.md)
  - [DocspaceApiSdk::ClientSecretResponse](docs/ClientSecretResponse.md)
- - [DocspaceApiSdk::CoEditingConfig](docs/CoEditingConfig.md)
+ - [DocspaceApiSdk::CoEditingConfigDto](docs/CoEditingConfigDto.md)
  - [DocspaceApiSdk::CoEditingConfigMode](docs/CoEditingConfigMode.md)
- - [DocspaceApiSdk::CompanyWhiteLabelSettings](docs/CompanyWhiteLabelSettings.md)
- - [DocspaceApiSdk::CompanyWhiteLabelSettingsArrayWrapper](docs/CompanyWhiteLabelSettingsArrayWrapper.md)
+ - [DocspaceApiSdk::ColorThemeColorsDto](docs/ColorThemeColorsDto.md)
+ - [DocspaceApiSdk::ColorThemeColorsRequestDto](docs/ColorThemeColorsRequestDto.md)
  - [DocspaceApiSdk::CompanyWhiteLabelSettingsDto](docs/CompanyWhiteLabelSettingsDto.md)
- - [DocspaceApiSdk::CompanyWhiteLabelSettingsDtoWrapper](docs/CompanyWhiteLabelSettingsDtoWrapper.md)
- - [DocspaceApiSdk::CompanyWhiteLabelSettingsResponseWrapper](docs/CompanyWhiteLabelSettingsResponseWrapper.md)
+ - [DocspaceApiSdk::CompanyWhiteLabelSettingsRequestDto](docs/CompanyWhiteLabelSettingsRequestDto.md)
  - [DocspaceApiSdk::CompanyWhiteLabelSettingsWrapper](docs/CompanyWhiteLabelSettingsWrapper.md)
  - [DocspaceApiSdk::ConfigurationDto](docs/ConfigurationDto.md)
  - [DocspaceApiSdk::ConfigurationWrapper](docs/ConfigurationWrapper.md)
@@ -4379,50 +4586,56 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::ConfirmDto](docs/ConfirmDto.md)
  - [DocspaceApiSdk::ConfirmType](docs/ConfirmType.md)
  - [DocspaceApiSdk::ConfirmWrapper](docs/ConfirmWrapper.md)
- - [DocspaceApiSdk::ConnectionTestResult](docs/ConnectionTestResult.md)
+ - [DocspaceApiSdk::ConnectionTestResultDto](docs/ConnectionTestResultDto.md)
  - [DocspaceApiSdk::ConnectionTestResultWrapper](docs/ConnectionTestResultWrapper.md)
  - [DocspaceApiSdk::Contact](docs/Contact.md)
  - [DocspaceApiSdk::ConversationResultArrayWrapper](docs/ConversationResultArrayWrapper.md)
  - [DocspaceApiSdk::ConversationResultDto](docs/ConversationResultDto.md)
+ - [DocspaceApiSdk::ConvertDocumentLayoutRequest](docs/ConvertDocumentLayoutRequest.md)
+ - [DocspaceApiSdk::ConvertDocumentRendererRequest](docs/ConvertDocumentRendererRequest.md)
+ - [DocspaceApiSdk::ConvertFileRequestDto](docs/ConvertFileRequestDto.md)
+ - [DocspaceApiSdk::ConvertPdfRequest](docs/ConvertPdfRequest.md)
+ - [DocspaceApiSdk::ConvertSpreadsheetLayoutRequest](docs/ConvertSpreadsheetLayoutRequest.md)
+ - [DocspaceApiSdk::ConvertSpreadsheetMarginsRequest](docs/ConvertSpreadsheetMarginsRequest.md)
+ - [DocspaceApiSdk::ConvertSpreadsheetPageSizeRequest](docs/ConvertSpreadsheetPageSizeRequest.md)
+ - [DocspaceApiSdk::ConvertThumbnailRequest](docs/ConvertThumbnailRequest.md)
  - [DocspaceApiSdk::CookieSettingsDto](docs/CookieSettingsDto.md)
- - [DocspaceApiSdk::CookieSettingsRequestsDto](docs/CookieSettingsRequestsDto.md)
+ - [DocspaceApiSdk::CookieSettingsRequestDto](docs/CookieSettingsRequestDto.md)
  - [DocspaceApiSdk::CookieSettingsWrapper](docs/CookieSettingsWrapper.md)
- - [DocspaceApiSdk::CopyAsJsonElement](docs/CopyAsJsonElement.md)
- - [DocspaceApiSdk::CopyAsJsonElementDestFolderId](docs/CopyAsJsonElementDestFolderId.md)
+ - [DocspaceApiSdk::CopyAsRequest](docs/CopyAsRequest.md)
+ - [DocspaceApiSdk::CopyAsRequestDestFolderId](docs/CopyAsRequestDestFolderId.md)
  - [DocspaceApiSdk::CoverRequestDto](docs/CoverRequestDto.md)
  - [DocspaceApiSdk::CoversResultArrayWrapper](docs/CoversResultArrayWrapper.md)
  - [DocspaceApiSdk::CoversResultDto](docs/CoversResultDto.md)
  - [DocspaceApiSdk::CreateApiKeyRequestDto](docs/CreateApiKeyRequestDto.md)
+ - [DocspaceApiSdk::CreateBackupScheduleRequestDto](docs/CreateBackupScheduleRequestDto.md)
  - [DocspaceApiSdk::CreateClientRequest](docs/CreateClientRequest.md)
- - [DocspaceApiSdk::CreateFileJsonElement](docs/CreateFileJsonElement.md)
- - [DocspaceApiSdk::CreateFileJsonElementTemplateId](docs/CreateFileJsonElementTemplateId.md)
- - [DocspaceApiSdk::CreateFolder](docs/CreateFolder.md)
+ - [DocspaceApiSdk::CreateFileRequest](docs/CreateFileRequest.md)
+ - [DocspaceApiSdk::CreateFileRequestTemplateId](docs/CreateFileRequestTemplateId.md)
+ - [DocspaceApiSdk::CreateFolderRequest](docs/CreateFolderRequest.md)
+ - [DocspaceApiSdk::CreateMetadataTemplateRequestDto](docs/CreateMetadataTemplateRequestDto.md)
  - [DocspaceApiSdk::CreateRoomFromTemplateDto](docs/CreateRoomFromTemplateDto.md)
  - [DocspaceApiSdk::CreateRoomRequestDto](docs/CreateRoomRequestDto.md)
  - [DocspaceApiSdk::CreateTagRequestDto](docs/CreateTagRequestDto.md)
- - [DocspaceApiSdk::CreateTextOrHtmlFile](docs/CreateTextOrHtmlFile.md)
- - [DocspaceApiSdk::CreateThirdPartyRoom](docs/CreateThirdPartyRoom.md)
- - [DocspaceApiSdk::CreateWebhooksConfigRequestsDto](docs/CreateWebhooksConfigRequestsDto.md)
- - [DocspaceApiSdk::Cron](docs/Cron.md)
- - [DocspaceApiSdk::CronParams](docs/CronParams.md)
+ - [DocspaceApiSdk::CreateTextOrHtmlFileRequest](docs/CreateTextOrHtmlFileRequest.md)
+ - [DocspaceApiSdk::CreateThirdPartyRoomRequest](docs/CreateThirdPartyRoomRequest.md)
+ - [DocspaceApiSdk::CreateWebhooksConfigRequestDto](docs/CreateWebhooksConfigRequestDto.md)
+ - [DocspaceApiSdk::CronParamsDto](docs/CronParamsDto.md)
  - [DocspaceApiSdk::CspDto](docs/CspDto.md)
- - [DocspaceApiSdk::CspRequestsDto](docs/CspRequestsDto.md)
+ - [DocspaceApiSdk::CspRequestDto](docs/CspRequestDto.md)
  - [DocspaceApiSdk::CspWrapper](docs/CspWrapper.md)
- - [DocspaceApiSdk::Culture](docs/Culture.md)
- - [DocspaceApiSdk::CultureSpecificExternalResource](docs/CultureSpecificExternalResource.md)
- - [DocspaceApiSdk::CultureSpecificExternalResources](docs/CultureSpecificExternalResources.md)
  - [DocspaceApiSdk::CurrenciesArrayWrapper](docs/CurrenciesArrayWrapper.md)
  - [DocspaceApiSdk::CurrenciesDto](docs/CurrenciesDto.md)
- - [DocspaceApiSdk::CurrencyAmount](docs/CurrencyAmount.md)
- - [DocspaceApiSdk::CurrencyCode](docs/CurrencyCode.md)
- - [DocspaceApiSdk::CurrencyInfo](docs/CurrencyInfo.md)
  - [DocspaceApiSdk::CurrentLicenseInfo](docs/CurrentLicenseInfo.md)
- - [DocspaceApiSdk::CustomColorThemesSettingsColorItem](docs/CustomColorThemesSettingsColorItem.md)
+ - [DocspaceApiSdk::CustomColorThemeDto](docs/CustomColorThemeDto.md)
+ - [DocspaceApiSdk::CustomColorThemeRequestDto](docs/CustomColorThemeRequestDto.md)
  - [DocspaceApiSdk::CustomColorThemesSettingsDto](docs/CustomColorThemesSettingsDto.md)
- - [DocspaceApiSdk::CustomColorThemesSettingsItem](docs/CustomColorThemesSettingsItem.md)
- - [DocspaceApiSdk::CustomColorThemesSettingsRequestsDto](docs/CustomColorThemesSettingsRequestsDto.md)
+ - [DocspaceApiSdk::CustomColorThemesSettingsRequestDto](docs/CustomColorThemesSettingsRequestDto.md)
  - [DocspaceApiSdk::CustomColorThemesSettingsWrapper](docs/CustomColorThemesSettingsWrapper.md)
- - [DocspaceApiSdk::CustomFilterParameters](docs/CustomFilterParameters.md)
+ - [DocspaceApiSdk::CustomFieldRequest](docs/CustomFieldRequest.md)
+ - [DocspaceApiSdk::CustomFieldValueArrayWrapper](docs/CustomFieldValueArrayWrapper.md)
+ - [DocspaceApiSdk::CustomFieldValueDto](docs/CustomFieldValueDto.md)
+ - [DocspaceApiSdk::CustomFilterRequest](docs/CustomFilterRequest.md)
  - [DocspaceApiSdk::CustomerConfigDto](docs/CustomerConfigDto.md)
  - [DocspaceApiSdk::CustomerInfoDto](docs/CustomerInfoDto.md)
  - [DocspaceApiSdk::CustomerInfoWrapper](docs/CustomerInfoWrapper.md)
@@ -4435,16 +4648,15 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::CustomerServiceUsageReportRequestDto](docs/CustomerServiceUsageReportRequestDto.md)
  - [DocspaceApiSdk::CustomerServiceUsageReportWrapper](docs/CustomerServiceUsageReportWrapper.md)
  - [DocspaceApiSdk::CustomizationConfigDto](docs/CustomizationConfigDto.md)
- - [DocspaceApiSdk::DarkThemeSettings](docs/DarkThemeSettings.md)
+ - [DocspaceApiSdk::DarkThemeSettingsDto](docs/DarkThemeSettingsDto.md)
  - [DocspaceApiSdk::DarkThemeSettingsRequestDto](docs/DarkThemeSettingsRequestDto.md)
  - [DocspaceApiSdk::DarkThemeSettingsType](docs/DarkThemeSettingsType.md)
  - [DocspaceApiSdk::DarkThemeSettingsWrapper](docs/DarkThemeSettingsWrapper.md)
  - [DocspaceApiSdk::DateToAutoCleanUp](docs/DateToAutoCleanUp.md)
- - [DocspaceApiSdk::DbTenant](docs/DbTenant.md)
- - [DocspaceApiSdk::DbTenantPartner](docs/DbTenantPartner.md)
- - [DocspaceApiSdk::DeepLinkConfigurationRequestsDto](docs/DeepLinkConfigurationRequestsDto.md)
+ - [DocspaceApiSdk::DeepLinkConfigurationRequestDto](docs/DeepLinkConfigurationRequestDto.md)
  - [DocspaceApiSdk::DeepLinkDto](docs/DeepLinkDto.md)
  - [DocspaceApiSdk::DeepLinkHandlingMode](docs/DeepLinkHandlingMode.md)
+ - [DocspaceApiSdk::DeepLinkSettingsRequestDto](docs/DeepLinkSettingsRequestDto.md)
  - [DocspaceApiSdk::DefaultProductRequestDto](docs/DefaultProductRequestDto.md)
  - [DocspaceApiSdk::DefaultTemplateItemDto](docs/DefaultTemplateItemDto.md)
  - [DocspaceApiSdk::DefaultTemplateSettingsDto](docs/DefaultTemplateSettingsDto.md)
@@ -4452,45 +4664,53 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::DefaultTemplateSettingsRequestDtoSelectedFile](docs/DefaultTemplateSettingsRequestDtoSelectedFile.md)
  - [DocspaceApiSdk::DefaultTemplateSettingsResetRequestDto](docs/DefaultTemplateSettingsResetRequestDto.md)
  - [DocspaceApiSdk::DefaultTemplateSettingsWrapper](docs/DefaultTemplateSettingsWrapper.md)
- - [DocspaceApiSdk::Delete](docs/Delete.md)
  - [DocspaceApiSdk::DeleteBatchRequestDto](docs/DeleteBatchRequestDto.md)
  - [DocspaceApiSdk::DeleteBatchRequestDtoAllOfFileIds](docs/DeleteBatchRequestDtoAllOfFileIds.md)
  - [DocspaceApiSdk::DeleteBatchRequestDtoAllOfFolderIds](docs/DeleteBatchRequestDtoAllOfFolderIds.md)
- - [DocspaceApiSdk::DeleteFolder](docs/DeleteFolder.md)
+ - [DocspaceApiSdk::DeleteFileRequest](docs/DeleteFileRequest.md)
+ - [DocspaceApiSdk::DeleteFolderRequest](docs/DeleteFolderRequest.md)
  - [DocspaceApiSdk::DeleteRoomRequest](docs/DeleteRoomRequest.md)
  - [DocspaceApiSdk::DeleteVersionBatchRequestDto](docs/DeleteVersionBatchRequestDto.md)
- - [DocspaceApiSdk::DiscountCategory](docs/DiscountCategory.md)
+ - [DocspaceApiSdk::DiscountCategoryDto](docs/DiscountCategoryDto.md)
  - [DocspaceApiSdk::DisplayRequestDto](docs/DisplayRequestDto.md)
  - [DocspaceApiSdk::DistributedTaskStatus](docs/DistributedTaskStatus.md)
- - [DocspaceApiSdk::DnsSettingsRequestsDto](docs/DnsSettingsRequestsDto.md)
+ - [DocspaceApiSdk::DnsSettingsRequestDto](docs/DnsSettingsRequestDto.md)
  - [DocspaceApiSdk::DocServiceUrlDto](docs/DocServiceUrlDto.md)
  - [DocspaceApiSdk::DocServiceUrlWrapper](docs/DocServiceUrlWrapper.md)
- - [DocspaceApiSdk::DocsCloudConfig](docs/DocsCloudConfig.md)
+ - [DocspaceApiSdk::DocsCloudConfigDto](docs/DocsCloudConfigDto.md)
+ - [DocspaceApiSdk::DocsCloudConfigRequestDto](docs/DocsCloudConfigRequestDto.md)
  - [DocspaceApiSdk::DocsCloudConfigWrapper](docs/DocsCloudConfigWrapper.md)
  - [DocspaceApiSdk::DocsCloudDevPackRequestDto](docs/DocsCloudDevPackRequestDto.md)
- - [DocspaceApiSdk::DocsCloudIpFilterConfig](docs/DocsCloudIpFilterConfig.md)
- - [DocspaceApiSdk::DocsCloudIpFilterRule](docs/DocsCloudIpFilterRule.md)
- - [DocspaceApiSdk::DocsCloudLicenseInfo](docs/DocsCloudLicenseInfo.md)
- - [DocspaceApiSdk::DocsCloudPayment](docs/DocsCloudPayment.md)
- - [DocspaceApiSdk::DocsCloudQuota](docs/DocsCloudQuota.md)
- - [DocspaceApiSdk::DocsCloudQuotaUser](docs/DocsCloudQuotaUser.md)
+ - [DocspaceApiSdk::DocsCloudIpFilterConfigDto](docs/DocsCloudIpFilterConfigDto.md)
+ - [DocspaceApiSdk::DocsCloudIpFilterConfigRequest](docs/DocsCloudIpFilterConfigRequest.md)
+ - [DocspaceApiSdk::DocsCloudIpFilterRuleDto](docs/DocsCloudIpFilterRuleDto.md)
+ - [DocspaceApiSdk::DocsCloudIpFilterRuleRequest](docs/DocsCloudIpFilterRuleRequest.md)
+ - [DocspaceApiSdk::DocsCloudLicenseInfoDto](docs/DocsCloudLicenseInfoDto.md)
+ - [DocspaceApiSdk::DocsCloudPaymentDto](docs/DocsCloudPaymentDto.md)
+ - [DocspaceApiSdk::DocsCloudQuotaDto](docs/DocsCloudQuotaDto.md)
+ - [DocspaceApiSdk::DocsCloudQuotaUserDto](docs/DocsCloudQuotaUserDto.md)
  - [DocspaceApiSdk::DocsCloudQuotaWrapper](docs/DocsCloudQuotaWrapper.md)
- - [DocspaceApiSdk::DocsCloudSecurityConfig](docs/DocsCloudSecurityConfig.md)
- - [DocspaceApiSdk::DocsCloudServerConfig](docs/DocsCloudServerConfig.md)
- - [DocspaceApiSdk::DocsCloudServerInfo](docs/DocsCloudServerInfo.md)
- - [DocspaceApiSdk::DocsCloudStats](docs/DocsCloudStats.md)
- - [DocspaceApiSdk::DocsCloudTenant](docs/DocsCloudTenant.md)
- - [DocspaceApiSdk::DocsCloudTenantInfo](docs/DocsCloudTenantInfo.md)
+ - [DocspaceApiSdk::DocsCloudSecurityConfigDto](docs/DocsCloudSecurityConfigDto.md)
+ - [DocspaceApiSdk::DocsCloudSecurityConfigRequest](docs/DocsCloudSecurityConfigRequest.md)
+ - [DocspaceApiSdk::DocsCloudServerConfigDto](docs/DocsCloudServerConfigDto.md)
+ - [DocspaceApiSdk::DocsCloudServerConfigRequest](docs/DocsCloudServerConfigRequest.md)
+ - [DocspaceApiSdk::DocsCloudServerInfoDto](docs/DocsCloudServerInfoDto.md)
+ - [DocspaceApiSdk::DocsCloudStatsDto](docs/DocsCloudStatsDto.md)
+ - [DocspaceApiSdk::DocsCloudTenantDto](docs/DocsCloudTenantDto.md)
+ - [DocspaceApiSdk::DocsCloudTenantInfoDto](docs/DocsCloudTenantInfoDto.md)
  - [DocspaceApiSdk::DocsCloudTenantInfoWrapper](docs/DocsCloudTenantInfoWrapper.md)
  - [DocspaceApiSdk::DocsCloudTenantWrapper](docs/DocsCloudTenantWrapper.md)
- - [DocspaceApiSdk::DocsCloudUsage](docs/DocsCloudUsage.md)
+ - [DocspaceApiSdk::DocsCloudUsageDto](docs/DocsCloudUsageDto.md)
  - [DocspaceApiSdk::DocsCloudUsageWrapper](docs/DocsCloudUsageWrapper.md)
- - [DocspaceApiSdk::DocsCloudUserStats](docs/DocsCloudUserStats.md)
- - [DocspaceApiSdk::DocsCloudUsersLimit](docs/DocsCloudUsersLimit.md)
- - [DocspaceApiSdk::DocsCloudWopiConfig](docs/DocsCloudWopiConfig.md)
+ - [DocspaceApiSdk::DocsCloudUserStatsDto](docs/DocsCloudUserStatsDto.md)
+ - [DocspaceApiSdk::DocsCloudUsersLimitDto](docs/DocsCloudUsersLimitDto.md)
+ - [DocspaceApiSdk::DocsCloudWopiConfigDto](docs/DocsCloudWopiConfigDto.md)
+ - [DocspaceApiSdk::DocsCloudWopiConfigRequest](docs/DocsCloudWopiConfigRequest.md)
  - [DocspaceApiSdk::DocumentBuilderTaskDto](docs/DocumentBuilderTaskDto.md)
  - [DocspaceApiSdk::DocumentBuilderTaskWrapper](docs/DocumentBuilderTaskWrapper.md)
  - [DocspaceApiSdk::DocumentConfigDto](docs/DocumentConfigDto.md)
+ - [DocspaceApiSdk::DocumentOptionsDto](docs/DocumentOptionsDto.md)
+ - [DocspaceApiSdk::DomainNameRulesDto](docs/DomainNameRulesDto.md)
  - [DocspaceApiSdk::DoubleNullableWrapper](docs/DoubleNullableWrapper.md)
  - [DocspaceApiSdk::DoubleWrapper](docs/DoubleWrapper.md)
  - [DocspaceApiSdk::DownloadRequestDto](docs/DownloadRequestDto.md)
@@ -4503,22 +4723,22 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::DuplicateRequestDtoAllOfFileIds](docs/DuplicateRequestDtoAllOfFileIds.md)
  - [DocspaceApiSdk::DuplicateRequestDtoAllOfFolderIds](docs/DuplicateRequestDtoAllOfFolderIds.md)
  - [DocspaceApiSdk::EditHistoryArrayWrapper](docs/EditHistoryArrayWrapper.md)
- - [DocspaceApiSdk::EditHistoryAuthor](docs/EditHistoryAuthor.md)
- - [DocspaceApiSdk::EditHistoryChangesWrapper](docs/EditHistoryChangesWrapper.md)
+ - [DocspaceApiSdk::EditHistoryAuthorDto](docs/EditHistoryAuthorDto.md)
+ - [DocspaceApiSdk::EditHistoryChangesDto](docs/EditHistoryChangesDto.md)
  - [DocspaceApiSdk::EditHistoryDataDto](docs/EditHistoryDataDto.md)
  - [DocspaceApiSdk::EditHistoryDataWrapper](docs/EditHistoryDataWrapper.md)
  - [DocspaceApiSdk::EditHistoryDto](docs/EditHistoryDto.md)
- - [DocspaceApiSdk::EditHistoryUrl](docs/EditHistoryUrl.md)
+ - [DocspaceApiSdk::EditHistoryUrlDto](docs/EditHistoryUrlDto.md)
  - [DocspaceApiSdk::EditorConfigurationDto](docs/EditorConfigurationDto.md)
  - [DocspaceApiSdk::EditorToolCallParametersDto](docs/EditorToolCallParametersDto.md)
  - [DocspaceApiSdk::EditorToolCallStateDto](docs/EditorToolCallStateDto.md)
  - [DocspaceApiSdk::EditorType](docs/EditorType.md)
- - [DocspaceApiSdk::EmailActivationSettings](docs/EmailActivationSettings.md)
+ - [DocspaceApiSdk::EmailActivationSettingsDto](docs/EmailActivationSettingsDto.md)
+ - [DocspaceApiSdk::EmailActivationSettingsRequestDto](docs/EmailActivationSettingsRequestDto.md)
  - [DocspaceApiSdk::EmailActivationSettingsWrapper](docs/EmailActivationSettingsWrapper.md)
  - [DocspaceApiSdk::EmailInvitationDto](docs/EmailInvitationDto.md)
  - [DocspaceApiSdk::EmailMemberRequestDto](docs/EmailMemberRequestDto.md)
- - [DocspaceApiSdk::EmailValidationKeyModel](docs/EmailValidationKeyModel.md)
- - [DocspaceApiSdk::EmbeddedConfig](docs/EmbeddedConfig.md)
+ - [DocspaceApiSdk::EmbeddedConfigDto](docs/EmbeddedConfigDto.md)
  - [DocspaceApiSdk::EmployeeActivationStatus](docs/EmployeeActivationStatus.md)
  - [DocspaceApiSdk::EmployeeArrayWrapper](docs/EmployeeArrayWrapper.md)
  - [DocspaceApiSdk::EmployeeDto](docs/EmployeeDto.md)
@@ -4530,29 +4750,39 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::EmployeeWrapper](docs/EmployeeWrapper.md)
  - [DocspaceApiSdk::EnabledModuleArrayWrapper](docs/EnabledModuleArrayWrapper.md)
  - [DocspaceApiSdk::EnabledModuleDto](docs/EnabledModuleDto.md)
- - [DocspaceApiSdk::EncryprtionStatus](docs/EncryprtionStatus.md)
  - [DocspaceApiSdk::EncryptionKeyArrayWrapper](docs/EncryptionKeyArrayWrapper.md)
  - [DocspaceApiSdk::EncryptionKeyDto](docs/EncryptionKeyDto.md)
  - [DocspaceApiSdk::EncryptionKeyRequestDto](docs/EncryptionKeyRequestDto.md)
- - [DocspaceApiSdk::EncryptionSettings](docs/EncryptionSettings.md)
+ - [DocspaceApiSdk::EncryptionSettingsDto](docs/EncryptionSettingsDto.md)
  - [DocspaceApiSdk::EncryptionSettingsWrapper](docs/EncryptionSettingsWrapper.md)
+ - [DocspaceApiSdk::EncryptionStatus](docs/EncryptionStatus.md)
+ - [DocspaceApiSdk::EntityQuotaDto](docs/EntityQuotaDto.md)
+ - [DocspaceApiSdk::EntityQuotaSettingsDto](docs/EntityQuotaSettingsDto.md)
+ - [DocspaceApiSdk::EntityQuotaSettingsWrapper](docs/EntityQuotaSettingsWrapper.md)
+ - [DocspaceApiSdk::EntryFieldDto](docs/EntryFieldDto.md)
+ - [DocspaceApiSdk::EntryMetadataDto](docs/EntryMetadataDto.md)
+ - [DocspaceApiSdk::EntryMetadataWrapper](docs/EntryMetadataWrapper.md)
+ - [DocspaceApiSdk::EntryTemplateDto](docs/EntryTemplateDto.md)
  - [DocspaceApiSdk::EntryType](docs/EntryType.md)
  - [DocspaceApiSdk::ErrorApiResponse](docs/ErrorApiResponse.md)
  - [DocspaceApiSdk::ErrorApiResponseError](docs/ErrorApiResponseError.md)
  - [DocspaceApiSdk::ExchangeToken200Response](docs/ExchangeToken200Response.md)
- - [DocspaceApiSdk::ExternalDatabaseSettings](docs/ExternalDatabaseSettings.md)
+ - [DocspaceApiSdk::ExternalDatabaseConnectionRequestDto](docs/ExternalDatabaseConnectionRequestDto.md)
  - [DocspaceApiSdk::ExternalDatabaseType](docs/ExternalDatabaseType.md)
  - [DocspaceApiSdk::ExternalDbSyncFormResultDto](docs/ExternalDbSyncFormResultDto.md)
  - [DocspaceApiSdk::ExternalDbSyncTaskDto](docs/ExternalDbSyncTaskDto.md)
  - [DocspaceApiSdk::ExternalDbSyncTaskWrapper](docs/ExternalDbSyncTaskWrapper.md)
+ - [DocspaceApiSdk::ExternalResourceDto](docs/ExternalResourceDto.md)
+ - [DocspaceApiSdk::ExternalResourcesDto](docs/ExternalResourcesDto.md)
  - [DocspaceApiSdk::ExternalShareDto](docs/ExternalShareDto.md)
  - [DocspaceApiSdk::ExternalShareRequestParam](docs/ExternalShareRequestParam.md)
+ - [DocspaceApiSdk::ExternalShareStatus](docs/ExternalShareStatus.md)
  - [DocspaceApiSdk::ExternalShareWrapper](docs/ExternalShareWrapper.md)
  - [DocspaceApiSdk::ExternalSharingSettingsDto](docs/ExternalSharingSettingsDto.md)
  - [DocspaceApiSdk::ExternalSharingSettingsRequestDto](docs/ExternalSharingSettingsRequestDto.md)
  - [DocspaceApiSdk::ExternalSharingSettingsWrapper](docs/ExternalSharingSettingsWrapper.md)
  - [DocspaceApiSdk::FeatureUsedDto](docs/FeatureUsedDto.md)
- - [DocspaceApiSdk::FeedbackConfig](docs/FeedbackConfig.md)
+ - [DocspaceApiSdk::FeedbackConfigDto](docs/FeedbackConfigDto.md)
  - [DocspaceApiSdk::FieldError](docs/FieldError.md)
  - [DocspaceApiSdk::FileArrayWrapper](docs/FileArrayWrapper.md)
  - [DocspaceApiSdk::FileConflictResolveType](docs/FileConflictResolveType.md)
@@ -4566,8 +4796,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::FileEntryBaseWrapper](docs/FileEntryBaseWrapper.md)
  - [DocspaceApiSdk::FileEntryDto](docs/FileEntryDto.md)
  - [DocspaceApiSdk::FileEntryType](docs/FileEntryType.md)
- - [DocspaceApiSdk::FileKeys](docs/FileKeys.md)
- - [DocspaceApiSdk::FileLink](docs/FileLink.md)
+ - [DocspaceApiSdk::FileKeysDto](docs/FileKeysDto.md)
+ - [DocspaceApiSdk::FileLinkDto](docs/FileLinkDto.md)
  - [DocspaceApiSdk::FileLinkRequest](docs/FileLinkRequest.md)
  - [DocspaceApiSdk::FileLinkWrapper](docs/FileLinkWrapper.md)
  - [DocspaceApiSdk::FileOperationArrayWrapper](docs/FileOperationArrayWrapper.md)
@@ -4575,8 +4805,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::FileOperationRequestBaseDto](docs/FileOperationRequestBaseDto.md)
  - [DocspaceApiSdk::FileOperationType](docs/FileOperationType.md)
  - [DocspaceApiSdk::FileOperationWrapper](docs/FileOperationWrapper.md)
- - [DocspaceApiSdk::FileReference](docs/FileReference.md)
- - [DocspaceApiSdk::FileReferenceData](docs/FileReferenceData.md)
+ - [DocspaceApiSdk::FileReferenceDataDto](docs/FileReferenceDataDto.md)
+ - [DocspaceApiSdk::FileReferenceDto](docs/FileReferenceDto.md)
  - [DocspaceApiSdk::FileReferenceWrapper](docs/FileReferenceWrapper.md)
  - [DocspaceApiSdk::FileShare](docs/FileShare.md)
  - [DocspaceApiSdk::FileShareArrayWrapper](docs/FileShareArrayWrapper.md)
@@ -4600,30 +4830,31 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::FillingFormResultWrapper](docs/FillingFormResultWrapper.md)
  - [DocspaceApiSdk::FilterType](docs/FilterType.md)
  - [DocspaceApiSdk::FinishDto](docs/FinishDto.md)
- - [DocspaceApiSdk::FireBaseUser](docs/FireBaseUser.md)
- - [DocspaceApiSdk::FireBaseUserWrapper](docs/FireBaseUserWrapper.md)
+ - [DocspaceApiSdk::FirebaseDeviceDto](docs/FirebaseDeviceDto.md)
+ - [DocspaceApiSdk::FirebaseDeviceWrapper](docs/FirebaseDeviceWrapper.md)
  - [DocspaceApiSdk::FirebaseDto](docs/FirebaseDto.md)
- - [DocspaceApiSdk::FirebaseRequestsDto](docs/FirebaseRequestsDto.md)
+ - [DocspaceApiSdk::FirebaseRequestDto](docs/FirebaseRequestDto.md)
  - [DocspaceApiSdk::FolderArrayWrapper](docs/FolderArrayWrapper.md)
  - [DocspaceApiSdk::FolderContentArrayWrapper](docs/FolderContentArrayWrapper.md)
  - [DocspaceApiSdk::FolderContentDto](docs/FolderContentDto.md)
  - [DocspaceApiSdk::FolderContentWrapper](docs/FolderContentWrapper.md)
  - [DocspaceApiSdk::FolderDto](docs/FolderDto.md)
  - [DocspaceApiSdk::FolderLinkRequest](docs/FolderLinkRequest.md)
+ - [DocspaceApiSdk::FolderMetadataSearch](docs/FolderMetadataSearch.md)
  - [DocspaceApiSdk::FolderType](docs/FolderType.md)
  - [DocspaceApiSdk::FolderWrapper](docs/FolderWrapper.md)
  - [DocspaceApiSdk::FormFillingManageAction](docs/FormFillingManageAction.md)
  - [DocspaceApiSdk::FormFillingStatus](docs/FormFillingStatus.md)
  - [DocspaceApiSdk::FormGalleryDto](docs/FormGalleryDto.md)
- - [DocspaceApiSdk::FormMetadata](docs/FormMetadata.md)
+ - [DocspaceApiSdk::FormMetadataDto](docs/FormMetadataDto.md)
  - [DocspaceApiSdk::FormResultsDto](docs/FormResultsDto.md)
- - [DocspaceApiSdk::FormRole](docs/FormRole.md)
  - [DocspaceApiSdk::FormRoleArrayWrapper](docs/FormRoleArrayWrapper.md)
  - [DocspaceApiSdk::FormRoleDto](docs/FormRoleDto.md)
+ - [DocspaceApiSdk::FormRoleRequest](docs/FormRoleRequest.md)
  - [DocspaceApiSdk::FormSubmissionsDto](docs/FormSubmissionsDto.md)
  - [DocspaceApiSdk::FormSubmissionsWrapper](docs/FormSubmissionsWrapper.md)
  - [DocspaceApiSdk::FormsItemArrayWrapper](docs/FormsItemArrayWrapper.md)
- - [DocspaceApiSdk::FormsItemData](docs/FormsItemData.md)
+ - [DocspaceApiSdk::FormsItemDataDto](docs/FormsItemDataDto.md)
  - [DocspaceApiSdk::FormsItemDto](docs/FormsItemDto.md)
  - [DocspaceApiSdk::GenerateDocxToolCallParametersDto](docs/GenerateDocxToolCallParametersDto.md)
  - [DocspaceApiSdk::GenerateFormToolCallParametersDto](docs/GenerateFormToolCallParametersDto.md)
@@ -4631,29 +4862,24 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::GetPortalPrices200Response](docs/GetPortalPrices200Response.md)
  - [DocspaceApiSdk::GetPortalPrices200ResponseLinksInner](docs/GetPortalPrices200ResponseLinksInner.md)
  - [DocspaceApiSdk::GetReferenceDataDto](docs/GetReferenceDataDto.md)
- - [DocspaceApiSdk::GobackConfig](docs/GobackConfig.md)
- - [DocspaceApiSdk::GreetingSettingsRequestsDto](docs/GreetingSettingsRequestsDto.md)
+ - [DocspaceApiSdk::GobackConfigDto](docs/GobackConfigDto.md)
+ - [DocspaceApiSdk::GreetingSettingsRequestDto](docs/GreetingSettingsRequestDto.md)
  - [DocspaceApiSdk::GroupArrayWrapper](docs/GroupArrayWrapper.md)
  - [DocspaceApiSdk::GroupDto](docs/GroupDto.md)
- - [DocspaceApiSdk::GroupMemberSecurityRequestArrayWrapper](docs/GroupMemberSecurityRequestArrayWrapper.md)
- - [DocspaceApiSdk::GroupMemberSecurityRequestDto](docs/GroupMemberSecurityRequestDto.md)
+ - [DocspaceApiSdk::GroupMemberSecurityArrayWrapper](docs/GroupMemberSecurityArrayWrapper.md)
+ - [DocspaceApiSdk::GroupMemberSecurityDto](docs/GroupMemberSecurityDto.md)
  - [DocspaceApiSdk::GroupRequestDto](docs/GroupRequestDto.md)
  - [DocspaceApiSdk::GroupSummaryArrayWrapper](docs/GroupSummaryArrayWrapper.md)
  - [DocspaceApiSdk::GroupSummaryDto](docs/GroupSummaryDto.md)
  - [DocspaceApiSdk::GroupWrapper](docs/GroupWrapper.md)
  - [DocspaceApiSdk::HideConfirmConvertRequestDto](docs/HideConfirmConvertRequestDto.md)
- - [DocspaceApiSdk::HistoryAction](docs/HistoryAction.md)
+ - [DocspaceApiSdk::HistoryActionDto](docs/HistoryActionDto.md)
  - [DocspaceApiSdk::HistoryArrayWrapper](docs/HistoryArrayWrapper.md)
- - [DocspaceApiSdk::HistoryData](docs/HistoryData.md)
+ - [DocspaceApiSdk::HistoryDataDto](docs/HistoryDataDto.md)
  - [DocspaceApiSdk::HistoryDto](docs/HistoryDto.md)
- - [DocspaceApiSdk::IAccountEntryArrayWrapper](docs/IAccountEntryArrayWrapper.md)
- - [DocspaceApiSdk::IAccountEntryDto](docs/IAccountEntryDto.md)
  - [DocspaceApiSdk::ICompressWrapper](docs/ICompressWrapper.md)
- - [DocspaceApiSdk::IPRestriction](docs/IPRestriction.md)
- - [DocspaceApiSdk::IPRestrictionArrayWrapper](docs/IPRestrictionArrayWrapper.md)
- - [DocspaceApiSdk::IPRestrictionsSettings](docs/IPRestrictionsSettings.md)
- - [DocspaceApiSdk::IPRestrictionsSettingsWrapper](docs/IPRestrictionsSettingsWrapper.md)
  - [DocspaceApiSdk::IconRequest](docs/IconRequest.md)
+ - [DocspaceApiSdk::ImageSizeDto](docs/ImageSizeDto.md)
  - [DocspaceApiSdk::ImportableApiEntity](docs/ImportableApiEntity.md)
  - [DocspaceApiSdk::InfoConfigDto](docs/InfoConfigDto.md)
  - [DocspaceApiSdk::Int32Wrapper](docs/Int32Wrapper.md)
@@ -4664,8 +4890,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::InvitationLinkUpdateRequestDto](docs/InvitationLinkUpdateRequestDto.md)
  - [DocspaceApiSdk::InvitationLinkWrapper](docs/InvitationLinkWrapper.md)
  - [DocspaceApiSdk::InviteUsersRequestDto](docs/InviteUsersRequestDto.md)
- - [DocspaceApiSdk::IpRestrictionBase](docs/IpRestrictionBase.md)
+ - [DocspaceApiSdk::IpRestrictionArrayWrapper](docs/IpRestrictionArrayWrapper.md)
+ - [DocspaceApiSdk::IpRestrictionDto](docs/IpRestrictionDto.md)
+ - [DocspaceApiSdk::IpRestrictionEntryDto](docs/IpRestrictionEntryDto.md)
  - [DocspaceApiSdk::IpRestrictionsDto](docs/IpRestrictionsDto.md)
+ - [DocspaceApiSdk::IpRestrictionsSettingsDto](docs/IpRestrictionsSettingsDto.md)
+ - [DocspaceApiSdk::IpRestrictionsSettingsWrapper](docs/IpRestrictionsSettingsWrapper.md)
  - [DocspaceApiSdk::IpRestrictionsWrapper](docs/IpRestrictionsWrapper.md)
  - [DocspaceApiSdk::IsDefaultWhiteLabelLogosArrayWrapper](docs/IsDefaultWhiteLabelLogosArrayWrapper.md)
  - [DocspaceApiSdk::IsDefaultWhiteLabelLogosDto](docs/IsDefaultWhiteLabelLogosDto.md)
@@ -4674,33 +4904,51 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::ItemKeyValuePairBooleanStringWrapper](docs/ItemKeyValuePairBooleanStringWrapper.md)
  - [DocspaceApiSdk::ItemKeyValuePairObjectObject](docs/ItemKeyValuePairObjectObject.md)
  - [DocspaceApiSdk::ItemKeyValuePairStringBoolean](docs/ItemKeyValuePairStringBoolean.md)
- - [DocspaceApiSdk::ItemKeyValuePairStringLogoRequestsDto](docs/ItemKeyValuePairStringLogoRequestsDto.md)
+ - [DocspaceApiSdk::ItemKeyValuePairStringLogoRequestDto](docs/ItemKeyValuePairStringLogoRequestDto.md)
  - [DocspaceApiSdk::ItemKeyValuePairStringString](docs/ItemKeyValuePairStringString.md)
  - [DocspaceApiSdk::JsonValueWrapper](docs/JsonValueWrapper.md)
+ - [DocspaceApiSdk::LicensorDetailsArrayWrapper](docs/LicensorDetailsArrayWrapper.md)
+ - [DocspaceApiSdk::LicensorDetailsDto](docs/LicensorDetailsDto.md)
+ - [DocspaceApiSdk::LicensorDetailsWrapper](docs/LicensorDetailsWrapper.md)
  - [DocspaceApiSdk::LinkAccountRequestDto](docs/LinkAccountRequestDto.md)
  - [DocspaceApiSdk::LinkType](docs/LinkType.md)
- - [DocspaceApiSdk::Location](docs/Location.md)
  - [DocspaceApiSdk::LocationType](docs/LocationType.md)
- - [DocspaceApiSdk::LockFileParameters](docs/LockFileParameters.md)
+ - [DocspaceApiSdk::LockFileRequest](docs/LockFileRequest.md)
  - [DocspaceApiSdk::LoginEventArrayWrapper](docs/LoginEventArrayWrapper.md)
  - [DocspaceApiSdk::LoginEventDto](docs/LoginEventDto.md)
  - [DocspaceApiSdk::LoginProvider](docs/LoginProvider.md)
  - [DocspaceApiSdk::LoginSettingsDto](docs/LoginSettingsDto.md)
  - [DocspaceApiSdk::LoginSettingsRequestDto](docs/LoginSettingsRequestDto.md)
  - [DocspaceApiSdk::LoginSettingsWrapper](docs/LoginSettingsWrapper.md)
- - [DocspaceApiSdk::Logo](docs/Logo.md)
  - [DocspaceApiSdk::LogoConfigDto](docs/LogoConfigDto.md)
- - [DocspaceApiSdk::LogoCover](docs/LogoCover.md)
+ - [DocspaceApiSdk::LogoCoverDto](docs/LogoCoverDto.md)
+ - [DocspaceApiSdk::LogoDto](docs/LogoDto.md)
  - [DocspaceApiSdk::LogoRequest](docs/LogoRequest.md)
- - [DocspaceApiSdk::LogoRequestsDto](docs/LogoRequestsDto.md)
- - [DocspaceApiSdk::MailDomainSettingsRequestsDto](docs/MailDomainSettingsRequestsDto.md)
+ - [DocspaceApiSdk::LogoRequestDto](docs/LogoRequestDto.md)
+ - [DocspaceApiSdk::MailDomainSettingsRequestDto](docs/MailDomainSettingsRequestDto.md)
  - [DocspaceApiSdk::ManageFormFillingDto](docs/ManageFormFillingDto.md)
  - [DocspaceApiSdk::MemberRequestDto](docs/MemberRequestDto.md)
  - [DocspaceApiSdk::MembersRequest](docs/MembersRequest.md)
- - [DocspaceApiSdk::MentionMessageWrapper](docs/MentionMessageWrapper.md)
- - [DocspaceApiSdk::MentionWrapper](docs/MentionWrapper.md)
- - [DocspaceApiSdk::MentionWrapperArrayWrapper](docs/MentionWrapperArrayWrapper.md)
+ - [DocspaceApiSdk::MentionArrayWrapper](docs/MentionArrayWrapper.md)
+ - [DocspaceApiSdk::MentionDto](docs/MentionDto.md)
+ - [DocspaceApiSdk::MentionMessageRequest](docs/MentionMessageRequest.md)
  - [DocspaceApiSdk::MessageAction](docs/MessageAction.md)
+ - [DocspaceApiSdk::MetadataConflictResolveType](docs/MetadataConflictResolveType.md)
+ - [DocspaceApiSdk::MetadataFieldDto](docs/MetadataFieldDto.md)
+ - [DocspaceApiSdk::MetadataFieldOptionDto](docs/MetadataFieldOptionDto.md)
+ - [DocspaceApiSdk::MetadataFieldOptionRequest](docs/MetadataFieldOptionRequest.md)
+ - [DocspaceApiSdk::MetadataFieldRequest](docs/MetadataFieldRequest.md)
+ - [DocspaceApiSdk::MetadataFieldType](docs/MetadataFieldType.md)
+ - [DocspaceApiSdk::MetadataFieldWrapper](docs/MetadataFieldWrapper.md)
+ - [DocspaceApiSdk::MetadataFilterConditionRequest](docs/MetadataFilterConditionRequest.md)
+ - [DocspaceApiSdk::MetadataMatchDto](docs/MetadataMatchDto.md)
+ - [DocspaceApiSdk::MetadataOperationDto](docs/MetadataOperationDto.md)
+ - [DocspaceApiSdk::MetadataOperationWrapper](docs/MetadataOperationWrapper.md)
+ - [DocspaceApiSdk::MetadataTemplateArrayWrapper](docs/MetadataTemplateArrayWrapper.md)
+ - [DocspaceApiSdk::MetadataTemplateDto](docs/MetadataTemplateDto.md)
+ - [DocspaceApiSdk::MetadataTemplateWrapper](docs/MetadataTemplateWrapper.md)
+ - [DocspaceApiSdk::MetadataValueDto](docs/MetadataValueDto.md)
+ - [DocspaceApiSdk::MetadataValueRequest](docs/MetadataValueRequest.md)
  - [DocspaceApiSdk::MigratingApiFiles](docs/MigratingApiFiles.md)
  - [DocspaceApiSdk::MigratingApiGroup](docs/MigratingApiGroup.md)
  - [DocspaceApiSdk::MigratingApiUser](docs/MigratingApiUser.md)
@@ -4708,10 +4956,10 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::MigrationStatusDto](docs/MigrationStatusDto.md)
  - [DocspaceApiSdk::MigrationStatusWrapper](docs/MigrationStatusWrapper.md)
  - [DocspaceApiSdk::MobilePhoneActivationStatus](docs/MobilePhoneActivationStatus.md)
- - [DocspaceApiSdk::MobileRequestsDto](docs/MobileRequestsDto.md)
+ - [DocspaceApiSdk::MobileRequestDto](docs/MobileRequestDto.md)
  - [DocspaceApiSdk::ModelModule](docs/ModelModule.md)
  - [DocspaceApiSdk::ModuleWrapper](docs/ModuleWrapper.md)
- - [DocspaceApiSdk::MultiSizeLogoCover](docs/MultiSizeLogoCover.md)
+ - [DocspaceApiSdk::MultiSizeLogoCoverDto](docs/MultiSizeLogoCoverDto.md)
  - [DocspaceApiSdk::NewItemsDtoFileEntryBaseDto](docs/NewItemsDtoFileEntryBaseDto.md)
  - [DocspaceApiSdk::NewItemsDtoRoomNewItemsDto](docs/NewItemsDtoRoomNewItemsDto.md)
  - [DocspaceApiSdk::NewItemsFileEntryBaseArrayWrapper](docs/NewItemsFileEntryBaseArrayWrapper.md)
@@ -4720,18 +4968,16 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::NotificationChannelStatusDto](docs/NotificationChannelStatusDto.md)
  - [DocspaceApiSdk::NotificationChannelStatusWrapper](docs/NotificationChannelStatusWrapper.md)
  - [DocspaceApiSdk::NotificationSettingsDto](docs/NotificationSettingsDto.md)
- - [DocspaceApiSdk::NotificationSettingsRequestsDto](docs/NotificationSettingsRequestsDto.md)
+ - [DocspaceApiSdk::NotificationSettingsRequestDto](docs/NotificationSettingsRequestDto.md)
  - [DocspaceApiSdk::NotificationSettingsWrapper](docs/NotificationSettingsWrapper.md)
  - [DocspaceApiSdk::NotificationType](docs/NotificationType.md)
- - [DocspaceApiSdk::OAuth20Token](docs/OAuth20Token.md)
  - [DocspaceApiSdk::ObjectArrayWrapper](docs/ObjectArrayWrapper.md)
  - [DocspaceApiSdk::OperationDto](docs/OperationDto.md)
  - [DocspaceApiSdk::OperationOrderType](docs/OperationOrderType.md)
  - [DocspaceApiSdk::OperationStatus](docs/OperationStatus.md)
- - [DocspaceApiSdk::OperationTokenUsage](docs/OperationTokenUsage.md)
+ - [DocspaceApiSdk::OperationTokenUsageDto](docs/OperationTokenUsageDto.md)
  - [DocspaceApiSdk::OperationType](docs/OperationType.md)
- - [DocspaceApiSdk::Options](docs/Options.md)
- - [DocspaceApiSdk::OrderBy](docs/OrderBy.md)
+ - [DocspaceApiSdk::OrderByDto](docs/OrderByDto.md)
  - [DocspaceApiSdk::OrderRequestDto](docs/OrderRequestDto.md)
  - [DocspaceApiSdk::OrdersItemRequestDto](docs/OrdersItemRequestDto.md)
  - [DocspaceApiSdk::OrdersRequestDto](docs/OrdersRequestDto.md)
@@ -4742,21 +4988,22 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::PageableClientResponse](docs/PageableClientResponse.md)
  - [DocspaceApiSdk::PageableModificationResponse](docs/PageableModificationResponse.md)
  - [DocspaceApiSdk::PageableResponse](docs/PageableResponse.md)
- - [DocspaceApiSdk::Paragraph](docs/Paragraph.md)
- - [DocspaceApiSdk::PasswordHasher](docs/PasswordHasher.md)
+ - [DocspaceApiSdk::PasswordHashSettingsDto](docs/PasswordHashSettingsDto.md)
  - [DocspaceApiSdk::PasswordSettingsDto](docs/PasswordSettingsDto.md)
- - [DocspaceApiSdk::PasswordSettingsRequestsDto](docs/PasswordSettingsRequestsDto.md)
+ - [DocspaceApiSdk::PasswordSettingsRequestDto](docs/PasswordSettingsRequestDto.md)
  - [DocspaceApiSdk::PasswordSettingsWrapper](docs/PasswordSettingsWrapper.md)
- - [DocspaceApiSdk::PaymentCalculation](docs/PaymentCalculation.md)
+ - [DocspaceApiSdk::PaymentCalculationDto](docs/PaymentCalculationDto.md)
  - [DocspaceApiSdk::PaymentCalculationWrapper](docs/PaymentCalculationWrapper.md)
  - [DocspaceApiSdk::PaymentMethodStatus](docs/PaymentMethodStatus.md)
  - [DocspaceApiSdk::PaymentSettingsDto](docs/PaymentSettingsDto.md)
  - [DocspaceApiSdk::PaymentSettingsWrapper](docs/PaymentSettingsWrapper.md)
  - [DocspaceApiSdk::PaymentUrlRequestDto](docs/PaymentUrlRequestDto.md)
  - [DocspaceApiSdk::Payments](docs/Payments.md)
- - [DocspaceApiSdk::PermissionsConfig](docs/PermissionsConfig.md)
- - [DocspaceApiSdk::PluginsConfig](docs/PluginsConfig.md)
+ - [DocspaceApiSdk::PermissionsConfigDto](docs/PermissionsConfigDto.md)
+ - [DocspaceApiSdk::PluginsConfigDto](docs/PluginsConfigDto.md)
  - [DocspaceApiSdk::PluginsDto](docs/PluginsDto.md)
+ - [DocspaceApiSdk::PortalUserDto](docs/PortalUserDto.md)
+ - [DocspaceApiSdk::PortalUserWrapper](docs/PortalUserWrapper.md)
  - [DocspaceApiSdk::PriceDto](docs/PriceDto.md)
  - [DocspaceApiSdk::PriceStatus](docs/PriceStatus.md)
  - [DocspaceApiSdk::PriceTimeUnit](docs/PriceTimeUnit.md)
@@ -4773,18 +5020,19 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::QuotaDto](docs/QuotaDto.md)
  - [DocspaceApiSdk::QuotaFilter](docs/QuotaFilter.md)
  - [DocspaceApiSdk::QuotaScope](docs/QuotaScope.md)
- - [DocspaceApiSdk::QuotaSettingsRequestsDto](docs/QuotaSettingsRequestsDto.md)
- - [DocspaceApiSdk::QuotaSettingsRequestsDtoDefaultQuota](docs/QuotaSettingsRequestsDtoDefaultQuota.md)
+ - [DocspaceApiSdk::QuotaSettingsRequestDto](docs/QuotaSettingsRequestDto.md)
+ - [DocspaceApiSdk::QuotaSettingsRequestDtoDefaultQuota](docs/QuotaSettingsRequestDtoDefaultQuota.md)
  - [DocspaceApiSdk::QuotaState](docs/QuotaState.md)
  - [DocspaceApiSdk::QuotaWrapper](docs/QuotaWrapper.md)
  - [DocspaceApiSdk::RecaptchaType](docs/RecaptchaType.md)
- - [DocspaceApiSdk::RecentConfig](docs/RecentConfig.md)
+ - [DocspaceApiSdk::RecentConfigDto](docs/RecentConfigDto.md)
  - [DocspaceApiSdk::RegStatus](docs/RegStatus.md)
  - [DocspaceApiSdk::ReportDto](docs/ReportDto.md)
  - [DocspaceApiSdk::ReportWrapper](docs/ReportWrapper.md)
- - [DocspaceApiSdk::RestrictedModelsResponse](docs/RestrictedModelsResponse.md)
- - [DocspaceApiSdk::RestrictedModelsResponseWrapper](docs/RestrictedModelsResponseWrapper.md)
- - [DocspaceApiSdk::ReviewConfig](docs/ReviewConfig.md)
+ - [DocspaceApiSdk::RequestLocation](docs/RequestLocation.md)
+ - [DocspaceApiSdk::RestrictedAiModelsDto](docs/RestrictedAiModelsDto.md)
+ - [DocspaceApiSdk::RestrictedAiModelsWrapper](docs/RestrictedAiModelsWrapper.md)
+ - [DocspaceApiSdk::ReviewConfigDto](docs/ReviewConfigDto.md)
  - [DocspaceApiSdk::RoomDataLifetimeDto](docs/RoomDataLifetimeDto.md)
  - [DocspaceApiSdk::RoomDataLifetimePeriod](docs/RoomDataLifetimePeriod.md)
  - [DocspaceApiSdk::RoomFromTemplateStatusDto](docs/RoomFromTemplateStatusDto.md)
@@ -4805,13 +5053,18 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::RoomTemplateStatusDto](docs/RoomTemplateStatusDto.md)
  - [DocspaceApiSdk::RoomTemplateStatusWrapper](docs/RoomTemplateStatusWrapper.md)
  - [DocspaceApiSdk::RoomType](docs/RoomType.md)
+ - [DocspaceApiSdk::RoomsMetadataSearchRequestDto](docs/RoomsMetadataSearchRequestDto.md)
  - [DocspaceApiSdk::RoomsNotificationSettingsDto](docs/RoomsNotificationSettingsDto.md)
  - [DocspaceApiSdk::RoomsNotificationSettingsWrapper](docs/RoomsNotificationSettingsWrapper.md)
  - [DocspaceApiSdk::RoomsNotificationsSettingsRequestDto](docs/RoomsNotificationsSettingsRequestDto.md)
- - [DocspaceApiSdk::Run](docs/Run.md)
- - [DocspaceApiSdk::STRINGArrayWrapper](docs/STRINGArrayWrapper.md)
- - [DocspaceApiSdk::SalesRequestsDto](docs/SalesRequestsDto.md)
- - [DocspaceApiSdk::SaveAsPdf](docs/SaveAsPdf.md)
+ - [DocspaceApiSdk::RunBuilderScriptOutputRequest](docs/RunBuilderScriptOutputRequest.md)
+ - [DocspaceApiSdk::RunBuilderScriptRequestDto](docs/RunBuilderScriptRequestDto.md)
+ - [DocspaceApiSdk::RunBuilderScriptRequestDtoArgument](docs/RunBuilderScriptRequestDtoArgument.md)
+ - [DocspaceApiSdk::SalesRequestDto](docs/SalesRequestDto.md)
+ - [DocspaceApiSdk::SaveAdditionalResourcesRequest](docs/SaveAdditionalResourcesRequest.md)
+ - [DocspaceApiSdk::SaveAsPdfRequest](docs/SaveAsPdfRequest.md)
+ - [DocspaceApiSdk::SaveAuthKeysRequestDto](docs/SaveAuthKeysRequestDto.md)
+ - [DocspaceApiSdk::SaveCompanyInfoRequest](docs/SaveCompanyInfoRequest.md)
  - [DocspaceApiSdk::SaveFormRoleMappingDto](docs/SaveFormRoleMappingDto.md)
  - [DocspaceApiSdk::ScheduleDto](docs/ScheduleDto.md)
  - [DocspaceApiSdk::ScheduleWrapper](docs/ScheduleWrapper.md)
@@ -4821,23 +5074,26 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::SecurityDto](docs/SecurityDto.md)
  - [DocspaceApiSdk::SecurityInfoRequestDto](docs/SecurityInfoRequestDto.md)
  - [DocspaceApiSdk::SecurityInfoSimpleRequestDto](docs/SecurityInfoSimpleRequestDto.md)
- - [DocspaceApiSdk::SecurityRequestsDto](docs/SecurityRequestsDto.md)
- - [DocspaceApiSdk::ServicePriceInfo](docs/ServicePriceInfo.md)
- - [DocspaceApiSdk::ServicePriceInfoArrayWrapper](docs/ServicePriceInfoArrayWrapper.md)
+ - [DocspaceApiSdk::SecurityRequestDto](docs/SecurityRequestDto.md)
+ - [DocspaceApiSdk::ServicePriceArrayWrapper](docs/ServicePriceArrayWrapper.md)
+ - [DocspaceApiSdk::ServicePriceDto](docs/ServicePriceDto.md)
  - [DocspaceApiSdk::SessionRequest](docs/SessionRequest.md)
- - [DocspaceApiSdk::SetAppEnabledBody](docs/SetAppEnabledBody.md)
- - [DocspaceApiSdk::SetAppSettingsBody](docs/SetAppSettingsBody.md)
+ - [DocspaceApiSdk::SetAppEnabledRequest](docs/SetAppEnabledRequest.md)
+ - [DocspaceApiSdk::SetAppSettingsRequest](docs/SetAppSettingsRequest.md)
+ - [DocspaceApiSdk::SetAuditLifetimeSettingsRequest](docs/SetAuditLifetimeSettingsRequest.md)
+ - [DocspaceApiSdk::SetCustomFields](docs/SetCustomFields.md)
  - [DocspaceApiSdk::SetManagerRequest](docs/SetManagerRequest.md)
+ - [DocspaceApiSdk::SetMetadataValues](docs/SetMetadataValues.md)
  - [DocspaceApiSdk::SetPublicDto](docs/SetPublicDto.md)
  - [DocspaceApiSdk::SetRestrictedAiModelsRequestDto](docs/SetRestrictedAiModelsRequestDto.md)
+ - [DocspaceApiSdk::SetWalletTopUpSettingsRequest](docs/SetWalletTopUpSettingsRequest.md)
  - [DocspaceApiSdk::SettingsDto](docs/SettingsDto.md)
  - [DocspaceApiSdk::SettingsRequestDto](docs/SettingsRequestDto.md)
  - [DocspaceApiSdk::SettingsWrapper](docs/SettingsWrapper.md)
  - [DocspaceApiSdk::ShareFilterType](docs/ShareFilterType.md)
  - [DocspaceApiSdk::SignupAccountRequestDto](docs/SignupAccountRequestDto.md)
- - [DocspaceApiSdk::Size](docs/Size.md)
- - [DocspaceApiSdk::SmtpOperationStatusRequestsDto](docs/SmtpOperationStatusRequestsDto.md)
- - [DocspaceApiSdk::SmtpOperationStatusRequestsWrapper](docs/SmtpOperationStatusRequestsWrapper.md)
+ - [DocspaceApiSdk::SmtpOperationStatusDto](docs/SmtpOperationStatusDto.md)
+ - [DocspaceApiSdk::SmtpOperationStatusWrapper](docs/SmtpOperationStatusWrapper.md)
  - [DocspaceApiSdk::SmtpSettingsDto](docs/SmtpSettingsDto.md)
  - [DocspaceApiSdk::SmtpSettingsWrapper](docs/SmtpSettingsWrapper.md)
  - [DocspaceApiSdk::SocketSettingsDto](docs/SocketSettingsDto.md)
@@ -4845,42 +5101,44 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::SortOrder](docs/SortOrder.md)
  - [DocspaceApiSdk::SortedByType](docs/SortedByType.md)
  - [DocspaceApiSdk::SsoBindingTypeDto](docs/SsoBindingTypeDto.md)
- - [DocspaceApiSdk::SsoCertificate](docs/SsoCertificate.md)
+ - [DocspaceApiSdk::SsoCertificateDto](docs/SsoCertificateDto.md)
  - [DocspaceApiSdk::SsoEncryptAlgorithmTypeDto](docs/SsoEncryptAlgorithmTypeDto.md)
- - [DocspaceApiSdk::SsoFieldMapping](docs/SsoFieldMapping.md)
+ - [DocspaceApiSdk::SsoFieldMappingDto](docs/SsoFieldMappingDto.md)
  - [DocspaceApiSdk::SsoIdpCertificateActionTypeDto](docs/SsoIdpCertificateActionTypeDto.md)
- - [DocspaceApiSdk::SsoIdpCertificateAdvanced](docs/SsoIdpCertificateAdvanced.md)
- - [DocspaceApiSdk::SsoIdpSettings](docs/SsoIdpSettings.md)
+ - [DocspaceApiSdk::SsoIdpCertificateAdvancedDto](docs/SsoIdpCertificateAdvancedDto.md)
+ - [DocspaceApiSdk::SsoIdpSettingsDto](docs/SsoIdpSettingsDto.md)
  - [DocspaceApiSdk::SsoNameIdFormatTypeDto](docs/SsoNameIdFormatTypeDto.md)
- - [DocspaceApiSdk::SsoSettingsRequestsDto](docs/SsoSettingsRequestsDto.md)
- - [DocspaceApiSdk::SsoSettingsV2](docs/SsoSettingsV2.md)
- - [DocspaceApiSdk::SsoSettingsV2ConstantsDto](docs/SsoSettingsV2ConstantsDto.md)
- - [DocspaceApiSdk::SsoSettingsV2ConstantsWrapper](docs/SsoSettingsV2ConstantsWrapper.md)
- - [DocspaceApiSdk::SsoSettingsV2Wrapper](docs/SsoSettingsV2Wrapper.md)
+ - [DocspaceApiSdk::SsoSettingsConstantsDto](docs/SsoSettingsConstantsDto.md)
+ - [DocspaceApiSdk::SsoSettingsConstantsWrapper](docs/SsoSettingsConstantsWrapper.md)
+ - [DocspaceApiSdk::SsoSettingsDto](docs/SsoSettingsDto.md)
+ - [DocspaceApiSdk::SsoSettingsRequestDto](docs/SsoSettingsRequestDto.md)
+ - [DocspaceApiSdk::SsoSettingsWrapper](docs/SsoSettingsWrapper.md)
  - [DocspaceApiSdk::SsoSigningAlgorithmTypeDto](docs/SsoSigningAlgorithmTypeDto.md)
  - [DocspaceApiSdk::SsoSpCertificateActionTypeDto](docs/SsoSpCertificateActionTypeDto.md)
- - [DocspaceApiSdk::SsoSpCertificateAdvanced](docs/SsoSpCertificateAdvanced.md)
- - [DocspaceApiSdk::StartEdit](docs/StartEdit.md)
+ - [DocspaceApiSdk::SsoSpCertificateAdvancedDto](docs/SsoSpCertificateAdvancedDto.md)
+ - [DocspaceApiSdk::StartBackupRequestDto](docs/StartBackupRequestDto.md)
+ - [DocspaceApiSdk::StartBackupRestoreRequestDto](docs/StartBackupRestoreRequestDto.md)
+ - [DocspaceApiSdk::StartEditRequest](docs/StartEditRequest.md)
  - [DocspaceApiSdk::StartFillingForm](docs/StartFillingForm.md)
  - [DocspaceApiSdk::StartFillingMode](docs/StartFillingMode.md)
  - [DocspaceApiSdk::StartReassignRequestDto](docs/StartReassignRequestDto.md)
  - [DocspaceApiSdk::StartUpdateUserTypeDto](docs/StartUpdateUserTypeDto.md)
- - [DocspaceApiSdk::Status](docs/Status.md)
  - [DocspaceApiSdk::StorageArrayWrapper](docs/StorageArrayWrapper.md)
  - [DocspaceApiSdk::StorageDto](docs/StorageDto.md)
- - [DocspaceApiSdk::StorageEncryptionRequestsDto](docs/StorageEncryptionRequestsDto.md)
+ - [DocspaceApiSdk::StorageEncryptionRequestDto](docs/StorageEncryptionRequestDto.md)
  - [DocspaceApiSdk::StorageFilter](docs/StorageFilter.md)
- - [DocspaceApiSdk::StorageRequestsDto](docs/StorageRequestsDto.md)
- - [DocspaceApiSdk::StorageSettings](docs/StorageSettings.md)
+ - [DocspaceApiSdk::StorageRequestDto](docs/StorageRequestDto.md)
+ - [DocspaceApiSdk::StorageSettingsDto](docs/StorageSettingsDto.md)
  - [DocspaceApiSdk::StorageSettingsWrapper](docs/StorageSettingsWrapper.md)
+ - [DocspaceApiSdk::StringArrayWrapper](docs/StringArrayWrapper.md)
  - [DocspaceApiSdk::StringWrapper](docs/StringWrapper.md)
- - [DocspaceApiSdk::StudioDefaultPageSettings](docs/StudioDefaultPageSettings.md)
+ - [DocspaceApiSdk::StudioDefaultPageSettingsDto](docs/StudioDefaultPageSettingsDto.md)
  - [DocspaceApiSdk::StudioDefaultPageSettingsWrapper](docs/StudioDefaultPageSettingsWrapper.md)
- - [DocspaceApiSdk::SubAccount](docs/SubAccount.md)
+ - [DocspaceApiSdk::SubAccountDto](docs/SubAccountDto.md)
  - [DocspaceApiSdk::SubjectType](docs/SubjectType.md)
- - [DocspaceApiSdk::SubmitForm](docs/SubmitForm.md)
- - [DocspaceApiSdk::SubscriptionBalanceInfo](docs/SubscriptionBalanceInfo.md)
- - [DocspaceApiSdk::SubscriptionBalanceInfoWrapper](docs/SubscriptionBalanceInfoWrapper.md)
+ - [DocspaceApiSdk::SubmitFormDto](docs/SubmitFormDto.md)
+ - [DocspaceApiSdk::SubscriptionBalanceDto](docs/SubscriptionBalanceDto.md)
+ - [DocspaceApiSdk::SubscriptionBalanceWrapper](docs/SubscriptionBalanceWrapper.md)
  - [DocspaceApiSdk::TariffDto](docs/TariffDto.md)
  - [DocspaceApiSdk::TariffQuotaDto](docs/TariffQuotaDto.md)
  - [DocspaceApiSdk::TariffState](docs/TariffState.md)
@@ -4889,48 +5147,40 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::TaskProgressResponseWrapper](docs/TaskProgressResponseWrapper.md)
  - [DocspaceApiSdk::TelegramStatusDto](docs/TelegramStatusDto.md)
  - [DocspaceApiSdk::TelegramStatusWrapper](docs/TelegramStatusWrapper.md)
- - [DocspaceApiSdk::TemplatesConfig](docs/TemplatesConfig.md)
+ - [DocspaceApiSdk::TemplatesConfigDto](docs/TemplatesConfigDto.md)
  - [DocspaceApiSdk::TemplatesRequestDto](docs/TemplatesRequestDto.md)
- - [DocspaceApiSdk::TenantAiAccessSettings](docs/TenantAiAccessSettings.md)
  - [DocspaceApiSdk::TenantAiAccessSettingsDto](docs/TenantAiAccessSettingsDto.md)
+ - [DocspaceApiSdk::TenantAiAccessSettingsRequestDto](docs/TenantAiAccessSettingsRequestDto.md)
  - [DocspaceApiSdk::TenantAiAccessSettingsWrapper](docs/TenantAiAccessSettingsWrapper.md)
- - [DocspaceApiSdk::TenantAiAgentQuotaSettings](docs/TenantAiAgentQuotaSettings.md)
- - [DocspaceApiSdk::TenantAiAgentQuotaSettingsWrapper](docs/TenantAiAgentQuotaSettingsWrapper.md)
- - [DocspaceApiSdk::TenantAuditSettings](docs/TenantAuditSettings.md)
- - [DocspaceApiSdk::TenantAuditSettingsResponseWrapper](docs/TenantAuditSettingsResponseWrapper.md)
+ - [DocspaceApiSdk::TenantAuditSettingsDto](docs/TenantAuditSettingsDto.md)
+ - [DocspaceApiSdk::TenantAuditSettingsRequestDto](docs/TenantAuditSettingsRequestDto.md)
  - [DocspaceApiSdk::TenantAuditSettingsWrapper](docs/TenantAuditSettingsWrapper.md)
- - [DocspaceApiSdk::TenantBannerSettings](docs/TenantBannerSettings.md)
  - [DocspaceApiSdk::TenantBannerSettingsDto](docs/TenantBannerSettingsDto.md)
+ - [DocspaceApiSdk::TenantBannerSettingsRequestDto](docs/TenantBannerSettingsRequestDto.md)
  - [DocspaceApiSdk::TenantBannerSettingsWrapper](docs/TenantBannerSettingsWrapper.md)
- - [DocspaceApiSdk::TenantDeepLinkSettings](docs/TenantDeepLinkSettings.md)
+ - [DocspaceApiSdk::TenantDeepLinkSettingsDto](docs/TenantDeepLinkSettingsDto.md)
  - [DocspaceApiSdk::TenantDeepLinkSettingsWrapper](docs/TenantDeepLinkSettingsWrapper.md)
- - [DocspaceApiSdk::TenantDevToolsAccessSettings](docs/TenantDevToolsAccessSettings.md)
  - [DocspaceApiSdk::TenantDevToolsAccessSettingsDto](docs/TenantDevToolsAccessSettingsDto.md)
+ - [DocspaceApiSdk::TenantDevToolsAccessSettingsRequestDto](docs/TenantDevToolsAccessSettingsRequestDto.md)
  - [DocspaceApiSdk::TenantDevToolsAccessSettingsWrapper](docs/TenantDevToolsAccessSettingsWrapper.md)
- - [DocspaceApiSdk::TenantDomainValidator](docs/TenantDomainValidator.md)
  - [DocspaceApiSdk::TenantDto](docs/TenantDto.md)
- - [DocspaceApiSdk::TenantEntityQuotaSettings](docs/TenantEntityQuotaSettings.md)
  - [DocspaceApiSdk::TenantIndustry](docs/TenantIndustry.md)
- - [DocspaceApiSdk::TenantQuota](docs/TenantQuota.md)
+ - [DocspaceApiSdk::TenantQuotaDto](docs/TenantQuotaDto.md)
  - [DocspaceApiSdk::TenantQuotaFeatureDto](docs/TenantQuotaFeatureDto.md)
- - [DocspaceApiSdk::TenantQuotaSettings](docs/TenantQuotaSettings.md)
- - [DocspaceApiSdk::TenantQuotaSettingsRequestsDto](docs/TenantQuotaSettingsRequestsDto.md)
+ - [DocspaceApiSdk::TenantQuotaSettingsDto](docs/TenantQuotaSettingsDto.md)
+ - [DocspaceApiSdk::TenantQuotaSettingsRequestDto](docs/TenantQuotaSettingsRequestDto.md)
  - [DocspaceApiSdk::TenantQuotaSettingsWrapper](docs/TenantQuotaSettingsWrapper.md)
  - [DocspaceApiSdk::TenantQuotaWrapper](docs/TenantQuotaWrapper.md)
- - [DocspaceApiSdk::TenantRoomQuotaSettings](docs/TenantRoomQuotaSettings.md)
- - [DocspaceApiSdk::TenantRoomQuotaSettingsWrapper](docs/TenantRoomQuotaSettingsWrapper.md)
  - [DocspaceApiSdk::TenantStatus](docs/TenantStatus.md)
  - [DocspaceApiSdk::TenantTrustedDomainsType](docs/TenantTrustedDomainsType.md)
  - [DocspaceApiSdk::TenantUserInvitationSettingsDto](docs/TenantUserInvitationSettingsDto.md)
  - [DocspaceApiSdk::TenantUserInvitationSettingsRequestDto](docs/TenantUserInvitationSettingsRequestDto.md)
  - [DocspaceApiSdk::TenantUserInvitationSettingsWrapper](docs/TenantUserInvitationSettingsWrapper.md)
- - [DocspaceApiSdk::TenantUserQuotaSettings](docs/TenantUserQuotaSettings.md)
- - [DocspaceApiSdk::TenantUserQuotaSettingsWrapper](docs/TenantUserQuotaSettingsWrapper.md)
  - [DocspaceApiSdk::TenantWalletService](docs/TenantWalletService.md)
- - [DocspaceApiSdk::TenantWalletServiceSettings](docs/TenantWalletServiceSettings.md)
+ - [DocspaceApiSdk::TenantWalletServiceSettingsDto](docs/TenantWalletServiceSettingsDto.md)
  - [DocspaceApiSdk::TenantWalletServiceSettingsWrapper](docs/TenantWalletServiceSettingsWrapper.md)
- - [DocspaceApiSdk::TenantWalletSettings](docs/TenantWalletSettings.md)
- - [DocspaceApiSdk::TenantWalletSettingsResponseWrapper](docs/TenantWalletSettingsResponseWrapper.md)
+ - [DocspaceApiSdk::TenantWalletSettingsDto](docs/TenantWalletSettingsDto.md)
+ - [DocspaceApiSdk::TenantWalletSettingsRequestDto](docs/TenantWalletSettingsRequestDto.md)
  - [DocspaceApiSdk::TenantWalletSettingsWrapper](docs/TenantWalletSettingsWrapper.md)
  - [DocspaceApiSdk::TenantWrapper](docs/TenantWrapper.md)
  - [DocspaceApiSdk::TerminateRequestDto](docs/TerminateRequestDto.md)
@@ -4938,19 +5188,21 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::TfaAppCodeDto](docs/TfaAppCodeDto.md)
  - [DocspaceApiSdk::TfaConfirmDataDto](docs/TfaConfirmDataDto.md)
  - [DocspaceApiSdk::TfaConfirmDataWrapper](docs/TfaConfirmDataWrapper.md)
- - [DocspaceApiSdk::TfaRequestsDto](docs/TfaRequestsDto.md)
- - [DocspaceApiSdk::TfaRequestsDtoType](docs/TfaRequestsDtoType.md)
+ - [DocspaceApiSdk::TfaRequestDto](docs/TfaRequestDto.md)
  - [DocspaceApiSdk::TfaSettingsArrayWrapper](docs/TfaSettingsArrayWrapper.md)
  - [DocspaceApiSdk::TfaSettingsDto](docs/TfaSettingsDto.md)
  - [DocspaceApiSdk::TfaSetupCodeDto](docs/TfaSetupCodeDto.md)
  - [DocspaceApiSdk::TfaSetupCodeWrapper](docs/TfaSetupCodeWrapper.md)
- - [DocspaceApiSdk::TfaValidateRequestsDto](docs/TfaValidateRequestsDto.md)
+ - [DocspaceApiSdk::TfaType](docs/TfaType.md)
+ - [DocspaceApiSdk::TfaValidateRequestDto](docs/TfaValidateRequestDto.md)
+ - [DocspaceApiSdk::ThirdPartyAccountArrayWrapper](docs/ThirdPartyAccountArrayWrapper.md)
+ - [DocspaceApiSdk::ThirdPartyAccountDto](docs/ThirdPartyAccountDto.md)
  - [DocspaceApiSdk::ThirdPartyBackupRequestDto](docs/ThirdPartyBackupRequestDto.md)
  - [DocspaceApiSdk::ThirdPartyCheckConversionRequestDto](docs/ThirdPartyCheckConversionRequestDto.md)
- - [DocspaceApiSdk::ThirdPartyChunkedUploadSessionResponse](docs/ThirdPartyChunkedUploadSessionResponse.md)
- - [DocspaceApiSdk::ThirdPartyChunkedUploadSessionResponseResponseWrapper](docs/ThirdPartyChunkedUploadSessionResponseResponseWrapper.md)
- - [DocspaceApiSdk::ThirdPartyChunkedUploadSessionResponseWrapper](docs/ThirdPartyChunkedUploadSessionResponseWrapper.md)
- - [DocspaceApiSdk::ThirdPartyChunkedUploadSessionResponseWrapperWrapper](docs/ThirdPartyChunkedUploadSessionResponseWrapperWrapper.md)
+ - [DocspaceApiSdk::ThirdPartyChunkedUploadSessionDto](docs/ThirdPartyChunkedUploadSessionDto.md)
+ - [DocspaceApiSdk::ThirdPartyChunkedUploadSessionResultDto](docs/ThirdPartyChunkedUploadSessionResultDto.md)
+ - [DocspaceApiSdk::ThirdPartyChunkedUploadSessionResultWrapper](docs/ThirdPartyChunkedUploadSessionResultWrapper.md)
+ - [DocspaceApiSdk::ThirdPartyChunkedUploadSessionWrapper](docs/ThirdPartyChunkedUploadSessionWrapper.md)
  - [DocspaceApiSdk::ThirdPartyConfigurationDto](docs/ThirdPartyConfigurationDto.md)
  - [DocspaceApiSdk::ThirdPartyConfigurationWrapper](docs/ThirdPartyConfigurationWrapper.md)
  - [DocspaceApiSdk::ThirdPartyDraftLocation](docs/ThirdPartyDraftLocation.md)
@@ -4963,53 +5215,53 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::ThirdPartyFolderContentWrapper](docs/ThirdPartyFolderContentWrapper.md)
  - [DocspaceApiSdk::ThirdPartyFolderDto](docs/ThirdPartyFolderDto.md)
  - [DocspaceApiSdk::ThirdPartyFolderWrapper](docs/ThirdPartyFolderWrapper.md)
- - [DocspaceApiSdk::ThirdPartyParams](docs/ThirdPartyParams.md)
- - [DocspaceApiSdk::ThirdPartyParamsArrayWrapper](docs/ThirdPartyParamsArrayWrapper.md)
  - [DocspaceApiSdk::ThirdPartyRequestDto](docs/ThirdPartyRequestDto.md)
- - [DocspaceApiSdk::ThirdPartySaveAsPdf](docs/ThirdPartySaveAsPdf.md)
+ - [DocspaceApiSdk::ThirdPartySaveAsPdfRequest](docs/ThirdPartySaveAsPdfRequest.md)
  - [DocspaceApiSdk::ThirdPartyUploadSessionResponseDto](docs/ThirdPartyUploadSessionResponseDto.md)
  - [DocspaceApiSdk::ThirdPartyUploadSessionResponseWrapper](docs/ThirdPartyUploadSessionResponseWrapper.md)
  - [DocspaceApiSdk::Thumbnail](docs/Thumbnail.md)
  - [DocspaceApiSdk::ThumbnailsDataDto](docs/ThumbnailsDataDto.md)
  - [DocspaceApiSdk::ThumbnailsDataWrapper](docs/ThumbnailsDataWrapper.md)
  - [DocspaceApiSdk::ThumbnailsRequest](docs/ThumbnailsRequest.md)
- - [DocspaceApiSdk::TimeBound](docs/TimeBound.md)
- - [DocspaceApiSdk::TimezonesRequestsArrayWrapper](docs/TimezonesRequestsArrayWrapper.md)
- - [DocspaceApiSdk::TimezonesRequestsDto](docs/TimezonesRequestsDto.md)
+ - [DocspaceApiSdk::TimeBoundDto](docs/TimeBoundDto.md)
+ - [DocspaceApiSdk::TimezoneArrayWrapper](docs/TimezoneArrayWrapper.md)
+ - [DocspaceApiSdk::TimezoneDto](docs/TimezoneDto.md)
  - [DocspaceApiSdk::TokenDiagnosticsDto](docs/TokenDiagnosticsDto.md)
  - [DocspaceApiSdk::TokenDiagnosticsWrapper](docs/TokenDiagnosticsWrapper.md)
  - [DocspaceApiSdk::TopUpDepositRequestDto](docs/TopUpDepositRequestDto.md)
- - [DocspaceApiSdk::TransactionInfo](docs/TransactionInfo.md)
+ - [DocspaceApiSdk::TransactionInfoDto](docs/TransactionInfoDto.md)
  - [DocspaceApiSdk::TurnOnAdminMessageSettingsRequestDto](docs/TurnOnAdminMessageSettingsRequestDto.md)
  - [DocspaceApiSdk::UpcomingPaymentArrayWrapper](docs/UpcomingPaymentArrayWrapper.md)
  - [DocspaceApiSdk::UpcomingPaymentDto](docs/UpcomingPaymentDto.md)
  - [DocspaceApiSdk::UpdateApiKeyRequest](docs/UpdateApiKeyRequest.md)
  - [DocspaceApiSdk::UpdateClientRequest](docs/UpdateClientRequest.md)
- - [DocspaceApiSdk::UpdateComment](docs/UpdateComment.md)
- - [DocspaceApiSdk::UpdateFile](docs/UpdateFile.md)
+ - [DocspaceApiSdk::UpdateCommentRequest](docs/UpdateCommentRequest.md)
+ - [DocspaceApiSdk::UpdateFileRequest](docs/UpdateFileRequest.md)
+ - [DocspaceApiSdk::UpdateFolderMetadataTemplateRequest](docs/UpdateFolderMetadataTemplateRequest.md)
  - [DocspaceApiSdk::UpdateGroupRequest](docs/UpdateGroupRequest.md)
+ - [DocspaceApiSdk::UpdateMemberCultureRequest](docs/UpdateMemberCultureRequest.md)
  - [DocspaceApiSdk::UpdateMemberRequestDto](docs/UpdateMemberRequestDto.md)
  - [DocspaceApiSdk::UpdateMembersQuotaRequestDto](docs/UpdateMembersQuotaRequestDto.md)
  - [DocspaceApiSdk::UpdateMembersQuotaRequestDtoQuota](docs/UpdateMembersQuotaRequestDtoQuota.md)
  - [DocspaceApiSdk::UpdateMembersRequestDto](docs/UpdateMembersRequestDto.md)
+ - [DocspaceApiSdk::UpdateMetadataFieldRequest](docs/UpdateMetadataFieldRequest.md)
+ - [DocspaceApiSdk::UpdateMetadataTemplate](docs/UpdateMetadataTemplate.md)
  - [DocspaceApiSdk::UpdatePhotoMemberRequest](docs/UpdatePhotoMemberRequest.md)
  - [DocspaceApiSdk::UpdateRoomGroupRequest](docs/UpdateRoomGroupRequest.md)
  - [DocspaceApiSdk::UpdateRoomRequest](docs/UpdateRoomRequest.md)
  - [DocspaceApiSdk::UpdateRoomsQuotaRequestDto](docs/UpdateRoomsQuotaRequestDto.md)
  - [DocspaceApiSdk::UpdateRoomsRoomIdsRequestDto](docs/UpdateRoomsRoomIdsRequestDto.md)
  - [DocspaceApiSdk::UpdateTagRequestDto](docs/UpdateTagRequestDto.md)
- - [DocspaceApiSdk::UpdateWebhooksConfigRequestsDto](docs/UpdateWebhooksConfigRequestsDto.md)
+ - [DocspaceApiSdk::UpdateWebhooksConfigRequestDto](docs/UpdateWebhooksConfigRequestDto.md)
  - [DocspaceApiSdk::UploadResultDto](docs/UploadResultDto.md)
  - [DocspaceApiSdk::UploadResultWrapper](docs/UploadResultWrapper.md)
  - [DocspaceApiSdk::UploadSessionResponseDto](docs/UploadSessionResponseDto.md)
  - [DocspaceApiSdk::UploadSessionResponseWrapper](docs/UploadSessionResponseWrapper.md)
  - [DocspaceApiSdk::UsageSpaceStatItemArrayWrapper](docs/UsageSpaceStatItemArrayWrapper.md)
  - [DocspaceApiSdk::UsageSpaceStatItemDto](docs/UsageSpaceStatItemDto.md)
- - [DocspaceApiSdk::UserConfig](docs/UserConfig.md)
+ - [DocspaceApiSdk::UserConfigDto](docs/UserConfigDto.md)
  - [DocspaceApiSdk::UserExistsResponseDto](docs/UserExistsResponseDto.md)
  - [DocspaceApiSdk::UserExistsResponseWrapper](docs/UserExistsResponseWrapper.md)
- - [DocspaceApiSdk::UserInfo](docs/UserInfo.md)
- - [DocspaceApiSdk::UserInfoWrapper](docs/UserInfoWrapper.md)
  - [DocspaceApiSdk::UserInvitation](docs/UserInvitation.md)
  - [DocspaceApiSdk::UserInvitationRequestDto](docs/UserInvitationRequestDto.md)
  - [DocspaceApiSdk::ValidationErrorResponse](docs/ValidationErrorResponse.md)
@@ -5021,16 +5273,18 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::WalletServiceWrapper](docs/WalletServiceWrapper.md)
  - [DocspaceApiSdk::WatermarkAdditions](docs/WatermarkAdditions.md)
  - [DocspaceApiSdk::WatermarkDto](docs/WatermarkDto.md)
- - [DocspaceApiSdk::WatermarkOnDraw](docs/WatermarkOnDraw.md)
+ - [DocspaceApiSdk::WatermarkOnDrawDto](docs/WatermarkOnDrawDto.md)
+ - [DocspaceApiSdk::WatermarkParagraphDto](docs/WatermarkParagraphDto.md)
  - [DocspaceApiSdk::WatermarkRequestDto](docs/WatermarkRequestDto.md)
- - [DocspaceApiSdk::WebItemSecurityRequestsDto](docs/WebItemSecurityRequestsDto.md)
- - [DocspaceApiSdk::WebItemsSecurityRequestsDto](docs/WebItemsSecurityRequestsDto.md)
+ - [DocspaceApiSdk::WatermarkTextRunDto](docs/WatermarkTextRunDto.md)
+ - [DocspaceApiSdk::WebItemSecurityRequestDto](docs/WebItemSecurityRequestDto.md)
+ - [DocspaceApiSdk::WebItemsSecurityRequestDto](docs/WebItemsSecurityRequestDto.md)
  - [DocspaceApiSdk::WebPluginArrayWrapper](docs/WebPluginArrayWrapper.md)
  - [DocspaceApiSdk::WebPluginDto](docs/WebPluginDto.md)
- - [DocspaceApiSdk::WebPluginRequests](docs/WebPluginRequests.md)
+ - [DocspaceApiSdk::WebPluginRequest](docs/WebPluginRequest.md)
  - [DocspaceApiSdk::WebPluginWrapper](docs/WebPluginWrapper.md)
  - [DocspaceApiSdk::WebhookGroupStatus](docs/WebhookGroupStatus.md)
- - [DocspaceApiSdk::WebhookRetryRequestsDto](docs/WebhookRetryRequestsDto.md)
+ - [DocspaceApiSdk::WebhookRetryRequestDto](docs/WebhookRetryRequestDto.md)
  - [DocspaceApiSdk::WebhookTrigger](docs/WebhookTrigger.md)
  - [DocspaceApiSdk::WebhookTriggerArrayWrapper](docs/WebhookTriggerArrayWrapper.md)
  - [DocspaceApiSdk::WebhookTriggerDto](docs/WebhookTriggerDto.md)
@@ -5046,9 +5300,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::WhiteLabelItemPathDto](docs/WhiteLabelItemPathDto.md)
  - [DocspaceApiSdk::WhiteLabelItemSizeDto](docs/WhiteLabelItemSizeDto.md)
  - [DocspaceApiSdk::WhiteLabelLogoType](docs/WhiteLabelLogoType.md)
- - [DocspaceApiSdk::WhiteLabelRequestsDto](docs/WhiteLabelRequestsDto.md)
- - [DocspaceApiSdk::WizardRequestsDto](docs/WizardRequestsDto.md)
- - [DocspaceApiSdk::WizardSettings](docs/WizardSettings.md)
+ - [DocspaceApiSdk::WhiteLabelRequestDto](docs/WhiteLabelRequestDto.md)
+ - [DocspaceApiSdk::WizardRequestDto](docs/WizardRequestDto.md)
+ - [DocspaceApiSdk::WizardSettingsDto](docs/WizardSettingsDto.md)
  - [DocspaceApiSdk::WizardSettingsWrapper](docs/WizardSettingsWrapper.md)
  - [DocspaceApiSdk::XlsxReportResponseDto](docs/XlsxReportResponseDto.md)
  - [DocspaceApiSdk::XlsxReportResponseWrapper](docs/XlsxReportResponseWrapper.md)

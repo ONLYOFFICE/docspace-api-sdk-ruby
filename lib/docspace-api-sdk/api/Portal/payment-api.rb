@@ -359,7 +359,7 @@ module DocspaceApiSdk
     # @param service_name [String] The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error.
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :active Whether the answer is narrowed to the prices in force at the moment of the call. Leaving it false also  returns the retired and the not yet started ones, which is what pricing a movement recorded in the past  needs.
-    # @return [ServicePriceInfoArrayWrapper]
+    # @return [ServicePriceArrayWrapper]
     def get_accounting_service_prices(service_name, opts = {})
       data, _status_code, _headers = get_accounting_service_prices_with_http_info(service_name, opts)
       data
@@ -371,7 +371,7 @@ module DocspaceApiSdk
     # @param service_name [String] The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error.
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :active Whether the answer is narrowed to the prices in force at the moment of the call. Leaving it false also  returns the retired and the not yet started ones, which is what pricing a movement recorded in the past  needs.
-    # @return [Array<(ServicePriceInfoArrayWrapper, Integer, Hash)>] ServicePriceInfoArrayWrapper data, response status code and response headers
+    # @return [Array<(ServicePriceArrayWrapper, Integer, Hash)>] ServicePriceArrayWrapper data, response status code and response headers
     def get_accounting_service_prices_with_http_info(service_name, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Portal::PaymentApi.get_accounting_service_prices ...'
@@ -407,7 +407,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ServicePriceInfoArrayWrapper'
+      return_type = opts[:debug_return_type] || 'ServicePriceArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -599,8 +599,8 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'BackUrl'] = back_url
-      query_params[:'SuccessUrl'] = success_url
+      query_params[:'backUrl'] = back_url
+      query_params[:'successUrl'] = success_url
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -934,16 +934,16 @@ module DocspaceApiSdk
       query_params = opts[:query_params] || {}
       query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
-      query_params[:'ServiceName'] = @api_client.build_collection_param(opts[:'service_name'], :multi) if !opts[:'service_name'].nil?
-      query_params[:'StartDate'] = opts[:'start_date'] if !opts[:'start_date'].nil?
-      query_params[:'EndDate'] = opts[:'end_date'] if !opts[:'end_date'].nil?
-      query_params[:'ParticipantName'] = opts[:'participant_name'] if !opts[:'participant_name'].nil?
-      query_params[:'Credit'] = opts[:'credit'] if !opts[:'credit'].nil?
-      query_params[:'Debit'] = opts[:'debit'] if !opts[:'debit'].nil?
-      query_params[:'Type'] = opts[:'type'] if !opts[:'type'].nil?
-      query_params[:'Status'] = opts[:'status'] if !opts[:'status'].nil?
-      query_params[:'OrderBy'] = opts[:'order_by'] if !opts[:'order_by'].nil?
-      query_params[:'OrderType'] = opts[:'order_type'] if !opts[:'order_type'].nil?
+      query_params[:'serviceName'] = @api_client.build_collection_param(opts[:'service_name'], :multi) if !opts[:'service_name'].nil?
+      query_params[:'startDate'] = opts[:'start_date'] if !opts[:'start_date'].nil?
+      query_params[:'endDate'] = opts[:'end_date'] if !opts[:'end_date'].nil?
+      query_params[:'participantName'] = opts[:'participant_name'] if !opts[:'participant_name'].nil?
+      query_params[:'credit'] = opts[:'credit'] if !opts[:'credit'].nil?
+      query_params[:'debit'] = opts[:'debit'] if !opts[:'debit'].nil?
+      query_params[:'type'] = opts[:'type'] if !opts[:'type'].nil?
+      query_params[:'status'] = opts[:'status'] if !opts[:'status'].nil?
+      query_params[:'orderBy'] = opts[:'order_by'] if !opts[:'order_by'].nil?
+      query_params[:'orderType'] = opts[:'order_type'] if !opts[:'order_type'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1082,16 +1082,16 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'ServiceName'] = @api_client.build_collection_param(opts[:'service_name'], :multi) if !opts[:'service_name'].nil?
-      query_params[:'ParticipantName'] = opts[:'participant_name'] if !opts[:'participant_name'].nil?
-      query_params[:'Status'] = opts[:'status'] if !opts[:'status'].nil?
-      query_params[:'StartDate'] = opts[:'start_date'] if !opts[:'start_date'].nil?
-      query_params[:'EndDate'] = opts[:'end_date'] if !opts[:'end_date'].nil?
-      query_params[:'Metadata'] = opts[:'metadata'] if !opts[:'metadata'].nil?
+      query_params[:'serviceName'] = @api_client.build_collection_param(opts[:'service_name'], :multi) if !opts[:'service_name'].nil?
+      query_params[:'participantName'] = opts[:'participant_name'] if !opts[:'participant_name'].nil?
+      query_params[:'status'] = opts[:'status'] if !opts[:'status'].nil?
+      query_params[:'startDate'] = opts[:'start_date'] if !opts[:'start_date'].nil?
+      query_params[:'endDate'] = opts[:'end_date'] if !opts[:'end_date'].nil?
+      query_params[:'metadata'] = opts[:'metadata'] if !opts[:'metadata'].nil?
       query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
-      query_params[:'OrderBy'] = opts[:'order_by'] if !opts[:'order_by'].nil?
-      query_params[:'OrderType'] = opts[:'order_type'] if !opts[:'order_type'].nil?
+      query_params[:'orderBy'] = opts[:'order_by'] if !opts[:'order_by'].nil?
+      query_params[:'orderType'] = opts[:'order_type'] if !opts[:'order_type'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1571,7 +1571,7 @@ module DocspaceApiSdk
     # Returns the AI chat models that are barred on this portal - the ones no user of it may pick for a  conversation, whatever the price list offers. Only a DocSpace administrator may read it, and the call is  read-only. When the installation has no billing service or AI is not enabled for the portal, the answer is an  empty set instead of an error, which is indistinguishable from a portal that restricts nothing. An empty  `models` therefore means every model in `GET api/2.0/portal/payment/ai-prices` may be used. The set names the  barred models and not the allowed ones; replace it with `PUT api/2.0/portal/payment/ai-model/restrictions`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-restricted-ai-models/
     # @param [Hash] opts the optional parameters
-    # @return [RestrictedModelsResponseWrapper]
+    # @return [RestrictedAiModelsWrapper]
     def get_restricted_ai_models(opts = {})
       data, _status_code, _headers = get_restricted_ai_models_with_http_info(opts)
       data
@@ -1581,7 +1581,7 @@ module DocspaceApiSdk
     # Returns the AI chat models that are barred on this portal - the ones no user of it may pick for a  conversation, whatever the price list offers. Only a DocSpace administrator may read it, and the call is  read-only. When the installation has no billing service or AI is not enabled for the portal, the answer is an  empty set instead of an error, which is indistinguishable from a portal that restricts nothing. An empty  `models` therefore means every model in `GET api/2.0/portal/payment/ai-prices` may be used. The set names the  barred models and not the allowed ones; replace it with `PUT api/2.0/portal/payment/ai-model/restrictions`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-restricted-ai-models/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(RestrictedModelsResponseWrapper, Integer, Hash)>] RestrictedModelsResponseWrapper data, response status code and response headers
+    # @return [Array<(RestrictedAiModelsWrapper, Integer, Hash)>] RestrictedAiModelsWrapper data, response status code and response headers
     def get_restricted_ai_models_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Portal::PaymentApi.get_restricted_ai_models ...'
@@ -1604,7 +1604,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'RestrictedModelsResponseWrapper'
+      return_type = opts[:debug_return_type] || 'RestrictedAiModelsWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -1630,7 +1630,7 @@ module DocspaceApiSdk
     # Reports in money how much of the portal's paid subscription period is still unused - the credit that  `POST api/2.0/portal/payment/subscription/movetowallet` would carry over to the wallet if the subscription  were ended now. The portal must have a billing customer and a plan in the paid state; a plan that is not paid  answers 402, and a paid plan without a subscription row gives 404. Only the payer - the portal user whose  e-mail is the billing customer's e-mail - may read it, and the call is read-only. The answer states the total  cost of the current period with its currency, the start and the end of that period in UTC, the moment the  unused part is measured up to, the days already elapsed, and the remaining balance both in the subscription  currency and converted to the wallet currency. Every figure is computed for the instant of the request, so it  changes between calls.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-subscription-balance-info/
     # @param [Hash] opts the optional parameters
-    # @return [SubscriptionBalanceInfoWrapper]
+    # @return [SubscriptionBalanceWrapper]
     def get_subscription_balance_info(opts = {})
       data, _status_code, _headers = get_subscription_balance_info_with_http_info(opts)
       data
@@ -1640,7 +1640,7 @@ module DocspaceApiSdk
     # Reports in money how much of the portal's paid subscription period is still unused - the credit that  `POST api/2.0/portal/payment/subscription/movetowallet` would carry over to the wallet if the subscription  were ended now. The portal must have a billing customer and a plan in the paid state; a plan that is not paid  answers 402, and a paid plan without a subscription row gives 404. Only the payer - the portal user whose  e-mail is the billing customer's e-mail - may read it, and the call is read-only. The answer states the total  cost of the current period with its currency, the start and the end of that period in UTC, the moment the  unused part is measured up to, the days already elapsed, and the remaining balance both in the subscription  currency and converted to the wallet currency. Every figure is computed for the instant of the request, so it  changes between calls.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-subscription-balance-info/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(SubscriptionBalanceInfoWrapper, Integer, Hash)>] SubscriptionBalanceInfoWrapper data, response status code and response headers
+    # @return [Array<(SubscriptionBalanceWrapper, Integer, Hash)>] SubscriptionBalanceWrapper data, response status code and response headers
     def get_subscription_balance_info_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Portal::PaymentApi.get_subscription_balance_info ...'
@@ -1663,7 +1663,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'SubscriptionBalanceInfoWrapper'
+      return_type = opts[:debug_return_type] || 'SubscriptionBalanceWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -1745,20 +1745,20 @@ module DocspaceApiSdk
     end
 
     # Get the auto top-up settings
-    # Returns the portal's automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but ignored when the settings are written.
+    # Returns the portal's automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but cannot be written.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-settings/
     # @param [Hash] opts the optional parameters
-    # @return [TenantWalletSettingsResponseWrapper]
+    # @return [TenantWalletSettingsWrapper]
     def get_tenant_wallet_settings(opts = {})
       data, _status_code, _headers = get_tenant_wallet_settings_with_http_info(opts)
       data
     end
 
     # Get the auto top-up settings
-    # Returns the portal's automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but ignored when the settings are written.
+    # Returns the portal's automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but cannot be written.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-settings/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(TenantWalletSettingsResponseWrapper, Integer, Hash)>] TenantWalletSettingsResponseWrapper data, response status code and response headers
+    # @return [Array<(TenantWalletSettingsWrapper, Integer, Hash)>] TenantWalletSettingsWrapper data, response status code and response headers
     def get_tenant_wallet_settings_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Portal::PaymentApi.get_tenant_wallet_settings ...'
@@ -1781,7 +1781,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'TenantWalletSettingsResponseWrapper'
+      return_type = opts[:debug_return_type] || 'TenantWalletSettingsWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -1998,7 +1998,7 @@ module DocspaceApiSdk
     # Sends the portal's message to the ONLYOFFICE sales team - the contact-sales form behind a request for a quote,  an invoice or a plan that cannot be bought online. `email` has to be a well-formed address and is where the  answer will go, while `userName` and `message` say who is asking and what for; all three are required and none  may be empty. Only a DocSpace administrator may call it. Nothing on the portal changes: no plan, no quota and  no payment is touched, a message is mailed out and the request is written to the portal audit trail. There is  no response body - status 200 means the message was handed to the mail service - and the call is not  idempotent, so a repeat sends a second message. It is limited to ten requests a minute per user by default and  answers 429 above that.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/send-payment-request/
     # @param [Hash] opts the optional parameters
-    # @option opts [SalesRequestsDto] :sales_requests_dto 
+    # @option opts [SalesRequestDto] :sales_request_dto 
     # @return [nil]
     def send_payment_request(opts = {})
       send_payment_request_with_http_info(opts)
@@ -2009,7 +2009,7 @@ module DocspaceApiSdk
     # Sends the portal's message to the ONLYOFFICE sales team - the contact-sales form behind a request for a quote,  an invoice or a plan that cannot be bought online. `email` has to be a well-formed address and is where the  answer will go, while `userName` and `message` say who is asking and what for; all three are required and none  may be empty. Only a DocSpace administrator may call it. Nothing on the portal changes: no plan, no quota and  no payment is touched, a message is mailed out and the request is written to the portal audit trail. There is  no response body - status 200 means the message was handed to the mail service - and the call is not  idempotent, so a repeat sends a second message. It is limited to ten requests a minute per user by default and  answers 429 above that.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/send-payment-request/
     # @param [Hash] opts the optional parameters
-    # @option opts [SalesRequestsDto] :sales_requests_dto 
+    # @option opts [SalesRequestDto] :sales_request_dto 
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def send_payment_request_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -2035,7 +2035,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'sales_requests_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'sales_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type]
@@ -2061,22 +2061,22 @@ module DocspaceApiSdk
     end
 
     # Set restricted AI models
-    # Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer, and the caller needs the permission to edit the  portal settings as well as DocSpace administrator rights. The call is mutating and idempotent - sending the  same set twice leaves the same state - and it is written to the portal audit trail. It takes effect on the  next AI request, so a conversation already open on a model that has just been barred cannot go on with it. The  stored set comes back in the answer.
+    # Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer and the AI tools wallet service switched on with  `POST api/2.0/portal/payment/servicestate`, and the caller needs the permission to edit the portal settings as  well as DocSpace administrator rights. The call is mutating and idempotent - sending the same set twice leaves  the same state - and it is written to the portal audit trail. It takes effect on the next AI request, so a  conversation already open on a model that has just been barred cannot go on with it. The stored set comes  back in the answer. While AI tools is off the call is refused with 403 instead of being stored, because the  read reports an empty set then and nothing written could be read back.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-restricted-ai-models/
     # @param [Hash] opts the optional parameters
     # @option opts [SetRestrictedAiModelsRequestDto] :set_restricted_ai_models_request_dto 
-    # @return [RestrictedModelsResponseWrapper]
+    # @return [RestrictedAiModelsWrapper]
     def set_restricted_ai_models(opts = {})
       data, _status_code, _headers = set_restricted_ai_models_with_http_info(opts)
       data
     end
 
     # Set restricted AI models
-    # Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer, and the caller needs the permission to edit the  portal settings as well as DocSpace administrator rights. The call is mutating and idempotent - sending the  same set twice leaves the same state - and it is written to the portal audit trail. It takes effect on the  next AI request, so a conversation already open on a model that has just been barred cannot go on with it. The  stored set comes back in the answer.
+    # Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer and the AI tools wallet service switched on with  `POST api/2.0/portal/payment/servicestate`, and the caller needs the permission to edit the portal settings as  well as DocSpace administrator rights. The call is mutating and idempotent - sending the same set twice leaves  the same state - and it is written to the portal audit trail. It takes effect on the next AI request, so a  conversation already open on a model that has just been barred cannot go on with it. The stored set comes  back in the answer. While AI tools is off the call is refused with 403 instead of being stored, because the  read reports an empty set then and nothing written could be read back.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-restricted-ai-models/
     # @param [Hash] opts the optional parameters
     # @option opts [SetRestrictedAiModelsRequestDto] :set_restricted_ai_models_request_dto 
-    # @return [Array<(RestrictedModelsResponseWrapper, Integer, Hash)>] RestrictedModelsResponseWrapper data, response status code and response headers
+    # @return [Array<(RestrictedAiModelsWrapper, Integer, Hash)>] RestrictedAiModelsWrapper data, response status code and response headers
     def set_restricted_ai_models_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Portal::PaymentApi.set_restricted_ai_models ...'
@@ -2104,7 +2104,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'set_restricted_ai_models_request_dto'])
 
       # return_type
-      return_type = opts[:debug_return_type] || 'RestrictedModelsResponseWrapper'
+      return_type = opts[:debug_return_type] || 'RestrictedAiModelsWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -2127,22 +2127,22 @@ module DocspaceApiSdk
     end
 
     # Set the auto top-up settings
-    # Switches the portal's automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, while `lowBalanceThreshold` and `lowBalanceNotified` are ignored on the way in and kept as the portal  had them. The call is mutating and idempotent, it charges nothing by itself, it is written to the portal audit  trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
+    # Switches the portal's automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, and `upToBalance` has to be greater than `minBalance`, so that a top-up lifts the wallet above the balance  that triggers it. The low-balance warning state (`lowBalanceThreshold`, `lowBalanceNotified`) and `lastModified` may be  sent for compatibility but are ignored: the portal keeps the values it had. The call is mutating and  idempotent, it charges nothing by itself, it is written to the portal audit trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [TenantWalletSettingsWrapper] :tenant_wallet_settings_wrapper 
-    # @return [TenantWalletSettingsResponseWrapper]
+    # @option opts [TenantWalletSettingsRequestDto] :tenant_wallet_settings_request_dto 
+    # @return [TenantWalletSettingsWrapper]
     def set_tenant_wallet_settings(opts = {})
       data, _status_code, _headers = set_tenant_wallet_settings_with_http_info(opts)
       data
     end
 
     # Set the auto top-up settings
-    # Switches the portal's automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, while `lowBalanceThreshold` and `lowBalanceNotified` are ignored on the way in and kept as the portal  had them. The call is mutating and idempotent, it charges nothing by itself, it is written to the portal audit  trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
+    # Switches the portal's automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, and `upToBalance` has to be greater than `minBalance`, so that a top-up lifts the wallet above the balance  that triggers it. The low-balance warning state (`lowBalanceThreshold`, `lowBalanceNotified`) and `lastModified` may be  sent for compatibility but are ignored: the portal keeps the values it had. The call is mutating and  idempotent, it charges nothing by itself, it is written to the portal audit trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [TenantWalletSettingsWrapper] :tenant_wallet_settings_wrapper 
-    # @return [Array<(TenantWalletSettingsResponseWrapper, Integer, Hash)>] TenantWalletSettingsResponseWrapper data, response status code and response headers
+    # @option opts [TenantWalletSettingsRequestDto] :tenant_wallet_settings_request_dto 
+    # @return [Array<(TenantWalletSettingsWrapper, Integer, Hash)>] TenantWalletSettingsWrapper data, response status code and response headers
     def set_tenant_wallet_settings_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Portal::PaymentApi.set_tenant_wallet_settings ...'
@@ -2167,10 +2167,10 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'tenant_wallet_settings_wrapper'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'tenant_wallet_settings_request_dto'])
 
       # return_type
-      return_type = opts[:debug_return_type] || 'TenantWalletSettingsResponseWrapper'
+      return_type = opts[:debug_return_type] || 'TenantWalletSettingsWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']

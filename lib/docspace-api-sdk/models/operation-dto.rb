@@ -46,6 +46,9 @@ module DocspaceApiSdk
     # The amount that was taken out of the wallet, `0` on a movement that put money in.
     attr_accessor :debit
 
+    # What the AI provider charged for the whole `quantity` of an AI tools or AI search charge, as the billing  service recorded it - the provider's side of the same operation `debit` bills the portal for. It is `null`  on any other movement, and on an AI charge recorded without a provider cost.
+    attr_accessor :cost
+
     # Who caused the movement, as the billing service records them - an internal name, which is what the  `participantName` filter matches on. Show `participantDisplayName` instead.
     attr_accessor :participant_name
 
@@ -101,6 +104,7 @@ module DocspaceApiSdk
         :'currency' => :'currency',
         :'credit' => :'credit',
         :'debit' => :'debit',
+        :'cost' => :'cost',
         :'participant_name' => :'participantName',
         :'participant_display_name' => :'participantDisplayName',
         :'source_type' => :'sourceType',
@@ -133,12 +137,13 @@ module DocspaceApiSdk
         :'currency' => :'String',
         :'credit' => :'Float',
         :'debit' => :'Float',
+        :'cost' => :'Float',
         :'participant_name' => :'String',
         :'participant_display_name' => :'String',
         :'source_type' => :'String',
         :'source_title' => :'String',
         :'source_id' => :'String',
-        :'token_usage' => :'OperationTokenUsage',
+        :'token_usage' => :'OperationTokenUsageDto',
         :'type' => :'OperationType'
       }
     end
@@ -151,6 +156,7 @@ module DocspaceApiSdk
         :'details',
         :'service_unit',
         :'currency',
+        :'cost',
         :'participant_name',
         :'participant_display_name',
         :'source_type',
@@ -211,6 +217,10 @@ module DocspaceApiSdk
         self.debit = attributes[:'debit']
       end
 
+      if attributes.key?(:'cost')
+        self.cost = attributes[:'cost']
+      end
+
       if attributes.key?(:'participant_name')
         self.participant_name = attributes[:'participant_name']
       end
@@ -269,6 +279,7 @@ module DocspaceApiSdk
           currency == o.currency &&
           credit == o.credit &&
           debit == o.debit &&
+          cost == o.cost &&
           participant_name == o.participant_name &&
           participant_display_name == o.participant_display_name &&
           source_type == o.source_type &&
@@ -287,7 +298,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [date, service, description, details, service_unit, quantity, currency, credit, debit, participant_name, participant_display_name, source_type, source_title, source_id, token_usage, type].hash
+      [date, service, description, details, service_unit, quantity, currency, credit, debit, cost, participant_name, participant_display_name, source_type, source_title, source_id, token_usage, type].hash
     end
 
     # Builds the object from hash

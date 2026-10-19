@@ -86,7 +86,7 @@ module DocspaceApiSdk
       {
         :'storage_type' => :'BackupStorageType',
         :'storage_params' => :'Hash<String, String>',
-        :'cron_params' => :'CronParams',
+        :'cron_params' => :'CronParamsDto',
         :'backups_stored' => :'Integer',
         :'last_backup_time' => :'Time',
         :'dump' => :'Boolean'

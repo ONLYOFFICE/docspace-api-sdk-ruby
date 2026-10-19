@@ -705,7 +705,7 @@ module DocspaceApiSdk
     # Replaces the configuration of the Docs Connect tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules; it returns the configuration as Docs Connect stored it. The portal must have an activated Docs Connect tenant,  granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. Read the current  values with `GET api/2.0/settings/docscloud/tenant/config` first and send back whole sections: the sections  left out of the request are not sent to Docs Connect at all, while a section that is present is sent with all of  its fields, so a field left unset inside it goes out as `0`, `false` or empty. The caller must be a portal  administrator allowed to edit the portal settings, on an installation where the Docs Connect service is  configured. The call is mutating,  synchronous and idempotent, it is recorded in the portal audit trail, and it drops the cached configuration  itself, so the next read returns the new values without `refresh=true`. The `tenantName`, `security.secret`,  `security.header` and every `ipFilter.rules` address are capped at 255 characters and `server.fileSizeLimit`  at 209715200 bytes (200 MB); a value outside those bounds is rejected with 400 before anything reaches  Docs Connect. It changes these settings only, never the subscription, the user quota or the license.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tenant-config/
     # @param [Hash] opts the optional parameters
-    # @option opts [DocsCloudConfig] :docs_cloud_config 
+    # @option opts [DocsCloudConfigRequestDto] :docs_cloud_config_request_dto 
     # @return [DocsCloudConfigWrapper]
     def update_tenant_config(opts = {})
       data, _status_code, _headers = update_tenant_config_with_http_info(opts)
@@ -716,7 +716,7 @@ module DocspaceApiSdk
     # Replaces the configuration of the Docs Connect tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules; it returns the configuration as Docs Connect stored it. The portal must have an activated Docs Connect tenant,  granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. Read the current  values with `GET api/2.0/settings/docscloud/tenant/config` first and send back whole sections: the sections  left out of the request are not sent to Docs Connect at all, while a section that is present is sent with all of  its fields, so a field left unset inside it goes out as `0`, `false` or empty. The caller must be a portal  administrator allowed to edit the portal settings, on an installation where the Docs Connect service is  configured. The call is mutating,  synchronous and idempotent, it is recorded in the portal audit trail, and it drops the cached configuration  itself, so the next read returns the new values without `refresh=true`. The `tenantName`, `security.secret`,  `security.header` and every `ipFilter.rules` address are capped at 255 characters and `server.fileSizeLimit`  at 209715200 bytes (200 MB); a value outside those bounds is rejected with 400 before anything reaches  Docs Connect. It changes these settings only, never the subscription, the user quota or the license.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tenant-config/
     # @param [Hash] opts the optional parameters
-    # @option opts [DocsCloudConfig] :docs_cloud_config 
+    # @option opts [DocsCloudConfigRequestDto] :docs_cloud_config_request_dto 
     # @return [Array<(DocsCloudConfigWrapper, Integer, Hash)>] DocsCloudConfigWrapper data, response status code and response headers
     def update_tenant_config_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -742,7 +742,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'docs_cloud_config'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'docs_cloud_config_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'DocsCloudConfigWrapper'

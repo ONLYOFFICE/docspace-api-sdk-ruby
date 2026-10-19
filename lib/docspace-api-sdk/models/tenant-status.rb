@@ -25,9 +25,10 @@ module DocspaceApiSdk
     Restoring = 4.freeze
     Migrating = 5.freeze
     Encryption = 6.freeze
+    Blocked = 7.freeze
 
     def self.all_vars
-      @all_vars ||= [Active, Suspended, RemovePending, Transfering, Restoring, Migrating, Encryption].freeze
+      @all_vars ||= [Active, Suspended, RemovePending, Transfering, Restoring, Migrating, Encryption, Blocked].freeze
     end
 
     # Builds the enum from string

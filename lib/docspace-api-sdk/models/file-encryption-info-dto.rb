@@ -47,7 +47,7 @@ module DocspaceApiSdk
     def self.openapi_types
       {
         :'user_keys' => :'Array<EncryptionKeyDto>',
-        :'file_keys' => :'Array<FileKeys>'
+        :'file_keys' => :'Array<FileKeysDto>'
       }
     end
 

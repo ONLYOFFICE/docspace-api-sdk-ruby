@@ -27,7 +27,7 @@ module DocspaceApiSdk
     # Replaces the list of external domains the portal's Content Security Policy trusts and returns the policy  header the portal serves to browsers from that moment on. The list in `domains` replaces the stored one, so an  omitted or empty list falls back to the portal's built-in policy, and every entry that is sent becomes an  allowed source for scripts, styles, images, fonts, frames, media and connections at once. An entry may be a  host, a host with a scheme, or a wildcard host such as `*.example.com`; it has to form a valid absolute  address and may contain ASCII characters only, and an entry that does not is refused with 400 before anything  is saved. The caller needs the portal-settings right of a DocSpace administrator, and the request is also  refused with 403 when the header built from the list grows past the size configured for the installation, 15  KB by default. The change applies to the whole portal at once and is idempotent. Read the current state with  `GET api/2.0/security/csp`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-csp/
     # @param [Hash] opts the optional parameters
-    # @option opts [CspRequestsDto] :csp_requests_dto 
+    # @option opts [CspRequestDto] :csp_request_dto 
     # @return [CspWrapper]
     def configure_csp(opts = {})
       data, _status_code, _headers = configure_csp_with_http_info(opts)
@@ -38,7 +38,7 @@ module DocspaceApiSdk
     # Replaces the list of external domains the portal's Content Security Policy trusts and returns the policy  header the portal serves to browsers from that moment on. The list in `domains` replaces the stored one, so an  omitted or empty list falls back to the portal's built-in policy, and every entry that is sent becomes an  allowed source for scripts, styles, images, fonts, frames, media and connections at once. An entry may be a  host, a host with a scheme, or a wildcard host such as `*.example.com`; it has to form a valid absolute  address and may contain ASCII characters only, and an entry that does not is refused with 400 before anything  is saved. The caller needs the portal-settings right of a DocSpace administrator, and the request is also  refused with 403 when the header built from the list grows past the size configured for the installation, 15  KB by default. The change applies to the whole portal at once and is idempotent. Read the current state with  `GET api/2.0/security/csp`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-csp/
     # @param [Hash] opts the optional parameters
-    # @option opts [CspRequestsDto] :csp_requests_dto 
+    # @option opts [CspRequestDto] :csp_request_dto 
     # @return [Array<(CspWrapper, Integer, Hash)>] CspWrapper data, response status code and response headers
     def configure_csp_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -64,7 +64,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'csp_requests_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'csp_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'CspWrapper'

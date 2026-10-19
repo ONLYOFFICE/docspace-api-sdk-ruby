@@ -12,7 +12,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 ## get_user_quota_settings
 
-> <TenantUserQuotaSettingsWrapper> get_user_quota_settings
+> <EntityQuotaSettingsWrapper> get_user_quota_settings
 
 Get the user quota settings
 
@@ -64,7 +64,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<TenantUserQuotaSettingsWrapper>, Integer, Hash)> get_user_quota_settings_with_http_info
+> <Array(<EntityQuotaSettingsWrapper>, Integer, Hash)> get_user_quota_settings_with_http_info
 
 ```ruby
 begin
@@ -72,7 +72,7 @@ begin
   data, status_code, headers = api_instance.get_user_quota_settings_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <TenantUserQuotaSettingsWrapper>
+  p data # => <EntityQuotaSettingsWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::QuotaApi->get_user_quota_settings_with_http_info: #{e}"
 end
@@ -84,7 +84,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**TenantUserQuotaSettingsWrapper**](TenantUserQuotaSettingsWrapper.md)
+[**EntityQuotaSettingsWrapper**](EntityQuotaSettingsWrapper.md)
 
 ### Authorization
 
@@ -98,7 +98,7 @@ This endpoint does not need any parameter.
 
 ## save_ai_agent_quota_settings
 
-> <TenantAiAgentQuotaSettingsWrapper> save_ai_agent_quota_settings(opts)
+> <EntityQuotaSettingsWrapper> save_ai_agent_quota_settings(opts)
 
 Save the AI Agent quota settings
 
@@ -137,7 +137,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::QuotaApi.new
 opts = {
-  quota_settings_requests_dto: DocspaceApiSdk::QuotaSettingsRequestsDto.new({default_quota: nil}) # QuotaSettingsRequestsDto | 
+  quota_settings_request_dto: DocspaceApiSdk::QuotaSettingsRequestDto.new({default_quota: nil}) # QuotaSettingsRequestDto | 
 }
 
 begin
@@ -153,7 +153,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<TenantAiAgentQuotaSettingsWrapper>, Integer, Hash)> save_ai_agent_quota_settings_with_http_info(opts)
+> <Array(<EntityQuotaSettingsWrapper>, Integer, Hash)> save_ai_agent_quota_settings_with_http_info(opts)
 
 ```ruby
 begin
@@ -161,7 +161,7 @@ begin
   data, status_code, headers = api_instance.save_ai_agent_quota_settings_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <TenantAiAgentQuotaSettingsWrapper>
+  p data # => <EntityQuotaSettingsWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::QuotaApi->save_ai_agent_quota_settings_with_http_info: #{e}"
 end
@@ -171,11 +171,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **quota_settings_requests_dto** | [**QuotaSettingsRequestsDto**](QuotaSettingsRequestsDto.md) |  | [optional] |
+| **quota_settings_request_dto** | [**QuotaSettingsRequestDto**](QuotaSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 
-[**TenantAiAgentQuotaSettingsWrapper**](TenantAiAgentQuotaSettingsWrapper.md)
+[**EntityQuotaSettingsWrapper**](EntityQuotaSettingsWrapper.md)
 
 ### Authorization
 
@@ -189,7 +189,7 @@ end
 
 ## save_room_quota_settings
 
-> <TenantRoomQuotaSettingsWrapper> save_room_quota_settings(opts)
+> <EntityQuotaSettingsWrapper> save_room_quota_settings(opts)
 
 Save the room quota settings
 
@@ -228,7 +228,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::QuotaApi.new
 opts = {
-  quota_settings_requests_dto: DocspaceApiSdk::QuotaSettingsRequestsDto.new({default_quota: nil}) # QuotaSettingsRequestsDto | 
+  quota_settings_request_dto: DocspaceApiSdk::QuotaSettingsRequestDto.new({default_quota: nil}) # QuotaSettingsRequestDto | 
 }
 
 begin
@@ -244,7 +244,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<TenantRoomQuotaSettingsWrapper>, Integer, Hash)> save_room_quota_settings_with_http_info(opts)
+> <Array(<EntityQuotaSettingsWrapper>, Integer, Hash)> save_room_quota_settings_with_http_info(opts)
 
 ```ruby
 begin
@@ -252,7 +252,7 @@ begin
   data, status_code, headers = api_instance.save_room_quota_settings_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <TenantRoomQuotaSettingsWrapper>
+  p data # => <EntityQuotaSettingsWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::QuotaApi->save_room_quota_settings_with_http_info: #{e}"
 end
@@ -262,11 +262,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **quota_settings_requests_dto** | [**QuotaSettingsRequestsDto**](QuotaSettingsRequestsDto.md) |  | [optional] |
+| **quota_settings_request_dto** | [**QuotaSettingsRequestDto**](QuotaSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 
-[**TenantRoomQuotaSettingsWrapper**](TenantRoomQuotaSettingsWrapper.md)
+[**EntityQuotaSettingsWrapper**](EntityQuotaSettingsWrapper.md)
 
 ### Authorization
 
@@ -319,7 +319,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::QuotaApi.new
 opts = {
-  tenant_quota_settings_requests_dto: DocspaceApiSdk::TenantQuotaSettingsRequestsDto.new({tenant_id: 1}) # TenantQuotaSettingsRequestsDto | 
+  tenant_quota_settings_request_dto: DocspaceApiSdk::TenantQuotaSettingsRequestDto.new({tenant_id: 1}) # TenantQuotaSettingsRequestDto | 
 }
 
 begin
@@ -353,7 +353,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **tenant_quota_settings_requests_dto** | [**TenantQuotaSettingsRequestsDto**](TenantQuotaSettingsRequestsDto.md) |  | [optional] |
+| **tenant_quota_settings_request_dto** | [**TenantQuotaSettingsRequestDto**](TenantQuotaSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 

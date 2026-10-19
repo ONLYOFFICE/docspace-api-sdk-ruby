@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **response** | [**Array&lt;BackupHistoryRecord&gt;**](BackupHistoryRecord.md) | The list of BackupHistoryRecord objects returned by the operation. | [optional] |
+| **response** | [**Array&lt;BackupHistoryRecordDto&gt;**](BackupHistoryRecordDto.md) | The list of BackupHistoryRecordDto objects returned by the operation. | [optional] |
 | **count** | **Integer** | The total number of items in the response | [optional] |
 | **links** | [**Array&lt;GetPortalPrices200ResponseLinksInner&gt;**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] |
 | **status** | **Integer** | HTTP status code of the response | [optional] |

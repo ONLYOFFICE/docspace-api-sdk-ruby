@@ -159,7 +159,7 @@ module DocspaceApiSdk
     # Stores the access rights the sharing dialog offers the calling account by default, and returns the set that  was actually stored. The body is a bare array of access-right values, not an object. The portal normalises the  array instead of keeping it as sent: it keeps the fill-forms, custom-filter and review entries, then adds  read-and-write or comment - whichever is present, in that order - and stops there, and it falls back to read  alone when nothing else applies, so the response can be shorter than the request and its order can differ. An  empty array clears the setting, after which read alone is reported. A value outside the published list is  rejected as an invalid request. The set belongs to the calling account alone: every authenticated role down to  a guest may store its own, and an unauthenticated caller is refused. Nothing already shared is changed. The  stored set is published as `defaultSharingAccessRights` by `GET api/2.0/files/settings`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-default-access-rights/
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<Integer>] :request_body The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.
+    # @option opts [Array<Integer>] :default_access_rights_request_dto The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.
     # @return [FileShareResponseArrayWrapper]
     def change_default_access_rights(opts = {})
       data, _status_code, _headers = change_default_access_rights_with_http_info(opts)
@@ -170,7 +170,7 @@ module DocspaceApiSdk
     # Stores the access rights the sharing dialog offers the calling account by default, and returns the set that  was actually stored. The body is a bare array of access-right values, not an object. The portal normalises the  array instead of keeping it as sent: it keeps the fill-forms, custom-filter and review entries, then adds  read-and-write or comment - whichever is present, in that order - and stops there, and it falls back to read  alone when nothing else applies, so the response can be shorter than the request and its order can differ. An  empty array clears the setting, after which read alone is reported. A value outside the published list is  rejected as an invalid request. The set belongs to the calling account alone: every authenticated role down to  a guest may store its own, and an unauthenticated caller is refused. Nothing already shared is changed. The  stored set is published as `defaultSharingAccessRights` by `GET api/2.0/files/settings`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/change-default-access-rights/
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<Integer>] :request_body The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.
+    # @option opts [Array<Integer>] :default_access_rights_request_dto The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.
     # @return [Array<(FileShareResponseArrayWrapper, Integer, Hash)>] FileShareResponseArrayWrapper data, response status code and response headers
     def change_default_access_rights_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -196,7 +196,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'request_body'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'default_access_rights_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'FileShareResponseArrayWrapper'
@@ -1927,7 +1927,7 @@ module DocspaceApiSdk
 
       # query parameters
       query_params = opts[:query_params] || {}
-      query_params[:'FileExtension'] = file_extension
+      query_params[:'fileExtension'] = file_extension
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1941,7 +1941,7 @@ module DocspaceApiSdk
 
       # form parameters
       form_params = opts[:form_params] || {}
-      form_params['File'] = file
+      form_params['file'] = file
 
       # http body (model)
       post_body = opts[:debug_body]

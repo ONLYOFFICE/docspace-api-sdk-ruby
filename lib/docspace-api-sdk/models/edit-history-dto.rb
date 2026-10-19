@@ -78,10 +78,10 @@ module DocspaceApiSdk
         :'key' => :'String',
         :'version' => :'Integer',
         :'version_group' => :'Integer',
-        :'user' => :'EditHistoryAuthor',
+        :'user' => :'EditHistoryAuthorDto',
         :'created' => :'ApiDateTime',
         :'changes_history' => :'String',
-        :'changes' => :'Array<EditHistoryChangesWrapper>',
+        :'changes' => :'Array<EditHistoryChangesDto>',
         :'server_version' => :'String'
       }
     end

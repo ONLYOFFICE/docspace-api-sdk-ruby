@@ -52,7 +52,7 @@ module DocspaceApiSdk
       {
         :'success' => :'Boolean',
         :'profile' => :'AiProfile',
-        :'error' => :'AiTErrorData'
+        :'error' => :'AiErrorData'
       }
     end
 

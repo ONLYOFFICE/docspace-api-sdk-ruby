@@ -68,7 +68,7 @@ module DocspaceApiSdk
       {
         :'changes_url' => :'String',
         :'key' => :'String',
-        :'previous' => :'EditHistoryUrl',
+        :'previous' => :'EditHistoryUrlDto',
         :'token' => :'String',
         :'url' => :'String',
         :'version' => :'Integer',

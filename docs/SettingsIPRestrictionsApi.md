@@ -12,7 +12,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 ## get_ip_restrictions
 
-> <IPRestrictionArrayWrapper> get_ip_restrictions
+> <IpRestrictionArrayWrapper> get_ip_restrictions
 
 Get IP restrictions
 
@@ -64,7 +64,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<IPRestrictionArrayWrapper>, Integer, Hash)> get_ip_restrictions_with_http_info
+> <Array(<IpRestrictionArrayWrapper>, Integer, Hash)> get_ip_restrictions_with_http_info
 
 ```ruby
 begin
@@ -72,7 +72,7 @@ begin
   data, status_code, headers = api_instance.get_ip_restrictions_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <IPRestrictionArrayWrapper>
+  p data # => <IpRestrictionArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::IPRestrictionsApi->get_ip_restrictions_with_http_info: #{e}"
 end
@@ -84,7 +84,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**IPRestrictionArrayWrapper**](IPRestrictionArrayWrapper.md)
+[**IpRestrictionArrayWrapper**](IpRestrictionArrayWrapper.md)
 
 ### Authorization
 
@@ -98,7 +98,7 @@ This endpoint does not need any parameter.
 
 ## read_ip_restrictions_settings
 
-> <IPRestrictionsSettingsWrapper> read_ip_restrictions_settings
+> <IpRestrictionsSettingsWrapper> read_ip_restrictions_settings
 
 Get IP restriction settings
 
@@ -150,7 +150,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<IPRestrictionsSettingsWrapper>, Integer, Hash)> read_ip_restrictions_settings_with_http_info
+> <Array(<IpRestrictionsSettingsWrapper>, Integer, Hash)> read_ip_restrictions_settings_with_http_info
 
 ```ruby
 begin
@@ -158,7 +158,7 @@ begin
   data, status_code, headers = api_instance.read_ip_restrictions_settings_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <IPRestrictionsSettingsWrapper>
+  p data # => <IpRestrictionsSettingsWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::IPRestrictionsApi->read_ip_restrictions_settings_with_http_info: #{e}"
 end
@@ -170,7 +170,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**IPRestrictionsSettingsWrapper**](IPRestrictionsSettingsWrapper.md)
+[**IpRestrictionsSettingsWrapper**](IpRestrictionsSettingsWrapper.md)
 
 ### Authorization
 

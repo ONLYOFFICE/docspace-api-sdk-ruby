@@ -52,7 +52,7 @@ module DocspaceApiSdk
       {
         :'success' => :'Boolean',
         :'folder' => :'AiPromptFolder',
-        :'error' => :'AiTErrorData'
+        :'error' => :'AiErrorData'
       }
     end
 

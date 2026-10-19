@@ -112,7 +112,7 @@ This endpoint does not need any parameter.
 
 Create the backup schedule
 
-Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and because an omitted `day` is stored as 0, which neither period accepts, a weekly or  monthly schedule sent without it fails instead of falling back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
+Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and a weekly or monthly schedule sent without it is rejected with 400 instead of falling  back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-backup-schedule/).
 
@@ -147,7 +147,7 @@ end
 
 api_instance = DocspaceApiSdk::Backup::BackupApi.new
 opts = {
-  backup_schedule_dto: DocspaceApiSdk::BackupScheduleDto.new # BackupScheduleDto | 
+  create_backup_schedule_request_dto: DocspaceApiSdk::CreateBackupScheduleRequestDto.new # CreateBackupScheduleRequestDto | 
 }
 
 begin
@@ -181,7 +181,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **backup_schedule_dto** | [**BackupScheduleDto**](BackupScheduleDto.md) |  | [optional] |
+| **create_backup_schedule_request_dto** | [**CreateBackupScheduleRequestDto**](CreateBackupScheduleRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -203,7 +203,7 @@ end
 
 Delete the backup
 
-Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it.
+Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it. An ID that no backup has ever had is answered with 404.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-backup/).
 
@@ -1149,7 +1149,7 @@ end
 
 api_instance = DocspaceApiSdk::Backup::BackupApi.new
 opts = {
-  backup_dto: DocspaceApiSdk::BackupDto.new # BackupDto | 
+  start_backup_request_dto: DocspaceApiSdk::StartBackupRequestDto.new # StartBackupRequestDto | 
 }
 
 begin
@@ -1183,7 +1183,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **backup_dto** | [**BackupDto**](BackupDto.md) |  | [optional] |
+| **start_backup_request_dto** | [**StartBackupRequestDto**](StartBackupRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -1240,7 +1240,7 @@ end
 
 api_instance = DocspaceApiSdk::Backup::BackupApi.new
 opts = {
-  backup_restore_dto: DocspaceApiSdk::BackupRestoreDto.new({backup_id: '11111111-1111-1111-1111-111111111111'}) # BackupRestoreDto | 
+  start_backup_restore_request_dto: DocspaceApiSdk::StartBackupRestoreRequestDto.new({backup_id: '11111111-1111-1111-1111-111111111111'}) # StartBackupRestoreRequestDto | 
 }
 
 begin
@@ -1274,7 +1274,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **backup_restore_dto** | [**BackupRestoreDto**](BackupRestoreDto.md) |  | [optional] |
+| **start_backup_restore_request_dto** | [**StartBackupRestoreRequestDto**](StartBackupRestoreRequestDto.md) |  | [optional] |
 
 ### Return type
 

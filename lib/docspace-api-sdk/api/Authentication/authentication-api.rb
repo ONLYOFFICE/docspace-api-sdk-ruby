@@ -27,7 +27,7 @@ module DocspaceApiSdk
     # Signs a user in to the current portal and either issues the authentication token or reports which second  factor is still missing. Credentials go in the body as `userName` with `password` or `passwordHash`, as the  key of a confirmation link in `confirmData`, or as a third-party account (`provider` with `accessToken`, or  `serializedProfile`), which only a standalone installation or a tariff with third-party sign-in allows. Open  to unauthenticated callers, mutating and not  idempotent: it writes a login event, sets the portal cookies and counts every failure against the brute-force  limit. When a second factor is required for this user the answer carries no `token` but `sms` with the masked  phone number - or a `confirmUrl` pointing at `POST api/2.0/authentication/setphone` while no number is  activated yet - or `tfa` with the setup key while the authenticator app is not connected; submit the code to  `POST api/2.0/authentication/{code}` to finish such a sign-in. Otherwise the answer carries `token` for the  `Authorization` header and `expires`, which is omitted when `session=true` ties the token to the browser  session. An unknown user fails with 404, rejected credentials with 401, a disabled or blocked user with 403.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/authenticate-me/
     # @param [Hash] opts the optional parameters
-    # @option opts [AuthRequestsDto] :auth_requests_dto 
+    # @option opts [AuthRequestDto] :auth_request_dto 
     # @return [AuthenticationTokenWrapper]
     def authenticate_me(opts = {})
       data, _status_code, _headers = authenticate_me_with_http_info(opts)
@@ -38,7 +38,7 @@ module DocspaceApiSdk
     # Signs a user in to the current portal and either issues the authentication token or reports which second  factor is still missing. Credentials go in the body as `userName` with `password` or `passwordHash`, as the  key of a confirmation link in `confirmData`, or as a third-party account (`provider` with `accessToken`, or  `serializedProfile`), which only a standalone installation or a tariff with third-party sign-in allows. Open  to unauthenticated callers, mutating and not  idempotent: it writes a login event, sets the portal cookies and counts every failure against the brute-force  limit. When a second factor is required for this user the answer carries no `token` but `sms` with the masked  phone number - or a `confirmUrl` pointing at `POST api/2.0/authentication/setphone` while no number is  activated yet - or `tfa` with the setup key while the authenticator app is not connected; submit the code to  `POST api/2.0/authentication/{code}` to finish such a sign-in. Otherwise the answer carries `token` for the  `Authorization` header and `expires`, which is omitted when `session=true` ties the token to the browser  session. An unknown user fails with 404, rejected credentials with 401, a disabled or blocked user with 403.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/authenticate-me/
     # @param [Hash] opts the optional parameters
-    # @option opts [AuthRequestsDto] :auth_requests_dto 
+    # @option opts [AuthRequestDto] :auth_request_dto 
     # @return [Array<(AuthenticationTokenWrapper, Integer, Hash)>] AuthenticationTokenWrapper data, response status code and response headers
     def authenticate_me_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -64,7 +64,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'auth_requests_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'auth_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'AuthenticationTokenWrapper'
@@ -94,7 +94,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/authenticate-me-from-body-with-code/
     # @param code [String] The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads.
     # @param [Hash] opts the optional parameters
-    # @option opts [AuthWithCodeRequestsDto] :auth_with_code_requests_dto 
+    # @option opts [AuthWithCodeRequestDto] :auth_with_code_request_dto 
     # @return [AuthenticationTokenWrapper]
     def authenticate_me_from_body_with_code(code, opts = {})
       data, _status_code, _headers = authenticate_me_from_body_with_code_with_http_info(code, opts)
@@ -106,7 +106,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/authenticate-me-from-body-with-code/
     # @param code [String] The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads.
     # @param [Hash] opts the optional parameters
-    # @option opts [AuthWithCodeRequestsDto] :auth_with_code_requests_dto 
+    # @option opts [AuthWithCodeRequestDto] :auth_with_code_request_dto 
     # @return [Array<(AuthenticationTokenWrapper, Integer, Hash)>] AuthenticationTokenWrapper data, response status code and response headers
     def authenticate_me_from_body_with_code_with_http_info(code, opts = {})
       if @api_client.config.debugging
@@ -136,7 +136,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'auth_with_code_requests_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'auth_with_code_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'AuthenticationTokenWrapper'
@@ -165,7 +165,7 @@ module DocspaceApiSdk
     # Checks the key of a confirmation link that the portal sent by email and reports whether the action behind that  link can still be carried out - an employee invitation, phone activation, a password change, portal removal  and so on. Take `key` and `type` from the query string of the link; when `key` is left empty, the key saved in  the confirmation cookie of the same `type` is used instead. Open to unauthenticated callers and read-only: it  neither accepts the invitation nor signs anyone in. `result` is `Ok` when the link may be used, `Invalid` when  the key does not match the type or the email, `Expired` when it is too old, and `TariffLimit`, `UserExisted`,  `UserExcluded` or `QuotaFailed` when the key is sound but the invitation behind it cannot be accepted. Only  `Ok` should be followed by the operation that performs the action - `POST api/2.0/people` with  `fromInviteLink` for an invitation, `POST api/2.0/authentication` with `confirmData` for a sign-in link - and  for an invitation to a room the answer also carries the identifier and the title of that room.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-confirm/
     # @param [Hash] opts the optional parameters
-    # @option opts [EmailValidationKeyModel] :email_validation_key_model 
+    # @option opts [CheckConfirmRequestDto] :check_confirm_request_dto 
     # @return [ConfirmWrapper]
     def check_confirm(opts = {})
       data, _status_code, _headers = check_confirm_with_http_info(opts)
@@ -176,7 +176,7 @@ module DocspaceApiSdk
     # Checks the key of a confirmation link that the portal sent by email and reports whether the action behind that  link can still be carried out - an employee invitation, phone activation, a password change, portal removal  and so on. Take `key` and `type` from the query string of the link; when `key` is left empty, the key saved in  the confirmation cookie of the same `type` is used instead. Open to unauthenticated callers and read-only: it  neither accepts the invitation nor signs anyone in. `result` is `Ok` when the link may be used, `Invalid` when  the key does not match the type or the email, `Expired` when it is too old, and `TariffLimit`, `UserExisted`,  `UserExcluded` or `QuotaFailed` when the key is sound but the invitation behind it cannot be accepted. Only  `Ok` should be followed by the operation that performs the action - `POST api/2.0/people` with  `fromInviteLink` for an invitation, `POST api/2.0/authentication` with `confirmData` for a sign-in link - and  for an invitation to a room the answer also carries the identifier and the title of that room.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/check-confirm/
     # @param [Hash] opts the optional parameters
-    # @option opts [EmailValidationKeyModel] :email_validation_key_model 
+    # @option opts [CheckConfirmRequestDto] :check_confirm_request_dto 
     # @return [Array<(ConfirmWrapper, Integer, Hash)>] ConfirmWrapper data, response status code and response headers
     def check_confirm_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -202,7 +202,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'email_validation_key_model'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'check_confirm_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'ConfirmWrapper'
@@ -349,7 +349,7 @@ module DocspaceApiSdk
     # Stores the mobile phone number of a user who is going through phone activation and sends the first SMS  authentication code to it. It is reachable only with the phone-activation confirmation link that  `POST api/2.0/authentication` returns in `confirmUrl` when SMS two-factor is required and the user has no  activated number yet: that link authorizes the call in place of an authentication token, and no token is  issued here. The operation is mutating and not idempotent - it saves the number as not activated, writes an  audit event and sends a message - and an already activated number is not replaced this way, the stored number  has to be erased first. The answer carries `sms`, the masked number and `expires`, the moment the code stops  being accepted. Submit that code to `POST api/2.0/authentication/{code}`, which signs the user in and marks  the number activated, or ask for another one with `POST api/2.0/authentication/sendsms`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mobile-phone/
     # @param [Hash] opts the optional parameters
-    # @option opts [MobileRequestsDto] :mobile_requests_dto 
+    # @option opts [MobileRequestDto] :mobile_request_dto 
     # @return [AuthenticationTokenWrapper]
     def save_mobile_phone(opts = {})
       data, _status_code, _headers = save_mobile_phone_with_http_info(opts)
@@ -360,7 +360,7 @@ module DocspaceApiSdk
     # Stores the mobile phone number of a user who is going through phone activation and sends the first SMS  authentication code to it. It is reachable only with the phone-activation confirmation link that  `POST api/2.0/authentication` returns in `confirmUrl` when SMS two-factor is required and the user has no  activated number yet: that link authorizes the call in place of an authentication token, and no token is  issued here. The operation is mutating and not idempotent - it saves the number as not activated, writes an  audit event and sends a message - and an already activated number is not replaced this way, the stored number  has to be erased first. The answer carries `sms`, the masked number and `expires`, the moment the code stops  being accepted. Submit that code to `POST api/2.0/authentication/{code}`, which signs the user in and marks  the number activated, or ask for another one with `POST api/2.0/authentication/sendsms`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mobile-phone/
     # @param [Hash] opts the optional parameters
-    # @option opts [MobileRequestsDto] :mobile_requests_dto 
+    # @option opts [MobileRequestDto] :mobile_request_dto 
     # @return [Array<(AuthenticationTokenWrapper, Integer, Hash)>] AuthenticationTokenWrapper data, response status code and response headers
     def save_mobile_phone_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -386,7 +386,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'mobile_requests_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'mobile_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'AuthenticationTokenWrapper'
@@ -415,7 +415,7 @@ module DocspaceApiSdk
     # Sends a new SMS authentication code to the phone number stored for the user and reports when that code  expires. The credentials in the body are checked exactly as by `POST api/2.0/authentication`, so use this  operation to resend the code after that call answered with `sms`; the user needs SMS two-factor enabled and a  phone number already stored, which `POST api/2.0/authentication/setphone` registers. Open to unauthenticated  callers, mutating and not idempotent: every call sends a message, is counted in the portal's SMS usage and  spends one of the few codes a number is allowed within the code lifetime (ten minutes by default), after which  the call fails until those codes expire. Codes sent earlier stay valid, so a resent code does not invalidate  them, and the first one to be accepted invalidates all of them. The answer carries `sms`, the masked number  and `expires`, and no token - submit the code to `POST api/2.0/authentication/{code}`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/send-sms-code/
     # @param [Hash] opts the optional parameters
-    # @option opts [AuthRequestsDto] :auth_requests_dto 
+    # @option opts [AuthRequestDto] :auth_request_dto 
     # @return [AuthenticationTokenWrapper]
     def send_sms_code(opts = {})
       data, _status_code, _headers = send_sms_code_with_http_info(opts)
@@ -426,7 +426,7 @@ module DocspaceApiSdk
     # Sends a new SMS authentication code to the phone number stored for the user and reports when that code  expires. The credentials in the body are checked exactly as by `POST api/2.0/authentication`, so use this  operation to resend the code after that call answered with `sms`; the user needs SMS two-factor enabled and a  phone number already stored, which `POST api/2.0/authentication/setphone` registers. Open to unauthenticated  callers, mutating and not idempotent: every call sends a message, is counted in the portal's SMS usage and  spends one of the few codes a number is allowed within the code lifetime (ten minutes by default), after which  the call fails until those codes expire. Codes sent earlier stay valid, so a resent code does not invalidate  them, and the first one to be accepted invalidates all of them. The answer carries `sms`, the masked number  and `expires`, and no token - submit the code to `POST api/2.0/authentication/{code}`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/send-sms-code/
     # @param [Hash] opts the optional parameters
-    # @option opts [AuthRequestsDto] :auth_requests_dto 
+    # @option opts [AuthRequestDto] :auth_request_dto 
     # @return [Array<(AuthenticationTokenWrapper, Integer, Hash)>] AuthenticationTokenWrapper data, response status code and response headers
     def send_sms_code_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -452,7 +452,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'auth_requests_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'auth_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'AuthenticationTokenWrapper'

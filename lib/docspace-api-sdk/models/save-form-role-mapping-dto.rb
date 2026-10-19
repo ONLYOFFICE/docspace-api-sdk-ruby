@@ -47,7 +47,7 @@ module DocspaceApiSdk
     def self.openapi_types
       {
         :'form_id' => :'Integer',
-        :'roles' => :'Array<FormRole>'
+        :'roles' => :'Array<FormRoleRequest>'
       }
     end
 

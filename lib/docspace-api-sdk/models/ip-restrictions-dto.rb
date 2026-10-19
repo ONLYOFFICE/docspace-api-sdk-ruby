@@ -46,7 +46,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'ip_restrictions' => :'Array<IpRestrictionBase>',
+        :'ip_restrictions' => :'Array<IpRestrictionEntryDto>',
         :'enable' => :'Boolean'
       }
     end

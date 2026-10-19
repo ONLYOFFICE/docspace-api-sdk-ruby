@@ -25,7 +25,7 @@ module DocspaceApiSdk
     # The ID of the user who receives the data. The account has to be an active room admin or DocSpace admin, so a  guest, a system account or a disabled account is rejected.
     attr_accessor :to_user_id
 
-    # Specifies whether to delete the source profile once the transfer succeeds. When false, which is the default,  the emptied profile is kept and can be deleted later through `DELETE api/2.0/people/{userid}`.
+    # Specifies whether to delete the source profile once the transfer succeeds. When false, which is the default,  the emptied profile is kept and can be deleted later through `DELETE api/2.0/people/{userId}`.
     attr_accessor :delete_profile
 
     # Attribute mapping from ruby-style variable name to JSON key.

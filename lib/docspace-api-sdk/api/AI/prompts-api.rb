@@ -24,7 +24,7 @@ module DocspaceApiSdk
       @api_client = api_client
     end
     # Save a prompt
-    # Saves a new prompt in the caller's own prompt library and returns it. The name has to be non-empty and unique inside its folder, and `folderId` has to name an existing folder - omit it to save the prompt at the root. Prompts are per-user: another user's library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
+    # Saves a new prompt in the caller's own prompt library and returns it. `name` and `text` have to be strings and `folderId`, when sent, a string or null, or the call answers 400 before the library is touched. The name has to be non-empty and unique inside its folder, and `folderId` has to name an existing folder - omit it to save the prompt at the root. A refusal keeps the `{ success: false, error }` body but answers 400 for an empty value, 404 for an unknown folder and 409 for a name already in use. Prompts are per-user: another user's library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-create/
     # @param ai_create_prompt_input [AiCreatePromptInput] 
     # @param [Hash] opts the optional parameters
@@ -35,7 +35,7 @@ module DocspaceApiSdk
     end
 
     # Save a prompt
-    # Saves a new prompt in the caller's own prompt library and returns it. The name has to be non-empty and unique inside its folder, and `folderId` has to name an existing folder - omit it to save the prompt at the root. Prompts are per-user: another user's library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
+    # Saves a new prompt in the caller's own prompt library and returns it. `name` and `text` have to be strings and `folderId`, when sent, a string or null, or the call answers 400 before the library is touched. The name has to be non-empty and unique inside its folder, and `folderId` has to name an existing folder - omit it to save the prompt at the root. A refusal keeps the `{ success: false, error }` body but answers 400 for an empty value, 404 for an unknown folder and 409 for a name already in use. Prompts are per-user: another user's library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-create/
     # @param ai_create_prompt_input [AiCreatePromptInput] 
     # @param [Hash] opts the optional parameters
@@ -94,29 +94,29 @@ module DocspaceApiSdk
     end
 
     # Create folder
-    # Creates a folder in the caller's prompt library and returns it. The name has to be non-empty and unique across that library. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
+    # Creates a folder in the caller's prompt library and returns it. The name has to be a non-empty string and unique across that library - a non-string or empty one answers 400, a name in use 409, both with the `{ success: false, error }` body. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-create-folder/
-    # @param body [String] The name of the folder to create, as a bare JSON string.
+    # @param ai_prompts_create_folder_request [String] The name of the folder to create, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [AiFolderMutationResult]
-    def ai_prompts_create_folder(body, opts = {})
-      data, _status_code, _headers = ai_prompts_create_folder_with_http_info(body, opts)
+    def ai_prompts_create_folder(ai_prompts_create_folder_request, opts = {})
+      data, _status_code, _headers = ai_prompts_create_folder_with_http_info(ai_prompts_create_folder_request, opts)
       data
     end
 
     # Create folder
-    # Creates a folder in the caller's prompt library and returns it. The name has to be non-empty and unique across that library. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
+    # Creates a folder in the caller's prompt library and returns it. The name has to be a non-empty string and unique across that library - a non-string or empty one answers 400, a name in use 409, both with the `{ success: false, error }` body. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-create-folder/
-    # @param body [String] The name of the folder to create, as a bare JSON string.
+    # @param ai_prompts_create_folder_request [String] The name of the folder to create, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiFolderMutationResult, Integer, Hash)>] AiFolderMutationResult data, response status code and response headers
-    def ai_prompts_create_folder_with_http_info(body, opts = {})
+    def ai_prompts_create_folder_with_http_info(ai_prompts_create_folder_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::PromptsApi.ai_prompts_create_folder ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling AI::PromptsApi.ai_prompts_create_folder"
+      # verify the required parameter 'ai_prompts_create_folder_request' is set
+      if @api_client.config.client_side_validation && ai_prompts_create_folder_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_prompts_create_folder_request' when calling AI::PromptsApi.ai_prompts_create_folder"
       end
       # resource path
       local_var_path = '/api/2.0/ai/prompts/create-folder'
@@ -138,7 +138,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_prompts_create_folder_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AiFolderMutationResult'
@@ -166,27 +166,27 @@ module DocspaceApiSdk
     # Delete a saved prompt
     # Deletes one saved prompt from the caller's library. The ID may be sent in the body or as a query parameter, and it is required. An ID that does not exist, or that belongs to another user, is not reported: the call answers success without deleting anything. The deletion is permanent.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete/
-    # @param body [String] The ID of the prompt to delete, as a bare JSON string.
+    # @param ai_prompts_delete_request [String] The ID of the prompt to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [AiSuccessResponse]
-    def ai_prompts_delete(body, opts = {})
-      data, _status_code, _headers = ai_prompts_delete_with_http_info(body, opts)
+    def ai_prompts_delete(ai_prompts_delete_request, opts = {})
+      data, _status_code, _headers = ai_prompts_delete_with_http_info(ai_prompts_delete_request, opts)
       data
     end
 
     # Delete a saved prompt
     # Deletes one saved prompt from the caller's library. The ID may be sent in the body or as a query parameter, and it is required. An ID that does not exist, or that belongs to another user, is not reported: the call answers success without deleting anything. The deletion is permanent.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete/
-    # @param body [String] The ID of the prompt to delete, as a bare JSON string.
+    # @param ai_prompts_delete_request [String] The ID of the prompt to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
-    def ai_prompts_delete_with_http_info(body, opts = {})
+    def ai_prompts_delete_with_http_info(ai_prompts_delete_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::PromptsApi.ai_prompts_delete ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling AI::PromptsApi.ai_prompts_delete"
+      # verify the required parameter 'ai_prompts_delete_request' is set
+      if @api_client.config.client_side_validation && ai_prompts_delete_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_prompts_delete_request' when calling AI::PromptsApi.ai_prompts_delete"
       end
       # resource path
       local_var_path = '/api/2.0/ai/prompts/delete'
@@ -208,7 +208,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_prompts_delete_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'
@@ -236,27 +236,27 @@ module DocspaceApiSdk
     # Delete folder
     # Deletes a folder together with every prompt inside it, permanently. The ID is required and may be sent in the body or as a query parameter. Unlike deleting a prompt, this checks first: a folder that does not exist, and one that belongs to another user, both answer 404 - the two cases are deliberately indistinguishable, so a foreign folder cannot be probed. Move the prompts out with `PUT api/2.0/ai/prompts/move` first if they should survive.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete-folder/
-    # @param body [String] The ID of the folder to delete, as a bare JSON string.
+    # @param ai_prompts_delete_folder_request [String] The ID of the folder to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [AiSuccessResponse]
-    def ai_prompts_delete_folder(body, opts = {})
-      data, _status_code, _headers = ai_prompts_delete_folder_with_http_info(body, opts)
+    def ai_prompts_delete_folder(ai_prompts_delete_folder_request, opts = {})
+      data, _status_code, _headers = ai_prompts_delete_folder_with_http_info(ai_prompts_delete_folder_request, opts)
       data
     end
 
     # Delete folder
     # Deletes a folder together with every prompt inside it, permanently. The ID is required and may be sent in the body or as a query parameter. Unlike deleting a prompt, this checks first: a folder that does not exist, and one that belongs to another user, both answer 404 - the two cases are deliberately indistinguishable, so a foreign folder cannot be probed. Move the prompts out with `PUT api/2.0/ai/prompts/move` first if they should survive.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete-folder/
-    # @param body [String] The ID of the folder to delete, as a bare JSON string.
+    # @param ai_prompts_delete_folder_request [String] The ID of the folder to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
-    def ai_prompts_delete_folder_with_http_info(body, opts = {})
+    def ai_prompts_delete_folder_with_http_info(ai_prompts_delete_folder_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::PromptsApi.ai_prompts_delete_folder ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling AI::PromptsApi.ai_prompts_delete_folder"
+      # verify the required parameter 'ai_prompts_delete_folder_request' is set
+      if @api_client.config.client_side_validation && ai_prompts_delete_folder_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_prompts_delete_folder_request' when calling AI::PromptsApi.ai_prompts_delete_folder"
       end
       # resource path
       local_var_path = '/api/2.0/ai/prompts/delete-folder'
@@ -278,7 +278,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_prompts_delete_folder_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'
@@ -495,7 +495,7 @@ module DocspaceApiSdk
     end
 
     # Import bundle
-    # Writes a bundle produced by `GET api/2.0/ai/prompts/export` back into the caller's library. `mode` decides how: `replace` deletes the current prompts and folders before writing, and `merge` writes the bundle on top of what is already there. The folder references inside the bundle are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway. `replace` is destructive and cannot be undone - export first if the current library matters.
+    # Writes a bundle produced by `GET api/2.0/ai/prompts/export` back into the caller's library. `mode` decides how: `replace` deletes the current prompts and folders before writing, and `merge` writes the bundle on top of what is already there. The bundle's shape - version 1, `folders` and `prompts` arrays of objects with string ids, names and texts - and the folder references inside it are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway: 400 with the refusals in `errors`, or 409 when every refusal is a name that already exists in the library. `replace` is destructive and cannot be undone - export first if the current library matters.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-import-bundle/
     # @param ai_prompts_import_bundle_request [AiPromptsImportBundleRequest] 
     # @param [Hash] opts the optional parameters
@@ -506,7 +506,7 @@ module DocspaceApiSdk
     end
 
     # Import bundle
-    # Writes a bundle produced by `GET api/2.0/ai/prompts/export` back into the caller's library. `mode` decides how: `replace` deletes the current prompts and folders before writing, and `merge` writes the bundle on top of what is already there. The folder references inside the bundle are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway. `replace` is destructive and cannot be undone - export first if the current library matters.
+    # Writes a bundle produced by `GET api/2.0/ai/prompts/export` back into the caller's library. `mode` decides how: `replace` deletes the current prompts and folders before writing, and `merge` writes the bundle on top of what is already there. The bundle's shape - version 1, `folders` and `prompts` arrays of objects with string ids, names and texts - and the folder references inside it are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway: 400 with the refusals in `errors`, or 409 when every refusal is a name that already exists in the library. `replace` is destructive and cannot be undone - export first if the current library matters.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-import-bundle/
     # @param ai_prompts_import_bundle_request [AiPromptsImportBundleRequest] 
     # @param [Hash] opts the optional parameters
@@ -686,7 +686,7 @@ module DocspaceApiSdk
     end
 
     # Move a prompt to a folder
-    # Moves a saved prompt into another folder, or to the root when `folderId` is omitted or null. The name is re-validated in the target folder, so the move fails when a prompt of that name already sits there - rename it first with `PUT api/2.0/ai/prompts/update`. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
+    # Moves a saved prompt into another folder, or to the root when `folderId` is omitted or null. The name is re-validated in the target folder, so the move fails with 409 when a prompt of that name already sits there - rename it first with `PUT api/2.0/ai/prompts/update`; an unknown prompt or folder answers 404. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-move/
     # @param ai_prompts_move_request [AiPromptsMoveRequest] 
     # @param [Hash] opts the optional parameters
@@ -697,7 +697,7 @@ module DocspaceApiSdk
     end
 
     # Move a prompt to a folder
-    # Moves a saved prompt into another folder, or to the root when `folderId` is omitted or null. The name is re-validated in the target folder, so the move fails when a prompt of that name already sits there - rename it first with `PUT api/2.0/ai/prompts/update`. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
+    # Moves a saved prompt into another folder, or to the root when `folderId` is omitted or null. The name is re-validated in the target folder, so the move fails with 409 when a prompt of that name already sits there - rename it first with `PUT api/2.0/ai/prompts/update`; an unknown prompt or folder answers 404. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-move/
     # @param ai_prompts_move_request [AiPromptsMoveRequest] 
     # @param [Hash] opts the optional parameters
@@ -756,7 +756,7 @@ module DocspaceApiSdk
     end
 
     # Rename folder
-    # Renames a folder in the caller's prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected.
+    # Renames a folder in the caller's prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected with 409, an unknown folder with 404 and a non-string or empty name with 400, always with the `{ success: false, error }` body.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-rename-folder/
     # @param ai_prompts_rename_folder_request [AiPromptsRenameFolderRequest] 
     # @param [Hash] opts the optional parameters
@@ -767,7 +767,7 @@ module DocspaceApiSdk
     end
 
     # Rename folder
-    # Renames a folder in the caller's prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected.
+    # Renames a folder in the caller's prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected with 409, an unknown folder with 404 and a non-string or empty name with 400, always with the `{ success: false, error }` body.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-rename-folder/
     # @param ai_prompts_rename_folder_request [AiPromptsRenameFolderRequest] 
     # @param [Hash] opts the optional parameters
@@ -826,7 +826,7 @@ module DocspaceApiSdk
     end
 
     # Update a saved prompt
-    # Changes a saved prompt and returns the stored result. Only the fields present in `updates` are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses. Use `PUT api/2.0/ai/prompts/move` to change only the folder.
+    # Changes a saved prompt and returns the stored result. Only the fields present in `updates` are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses - that answers 409, an unknown prompt or folder 404, an empty or non-string value 400, always with the `{ success: false, error }` body. Use `PUT api/2.0/ai/prompts/move` to change only the folder.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-update/
     # @param ai_prompts_update_request [AiPromptsUpdateRequest] 
     # @param [Hash] opts the optional parameters
@@ -837,7 +837,7 @@ module DocspaceApiSdk
     end
 
     # Update a saved prompt
-    # Changes a saved prompt and returns the stored result. Only the fields present in `updates` are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses. Use `PUT api/2.0/ai/prompts/move` to change only the folder.
+    # Changes a saved prompt and returns the stored result. Only the fields present in `updates` are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses - that answers 409, an unknown prompt or folder 404, an empty or non-string value 400, always with the `{ success: false, error }` body. Use `PUT api/2.0/ai/prompts/move` to change only the folder.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-update/
     # @param ai_prompts_update_request [AiPromptsUpdateRequest] 
     # @param [Hash] opts the optional parameters

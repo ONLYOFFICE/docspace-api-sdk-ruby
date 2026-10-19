@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The successful API response containing the DocsCloudConfig object.
+  # The successful API response containing the DocsCloudConfigDto object.
   class DocsCloudConfigWrapper < ApiModelBase
-    # The DocsCloudConfig object returned by the operation.
+    # The DocsCloudConfigDto object returned by the operation.
     attr_accessor :response
 
     # The total number of items in the response
@@ -58,7 +58,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'response' => :'DocsCloudConfig',
+        :'response' => :'DocsCloudConfigDto',
         :'count' => :'Integer',
         :'links' => :'Array<GetPortalPrices200ResponseLinksInner>',
         :'status' => :'Integer',

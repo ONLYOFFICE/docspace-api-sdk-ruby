@@ -87,7 +87,7 @@ module DocspaceApiSdk
         :'favorite' => :'Boolean',
         :'folder' => :'String',
         :'owner' => :'String',
-        :'sharing_settings' => :'Array<AceShortWrapper>',
+        :'sharing_settings' => :'Array<AceShortDto>',
         :'type' => :'EditorType',
         :'uploaded' => :'String'
       }

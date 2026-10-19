@@ -210,7 +210,7 @@ module DocspaceApiSdk
     # Switches one kind of notification on or off for the calling user: send the kind as `type` - 0 the new-item  badges, 1 the room activity letters, 2 the daily feed digest, 3 the periodic tips letters - together with  `isEnabled`. The change touches the caller's own account only, and repeating the call with the same pair  leaves the account as it is. Every signed-in member configures its own settings: the portal owner, a DocSpace  administrator, a room administrator, a user and a guest are all accepted, and no permission is demanded. With  0 switched off the Files responses report `new` as 0 and mark files as muted; with 1 switched off both the  hourly room digest and the letters a room sends at once, such as an editor mention, stop; with 2 switched off  the daily digest stops; with 3 switched off the tips letters stop. What comes back is an echo of the request  rather than a re-read of the stored state, and a `type` outside 0-3 is echoed as well while nothing is stored,  so confirm the result with `GET api/2.0/settings/notification/{type}`. To silence a single room instead of a  whole kind use `POST api/2.0/settings/notification/rooms`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-notification-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [NotificationSettingsRequestsDto] :notification_settings_requests_dto 
+    # @option opts [NotificationSettingsRequestDto] :notification_settings_request_dto 
     # @return [NotificationSettingsWrapper]
     def set_notification_settings(opts = {})
       data, _status_code, _headers = set_notification_settings_with_http_info(opts)
@@ -221,7 +221,7 @@ module DocspaceApiSdk
     # Switches one kind of notification on or off for the calling user: send the kind as `type` - 0 the new-item  badges, 1 the room activity letters, 2 the daily feed digest, 3 the periodic tips letters - together with  `isEnabled`. The change touches the caller's own account only, and repeating the call with the same pair  leaves the account as it is. Every signed-in member configures its own settings: the portal owner, a DocSpace  administrator, a room administrator, a user and a guest are all accepted, and no permission is demanded. With  0 switched off the Files responses report `new` as 0 and mark files as muted; with 1 switched off both the  hourly room digest and the letters a room sends at once, such as an editor mention, stop; with 2 switched off  the daily digest stops; with 3 switched off the tips letters stop. What comes back is an echo of the request  rather than a re-read of the stored state, and a `type` outside 0-3 is echoed as well while nothing is stored,  so confirm the result with `GET api/2.0/settings/notification/{type}`. To silence a single room instead of a  whole kind use `POST api/2.0/settings/notification/rooms`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-notification-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [NotificationSettingsRequestsDto] :notification_settings_requests_dto 
+    # @option opts [NotificationSettingsRequestDto] :notification_settings_request_dto 
     # @return [Array<(NotificationSettingsWrapper, Integer, Hash)>] NotificationSettingsWrapper data, response status code and response headers
     def set_notification_settings_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -247,7 +247,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'notification_settings_requests_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'notification_settings_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'NotificationSettingsWrapper'

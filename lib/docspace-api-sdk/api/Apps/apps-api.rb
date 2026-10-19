@@ -213,25 +213,25 @@ module DocspaceApiSdk
     end
 
     # Enable or disable an app
-    # Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by `GET api/2.0/apps`. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.
+    # Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by `GET api/2.0/apps`. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.  The enabled field is mandatory, and a body without it is rejected with 400 rather than read as false.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-enabled/
     # @param id [String] The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything.
-    # @param set_app_enabled_body [SetAppEnabledBody] The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
+    # @param set_app_enabled_request [SetAppEnabledRequest] The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
     # @param [Hash] opts the optional parameters
     # @return [AppWrapper]
-    def set_enabled(id, set_app_enabled_body, opts = {})
-      data, _status_code, _headers = set_enabled_with_http_info(id, set_app_enabled_body, opts)
+    def set_enabled(id, set_app_enabled_request, opts = {})
+      data, _status_code, _headers = set_enabled_with_http_info(id, set_app_enabled_request, opts)
       data
     end
 
     # Enable or disable an app
-    # Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by `GET api/2.0/apps`. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.
+    # Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by `GET api/2.0/apps`. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.  The enabled field is mandatory, and a body without it is rejected with 400 rather than read as false.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-enabled/
     # @param id [String] The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything.
-    # @param set_app_enabled_body [SetAppEnabledBody] The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
+    # @param set_app_enabled_request [SetAppEnabledRequest] The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AppWrapper, Integer, Hash)>] AppWrapper data, response status code and response headers
-    def set_enabled_with_http_info(id, set_app_enabled_body, opts = {})
+    def set_enabled_with_http_info(id, set_app_enabled_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Apps::AppsApi.set_enabled ...'
       end
@@ -239,9 +239,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling Apps::AppsApi.set_enabled"
       end
-      # verify the required parameter 'set_app_enabled_body' is set
-      if @api_client.config.client_side_validation && set_app_enabled_body.nil?
-        fail ArgumentError, "Missing the required parameter 'set_app_enabled_body' when calling Apps::AppsApi.set_enabled"
+      # verify the required parameter 'set_app_enabled_request' is set
+      if @api_client.config.client_side_validation && set_app_enabled_request.nil?
+        fail ArgumentError, "Missing the required parameter 'set_app_enabled_request' when calling Apps::AppsApi.set_enabled"
       end
       # resource path
       local_var_path = '/api/2.0/apps/{id}/enabled'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -263,7 +263,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(set_app_enabled_body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(set_app_enabled_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AppWrapper'
@@ -292,11 +292,11 @@ module DocspaceApiSdk
     # Stores the application-specific settings document of one portal application for the current portal. The  identifier must be an application declared in the installation configuration, as listed by `GET api/2.0/apps`.  The caller must be a portal administrator allowed to edit the portal settings. The call is mutating and  idempotent, and it replaces the whole document instead of merging into it: read the current one with  `GET api/2.0/apps/{id}/settings`, change it and send it back complete, or send `null` to drop the saved document  and let the application fall back to its own defaults. Any valid JSON value is accepted, since the content is  stored as it is and is interpreted by the application rather than by the portal, while a body that is not valid  JSON fails with 400 and stores nothing. The response is the application in its new state, with the stored  document echoed back. Unlike `PUT api/2.0/apps/{id}/enabled`, this operation sends no notification to the  connected clients, which pick the new settings up on their next read.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-settings/
     # @param id [String] The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404.
-    # @param set_app_settings_body [SetAppSettingsBody] The configuration to store for this portal, replacing whatever was stored before.
+    # @param set_app_settings_request [SetAppSettingsRequest] The configuration to store for this portal, replacing whatever was stored before.
     # @param [Hash] opts the optional parameters
     # @return [AppWrapper]
-    def set_settings(id, set_app_settings_body, opts = {})
-      data, _status_code, _headers = set_settings_with_http_info(id, set_app_settings_body, opts)
+    def set_settings(id, set_app_settings_request, opts = {})
+      data, _status_code, _headers = set_settings_with_http_info(id, set_app_settings_request, opts)
       data
     end
 
@@ -304,10 +304,10 @@ module DocspaceApiSdk
     # Stores the application-specific settings document of one portal application for the current portal. The  identifier must be an application declared in the installation configuration, as listed by `GET api/2.0/apps`.  The caller must be a portal administrator allowed to edit the portal settings. The call is mutating and  idempotent, and it replaces the whole document instead of merging into it: read the current one with  `GET api/2.0/apps/{id}/settings`, change it and send it back complete, or send `null` to drop the saved document  and let the application fall back to its own defaults. Any valid JSON value is accepted, since the content is  stored as it is and is interpreted by the application rather than by the portal, while a body that is not valid  JSON fails with 400 and stores nothing. The response is the application in its new state, with the stored  document echoed back. Unlike `PUT api/2.0/apps/{id}/enabled`, this operation sends no notification to the  connected clients, which pick the new settings up on their next read.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-settings/
     # @param id [String] The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404.
-    # @param set_app_settings_body [SetAppSettingsBody] The configuration to store for this portal, replacing whatever was stored before.
+    # @param set_app_settings_request [SetAppSettingsRequest] The configuration to store for this portal, replacing whatever was stored before.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AppWrapper, Integer, Hash)>] AppWrapper data, response status code and response headers
-    def set_settings_with_http_info(id, set_app_settings_body, opts = {})
+    def set_settings_with_http_info(id, set_app_settings_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Apps::AppsApi.set_settings ...'
       end
@@ -315,9 +315,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling Apps::AppsApi.set_settings"
       end
-      # verify the required parameter 'set_app_settings_body' is set
-      if @api_client.config.client_side_validation && set_app_settings_body.nil?
-        fail ArgumentError, "Missing the required parameter 'set_app_settings_body' when calling Apps::AppsApi.set_settings"
+      # verify the required parameter 'set_app_settings_request' is set
+      if @api_client.config.client_side_validation && set_app_settings_request.nil?
+        fail ArgumentError, "Missing the required parameter 'set_app_settings_request' when calling Apps::AppsApi.set_settings"
       end
       # resource path
       local_var_path = '/api/2.0/apps/{id}/settings'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -339,7 +339,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(set_app_settings_body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(set_app_settings_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AppWrapper'

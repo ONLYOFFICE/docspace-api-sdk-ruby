@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The successful API response containing the IPRestrictionsSettings object.
-  class IPRestrictionsSettingsWrapper < ApiModelBase
-    # The IPRestrictionsSettings object returned by the operation.
+  # The successful API response containing the IpRestrictionsSettingsDto object.
+  class IpRestrictionsSettingsWrapper < ApiModelBase
+    # The IpRestrictionsSettingsDto object returned by the operation.
     attr_accessor :response
 
     # The total number of items in the response
@@ -58,7 +58,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'response' => :'IPRestrictionsSettings',
+        :'response' => :'IpRestrictionsSettingsDto',
         :'count' => :'Integer',
         :'links' => :'Array<GetPortalPrices200ResponseLinksInner>',
         :'status' => :'Integer',
@@ -76,14 +76,14 @@ module DocspaceApiSdk
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `DocspaceApiSdk::IPRestrictionsSettingsWrapper` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `DocspaceApiSdk::IpRestrictionsSettingsWrapper` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       acceptable_attribute_map = self.class.acceptable_attribute_map
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!acceptable_attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `DocspaceApiSdk::IPRestrictionsSettingsWrapper`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `DocspaceApiSdk::IpRestrictionsSettingsWrapper`. Please check the name to make sure it's valid. List of attributes: " + acceptable_attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }

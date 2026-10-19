@@ -29,7 +29,7 @@ module DocspaceApiSdk
     # @param folder_id [Integer, String] The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`.
     # @param check_upload_request [CheckUploadRequest] The names to test against the files the folder already holds.
     # @param [Hash] opts the optional parameters
-    # @return [STRINGArrayWrapper]
+    # @return [StringArrayWrapper]
     def check_upload(folder_id, check_upload_request, opts = {})
       data, _status_code, _headers = check_upload_with_http_info(folder_id, check_upload_request, opts)
       data
@@ -41,7 +41,7 @@ module DocspaceApiSdk
     # @param folder_id [Integer, String] The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`.
     # @param check_upload_request [CheckUploadRequest] The names to test against the files the folder already holds.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(STRINGArrayWrapper, Integer, Hash)>] STRINGArrayWrapper data, response status code and response headers
+    # @return [Array<(StringArrayWrapper, Integer, Hash)>] StringArrayWrapper data, response status code and response headers
     def check_upload_with_http_info(folder_id, check_upload_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FoldersApi.check_upload ...'
@@ -77,7 +77,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(check_upload_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'STRINGArrayWrapper'
+      return_type = opts[:debug_return_type] || 'StringArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -103,11 +103,11 @@ module DocspaceApiSdk
     # Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use `POST api/2.0/files/rooms` for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder/
     # @param folder_id [Integer, String] The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
-    # @param create_folder [CreateFolder] The title carried by the request body.
+    # @param create_folder_request [CreateFolderRequest] The title carried by the request body.
     # @param [Hash] opts the optional parameters
     # @return [FolderWrapper, ThirdPartyFolderWrapper]
-    def create_folder(folder_id, create_folder, opts = {})
-      data, _status_code, _headers = create_folder_with_http_info(folder_id, create_folder, opts)
+    def create_folder(folder_id, create_folder_request, opts = {})
+      data, _status_code, _headers = create_folder_with_http_info(folder_id, create_folder_request, opts)
       data
     end
 
@@ -115,10 +115,10 @@ module DocspaceApiSdk
     # Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use `POST api/2.0/files/rooms` for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder/
     # @param folder_id [Integer, String] The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
-    # @param create_folder [CreateFolder] The title carried by the request body.
+    # @param create_folder_request [CreateFolderRequest] The title carried by the request body.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FolderWrapper, ThirdPartyFolderWrapper, Integer, Hash)>] FolderWrapper, ThirdPartyFolderWrapper data, response status code and response headers
-    def create_folder_with_http_info(folder_id, create_folder, opts = {})
+    def create_folder_with_http_info(folder_id, create_folder_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FoldersApi.create_folder ...'
       end
@@ -126,9 +126,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && folder_id.nil?
         fail ArgumentError, "Missing the required parameter 'folder_id' when calling Files::FoldersApi.create_folder"
       end
-      # verify the required parameter 'create_folder' is set
-      if @api_client.config.client_side_validation && create_folder.nil?
-        fail ArgumentError, "Missing the required parameter 'create_folder' when calling Files::FoldersApi.create_folder"
+      # verify the required parameter 'create_folder_request' is set
+      if @api_client.config.client_side_validation && create_folder_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_folder_request' when calling Files::FoldersApi.create_folder"
       end
       # resource path
       local_var_path = '/api/2.0/files/folder/{folderId}'.sub('{' + 'folderId' + '}', CGI.escape(folder_id.to_s))
@@ -150,7 +150,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_folder)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_folder_request)
 
       # return_type
       return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyFolderWrapper' : 'FolderWrapper')
@@ -252,11 +252,11 @@ module DocspaceApiSdk
     end
 
     # Start the folder history report generation
-    # Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  `format` asks for one, and saves the result in the caller's My documents. The answer is the queued task, not  the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the  file from `resultFileId`, `resultFileName` and `resultFileUrl`, of which a CSV report fills only the last two.  `from` and `to` limit the exported period; leaving both out exports the whole history. While a report for the  same folder and caller is still running, this call joins it and answers with the running task instead of  starting a second one, so retrying is safe. The caller needs read access to the folder and may not be a guest,  and the portal plan has to include the audit feature - otherwise the call is refused, with 403 for the access  rule and 404 for a folder that does not exist. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
+    # Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  `format` asks for one, and saves the result in the caller's My documents. The answer is the queued task, not  the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the  file from `resultFileId`, `resultFileName` and `resultFileUrl`; the URL of a CSV file too large for the editor  downloads it instead of opening it. An XLSX report keeps only the most recent events, at most 200,000 by default  and fewer when the events are long, and its header says how many were left out; `format=Csv` exports every event  of the period. `from` and `to` limit the exported period; leaving both out exports the whole history. While a  report for the same folder and caller is still running, this call joins it and answers with the running task  instead of starting a second one, so retrying is safe. The caller needs read access to the folder and may not be  a guest - otherwise the call is refused with 403, and a folder that does not exist with 404; the report is  available on every pricing plan, and 402 comes only when the login history and audit trail section is turned  off for the portal. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-report-folder-history/
     # @param folder_id [Integer] The folder whose history is exported; the report covers the folder itself and the entries inside it.
     # @param [Hash] opts the optional parameters
-    # @option opts [AuditReportFormat] :format The shape the report is written in: `Xlsx` produces a spreadsheet that is saved as a file of the portal, while  `Csv` produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier.
+    # @option opts [AuditReportFormat] :format The shape the report is written in: `Xlsx` produces a spreadsheet and `Csv` a comma-separated text file, and  either is saved as a file in My documents.
     # @option opts [Time] :from The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps.
     # @option opts [Time] :to The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry.
     # @return [DocumentBuilderTaskWrapper]
@@ -266,11 +266,11 @@ module DocspaceApiSdk
     end
 
     # Start the folder history report generation
-    # Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  `format` asks for one, and saves the result in the caller's My documents. The answer is the queued task, not  the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the  file from `resultFileId`, `resultFileName` and `resultFileUrl`, of which a CSV report fills only the last two.  `from` and `to` limit the exported period; leaving both out exports the whole history. While a report for the  same folder and caller is still running, this call joins it and answers with the running task instead of  starting a second one, so retrying is safe. The caller needs read access to the folder and may not be a guest,  and the portal plan has to include the audit feature - otherwise the call is refused, with 403 for the access  rule and 404 for a folder that does not exist. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
+    # Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  `format` asks for one, and saves the result in the caller's My documents. The answer is the queued task, not  the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the  file from `resultFileId`, `resultFileName` and `resultFileUrl`; the URL of a CSV file too large for the editor  downloads it instead of opening it. An XLSX report keeps only the most recent events, at most 200,000 by default  and fewer when the events are long, and its header says how many were left out; `format=Csv` exports every event  of the period. `from` and `to` limit the exported period; leaving both out exports the whole history. While a  report for the same folder and caller is still running, this call joins it and answers with the running task  instead of starting a second one, so retrying is safe. The caller needs read access to the folder and may not be  a guest - otherwise the call is refused with 403, and a folder that does not exist with 404; the report is  available on every pricing plan, and 402 comes only when the login history and audit trail section is turned  off for the portal. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-report-folder-history/
     # @param folder_id [Integer] The folder whose history is exported; the report covers the folder itself and the entries inside it.
     # @param [Hash] opts the optional parameters
-    # @option opts [AuditReportFormat] :format The shape the report is written in: `Xlsx` produces a spreadsheet that is saved as a file of the portal, while  `Csv` produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier.
+    # @option opts [AuditReportFormat] :format The shape the report is written in: `Xlsx` produces a spreadsheet and `Csv` a comma-separated text file, and  either is saved as a file in My documents.
     # @option opts [Time] :from The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps.
     # @option opts [Time] :to The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry.
     # @return [Array<(DocumentBuilderTaskWrapper, Integer, Hash)>] DocumentBuilderTaskWrapper data, response status code and response headers
@@ -329,11 +329,11 @@ module DocspaceApiSdk
     # Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  `GET api/2.0/files/fileops` until the operation reports `finished`, and read its `error` to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  `immediately=true` discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. `deleteAfter=true` postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use `PUT api/2.0/files/fileops/delete`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-folder/
     # @param folder_id [Integer, String] The folder to delete, together with everything it holds.
-    # @param delete_folder [DeleteFolder] How the deletion is to be carried out.
+    # @param delete_folder_request [DeleteFolderRequest] How the deletion is to be carried out.
     # @param [Hash] opts the optional parameters
     # @return [FileOperationArrayWrapper]
-    def delete_folder(folder_id, delete_folder, opts = {})
-      data, _status_code, _headers = delete_folder_with_http_info(folder_id, delete_folder, opts)
+    def delete_folder(folder_id, delete_folder_request, opts = {})
+      data, _status_code, _headers = delete_folder_with_http_info(folder_id, delete_folder_request, opts)
       data
     end
 
@@ -341,10 +341,10 @@ module DocspaceApiSdk
     # Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  `GET api/2.0/files/fileops` until the operation reports `finished`, and read its `error` to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  `immediately=true` discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. `deleteAfter=true` postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use `PUT api/2.0/files/fileops/delete`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-folder/
     # @param folder_id [Integer, String] The folder to delete, together with everything it holds.
-    # @param delete_folder [DeleteFolder] How the deletion is to be carried out.
+    # @param delete_folder_request [DeleteFolderRequest] How the deletion is to be carried out.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FileOperationArrayWrapper, Integer, Hash)>] FileOperationArrayWrapper data, response status code and response headers
-    def delete_folder_with_http_info(folder_id, delete_folder, opts = {})
+    def delete_folder_with_http_info(folder_id, delete_folder_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FoldersApi.delete_folder ...'
       end
@@ -352,9 +352,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && folder_id.nil?
         fail ArgumentError, "Missing the required parameter 'folder_id' when calling Files::FoldersApi.delete_folder"
       end
-      # verify the required parameter 'delete_folder' is set
-      if @api_client.config.client_side_validation && delete_folder.nil?
-        fail ArgumentError, "Missing the required parameter 'delete_folder' when calling Files::FoldersApi.delete_folder"
+      # verify the required parameter 'delete_folder_request' is set
+      if @api_client.config.client_side_validation && delete_folder_request.nil?
+        fail ArgumentError, "Missing the required parameter 'delete_folder_request' when calling Files::FoldersApi.delete_folder"
       end
       # resource path
       local_var_path = '/api/2.0/files/folder/{folderId}'.sub('{' + 'folderId' + '}', CGI.escape(folder_id.to_s))
@@ -376,7 +376,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(delete_folder)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(delete_folder_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'FileOperationArrayWrapper'
@@ -477,6 +477,9 @@ module DocspaceApiSdk
     # @option opts [String] :sort_by The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
     # @option opts [SortOrder] :sort_order The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
     # @option opts [String] :filter_value The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
+    # @option opts [Integer] :metadata_template_id The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+    # @option opts [String] :metadata_filters The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+    # @option opts [Boolean] :include_hidden_metadata Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
     # @return [FolderContentWrapper]
     def get_favorites_folder(opts = {})
       data, _status_code, _headers = get_favorites_folder_with_http_info(opts)
@@ -494,6 +497,9 @@ module DocspaceApiSdk
     # @option opts [String] :sort_by The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
     # @option opts [SortOrder] :sort_order The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
     # @option opts [String] :filter_value The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
+    # @option opts [Integer] :metadata_template_id The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+    # @option opts [String] :metadata_filters The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+    # @option opts [Boolean] :include_hidden_metadata Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
     # @return [Array<(FolderContentWrapper, Integer, Hash)>] FolderContentWrapper data, response status code and response headers
     def get_favorites_folder_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -519,6 +525,9 @@ module DocspaceApiSdk
       query_params[:'sortBy'] = opts[:'sort_by'] if !opts[:'sort_by'].nil?
       query_params[:'sortOrder'] = opts[:'sort_order'] if !opts[:'sort_order'].nil?
       query_params[:'filterValue'] = opts[:'filter_value'] if !opts[:'filter_value'].nil?
+      query_params[:'metadataTemplateId'] = opts[:'metadata_template_id'] if !opts[:'metadata_template_id'].nil?
+      query_params[:'metadataFilters'] = opts[:'metadata_filters'] if !opts[:'metadata_filters'].nil?
+      query_params[:'includeHiddenMetadata'] = opts[:'include_hidden_metadata'] if !opts[:'include_hidden_metadata'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -700,7 +709,10 @@ module DocspaceApiSdk
     # @option opts [String] :sort_by The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
     # @option opts [SortOrder] :sort_order The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
     # @option opts [String] :filter_value The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.
-    # @option opts [Location] :location Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.
+    # @option opts [RequestLocation] :location Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.
+    # @option opts [Integer] :metadata_template_id The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400.
+    # @option opts [String] :metadata_filters The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search.
+    # @option opts [Boolean] :include_hidden_metadata Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
     # @return [FolderContentWrapper, ThirdPartyFolderContentWrapper]
     def get_folder_by_folder_id(folder_id, opts = {})
       data, _status_code, _headers = get_folder_by_folder_id_with_http_info(folder_id, opts)
@@ -729,7 +741,10 @@ module DocspaceApiSdk
     # @option opts [String] :sort_by The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
     # @option opts [SortOrder] :sort_order The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
     # @option opts [String] :filter_value The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.
-    # @option opts [Location] :location Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.
+    # @option opts [RequestLocation] :location Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.
+    # @option opts [Integer] :metadata_template_id The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400.
+    # @option opts [String] :metadata_filters The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search.
+    # @option opts [Boolean] :include_hidden_metadata Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
     # @return [Array<(FolderContentWrapper, ThirdPartyFolderContentWrapper, Integer, Hash)>] FolderContentWrapper, ThirdPartyFolderContentWrapper data, response status code and response headers
     def get_folder_by_folder_id_with_http_info(folder_id, opts = {})
       if @api_client.config.debugging
@@ -739,7 +754,7 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && folder_id.nil?
         fail ArgumentError, "Missing the required parameter 'folder_id' when calling Files::FoldersApi.get_folder_by_folder_id"
       end
-      allowable_values = [0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
+      allowable_values = [0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37]
       if @api_client.config.client_side_validation && opts[:'folder_type'] && !opts[:'folder_type'].all? { |item| allowable_values.include?(item) }
         fail ArgumentError, "invalid value for \"folder_type\", must include one of #{allowable_values}"
       end
@@ -773,7 +788,10 @@ module DocspaceApiSdk
       query_params[:'sortBy'] = opts[:'sort_by'] if !opts[:'sort_by'].nil?
       query_params[:'sortOrder'] = opts[:'sort_order'] if !opts[:'sort_order'].nil?
       query_params[:'filterValue'] = opts[:'filter_value'] if !opts[:'filter_value'].nil?
-      query_params[:'Location'] = opts[:'location'] if !opts[:'location'].nil?
+      query_params[:'location'] = opts[:'location'] if !opts[:'location'].nil?
+      query_params[:'metadataTemplateId'] = opts[:'metadata_template_id'] if !opts[:'metadata_template_id'].nil?
+      query_params[:'metadataFilters'] = opts[:'metadata_filters'] if !opts[:'metadata_filters'].nil?
+      query_params[:'includeHiddenMetadata'] = opts[:'include_hidden_metadata'] if !opts[:'include_hidden_metadata'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1234,7 +1252,7 @@ module DocspaceApiSdk
     end
 
     # Get the Forms section
-    # Returns the Forms section: the flat list of form-filling rooms the caller may read. Such rooms are stored  under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of the active  area and lists them when `searchArea` names the forms area instead. The section is not expanded into room  content, so `folders` carries the rooms while `files` comes back empty; to read what is inside one of them,  call `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy`  saves the requested order as the default order for this account. `filterType`, `filterValue`,  `userIdOrGroupId` and the sorting parameters narrow and order the room list, `count` and `startIndex` page  through it, `total` reports how many rooms match the request in full, and `current` describes the section  folder itself.
+    # Returns the Forms section: the flat list of form-filling rooms the caller may read. Such rooms are stored  under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of the active  area and lists them when `searchArea` names the forms area instead. The section is not expanded into room  content, so `folders` carries the rooms while `files` comes back empty; to read what is inside one of them,  call `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy`  saves the requested order as the default order for this account. `filterType`, `filterValue`,  `userIdOrGroupId` and the sorting parameters narrow and order the room list, `metadataTemplateId` and  `metadataFilters` keep only the rooms carrying the template and matching the conditions (an unknown template  or field, or a malformed condition, is refused with 400), `count` and `startIndex` page through it, `total`  reports how many rooms match the request in full, and `current` describes the section folder itself.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-forms-folder/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :user_id_or_group_id Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
@@ -1244,6 +1262,9 @@ module DocspaceApiSdk
     # @option opts [String] :sort_by The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
     # @option opts [SortOrder] :sort_order The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
     # @option opts [String] :filter_value The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
+    # @option opts [Integer] :metadata_template_id The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+    # @option opts [String] :metadata_filters The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+    # @option opts [Boolean] :include_hidden_metadata Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
     # @return [FolderContentWrapper]
     def get_forms_folder(opts = {})
       data, _status_code, _headers = get_forms_folder_with_http_info(opts)
@@ -1251,7 +1272,7 @@ module DocspaceApiSdk
     end
 
     # Get the Forms section
-    # Returns the Forms section: the flat list of form-filling rooms the caller may read. Such rooms are stored  under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of the active  area and lists them when `searchArea` names the forms area instead. The section is not expanded into room  content, so `folders` carries the rooms while `files` comes back empty; to read what is inside one of them,  call `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy`  saves the requested order as the default order for this account. `filterType`, `filterValue`,  `userIdOrGroupId` and the sorting parameters narrow and order the room list, `count` and `startIndex` page  through it, `total` reports how many rooms match the request in full, and `current` describes the section  folder itself.
+    # Returns the Forms section: the flat list of form-filling rooms the caller may read. Such rooms are stored  under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of the active  area and lists them when `searchArea` names the forms area instead. The section is not expanded into room  content, so `folders` carries the rooms while `files` comes back empty; to read what is inside one of them,  call `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy`  saves the requested order as the default order for this account. `filterType`, `filterValue`,  `userIdOrGroupId` and the sorting parameters narrow and order the room list, `metadataTemplateId` and  `metadataFilters` keep only the rooms carrying the template and matching the conditions (an unknown template  or field, or a malformed condition, is refused with 400), `count` and `startIndex` page through it, `total`  reports how many rooms match the request in full, and `current` describes the section folder itself.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-forms-folder/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :user_id_or_group_id Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
@@ -1261,6 +1282,9 @@ module DocspaceApiSdk
     # @option opts [String] :sort_by The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
     # @option opts [SortOrder] :sort_order The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
     # @option opts [String] :filter_value The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
+    # @option opts [Integer] :metadata_template_id The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+    # @option opts [String] :metadata_filters The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+    # @option opts [Boolean] :include_hidden_metadata Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
     # @return [Array<(FolderContentWrapper, Integer, Hash)>] FolderContentWrapper data, response status code and response headers
     def get_forms_folder_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -1286,6 +1310,9 @@ module DocspaceApiSdk
       query_params[:'sortBy'] = opts[:'sort_by'] if !opts[:'sort_by'].nil?
       query_params[:'sortOrder'] = opts[:'sort_order'] if !opts[:'sort_order'].nil?
       query_params[:'filterValue'] = opts[:'filter_value'] if !opts[:'filter_value'].nil?
+      query_params[:'metadataTemplateId'] = opts[:'metadata_template_id'] if !opts[:'metadata_template_id'].nil?
+      query_params[:'metadataFilters'] = opts[:'metadata_filters'] if !opts[:'metadata_filters'].nil?
+      query_params[:'includeHiddenMetadata'] = opts[:'include_hidden_metadata'] if !opts[:'include_hidden_metadata'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1322,7 +1349,7 @@ module DocspaceApiSdk
     end
 
     # Get the My documents section
-    # Returns the contents of the caller's My documents section, the personal storage that belongs to this account  alone and stays invisible to other members until something in it is shared explicitly. Any authenticated  member that has a personal section can read it; guest accounts are not given one, and the call then answers  404. Nothing in the section is modified, though passing `sortBy` saves the requested order as the default  order for this account. Without a filter only the top level of the section is listed; as soon as `filterType`,  `userIdOrGroupId` or `filterValue` narrows the request, the search descends through the whole subtree.  `filterValue` is matched against titles and against indexed document content, and the index is written  asynchronously, so a file uploaded a moment ago can be missing from a search for a short while. `folders` and  `files` hold one page of the result, `total` counts everything that matches before `count` and `startIndex`  are applied, and `current` describes the section folder. To open a folder inside the section, call  `GET api/2.0/files/{folderId}` with its identifier.
+    # Returns the contents of the caller's My documents section, the personal storage that belongs to this account  alone and stays invisible to other members until something in it is shared explicitly. Any authenticated  member that has a personal section can read it; guest accounts are not given one, and the call then answers  404. Nothing in the section is modified, though passing `sortBy` saves the requested order as the default  order for this account. Without a filter only the top level of the section is listed; as soon as `filterType`,  `userIdOrGroupId`, `filterValue` or a metadata filter narrows the request, the search descends through the whole  subtree. `filterValue` is matched against titles and against indexed document content, and the index is written  asynchronously, so a file uploaded a moment ago can be missing from a search for a short while.  `metadataTemplateId` and `metadataFilters` keep only the entries carrying the template and matching the  conditions, the same way `GET api/2.0/files/{folderId}` does; an unknown template or field, or a malformed  condition, is refused with 400. `folders` and `files` hold one page of the result, `total` counts everything  that matches before `count` and `startIndex` are applied, and `current` describes the section folder. To open  a folder inside the section, call `GET api/2.0/files/{folderId}` with its identifier.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-my-folder/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :user_id_or_group_id Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
@@ -1333,6 +1360,9 @@ module DocspaceApiSdk
     # @option opts [String] :sort_by The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
     # @option opts [SortOrder] :sort_order The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
     # @option opts [String] :filter_value The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.
+    # @option opts [Integer] :metadata_template_id The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+    # @option opts [String] :metadata_filters The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+    # @option opts [Boolean] :include_hidden_metadata Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
     # @return [FolderContentWrapper]
     def get_my_folder(opts = {})
       data, _status_code, _headers = get_my_folder_with_http_info(opts)
@@ -1340,7 +1370,7 @@ module DocspaceApiSdk
     end
 
     # Get the My documents section
-    # Returns the contents of the caller's My documents section, the personal storage that belongs to this account  alone and stays invisible to other members until something in it is shared explicitly. Any authenticated  member that has a personal section can read it; guest accounts are not given one, and the call then answers  404. Nothing in the section is modified, though passing `sortBy` saves the requested order as the default  order for this account. Without a filter only the top level of the section is listed; as soon as `filterType`,  `userIdOrGroupId` or `filterValue` narrows the request, the search descends through the whole subtree.  `filterValue` is matched against titles and against indexed document content, and the index is written  asynchronously, so a file uploaded a moment ago can be missing from a search for a short while. `folders` and  `files` hold one page of the result, `total` counts everything that matches before `count` and `startIndex`  are applied, and `current` describes the section folder. To open a folder inside the section, call  `GET api/2.0/files/{folderId}` with its identifier.
+    # Returns the contents of the caller's My documents section, the personal storage that belongs to this account  alone and stays invisible to other members until something in it is shared explicitly. Any authenticated  member that has a personal section can read it; guest accounts are not given one, and the call then answers  404. Nothing in the section is modified, though passing `sortBy` saves the requested order as the default  order for this account. Without a filter only the top level of the section is listed; as soon as `filterType`,  `userIdOrGroupId`, `filterValue` or a metadata filter narrows the request, the search descends through the whole  subtree. `filterValue` is matched against titles and against indexed document content, and the index is written  asynchronously, so a file uploaded a moment ago can be missing from a search for a short while.  `metadataTemplateId` and `metadataFilters` keep only the entries carrying the template and matching the  conditions, the same way `GET api/2.0/files/{folderId}` does; an unknown template or field, or a malformed  condition, is refused with 400. `folders` and `files` hold one page of the result, `total` counts everything  that matches before `count` and `startIndex` are applied, and `current` describes the section folder. To open  a folder inside the section, call `GET api/2.0/files/{folderId}` with its identifier.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-my-folder/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :user_id_or_group_id Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
@@ -1351,6 +1381,9 @@ module DocspaceApiSdk
     # @option opts [String] :sort_by The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
     # @option opts [SortOrder] :sort_order The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
     # @option opts [String] :filter_value The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.
+    # @option opts [Integer] :metadata_template_id The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+    # @option opts [String] :metadata_filters The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+    # @option opts [Boolean] :include_hidden_metadata Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
     # @return [Array<(FolderContentWrapper, Integer, Hash)>] FolderContentWrapper data, response status code and response headers
     def get_my_folder_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -1377,6 +1410,9 @@ module DocspaceApiSdk
       query_params[:'sortBy'] = opts[:'sort_by'] if !opts[:'sort_by'].nil?
       query_params[:'sortOrder'] = opts[:'sort_order'] if !opts[:'sort_order'].nil?
       query_params[:'filterValue'] = opts[:'filter_value'] if !opts[:'filter_value'].nil?
+      query_params[:'metadataTemplateId'] = opts[:'metadata_template_id'] if !opts[:'metadata_template_id'].nil?
+      query_params[:'metadataFilters'] = opts[:'metadata_filters'] if !opts[:'metadata_filters'].nil?
+      query_params[:'includeHiddenMetadata'] = opts[:'include_hidden_metadata'] if !opts[:'include_hidden_metadata'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1492,6 +1528,9 @@ module DocspaceApiSdk
     # @option opts [String] :sort_by The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing.
     # @option opts [SortOrder] :sort_order The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing.
     # @option opts [String] :filter_value The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history.
+    # @option opts [Integer] :metadata_template_id The ID of the metadata template the recent files must be assigned to. On its own it narrows the listing to the files  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party files never carry metadata and are left out when the filter is set.
+    # @option opts [String] :metadata_filters The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+    # @option opts [Boolean] :include_hidden_metadata Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
     # @return [FolderContentWrapper]
     def get_recent_folder(opts = {})
       data, _status_code, _headers = get_recent_folder_with_http_info(opts)
@@ -1513,6 +1552,9 @@ module DocspaceApiSdk
     # @option opts [String] :sort_by The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing.
     # @option opts [SortOrder] :sort_order The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing.
     # @option opts [String] :filter_value The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history.
+    # @option opts [Integer] :metadata_template_id The ID of the metadata template the recent files must be assigned to. On its own it narrows the listing to the files  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party files never carry metadata and are left out when the filter is set.
+    # @option opts [String] :metadata_filters The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+    # @option opts [Boolean] :include_hidden_metadata Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
     # @return [Array<(FolderContentWrapper, Integer, Hash)>] FolderContentWrapper data, response status code and response headers
     def get_recent_folder_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -1542,6 +1584,9 @@ module DocspaceApiSdk
       query_params[:'sortBy'] = opts[:'sort_by'] if !opts[:'sort_by'].nil?
       query_params[:'sortOrder'] = opts[:'sort_order'] if !opts[:'sort_order'].nil?
       query_params[:'filterValue'] = opts[:'filter_value'] if !opts[:'filter_value'].nil?
+      query_params[:'metadataTemplateId'] = opts[:'metadata_template_id'] if !opts[:'metadata_template_id'].nil?
+      query_params[:'metadataFilters'] = opts[:'metadata_filters'] if !opts[:'metadata_filters'].nil?
+      query_params[:'includeHiddenMetadata'] = opts[:'include_hidden_metadata'] if !opts[:'include_hidden_metadata'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1578,7 +1623,7 @@ module DocspaceApiSdk
     end
 
     # Get the folder history report generation status
-    # Reports how far the history report of a folder has got, and is the operation to poll after  `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`  turns true when the job is over however it ended, `error` carries the reason when it failed, and  `resultFileId`, `resultFileName` and `resultFileUrl` name the file that was saved in the caller's My  documents - a CSV report leaving the identifier empty. An empty answer means there is no report for this  folder and caller, either because none was started or because a finished one has already been picked up by an  earlier poll. The caller needs read access to the folder and may not be a guest, and the portal plan has to  include the audit feature; a caller who fails the access rule is answered with 403 and a folder that does not  exist with 404. The call is read-only, and each caller sees only their own report.
+    # Reports how far the history report of a folder has got, and is the operation to poll after  `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`  turns true when the job is over however it ended, `error` carries the reason when it failed, and `resultFileId`,  `resultFileName` and `resultFileUrl` name the file that was saved in the caller's My documents. An empty  answer means there is no report for this folder and caller, either because none was started or because a  finished one has already been picked up by an earlier poll. The caller needs read access to the folder and may  not be a guest; a caller who fails the access rule is answered with 403, a folder that does not exist with 404,  and a portal with the login history and audit trail section turned off with 402. The call is read-only, and each caller sees only  their own report.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-report-folder-history/
     # @param folder_id [Integer] The folder whose history report is being polled. It is the folder that was              passed to the operation that started the report.
     # @param [Hash] opts the optional parameters
@@ -1589,7 +1634,7 @@ module DocspaceApiSdk
     end
 
     # Get the folder history report generation status
-    # Reports how far the history report of a folder has got, and is the operation to poll after  `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`  turns true when the job is over however it ended, `error` carries the reason when it failed, and  `resultFileId`, `resultFileName` and `resultFileUrl` name the file that was saved in the caller's My  documents - a CSV report leaving the identifier empty. An empty answer means there is no report for this  folder and caller, either because none was started or because a finished one has already been picked up by an  earlier poll. The caller needs read access to the folder and may not be a guest, and the portal plan has to  include the audit feature; a caller who fails the access rule is answered with 403 and a folder that does not  exist with 404. The call is read-only, and each caller sees only their own report.
+    # Reports how far the history report of a folder has got, and is the operation to poll after  `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`  turns true when the job is over however it ended, `error` carries the reason when it failed, and `resultFileId`,  `resultFileName` and `resultFileUrl` name the file that was saved in the caller's My documents. An empty  answer means there is no report for this folder and caller, either because none was started or because a  finished one has already been picked up by an earlier poll. The caller needs read access to the folder and may  not be a guest; a caller who fails the access rule is answered with 403, a folder that does not exist with 404,  and a portal with the login history and audit trail section turned off with 402. The call is read-only, and each caller sees only  their own report.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-report-folder-history/
     # @param folder_id [Integer] The folder whose history report is being polled. It is the folder that was              passed to the operation that started the report.
     # @param [Hash] opts the optional parameters
@@ -1734,7 +1779,7 @@ module DocspaceApiSdk
     end
 
     # Get the Trash section
-    # Returns the caller's Trash section: the files and folders this account has deleted, kept there until they  are restored or discarded. Each member has a Trash of their own and sees only what they deleted themselves.  Restore an entry by moving it back with `PUT api/2.0/files/fileops/move`, or discard the whole section with  `PUT api/2.0/files/fileops/emptytrash`; both start a background operation that is polled through  `GET api/2.0/files/fileops`. This call itself modifies nothing, though passing `sortBy` saves the requested  order as the default order for this account. Only the top level of the section is listed, so the contents of a  deleted folder are not expanded into it, and `filterValue` is matched against titles alone here rather than  against document content. `folders` and `files` hold one page of the result, `total` counts everything that  matches before `count` and `startIndex` are applied, and `current` describes the section folder. An account  that is given no Trash of its own, an outsider for instance, receives 404.
+    # Returns the caller's Trash section: the files and folders this account has deleted, kept there until they  are restored or discarded. Each member has a Trash of their own and sees only what they deleted themselves.  Restore an entry by moving it back with `PUT api/2.0/files/fileops/move`, or discard the whole section with  `PUT api/2.0/files/fileops/emptytrash`; both start a background operation that is polled through  `GET api/2.0/files/fileops`. This call itself modifies nothing, though passing `sortBy` saves the requested  order as the default order for this account. Only the top level of the section is listed, so the contents of a  deleted folder are not expanded into it, and `filterValue` is matched against titles alone here rather than  against document content. `metadataTemplateId` and `metadataFilters` keep only the deleted entries carrying the  template and matching the conditions, the same way `GET api/2.0/files/{folderId}` does; an unknown template or  field, or a malformed condition, is refused with 400. `folders` and `files` hold one page of the result,  `total` counts everything that matches before `count` and `startIndex` are applied, and `current` describes  the section folder. An account that is given no Trash of its own, an outsider for instance, receives 404.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-trash-folder/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :user_id_or_group_id Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
@@ -1745,6 +1790,9 @@ module DocspaceApiSdk
     # @option opts [String] :sort_by The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
     # @option opts [SortOrder] :sort_order The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
     # @option opts [String] :filter_value The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.
+    # @option opts [Integer] :metadata_template_id The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+    # @option opts [String] :metadata_filters The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+    # @option opts [Boolean] :include_hidden_metadata Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
     # @return [FolderContentWrapper]
     def get_trash_folder(opts = {})
       data, _status_code, _headers = get_trash_folder_with_http_info(opts)
@@ -1752,7 +1800,7 @@ module DocspaceApiSdk
     end
 
     # Get the Trash section
-    # Returns the caller's Trash section: the files and folders this account has deleted, kept there until they  are restored or discarded. Each member has a Trash of their own and sees only what they deleted themselves.  Restore an entry by moving it back with `PUT api/2.0/files/fileops/move`, or discard the whole section with  `PUT api/2.0/files/fileops/emptytrash`; both start a background operation that is polled through  `GET api/2.0/files/fileops`. This call itself modifies nothing, though passing `sortBy` saves the requested  order as the default order for this account. Only the top level of the section is listed, so the contents of a  deleted folder are not expanded into it, and `filterValue` is matched against titles alone here rather than  against document content. `folders` and `files` hold one page of the result, `total` counts everything that  matches before `count` and `startIndex` are applied, and `current` describes the section folder. An account  that is given no Trash of its own, an outsider for instance, receives 404.
+    # Returns the caller's Trash section: the files and folders this account has deleted, kept there until they  are restored or discarded. Each member has a Trash of their own and sees only what they deleted themselves.  Restore an entry by moving it back with `PUT api/2.0/files/fileops/move`, or discard the whole section with  `PUT api/2.0/files/fileops/emptytrash`; both start a background operation that is polled through  `GET api/2.0/files/fileops`. This call itself modifies nothing, though passing `sortBy` saves the requested  order as the default order for this account. Only the top level of the section is listed, so the contents of a  deleted folder are not expanded into it, and `filterValue` is matched against titles alone here rather than  against document content. `metadataTemplateId` and `metadataFilters` keep only the deleted entries carrying the  template and matching the conditions, the same way `GET api/2.0/files/{folderId}` does; an unknown template or  field, or a malformed condition, is refused with 400. `folders` and `files` hold one page of the result,  `total` counts everything that matches before `count` and `startIndex` are applied, and `current` describes  the section folder. An account that is given no Trash of its own, an outsider for instance, receives 404.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-trash-folder/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :user_id_or_group_id Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
@@ -1763,6 +1811,9 @@ module DocspaceApiSdk
     # @option opts [String] :sort_by The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
     # @option opts [SortOrder] :sort_order The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
     # @option opts [String] :filter_value The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.
+    # @option opts [Integer] :metadata_template_id The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+    # @option opts [String] :metadata_filters The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+    # @option opts [Boolean] :include_hidden_metadata Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
     # @return [Array<(FolderContentWrapper, Integer, Hash)>] FolderContentWrapper data, response status code and response headers
     def get_trash_folder_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -1789,6 +1840,9 @@ module DocspaceApiSdk
       query_params[:'sortBy'] = opts[:'sort_by'] if !opts[:'sort_by'].nil?
       query_params[:'sortOrder'] = opts[:'sort_order'] if !opts[:'sort_order'].nil?
       query_params[:'filterValue'] = opts[:'filter_value'] if !opts[:'filter_value'].nil?
+      query_params[:'metadataTemplateId'] = opts[:'metadata_template_id'] if !opts[:'metadata_template_id'].nil?
+      query_params[:'metadataFilters'] = opts[:'metadata_filters'] if !opts[:'metadata_filters'].nil?
+      query_params[:'includeHiddenMetadata'] = opts[:'include_hidden_metadata'] if !opts[:'include_hidden_metadata'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1891,18 +1945,18 @@ module DocspaceApiSdk
 
       # form parameters
       form_params = opts[:form_params] || {}
-      form_params['InsertFile.File'] = opts[:'insert_file_file'] if !opts[:'insert_file_file'].nil?
-      form_params['InsertFile.Title'] = opts[:'insert_file_title'] if !opts[:'insert_file_title'].nil?
-      form_params['InsertFile.CreateNewIfExist'] = opts[:'insert_file_create_new_if_exist'] if !opts[:'insert_file_create_new_if_exist'].nil?
-      form_params['InsertFile.KeepConvertStatus'] = opts[:'insert_file_keep_convert_status'] if !opts[:'insert_file_keep_convert_status'].nil?
-      form_params['InsertFile.Stream.CanRead'] = opts[:'insert_file_stream_can_read'] if !opts[:'insert_file_stream_can_read'].nil?
-      form_params['InsertFile.Stream.CanWrite'] = opts[:'insert_file_stream_can_write'] if !opts[:'insert_file_stream_can_write'].nil?
-      form_params['InsertFile.Stream.CanSeek'] = opts[:'insert_file_stream_can_seek'] if !opts[:'insert_file_stream_can_seek'].nil?
-      form_params['InsertFile.Stream.CanTimeout'] = opts[:'insert_file_stream_can_timeout'] if !opts[:'insert_file_stream_can_timeout'].nil?
-      form_params['InsertFile.Stream.Length'] = opts[:'insert_file_stream_length'] if !opts[:'insert_file_stream_length'].nil?
-      form_params['InsertFile.Stream.Position'] = opts[:'insert_file_stream_position'] if !opts[:'insert_file_stream_position'].nil?
-      form_params['InsertFile.Stream.ReadTimeout'] = opts[:'insert_file_stream_read_timeout'] if !opts[:'insert_file_stream_read_timeout'].nil?
-      form_params['InsertFile.Stream.WriteTimeout'] = opts[:'insert_file_stream_write_timeout'] if !opts[:'insert_file_stream_write_timeout'].nil?
+      form_params['insertFile.file'] = opts[:'insert_file_file'] if !opts[:'insert_file_file'].nil?
+      form_params['insertFile.title'] = opts[:'insert_file_title'] if !opts[:'insert_file_title'].nil?
+      form_params['insertFile.createNewIfExist'] = opts[:'insert_file_create_new_if_exist'] if !opts[:'insert_file_create_new_if_exist'].nil?
+      form_params['insertFile.keepConvertStatus'] = opts[:'insert_file_keep_convert_status'] if !opts[:'insert_file_keep_convert_status'].nil?
+      form_params['insertFile.stream.canRead'] = opts[:'insert_file_stream_can_read'] if !opts[:'insert_file_stream_can_read'].nil?
+      form_params['insertFile.stream.canWrite'] = opts[:'insert_file_stream_can_write'] if !opts[:'insert_file_stream_can_write'].nil?
+      form_params['insertFile.stream.canSeek'] = opts[:'insert_file_stream_can_seek'] if !opts[:'insert_file_stream_can_seek'].nil?
+      form_params['insertFile.stream.canTimeout'] = opts[:'insert_file_stream_can_timeout'] if !opts[:'insert_file_stream_can_timeout'].nil?
+      form_params['insertFile.stream.length'] = opts[:'insert_file_stream_length'] if !opts[:'insert_file_stream_length'].nil?
+      form_params['insertFile.stream.position'] = opts[:'insert_file_stream_position'] if !opts[:'insert_file_stream_position'].nil?
+      form_params['insertFile.stream.readTimeout'] = opts[:'insert_file_stream_read_timeout'] if !opts[:'insert_file_stream_read_timeout'].nil?
+      form_params['insertFile.stream.writeTimeout'] = opts[:'insert_file_stream_write_timeout'] if !opts[:'insert_file_stream_write_timeout'].nil?
 
       # http body (model)
       post_body = opts[:debug_body]
@@ -1991,18 +2045,18 @@ module DocspaceApiSdk
 
       # form parameters
       form_params = opts[:form_params] || {}
-      form_params['File'] = opts[:'file'] if !opts[:'file'].nil?
-      form_params['Title'] = opts[:'title'] if !opts[:'title'].nil?
-      form_params['CreateNewIfExist'] = opts[:'create_new_if_exist'] if !opts[:'create_new_if_exist'].nil?
-      form_params['KeepConvertStatus'] = opts[:'keep_convert_status'] if !opts[:'keep_convert_status'].nil?
-      form_params['Stream.CanRead'] = opts[:'stream_can_read'] if !opts[:'stream_can_read'].nil?
-      form_params['Stream.CanWrite'] = opts[:'stream_can_write'] if !opts[:'stream_can_write'].nil?
-      form_params['Stream.CanSeek'] = opts[:'stream_can_seek'] if !opts[:'stream_can_seek'].nil?
-      form_params['Stream.CanTimeout'] = opts[:'stream_can_timeout'] if !opts[:'stream_can_timeout'].nil?
-      form_params['Stream.Length'] = opts[:'stream_length'] if !opts[:'stream_length'].nil?
-      form_params['Stream.Position'] = opts[:'stream_position'] if !opts[:'stream_position'].nil?
-      form_params['Stream.ReadTimeout'] = opts[:'stream_read_timeout'] if !opts[:'stream_read_timeout'].nil?
-      form_params['Stream.WriteTimeout'] = opts[:'stream_write_timeout'] if !opts[:'stream_write_timeout'].nil?
+      form_params['file'] = opts[:'file'] if !opts[:'file'].nil?
+      form_params['title'] = opts[:'title'] if !opts[:'title'].nil?
+      form_params['createNewIfExist'] = opts[:'create_new_if_exist'] if !opts[:'create_new_if_exist'].nil?
+      form_params['keepConvertStatus'] = opts[:'keep_convert_status'] if !opts[:'keep_convert_status'].nil?
+      form_params['stream.canRead'] = opts[:'stream_can_read'] if !opts[:'stream_can_read'].nil?
+      form_params['stream.canWrite'] = opts[:'stream_can_write'] if !opts[:'stream_can_write'].nil?
+      form_params['stream.canSeek'] = opts[:'stream_can_seek'] if !opts[:'stream_can_seek'].nil?
+      form_params['stream.canTimeout'] = opts[:'stream_can_timeout'] if !opts[:'stream_can_timeout'].nil?
+      form_params['stream.length'] = opts[:'stream_length'] if !opts[:'stream_length'].nil?
+      form_params['stream.position'] = opts[:'stream_position'] if !opts[:'stream_position'].nil?
+      form_params['stream.readTimeout'] = opts[:'stream_read_timeout'] if !opts[:'stream_read_timeout'].nil?
+      form_params['stream.writeTimeout'] = opts[:'stream_write_timeout'] if !opts[:'stream_write_timeout'].nil?
 
       # http body (model)
       post_body = opts[:debug_body]
@@ -2034,11 +2088,11 @@ module DocspaceApiSdk
     # Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/rename-folder/
     # @param folder_id [Integer, String] The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
-    # @param create_folder [CreateFolder] The title carried by the request body.
+    # @param create_folder_request [CreateFolderRequest] The title carried by the request body.
     # @param [Hash] opts the optional parameters
     # @return [FolderWrapper, ThirdPartyFolderWrapper]
-    def rename_folder(folder_id, create_folder, opts = {})
-      data, _status_code, _headers = rename_folder_with_http_info(folder_id, create_folder, opts)
+    def rename_folder(folder_id, create_folder_request, opts = {})
+      data, _status_code, _headers = rename_folder_with_http_info(folder_id, create_folder_request, opts)
       data
     end
 
@@ -2046,10 +2100,10 @@ module DocspaceApiSdk
     # Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/rename-folder/
     # @param folder_id [Integer, String] The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
-    # @param create_folder [CreateFolder] The title carried by the request body.
+    # @param create_folder_request [CreateFolderRequest] The title carried by the request body.
     # @param [Hash] opts the optional parameters
     # @return [Array<(FolderWrapper, ThirdPartyFolderWrapper, Integer, Hash)>] FolderWrapper, ThirdPartyFolderWrapper data, response status code and response headers
-    def rename_folder_with_http_info(folder_id, create_folder, opts = {})
+    def rename_folder_with_http_info(folder_id, create_folder_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Files::FoldersApi.rename_folder ...'
       end
@@ -2057,9 +2111,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && folder_id.nil?
         fail ArgumentError, "Missing the required parameter 'folder_id' when calling Files::FoldersApi.rename_folder"
       end
-      # verify the required parameter 'create_folder' is set
-      if @api_client.config.client_side_validation && create_folder.nil?
-        fail ArgumentError, "Missing the required parameter 'create_folder' when calling Files::FoldersApi.rename_folder"
+      # verify the required parameter 'create_folder_request' is set
+      if @api_client.config.client_side_validation && create_folder_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_folder_request' when calling Files::FoldersApi.rename_folder"
       end
       # resource path
       local_var_path = '/api/2.0/files/folder/{folderId}'.sub('{' + 'folderId' + '}', CGI.escape(folder_id.to_s))
@@ -2081,7 +2135,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_folder)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_folder_request)
 
       # return_type
       return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyFolderWrapper' : 'FolderWrapper')
@@ -2102,6 +2156,82 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Files::FoldersApi#rename_folder\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Search a folder by metadata
+    # Searches the folder by metadata. The same filter the folder listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/search-folder/
+    # @param folder_id [Integer, String] The folder ID.
+    # @param folder_metadata_search [FolderMetadataSearch] The search parameters.
+    # @param [Hash] opts the optional parameters
+    # @return [FolderContentWrapper, ThirdPartyFolderContentWrapper]
+    def search_folder(folder_id, folder_metadata_search, opts = {})
+      data, _status_code, _headers = search_folder_with_http_info(folder_id, folder_metadata_search, opts)
+      data
+    end
+
+    # Search a folder by metadata
+    # Searches the folder by metadata. The same filter the folder listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/search-folder/
+    # @param folder_id [Integer, String] The folder ID.
+    # @param folder_metadata_search [FolderMetadataSearch] The search parameters.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(FolderContentWrapper, ThirdPartyFolderContentWrapper, Integer, Hash)>] FolderContentWrapper, ThirdPartyFolderContentWrapper data, response status code and response headers
+    def search_folder_with_http_info(folder_id, folder_metadata_search, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: Files::FoldersApi.search_folder ...'
+      end
+      # verify the required parameter 'folder_id' is set
+      if @api_client.config.client_side_validation && folder_id.nil?
+        fail ArgumentError, "Missing the required parameter 'folder_id' when calling Files::FoldersApi.search_folder"
+      end
+      # verify the required parameter 'folder_metadata_search' is set
+      if @api_client.config.client_side_validation && folder_metadata_search.nil?
+        fail ArgumentError, "Missing the required parameter 'folder_metadata_search' when calling Files::FoldersApi.search_folder"
+      end
+      # resource path
+      local_var_path = '/api/2.0/files/{folderId}/search'.sub('{' + 'folderId' + '}', CGI.escape(folder_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(folder_metadata_search)
+
+      # return_type
+      return_type = opts[:debug_return_type] || (folder_id.is_a?(String) ? 'ThirdPartyFolderContentWrapper' : 'FolderContentWrapper')
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
+
+      new_options = opts.merge(
+        :operation => :"Files::FoldersApi.search_folder",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: Files::FoldersApi#search_folder\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -2255,7 +2385,7 @@ module DocspaceApiSdk
     end
 
     # Terminate the folder history report generation
-    # Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest, and the portal  plan has to include the audit feature; a caller who fails the access rule is answered with 403 and a folder  that does not exist with 404. Each caller can only terminate their own report.
+    # Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest; a caller who fails  the access rule is answered with 403, a folder that does not exist with 404, and a portal with the login history  and audit trail section turned off with 402. Each caller can only terminate their own report.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-report-folder-history/
     # @param folder_id [Integer] The folder whose running history report is to be given up. It is the folder that              was passed to the operation that started the report.
     # @param [Hash] opts the optional parameters
@@ -2266,7 +2396,7 @@ module DocspaceApiSdk
     end
 
     # Terminate the folder history report generation
-    # Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest, and the portal  plan has to include the audit feature; a caller who fails the access rule is answered with 403 and a folder  that does not exist with 404. Each caller can only terminate their own report.
+    # Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest; a caller who fails  the access rule is answered with 403, a folder that does not exist with 404, and a portal with the login history  and audit trail section turned off with 402. Each caller can only terminate their own report.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-report-folder-history/
     # @param folder_id [Integer] The folder whose running history report is to be given up. It is the folder that              was passed to the operation that started the report.
     # @param [Hash] opts the optional parameters
@@ -2373,7 +2503,7 @@ module DocspaceApiSdk
 
       # form parameters
       form_params = opts[:form_params] || {}
-      form_params['File'] = opts[:'file'] if !opts[:'file'].nil?
+      form_params['file'] = opts[:'file'] if !opts[:'file'].nil?
 
       # http body (model)
       post_body = opts[:debug_body]
@@ -2449,7 +2579,7 @@ module DocspaceApiSdk
 
       # form parameters
       form_params = opts[:form_params] || {}
-      form_params['File'] = opts[:'file'] if !opts[:'file'].nil?
+      form_params['file'] = opts[:'file'] if !opts[:'file'].nil?
 
       # http body (model)
       post_body = opts[:debug_body]

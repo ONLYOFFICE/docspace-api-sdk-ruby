@@ -584,25 +584,25 @@ module DocspaceApiSdk
     end
 
     # Create a third-party room
-    # Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  `POST api/2.0/files/thirdparty` and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder  from the path becomes the room itself and `indexing`, `denyDownload`, `tags` and `logo` are then dropped. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with `GET api/2.0/files/rooms/{id}/link`.
+    # Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  `POST api/2.0/files/thirdparty` and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder  from the path becomes the room itself and `tags` and `logo` are then dropped. A third-party room keeps neither  `indexing` nor `denyDownload` in either mode: both are accepted and ignored, and the room reads back with them  off. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with `GET api/2.0/files/rooms/{id}/link`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-third-party/
     # @param id [String] The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account.
-    # @param create_third_party_room [CreateThirdPartyRoom] The settings of the room to be created out of the folder.
+    # @param create_third_party_room_request [CreateThirdPartyRoomRequest] The settings of the room to be created out of the folder.
     # @param [Hash] opts the optional parameters
     # @return [ThirdPartyFolderWrapper]
-    def create_room_third_party(id, create_third_party_room, opts = {})
-      data, _status_code, _headers = create_room_third_party_with_http_info(id, create_third_party_room, opts)
+    def create_room_third_party(id, create_third_party_room_request, opts = {})
+      data, _status_code, _headers = create_room_third_party_with_http_info(id, create_third_party_room_request, opts)
       data
     end
 
     # Create a third-party room
-    # Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  `POST api/2.0/files/thirdparty` and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder  from the path becomes the room itself and `indexing`, `denyDownload`, `tags` and `logo` are then dropped. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with `GET api/2.0/files/rooms/{id}/link`.
+    # Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  `POST api/2.0/files/thirdparty` and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder  from the path becomes the room itself and `tags` and `logo` are then dropped. A third-party room keeps neither  `indexing` nor `denyDownload` in either mode: both are accepted and ignored, and the room reads back with them  off. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with `GET api/2.0/files/rooms/{id}/link`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-third-party/
     # @param id [String] The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account.
-    # @param create_third_party_room [CreateThirdPartyRoom] The settings of the room to be created out of the folder.
+    # @param create_third_party_room_request [CreateThirdPartyRoomRequest] The settings of the room to be created out of the folder.
     # @param [Hash] opts the optional parameters
     # @return [Array<(ThirdPartyFolderWrapper, Integer, Hash)>] ThirdPartyFolderWrapper data, response status code and response headers
-    def create_room_third_party_with_http_info(id, create_third_party_room, opts = {})
+    def create_room_third_party_with_http_info(id, create_third_party_room_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.create_room_third_party ...'
       end
@@ -610,9 +610,9 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && id.nil?
         fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.create_room_third_party"
       end
-      # verify the required parameter 'create_third_party_room' is set
-      if @api_client.config.client_side_validation && create_third_party_room.nil?
-        fail ArgumentError, "Missing the required parameter 'create_third_party_room' when calling Rooms::RoomsApi.create_room_third_party"
+      # verify the required parameter 'create_third_party_room_request' is set
+      if @api_client.config.client_side_validation && create_third_party_room_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_third_party_room_request' when calling Rooms::RoomsApi.create_room_third_party"
       end
       # resource path
       local_var_path = '/api/2.0/files/rooms/thirdparty/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -634,7 +634,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_third_party_room)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(create_third_party_room_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'ThirdPartyFolderWrapper'
@@ -1141,6 +1141,97 @@ module DocspaceApiSdk
       return data, status_code, headers
     end
 
+    # Get the .ai folder of a room
+    # Returns one page of the contents of the .ai folder that lies in the root of a room, in the same shape as  `GET api/2.0/files/{folderId}` returns for any other folder. The rooms that hold such a folder are listed with  `GET api/2.0/files/rooms?withAiFolder=true`. Any member who can read the room may call it; somebody who cannot  is refused, and a room that does not exist is answered as not found. A room that holds no .ai folder is  answered with an empty page: no files and folders, a zero `total`, no `current` folder and empty `pathParts`.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-ai-folder/
+    # @param id [Integer] The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param [Hash] opts the optional parameters
+    # @option opts [FilterType] :filter_type Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.
+    # @option opts [Integer] :count The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
+    # @option opts [Integer] :start_index The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+    # @option opts [String] :sort_by The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.
+    # @option opts [SortOrder] :sort_order The direction in which the `sortBy` field is ordered.
+    # @option opts [String] :filter_value The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.
+    # @return [FolderContentWrapper]
+    def get_room_ai_folder(id, opts = {})
+      data, _status_code, _headers = get_room_ai_folder_with_http_info(id, opts)
+      data
+    end
+
+    # Get the .ai folder of a room
+    # Returns one page of the contents of the .ai folder that lies in the root of a room, in the same shape as  `GET api/2.0/files/{folderId}` returns for any other folder. The rooms that hold such a folder are listed with  `GET api/2.0/files/rooms?withAiFolder=true`. Any member who can read the room may call it; somebody who cannot  is refused, and a room that does not exist is answered as not found. A room that holds no .ai folder is  answered with an empty page: no files and folders, a zero `total`, no `current` folder and empty `pathParts`.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-ai-folder/
+    # @param id [Integer] The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+    # @param [Hash] opts the optional parameters
+    # @option opts [FilterType] :filter_type Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.
+    # @option opts [Integer] :count The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
+    # @option opts [Integer] :start_index The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+    # @option opts [String] :sort_by The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.
+    # @option opts [SortOrder] :sort_order The direction in which the `sortBy` field is ordered.
+    # @option opts [String] :filter_value The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.
+    # @return [Array<(FolderContentWrapper, Integer, Hash)>] FolderContentWrapper data, response status code and response headers
+    def get_room_ai_folder_with_http_info(id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.get_room_ai_folder ...'
+      end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling Rooms::RoomsApi.get_room_ai_folder"
+      end
+      if @api_client.config.client_side_validation && !opts[:'count'].nil? && opts[:'count'] > 100
+        fail ArgumentError, 'invalid value for "opts[:"count"]" when calling Rooms::RoomsApi.get_room_ai_folder, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'count'].nil? && opts[:'count'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"count"]" when calling Rooms::RoomsApi.get_room_ai_folder, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/api/2.0/files/rooms/{id}/ai'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'filterType'] = opts[:'filter_type'] if !opts[:'filter_type'].nil?
+      query_params[:'count'] = opts[:'count'] if !opts[:'count'].nil?
+      query_params[:'startIndex'] = opts[:'start_index'] if !opts[:'start_index'].nil?
+      query_params[:'sortBy'] = opts[:'sort_by'] if !opts[:'sort_by'].nil?
+      query_params[:'sortOrder'] = opts[:'sort_order'] if !opts[:'sort_order'].nil?
+      query_params[:'filterValue'] = opts[:'filter_value'] if !opts[:'filter_value'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'FolderContentWrapper'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
+
+      new_options = opts.merge(
+        :operation => :"Rooms::RoomsApi.get_room_ai_folder",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: Rooms::RoomsApi#get_room_ai_folder\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get room cover gallery
     # Returns the gallery of cover pictures a room can be given: every entry pairs the identifier to send to  `POST api/2.0/files/rooms/{id}/cover` with the drawing itself as inline vector markup ready to be rendered.  The gallery is built into the product rather than stored per portal, so it is the same for every account and  every room, does not depend on what rooms exist, and its identifiers do not change with the language of the  request. The identifiers are unique and stable, which makes them safe to keep in a client, while the drawings  behind them may change between product versions. Any account of the portal may read the gallery, but a guest  is refused. The list is the only source of valid cover identifiers: a value that is not in it is rejected  wherever a cover is set, including room creation and room update. The call changes nothing and is safe to  repeat.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-covers/
@@ -1543,7 +1634,7 @@ module DocspaceApiSdk
     # @option opts [Integer] :count How many tag names one page may carry. The answer reports no total, so a page shorter than this is the sign  that the list is exhausted.
     # @option opts [Integer] :start_index How many tag names to skip before the page begins. Raise it by the number of names already received to read  the next page.
     # @option opts [String] :filter_value Keeps only the tag names that contain this text, ignoring case. It is a substring match, so a fragment from  the middle of a name is enough.
-    # @return [STRINGArrayWrapper]
+    # @return [StringArrayWrapper]
     def get_room_tags_info(opts = {})
       data, _status_code, _headers = get_room_tags_info_with_http_info(opts)
       data
@@ -1556,7 +1647,7 @@ module DocspaceApiSdk
     # @option opts [Integer] :count How many tag names one page may carry. The answer reports no total, so a page shorter than this is the sign  that the list is exhausted.
     # @option opts [Integer] :start_index How many tag names to skip before the page begins. Raise it by the number of names already received to read  the next page.
     # @option opts [String] :filter_value Keeps only the tag names that contain this text, ignoring case. It is a substring match, so a fragment from  the middle of a name is enough.
-    # @return [Array<(STRINGArrayWrapper, Integer, Hash)>] STRINGArrayWrapper data, response status code and response headers
+    # @return [Array<(StringArrayWrapper, Integer, Hash)>] StringArrayWrapper data, response status code and response headers
     def get_room_tags_info_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.get_room_tags_info ...'
@@ -1598,7 +1689,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'STRINGArrayWrapper'
+      return_type = opts[:debug_return_type] || 'StringArrayWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -1694,12 +1785,16 @@ module DocspaceApiSdk
     # @option opts [QuotaFilter] :quota_filter Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found.
     # @option opts [StorageFilter] :storage_filter Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter.
     # @option opts [RoomPrivacyFilter] :privacy_filter Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds.
+    # @option opts [Boolean] :with_ai_folder Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.
     # @option opts [Integer] :count How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.
     # @option opts [Integer] :start_index How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports.
     # @option opts [String] :sort_by The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order.
     # @option opts [SortOrder] :sort_order The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used.
     # @option opts [String] :filter_value Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched.
     # @option opts [Integer] :group_id Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here.
+    # @option opts [Integer] :metadata_template_id The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.
+    # @option opts [String] :metadata_filters The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.
+    # @option opts [Boolean] :include_hidden_metadata Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
     # @return [FolderContentWrapper]
     def get_rooms_folder(opts = {})
       data, _status_code, _headers = get_rooms_folder_with_http_info(opts)
@@ -1721,12 +1816,16 @@ module DocspaceApiSdk
     # @option opts [QuotaFilter] :quota_filter Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found.
     # @option opts [StorageFilter] :storage_filter Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter.
     # @option opts [RoomPrivacyFilter] :privacy_filter Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds.
+    # @option opts [Boolean] :with_ai_folder Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.
     # @option opts [Integer] :count How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.
     # @option opts [Integer] :start_index How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports.
     # @option opts [String] :sort_by The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account's stored order.
     # @option opts [SortOrder] :sort_order The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used.
     # @option opts [String] :filter_value Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched.
     # @option opts [Integer] :group_id Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here.
+    # @option opts [Integer] :metadata_template_id The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.
+    # @option opts [String] :metadata_filters The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq (the whole value) or contains (a part of it); a number or a date field takes range with inclusive bounds,  or gt, gte, lt, lte with the single bound in value; a choice field takes in. A date-only bound covers the whole day,  so to:2026-06-30 includes the values stored on 30 June and gt:2026-06-30 starts after it.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.
+    # @option opts [Boolean] :include_hidden_metadata Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
     # @return [Array<(FolderContentWrapper, Integer, Hash)>] FolderContentWrapper data, response status code and response headers
     def get_rooms_folder_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -1756,12 +1855,16 @@ module DocspaceApiSdk
       query_params[:'quotaFilter'] = opts[:'quota_filter'] if !opts[:'quota_filter'].nil?
       query_params[:'storageFilter'] = opts[:'storage_filter'] if !opts[:'storage_filter'].nil?
       query_params[:'privacyFilter'] = opts[:'privacy_filter'] if !opts[:'privacy_filter'].nil?
+      query_params[:'withAiFolder'] = opts[:'with_ai_folder'] if !opts[:'with_ai_folder'].nil?
       query_params[:'count'] = opts[:'count'] if !opts[:'count'].nil?
       query_params[:'startIndex'] = opts[:'start_index'] if !opts[:'start_index'].nil?
       query_params[:'sortBy'] = opts[:'sort_by'] if !opts[:'sort_by'].nil?
       query_params[:'sortOrder'] = opts[:'sort_order'] if !opts[:'sort_order'].nil?
       query_params[:'filterValue'] = opts[:'filter_value'] if !opts[:'filter_value'].nil?
       query_params[:'groupId'] = opts[:'group_id'] if !opts[:'group_id'].nil?
+      query_params[:'metadataTemplateId'] = opts[:'metadata_template_id'] if !opts[:'metadata_template_id'].nil?
+      query_params[:'metadataFilters'] = opts[:'metadata_filters'] if !opts[:'metadata_filters'].nil?
+      query_params[:'includeHiddenMetadata'] = opts[:'include_hidden_metadata'] if !opts[:'include_hidden_metadata'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -2191,6 +2294,72 @@ module DocspaceApiSdk
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: Rooms::RoomsApi#resend_email_invitations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Search the rooms by metadata
+    # Searches the rooms by metadata. The same filter the rooms listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/search-rooms/
+    # @param [Hash] opts the optional parameters
+    # @option opts [RoomsMetadataSearchRequestDto] :rooms_metadata_search_request_dto 
+    # @return [FolderContentWrapper]
+    def search_rooms(opts = {})
+      data, _status_code, _headers = search_rooms_with_http_info(opts)
+      data
+    end
+
+    # Search the rooms by metadata
+    # Searches the rooms by metadata. The same filter the rooms listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+    # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/search-rooms/
+    # @param [Hash] opts the optional parameters
+    # @option opts [RoomsMetadataSearchRequestDto] :rooms_metadata_search_request_dto 
+    # @return [Array<(FolderContentWrapper, Integer, Hash)>] FolderContentWrapper data, response status code and response headers
+    def search_rooms_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: Rooms::RoomsApi.search_rooms ...'
+      end
+      # resource path
+      local_var_path = '/api/2.0/files/rooms/search'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'rooms_metadata_search_request_dto'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'FolderContentWrapper'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
+
+      new_options = opts.merge(
+        :operation => :"Rooms::RoomsApi.search_rooms",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: Rooms::RoomsApi#search_rooms\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

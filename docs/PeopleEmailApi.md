@@ -4,13 +4,13 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**change_user_email**](PeopleEmailApi.md#change_user_email) | **PUT** /api/2.0/people/{userid}/email | Change a user email |
+| [**change_user_email**](PeopleEmailApi.md#change_user_email) | **PUT** /api/2.0/people/{userId}/email | Change a user email |
 | [**send_email_change_instructions**](PeopleEmailApi.md#send_email_change_instructions) | **POST** /api/2.0/people/email | Send instructions to change email |
 
 
 ## change_user_email
 
-> <EmployeeFullWrapper> change_user_email(userid, change_email_request)
+> <EmployeeFullWrapper> change_user_email(user_id, change_email_request)
 
 Change a user email
 
@@ -48,12 +48,12 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::People::EmailApi.new
-userid = '00000000-0000-0000-0000-000000000000' # String | The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
+user_id = '00000000-0000-0000-0000-000000000000' # String | The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
 change_email_request = DocspaceApiSdk::ChangeEmailRequest.new # ChangeEmailRequest | The new address, in plain text or in the encrypted form the confirmation link carries.
 
 begin
   # Change a user email
-  result = api_instance.change_user_email(userid, change_email_request)
+  result = api_instance.change_user_email(user_id, change_email_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling People::EmailApi->change_user_email: #{e}"
@@ -64,12 +64,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<EmployeeFullWrapper>, Integer, Hash)> change_user_email_with_http_info(userid, change_email_request)
+> <Array(<EmployeeFullWrapper>, Integer, Hash)> change_user_email_with_http_info(user_id, change_email_request)
 
 ```ruby
 begin
   # Change a user email
-  data, status_code, headers = api_instance.change_user_email_with_http_info(userid, change_email_request)
+  data, status_code, headers = api_instance.change_user_email_with_http_info(user_id, change_email_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <EmployeeFullWrapper>
@@ -82,7 +82,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **userid** | **String** | The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. |  |
+| **user_id** | **String** | The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active. |  |
 | **change_email_request** | [**ChangeEmailRequest**](ChangeEmailRequest.md) | The new address, in plain text or in the encrypted form the confirmation link carries. |  |
 
 ### Return type
@@ -105,7 +105,7 @@ end
 
 Send instructions to change email
 
-Starts changing the email address of an account, and what it actually does depends on who calls it.  A caller acting on their own account only gets a confirmation letter sent to the new address, and the address  stays unchanged until that link is followed, which lands on `PUT api/2.0/people/{userid}/email`.  A DocSpace administrator acting on somebody else changes the address immediately instead: the account is  marked as not activated, every session of it is ended, and activation instructions are sent to the new  address - and passing the address the account already has is then rejected with 400.  A caller who is not an administrator may only address their own account, nobody but the owner may change the  owner's address, and only the owner may change the address of another DocSpace administrator.  The target has to be an account that is neither disabled nor a pending invitation, otherwise the operation  answers 404, and an address that already belongs to somebody answers 400.  The answer is a ready-to-display message naming the address the letter was sent to.
+Starts changing the email address of an account, and what it actually does depends on who calls it.  A caller acting on their own account only gets a confirmation letter sent to the new address, and the address  stays unchanged until that link is followed, which lands on `PUT api/2.0/people/{userId}/email`.  A DocSpace administrator acting on somebody else changes the address immediately instead: the account is  marked as not activated, every session of it is ended, and activation instructions are sent to the new  address - and passing the address the account already has is then rejected with 400.  A caller who is not an administrator may only address their own account, nobody but the owner may change the  owner's address, and only the owner may change the address of another DocSpace administrator.  The target has to be an account that is neither disabled nor a pending invitation, otherwise the operation  answers 404, and an address that already belongs to somebody answers 400.  The answer is a ready-to-display message naming the address the letter was sent to.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/send-email-change-instructions/).
 

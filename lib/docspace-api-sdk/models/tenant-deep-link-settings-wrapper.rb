@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The successful API response containing the TenantDeepLinkSettings object.
+  # The successful API response containing the TenantDeepLinkSettingsDto object.
   class TenantDeepLinkSettingsWrapper < ApiModelBase
-    # The TenantDeepLinkSettings object returned by the operation.
+    # The TenantDeepLinkSettingsDto object returned by the operation.
     attr_accessor :response
 
     # The total number of items in the response
@@ -58,7 +58,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'response' => :'TenantDeepLinkSettings',
+        :'response' => :'TenantDeepLinkSettingsDto',
         :'count' => :'Integer',
         :'links' => :'Array<GetPortalPrices200ResponseLinksInner>',
         :'status' => :'Integer',

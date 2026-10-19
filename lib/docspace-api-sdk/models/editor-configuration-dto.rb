@@ -91,18 +91,18 @@ module DocspaceApiSdk
     def self.openapi_types
       {
         :'callback_url' => :'String',
-        :'co_editing' => :'CoEditingConfig',
+        :'co_editing' => :'CoEditingConfigDto',
         :'create_url' => :'String',
         :'customization' => :'CustomizationConfigDto',
-        :'embedded' => :'EmbeddedConfig',
+        :'embedded' => :'EmbeddedConfigDto',
         :'encryption_keys' => :'Array<EncryptionKeyDto>',
         :'lang' => :'String',
         :'mode' => :'String',
         :'mode_write' => :'Boolean',
-        :'plugins' => :'PluginsConfig',
-        :'recent' => :'Array<RecentConfig>',
-        :'templates' => :'Array<TemplatesConfig>',
-        :'user' => :'UserConfig'
+        :'plugins' => :'PluginsConfigDto',
+        :'recent' => :'Array<RecentConfigDto>',
+        :'templates' => :'Array<TemplatesConfigDto>',
+        :'user' => :'UserConfigDto'
       }
     end
 

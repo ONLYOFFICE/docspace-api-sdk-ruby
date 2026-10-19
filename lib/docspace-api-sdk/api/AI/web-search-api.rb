@@ -26,27 +26,27 @@ module DocspaceApiSdk
     # Clear the web-search configuration
     # Removes the portal's web-search configuration, after which web search is unavailable everywhere it was not configured separately. This is not scoped: it takes no `entityId` and any body sent with it is ignored, so it cannot be used to clear one room's configuration. Clearing an already-unconfigured portal is not an error and the call answers success either way. The stored provider key is destroyed with the configuration and has to be entered again.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-clear/
-    # @param body [String] Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
+    # @param ai_web_search_clear_request [String] Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
     # @param [Hash] opts the optional parameters
     # @return [AiSuccessResponse]
-    def ai_web_search_clear(body, opts = {})
-      data, _status_code, _headers = ai_web_search_clear_with_http_info(body, opts)
+    def ai_web_search_clear(ai_web_search_clear_request, opts = {})
+      data, _status_code, _headers = ai_web_search_clear_with_http_info(ai_web_search_clear_request, opts)
       data
     end
 
     # Clear the web-search configuration
     # Removes the portal's web-search configuration, after which web search is unavailable everywhere it was not configured separately. This is not scoped: it takes no `entityId` and any body sent with it is ignored, so it cannot be used to clear one room's configuration. Clearing an already-unconfigured portal is not an error and the call answers success either way. The stored provider key is destroyed with the configuration and has to be entered again.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-clear/
-    # @param body [String] Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
+    # @param ai_web_search_clear_request [String] Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
-    def ai_web_search_clear_with_http_info(body, opts = {})
+    def ai_web_search_clear_with_http_info(ai_web_search_clear_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::WebSearchApi.ai_web_search_clear ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling AI::WebSearchApi.ai_web_search_clear"
+      # verify the required parameter 'ai_web_search_clear_request' is set
+      if @api_client.config.client_side_validation && ai_web_search_clear_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_web_search_clear_request' when calling AI::WebSearchApi.ai_web_search_clear"
       end
       # resource path
       local_var_path = '/api/2.0/ai/web-search/clear'
@@ -68,7 +68,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_web_search_clear_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'
@@ -288,29 +288,29 @@ module DocspaceApiSdk
     end
 
     # Web page contents passthrough
-    # Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider's status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
+    # Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. `urls` has to be a non-empty array of strings, or the call answers 400 naming the field. The provider's 4xx status, body and content type are relayed, so its 429 surfaces unchanged, while a 5xx is replaced by a fixed 502 with the detail kept in the server log. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-contents/
-    # @param request_body [Hash<String, Object>] A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.
+    # @param ai_web_search_passthrough_contents_request [Hash<String, Object>] A page-contents request in the shape the portal's active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration.
     # @param [Hash] opts the optional parameters
     # @return [Hash<String, Object>]
-    def ai_web_search_passthrough_contents(request_body, opts = {})
-      data, _status_code, _headers = ai_web_search_passthrough_contents_with_http_info(request_body, opts)
+    def ai_web_search_passthrough_contents(ai_web_search_passthrough_contents_request, opts = {})
+      data, _status_code, _headers = ai_web_search_passthrough_contents_with_http_info(ai_web_search_passthrough_contents_request, opts)
       data
     end
 
     # Web page contents passthrough
-    # Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider's status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
+    # Fetches the contents of web pages on behalf of the document editor's AI plugin, against the portal's active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. `urls` has to be a non-empty array of strings, or the call answers 400 naming the field. The provider's 4xx status, body and content type are relayed, so its 429 surfaces unchanged, while a 5xx is replaced by a fixed 502 with the detail kept in the server log. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-contents/
-    # @param request_body [Hash<String, Object>] A page-contents request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.
+    # @param ai_web_search_passthrough_contents_request [Hash<String, Object>] A page-contents request in the shape the portal's active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Hash<String, Object>, Integer, Hash)>] Hash<String, Object> data, response status code and response headers
-    def ai_web_search_passthrough_contents_with_http_info(request_body, opts = {})
+    def ai_web_search_passthrough_contents_with_http_info(ai_web_search_passthrough_contents_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::WebSearchApi.ai_web_search_passthrough_contents ...'
       end
-      # verify the required parameter 'request_body' is set
-      if @api_client.config.client_side_validation && request_body.nil?
-        fail ArgumentError, "Missing the required parameter 'request_body' when calling AI::WebSearchApi.ai_web_search_passthrough_contents"
+      # verify the required parameter 'ai_web_search_passthrough_contents_request' is set
+      if @api_client.config.client_side_validation && ai_web_search_passthrough_contents_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_web_search_passthrough_contents_request' when calling AI::WebSearchApi.ai_web_search_passthrough_contents"
       end
       # resource path
       local_var_path = '/api/2.0/ai/websearch/v1/contents'
@@ -332,7 +332,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(request_body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_web_search_passthrough_contents_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'Hash<String, Object>'
@@ -358,29 +358,29 @@ module DocspaceApiSdk
     end
 
     # Web search passthrough
-    # Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider's own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
+    # Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. `query` has to be a non-empty string and `numResults`, when sent, a positive integer; a body failing that answers 400 naming the field, before anything is sent on. The provider's own 4xx status, body and content type are relayed as they stand, so a provider that rate-limits answers 429; a 5xx from the provider or from the hop in front of it is not relayed, its detail stays in the server log and the call answers a fixed 502, which is also what an unreachable provider answers. Closing the connection aborts the upstream request.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-search/
-    # @param request_body [Hash<String, Object>] A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.
+    # @param ai_web_search_passthrough_search_request [Hash<String, Object>] A search request in the shape the portal's active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here.
     # @param [Hash] opts the optional parameters
     # @return [Hash<String, Object>]
-    def ai_web_search_passthrough_search(request_body, opts = {})
-      data, _status_code, _headers = ai_web_search_passthrough_search_with_http_info(request_body, opts)
+    def ai_web_search_passthrough_search(ai_web_search_passthrough_search_request, opts = {})
+      data, _status_code, _headers = ai_web_search_passthrough_search_with_http_info(ai_web_search_passthrough_search_request, opts)
       data
     end
 
     # Web search passthrough
-    # Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider's own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
+    # Runs a web search on behalf of the document editor's AI plugin, which holds only a placeholder configuration - the portal's active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller's credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. `query` has to be a non-empty string and `numResults`, when sent, a positive integer; a body failing that answers 400 naming the field, before anything is sent on. The provider's own 4xx status, body and content type are relayed as they stand, so a provider that rate-limits answers 429; a 5xx from the provider or from the hop in front of it is not relayed, its detail stays in the server log and the call answers a fixed 502, which is also what an unreachable provider answers. Closing the connection aborts the upstream request.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-search/
-    # @param request_body [Hash<String, Object>] A search request in the shape the portal's active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.
+    # @param ai_web_search_passthrough_search_request [Hash<String, Object>] A search request in the shape the portal's active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Hash<String, Object>, Integer, Hash)>] Hash<String, Object> data, response status code and response headers
-    def ai_web_search_passthrough_search_with_http_info(request_body, opts = {})
+    def ai_web_search_passthrough_search_with_http_info(ai_web_search_passthrough_search_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::WebSearchApi.ai_web_search_passthrough_search ...'
       end
-      # verify the required parameter 'request_body' is set
-      if @api_client.config.client_side_validation && request_body.nil?
-        fail ArgumentError, "Missing the required parameter 'request_body' when calling AI::WebSearchApi.ai_web_search_passthrough_search"
+      # verify the required parameter 'ai_web_search_passthrough_search_request' is set
+      if @api_client.config.client_side_validation && ai_web_search_passthrough_search_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_web_search_passthrough_search_request' when calling AI::WebSearchApi.ai_web_search_passthrough_search"
       end
       # resource path
       local_var_path = '/api/2.0/ai/websearch/v1/search'
@@ -402,7 +402,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(request_body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_web_search_passthrough_search_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'Hash<String, Object>'
@@ -430,27 +430,27 @@ module DocspaceApiSdk
     # Set active config
     # Stores a web-search configuration without contacting the provider first, for a form that has already validated its input or for restoring a known-good configuration. `entityId` scopes it to a room and has to name one the caller can open. A `baseUrl` pointing at a private network address is still refused, because that check is local. Nothing guarantees the stored provider works: follow up with `POST api/2.0/ai/web-search/test-connection`, or use `PUT api/2.0/ai/web-search/configure` to have the store gated on a live probe.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-set-active-config/
-    # @param ai_web_search_configure_request [AiWebSearchConfigureRequest] 
+    # @param ai_web_search_set_active_config_request [AiWebSearchSetActiveConfigRequest] 
     # @param [Hash] opts the optional parameters
     # @return [AiSuccessResponse]
-    def ai_web_search_set_active_config(ai_web_search_configure_request, opts = {})
-      data, _status_code, _headers = ai_web_search_set_active_config_with_http_info(ai_web_search_configure_request, opts)
+    def ai_web_search_set_active_config(ai_web_search_set_active_config_request, opts = {})
+      data, _status_code, _headers = ai_web_search_set_active_config_with_http_info(ai_web_search_set_active_config_request, opts)
       data
     end
 
     # Set active config
     # Stores a web-search configuration without contacting the provider first, for a form that has already validated its input or for restoring a known-good configuration. `entityId` scopes it to a room and has to name one the caller can open. A `baseUrl` pointing at a private network address is still refused, because that check is local. Nothing guarantees the stored provider works: follow up with `POST api/2.0/ai/web-search/test-connection`, or use `PUT api/2.0/ai/web-search/configure` to have the store gated on a live probe.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-set-active-config/
-    # @param ai_web_search_configure_request [AiWebSearchConfigureRequest] 
+    # @param ai_web_search_set_active_config_request [AiWebSearchSetActiveConfigRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
-    def ai_web_search_set_active_config_with_http_info(ai_web_search_configure_request, opts = {})
+    def ai_web_search_set_active_config_with_http_info(ai_web_search_set_active_config_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::WebSearchApi.ai_web_search_set_active_config ...'
       end
-      # verify the required parameter 'ai_web_search_configure_request' is set
-      if @api_client.config.client_side_validation && ai_web_search_configure_request.nil?
-        fail ArgumentError, "Missing the required parameter 'ai_web_search_configure_request' when calling AI::WebSearchApi.ai_web_search_set_active_config"
+      # verify the required parameter 'ai_web_search_set_active_config_request' is set
+      if @api_client.config.client_side_validation && ai_web_search_set_active_config_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_web_search_set_active_config_request' when calling AI::WebSearchApi.ai_web_search_set_active_config"
       end
       # resource path
       local_var_path = '/api/2.0/ai/web-search/set-active-config'
@@ -472,7 +472,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_web_search_configure_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_web_search_set_active_config_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'

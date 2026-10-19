@@ -40,6 +40,8 @@
 | **external** | **Boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] |
 | **expiration_date** | [**ApiDateTime**](ApiDateTime.md) | When the link being used stops working, written with the offset of the portal's time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] |
 | **is_link_expired** | **Boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] |
+| **assigned_metadata_templates** | **Array&lt;Integer&gt;** | The IDs of the metadata templates assigned to the file entry. | [optional] |
+| **metadata_matches** | [**Array&lt;MetadataMatchDto&gt;**](MetadataMatchDto.md) | Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here. | [optional] |
 | **folder_id** | **Integer** | The folder the file is stored in. When the file was reached through a share and the caller cannot open its  real parent, the identifier of the Shared with me section is reported instead, so this is where the file is  visible rather than where it physically sits. | [optional] |
 | **version** | **Integer** | The revision this entry describes. It starts at 1 and moves to the next number each time new content is stored  over the file, except for an editing session opened against the file itself, which replaces the content and  keeps the number. `GET api/2.0/files/file/{fileId}/history` lists them all. | [optional] |
 | **version_group** | **Integer** | Groups revisions that belong together, which is how a history can fold a long editing session into one entry:  versions saved inside one session share this number, and an upload over the file starts a new group. | [optional] |
@@ -74,7 +76,7 @@
 | **expired** | [**ApiDateTime**](ApiDateTime.md) | The moment the file falls under the lifetime rule of the room holding it and is removed. It is counted from  the first revision rather than the latest one, so editing a file does not postpone it, and it is null when the  room sets no lifetime. Written with the offset of the portal's time zone. | [optional] |
 | **vectorization_status** | [**VectorizationStatus**](VectorizationStatus.md) | How far the indexing of the file's content for AI search has got. It is null for a file that has never been  queued for indexing, which is every file while the feature is off for the portal. | [optional] |
 | **external_db_table_name** | **String** | The table collecting the submitted values of this form in the external database configured for its room. The  field is left out of the answer entirely when the form has no such table. | [optional] |
-| **dimensions** | [**Size**](Size.md) | The pixel size of the picture, measured by reading the stored file rather than taken from any stored metadata.  Null for anything that is not a picture the portal can show, and also when the file could not be read. | [optional] |
+| **dimensions** | [**ImageSizeDto**](ImageSizeDto.md) | The pixel size of the picture, measured by reading the stored file rather than taken from any stored metadata.  Null for anything that is not a picture the portal can show, and also when the file could not be read. | [optional] |
 
 ## Example
 
@@ -118,6 +120,8 @@ instance = DocspaceApiSdk::FileDto.new(
   external: false,
   expiration_date: null,
   is_link_expired: false,
+  assigned_metadata_templates: null,
+  metadata_matches: null,
   folder_id: 10,
   version: 3,
   version_group: 1,

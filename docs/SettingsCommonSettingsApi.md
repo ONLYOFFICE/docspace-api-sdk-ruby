@@ -154,7 +154,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::CommonSettingsApi.new
 opts = {
-  wizard_requests_dto: DocspaceApiSdk::WizardRequestsDto.new({email: 'user@example.com', password_hash: '2DYmIoA/aYKEksFocEf6uw=='}) # WizardRequestsDto | 
+  wizard_request_dto: DocspaceApiSdk::WizardRequestDto.new({email: 'user@example.com', password_hash: '2DYmIoA/aYKEksFocEf6uw=='}) # WizardRequestDto | 
 }
 
 begin
@@ -188,7 +188,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **wizard_requests_dto** | [**WizardRequestsDto**](WizardRequestsDto.md) |  | [optional] |
+| **wizard_request_dto** | [**WizardRequestDto**](WizardRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -245,7 +245,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::CommonSettingsApi.new
 opts = {
-  deep_link_configuration_requests_dto: DocspaceApiSdk::DeepLinkConfigurationRequestsDto.new # DeepLinkConfigurationRequestsDto | 
+  deep_link_configuration_request_dto: DocspaceApiSdk::DeepLinkConfigurationRequestDto.new # DeepLinkConfigurationRequestDto | 
 }
 
 begin
@@ -279,7 +279,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **deep_link_configuration_requests_dto** | [**DeepLinkConfigurationRequestsDto**](DeepLinkConfigurationRequestsDto.md) |  | [optional] |
+| **deep_link_configuration_request_dto** | [**DeepLinkConfigurationRequestDto**](DeepLinkConfigurationRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -993,7 +993,7 @@ This endpoint does not need any parameter.
 
 ## get_supported_cultures
 
-> <STRINGArrayWrapper> get_supported_cultures
+> <StringArrayWrapper> get_supported_cultures
 
 Get supported languages
 
@@ -1045,7 +1045,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<STRINGArrayWrapper>, Integer, Hash)> get_supported_cultures_with_http_info
+> <Array(<StringArrayWrapper>, Integer, Hash)> get_supported_cultures_with_http_info
 
 ```ruby
 begin
@@ -1053,7 +1053,7 @@ begin
   data, status_code, headers = api_instance.get_supported_cultures_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <STRINGArrayWrapper>
+  p data # => <StringArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::CommonSettingsApi->get_supported_cultures_with_http_info: #{e}"
 end
@@ -1065,7 +1065,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**STRINGArrayWrapper**](STRINGArrayWrapper.md)
+[**StringArrayWrapper**](StringArrayWrapper.md)
 
 ### Authorization
 
@@ -1251,7 +1251,7 @@ This endpoint does not need any parameter.
 
 ## get_time_zones
 
-> <TimezonesRequestsArrayWrapper> get_time_zones
+> <TimezoneArrayWrapper> get_time_zones
 
 Get time zones
 
@@ -1303,7 +1303,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<TimezonesRequestsArrayWrapper>, Integer, Hash)> get_time_zones_with_http_info
+> <Array(<TimezoneArrayWrapper>, Integer, Hash)> get_time_zones_with_http_info
 
 ```ruby
 begin
@@ -1311,7 +1311,7 @@ begin
   data, status_code, headers = api_instance.get_time_zones_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <TimezonesRequestsArrayWrapper>
+  p data # => <TimezoneArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::CommonSettingsApi->get_time_zones_with_http_info: #{e}"
 end
@@ -1323,7 +1323,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**TimezonesRequestsArrayWrapper**](TimezonesRequestsArrayWrapper.md)
+[**TimezoneArrayWrapper**](TimezoneArrayWrapper.md)
 
 ### Authorization
 
@@ -1467,7 +1467,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::CommonSettingsApi.new
 opts = {
-  dns_settings_requests_dto: DocspaceApiSdk::DnsSettingsRequestsDto.new # DnsSettingsRequestsDto | 
+  dns_settings_request_dto: DocspaceApiSdk::DnsSettingsRequestDto.new # DnsSettingsRequestDto | 
 }
 
 begin
@@ -1501,7 +1501,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **dns_settings_requests_dto** | [**DnsSettingsRequestsDto**](DnsSettingsRequestsDto.md) |  | [optional] |
+| **dns_settings_request_dto** | [**DnsSettingsRequestDto**](DnsSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -1558,7 +1558,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::CommonSettingsApi.new
 opts = {
-  mail_domain_settings_requests_dto: DocspaceApiSdk::MailDomainSettingsRequestsDto.new({type: DocspaceApiSdk::TenantTrustedDomainsType::None, domains: [example.com,  company.com], invite_users_as_visitors: false}) # MailDomainSettingsRequestsDto | 
+  mail_domain_settings_request_dto: DocspaceApiSdk::MailDomainSettingsRequestDto.new({type: DocspaceApiSdk::TenantTrustedDomainsType::None, domains: [example.com,  company.com], invite_users_as_visitors: false}) # MailDomainSettingsRequestDto | 
 }
 
 begin
@@ -1592,7 +1592,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **mail_domain_settings_requests_dto** | [**MailDomainSettingsRequestsDto**](MailDomainSettingsRequestsDto.md) |  | [optional] |
+| **mail_domain_settings_request_dto** | [**MailDomainSettingsRequestDto**](MailDomainSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -1649,7 +1649,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::CommonSettingsApi.new
 opts = {
-  custom_color_themes_settings_requests_dto: DocspaceApiSdk::CustomColorThemesSettingsRequestsDto.new # CustomColorThemesSettingsRequestsDto | 
+  custom_color_themes_settings_request_dto: DocspaceApiSdk::CustomColorThemesSettingsRequestDto.new # CustomColorThemesSettingsRequestDto | 
 }
 
 begin
@@ -1683,7 +1683,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **custom_color_themes_settings_requests_dto** | [**CustomColorThemesSettingsRequestsDto**](CustomColorThemesSettingsRequestsDto.md) |  | [optional] |
+| **custom_color_themes_settings_request_dto** | [**CustomColorThemesSettingsRequestDto**](CustomColorThemesSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -1740,7 +1740,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::CommonSettingsApi.new
 opts = {
-  tenant_ai_access_settings_dto: DocspaceApiSdk::TenantAiAccessSettingsDto.new # TenantAiAccessSettingsDto | 
+  tenant_ai_access_settings_request_dto: DocspaceApiSdk::TenantAiAccessSettingsRequestDto.new # TenantAiAccessSettingsRequestDto | 
 }
 
 begin
@@ -1774,7 +1774,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **tenant_ai_access_settings_dto** | [**TenantAiAccessSettingsDto**](TenantAiAccessSettingsDto.md) |  | [optional] |
+| **tenant_ai_access_settings_request_dto** | [**TenantAiAccessSettingsRequestDto**](TenantAiAccessSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -1831,7 +1831,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::CommonSettingsApi.new
 opts = {
-  email_activation_settings: DocspaceApiSdk::EmailActivationSettings.new # EmailActivationSettings | 
+  email_activation_settings_request_dto: DocspaceApiSdk::EmailActivationSettingsRequestDto.new # EmailActivationSettingsRequestDto | 
 }
 
 begin
@@ -1865,7 +1865,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **email_activation_settings** | [**EmailActivationSettings**](EmailActivationSettings.md) |  | [optional] |
+| **email_activation_settings_request_dto** | [**EmailActivationSettingsRequestDto**](EmailActivationSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 

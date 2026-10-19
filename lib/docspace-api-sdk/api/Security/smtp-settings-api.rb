@@ -27,7 +27,7 @@ module DocspaceApiSdk
     # Returns the state of the test message that `GET api/2.0/smtpsettings/smtp/test` queued for this portal, and is  the operation to poll while that test runs. A test has to be queued first; the caller needs the  portal-settings right of a DocSpace administrator, and the SMTP settings section has to be enabled for the  portal, otherwise the call is answered with 402. The call changes no settings, but it is not free of  consequence: the first answer that reports `completed` true also discards the finished job, so a later call no  longer knows about it - take `error` from that answer and keep it. An empty answer means the portal has no  test on record, either because none was queued or because its result has already been read. While the job  runs, `percents` climbs to 100 and `status` names the step reached, such as `Connect to host` or  `Send test message`; `error` is empty until something fails and stays empty when the relay accepted the  message. `id` identifies the queued job, of which a portal only ever has one.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-smtp-operation-status/
     # @param [Hash] opts the optional parameters
-    # @return [SmtpOperationStatusRequestsWrapper]
+    # @return [SmtpOperationStatusWrapper]
     def get_smtp_operation_status(opts = {})
       data, _status_code, _headers = get_smtp_operation_status_with_http_info(opts)
       data
@@ -37,7 +37,7 @@ module DocspaceApiSdk
     # Returns the state of the test message that `GET api/2.0/smtpsettings/smtp/test` queued for this portal, and is  the operation to poll while that test runs. A test has to be queued first; the caller needs the  portal-settings right of a DocSpace administrator, and the SMTP settings section has to be enabled for the  portal, otherwise the call is answered with 402. The call changes no settings, but it is not free of  consequence: the first answer that reports `completed` true also discards the finished job, so a later call no  longer knows about it - take `error` from that answer and keep it. An empty answer means the portal has no  test on record, either because none was queued or because its result has already been read. While the job  runs, `percents` climbs to 100 and `status` names the step reached, such as `Connect to host` or  `Send test message`; `error` is empty until something fails and stays empty when the relay accepted the  message. `id` identifies the queued job, of which a portal only ever has one.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-smtp-operation-status/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(SmtpOperationStatusRequestsWrapper, Integer, Hash)>] SmtpOperationStatusRequestsWrapper data, response status code and response headers
+    # @return [Array<(SmtpOperationStatusWrapper, Integer, Hash)>] SmtpOperationStatusWrapper data, response status code and response headers
     def get_smtp_operation_status_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Security::SMTPSettingsApi.get_smtp_operation_status ...'
@@ -60,7 +60,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'SmtpOperationStatusRequestsWrapper'
+      return_type = opts[:debug_return_type] || 'SmtpOperationStatusWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']
@@ -270,7 +270,7 @@ module DocspaceApiSdk
     # Queues a background job that sends a test message through the SMTP settings currently stored for the portal to  the email address of the calling user, and returns the state of that job. Save the settings with  `POST api/2.0/smtpsettings/smtp` first: the job always takes the stored settings and nothing can be passed to  it here. The caller needs the portal-settings right of a DocSpace administrator, and the SMTP settings section  has to be enabled for the portal, otherwise the call is answered with 402. The call is mutating, it sends  mail, and it is rate-limited to five requests per fifteen minutes per user and path by default, answering 429  above that; while a test is still running the same job is returned instead of a second one being started. The  message has not been sent when the answer arrives: poll `GET api/2.0/smtpsettings/smtp/test/status` until  `completed` is true, then read `error` - empty means the relay accepted the message, otherwise it carries the  reason. `percents` climbs to 100 and `status` names the step reached, such as `Connect to host` or  `Send test message`. An unreachable relay is reported in `error` after a 30-second connection timeout, not as  a failed request.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/test-smtp-settings/
     # @param [Hash] opts the optional parameters
-    # @return [SmtpOperationStatusRequestsWrapper]
+    # @return [SmtpOperationStatusWrapper]
     def test_smtp_settings(opts = {})
       data, _status_code, _headers = test_smtp_settings_with_http_info(opts)
       data
@@ -280,7 +280,7 @@ module DocspaceApiSdk
     # Queues a background job that sends a test message through the SMTP settings currently stored for the portal to  the email address of the calling user, and returns the state of that job. Save the settings with  `POST api/2.0/smtpsettings/smtp` first: the job always takes the stored settings and nothing can be passed to  it here. The caller needs the portal-settings right of a DocSpace administrator, and the SMTP settings section  has to be enabled for the portal, otherwise the call is answered with 402. The call is mutating, it sends  mail, and it is rate-limited to five requests per fifteen minutes per user and path by default, answering 429  above that; while a test is still running the same job is returned instead of a second one being started. The  message has not been sent when the answer arrives: poll `GET api/2.0/smtpsettings/smtp/test/status` until  `completed` is true, then read `error` - empty means the relay accepted the message, otherwise it carries the  reason. `percents` climbs to 100 and `status` names the step reached, such as `Connect to host` or  `Send test message`. An unreachable relay is reported in `error` after a 30-second connection timeout, not as  a failed request.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/test-smtp-settings/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(SmtpOperationStatusRequestsWrapper, Integer, Hash)>] SmtpOperationStatusRequestsWrapper data, response status code and response headers
+    # @return [Array<(SmtpOperationStatusWrapper, Integer, Hash)>] SmtpOperationStatusWrapper data, response status code and response headers
     def test_smtp_settings_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Security::SMTPSettingsApi.test_smtp_settings ...'
@@ -303,7 +303,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'SmtpOperationStatusRequestsWrapper'
+      return_type = opts[:debug_return_type] || 'SmtpOperationStatusWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId']

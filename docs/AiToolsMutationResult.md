@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **success** | **Boolean** | True when the MCP server was persisted. |  |
-| **error** | [**AiTErrorData**](AiTErrorData.md) | Why the MCP server was rejected. Present on failure. | [optional] |
+| **error** | [**AiErrorData**](AiErrorData.md) | Why the MCP server was rejected. Present on failure. | [optional] |
 
 ## Example
 

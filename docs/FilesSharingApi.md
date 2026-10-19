@@ -591,7 +591,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ## get_groups_members_with_file_security
 
-> <GroupMemberSecurityRequestArrayWrapper> get_groups_members_with_file_security(file_id, group_id, opts)
+> <GroupMemberSecurityArrayWrapper> get_groups_members_with_file_security(file_id, group_id, opts)
 
 Get file access of group members
 
@@ -650,7 +650,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GroupMemberSecurityRequestArrayWrapper>, Integer, Hash)> get_groups_members_with_file_security_with_http_info(file_id, group_id, opts)
+> <Array(<GroupMemberSecurityArrayWrapper>, Integer, Hash)> get_groups_members_with_file_security_with_http_info(file_id, group_id, opts)
 
 ```ruby
 begin
@@ -658,7 +658,7 @@ begin
   data, status_code, headers = api_instance.get_groups_members_with_file_security_with_http_info(file_id, group_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GroupMemberSecurityRequestArrayWrapper>
+  p data # => <GroupMemberSecurityArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::SharingApi->get_groups_members_with_file_security_with_http_info: #{e}"
 end
@@ -676,7 +676,7 @@ end
 
 ### Return type
 
-[**GroupMemberSecurityRequestArrayWrapper**](GroupMemberSecurityRequestArrayWrapper.md)
+[**GroupMemberSecurityArrayWrapper**](GroupMemberSecurityArrayWrapper.md)
 
 ### Third-party storage
 
@@ -694,7 +694,7 @@ The same method serves an entry in a connected third-party storage, whose identi
 
 ## get_groups_members_with_folder_security
 
-> <GroupMemberSecurityRequestArrayWrapper> get_groups_members_with_folder_security(folder_id, group_id, opts)
+> <GroupMemberSecurityArrayWrapper> get_groups_members_with_folder_security(folder_id, group_id, opts)
 
 Get folder access of group members
 
@@ -753,7 +753,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GroupMemberSecurityRequestArrayWrapper>, Integer, Hash)> get_groups_members_with_folder_security_with_http_info(folder_id, group_id, opts)
+> <Array(<GroupMemberSecurityArrayWrapper>, Integer, Hash)> get_groups_members_with_folder_security_with_http_info(folder_id, group_id, opts)
 
 ```ruby
 begin
@@ -761,7 +761,7 @@ begin
   data, status_code, headers = api_instance.get_groups_members_with_folder_security_with_http_info(folder_id, group_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GroupMemberSecurityRequestArrayWrapper>
+  p data # => <GroupMemberSecurityArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::SharingApi->get_groups_members_with_folder_security_with_http_info: #{e}"
 end
@@ -779,7 +779,7 @@ end
 
 ### Return type
 
-[**GroupMemberSecurityRequestArrayWrapper**](GroupMemberSecurityRequestArrayWrapper.md)
+[**GroupMemberSecurityArrayWrapper**](GroupMemberSecurityArrayWrapper.md)
 
 ### Third-party storage
 
@@ -888,7 +888,7 @@ end
 
 ## get_shared_users
 
-> <MentionWrapperArrayWrapper> get_shared_users(file_id)
+> <MentionArrayWrapper> get_shared_users(file_id)
 
 Get users to mention in a file
 
@@ -941,7 +941,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<MentionWrapperArrayWrapper>, Integer, Hash)> get_shared_users_with_http_info(file_id)
+> <Array(<MentionArrayWrapper>, Integer, Hash)> get_shared_users_with_http_info(file_id)
 
 ```ruby
 begin
@@ -949,7 +949,7 @@ begin
   data, status_code, headers = api_instance.get_shared_users_with_http_info(file_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <MentionWrapperArrayWrapper>
+  p data # => <MentionArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::SharingApi->get_shared_users_with_http_info: #{e}"
 end
@@ -963,7 +963,7 @@ end
 
 ### Return type
 
-[**MentionWrapperArrayWrapper**](MentionWrapperArrayWrapper.md)
+[**MentionArrayWrapper**](MentionArrayWrapper.md)
 
 ### Third-party storage
 
@@ -1072,7 +1072,7 @@ end
 
 ## send_editor_notify
 
-> <AceShortWrapperArrayWrapper> send_editor_notify(file_id, opts)
+> <AceShortArrayWrapper> send_editor_notify(file_id, opts)
 
 Notify mentioned users
 
@@ -1112,7 +1112,7 @@ end
 api_instance = DocspaceApiSdk::Files::SharingApi.new
 file_id = 10 # Integer | The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
 opts = {
-  mention_message_wrapper: DocspaceApiSdk::MentionMessageWrapper.new # MentionMessageWrapper | The notification to send.
+  mention_message_request: DocspaceApiSdk::MentionMessageRequest.new # MentionMessageRequest | The notification to send.
 }
 
 begin
@@ -1128,7 +1128,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AceShortWrapperArrayWrapper>, Integer, Hash)> send_editor_notify_with_http_info(file_id, opts)
+> <Array(<AceShortArrayWrapper>, Integer, Hash)> send_editor_notify_with_http_info(file_id, opts)
 
 ```ruby
 begin
@@ -1136,7 +1136,7 @@ begin
   data, status_code, headers = api_instance.send_editor_notify_with_http_info(file_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <AceShortWrapperArrayWrapper>
+  p data # => <AceShortArrayWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Files::SharingApi->send_editor_notify_with_http_info: #{e}"
 end
@@ -1147,11 +1147,11 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **file_id** | **Integer** | The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string. |  |
-| **mention_message_wrapper** | [**MentionMessageWrapper**](MentionMessageWrapper.md) | The notification to send. | [optional] |
+| **mention_message_request** | [**MentionMessageRequest**](MentionMessageRequest.md) | The notification to send. | [optional] |
 
 ### Return type
 
-[**AceShortWrapperArrayWrapper**](AceShortWrapperArrayWrapper.md)
+[**AceShortArrayWrapper**](AceShortArrayWrapper.md)
 
 ### Third-party storage
 

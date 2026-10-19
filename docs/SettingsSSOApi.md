@@ -13,7 +13,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 ## get_default_sso_settings_v2
 
-> <SsoSettingsV2Wrapper> get_default_sso_settings_v2
+> <SsoSettingsWrapper> get_default_sso_settings_v2
 
 Get the default SSO settings
 
@@ -65,7 +65,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SsoSettingsV2Wrapper>, Integer, Hash)> get_default_sso_settings_v2_with_http_info
+> <Array(<SsoSettingsWrapper>, Integer, Hash)> get_default_sso_settings_v2_with_http_info
 
 ```ruby
 begin
@@ -73,7 +73,7 @@ begin
   data, status_code, headers = api_instance.get_default_sso_settings_v2_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <SsoSettingsV2Wrapper>
+  p data # => <SsoSettingsWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::SSOApi->get_default_sso_settings_v2_with_http_info: #{e}"
 end
@@ -85,7 +85,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SsoSettingsV2Wrapper**](SsoSettingsV2Wrapper.md)
+[**SsoSettingsWrapper**](SsoSettingsWrapper.md)
 
 ### Authorization
 
@@ -99,7 +99,7 @@ This endpoint does not need any parameter.
 
 ## get_sso_settings_v2
 
-> <SsoSettingsV2Wrapper> get_sso_settings_v2
+> <SsoSettingsWrapper> get_sso_settings_v2
 
 Get the SSO settings
 
@@ -151,7 +151,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SsoSettingsV2Wrapper>, Integer, Hash)> get_sso_settings_v2_with_http_info
+> <Array(<SsoSettingsWrapper>, Integer, Hash)> get_sso_settings_v2_with_http_info
 
 ```ruby
 begin
@@ -159,7 +159,7 @@ begin
   data, status_code, headers = api_instance.get_sso_settings_v2_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <SsoSettingsV2Wrapper>
+  p data # => <SsoSettingsWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::SSOApi->get_sso_settings_v2_with_http_info: #{e}"
 end
@@ -171,7 +171,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SsoSettingsV2Wrapper**](SsoSettingsV2Wrapper.md)
+[**SsoSettingsWrapper**](SsoSettingsWrapper.md)
 
 ### Authorization
 
@@ -185,7 +185,7 @@ This endpoint does not need any parameter.
 
 ## get_sso_settings_v2_constants
 
-> <SsoSettingsV2ConstantsWrapper> get_sso_settings_v2_constants
+> <SsoSettingsConstantsWrapper> get_sso_settings_v2_constants
 
 Get the SSO settings constants
 
@@ -237,7 +237,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SsoSettingsV2ConstantsWrapper>, Integer, Hash)> get_sso_settings_v2_constants_with_http_info
+> <Array(<SsoSettingsConstantsWrapper>, Integer, Hash)> get_sso_settings_v2_constants_with_http_info
 
 ```ruby
 begin
@@ -245,7 +245,7 @@ begin
   data, status_code, headers = api_instance.get_sso_settings_v2_constants_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <SsoSettingsV2ConstantsWrapper>
+  p data # => <SsoSettingsConstantsWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::SSOApi->get_sso_settings_v2_constants_with_http_info: #{e}"
 end
@@ -257,7 +257,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SsoSettingsV2ConstantsWrapper**](SsoSettingsV2ConstantsWrapper.md)
+[**SsoSettingsConstantsWrapper**](SsoSettingsConstantsWrapper.md)
 
 ### Authorization
 
@@ -271,7 +271,7 @@ This endpoint does not need any parameter.
 
 ## reset_sso_settings_v2
 
-> <SsoSettingsV2Wrapper> reset_sso_settings_v2
+> <SsoSettingsWrapper> reset_sso_settings_v2
 
 Reset the SSO settings
 
@@ -323,7 +323,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SsoSettingsV2Wrapper>, Integer, Hash)> reset_sso_settings_v2_with_http_info
+> <Array(<SsoSettingsWrapper>, Integer, Hash)> reset_sso_settings_v2_with_http_info
 
 ```ruby
 begin
@@ -331,7 +331,7 @@ begin
   data, status_code, headers = api_instance.reset_sso_settings_v2_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <SsoSettingsV2Wrapper>
+  p data # => <SsoSettingsWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::SSOApi->reset_sso_settings_v2_with_http_info: #{e}"
 end
@@ -343,7 +343,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SsoSettingsV2Wrapper**](SsoSettingsV2Wrapper.md)
+[**SsoSettingsWrapper**](SsoSettingsWrapper.md)
 
 ### Authorization
 
@@ -357,7 +357,7 @@ This endpoint does not need any parameter.
 
 ## save_sso_settings_v2
 
-> <SsoSettingsV2Wrapper> save_sso_settings_v2(opts)
+> <SsoSettingsWrapper> save_sso_settings_v2(opts)
 
 Save the SSO settings
 
@@ -396,7 +396,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::SSOApi.new
 opts = {
-  sso_settings_requests_dto: DocspaceApiSdk::SsoSettingsRequestsDto.new({serialize_settings: '{"enableSso":true,"idpSettings":{"entityId":"https://idp.example.com"}}'}) # SsoSettingsRequestsDto | 
+  sso_settings_request_dto: DocspaceApiSdk::SsoSettingsRequestDto.new({serialize_settings: '{"enableSso":true,"idpSettings":{"entityId":"https://idp.example.com"}}'}) # SsoSettingsRequestDto | 
 }
 
 begin
@@ -412,7 +412,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<SsoSettingsV2Wrapper>, Integer, Hash)> save_sso_settings_v2_with_http_info(opts)
+> <Array(<SsoSettingsWrapper>, Integer, Hash)> save_sso_settings_v2_with_http_info(opts)
 
 ```ruby
 begin
@@ -420,7 +420,7 @@ begin
   data, status_code, headers = api_instance.save_sso_settings_v2_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <SsoSettingsV2Wrapper>
+  p data # => <SsoSettingsWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::SSOApi->save_sso_settings_v2_with_http_info: #{e}"
 end
@@ -430,11 +430,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **sso_settings_requests_dto** | [**SsoSettingsRequestsDto**](SsoSettingsRequestsDto.md) |  | [optional] |
+| **sso_settings_request_dto** | [**SsoSettingsRequestDto**](SsoSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 
-[**SsoSettingsV2Wrapper**](SsoSettingsV2Wrapper.md)
+[**SsoSettingsWrapper**](SsoSettingsWrapper.md)
 
 ### Authorization
 

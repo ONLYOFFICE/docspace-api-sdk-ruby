@@ -49,7 +49,7 @@ end
 
 api_instance = DocspaceApiSdk::Security::CSPApi.new
 opts = {
-  csp_requests_dto: DocspaceApiSdk::CspRequestsDto.new # CspRequestsDto | 
+  csp_request_dto: DocspaceApiSdk::CspRequestDto.new # CspRequestDto | 
 }
 
 begin
@@ -83,7 +83,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **csp_requests_dto** | [**CspRequestsDto**](CspRequestsDto.md) |  | [optional] |
+| **csp_request_dto** | [**CspRequestDto**](CspRequestDto.md) |  | [optional] |
 
 ### Return type
 

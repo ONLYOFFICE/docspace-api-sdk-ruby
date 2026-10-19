@@ -34,7 +34,7 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::VectorizationApi.new
-ai_vectorization_start_task_request = DocspaceApiSdk::AiVectorizationStartTaskRequest.new({files: [1234, 1235]}) # AiVectorizationStartTaskRequest | The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape.
+ai_vectorization_start_task_request = DocspaceApiSdk::AiVectorizationStartTaskRequest.new({files: [1234,  1235]}) # AiVectorizationStartTaskRequest | The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape.
 
 begin
   # Start a vectorization task

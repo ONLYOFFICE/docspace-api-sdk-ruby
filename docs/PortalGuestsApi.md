@@ -4,12 +4,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_guest_sharing_link**](PortalGuestsApi.md#get_guest_sharing_link) | **GET** /api/2.0/people/guests/{userid}/share | Get a guest sharing link |
+| [**get_guest_sharing_link**](PortalGuestsApi.md#get_guest_sharing_link) | **GET** /api/2.0/people/guests/{userId}/share | Get a guest sharing link |
 
 
 ## get_guest_sharing_link
 
-> <StringWrapper> get_guest_sharing_link(userid)
+> <StringWrapper> get_guest_sharing_link(user_id)
 
 Get a guest sharing link
 
@@ -47,11 +47,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::Portal::GuestsApi.new
-userid = '00000000-0000-0000-0000-000000000000' # String | The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
+user_id = '00000000-0000-0000-0000-000000000000' # String | The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
 
 begin
   # Get a guest sharing link
-  result = api_instance.get_guest_sharing_link(userid)
+  result = api_instance.get_guest_sharing_link(user_id)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Portal::GuestsApi->get_guest_sharing_link: #{e}"
@@ -62,12 +62,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<StringWrapper>, Integer, Hash)> get_guest_sharing_link_with_http_info(userid)
+> <Array(<StringWrapper>, Integer, Hash)> get_guest_sharing_link_with_http_info(user_id)
 
 ```ruby
 begin
   # Get a guest sharing link
-  data, status_code, headers = api_instance.get_guest_sharing_link_with_http_info(userid)
+  data, status_code, headers = api_instance.get_guest_sharing_link_with_http_info(user_id)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <StringWrapper>
@@ -80,7 +80,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **userid** | **String** | The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see. |  |
+| **user_id** | **String** | The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see. |  |
 
 ### Return type
 

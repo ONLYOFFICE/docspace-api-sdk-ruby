@@ -27,7 +27,7 @@ module DocspaceApiSdk
     # Sets whether the portal restricts the `User` role from using the developer tools (API keys, OAuth apps,  webhooks); `RoomAdmin` and `DocSpaceAdmin` are never affected by this setting. Requires Owner or DocSpaceAdmin  (the EditPortalSettings permission). This is a mutating, idempotent, portal-wide call: it applies to every  `User` on the tenant immediately. It returns the saved setting; read the current value at any time from  `GET api/2.0/settings/devtoolsaccess`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-dev-tools-access-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [TenantDevToolsAccessSettingsDto] :tenant_dev_tools_access_settings_dto 
+    # @option opts [TenantDevToolsAccessSettingsRequestDto] :tenant_dev_tools_access_settings_request_dto 
     # @return [TenantDevToolsAccessSettingsWrapper]
     def set_tenant_dev_tools_access_settings(opts = {})
       data, _status_code, _headers = set_tenant_dev_tools_access_settings_with_http_info(opts)
@@ -38,7 +38,7 @@ module DocspaceApiSdk
     # Sets whether the portal restricts the `User` role from using the developer tools (API keys, OAuth apps,  webhooks); `RoomAdmin` and `DocSpaceAdmin` are never affected by this setting. Requires Owner or DocSpaceAdmin  (the EditPortalSettings permission). This is a mutating, idempotent, portal-wide call: it applies to every  `User` on the tenant immediately. It returns the saved setting; read the current value at any time from  `GET api/2.0/settings/devtoolsaccess`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-dev-tools-access-settings/
     # @param [Hash] opts the optional parameters
-    # @option opts [TenantDevToolsAccessSettingsDto] :tenant_dev_tools_access_settings_dto 
+    # @option opts [TenantDevToolsAccessSettingsRequestDto] :tenant_dev_tools_access_settings_request_dto 
     # @return [Array<(TenantDevToolsAccessSettingsWrapper, Integer, Hash)>] TenantDevToolsAccessSettingsWrapper data, response status code and response headers
     def set_tenant_dev_tools_access_settings_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -64,7 +64,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'tenant_dev_tools_access_settings_dto'])
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'tenant_dev_tools_access_settings_request_dto'])
 
       # return_type
       return_type = opts[:debug_return_type] || 'TenantDevToolsAccessSettingsWrapper'

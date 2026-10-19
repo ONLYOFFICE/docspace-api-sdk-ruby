@@ -8,7 +8,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | [**add_members_to**](GroupApi.md#add_members_to) | **PUT** /api/2.0/group/{id}/members | Add group members |
 | [**delete_group**](GroupApi.md#delete_group) | **DELETE** /api/2.0/group/{id} | Delete a group |
 | [**get_group**](GroupApi.md#get_group) | **GET** /api/2.0/group/{id} | Get a group |
-| [**get_group_by_user_id**](GroupApi.md#get_group_by_user_id) | **GET** /api/2.0/group/user/{userid} | Get user groups |
+| [**get_group_by_user_id**](GroupApi.md#get_group_by_user_id) | **GET** /api/2.0/group/user/{userId} | Get user groups |
 | [**get_groups**](GroupApi.md#get_groups) | **GET** /api/2.0/group | Get groups |
 | [**move_members_to**](GroupApi.md#move_members_to) | **PUT** /api/2.0/group/{fromId}/members/{toId} | Move group members |
 | [**remove_members_from**](GroupApi.md#remove_members_from) | **DELETE** /api/2.0/group/{id}/members | Remove group members |
@@ -382,7 +382,7 @@ end
 
 ## get_group_by_user_id
 
-> <GroupSummaryArrayWrapper> get_group_by_user_id(userid)
+> <GroupSummaryArrayWrapper> get_group_by_user_id(user_id)
 
 Get user groups
 
@@ -420,11 +420,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::Group::GroupApi.new
-userid = '00000000-0000-0000-0000-000000000000' # String | The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
+user_id = '00000000-0000-0000-0000-000000000000' # String | The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
 
 begin
   # Get user groups
-  result = api_instance.get_group_by_user_id(userid)
+  result = api_instance.get_group_by_user_id(user_id)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Group::GroupApi->get_group_by_user_id: #{e}"
@@ -435,12 +435,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GroupSummaryArrayWrapper>, Integer, Hash)> get_group_by_user_id_with_http_info(userid)
+> <Array(<GroupSummaryArrayWrapper>, Integer, Hash)> get_group_by_user_id_with_http_info(user_id)
 
 ```ruby
 begin
   # Get user groups
-  data, status_code, headers = api_instance.get_group_by_user_id_with_http_info(userid)
+  data, status_code, headers = api_instance.get_group_by_user_id_with_http_info(user_id)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GroupSummaryArrayWrapper>
@@ -453,7 +453,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **userid** | **String** | The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. |  |
+| **user_id** | **String** | The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. |  |
 
 ### Return type
 
@@ -475,7 +475,7 @@ end
 
 Get groups
 
-Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
+Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userId}` to find the groups of a single account.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups/).
 

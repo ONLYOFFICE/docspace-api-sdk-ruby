@@ -17,3 +17,5 @@
 
 * `Encryption` (value: `6`)
 
+* `Blocked` (value: `7`)
+

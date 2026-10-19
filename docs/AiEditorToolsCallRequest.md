@@ -15,7 +15,7 @@ require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiEditorToolsCallRequest.new(
   name: docspace_get_folder,
-  arguments: {"folderId":"1234"},
+  arguments: {folderId=1234},
   entity_id: 1234
 )
 ```

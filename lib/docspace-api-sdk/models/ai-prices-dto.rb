@@ -62,7 +62,7 @@ module DocspaceApiSdk
         :'embedding' => :'Array<AiEntryPricingDtoAiEmbeddingPriceDto>',
         :'image' => :'Array<AiEntryPricingDtoAiImagePriceDto>',
         :'web_search' => :'Array<AiEntryPricingDtoDecimal>',
-        :'currency' => :'CurrencyInfo'
+        :'currency' => :'AiPriceCurrencyDto'
       }
     end
 

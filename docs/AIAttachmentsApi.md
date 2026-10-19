@@ -16,7 +16,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 ## ai_attachments_delete
 
-> <AiSuccessResponse> ai_attachments_delete(body)
+> <AiSuccessResponse> ai_attachments_delete(ai_attachments_delete_request)
 
 Delete one attachment
 
@@ -41,11 +41,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::AttachmentsApi.new
-body = 'body_example' # String | The ID of the attachment to delete, as a bare JSON string.
+ai_attachments_delete_request = 'ai_attachments_delete_request_example' # String | The ID of the attachment to delete, as a bare JSON string.
 
 begin
   # Delete one attachment
-  result = api_instance.ai_attachments_delete(body)
+  result = api_instance.ai_attachments_delete(ai_attachments_delete_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::AttachmentsApi->ai_attachments_delete: #{e}"
@@ -56,12 +56,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AiSuccessResponse>, Integer, Hash)> ai_attachments_delete_with_http_info(body)
+> <Array(<AiSuccessResponse>, Integer, Hash)> ai_attachments_delete_with_http_info(ai_attachments_delete_request)
 
 ```ruby
 begin
   # Delete one attachment
-  data, status_code, headers = api_instance.ai_attachments_delete_with_http_info(body)
+  data, status_code, headers = api_instance.ai_attachments_delete_with_http_info(ai_attachments_delete_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AiSuccessResponse>
@@ -74,7 +74,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **body** | **String** | The ID of the attachment to delete, as a bare JSON string. |  |
+| **ai_attachments_delete_request** | **String** | The ID of the attachment to delete, as a bare JSON string. |  |
 
 ### Return type
 
@@ -92,7 +92,7 @@ end
 
 ## ai_attachments_delete_many
 
-> <AiSuccessResponse> ai_attachments_delete_many(request_body)
+> <AiSuccessResponse> ai_attachments_delete_many(ai_attachments_delete_many_request)
 
 Delete many
 
@@ -117,11 +117,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::AttachmentsApi.new
-request_body = ['property_example'] # Array<String> | The IDs of the attachments to delete, as a bare JSON array of strings.
+ai_attachments_delete_many_request = ['property_example'] # Array<String> | The IDs of the attachments to delete, as a bare JSON array of strings.
 
 begin
   # Delete many
-  result = api_instance.ai_attachments_delete_many(request_body)
+  result = api_instance.ai_attachments_delete_many(ai_attachments_delete_many_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::AttachmentsApi->ai_attachments_delete_many: #{e}"
@@ -132,12 +132,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AiSuccessResponse>, Integer, Hash)> ai_attachments_delete_many_with_http_info(request_body)
+> <Array(<AiSuccessResponse>, Integer, Hash)> ai_attachments_delete_many_with_http_info(ai_attachments_delete_many_request)
 
 ```ruby
 begin
   # Delete many
-  data, status_code, headers = api_instance.ai_attachments_delete_many_with_http_info(request_body)
+  data, status_code, headers = api_instance.ai_attachments_delete_many_with_http_info(ai_attachments_delete_many_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AiSuccessResponse>
@@ -150,7 +150,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **request_body** | [**Array&lt;String&gt;**](String.md) | The IDs of the attachments to delete, as a bare JSON array of strings. |  |
+| **ai_attachments_delete_many_request** | [**Array&lt;String&gt;**](String.md) | The IDs of the attachments to delete, as a bare JSON array of strings. |  |
 
 ### Return type
 
@@ -168,7 +168,7 @@ end
 
 ## ai_attachments_get
 
-> <AiAttachment> ai_attachments_get(body)
+> <AiAttachment> ai_attachments_get(ai_attachments_get_request)
 
 Get one attachment
 
@@ -193,11 +193,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::AttachmentsApi.new
-body = 'body_example' # String | The ID of the attachment to read, as a bare JSON string.
+ai_attachments_get_request = 'ai_attachments_get_request_example' # String | The ID of the attachment to read, as a bare JSON string.
 
 begin
   # Get one attachment
-  result = api_instance.ai_attachments_get(body)
+  result = api_instance.ai_attachments_get(ai_attachments_get_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::AttachmentsApi->ai_attachments_get: #{e}"
@@ -208,12 +208,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AiAttachment>, Integer, Hash)> ai_attachments_get_with_http_info(body)
+> <Array(<AiAttachment>, Integer, Hash)> ai_attachments_get_with_http_info(ai_attachments_get_request)
 
 ```ruby
 begin
   # Get one attachment
-  data, status_code, headers = api_instance.ai_attachments_get_with_http_info(body)
+  data, status_code, headers = api_instance.ai_attachments_get_with_http_info(ai_attachments_get_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AiAttachment>
@@ -226,7 +226,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **body** | **String** | The ID of the attachment to read, as a bare JSON string. |  |
+| **ai_attachments_get_request** | **String** | The ID of the attachment to read, as a bare JSON string. |  |
 
 ### Return type
 
@@ -244,7 +244,7 @@ end
 
 ## ai_attachments_get_many
 
-> <Array<AiAttachment>> ai_attachments_get_many(request_body)
+> <Array<AiAttachment>> ai_attachments_get_many(ai_attachments_get_many_request)
 
 Get many
 
@@ -269,11 +269,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::AttachmentsApi.new
-request_body = ['property_example'] # Array<String> | The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
+ai_attachments_get_many_request = ['property_example'] # Array<String> | The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
 
 begin
   # Get many
-  result = api_instance.ai_attachments_get_many(request_body)
+  result = api_instance.ai_attachments_get_many(ai_attachments_get_many_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::AttachmentsApi->ai_attachments_get_many: #{e}"
@@ -284,12 +284,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<AiAttachment>>, Integer, Hash)> ai_attachments_get_many_with_http_info(request_body)
+> <Array(<Array<AiAttachment>>, Integer, Hash)> ai_attachments_get_many_with_http_info(ai_attachments_get_many_request)
 
 ```ruby
 begin
   # Get many
-  data, status_code, headers = api_instance.ai_attachments_get_many_with_http_info(request_body)
+  data, status_code, headers = api_instance.ai_attachments_get_many_with_http_info(ai_attachments_get_many_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Array<AiAttachment>>
@@ -302,7 +302,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **request_body** | [**Array&lt;String&gt;**](String.md) | The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. |  |
+| **ai_attachments_get_many_request** | [**Array&lt;String&gt;**](String.md) | The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. |  |
 
 ### Return type
 
@@ -320,7 +320,7 @@ end
 
 ## ai_attachments_get_suggested_questions
 
-> <AiSuccessResponse> ai_attachments_get_suggested_questions(request_body)
+> <AiSuccessResponse> ai_attachments_get_suggested_questions(ai_attachments_get_suggested_questions_request)
 
 Get suggested questions
 
@@ -343,11 +343,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::AttachmentsApi.new
-request_body = { key: 3.56} # Hash<String, Object> | 
+ai_attachments_get_suggested_questions_request = { key: 3.56} # Hash<String, Object> | 
 
 begin
   # Get suggested questions
-  result = api_instance.ai_attachments_get_suggested_questions(request_body)
+  result = api_instance.ai_attachments_get_suggested_questions(ai_attachments_get_suggested_questions_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::AttachmentsApi->ai_attachments_get_suggested_questions: #{e}"
@@ -358,12 +358,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AiSuccessResponse>, Integer, Hash)> ai_attachments_get_suggested_questions_with_http_info(request_body)
+> <Array(<AiSuccessResponse>, Integer, Hash)> ai_attachments_get_suggested_questions_with_http_info(ai_attachments_get_suggested_questions_request)
 
 ```ruby
 begin
   # Get suggested questions
-  data, status_code, headers = api_instance.ai_attachments_get_suggested_questions_with_http_info(request_body)
+  data, status_code, headers = api_instance.ai_attachments_get_suggested_questions_with_http_info(ai_attachments_get_suggested_questions_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AiSuccessResponse>
@@ -376,7 +376,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **request_body** | [**Hash&lt;String, Object&gt;**](Object.md) |  |  |
+| **ai_attachments_get_suggested_questions_request** | [**Hash&lt;String, Object&gt;**](Object.md) |  |  |
 
 ### Return type
 

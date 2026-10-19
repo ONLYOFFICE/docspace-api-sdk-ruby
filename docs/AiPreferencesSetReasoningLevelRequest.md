@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **value** | [**AiAiReasoningLevel**](AiAiReasoningLevel.md) | New extended-thinking depth; `off` turns deep mode off. |  |
+| **value** | [**AiReasoningLevel**](AiReasoningLevel.md) | New extended-thinking depth; `off` turns deep mode off. |  |
 | **entity_id** | **String** |  | [optional] |
 
 ## Example

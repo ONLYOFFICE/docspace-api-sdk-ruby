@@ -301,30 +301,30 @@ module DocspaceApiSdk
     # Get user groups
     # Returns every group the account with the ID in the route belongs to, as a flat list of ID and name pairs.  The caller needs the permission to read groups.  The call is read-only, is not paged, and answers an empty list both for an account that belongs to no group  and for an ID that matches no account, so an empty answer does not prove the account exists.  The entries are summaries and carry neither the manager nor the members - read `GET api/2.0/group/{id}` for  the full picture of one of them.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-group-by-user-id/
-    # @param userid [String] The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
+    # @param user_id [String] The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
     # @param [Hash] opts the optional parameters
     # @return [GroupSummaryArrayWrapper]
-    def get_group_by_user_id(userid, opts = {})
-      data, _status_code, _headers = get_group_by_user_id_with_http_info(userid, opts)
+    def get_group_by_user_id(user_id, opts = {})
+      data, _status_code, _headers = get_group_by_user_id_with_http_info(user_id, opts)
       data
     end
 
     # Get user groups
     # Returns every group the account with the ID in the route belongs to, as a flat list of ID and name pairs.  The caller needs the permission to read groups.  The call is read-only, is not paged, and answers an empty list both for an account that belongs to no group  and for an ID that matches no account, so an empty answer does not prove the account exists.  The entries are summaries and carry neither the manager nor the members - read `GET api/2.0/group/{id}` for  the full picture of one of them.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-group-by-user-id/
-    # @param userid [String] The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
+    # @param user_id [String] The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
     # @param [Hash] opts the optional parameters
     # @return [Array<(GroupSummaryArrayWrapper, Integer, Hash)>] GroupSummaryArrayWrapper data, response status code and response headers
-    def get_group_by_user_id_with_http_info(userid, opts = {})
+    def get_group_by_user_id_with_http_info(user_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: Group::GroupApi.get_group_by_user_id ...'
       end
-      # verify the required parameter 'userid' is set
-      if @api_client.config.client_side_validation && userid.nil?
-        fail ArgumentError, "Missing the required parameter 'userid' when calling Group::GroupApi.get_group_by_user_id"
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling Group::GroupApi.get_group_by_user_id"
       end
       # resource path
-      local_var_path = '/api/2.0/group/user/{userid}'.sub('{' + 'userid' + '}', CGI.escape(userid.to_s))
+      local_var_path = '/api/2.0/group/user/{userId}'.sub('{' + 'userId' + '}', CGI.escape(user_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -364,7 +364,7 @@ module DocspaceApiSdk
     end
 
     # Get groups
-    # Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
+    # Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userId}` to find the groups of a single account.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :user_id Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal.
@@ -381,7 +381,7 @@ module DocspaceApiSdk
     end
 
     # Get groups
-    # Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
+    # Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userId}` to find the groups of a single account.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups/
     # @param [Hash] opts the optional parameters
     # @option opts [String] :user_id Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal.

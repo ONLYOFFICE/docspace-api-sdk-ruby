@@ -17,15 +17,19 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Whether the portal promotional banners are hidden.
+  # Whether the portal hides its promotional banners.
   class TenantBannerSettingsDto < ApiModelBase
-    # Whether the promotional banners are hidden from every user of the portal. The flag is only honoured on a  self-hosted installation; a SaaS portal keeps showing the banners whatever is stored here.
+    # The banners visibility flag.
     attr_accessor :hidden
+
+    # The timestamp indicating when the settings were last modified.
+    attr_accessor :last_modified
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'hidden' => :'hidden'
+        :'hidden' => :'hidden',
+        :'last_modified' => :'lastModified'
       }
     end
 
@@ -42,7 +46,8 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'hidden' => :'Boolean'
+        :'hidden' => :'Boolean',
+        :'last_modified' => :'Time'
       }
     end
 
@@ -71,6 +76,10 @@ module DocspaceApiSdk
       if attributes.key?(:'hidden')
         self.hidden = attributes[:'hidden']
       end
+
+      if attributes.key?(:'last_modified')
+        self.last_modified = attributes[:'last_modified']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -93,7 +102,8 @@ module DocspaceApiSdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          hidden == o.hidden
+          hidden == o.hidden &&
+          last_modified == o.last_modified
     end
 
     # @see the `==` method
@@ -105,7 +115,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [hidden].hash
+      [hidden, last_modified].hash
     end
 
     # Builds the object from hash

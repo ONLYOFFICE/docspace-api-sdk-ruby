@@ -26,7 +26,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 Append user message
 
-Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
+Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. `threadId` is required, the message has to carry `role: user` and a content that is a non-blank string or a part list with at least one real part - text, a file or image attachment - so an empty or role-less body is rejected rather than stored. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message's ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-append-user-message/).
 
@@ -98,7 +98,7 @@ end
 
 ## ai_threads_clear_messages
 
-> <AiSuccessResponse> ai_threads_clear_messages(body)
+> <AiSuccessResponse> ai_threads_clear_messages(ai_threads_clear_messages_request)
 
 Clear messages
 
@@ -123,11 +123,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::ThreadsApi.new
-body = 'body_example' # String | The ID of the thread to empty, as a bare JSON string.
+ai_threads_clear_messages_request = 'ai_threads_clear_messages_request_example' # String | The ID of the thread to empty, as a bare JSON string.
 
 begin
   # Clear messages
-  result = api_instance.ai_threads_clear_messages(body)
+  result = api_instance.ai_threads_clear_messages(ai_threads_clear_messages_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::ThreadsApi->ai_threads_clear_messages: #{e}"
@@ -138,12 +138,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AiSuccessResponse>, Integer, Hash)> ai_threads_clear_messages_with_http_info(body)
+> <Array(<AiSuccessResponse>, Integer, Hash)> ai_threads_clear_messages_with_http_info(ai_threads_clear_messages_request)
 
 ```ruby
 begin
   # Clear messages
-  data, status_code, headers = api_instance.ai_threads_clear_messages_with_http_info(body)
+  data, status_code, headers = api_instance.ai_threads_clear_messages_with_http_info(ai_threads_clear_messages_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AiSuccessResponse>
@@ -156,7 +156,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **body** | **String** | The ID of the thread to empty, as a bare JSON string. |  |
+| **ai_threads_clear_messages_request** | **String** | The ID of the thread to empty, as a bare JSON string. |  |
 
 ### Return type
 
@@ -250,7 +250,7 @@ end
 
 ## ai_threads_delete
 
-> <AiSuccessResponse> ai_threads_delete(body)
+> <AiSuccessResponse> ai_threads_delete(ai_threads_delete_request)
 
 Delete a chat thread
 
@@ -275,11 +275,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::ThreadsApi.new
-body = 'body_example' # String | The ID of the thread to delete, as a bare JSON string.
+ai_threads_delete_request = 'ai_threads_delete_request_example' # String | The ID of the thread to delete, as a bare JSON string.
 
 begin
   # Delete a chat thread
-  result = api_instance.ai_threads_delete(body)
+  result = api_instance.ai_threads_delete(ai_threads_delete_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::ThreadsApi->ai_threads_delete: #{e}"
@@ -290,12 +290,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AiSuccessResponse>, Integer, Hash)> ai_threads_delete_with_http_info(body)
+> <Array(<AiSuccessResponse>, Integer, Hash)> ai_threads_delete_with_http_info(ai_threads_delete_request)
 
 ```ruby
 begin
   # Delete a chat thread
-  data, status_code, headers = api_instance.ai_threads_delete_with_http_info(body)
+  data, status_code, headers = api_instance.ai_threads_delete_with_http_info(ai_threads_delete_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AiSuccessResponse>
@@ -308,7 +308,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **body** | **String** | The ID of the thread to delete, as a bare JSON string. |  |
+| **ai_threads_delete_request** | **String** | The ID of the thread to delete, as a bare JSON string. |  |
 
 ### Return type
 
@@ -326,7 +326,7 @@ end
 
 ## ai_threads_delete_message
 
-> <AiSuccessResponse> ai_threads_delete_message(body)
+> <AiSuccessResponse> ai_threads_delete_message(ai_threads_delete_message_request)
 
 Delete message
 
@@ -351,11 +351,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::ThreadsApi.new
-body = 'body_example' # String | The ID of the message to delete, as a bare JSON string.
+ai_threads_delete_message_request = 'ai_threads_delete_message_request_example' # String | The ID of the message to delete, as a bare JSON string.
 
 begin
   # Delete message
-  result = api_instance.ai_threads_delete_message(body)
+  result = api_instance.ai_threads_delete_message(ai_threads_delete_message_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::ThreadsApi->ai_threads_delete_message: #{e}"
@@ -366,12 +366,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AiSuccessResponse>, Integer, Hash)> ai_threads_delete_message_with_http_info(body)
+> <Array(<AiSuccessResponse>, Integer, Hash)> ai_threads_delete_message_with_http_info(ai_threads_delete_message_request)
 
 ```ruby
 begin
   # Delete message
-  data, status_code, headers = api_instance.ai_threads_delete_message_with_http_info(body)
+  data, status_code, headers = api_instance.ai_threads_delete_message_with_http_info(ai_threads_delete_message_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AiSuccessResponse>
@@ -384,7 +384,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **body** | **String** | The ID of the message to delete, as a bare JSON string. |  |
+| **ai_threads_delete_message_request** | **String** | The ID of the message to delete, as a bare JSON string. |  |
 
 ### Return type
 
@@ -482,7 +482,7 @@ end
 
 Get one chat message
 
-Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required. Unlike `GET api/2.0/ai/threads/get-by-id` an unknown ID is not reported as 404: the answer is an empty body with status 200, so a client has to treat a missing payload as no such message. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
+Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required and, as with `GET api/2.0/ai/threads/get-by-id`, an unknown or deleted ID answers 404, so the result is never an empty body. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-get-message-by-id/).
 
@@ -718,7 +718,7 @@ end
 
 Read messages
 
-Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. Omitting `threadId` is not an error: the call answers 200 with an empty list, so an empty result does not distinguish a thread with no messages from a request that forgot the ID. A malformed cursor is ignored and the read starts from the beginning.
+Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. `threadId` is required and a missing one answers 400, so an empty list always means a thread with no messages. A malformed cursor is ignored and the read starts from the beginning.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-read-messages/).
 
@@ -1030,7 +1030,7 @@ end
 
 Update message
 
-Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object. Neither the ID nor the payload is validated here, so a malformed request surfaces as an error relayed from storage rather than as a 400. The answer only confirms the write.
+Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object with a known `role` and a content that is a non-blank string or a part list with at least one real part - a tool-call-only assistant message counts, an empty list does not. The role has to match the stored message's: a user message cannot be turned into an assistant one. An unknown `messageId` answers 404. The answer only confirms the write.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-update-message/).
 

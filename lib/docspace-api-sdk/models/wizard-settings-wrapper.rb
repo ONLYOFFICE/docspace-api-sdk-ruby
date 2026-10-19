@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The successful API response containing the WizardSettings object.
+  # The successful API response containing the WizardSettingsDto object.
   class WizardSettingsWrapper < ApiModelBase
-    # The WizardSettings object returned by the operation.
+    # The WizardSettingsDto object returned by the operation.
     attr_accessor :response
 
     # The total number of items in the response
@@ -58,7 +58,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'response' => :'WizardSettings',
+        :'response' => :'WizardSettingsDto',
         :'count' => :'Integer',
         :'links' => :'Array<GetPortalPrices200ResponseLinksInner>',
         :'status' => :'Integer',

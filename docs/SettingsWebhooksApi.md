@@ -56,7 +56,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::WebhooksApi.new
 opts = {
-  create_webhooks_config_requests_dto: DocspaceApiSdk::CreateWebhooksConfigRequestsDto.new({name: 'Production Webhook', uri: 'https://example.com/webhook'}) # CreateWebhooksConfigRequestsDto | 
+  create_webhooks_config_request_dto: DocspaceApiSdk::CreateWebhooksConfigRequestDto.new({name: 'Production Webhook', uri: 'https://example.com/webhook'}) # CreateWebhooksConfigRequestDto | 
 }
 
 begin
@@ -90,7 +90,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **create_webhooks_config_requests_dto** | [**CreateWebhooksConfigRequestsDto**](CreateWebhooksConfigRequestsDto.md) |  | [optional] |
+| **create_webhooks_config_request_dto** | [**CreateWebhooksConfigRequestDto**](CreateWebhooksConfigRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -147,7 +147,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::WebhooksApi.new
 opts = {
-  update_webhooks_config_requests_dto: DocspaceApiSdk::UpdateWebhooksConfigRequestsDto.new({name: 'Production Webhook', uri: 'https://example.com/webhook', id: 1}) # UpdateWebhooksConfigRequestsDto | 
+  update_webhooks_config_request_dto: DocspaceApiSdk::UpdateWebhooksConfigRequestDto.new({name: 'Production Webhook', uri: 'https://example.com/webhook', id: 1}) # UpdateWebhooksConfigRequestDto | 
 }
 
 begin
@@ -181,7 +181,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **update_webhooks_config_requests_dto** | [**UpdateWebhooksConfigRequestsDto**](UpdateWebhooksConfigRequestsDto.md) |  | [optional] |
+| **update_webhooks_config_request_dto** | [**UpdateWebhooksConfigRequestDto**](UpdateWebhooksConfigRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -697,7 +697,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::WebhooksApi.new
 opts = {
-  webhook_retry_requests_dto: DocspaceApiSdk::WebhookRetryRequestsDto.new # WebhookRetryRequestsDto | 
+  webhook_retry_request_dto: DocspaceApiSdk::WebhookRetryRequestDto.new # WebhookRetryRequestDto | 
 }
 
 begin
@@ -731,7 +731,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **webhook_retry_requests_dto** | [**WebhookRetryRequestsDto**](WebhookRetryRequestsDto.md) |  | [optional] |
+| **webhook_retry_request_dto** | [**WebhookRetryRequestDto**](WebhookRetryRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -788,7 +788,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::WebhooksApi.new
 opts = {
-  update_webhooks_config_requests_dto: DocspaceApiSdk::UpdateWebhooksConfigRequestsDto.new({name: 'Production Webhook', uri: 'https://example.com/webhook', id: 1}) # UpdateWebhooksConfigRequestsDto | 
+  update_webhooks_config_request_dto: DocspaceApiSdk::UpdateWebhooksConfigRequestDto.new({name: 'Production Webhook', uri: 'https://example.com/webhook', id: 1}) # UpdateWebhooksConfigRequestDto | 
 }
 
 begin
@@ -822,7 +822,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **update_webhooks_config_requests_dto** | [**UpdateWebhooksConfigRequestsDto**](UpdateWebhooksConfigRequestsDto.md) |  | [optional] |
+| **update_webhooks_config_request_dto** | [**UpdateWebhooksConfigRequestDto**](UpdateWebhooksConfigRequestDto.md) |  | [optional] |
 
 ### Return type
 

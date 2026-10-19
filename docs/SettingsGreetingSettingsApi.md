@@ -309,7 +309,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::GreetingSettingsApi.new
 opts = {
-  greeting_settings_requests_dto: DocspaceApiSdk::GreetingSettingsRequestsDto.new({title: 'Welcome to Our Portal'}) # GreetingSettingsRequestsDto | 
+  greeting_settings_request_dto: DocspaceApiSdk::GreetingSettingsRequestDto.new({title: 'Welcome to Our Portal'}) # GreetingSettingsRequestDto | 
 }
 
 begin
@@ -343,7 +343,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **greeting_settings_requests_dto** | [**GreetingSettingsRequestsDto**](GreetingSettingsRequestsDto.md) |  | [optional] |
+| **greeting_settings_request_dto** | [**GreetingSettingsRequestDto**](GreetingSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 

@@ -74,7 +74,7 @@ module DocspaceApiSdk
       {
         :'kind' => :'String',
         :'ref' => :'String',
-        :'error' => :'AiTErrorData'
+        :'error' => :'AiErrorData'
       }
     end
 

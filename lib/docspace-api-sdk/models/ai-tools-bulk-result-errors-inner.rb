@@ -44,7 +44,7 @@ module DocspaceApiSdk
     def self.openapi_types
       {
         :'name' => :'String',
-        :'error' => :'AiTErrorData'
+        :'error' => :'AiErrorData'
       }
     end
 

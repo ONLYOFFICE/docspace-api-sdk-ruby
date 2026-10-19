@@ -26,27 +26,27 @@ module DocspaceApiSdk
     # Delete one attachment
     # Permanently deletes one attachment, whether it is still a draft or already bound to a message. The ID is not validated here, so a malformed one surfaces as an error relayed from storage rather than as a 400, and an ID that does not exist answers success without deleting anything. Deleting a bound attachment leaves the message in place without it. The deletion cannot be undone.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-delete/
-    # @param body [String] The ID of the attachment to delete, as a bare JSON string.
+    # @param ai_attachments_delete_request [String] The ID of the attachment to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [AiSuccessResponse]
-    def ai_attachments_delete(body, opts = {})
-      data, _status_code, _headers = ai_attachments_delete_with_http_info(body, opts)
+    def ai_attachments_delete(ai_attachments_delete_request, opts = {})
+      data, _status_code, _headers = ai_attachments_delete_with_http_info(ai_attachments_delete_request, opts)
       data
     end
 
     # Delete one attachment
     # Permanently deletes one attachment, whether it is still a draft or already bound to a message. The ID is not validated here, so a malformed one surfaces as an error relayed from storage rather than as a 400, and an ID that does not exist answers success without deleting anything. Deleting a bound attachment leaves the message in place without it. The deletion cannot be undone.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-delete/
-    # @param body [String] The ID of the attachment to delete, as a bare JSON string.
+    # @param ai_attachments_delete_request [String] The ID of the attachment to delete, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
-    def ai_attachments_delete_with_http_info(body, opts = {})
+    def ai_attachments_delete_with_http_info(ai_attachments_delete_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::AttachmentsApi.ai_attachments_delete ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling AI::AttachmentsApi.ai_attachments_delete"
+      # verify the required parameter 'ai_attachments_delete_request' is set
+      if @api_client.config.client_side_validation && ai_attachments_delete_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_attachments_delete_request' when calling AI::AttachmentsApi.ai_attachments_delete"
       end
       # resource path
       local_var_path = '/api/2.0/ai/attachments/delete'
@@ -68,7 +68,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_attachments_delete_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'
@@ -96,27 +96,27 @@ module DocspaceApiSdk
     # Delete many
     # Permanently deletes several attachments in one round trip. `ids` is optional and an absent value is treated as an empty list, so a malformed request quietly deletes nothing instead of failing. IDs that do not exist are skipped without being reported, so the answer confirms only that the call was accepted. The deletions cannot be undone.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-delete-many/
-    # @param request_body [Array<String>] The IDs of the attachments to delete, as a bare JSON array of strings.
+    # @param ai_attachments_delete_many_request [Array<String>] The IDs of the attachments to delete, as a bare JSON array of strings.
     # @param [Hash] opts the optional parameters
     # @return [AiSuccessResponse]
-    def ai_attachments_delete_many(request_body, opts = {})
-      data, _status_code, _headers = ai_attachments_delete_many_with_http_info(request_body, opts)
+    def ai_attachments_delete_many(ai_attachments_delete_many_request, opts = {})
+      data, _status_code, _headers = ai_attachments_delete_many_with_http_info(ai_attachments_delete_many_request, opts)
       data
     end
 
     # Delete many
     # Permanently deletes several attachments in one round trip. `ids` is optional and an absent value is treated as an empty list, so a malformed request quietly deletes nothing instead of failing. IDs that do not exist are skipped without being reported, so the answer confirms only that the call was accepted. The deletions cannot be undone.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-delete-many/
-    # @param request_body [Array<String>] The IDs of the attachments to delete, as a bare JSON array of strings.
+    # @param ai_attachments_delete_many_request [Array<String>] The IDs of the attachments to delete, as a bare JSON array of strings.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
-    def ai_attachments_delete_many_with_http_info(request_body, opts = {})
+    def ai_attachments_delete_many_with_http_info(ai_attachments_delete_many_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::AttachmentsApi.ai_attachments_delete_many ...'
       end
-      # verify the required parameter 'request_body' is set
-      if @api_client.config.client_side_validation && request_body.nil?
-        fail ArgumentError, "Missing the required parameter 'request_body' when calling AI::AttachmentsApi.ai_attachments_delete_many"
+      # verify the required parameter 'ai_attachments_delete_many_request' is set
+      if @api_client.config.client_side_validation && ai_attachments_delete_many_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_attachments_delete_many_request' when calling AI::AttachmentsApi.ai_attachments_delete_many"
       end
       # resource path
       local_var_path = '/api/2.0/ai/attachments/delete-many'
@@ -138,7 +138,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(request_body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_attachments_delete_many_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'
@@ -166,27 +166,27 @@ module DocspaceApiSdk
     # Get one attachment
     # Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use `POST api/2.0/ai/attachments/get-many` to read several at once.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get/
-    # @param body [String] The ID of the attachment to read, as a bare JSON string.
+    # @param ai_attachments_get_request [String] The ID of the attachment to read, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [AiAttachment]
-    def ai_attachments_get(body, opts = {})
-      data, _status_code, _headers = ai_attachments_get_with_http_info(body, opts)
+    def ai_attachments_get(ai_attachments_get_request, opts = {})
+      data, _status_code, _headers = ai_attachments_get_with_http_info(ai_attachments_get_request, opts)
       data
     end
 
     # Get one attachment
     # Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use `POST api/2.0/ai/attachments/get-many` to read several at once.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get/
-    # @param body [String] The ID of the attachment to read, as a bare JSON string.
+    # @param ai_attachments_get_request [String] The ID of the attachment to read, as a bare JSON string.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiAttachment, Integer, Hash)>] AiAttachment data, response status code and response headers
-    def ai_attachments_get_with_http_info(body, opts = {})
+    def ai_attachments_get_with_http_info(ai_attachments_get_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::AttachmentsApi.ai_attachments_get ...'
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling AI::AttachmentsApi.ai_attachments_get"
+      # verify the required parameter 'ai_attachments_get_request' is set
+      if @api_client.config.client_side_validation && ai_attachments_get_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_attachments_get_request' when calling AI::AttachmentsApi.ai_attachments_get"
       end
       # resource path
       local_var_path = '/api/2.0/ai/attachments/get'
@@ -208,7 +208,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_attachments_get_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AiAttachment'
@@ -236,27 +236,27 @@ module DocspaceApiSdk
     # Get many
     # Returns several attachments in one call, aligned by position with the `ids` that were sent, so the answer can be zipped straight onto the request. An ID that no longer exists leaves its slot empty rather than shortening the list, which is how a caller tells which of them are gone. `ids` has to be present and non-empty - an empty batch is rejected rather than answered with an empty list. Nothing is changed by the call.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-many/
-    # @param request_body [Array<String>] The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
+    # @param ai_attachments_get_many_request [Array<String>] The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
     # @param [Hash] opts the optional parameters
     # @return [Array<AiAttachment>]
-    def ai_attachments_get_many(request_body, opts = {})
-      data, _status_code, _headers = ai_attachments_get_many_with_http_info(request_body, opts)
+    def ai_attachments_get_many(ai_attachments_get_many_request, opts = {})
+      data, _status_code, _headers = ai_attachments_get_many_with_http_info(ai_attachments_get_many_request, opts)
       data
     end
 
     # Get many
     # Returns several attachments in one call, aligned by position with the `ids` that were sent, so the answer can be zipped straight onto the request. An ID that no longer exists leaves its slot empty rather than shortening the list, which is how a caller tells which of them are gone. `ids` has to be present and non-empty - an empty batch is rejected rather than answered with an empty list. Nothing is changed by the call.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-many/
-    # @param request_body [Array<String>] The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
+    # @param ai_attachments_get_many_request [Array<String>] The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<AiAttachment>, Integer, Hash)>] Array<AiAttachment> data, response status code and response headers
-    def ai_attachments_get_many_with_http_info(request_body, opts = {})
+    def ai_attachments_get_many_with_http_info(ai_attachments_get_many_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::AttachmentsApi.ai_attachments_get_many ...'
       end
-      # verify the required parameter 'request_body' is set
-      if @api_client.config.client_side_validation && request_body.nil?
-        fail ArgumentError, "Missing the required parameter 'request_body' when calling AI::AttachmentsApi.ai_attachments_get_many"
+      # verify the required parameter 'ai_attachments_get_many_request' is set
+      if @api_client.config.client_side_validation && ai_attachments_get_many_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_attachments_get_many_request' when calling AI::AttachmentsApi.ai_attachments_get_many"
       end
       # resource path
       local_var_path = '/api/2.0/ai/attachments/get-many'
@@ -278,7 +278,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(request_body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_attachments_get_many_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'Array<AiAttachment>'
@@ -305,26 +305,26 @@ module DocspaceApiSdk
 
     # Get suggested questions
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-suggested-questions/
-    # @param request_body [Hash<String, Object>] 
+    # @param ai_attachments_get_suggested_questions_request [Hash<String, Object>] 
     # @param [Hash] opts the optional parameters
     # @return [AiSuccessResponse]
-    def ai_attachments_get_suggested_questions(request_body, opts = {})
-      data, _status_code, _headers = ai_attachments_get_suggested_questions_with_http_info(request_body, opts)
+    def ai_attachments_get_suggested_questions(ai_attachments_get_suggested_questions_request, opts = {})
+      data, _status_code, _headers = ai_attachments_get_suggested_questions_with_http_info(ai_attachments_get_suggested_questions_request, opts)
       data
     end
 
     # Get suggested questions
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-suggested-questions/
-    # @param request_body [Hash<String, Object>] 
+    # @param ai_attachments_get_suggested_questions_request [Hash<String, Object>] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
-    def ai_attachments_get_suggested_questions_with_http_info(request_body, opts = {})
+    def ai_attachments_get_suggested_questions_with_http_info(ai_attachments_get_suggested_questions_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::AttachmentsApi.ai_attachments_get_suggested_questions ...'
       end
-      # verify the required parameter 'request_body' is set
-      if @api_client.config.client_side_validation && request_body.nil?
-        fail ArgumentError, "Missing the required parameter 'request_body' when calling AI::AttachmentsApi.ai_attachments_get_suggested_questions"
+      # verify the required parameter 'ai_attachments_get_suggested_questions_request' is set
+      if @api_client.config.client_side_validation && ai_attachments_get_suggested_questions_request.nil?
+        fail ArgumentError, "Missing the required parameter 'ai_attachments_get_suggested_questions_request' when calling AI::AttachmentsApi.ai_attachments_get_suggested_questions"
       end
       # resource path
       local_var_path = '/api/2.0/ai/attachments/suggested-questions'
@@ -346,7 +346,7 @@ module DocspaceApiSdk
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(request_body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_attachments_get_suggested_questions_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AiSuccessResponse'

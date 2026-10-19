@@ -26,9 +26,10 @@ module DocspaceApiSdk
     Import = 5.freeze
     Convert = 6.freeze
     Duplicate = 7.freeze
+    Build = 8.freeze
 
     def self.all_vars
-      @all_vars ||= [Move, Copy, Delete, Download, MarkAsRead, Import, Convert, Duplicate].freeze
+      @all_vars ||= [Move, Copy, Delete, Download, MarkAsRead, Import, Convert, Duplicate, Build].freeze
     end
 
     # Builds the enum from string

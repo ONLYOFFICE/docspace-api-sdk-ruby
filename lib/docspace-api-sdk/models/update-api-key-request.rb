@@ -19,7 +19,7 @@ require 'time'
 module DocspaceApiSdk
   # The request parameters for updating an existing API key.
   class UpdateApiKeyRequest < ApiModelBase
-    # The new label of the key, up to 30 characters. Omit it to keep the current name.
+    # The new label of the key, up to 30 characters, neither empty nor made of whitespace only. Omit it to keep the  current name.
     attr_accessor :name
 
     # The scopes that replace the current ones. Every value has to come from `GET api/2.0/keys/permissions`, an  unknown value or an empty array is rejected, and omitting the field keeps the current scopes.
@@ -105,8 +105,13 @@ module DocspaceApiSdk
         invalid_properties.push('invalid value for "name", the character length must be smaller than or equal to 30.')
       end
 
-      if !@name.nil? && @name.to_s.length < 0
-        invalid_properties.push('invalid value for "name", the character length must be greater than or equal to 0.')
+      if !@name.nil? && @name.to_s.length < 1
+        invalid_properties.push('invalid value for "name", the character length must be greater than or equal to 1.')
+      end
+
+      pattern = Regexp.new(/[\s\S]*\S[\s\S]*/)
+      if !@name.nil? && @name !~ pattern
+        invalid_properties.push("invalid value for \"name\", must conform to the pattern #{pattern}.")
       end
 
       invalid_properties
@@ -117,7 +122,8 @@ module DocspaceApiSdk
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@name.nil? && @name.to_s.length > 30
-      return false if !@name.nil? && @name.to_s.length < 0
+      return false if !@name.nil? && @name.to_s.length < 1
+      return false if !@name.nil? && @name !~ Regexp.new(/[\s\S]*\S[\s\S]*/)
       true
     end
 
@@ -128,8 +134,13 @@ module DocspaceApiSdk
         fail ArgumentError, 'invalid value for "name", the character length must be smaller than or equal to 30.'
       end
 
-      if !name.nil? && name.to_s.length < 0
-        fail ArgumentError, 'invalid value for "name", the character length must be greater than or equal to 0.'
+      if !name.nil? && name.to_s.length < 1
+        fail ArgumentError, 'invalid value for "name", the character length must be greater than or equal to 1.'
+      end
+
+      pattern = Regexp.new(/[\s\S]*\S[\s\S]*/)
+      if !name.nil? && name !~ pattern
+        fail ArgumentError, "invalid value for \"name\", must conform to the pattern #{pattern}."
       end
 
       @name = name

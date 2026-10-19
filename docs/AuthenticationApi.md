@@ -54,7 +54,7 @@ end
 
 api_instance = DocspaceApiSdk::Authentication::AuthenticationApi.new
 opts = {
-  auth_requests_dto: DocspaceApiSdk::AuthRequestsDto.new # AuthRequestsDto | 
+  auth_request_dto: DocspaceApiSdk::AuthRequestDto.new # AuthRequestDto | 
 }
 
 begin
@@ -88,7 +88,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **auth_requests_dto** | [**AuthRequestsDto**](AuthRequestsDto.md) |  | [optional] |
+| **auth_request_dto** | [**AuthRequestDto**](AuthRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -146,7 +146,7 @@ end
 api_instance = DocspaceApiSdk::Authentication::AuthenticationApi.new
 code = 'code_example' # String | The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads.
 opts = {
-  auth_with_code_requests_dto: DocspaceApiSdk::AuthWithCodeRequestsDto.new # AuthWithCodeRequestsDto | 
+  auth_with_code_request_dto: DocspaceApiSdk::AuthWithCodeRequestDto.new # AuthWithCodeRequestDto | 
 }
 
 begin
@@ -181,7 +181,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **code** | **String** | The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads. |  |
-| **auth_with_code_requests_dto** | [**AuthWithCodeRequestsDto**](AuthWithCodeRequestsDto.md) |  | [optional] |
+| **auth_with_code_request_dto** | [**AuthWithCodeRequestDto**](AuthWithCodeRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -238,7 +238,7 @@ end
 
 api_instance = DocspaceApiSdk::Authentication::AuthenticationApi.new
 opts = {
-  email_validation_key_model: DocspaceApiSdk::EmailValidationKeyModel.new # EmailValidationKeyModel | 
+  check_confirm_request_dto: DocspaceApiSdk::CheckConfirmRequestDto.new # CheckConfirmRequestDto | 
 }
 
 begin
@@ -272,7 +272,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **email_validation_key_model** | [**EmailValidationKeyModel**](EmailValidationKeyModel.md) |  | [optional] |
+| **check_confirm_request_dto** | [**CheckConfirmRequestDto**](CheckConfirmRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -501,7 +501,7 @@ end
 
 api_instance = DocspaceApiSdk::Authentication::AuthenticationApi.new
 opts = {
-  mobile_requests_dto: DocspaceApiSdk::MobileRequestsDto.new # MobileRequestsDto | 
+  mobile_request_dto: DocspaceApiSdk::MobileRequestDto.new # MobileRequestDto | 
 }
 
 begin
@@ -535,7 +535,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **mobile_requests_dto** | [**MobileRequestsDto**](MobileRequestsDto.md) |  | [optional] |
+| **mobile_request_dto** | [**MobileRequestDto**](MobileRequestDto.md) |  | [optional] |
 
 ### Return type
 
@@ -592,7 +592,7 @@ end
 
 api_instance = DocspaceApiSdk::Authentication::AuthenticationApi.new
 opts = {
-  auth_requests_dto: DocspaceApiSdk::AuthRequestsDto.new # AuthRequestsDto | 
+  auth_request_dto: DocspaceApiSdk::AuthRequestDto.new # AuthRequestDto | 
 }
 
 begin
@@ -626,7 +626,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **auth_requests_dto** | [**AuthRequestsDto**](AuthRequestsDto.md) |  | [optional] |
+| **auth_request_dto** | [**AuthRequestDto**](AuthRequestDto.md) |  | [optional] |
 
 ### Return type
 

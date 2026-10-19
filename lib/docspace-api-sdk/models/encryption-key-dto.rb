@@ -25,7 +25,7 @@ module DocspaceApiSdk
     # The member the pair belongs to. In the key set of a room or of a file this is how the caller tells its own  entries, the ones carrying a private half, from those of the other members.
     attr_accessor :user_id
 
-    # When this key material was written. Rotating the pair refreshes it, so it dates the material that is being  reported rather than the first appearance of the identifier.
+    # When this key material was written. Rotating the pair refreshes it, so it dates the material that is being  reported rather than the first appearance of the identifier. A pair stored before key sets existed (the one with  the all-zero identifier) has no recorded date and reports `0001-01-01T00:00:00` until it is rotated.
     attr_accessor :date
 
     # The public half of the pair, the half a client encrypts file keys with. A pair whose public half is missing  is treated as no access and left out of a room's or a file's key set.

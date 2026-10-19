@@ -48,7 +48,7 @@ end
 
 api_instance = DocspaceApiSdk::Security::AccessToDevToolsApi.new
 opts = {
-  tenant_dev_tools_access_settings_dto: DocspaceApiSdk::TenantDevToolsAccessSettingsDto.new # TenantDevToolsAccessSettingsDto | 
+  tenant_dev_tools_access_settings_request_dto: DocspaceApiSdk::TenantDevToolsAccessSettingsRequestDto.new # TenantDevToolsAccessSettingsRequestDto | 
 }
 
 begin
@@ -82,7 +82,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **tenant_dev_tools_access_settings_dto** | [**TenantDevToolsAccessSettingsDto**](TenantDevToolsAccessSettingsDto.md) |  | [optional] |
+| **tenant_dev_tools_access_settings_request_dto** | [**TenantDevToolsAccessSettingsRequestDto**](TenantDevToolsAccessSettingsRequestDto.md) |  | [optional] |
 
 ### Return type
 

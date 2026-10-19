@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **response** | [**EncryptionSettings**](EncryptionSettings.md) | The EncryptionSettings object returned by the operation. | [optional] |
+| **response** | [**EncryptionSettingsDto**](EncryptionSettingsDto.md) | The EncryptionSettingsDto object returned by the operation. | [optional] |
 | **count** | **Integer** | The total number of items in the response | [optional] |
 | **links** | [**Array&lt;GetPortalPrices200ResponseLinksInner&gt;**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] |
 | **status** | **Integer** | HTTP status code of the response | [optional] |

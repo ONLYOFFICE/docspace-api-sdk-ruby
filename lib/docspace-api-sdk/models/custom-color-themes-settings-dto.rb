@@ -50,7 +50,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'themes' => :'Array<CustomColorThemesSettingsItem>',
+        :'themes' => :'Array<CustomColorThemeDto>',
         :'selected' => :'Integer',
         :'limit' => :'Integer'
       }

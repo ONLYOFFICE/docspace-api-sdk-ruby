@@ -8,6 +8,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | [**delete_web_plugin**](SettingsWebpluginsApi.md#delete_web_plugin) | **DELETE** /api/2.0/settings/webplugins/{name} | Delete a web plugin |
 | [**get_web_plugin**](SettingsWebpluginsApi.md#get_web_plugin) | **GET** /api/2.0/settings/webplugins/{name} | Get a web plugin by name |
 | [**get_web_plugins**](SettingsWebpluginsApi.md#get_web_plugins) | **GET** /api/2.0/settings/webplugins | Get web plugins |
+| [**refresh_web_plugin**](SettingsWebpluginsApi.md#refresh_web_plugin) | **PUT** /api/2.0/settings/webplugins/{name}/refresh | Refresh a web plugin |
 | [**update_web_plugin**](SettingsWebpluginsApi.md#update_web_plugin) | **PUT** /api/2.0/settings/webplugins/{name} | Update a web plugin |
 
 
@@ -370,9 +371,98 @@ end
 - **Accept**: application/json
 
 
+## refresh_web_plugin
+
+> <WebPluginWrapper> refresh_web_plugin(name)
+
+Refresh a web plugin
+
+Picks up a web plugin whose files were replaced in storage without an upload, for example a new version of an  installation-wide plugin put in place during a deployment. The `name` is the manifest name published by  `GET api/2.0/settings/webplugins`, matched without regard to case. Editing the portal settings is required, so  a portal owner or administrator, and the installation has to have web plugins enabled in its configuration.  The server compares the version of the plugin it serves with the `version` of the manifest in storage and,  only when they differ or the plugin appeared in or vanished from storage, re-reads the plugin list on every  server: for all portals when the plugin is installation-wide, for this portal alone otherwise, and notifies  the connected clients of this portal. The call is idempotent: with matching versions nothing changes, so a  repeat is safe. The response is the plugin as served after the check. The stored state, the settings and the  Content Security Policy of the portal are left as they are. To install a new version use  `POST api/2.0/settings/webplugins` instead.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/refresh-web-plugin/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Settings::WebpluginsApi.new
+name = 'example-plugin' # String | The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404.
+
+begin
+  # Refresh a web plugin
+  result = api_instance.refresh_web_plugin(name)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Settings::WebpluginsApi->refresh_web_plugin: #{e}"
+end
+```
+
+#### Using the refresh_web_plugin_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<WebPluginWrapper>, Integer, Hash)> refresh_web_plugin_with_http_info(name)
+
+```ruby
+begin
+  # Refresh a web plugin
+  data, status_code, headers = api_instance.refresh_web_plugin_with_http_info(name)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <WebPluginWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Settings::WebpluginsApi->refresh_web_plugin_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **name** | **String** | The plugin to act on, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`; a name that is not installed answers 404. |  |
+
+### Return type
+
+[**WebPluginWrapper**](WebPluginWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## update_web_plugin
 
-> update_web_plugin(name, web_plugin_requests)
+> update_web_plugin(name, web_plugin_request)
 
 Update a web plugin
 
@@ -411,11 +501,11 @@ end
 
 api_instance = DocspaceApiSdk::Settings::WebpluginsApi.new
 name = 'example-plugin' # String | The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404.
-web_plugin_requests = DocspaceApiSdk::WebPluginRequests.new({settings: '{"theme":"dark","autoSave":true}'}) # WebPluginRequests | The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.
+web_plugin_request = DocspaceApiSdk::WebPluginRequest.new({settings: '{"theme":"dark","autoSave":true}'}) # WebPluginRequest | The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.
 
 begin
   # Update a web plugin
-  api_instance.update_web_plugin(name, web_plugin_requests)
+  api_instance.update_web_plugin(name, web_plugin_request)
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Settings::WebpluginsApi->update_web_plugin: #{e}"
 end
@@ -425,12 +515,12 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> update_web_plugin_with_http_info(name, web_plugin_requests)
+> <Array(nil, Integer, Hash)> update_web_plugin_with_http_info(name, web_plugin_request)
 
 ```ruby
 begin
   # Update a web plugin
-  data, status_code, headers = api_instance.update_web_plugin_with_http_info(name, web_plugin_requests)
+  data, status_code, headers = api_instance.update_web_plugin_with_http_info(name, web_plugin_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -444,7 +534,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **name** | **String** | The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404. |  |
-| **web_plugin_requests** | [**WebPluginRequests**](WebPluginRequests.md) | The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time. |  |
+| **web_plugin_request** | [**WebPluginRequest**](WebPluginRequest.md) | The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time. |  |
 
 ### Return type
 

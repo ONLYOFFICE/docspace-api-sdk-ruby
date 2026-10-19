@@ -90,7 +90,7 @@ module DocspaceApiSdk
       {
         :'id' => :'Integer',
         :'name' => :'String',
-        :'icon' => :'MultiSizeLogoCover',
+        :'icon' => :'MultiSizeLogoCoverDto',
         :'user_id' => :'String',
         :'search_area' => :'SearchArea',
         :'rooms' => :'Array<FileEntryBaseDto>',

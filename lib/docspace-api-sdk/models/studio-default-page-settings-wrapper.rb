@@ -17,9 +17,9 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # The successful API response containing the StudioDefaultPageSettings object.
+  # The successful API response containing the StudioDefaultPageSettingsDto object.
   class StudioDefaultPageSettingsWrapper < ApiModelBase
-    # The StudioDefaultPageSettings object returned by the operation.
+    # The StudioDefaultPageSettingsDto object returned by the operation.
     attr_accessor :response
 
     # The total number of items in the response
@@ -58,7 +58,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'response' => :'StudioDefaultPageSettings',
+        :'response' => :'StudioDefaultPageSettingsDto',
         :'count' => :'Integer',
         :'links' => :'Array<GetPortalPrices200ResponseLinksInner>',
         :'status' => :'Integer',

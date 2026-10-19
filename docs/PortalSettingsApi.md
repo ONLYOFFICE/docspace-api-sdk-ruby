@@ -11,6 +11,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | [**send_delete_instructions**](PortalSettingsApi.md#send_delete_instructions) | **POST** /api/2.0/portal/delete | Send removal instructions |
 | [**send_suspend_instructions**](PortalSettingsApi.md#send_suspend_instructions) | **POST** /api/2.0/portal/suspend | Send suspension instructions |
 | [**suspend_portal**](PortalSettingsApi.md#suspend_portal) | **PUT** /api/2.0/portal/suspend | Deactivate a portal |
+| [**unblock_portal**](PortalSettingsApi.md#unblock_portal) | **PUT** /api/2.0/portal/unblock | Unblock a portal |
 
 
 ## continue_portal
@@ -595,6 +596,91 @@ begin
   p data # => nil
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling Portal::SettingsApi->suspend_portal_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## unblock_portal
+
+> unblock_portal
+
+Unblock a portal
+
+Unblocks this portal, blocked by the retention policy after a long period without use, so its users can sign in  again. The portal must be blocked. The call is authorized only by the unblocking link the retention letters send  to the owner; it works for the current block only. The call is mutating: it makes the portal active, records the  unblocking in the audit trail, refreshes its Content Security Policy and restarts the retention count. Nothing  is returned in the body; to check the status, read `tenantStatus` from `GET api/2.0/settings`, which a blocked  portal still answers. A lapsed paid tariff stays unpaid after the unblocking, so renewing it is the next step.  The letters of a free portal carry no such link: support unblocks it. The call does not bring back a portal  deleted at the end of its retention period, or one its owner deactivated, which `PUT api/2.0/portal/continue`  brings back. An invalid link, a link of an earlier block, or a portal that is no longer blocked, a repeated call  included, is refused with 401; an ordinary sign-in token instead of the link is refused with 403.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/unblock-portal/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Portal::SettingsApi.new
+
+begin
+  # Unblock a portal
+  api_instance.unblock_portal
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::SettingsApi->unblock_portal: #{e}"
+end
+```
+
+#### Using the unblock_portal_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> unblock_portal_with_http_info
+
+```ruby
+begin
+  # Unblock a portal
+  data, status_code, headers = api_instance.unblock_portal_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::SettingsApi->unblock_portal_with_http_info: #{e}"
 end
 ```
 

@@ -49,7 +49,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'groups' => :'Hash<String, Array<AiTMCPItem>>',
+        :'groups' => :'Hash<String, Array<AiMCPItem>>',
         :'errors' => :'Hash<String, String>',
         :'system' => :'Array<String>'
       }

@@ -1039,7 +1039,7 @@ end
 
 api_instance = DocspaceApiSdk::Settings::DocsCloudApi.new
 opts = {
-  docs_cloud_config: DocspaceApiSdk::DocsCloudConfig.new # DocsCloudConfig | 
+  docs_cloud_config_request_dto: DocspaceApiSdk::DocsCloudConfigRequestDto.new # DocsCloudConfigRequestDto | 
 }
 
 begin
@@ -1073,7 +1073,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **docs_cloud_config** | [**DocsCloudConfig**](DocsCloudConfig.md) |  | [optional] |
+| **docs_cloud_config_request_dto** | [**DocsCloudConfigRequestDto**](DocsCloudConfigRequestDto.md) |  | [optional] |
 
 ### Return type
 

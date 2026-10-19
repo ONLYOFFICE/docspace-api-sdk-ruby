@@ -1,10 +1,10 @@
-# DocspaceApiSdk::IPRestrictionArrayWrapper
+# DocspaceApiSdk::IpRestrictionArrayWrapper
 
 ## Properties
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **response** | [**Array&lt;IPRestriction&gt;**](IPRestriction.md) | The list of IPRestriction objects returned by the operation. | [optional] |
+| **response** | [**Array&lt;IpRestrictionDto&gt;**](IpRestrictionDto.md) | The list of IpRestrictionDto objects returned by the operation. | [optional] |
 | **count** | **Integer** | The total number of items in the response | [optional] |
 | **links** | [**Array&lt;GetPortalPrices200ResponseLinksInner&gt;**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] |
 | **status** | **Integer** | HTTP status code of the response | [optional] |
@@ -15,7 +15,7 @@
 ```ruby
 require 'docspace-api-sdk'
 
-instance = DocspaceApiSdk::IPRestrictionArrayWrapper.new(
+instance = DocspaceApiSdk::IpRestrictionArrayWrapper.new(
   response: null,
   count: null,
   links: null,

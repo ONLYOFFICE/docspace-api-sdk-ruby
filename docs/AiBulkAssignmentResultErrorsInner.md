@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **action_type** | [**AiActionType**](AiActionType.md) |  |  |
-| **error** | [**AiTErrorData**](AiTErrorData.md) |  |  |
+| **error** | [**AiErrorData**](AiErrorData.md) |  |  |
 
 ## Example
 

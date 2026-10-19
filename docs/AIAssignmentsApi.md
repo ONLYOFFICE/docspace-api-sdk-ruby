@@ -92,7 +92,7 @@ end
 
 ## ai_assignments_bulk_assign
 
-> <AiBulkAssignmentResult> ai_assignments_bulk_assign(request_body)
+> <AiBulkAssignmentResult> ai_assignments_bulk_assign(ai_assignments_bulk_assign_request)
 
 Bulk assign
 
@@ -117,11 +117,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::AssignmentsApi.new
-request_body = { key: 'inner_example'} # Hash<String, String> | A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.
+ai_assignments_bulk_assign_request = { key: 'inner_example'} # Hash<String, String> | A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.
 
 begin
   # Bulk assign
-  result = api_instance.ai_assignments_bulk_assign(request_body)
+  result = api_instance.ai_assignments_bulk_assign(ai_assignments_bulk_assign_request)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::AssignmentsApi->ai_assignments_bulk_assign: #{e}"
@@ -132,12 +132,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AiBulkAssignmentResult>, Integer, Hash)> ai_assignments_bulk_assign_with_http_info(request_body)
+> <Array(<AiBulkAssignmentResult>, Integer, Hash)> ai_assignments_bulk_assign_with_http_info(ai_assignments_bulk_assign_request)
 
 ```ruby
 begin
   # Bulk assign
-  data, status_code, headers = api_instance.ai_assignments_bulk_assign_with_http_info(request_body)
+  data, status_code, headers = api_instance.ai_assignments_bulk_assign_with_http_info(ai_assignments_bulk_assign_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AiBulkAssignmentResult>
@@ -150,7 +150,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **request_body** | [**Hash&lt;String, String&gt;**](String.md) | A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map. |  |
+| **ai_assignments_bulk_assign_request** | [**Hash&lt;String, String&gt;**](String.md) | A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map. |  |
 
 ### Return type
 
@@ -402,7 +402,7 @@ end
 
 Resolve for action
 
-Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room, and a room with no assignment of its own degrades to the portal-wide one. This fails when neither slot is set or the bound profile is gone, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
+Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room and has to name one the caller can open - an unknown room answers 404 rather than quietly resolving portal-wide - while an accessible room with no assignment of its own degrades to the portal-wide one. When neither slot is set, the slot names a profile that no longer exists, or the `Default` profile cannot serve the action, the call answers 404, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-resolve-for-action/).
 
@@ -482,7 +482,7 @@ end
 
 Try resolve for action
 
-Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
+Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room the caller can open - an unknown one answers 404 here as well. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-try-resolve-for-action/).
 
@@ -558,7 +558,7 @@ end
 
 ## ai_assignments_unassign
 
-> <AiSuccessResponse> ai_assignments_unassign(body)
+> <AiSuccessResponse> ai_assignments_unassign(ai_action_type)
 
 Clear an action's profile
 
@@ -583,11 +583,11 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::AssignmentsApi.new
-body = 'body_example' # String | 
+ai_action_type = 'ai_action_type_example' # String | 
 
 begin
   # Clear an action's profile
-  result = api_instance.ai_assignments_unassign(body)
+  result = api_instance.ai_assignments_unassign(ai_action_type)
   p result
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::AssignmentsApi->ai_assignments_unassign: #{e}"
@@ -598,12 +598,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AiSuccessResponse>, Integer, Hash)> ai_assignments_unassign_with_http_info(body)
+> <Array(<AiSuccessResponse>, Integer, Hash)> ai_assignments_unassign_with_http_info(ai_action_type)
 
 ```ruby
 begin
   # Clear an action's profile
-  data, status_code, headers = api_instance.ai_assignments_unassign_with_http_info(body)
+  data, status_code, headers = api_instance.ai_assignments_unassign_with_http_info(ai_action_type)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <AiSuccessResponse>
@@ -616,7 +616,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **body** | **String** |  |  |
+| **ai_action_type** | **String** |  |  |
 
 ### Return type
 
