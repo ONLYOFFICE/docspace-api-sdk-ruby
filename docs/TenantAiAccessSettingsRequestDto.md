@@ -1,0 +1,17 @@
+# DocspaceApiSdk::TenantAiAccessSettingsRequestDto
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **enabled** | **Boolean** | Whether AI is available on the portal at all - chat, agents and vectorization together. Switching it off  hides the AI Agents folder and makes every AI endpoint unreachable for all members at once, not only for the  caller, and the change is pushed to connected clients rather than waiting for their next request. | [optional] |
+
+## Example
+
+```ruby
+require 'docspace-api-sdk'
+
+instance = DocspaceApiSdk::TenantAiAccessSettingsRequestDto.new(
+  enabled: false
+)
+```

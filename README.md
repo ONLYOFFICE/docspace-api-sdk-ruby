@@ -1,0 +1,5310 @@
+# docspace-api-sdk
+
+The ONLYOFFICE DocSpace SDK for Ruby is a library that provides tools for integrating and managing DocSpace features within your applications. It simplifies interaction with the DocSpace API by offering ready-to-use methods and models.
+
+For more information, please visit [https://helpdesk.onlyoffice.com/hc/en-us](https://helpdesk.onlyoffice.com/hc/en-us)
+
+### Building
+
+To build the Ruby gem, run the following command:
+
+```bash
+gem build docspace-api-sdk.gemspec
+```
+
+### Consuming
+
+To use the generated SDK in your project, choose one of the following options.
+
+#### From published gem (recommended)
+
+Add this to your `Gemfile`:
+
+```ruby
+gem 'docspace-api-sdk', '~> 4.0.0'
+```
+
+Then run:
+
+```bash
+bundle install
+```
+
+#### From local build
+
+```bash
+gem install ./docspace-api-sdk-4.0.0.gem
+```
+
+#### From Git
+
+```ruby
+gem 'docspace-api-sdk', git: 'https://github.com/GIT_USER_ID/GIT_REPO_ID.git'
+```
+
+## Getting Started
+
+Please follow the [building](#building) instruction and then run the following Ruby code:
+
+```ruby
+# Load the gem
+require 'docspace-api-sdk'
+
+# Setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+  # Configure a proc to get access tokens in lieu of the static access_token configuration
+  config.access_token_getter = -> { 'YOUR TOKEN GETTER PROC' } 
+end
+
+api_instance = DocspaceApiSdk::AI::AIApi.new
+ai_approve_tool_call_request = DocspaceApiSdk::AiApproveToolCallRequest.new({result: 3.56, thread_id: 'thread_id_example', message_id: 'message_id_example', idx: 3.56, message: DocspaceApiSdk::AiThreadMessageLike.new({role: 'user', content: DocspaceApiSdk::AiThreadMessageLikeContent.new})}) # AiApproveToolCallRequest | 
+
+
+begin
+  # Approve tool call
+  result = api_instance.ai_approve_tool_call(ai_approve_tool_call_request)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Exception when calling AI::AIApi->ai_approve_tool_call: #{e}"
+end
+
+```
+
+## Documentation For Authorization
+
+
+Authentication schemes defined for the API:
+<a id="cookieAuth"></a>
+### cookieAuth
+
+- **Type**: API key
+- **API key parameter name**: asc_auth_key
+- **Location**: Cookie
+
+<a id="bearerAuth"></a>
+### bearerAuth
+
+- **Type**: Bearer authentication
+
+<a id="asc_auth_key"></a>
+### asc_auth_key
+
+- **Type**: API key
+- **API key parameter name**: asc_auth_key
+- **Location**: Cookie
+
+<a id="Basic"></a>
+### Basic
+
+- **Type**: HTTP basic authentication
+
+<a id="Bearer"></a>
+### Bearer
+
+- **Type**: Bearer authentication (JWT)
+
+<a id="ApiKeyBearer"></a>
+### ApiKeyBearer
+
+- **Type**: API key
+- **API key parameter name**: ApiKeyBearer
+- **Location**: HTTP header
+
+<a id="OAuth2"></a>
+### OAuth2
+
+- **Type**: OAuth
+- **Flow**: accessCode
+- **Authorization URL**: {{authBaseUrl}}/oauth2/authorize
+- **Token Url**: {{authBaseUrl}}/oauth2/token
+- **Scopes**: 
+ - **read**: Read access to protected resources
+ - **write**: Write access to protected resources
+
+<a id="OpenId"></a>
+### OpenId
+
+- **Type**: OpenId Connect
+- **OpenId Connect URL**: {{authBaseUrl}}/.well-known/openid-configuration
+
+<a id="x-signature"></a>
+### x-signature
+
+- **Type**: API key
+- **API key parameter name**: x-signature
+- **Location**: Cookie
+
+
+## Rate Limiting
+
+All API responses may include the following rate limiting headers:
+
+| Header | Description |
+|--------|-------------|
+| `X-RateLimit-Limit` | Sliding window rate limit: 1500 requests per minute per user/IP. |
+| `X-RateLimit-Remaining` | Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. |
+| `X-RateLimit-Reset` | Unix timestamp (seconds) when the current sliding window rate limit resets. |
+| `Retry-After` | Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). |
+
+### Documentation for API Endpoints
+
+All URIs are relative to *https://your-docspace.onlyoffice.com*
+
+### API Endpoints tables:
+
+<details>
+  <summary>AI</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::AIApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAIApi.md#ai_approve_tool_call"><strong>ai_approve_tool_call</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/approve-tool-call</td>
+        <td>Approve tool call</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAIApi.md#ai_deny_tool_call"><strong>ai_deny_tool_call</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/deny-tool-call</td>
+        <td>Deny tool call</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAIApi.md#ai_regenerate_stream"><strong>ai_regenerate_stream</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/regenerate-stream</td>
+        <td>Regenerate stream</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAIApi.md#ai_send"><strong>ai_send</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/send</td>
+        <td>Run an AI action</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAIApi.md#ai_send_custom"><strong>ai_send_custom</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/send-custom</td>
+        <td>Send custom</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAIApi.md#ai_send_with_stream"><strong>ai_send_with_stream</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/send-with-stream</td>
+        <td>Send with stream</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAIApi.md#ai_send_with_stream_open_ai"><strong>ai_send_with_stream_open_ai</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/ai/send-with-stream-openai</td>
+        <td>Stream a chat in OpenAI format</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::AgentsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAgentsApi.md#ai_agents_create"><strong>ai_agents_create</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/agents</td>
+        <td>Create an agent</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAgentsApi.md#ai_agents_delete"><strong>ai_agents_delete</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/agents/{id}</td>
+        <td>Delete an agent</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAgentsApi.md#ai_agents_get"><strong>ai_agents_get</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/agents/{id}</td>
+        <td>Get an agent</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAgentsApi.md#ai_agents_list"><strong>ai_agents_list</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/agents</td>
+        <td>List agents</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAgentsApi.md#ai_agents_news"><strong>ai_agents_news</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/agents/news</td>
+        <td>List agent news items</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAgentsApi.md#ai_agents_reset_quota"><strong>ai_agents_reset_quota</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/agents/resetquota</td>
+        <td>Reset agents' quota</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAgentsApi.md#ai_agents_update"><strong>ai_agents_update</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/agents/{id}</td>
+        <td>Update an agent</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAgentsApi.md#ai_agents_update_quota"><strong>ai_agents_update_quota</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/agents/agentquota</td>
+        <td>Update agents' quota</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::AssignmentsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAssignmentsApi.md#ai_assignments_assign"><strong>ai_assignments_assign</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/assignments/assign</td>
+        <td>Bind a profile to an action</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAssignmentsApi.md#ai_assignments_bulk_assign"><strong>ai_assignments_bulk_assign</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/assignments/bulk-assign</td>
+        <td>Bulk assign</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAssignmentsApi.md#ai_assignments_cascade_profile_delete"><strong>ai_assignments_cascade_profile_delete</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/assignments/cascade-profile-delete</td>
+        <td>Cascade profile delete</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAssignmentsApi.md#ai_assignments_get_all_assignments"><strong>ai_assignments_get_all_assignments</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/assignments/get-all-assignments</td>
+        <td>Get all assignments</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAssignmentsApi.md#ai_assignments_get_assignment"><strong>ai_assignments_get_assignment</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/assignments/get-assignment</td>
+        <td>Get assignment</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAssignmentsApi.md#ai_assignments_resolve_for_action"><strong>ai_assignments_resolve_for_action</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/assignments/resolve-for-action</td>
+        <td>Resolve for action</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAssignmentsApi.md#ai_assignments_try_resolve_for_action"><strong>ai_assignments_try_resolve_for_action</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/assignments/try-resolve-for-action</td>
+        <td>Try resolve for action</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAssignmentsApi.md#ai_assignments_unassign"><strong>ai_assignments_unassign</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/assignments/unassign</td>
+        <td>Clear an action's profile</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::AttachmentsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#ai_attachments_delete"><strong>ai_attachments_delete</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/attachments/delete</td>
+        <td>Delete one attachment</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#ai_attachments_delete_many"><strong>ai_attachments_delete_many</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/attachments/delete-many</td>
+        <td>Delete many</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#ai_attachments_get"><strong>ai_attachments_get</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/get</td>
+        <td>Get one attachment</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#ai_attachments_get_many"><strong>ai_attachments_get_many</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/get-many</td>
+        <td>Get many</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#ai_attachments_get_suggested_questions"><strong>ai_attachments_get_suggested_questions</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/suggested-questions</td>
+        <td>Get suggested questions</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#ai_attachments_link_to_message"><strong>ai_attachments_link_to_message</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/link-to-message</td>
+        <td>Link to message</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#ai_attachments_save_file"><strong>ai_attachments_save_file</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/save-file</td>
+        <td>Save file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIAttachmentsApi.md#ai_attachments_save_files_many"><strong>ai_attachments_save_files_many</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/attachments/save-files-many</td>
+        <td>Save files many</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::ContextApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIContextApi.md#ai_context_get_context_folders"><strong>ai_context_get_context_folders</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/context/get-context-folders</td>
+        <td>Get context folders</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIContextApi.md#ai_context_get_room_skill"><strong>ai_context_get_room_skill</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/context/get-room-skill</td>
+        <td>Get room skill</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIContextApi.md#ai_context_get_room_skills"><strong>ai_context_get_room_skills</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/context/get-room-skills</td>
+        <td>Get room skills</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::EditorToolsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIEditorToolsApi.md#ai_editor_tools_call"><strong>ai_editor_tools_call</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/editor-tools/call</td>
+        <td>Call an editor tool</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIEditorToolsApi.md#ai_editor_tools_list"><strong>ai_editor_tools_list</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/editor-tools/list</td>
+        <td>List editor tools</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::ExportApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIExportApi.md#ai_export_text_to_docx"><strong>ai_export_text_to_docx</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/text-to-docx</td>
+        <td>Start markdown export</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::OpenAIPassthroughApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIOpenAIPassthroughApi.md#ai_openai_chat_completions"><strong>ai_openai_chat_completions</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/openai/{profileId}/v1/chat/completions</td>
+        <td>OpenAI chat completions passthrough</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIOpenAIPassthroughApi.md#ai_openai_images_generations"><strong>ai_openai_images_generations</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/openai/{profileId}/v1/images/generations</td>
+        <td>OpenAI image generation passthrough</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::PreferencesApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPreferencesApi.md#ai_preferences_clear_deep_mode"><strong>ai_preferences_clear_deep_mode</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/preferences/clear-deep-mode</td>
+        <td>Clear deep mode</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPreferencesApi.md#ai_preferences_get_deep_mode"><strong>ai_preferences_get_deep_mode</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/preferences/get-deep-mode</td>
+        <td>Get deep mode</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPreferencesApi.md#ai_preferences_get_reasoning_level"><strong>ai_preferences_get_reasoning_level</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/preferences/get-reasoning-level</td>
+        <td>Get reasoning level</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPreferencesApi.md#ai_preferences_get_tool_permission_mode"><strong>ai_preferences_get_tool_permission_mode</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/preferences/get-tool-permission-mode</td>
+        <td>Get tool permission mode</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPreferencesApi.md#ai_preferences_is_deep_mode_set"><strong>ai_preferences_is_deep_mode_set</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/preferences/is-deep-mode-set</td>
+        <td>Is deep mode set</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPreferencesApi.md#ai_preferences_set_deep_mode"><strong>ai_preferences_set_deep_mode</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/preferences/set-deep-mode</td>
+        <td>Set deep mode</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPreferencesApi.md#ai_preferences_set_reasoning_level"><strong>ai_preferences_set_reasoning_level</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/preferences/set-reasoning-level</td>
+        <td>Set reasoning level</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPreferencesApi.md#ai_preferences_set_tool_permission_mode"><strong>ai_preferences_set_tool_permission_mode</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/preferences/set-tool-permission-mode</td>
+        <td>Set tool permission mode</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::ProfilesApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIProfilesApi.md#ai_profiles_create"><strong>ai_profiles_create</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/profiles/create</td>
+        <td>Create a provider profile</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIProfilesApi.md#ai_profiles_delete"><strong>ai_profiles_delete</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/profiles/delete</td>
+        <td>Delete a provider profile</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIProfilesApi.md#ai_profiles_get_by_id"><strong>ai_profiles_get_by_id</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/profiles/get-by-id</td>
+        <td>Get a provider profile</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIProfilesApi.md#ai_profiles_list"><strong>ai_profiles_list</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/profiles/list</td>
+        <td>List provider profiles</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIProfilesApi.md#ai_profiles_list_models"><strong>ai_profiles_list_models</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/profiles/list-models</td>
+        <td>List models</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIProfilesApi.md#ai_profiles_list_provider_models"><strong>ai_profiles_list_provider_models</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/profiles/list-provider-models</td>
+        <td>List provider models</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIProfilesApi.md#ai_profiles_test_connection"><strong>ai_profiles_test_connection</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/profiles/test-connection</td>
+        <td>Test a profile's provider</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIProfilesApi.md#ai_profiles_update"><strong>ai_profiles_update</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/profiles/update</td>
+        <td>Update a provider profile</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::PromptsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#ai_prompts_create"><strong>ai_prompts_create</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/prompts/create</td>
+        <td>Save a prompt</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#ai_prompts_create_folder"><strong>ai_prompts_create_folder</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/prompts/create-folder</td>
+        <td>Create folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#ai_prompts_delete"><strong>ai_prompts_delete</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/prompts/delete</td>
+        <td>Delete a saved prompt</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#ai_prompts_delete_folder"><strong>ai_prompts_delete_folder</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/prompts/delete-folder</td>
+        <td>Delete folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#ai_prompts_export"><strong>ai_prompts_export</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/prompts/export</td>
+        <td>Export the prompt library</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#ai_prompts_get_by_id"><strong>ai_prompts_get_by_id</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/prompts/get-by-id</td>
+        <td>Get a saved prompt</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#ai_prompts_get_folder_by_id"><strong>ai_prompts_get_folder_by_id</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/prompts/get-folder-by-id</td>
+        <td>Get a prompt folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#ai_prompts_import_bundle"><strong>ai_prompts_import_bundle</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/prompts/import-bundle</td>
+        <td>Import bundle</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#ai_prompts_list"><strong>ai_prompts_list</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/prompts/list</td>
+        <td>List saved prompts</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#ai_prompts_list_folders"><strong>ai_prompts_list_folders</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/prompts/list-folders</td>
+        <td>List folders</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#ai_prompts_move"><strong>ai_prompts_move</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/prompts/move</td>
+        <td>Move a prompt to a folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#ai_prompts_rename_folder"><strong>ai_prompts_rename_folder</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/prompts/rename-folder</td>
+        <td>Rename folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIPromptsApi.md#ai_prompts_update"><strong>ai_prompts_update</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/prompts/update</td>
+        <td>Update a saved prompt</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::SettingsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AISettingsApi.md#ai_settings_get"><strong>ai_settings_get</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/config</td>
+        <td>Get AI settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AISettingsApi.md#ai_settings_get_tool_mode"><strong>ai_settings_get_tool_mode</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/config/tool-mode</td>
+        <td>Get the tool permission mode</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AISettingsApi.md#ai_settings_get_user"><strong>ai_settings_get_user</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/config/user</td>
+        <td>Get user AI settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AISettingsApi.md#ai_settings_get_vectorization"><strong>ai_settings_get_vectorization</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/config/vectorization</td>
+        <td>Get vectorization settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AISettingsApi.md#ai_settings_set_tool_mode"><strong>ai_settings_set_tool_mode</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/config/tool-mode</td>
+        <td>Set the tool permission mode</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AISettingsApi.md#ai_settings_set_user"><strong>ai_settings_set_user</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/config/user</td>
+        <td>Update user AI settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AISettingsApi.md#ai_settings_set_vectorization"><strong>ai_settings_set_vectorization</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/config/vectorization</td>
+        <td>Update vectorization settings</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::ThreadsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#ai_threads_append_user_message"><strong>ai_threads_append_user_message</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/threads/append-user-message</td>
+        <td>Append user message</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#ai_threads_clear_messages"><strong>ai_threads_clear_messages</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/threads/clear-messages</td>
+        <td>Clear messages</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#ai_threads_create"><strong>ai_threads_create</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/threads/create</td>
+        <td>Create a chat thread</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#ai_threads_delete"><strong>ai_threads_delete</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/threads/delete</td>
+        <td>Delete a chat thread</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#ai_threads_delete_message"><strong>ai_threads_delete_message</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/threads/delete-message</td>
+        <td>Delete message</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#ai_threads_get_by_id"><strong>ai_threads_get_by_id</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/threads/get-by-id</td>
+        <td>Get a chat thread</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#ai_threads_get_message_by_id"><strong>ai_threads_get_message_by_id</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/threads/get-message-by-id</td>
+        <td>Get one chat message</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#ai_threads_list"><strong>ai_threads_list</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/threads/list</td>
+        <td>List chat threads</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#ai_threads_open_or_create"><strong>ai_threads_open_or_create</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/threads/open-or-create</td>
+        <td>Open or create</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#ai_threads_read_messages"><strong>ai_threads_read_messages</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/threads/read-messages</td>
+        <td>Read messages</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#ai_threads_regenerate_title"><strong>ai_threads_regenerate_title</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/threads/regenerate-title</td>
+        <td>Regenerate title</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#ai_threads_rename"><strong>ai_threads_rename</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/threads/rename</td>
+        <td>Rename a chat thread</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#ai_threads_touch"><strong>ai_threads_touch</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/threads/touch</td>
+        <td>Bump a thread's activity</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIThreadsApi.md#ai_threads_update_message"><strong>ai_threads_update_message</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/threads/update-message</td>
+        <td>Update message</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::ToolsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#ai_tools_add_custom_server"><strong>ai_tools_add_custom_server</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/tools/add-custom-server</td>
+        <td>Add custom server</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#ai_tools_get_allow_always"><strong>ai_tools_get_allow_always</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/get-allow-always</td>
+        <td>Get allow always</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#ai_tools_get_custom_server"><strong>ai_tools_get_custom_server</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/get-custom-server</td>
+        <td>Get custom server</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#ai_tools_get_disabled"><strong>ai_tools_get_disabled</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/get-disabled</td>
+        <td>Get disabled</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#ai_tools_is_allow_always"><strong>ai_tools_is_allow_always</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/is-allow-always</td>
+        <td>Is allow always</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#ai_tools_is_tool_disabled"><strong>ai_tools_is_tool_disabled</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/is-tool-disabled</td>
+        <td>Is tool disabled</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#ai_tools_list_custom_servers"><strong>ai_tools_list_custom_servers</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/list-custom-servers</td>
+        <td>List custom servers</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#ai_tools_list_system_tools"><strong>ai_tools_list_system_tools</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/tools/list-system-tools</td>
+        <td>List system tools</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#ai_tools_remove_custom_server"><strong>ai_tools_remove_custom_server</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/tools/remove-custom-server</td>
+        <td>Remove custom server</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#ai_tools_replace_all_custom_servers"><strong>ai_tools_replace_all_custom_servers</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/tools/replace-all-custom-servers</td>
+        <td>Replace all custom servers</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#ai_tools_set_allow_always"><strong>ai_tools_set_allow_always</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/tools/set-allow-always</td>
+        <td>Set allow always</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#ai_tools_set_disabled"><strong>ai_tools_set_disabled</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/tools/set-disabled</td>
+        <td>Set disabled</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIToolsApi.md#ai_tools_update_custom_server"><strong>ai_tools_update_custom_server</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/tools/update-custom-server</td>
+        <td>Update custom server</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::VectorizationApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIVectorizationApi.md#ai_vectorization_start_task"><strong>ai_vectorization_start_task</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/vectorization/tasks</td>
+        <td>Start a vectorization task</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>AI::WebSearchApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIWebSearchApi.md#ai_web_search_clear"><strong>ai_web_search_clear</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/web-search/clear</td>
+        <td>Clear the web-search configuration</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIWebSearchApi.md#ai_web_search_configure"><strong>ai_web_search_configure</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/web-search/configure</td>
+        <td>Configure and verify web search</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIWebSearchApi.md#ai_web_search_get_active_config"><strong>ai_web_search_get_active_config</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/web-search/get-active-config</td>
+        <td>Get active config</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIWebSearchApi.md#ai_web_search_is_configured"><strong>ai_web_search_is_configured</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/web-search/is-configured</td>
+        <td>Is configured</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIWebSearchApi.md#ai_web_search_passthrough_contents"><strong>ai_web_search_passthrough_contents</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/websearch/v1/contents</td>
+        <td>Web page contents passthrough</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIWebSearchApi.md#ai_web_search_passthrough_search"><strong>ai_web_search_passthrough_search</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/websearch/v1/search</td>
+        <td>Web search passthrough</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIWebSearchApi.md#ai_web_search_set_active_config"><strong>ai_web_search_set_active_config</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/web-search/set-active-config</td>
+        <td>Set active config</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIWebSearchApi.md#ai_web_search_test_connection"><strong>ai_web_search_test_connection</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/web-search/test-connection</td>
+        <td>Test a web-search provider</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
+  <summary>ApiKeys</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>ApiKeys::ApiKeysApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/ApiKeysApi.md#create_api_key"><strong>create_api_key</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/keys</td>
+        <td>Create a user API key</td>
+      </tr>
+      <tr>
+        <td><a href="docs/ApiKeysApi.md#delete_api_key"><strong>delete_api_key</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/keys/{keyId}</td>
+        <td>Delete an API key</td>
+      </tr>
+      <tr>
+        <td><a href="docs/ApiKeysApi.md#get_all_permissions"><strong>get_all_permissions</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/keys/permissions</td>
+        <td>Get API key permissions</td>
+      </tr>
+      <tr>
+        <td><a href="docs/ApiKeysApi.md#get_api_key"><strong>get_api_key</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/keys/@self</td>
+        <td>Get the current API key</td>
+      </tr>
+      <tr>
+        <td><a href="docs/ApiKeysApi.md#get_api_keys"><strong>get_api_keys</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/keys</td>
+        <td>Get the API keys</td>
+      </tr>
+      <tr>
+        <td><a href="docs/ApiKeysApi.md#update_api_key"><strong>update_api_key</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/keys/{keyId}</td>
+        <td>Update an API key</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
+  <summary>Apps</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Apps::AppsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AppsApi.md#get"><strong>get</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/apps/{id}</td>
+        <td>Get an app</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AppsApi.md#get_all"><strong>get_all</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/apps</td>
+        <td>Get all apps</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AppsApi.md#get_settings"><strong>get_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/apps/{id}/settings</td>
+        <td>Get app settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AppsApi.md#set_enabled"><strong>set_enabled</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/apps/{id}/enabled</td>
+        <td>Enable or disable an app</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AppsApi.md#set_settings"><strong>set_settings</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/apps/{id}/settings</td>
+        <td>Save app settings</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
+  <summary>Authentication</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Authentication::AuthenticationApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AuthenticationApi.md#authenticate_me"><strong>authenticate_me</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/authentication</td>
+        <td>Authenticate a user</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AuthenticationApi.md#authenticate_me_from_body_with_code"><strong>authenticate_me_from_body_with_code</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/authentication/{code}</td>
+        <td>Authenticate a user by code</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AuthenticationApi.md#check_confirm"><strong>check_confirm</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/authentication/confirm</td>
+        <td>Check a confirmation link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AuthenticationApi.md#get_is_authentificated"><strong>get_is_authentificated</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/authentication</td>
+        <td>Check authentication</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AuthenticationApi.md#logout"><strong>logout</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/authentication/logout</td>
+        <td>Log out</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AuthenticationApi.md#save_mobile_phone"><strong>save_mobile_phone</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/authentication/setphone</td>
+        <td>Set a mobile phone</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AuthenticationApi.md#send_sms_code"><strong>send_sms_code</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/authentication/sendsms</td>
+        <td>Send SMS code</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
+  <summary>Backup</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Backup::BackupApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/BackupApi.md#cancel_backup"><strong>cancel_backup</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/backup/cancelbackup</td>
+        <td>Cancel the running backup</td>
+      </tr>
+      <tr>
+        <td><a href="docs/BackupApi.md#create_backup_schedule"><strong>create_backup_schedule</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/backup/createbackupschedule</td>
+        <td>Create the backup schedule</td>
+      </tr>
+      <tr>
+        <td><a href="docs/BackupApi.md#delete_backup"><strong>delete_backup</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/backup/deletebackup/{id}</td>
+        <td>Delete the backup</td>
+      </tr>
+      <tr>
+        <td><a href="docs/BackupApi.md#delete_backup_history"><strong>delete_backup_history</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/backup/deletebackuphistory</td>
+        <td>Delete the backup history</td>
+      </tr>
+      <tr>
+        <td><a href="docs/BackupApi.md#delete_backup_schedule"><strong>delete_backup_schedule</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/backup/deletebackupschedule</td>
+        <td>Delete the backup schedule</td>
+      </tr>
+      <tr>
+        <td><a href="docs/BackupApi.md#get_backup_history"><strong>get_backup_history</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/backup/getbackuphistory</td>
+        <td>Get the backup history</td>
+      </tr>
+      <tr>
+        <td><a href="docs/BackupApi.md#get_backup_progress"><strong>get_backup_progress</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/backup/getbackupprogress</td>
+        <td>Get the backup progress</td>
+      </tr>
+      <tr>
+        <td><a href="docs/BackupApi.md#get_backup_schedule"><strong>get_backup_schedule</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/backup/getbackupschedule</td>
+        <td>Get the backup schedule</td>
+      </tr>
+      <tr>
+        <td><a href="docs/BackupApi.md#get_backups_count"><strong>get_backups_count</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/backup/getbackupscount</td>
+        <td>Get the number of backups</td>
+      </tr>
+      <tr>
+        <td><a href="docs/BackupApi.md#get_backups_counts"><strong>get_backups_counts</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/backup/getbackupscountbypaid</td>
+        <td>Get free and paid backup counts</td>
+      </tr>
+      <tr>
+        <td><a href="docs/BackupApi.md#get_backups_service_state"><strong>get_backups_service_state</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/backup/getservicestate</td>
+        <td>Check whether backups are enabled</td>
+      </tr>
+      <tr>
+        <td><a href="docs/BackupApi.md#get_restore_progress"><strong>get_restore_progress</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/backup/getrestoreprogress</td>
+        <td>Get the restoring progress</td>
+      </tr>
+      <tr>
+        <td><a href="docs/BackupApi.md#start_backup"><strong>start_backup</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/backup/startbackup</td>
+        <td>Start the backup</td>
+      </tr>
+      <tr>
+        <td><a href="docs/BackupApi.md#start_backup_restore"><strong>start_backup_restore</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/backup/startrestore</td>
+        <td>Start the restoring process</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
+  <summary>Capabilities</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Capabilities::CapabilitiesApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/CapabilitiesApi.md#get_portal_capabilities"><strong>get_portal_capabilities</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/capabilities</td>
+        <td>Get portal capabilities</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
+  <summary>Docs</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Docs::DocsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/DocsApi.md#convert_file"><strong>convert_file</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/docs/converter</td>
+        <td>Convert a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/DocsApi.md#run_builder_script"><strong>run_builder_script</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/docs/builder</td>
+        <td>Run a document builder script</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
+  <summary>Files</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Files::FilesApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#add_file_to_recent"><strong>add_file_to_recent</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/file/{fileId}/recent</td>
+        <td>Add a file to Recent</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#add_templates"><strong>add_templates</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/templates</td>
+        <td>Add template files</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#change_version_history"><strong>change_version_history</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/history</td>
+        <td>Change version history</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#check_fill_form_draft"><strong>check_fill_form_draft</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/masterform/{fileId}/checkfillformdraft</td>
+        <td>Open a form draft for filling</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#copy_file_as"><strong>copy_file_as</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/file/{fileId}/copyas</td>
+        <td>Copy a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#create_edit_session"><strong>create_edit_session</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/file/{fileId}/edit_session</td>
+        <td>Create the editing session</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#create_file"><strong>create_file</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/{folderId}/file</td>
+        <td>Create a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#create_file_in_my_documents"><strong>create_file_in_my_documents</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/@my/file</td>
+        <td>Create a file in My documents</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#create_file_primary_external_link"><strong>create_file_primary_external_link</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/file/{id}/link</td>
+        <td>Create the file primary external link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#create_html_file"><strong>create_html_file</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/{folderId}/html</td>
+        <td>Create an HTML file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#create_html_file_in_my_documents"><strong>create_html_file_in_my_documents</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/@my/html</td>
+        <td>Create an HTML file in My documents</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#create_text_file"><strong>create_text_file</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/{folderId}/text</td>
+        <td>Create a text file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#create_text_file_in_my_documents"><strong>create_text_file_in_my_documents</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/@my/text</td>
+        <td>Create a text file in My documents</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#create_thumbnails"><strong>create_thumbnails</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/thumbnails</td>
+        <td>Queue file thumbnails</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#delete_file"><strong>delete_file</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/file/{fileId}</td>
+        <td>Delete a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#delete_recent"><strong>delete_recent</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/recent</td>
+        <td>Delete recent files</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#delete_templates"><strong>delete_templates</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/templates</td>
+        <td>Delete template files</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#generate_xlsx"><strong>generate_xlsx</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/file/{fileId}/xlsx</td>
+        <td>Generate a form answers report</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#get_all_form_roles"><strong>get_all_form_roles</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/formroles</td>
+        <td>Get form roles</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#get_edit_diff_url"><strong>get_edit_diff_url</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/edit/diff</td>
+        <td>Get changes URL</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#get_edit_history"><strong>get_edit_history</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/edit/history</td>
+        <td>Get version history</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#get_encryption_info"><strong>get_encryption_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/{fileId}/access</td>
+        <td>Get file encryption information</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#get_file_history"><strong>get_file_history</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/log</td>
+        <td>Get file history</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#get_file_info"><strong>get_file_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}</td>
+        <td>Get file information</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#get_file_links"><strong>get_file_links</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{id}/links</td>
+        <td>Get file external links</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#get_file_primary_external_link"><strong>get_file_primary_external_link</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{id}/link</td>
+        <td>Get the file primary external link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#get_file_version_info"><strong>get_file_version_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/history</td>
+        <td>Get file versions</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#get_fill_result"><strong>get_fill_result</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/fillresult</td>
+        <td>Get form-filling result</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#get_form_submissions"><strong>get_form_submissions</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/submissions</td>
+        <td>Get form submission results</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#get_presigned_file_uri"><strong>get_presigned_file_uri</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/presigned</td>
+        <td>Get a signed download address</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#get_presigned_uri"><strong>get_presigned_uri</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/presigneduri</td>
+        <td>Get file download link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#get_protected_file_users"><strong>get_protected_file_users</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/protectusers</td>
+        <td>Get users for document protection</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#get_reference_data"><strong>get_reference_data</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/file/referencedata</td>
+        <td>Resolve a spreadsheet reference</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#get_xlsx"><strong>get_xlsx</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/xlsx</td>
+        <td>Get form report generation status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#is_form_pdf"><strong>is_form_pdf</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/isformpdf</td>
+        <td>Check the PDF file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#lock_file"><strong>lock_file</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/lock</td>
+        <td>Lock a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#manage_form_filling"><strong>manage_form_filling</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/manageformfilling</td>
+        <td>Perform form filling action</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#open_edit_file"><strong>open_edit_file</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/openedit</td>
+        <td>Get the editor configuration</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#restore_file_version"><strong>restore_file_version</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/file/{fileId}/restoreversion</td>
+        <td>Restore a file version</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#save_editing_file_from_form"><strong>save_editing_file_from_form</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/saveediting</td>
+        <td>Save edited file content</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#save_file_as_pdf"><strong>save_file_as_pdf</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/file/{id}/saveaspdf</td>
+        <td>Save a file as PDF</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#save_form_role_mapping"><strong>save_form_role_mapping</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/file/{fileId}/formrolemapping</td>
+        <td>Save form role mapping</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#set_custom_filter_tag"><strong>set_custom_filter_tag</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/customfilter</td>
+        <td>Set the Custom Filter editing mode</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#set_encryption_info"><strong>set_encryption_info</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/{fileId}/access</td>
+        <td>Set file encryption information</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#set_file_external_link"><strong>set_file_external_link</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/file/{id}/links</td>
+        <td>Set a file external link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#set_file_order"><strong>set_file_order</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/{fileId}/order</td>
+        <td>Set file order</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#set_files_order"><strong>set_files_order</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/order</td>
+        <td>Set order of files</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#start_edit_file"><strong>start_edit_file</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/file/{fileId}/startedit</td>
+        <td>Open an editing session</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#start_filling_file"><strong>start_filling_file</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/startfilling</td>
+        <td>Start filling a form</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#toggle_file_favorite"><strong>toggle_file_favorite</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/favorites/{fileId}</td>
+        <td>Set the file favorite status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#track_edit_file"><strong>track_edit_file</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/trackeditfile</td>
+        <td>Track an editing session</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFilesApi.md#update_file"><strong>update_file</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/file/{fileId}</td>
+        <td>Update a file</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Files::FoldersApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#check_upload"><strong>check_upload</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/{folderId}/upload/check</td>
+        <td>Check for upload conflicts</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#create_folder"><strong>create_folder</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/folder/{folderId}</td>
+        <td>Create a folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#create_folder_primary_external_link"><strong>create_folder_primary_external_link</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/folder/{id}/link</td>
+        <td>Create the folder primary external link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#create_report_folder_history"><strong>create_report_folder_history</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/folder/{folderId}/log/report</td>
+        <td>Start the folder history report generation</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#delete_folder"><strong>delete_folder</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/folder/{folderId}</td>
+        <td>Delete a folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#generate_xlsx_by_folder"><strong>generate_xlsx_by_folder</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/folder/{folderId}/xlsx</td>
+        <td>Generate XLSX report by folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_favorites_folder"><strong>get_favorites_folder</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/@favorites</td>
+        <td>Get the Favorites section</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_files_used_space"><strong>get_files_used_space</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/filesusedspace</td>
+        <td>Get used space of files</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_folder"><strong>get_folder</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/{folderId}/formfilter</td>
+        <td>Get folder form filter</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_folder_by_folder_id"><strong>get_folder_by_folder_id</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/{folderId}</td>
+        <td>Get a folder by ID</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_folder_history"><strong>get_folder_history</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/folder/{folderId}/log</td>
+        <td>Get folder history</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_folder_info"><strong>get_folder_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/folder/{folderId}</td>
+        <td>Get folder information</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_folder_links"><strong>get_folder_links</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/folder/{id}/links</td>
+        <td>Get folder external links</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_folder_path"><strong>get_folder_path</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/folder/{folderId}/path</td>
+        <td>Get the folder path</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_folder_primary_external_link"><strong>get_folder_primary_external_link</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/folder/{id}/link</td>
+        <td>Get the folder primary external link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_folders"><strong>get_folders</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/{folderId}/subfolders</td>
+        <td>Get subfolders</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_forms_folder"><strong>get_forms_folder</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/@forms</td>
+        <td>Get the Forms section</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_my_folder"><strong>get_my_folder</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/@my</td>
+        <td>Get the My documents section</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_new_folder_items"><strong>get_new_folder_items</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/{folderId}/news</td>
+        <td>Get new folder items</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_recent_folder"><strong>get_recent_folder</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/recent</td>
+        <td>Get the Recent section</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_report_folder_history"><strong>get_report_folder_history</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/folder/{folderId}/log/report</td>
+        <td>Get the folder history report generation status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_root_folders"><strong>get_root_folders</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/@root</td>
+        <td>Get filtered sections</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#get_trash_folder"><strong>get_trash_folder</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/@trash</td>
+        <td>Get the Trash section</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#insert_file"><strong>insert_file</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/{folderId}/insert</td>
+        <td>Insert a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#insert_file_to_my_from_body"><strong>insert_file_to_my_from_body</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/@my/insert</td>
+        <td>Insert a file into My documents</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#rename_folder"><strong>rename_folder</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/folder/{folderId}</td>
+        <td>Rename a folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#search_folder"><strong>search_folder</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/{folderId}/search</td>
+        <td>Search a folder by metadata</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#set_folder_order"><strong>set_folder_order</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/folder/{folderId}/order</td>
+        <td>Set folder order</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#set_folder_primary_external_link"><strong>set_folder_primary_external_link</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/folder/{id}/links</td>
+        <td>Set the folder external link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#terminate_report_folder_history"><strong>terminate_report_folder_history</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/folder/{folderId}/log/report</td>
+        <td>Terminate the folder history report generation</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#upload_file"><strong>upload_file</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/{folderId}/upload</td>
+        <td>Upload a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#upload_file_to_my"><strong>upload_file_to_my</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/@my/upload</td>
+        <td>Upload a file to My documents</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Files::MetadataApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#assign_file_templates"><strong>assign_file_templates</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/file/{fileId}/templates</td>
+        <td>Assign templates to a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#assign_folder_templates"><strong>assign_folder_templates</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/folder/{folderId}/templates</td>
+        <td>Assign templates to a folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#create_field"><strong>create_field</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/metadata/templates/{templateId}/fields</td>
+        <td>Add a metadata field</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#create_template"><strong>create_template</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/metadata/templates</td>
+        <td>Create a metadata template</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#delete_field"><strong>delete_field</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/metadata/templates/{templateId}/fields/{fieldId}</td>
+        <td>Delete a metadata field</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#delete_template"><strong>delete_template</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/metadata/templates/{templateId}</td>
+        <td>Delete a metadata template</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#get_cascade_progress"><strong>get_cascade_progress</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/metadata/folder/{folderId}/templates/progress</td>
+        <td>Get cascade progress</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#get_file_metadata"><strong>get_file_metadata</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/metadata/file/{fileId}</td>
+        <td>Get file metadata</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#get_folder_metadata"><strong>get_folder_metadata</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/metadata/folder/{folderId}</td>
+        <td>Get folder metadata</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#get_template"><strong>get_template</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/metadata/templates/{templateId}</td>
+        <td>Get a metadata template</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#get_templates"><strong>get_templates</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/metadata/templates</td>
+        <td>Get metadata templates</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#set_file_custom_fields"><strong>set_file_custom_fields</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/file/{fileId}/customfields</td>
+        <td>Set file custom fields</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#set_file_values"><strong>set_file_values</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/file/{fileId}/values</td>
+        <td>Set file metadata values</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#set_folder_custom_fields"><strong>set_folder_custom_fields</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/folder/{folderId}/customfields</td>
+        <td>Set folder custom fields</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#set_folder_values"><strong>set_folder_values</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/folder/{folderId}/values</td>
+        <td>Set folder metadata values</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#unassign_file_template"><strong>unassign_file_template</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/metadata/file/{fileId}/templates/{templateId}</td>
+        <td>Unassign a template from a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#unassign_folder_template"><strong>unassign_folder_template</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/metadata/folder/{folderId}/templates/{templateId}</td>
+        <td>Unassign a template from a folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#update_field"><strong>update_field</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/templates/{templateId}/fields/{fieldId}</td>
+        <td>Update a metadata field</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#update_folder_template"><strong>update_folder_template</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/folder/{folderId}/templates/{templateId}</td>
+        <td>Update a template assignment on a folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesMetadataApi.md#update_template"><strong>update_template</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/metadata/templates/{templateId}</td>
+        <td>Update a metadata template</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Files::OperationsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#abort_upload_session"><strong>abort_upload_session</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/{folderId}/session/{sessionId}</td>
+        <td>Abort an upload session</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#add_favorites"><strong>add_favorites</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/favorites</td>
+        <td>Add favorite files and folders</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#bulk_download"><strong>bulk_download</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/fileops/bulkdownload</td>
+        <td>Bulk download</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#check_conversion_status"><strong>check_conversion_status</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/checkconversion</td>
+        <td>Get conversion status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#check_move_or_copy_batch_items"><strong>check_move_or_copy_batch_items</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/fileops/move</td>
+        <td>Check move or copy conflicts</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#check_move_or_copy_dest_folder"><strong>check_move_or_copy_dest_folder</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/fileops/checkdestfolder</td>
+        <td>Check the destination folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#copy_batch_items"><strong>copy_batch_items</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/fileops/copy</td>
+        <td>Copy files and folders</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#create_upload_session"><strong>create_upload_session</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/{folderId}/upload/create_session</td>
+        <td>Chunked upload</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#create_upload_session_in_folder"><strong>create_upload_session_in_folder</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/{folderId}/session</td>
+        <td>Create an upload session</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#delete_batch_items"><strong>delete_batch_items</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/fileops/delete</td>
+        <td>Delete files and folders</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#delete_favorites_from_body"><strong>delete_favorites_from_body</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/favorites</td>
+        <td>Delete favorite files and folders</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#delete_file_versions"><strong>delete_file_versions</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/fileops/deleteversion</td>
+        <td>Delete file versions</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#duplicate_batch_items"><strong>duplicate_batch_items</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/fileops/duplicate</td>
+        <td>Duplicate files and folders</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#empty_trash"><strong>empty_trash</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/fileops/emptytrash</td>
+        <td>Empty the Trash folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#finalize_session"><strong>finalize_session</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/{folderId}/session/{sessionId}/finalize</td>
+        <td>Finalize an upload session</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#get_operation_statuses"><strong>get_operation_statuses</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/fileops</td>
+        <td>Get active file operations</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#get_operation_statuses_by_type"><strong>get_operation_statuses_by_type</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/fileops/{operationType}</td>
+        <td>Get file operations by type</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#mark_as_read"><strong>mark_as_read</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/fileops/markasread</td>
+        <td>Mark files and folders as read</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#move_batch_items"><strong>move_batch_items</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/fileops/move</td>
+        <td>Move files and folders</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#start_file_conversion"><strong>start_file_conversion</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/checkconversion</td>
+        <td>Start file conversion</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#terminate_tasks"><strong>terminate_tasks</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/fileops/terminate/{id}</td>
+        <td>Cancel file operations</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#update_file_comment"><strong>update_file_comment</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/file/{fileId}/comment</td>
+        <td>Update a comment</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#upload_async_session"><strong>upload_async_session</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/{folderId}/session/{sessionId}/upload</td>
+        <td>Upload a numbered chunk</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesOperationsApi.md#upload_session"><strong>upload_session</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/{folderId}/session/{sessionId}</td>
+        <td>Upload the next chunk</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Files::QuotaApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesQuotaApi.md#reset_room_quota"><strong>reset_room_quota</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/rooms/resetquota</td>
+        <td>Reset the room quota limit</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesQuotaApi.md#update_rooms_quota"><strong>update_rooms_quota</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/rooms/roomquota</td>
+        <td>Change the room quota limit</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Files::SettingsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#change_access_to_thirdparty"><strong>change_access_to_thirdparty</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/thirdparty</td>
+        <td>Change the third-party settings access</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#change_automatically_clean_up"><strong>change_automatically_clean_up</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/settings/autocleanup</td>
+        <td>Update the trash bin auto-clearing setting</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#change_default_access_rights"><strong>change_default_access_rights</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/settings/dafaultaccessrights</td>
+        <td>Change the default access rights</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#change_delete_confirm"><strong>change_delete_confirm</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/changedeleteconfrim</td>
+        <td>Ask for delete confirmation</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#change_download_zip"><strong>change_download_zip</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/settings/downloadtargz</td>
+        <td>Change the download archive format</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#change_external_sharing_settings"><strong>change_external_sharing_settings</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/settings/externalsharingsettings</td>
+        <td>Configure external sharing</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#check_doc_service_url"><strong>check_doc_service_url</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/docservice</td>
+        <td>Set the document service address</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#display_file_extension"><strong>display_file_extension</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/displayfileextension</td>
+        <td>Display a file extension</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#display_recent"><strong>display_recent</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/displayrecent</td>
+        <td>Show the Recent section</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#external_share"><strong>external_share</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/settings/external</td>
+        <td>Change the external sharing ability</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#external_share_social_media"><strong>external_share_social_media</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/settings/externalsocialmedia</td>
+        <td>Change the external sharing ability on social networks</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#forcesave"><strong>forcesave</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/forcesave</td>
+        <td>Change the forcesaving ability</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#get_automatically_clean_up"><strong>get_automatically_clean_up</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/settings/autocleanup</td>
+        <td>Get the trash bin auto-clearing setting</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#get_default_templates"><strong>get_default_templates</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/settings/defaulttemplate</td>
+        <td>Get the default template setting</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#get_doc_service_url"><strong>get_doc_service_url</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/docservice</td>
+        <td>Get the document service address</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#get_files_module"><strong>get_files_module</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/info</td>
+        <td>Get the Documents module information</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#get_files_settings"><strong>get_files_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/settings</td>
+        <td>Get file settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#hide_confirm_cancel_operation"><strong>hide_confirm_cancel_operation</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/hideconfirmcanceloperation</td>
+        <td>Hide confirmation dialog when canceling operations</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#hide_confirm_convert"><strong>hide_confirm_convert</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/hideconfirmconvert</td>
+        <td>Hide the confirmation dialog when converting</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#hide_confirm_room_lifetime"><strong>hide_confirm_room_lifetime</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/hideconfirmroomlifetime</td>
+        <td>Hide confirmation dialog when changing room lifetime settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#keep_new_file_name"><strong>keep_new_file_name</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/keepnewfilename</td>
+        <td>Keep the default file name</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#reset_default_template"><strong>reset_default_template</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/settings/defaulttemplate</td>
+        <td>Reset the default template setting</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#set_default_template"><strong>set_default_template</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/settings/defaulttemplate</td>
+        <td>Change the default template setting</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#set_open_editor_in_same_tab"><strong>set_open_editor_in_same_tab</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/settings/openeditorinsametab</td>
+        <td>Open document in the same browser tab</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#set_organize_rooms_grouping"><strong>set_organize_rooms_grouping</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/settings/organizegrouping</td>
+        <td>Organize rooms grouping</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#show_quick_actions"><strong>show_quick_actions</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/showquickactions</td>
+        <td>Display quick actions</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#store_forcesave"><strong>store_forcesave</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/storeforcesave</td>
+        <td>Change the ability to store the forcesaved files</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#store_original"><strong>store_original</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/storeoriginal</td>
+        <td>Change the ability to upload original formats</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#update_file_if_exist"><strong>update_file_if_exist</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/updateifexist</td>
+        <td>Update a file version if it exists</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSettingsApi.md#upload_default_template"><strong>upload_default_template</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/settings/defaulttemplate</td>
+        <td>Upload a file as the default template setting</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Files::SharingApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#apply_external_share_password"><strong>apply_external_share_password</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/share/{key}/password</td>
+        <td>Unlock a password-protected link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#change_file_owner"><strong>change_file_owner</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/owner</td>
+        <td>Change the room or file owner</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#get_encryption_access"><strong>get_encryption_access</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/publickeys</td>
+        <td>Get file encryption keys</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#get_external_share_data"><strong>get_external_share_data</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/share/{key}</td>
+        <td>Resolve an external share link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#get_file_security_info"><strong>get_file_security_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{id}/share</td>
+        <td>Get file sharing rights</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#get_folder_security_info"><strong>get_folder_security_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/folder/{id}/share</td>
+        <td>Get folder sharing rights</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#get_groups_members_with_file_security"><strong>get_groups_members_with_file_security</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/group/{groupId}/share</td>
+        <td>Get file access of group members</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#get_groups_members_with_folder_security"><strong>get_groups_members_with_folder_security</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/folder/{folderId}/group/{groupId}/share</td>
+        <td>Get folder access of group members</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#get_security_info"><strong>get_security_info</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/share</td>
+        <td>Get sharing rights in batch</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#get_shared_users"><strong>get_shared_users</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/file/{fileId}/sharedusers</td>
+        <td>Get users to mention in a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#remove_security_info"><strong>remove_security_info</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/share</td>
+        <td>Remove sharing rights in batch</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#send_editor_notify"><strong>send_editor_notify</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/file/{fileId}/sendeditornotify</td>
+        <td>Notify mentioned users</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#set_file_security_info"><strong>set_file_security_info</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/file/{id}/share</td>
+        <td>Share a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#set_folder_security_info"><strong>set_folder_security_info</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/folder/{id}/share</td>
+        <td>Share a folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesSharingApi.md#set_security_info"><strong>set_security_info</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/share</td>
+        <td>Set sharing rights in batch</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Files::ThirdPartyIntegrationApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesThirdPartyIntegrationApi.md#delete_third_party"><strong>delete_third_party</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/thirdparty/{providerId}</td>
+        <td>Remove a third-party account</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesThirdPartyIntegrationApi.md#get_all_providers"><strong>get_all_providers</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/thirdparty/providers</td>
+        <td>Get all third-party providers</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesThirdPartyIntegrationApi.md#get_backup_third_party_account"><strong>get_backup_third_party_account</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/thirdparty/backup</td>
+        <td>Get the third-party backup folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesThirdPartyIntegrationApi.md#get_capabilities"><strong>get_capabilities</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/thirdparty/capabilities</td>
+        <td>Get third-party provider capabilities</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesThirdPartyIntegrationApi.md#get_common_third_party_folders"><strong>get_common_third_party_folders</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/thirdparty/common</td>
+        <td>Get common third-party folders</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesThirdPartyIntegrationApi.md#get_third_party_accounts"><strong>get_third_party_accounts</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/thirdparty</td>
+        <td>Get the third-party accounts</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesThirdPartyIntegrationApi.md#save_third_party"><strong>save_third_party</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/thirdparty</td>
+        <td>Connect a third-party account</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesThirdPartyIntegrationApi.md#save_third_party_backup"><strong>save_third_party_backup</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/thirdparty/backup</td>
+        <td>Connect the third-party backup storage</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
+  <summary>Group</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Group::GroupApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/GroupApi.md#add_group"><strong>add_group</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/group</td>
+        <td>Add a new group</td>
+      </tr>
+      <tr>
+        <td><a href="docs/GroupApi.md#add_members_to"><strong>add_members_to</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/group/{id}/members</td>
+        <td>Add group members</td>
+      </tr>
+      <tr>
+        <td><a href="docs/GroupApi.md#delete_group"><strong>delete_group</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/group/{id}</td>
+        <td>Delete a group</td>
+      </tr>
+      <tr>
+        <td><a href="docs/GroupApi.md#get_group"><strong>get_group</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/group/{id}</td>
+        <td>Get a group</td>
+      </tr>
+      <tr>
+        <td><a href="docs/GroupApi.md#get_group_by_user_id"><strong>get_group_by_user_id</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/group/user/{userId}</td>
+        <td>Get user groups</td>
+      </tr>
+      <tr>
+        <td><a href="docs/GroupApi.md#get_groups"><strong>get_groups</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/group</td>
+        <td>Get groups</td>
+      </tr>
+      <tr>
+        <td><a href="docs/GroupApi.md#move_members_to"><strong>move_members_to</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/group/{fromId}/members/{toId}</td>
+        <td>Move group members</td>
+      </tr>
+      <tr>
+        <td><a href="docs/GroupApi.md#remove_members_from"><strong>remove_members_from</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/group/{id}/members</td>
+        <td>Remove group members</td>
+      </tr>
+      <tr>
+        <td><a href="docs/GroupApi.md#set_group_manager"><strong>set_group_manager</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/group/{id}/manager</td>
+        <td>Set a group manager</td>
+      </tr>
+      <tr>
+        <td><a href="docs/GroupApi.md#set_members_to"><strong>set_members_to</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/group/{id}/members</td>
+        <td>Replace group members</td>
+      </tr>
+      <tr>
+        <td><a href="docs/GroupApi.md#update_group"><strong>update_group</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/group/{id}</td>
+        <td>Update a group</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Group::SearchApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/GroupSearchApi.md#get_groups_with_files_shared"><strong>get_groups_with_files_shared</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/group/file/{id}</td>
+        <td>Search groups for a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/GroupSearchApi.md#get_groups_with_folders_shared"><strong>get_groups_with_folders_shared</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/group/folder/{id}</td>
+        <td>Search groups for a folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/GroupSearchApi.md#get_groups_with_rooms_shared"><strong>get_groups_with_rooms_shared</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/group/room/{id}</td>
+        <td>Search groups for a room</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
+  <summary>Migration</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Migration::MigrationApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/MigrationApi.md#cancel_migration"><strong>cancel_migration</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/migration/cancel</td>
+        <td>Cancel migration</td>
+      </tr>
+      <tr>
+        <td><a href="docs/MigrationApi.md#clear_migration"><strong>clear_migration</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/migration/clear</td>
+        <td>Clear migration</td>
+      </tr>
+      <tr>
+        <td><a href="docs/MigrationApi.md#finish_migration"><strong>finish_migration</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/migration/finish</td>
+        <td>Finish migration</td>
+      </tr>
+      <tr>
+        <td><a href="docs/MigrationApi.md#get_migration_logs"><strong>get_migration_logs</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/migration/logs</td>
+        <td>Get migration logs</td>
+      </tr>
+      <tr>
+        <td><a href="docs/MigrationApi.md#get_migration_status"><strong>get_migration_status</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/migration/status</td>
+        <td>Get migration status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/MigrationApi.md#list_migrations"><strong>list_migrations</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/migration/list</td>
+        <td>Get available migrators</td>
+      </tr>
+      <tr>
+        <td><a href="docs/MigrationApi.md#start_migration"><strong>start_migration</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/migration/migrate</td>
+        <td>Start migration</td>
+      </tr>
+      <tr>
+        <td><a href="docs/MigrationApi.md#upload_and_initialize_migration"><strong>upload_and_initialize_migration</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/migration/init/{migratorName}</td>
+        <td>Parse migration archive</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
+  <summary>OAuth20</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>OAuth20::AuthorizationApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20AuthorizationApi.md#authorize_o_auth"><strong>authorize_o_auth</strong></a></td>
+        <td><strong>GET</strong> /oauth2/authorize</td>
+        <td>Start the authorization flow</td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20AuthorizationApi.md#exchange_token"><strong>exchange_token</strong></a></td>
+        <td><strong>POST</strong> /oauth2/token</td>
+        <td>Exchange the authorization code</td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20AuthorizationApi.md#submit_consent"><strong>submit_consent</strong></a></td>
+        <td><strong>POST</strong> /oauth2/authorize</td>
+        <td>Submit the consent decision</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>OAuth20::ClientManagementApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20ClientManagementApi.md#change_activation"><strong>change_activation</strong></a></td>
+        <td><strong>PATCH</strong> /api/2.0/oauth2/clients/{clientId}/activation</td>
+        <td>Change client activation status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20ClientManagementApi.md#create_client"><strong>create_client</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/oauth2/clients</td>
+        <td>Create a new OAuth2 client</td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20ClientManagementApi.md#delete_client"><strong>delete_client</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/oauth2/clients/{clientId}</td>
+        <td>Delete an OAuth2 client</td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20ClientManagementApi.md#delete_tenant_clients"><strong>delete_tenant_clients</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/oauth2/clients/tenant</td>
+        <td>Delete all tenant OAuth2 clients</td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20ClientManagementApi.md#delete_user_clients"><strong>delete_user_clients</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/oauth2/clients</td>
+        <td>Delete all user OAuth2 clients</td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20ClientManagementApi.md#regenerate_secret"><strong>regenerate_secret</strong></a></td>
+        <td><strong>PATCH</strong> /api/2.0/oauth2/clients/{clientId}/regenerate</td>
+        <td>Regenerate client secret</td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20ClientManagementApi.md#revoke_user_client"><strong>revoke_user_client</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/oauth2/clients/{clientId}/revoke</td>
+        <td>Revoke client consent</td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20ClientManagementApi.md#update_client"><strong>update_client</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/oauth2/clients/{clientId}</td>
+        <td>Update an existing OAuth2 client</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>OAuth20::ClientQueryingApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20ClientQueryingApi.md#get_client"><strong>get_client</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/oauth2/clients/{clientId}</td>
+        <td>Get client details</td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20ClientQueryingApi.md#get_client_info"><strong>get_client_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/oauth2/clients/{clientId}/info</td>
+        <td>Get client info</td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20ClientQueryingApi.md#get_clients"><strong>get_clients</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/oauth2/clients</td>
+        <td>List clients</td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20ClientQueryingApi.md#get_clients_info"><strong>get_clients_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/oauth2/clients/info</td>
+        <td>List client info</td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20ClientQueryingApi.md#get_consents"><strong>get_consents</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/oauth2/clients/consents</td>
+        <td>List user consents</td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20ClientQueryingApi.md#get_public_client_info"><strong>get_public_client_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/oauth2/clients/{clientId}/public/info</td>
+        <td>Get public client info</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>OAuth20::DiscoveryApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20DiscoveryApi.md#handle_options"><strong>handle_options</strong></a></td>
+        <td><strong>OPTIONS</strong> /.well-known/oauth-authorization-server</td>
+        <td>Probe the discovery endpoint</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>OAuth20::ScopeManagementApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/OAuth20ScopeManagementApi.md#get_scopes"><strong>get_scopes</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/oauth2/scopes</td>
+        <td>List available OAuth2 scopes</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
+  <summary>People</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>People::EmailApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleEmailApi.md#change_user_email"><strong>change_user_email</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/{userId}/email</td>
+        <td>Change a user email</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleEmailApi.md#send_email_change_instructions"><strong>send_email_change_instructions</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/people/email</td>
+        <td>Send instructions to change email</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>People::GuestsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleGuestsApi.md#approve_guest_share_link"><strong>approve_guest_share_link</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/people/guests/share/approve</td>
+        <td>Approve a guest sharing link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleGuestsApi.md#delete_guests"><strong>delete_guests</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/people/guests</td>
+        <td>Remove guest relations</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>People::PasswordApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeoplePasswordApi.md#change_user_password"><strong>change_user_password</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/{userId}/password</td>
+        <td>Change a user password</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeoplePasswordApi.md#send_user_password"><strong>send_user_password</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/people/password</td>
+        <td>Remind a user password</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>People::PhotosApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeoplePhotosApi.md#create_member_photo_thumbnails"><strong>create_member_photo_thumbnails</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/people/{userId}/photo/thumbnails</td>
+        <td>Create photo thumbnails</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeoplePhotosApi.md#delete_member_photo"><strong>delete_member_photo</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/people/{userId}/photo</td>
+        <td>Delete a user photo</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeoplePhotosApi.md#get_member_photo"><strong>get_member_photo</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/{userId}/photo</td>
+        <td>Get a user photo</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeoplePhotosApi.md#update_member_photo"><strong>update_member_photo</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/{userId}/photo</td>
+        <td>Update a user photo</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeoplePhotosApi.md#upload_member_photo"><strong>upload_member_photo</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/people/{userId}/photo</td>
+        <td>Upload a user photo</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>People::ProfilesApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleProfilesApi.md#add_member"><strong>add_member</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/people</td>
+        <td>Add a user</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleProfilesApi.md#check_user_exists_by_email"><strong>check_user_exists_by_email</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/exists</td>
+        <td>Check whether an email is taken</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleProfilesApi.md#delete_member"><strong>delete_member</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/people/{userId}</td>
+        <td>Delete a user</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleProfilesApi.md#delete_profile"><strong>delete_profile</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/people/@self</td>
+        <td>Close my own profile</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleProfilesApi.md#get_all_profiles"><strong>get_all_profiles</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people</td>
+        <td>Get the active profiles</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleProfilesApi.md#get_claims"><strong>get_claims</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/tokendiagnostics</td>
+        <td>Get user claims</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleProfilesApi.md#get_profile_by_email"><strong>get_profile_by_email</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/email</td>
+        <td>Get a profile by user email</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleProfilesApi.md#get_profile_by_user_id"><strong>get_profile_by_user_id</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/{userId}</td>
+        <td>Get a profile by user ID</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleProfilesApi.md#get_self_profile"><strong>get_self_profile</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/@self</td>
+        <td>Get my profile</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleProfilesApi.md#invite_users"><strong>invite_users</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/people/invite</td>
+        <td>Invite users</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleProfilesApi.md#remove_users"><strong>remove_users</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/delete</td>
+        <td>Delete users</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleProfilesApi.md#resend_user_invites"><strong>resend_user_invites</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/invite</td>
+        <td>Resend activation emails</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleProfilesApi.md#update_member"><strong>update_member</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/{userId}</td>
+        <td>Update a user</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleProfilesApi.md#update_member_culture"><strong>update_member_culture</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/{userId}/culture</td>
+        <td>Update a user culture</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>People::QuotaApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleQuotaApi.md#reset_users_quota"><strong>reset_users_quota</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/resetquota</td>
+        <td>Reset a user quota limit</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleQuotaApi.md#update_user_quota"><strong>update_user_quota</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/userquota</td>
+        <td>Change a user quota limit</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>People::SearchApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleSearchApi.md#get_accounts_entries_with_files_shared"><strong>get_accounts_entries_with_files_shared</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/accounts/file/{id}/search</td>
+        <td>Search accounts for a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleSearchApi.md#get_accounts_entries_with_folders_shared"><strong>get_accounts_entries_with_folders_shared</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/accounts/folder/{id}/search</td>
+        <td>Search accounts for a folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleSearchApi.md#get_accounts_entries_with_rooms_shared"><strong>get_accounts_entries_with_rooms_shared</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/accounts/room/{id}/search</td>
+        <td>Search accounts for a room</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleSearchApi.md#get_search"><strong>get_search</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/@search/{query}</td>
+        <td>Search users</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleSearchApi.md#get_simple_by_filter"><strong>get_simple_by_filter</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/simple/filter</td>
+        <td>Filter users in brief</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleSearchApi.md#get_users_with_files_shared"><strong>get_users_with_files_shared</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/file/{id}</td>
+        <td>Search users for a file</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleSearchApi.md#get_users_with_folders_shared"><strong>get_users_with_folders_shared</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/folder/{id}</td>
+        <td>Search users for a folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleSearchApi.md#get_users_with_room_shared"><strong>get_users_with_room_shared</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/room/{id}</td>
+        <td>Search users for a room</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleSearchApi.md#search_users_by_extended_filter"><strong>search_users_by_extended_filter</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/filter</td>
+        <td>Filter users in detail</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleSearchApi.md#search_users_by_query"><strong>search_users_by_query</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/search</td>
+        <td>Search users by query</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleSearchApi.md#search_users_by_status"><strong>search_users_by_status</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/status/{status}/search</td>
+        <td>Search users by status filter</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>People::ThemeApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleThemeApi.md#change_portal_theme"><strong>change_portal_theme</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/theme</td>
+        <td>Change the portal theme</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleThemeApi.md#get_portal_theme"><strong>get_portal_theme</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/theme</td>
+        <td>Get the portal theme</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>People::ThirdPartyAccountsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleThirdPartyAccountsApi.md#get_third_party_auth_providers"><strong>get_third_party_auth_providers</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/thirdparty/providers</td>
+        <td>Get third-party providers</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleThirdPartyAccountsApi.md#link_third_party_account"><strong>link_third_party_account</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/thirdparty/linkaccount</td>
+        <td>Link a third-party account</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleThirdPartyAccountsApi.md#signup_third_party_account"><strong>signup_third_party_account</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/people/thirdparty/signup</td>
+        <td>Sign up with a provider</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleThirdPartyAccountsApi.md#unlink_third_party_account"><strong>unlink_third_party_account</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/people/thirdparty/unlinkaccount</td>
+        <td>Unlink a third-party account</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>People::UserDataApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserDataApi.md#get_delete_personal_folder_progress"><strong>get_delete_personal_folder_progress</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/delete/personal/progress</td>
+        <td>Get the personal folder deletion progress</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserDataApi.md#get_reassign_progress"><strong>get_reassign_progress</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/reassign/progress/{userId}</td>
+        <td>Get the reassignment progress</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserDataApi.md#get_remove_progress"><strong>get_remove_progress</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/remove/progress/{userId}</td>
+        <td>Get the deletion progress</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserDataApi.md#necessary_reassign"><strong>necessary_reassign</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/reassign/necessary</td>
+        <td>Check data for reassignment need</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserDataApi.md#send_instructions_to_delete"><strong>send_instructions_to_delete</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/self/delete</td>
+        <td>Send the deletion instructions</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserDataApi.md#start_delete_personal_folder"><strong>start_delete_personal_folder</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/people/delete/personal/start</td>
+        <td>Delete the personal folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserDataApi.md#start_reassign"><strong>start_reassign</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/people/reassign/start</td>
+        <td>Start the data reassignment</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserDataApi.md#start_remove"><strong>start_remove</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/people/remove/start</td>
+        <td>Start the data deletion</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserDataApi.md#terminate_reassign"><strong>terminate_reassign</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/reassign/terminate</td>
+        <td>Terminate the data reassignment</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserDataApi.md#terminate_remove"><strong>terminate_remove</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/remove/terminate</td>
+        <td>Terminate the data deletion</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>People::UserStatusApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserStatusApi.md#get_by_status"><strong>get_by_status</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/status/{status}</td>
+        <td>Get profiles by status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserStatusApi.md#update_user_activation_status"><strong>update_user_activation_status</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/activationstatus/{activationStatus}</td>
+        <td>Set my activation status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserStatusApi.md#update_user_status"><strong>update_user_status</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/status/{status}</td>
+        <td>Change a user status</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>People::UserTypeApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserTypeApi.md#get_user_type_update_progress"><strong>get_user_type_update_progress</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/type/progress/{userId}</td>
+        <td>Get the user type change progress</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserTypeApi.md#start_user_type_update"><strong>start_user_type_update</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/people/type</td>
+        <td>Start updating user type</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserTypeApi.md#terminate_user_type_update"><strong>terminate_user_type_update</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/type/terminate</td>
+        <td>Terminate updating user type</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PeopleUserTypeApi.md#update_user_type"><strong>update_user_type</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/people/type/{type}</td>
+        <td>Change a user type</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
+  <summary>Portal</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Portal::GuestsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalGuestsApi.md#get_guest_sharing_link"><strong>get_guest_sharing_link</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/people/guests/{userId}/share</td>
+        <td>Get a guest sharing link</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Portal::PaymentApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#calculate_wallet_payment"><strong>calculate_wallet_payment</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/portal/payment/calculatewallet</td>
+        <td>Calculate the wallet payment amount</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#change_tenant_wallet_service_state"><strong>change_tenant_wallet_service_state</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/portal/payment/servicestate</td>
+        <td>Switch a wallet service</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#create_customer_monthly_usage_report"><strong>create_customer_monthly_usage_report</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/portal/payment/customer/usage/monthly/report</td>
+        <td>Start the monthly usage report</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#create_customer_operations_report"><strong>create_customer_operations_report</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/portal/payment/customer/operationsreport</td>
+        <td>Start the operations report</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#create_customer_service_usage_report"><strong>create_customer_service_usage_report</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/portal/payment/customer/usage/report</td>
+        <td>Start the service usage report</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_accounting_service_prices"><strong>get_accounting_service_prices</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/accounting/prices/{serviceName}</td>
+        <td>Get the service prices from the accounting service</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_active_services"><strong>get_active_services</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/activeservices</td>
+        <td>Get the active wallet services</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_ai_prices"><strong>get_ai_prices</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/ai-prices</td>
+        <td>Get AI model prices</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_checkout_setup_url"><strong>get_checkout_setup_url</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/checkoutsetupurl</td>
+        <td>Get the checkout setup page URL</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_customer_balance"><strong>get_customer_balance</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/customer/balance</td>
+        <td>Get the customer balance</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_customer_info"><strong>get_customer_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/customerinfo</td>
+        <td>Get the customer information</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_customer_monthly_usage"><strong>get_customer_monthly_usage</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/customer/usage/monthly</td>
+        <td>Get the customer monthly usage</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_customer_monthly_usage_report"><strong>get_customer_monthly_usage_report</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/customer/usage/monthly/report</td>
+        <td>Get the monthly usage report status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_customer_operations"><strong>get_customer_operations</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/customer/operations</td>
+        <td>Get the wallet operations</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_customer_operations_report"><strong>get_customer_operations_report</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/customer/operationsreport</td>
+        <td>Get the operations report status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_customer_service_usage"><strong>get_customer_service_usage</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/customer/usage</td>
+        <td>Get the customer service usage</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_customer_service_usage_report"><strong>get_customer_service_usage_report</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/customer/usage/report</td>
+        <td>Get the service usage report status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_payment_account"><strong>get_payment_account</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/account</td>
+        <td>Get the billing account page</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_payment_currencies"><strong>get_payment_currencies</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/currencies</td>
+        <td>Get the billing currencies</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_payment_quotas"><strong>get_payment_quotas</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/quotas</td>
+        <td>Get the purchasable quotas</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_payment_url"><strong>get_payment_url</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/portal/payment/url</td>
+        <td>Get the payment page URL</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_portal_prices"><strong>get_portal_prices</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/prices</td>
+        <td>Get the product prices</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_quota_payment_information"><strong>get_quota_payment_information</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/quota</td>
+        <td>Get the current plan and limits</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_restricted_ai_models"><strong>get_restricted_ai_models</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/ai-model/restrictions</td>
+        <td>Get restricted AI models</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_subscription_balance_info"><strong>get_subscription_balance_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/subscription/balance</td>
+        <td>Get the subscription balance information</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_tenant_wallet_service_settings"><strong>get_tenant_wallet_service_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/servicessettings</td>
+        <td>Get the wallet service settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_tenant_wallet_settings"><strong>get_tenant_wallet_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/topupsettings</td>
+        <td>Get the auto top-up settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_wallet_service"><strong>get_wallet_service</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/walletservice</td>
+        <td>Get a wallet service</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#get_wallet_services"><strong>get_wallet_services</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/payment/walletservices</td>
+        <td>Get wallet services</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#move_subscription_to_wallet"><strong>move_subscription_to_wallet</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/portal/payment/subscription/movetowallet</td>
+        <td>Move the subscription to the wallet</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#send_payment_request"><strong>send_payment_request</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/portal/payment/request</td>
+        <td>Contact the sales team</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#set_restricted_ai_models"><strong>set_restricted_ai_models</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/portal/payment/ai-model/restrictions</td>
+        <td>Set restricted AI models</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#set_tenant_wallet_settings"><strong>set_tenant_wallet_settings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/portal/payment/topupsettings</td>
+        <td>Set the auto top-up settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#terminate_customer_monthly_usage_report"><strong>terminate_customer_monthly_usage_report</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/portal/payment/customer/usage/monthly/report</td>
+        <td>Terminate the monthly usage report</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#terminate_customer_operations_report"><strong>terminate_customer_operations_report</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/portal/payment/customer/operationsreport</td>
+        <td>Terminate the operations report</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#terminate_customer_service_usage_report"><strong>terminate_customer_service_usage_report</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/portal/payment/customer/usage/report</td>
+        <td>Terminate the service usage report</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#top_up_deposit"><strong>top_up_deposit</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/portal/payment/deposit</td>
+        <td>Top up the wallet</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#update_payment"><strong>update_payment</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/portal/payment/update</td>
+        <td>Change the subscription quantity</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalPaymentApi.md#update_wallet_payment"><strong>update_wallet_payment</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/portal/payment/updatewallet</td>
+        <td>Change a wallet service quantity</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Portal::QuotaApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalQuotaApi.md#get_portal_quota"><strong>get_portal_quota</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/quota</td>
+        <td>Get the portal quota</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalQuotaApi.md#get_portal_tariff"><strong>get_portal_tariff</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/tariff</td>
+        <td>Get the portal tariff</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalQuotaApi.md#get_portal_used_space"><strong>get_portal_used_space</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/usedspace</td>
+        <td>Get the portal used space</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalQuotaApi.md#get_right_quota"><strong>get_right_quota</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/quota/right</td>
+        <td>Get the recommended quota</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalQuotaApi.md#get_upcoming_payments"><strong>get_upcoming_payments</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/tariff/upcoming</td>
+        <td>Get upcoming payments</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Portal::SettingsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalSettingsApi.md#continue_portal"><strong>continue_portal</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/portal/continue</td>
+        <td>Restore a portal</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalSettingsApi.md#delete_portal"><strong>delete_portal</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/portal/delete</td>
+        <td>Delete a portal</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalSettingsApi.md#get_portal_information"><strong>get_portal_information</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal</td>
+        <td>Get portal information</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalSettingsApi.md#get_portal_path"><strong>get_portal_path</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/path</td>
+        <td>Get a path to the portal</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalSettingsApi.md#send_delete_instructions"><strong>send_delete_instructions</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/portal/delete</td>
+        <td>Send removal instructions</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalSettingsApi.md#send_suspend_instructions"><strong>send_suspend_instructions</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/portal/suspend</td>
+        <td>Send suspension instructions</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalSettingsApi.md#suspend_portal"><strong>suspend_portal</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/portal/suspend</td>
+        <td>Deactivate a portal</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalSettingsApi.md#unblock_portal"><strong>unblock_portal</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/portal/unblock</td>
+        <td>Unblock a portal</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Portal::UsersApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalUsersApi.md#create_invitation_link"><strong>create_invitation_link</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/portal/users/invitationlink</td>
+        <td>Create an invitation link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalUsersApi.md#delete_invitation_link"><strong>delete_invitation_link</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/portal/users/invitationlink</td>
+        <td>Delete an invitation link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalUsersApi.md#get_invitation_link"><strong>get_invitation_link</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/users/invite/{employeeType}</td>
+        <td>Get a legacy invitation link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalUsersApi.md#get_invitation_link_by_employee_type"><strong>get_invitation_link_by_employee_type</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/users/invitationlink/{employeeType}</td>
+        <td>Get an invitation link by role</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalUsersApi.md#get_portal_users_count"><strong>get_portal_users_count</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/userscount</td>
+        <td>Get a number of portal users</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalUsersApi.md#get_user_by_id"><strong>get_user_by_id</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/portal/users/{userId}</td>
+        <td>Get a portal user</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalUsersApi.md#mark_gift_message_as_read"><strong>mark_gift_message_as_read</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/portal/present/mark</td>
+        <td>Mark a gift message as read</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalUsersApi.md#send_congratulations"><strong>send_congratulations</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/portal/sendcongratulations</td>
+        <td>Send congratulations</td>
+      </tr>
+      <tr>
+        <td><a href="docs/PortalUsersApi.md#update_invitation_link"><strong>update_invitation_link</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/portal/users/invitationlink</td>
+        <td>Update an invitation link</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
+  <summary>Rooms</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Rooms::RoomsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#add_room_tags"><strong>add_room_tags</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/tags</td>
+        <td>Attach tags to a room</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#archive_room"><strong>archive_room</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/archive</td>
+        <td>Archive a room</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#change_room_cover"><strong>change_room_cover</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/rooms/{id}/cover</td>
+        <td>Change the room cover</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#create_room"><strong>create_room</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/rooms</td>
+        <td>Create a room</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#create_room_from_template"><strong>create_room_from_template</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/rooms/fromtemplate</td>
+        <td>Create a room from the template</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#create_room_logo"><strong>create_room_logo</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/rooms/{id}/logo</td>
+        <td>Set the room logo</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#create_room_tag"><strong>create_room_tag</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/tags</td>
+        <td>Create a room tag</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#create_room_template"><strong>create_room_template</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/roomtemplate</td>
+        <td>Create a room template</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#create_room_third_party"><strong>create_room_third_party</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/rooms/thirdparty/{id}</td>
+        <td>Create a third-party room</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#delete_custom_tags"><strong>delete_custom_tags</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/tags</td>
+        <td>Delete the custom room tags</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#delete_room"><strong>delete_room</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/rooms/{id}</td>
+        <td>Remove a room</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#delete_room_logo"><strong>delete_room_logo</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/rooms/{id}/logo</td>
+        <td>Remove a room logo</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#delete_room_tags"><strong>delete_room_tags</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/rooms/{id}/tags</td>
+        <td>Detach tags from a room</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#get_external_db_sync_status"><strong>get_external_db_sync_status</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms/{id}/externaldbsync</td>
+        <td>Get external DB sync status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#get_new_room_items"><strong>get_new_room_items</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms/{id}/news</td>
+        <td>Get new items in a room</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#get_public_settings"><strong>get_public_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/roomtemplate/{id}/public</td>
+        <td>Get room template public access</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#get_room_ai_folder"><strong>get_room_ai_folder</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms/{id}/ai</td>
+        <td>Get the .ai folder of a room</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#get_room_covers"><strong>get_room_covers</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms/covers</td>
+        <td>Get room cover gallery</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#get_room_creating_status"><strong>get_room_creating_status</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms/fromtemplate/status</td>
+        <td>Get the room creation progress</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#get_room_index_export"><strong>get_room_index_export</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms/indexexport</td>
+        <td>Get the room index export</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#get_room_info"><strong>get_room_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms/{id}</td>
+        <td>Get room information</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#get_room_links"><strong>get_room_links</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms/{id}/links</td>
+        <td>Get the room links</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#get_room_security_info"><strong>get_room_security_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms/{id}/share</td>
+        <td>Get the room access rights</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#get_room_tags_info"><strong>get_room_tags_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/tags</td>
+        <td>Get available room tags</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#get_room_template_creating_status"><strong>get_room_template_creating_status</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/roomtemplate/status</td>
+        <td>Get room template creation status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#get_rooms_folder"><strong>get_rooms_folder</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms</td>
+        <td>Get rooms</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#get_rooms_new_items"><strong>get_rooms_new_items</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms/news</td>
+        <td>Get new items in all rooms</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#get_rooms_primary_external_link"><strong>get_rooms_primary_external_link</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms/{id}/link</td>
+        <td>Get the room primary external link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#has_tag_links"><strong>has_tag_links</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/tags/{tagName}/haslinks</td>
+        <td>Check room tag usage</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#pin_room"><strong>pin_room</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/pin</td>
+        <td>Pin a room</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#reorder_room"><strong>reorder_room</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/reorder</td>
+        <td>Reorder room contents</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#resend_email_invitations"><strong>resend_email_invitations</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/rooms/{id}/resend</td>
+        <td>Resend the room invitations</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#search_rooms"><strong>search_rooms</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/rooms/search</td>
+        <td>Search the rooms by metadata</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#set_public_settings"><strong>set_public_settings</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/roomtemplate/public</td>
+        <td>Set room template public access</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#set_room_link"><strong>set_room_link</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/links</td>
+        <td>Set the room external or invitation link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#set_room_security"><strong>set_room_security</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/share</td>
+        <td>Set the room access rights</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#start_external_db_sync"><strong>start_external_db_sync</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/rooms/{id}/externaldbsync</td>
+        <td>Start external DB sync</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#start_room_index_export"><strong>start_room_index_export</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/rooms/{id}/indexexport</td>
+        <td>Start the room index export</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#terminate_room_index_export"><strong>terminate_room_index_export</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/rooms/indexexport</td>
+        <td>Terminate the room index export</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#unarchive_room"><strong>unarchive_room</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/unarchive</td>
+        <td>Unarchive a room</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#unpin_room"><strong>unpin_room</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/unpin</td>
+        <td>Unpin a room</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#update_room"><strong>update_room</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/rooms/{id}</td>
+        <td>Update a room</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#update_room_tag"><strong>update_room_tag</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/tags</td>
+        <td>Rename a room tag</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsApi.md#upload_room_logo"><strong>upload_room_logo</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/logos</td>
+        <td>Upload a room logo image</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Rooms::GroupsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsGroupsApi.md#add_room_group"><strong>add_room_group</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/group</td>
+        <td>Add a new room group</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsGroupsApi.md#change_room_group_icon"><strong>change_room_group_icon</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/group/{id}/icon</td>
+        <td>Change room group icon</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsGroupsApi.md#delete_room_group"><strong>delete_room_group</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/group/{id}</td>
+        <td>Delete a room group</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsGroupsApi.md#get_room_group_info"><strong>get_room_group_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/group/{id}</td>
+        <td>Get room group info</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsGroupsApi.md#get_room_groups"><strong>get_room_groups</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/group</td>
+        <td>List room groups</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsGroupsApi.md#update_room_group"><strong>update_room_group</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/group/{id}</td>
+        <td>Update room group</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Rooms::PrivacyRoomApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsPrivacyRoomApi.md#delete_keys"><strong>delete_keys</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/privacyroom/keys/{id}</td>
+        <td>Delete an encryption key</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsPrivacyRoomApi.md#get_user_keys"><strong>get_user_keys</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/privacyroom/keys</td>
+        <td>Get own encryption keys</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsPrivacyRoomApi.md#get_user_keys_for_room"><strong>get_user_keys_for_room</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/privacyroom/{roomId}/access</td>
+        <td>Get private room access keys</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsPrivacyRoomApi.md#replace_key"><strong>replace_key</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/privacyroom/keys</td>
+        <td>Rotate an encryption key</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsPrivacyRoomApi.md#set_keys"><strong>set_keys</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/privacyroom/keys</td>
+        <td>Create an encryption key</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
+  <summary>Security</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Security::AccessToDevToolsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityAccessToDevToolsApi.md#set_tenant_dev_tools_access_settings"><strong>set_tenant_dev_tools_access_settings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/devtoolsaccess</td>
+        <td>Set the Developer Tools access settings</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Security::ActiveConnectionsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityActiveConnectionsApi.md#get_all_active_connections"><strong>get_all_active_connections</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/security/activeconnections</td>
+        <td>Get active connections</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityActiveConnectionsApi.md#log_out_active_connection"><strong>log_out_active_connection</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/security/activeconnections/logout/{loginEventId}</td>
+        <td>Log out one connection</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityActiveConnectionsApi.md#log_out_all_active_connections_change_password"><strong>log_out_all_active_connections_change_password</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/security/activeconnections/logoutallchangepassword</td>
+        <td>Log out and reset password</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityActiveConnectionsApi.md#log_out_all_active_connections_for_user"><strong>log_out_all_active_connections_for_user</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/security/activeconnections/logoutall/{userId}</td>
+        <td>Log out a user everywhere</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityActiveConnectionsApi.md#log_out_all_except_this_connection"><strong>log_out_all_except_this_connection</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/security/activeconnections/logoutallexceptthis</td>
+        <td>Log out other connections</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Security::AuditTrailDataApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityAuditTrailDataApi.md#create_audit_trail_report"><strong>create_audit_trail_report</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/security/audit/events/report</td>
+        <td>Start audit trail report</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityAuditTrailDataApi.md#get_audit_events_by_filter"><strong>get_audit_events_by_filter</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/security/audit/events/filter</td>
+        <td>Get filtered audit events</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityAuditTrailDataApi.md#get_audit_settings"><strong>get_audit_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/security/audit/settings/lifetime</td>
+        <td>Get audit lifetime settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityAuditTrailDataApi.md#get_audit_trail_mappers"><strong>get_audit_trail_mappers</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/security/audit/mappers</td>
+        <td>Get audit trail mappers</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityAuditTrailDataApi.md#get_audit_trail_report"><strong>get_audit_trail_report</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/security/audit/events/report</td>
+        <td>Get audit trail report status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityAuditTrailDataApi.md#get_audit_trail_types"><strong>get_audit_trail_types</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/security/audit/types</td>
+        <td>Get audit trail types</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityAuditTrailDataApi.md#get_last_audit_events"><strong>get_last_audit_events</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/security/audit/events/last</td>
+        <td>Get recent audit events</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityAuditTrailDataApi.md#set_audit_settings"><strong>set_audit_settings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/security/audit/settings/lifetime</td>
+        <td>Set audit lifetime settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityAuditTrailDataApi.md#terminate_audit_trail_report"><strong>terminate_audit_trail_report</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/security/audit/events/report</td>
+        <td>Terminate audit trail report</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Security::BannersVisibilityApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityBannersVisibilityApi.md#set_tenant_banner_settings"><strong>set_tenant_banner_settings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/banner</td>
+        <td>Set the banners visibility</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Security::CSPApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityCSPApi.md#configure_csp"><strong>configure_csp</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/security/csp</td>
+        <td>Configure CSP settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityCSPApi.md#get_csp_settings"><strong>get_csp_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/security/csp</td>
+        <td>Get CSP settings</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Security::FirebaseApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityFirebaseApi.md#doc_register_pusn_notification_device"><strong>doc_register_pusn_notification_device</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/push/docregisterdevice</td>
+        <td>Register a push device</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityFirebaseApi.md#subscribe_documents_push_notification"><strong>subscribe_documents_push_notification</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/push/docsubscribe</td>
+        <td>Set push subscription</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Security::LoginHistoryApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityLoginHistoryApi.md#create_login_history_report"><strong>create_login_history_report</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/security/audit/login/report</td>
+        <td>Start login history report</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityLoginHistoryApi.md#get_last_login_events"><strong>get_last_login_events</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/security/audit/login/last</td>
+        <td>Get recent login events</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityLoginHistoryApi.md#get_login_events_by_filter"><strong>get_login_events_by_filter</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/security/audit/login/filter</td>
+        <td>Get filtered login events</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityLoginHistoryApi.md#get_login_history_report"><strong>get_login_history_report</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/security/audit/login/report</td>
+        <td>Get login history report status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityLoginHistoryApi.md#terminate_login_history_report"><strong>terminate_login_history_report</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/security/audit/login/report</td>
+        <td>Terminate login history report</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Security::OAuth2Api</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecurityOAuth2Api.md#generate_jwt_token"><strong>generate_jwt_token</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/security/oauth2/token</td>
+        <td>Generate JWT token</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Security::SMTPSettingsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecuritySMTPSettingsApi.md#get_smtp_operation_status"><strong>get_smtp_operation_status</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/smtpsettings/smtp/test/status</td>
+        <td>Get SMTP test status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecuritySMTPSettingsApi.md#get_smtp_settings"><strong>get_smtp_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/smtpsettings/smtp</td>
+        <td>Get SMTP settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecuritySMTPSettingsApi.md#reset_smtp_settings"><strong>reset_smtp_settings</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/smtpsettings/smtp</td>
+        <td>Reset SMTP settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecuritySMTPSettingsApi.md#save_smtp_settings"><strong>save_smtp_settings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/smtpsettings/smtp</td>
+        <td>Save SMTP settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SecuritySMTPSettingsApi.md#test_smtp_settings"><strong>test_smtp_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/smtpsettings/smtp/test</td>
+        <td>Test SMTP settings</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
+  <summary>Settings</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::AccessToDevToolsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsAccessToDevToolsApi.md#get_tenant_access_dev_tools_settings"><strong>get_tenant_access_dev_tools_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/devtoolsaccess</td>
+        <td>Get the Developer Tools access settings</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::AuthorizationApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsAuthorizationApi.md#get_auth_services"><strong>get_auth_services</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/authservice</td>
+        <td>Get the authorization services</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsAuthorizationApi.md#save_auth_keys"><strong>save_auth_keys</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/authservice</td>
+        <td>Save the authorization keys</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsAuthorizationApi.md#test_external_database_connection"><strong>test_external_database_connection</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/authservice/externaldb/test</td>
+        <td>Test external database connection</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::BannersVisibilityApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsBannersVisibilityApi.md#get_tenant_banner_settings"><strong>get_tenant_banner_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/banner</td>
+        <td>Get the banners visibility</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::CommonSettingsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#close_admin_helper"><strong>close_admin_helper</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/closeadminhelper</td>
+        <td>Close the admin helper</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#complete_wizard"><strong>complete_wizard</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/wizard/complete</td>
+        <td>Complete the Wizard settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#configure_deep_link"><strong>configure_deep_link</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/deeplink</td>
+        <td>Configure the deep link settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#delete_portal_color_theme"><strong>delete_portal_color_theme</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/settings/colortheme</td>
+        <td>Delete a color theme</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#get_deep_link_settings"><strong>get_deep_link_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/deeplink</td>
+        <td>Get the deep link settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#get_payment_settings"><strong>get_payment_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/payment</td>
+        <td>Get the payment settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#get_portal_color_theme"><strong>get_portal_color_theme</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/colortheme</td>
+        <td>Get a color theme</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#get_portal_hostname"><strong>get_portal_hostname</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/machine</td>
+        <td>Get the portal hostname</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#get_portal_logo"><strong>get_portal_logo</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/logo</td>
+        <td>Get a portal logo</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#get_portal_settings"><strong>get_portal_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings</td>
+        <td>Get the portal settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#get_socket_settings"><strong>get_socket_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/socket</td>
+        <td>Get the socket settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#get_supported_cultures"><strong>get_supported_cultures</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/cultures</td>
+        <td>Get supported languages</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#get_tenant_ai_access_settings"><strong>get_tenant_ai_access_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/ai-access</td>
+        <td>Get the AI access settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#get_tenant_user_invitation_settings"><strong>get_tenant_user_invitation_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/invitationsettings</td>
+        <td>Get the user invitation settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#get_time_zones"><strong>get_time_zones</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/timezones</td>
+        <td>Get time zones</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#save_default_folder"><strong>save_default_folder</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/defaultfolder</td>
+        <td>Set the default folder</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#save_dns_settings"><strong>save_dns_settings</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/dns</td>
+        <td>Save the DNS settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#save_mail_domain_settings"><strong>save_mail_domain_settings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/maildomainsettings</td>
+        <td>Save the mail domain settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#save_portal_color_theme"><strong>save_portal_color_theme</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/colortheme</td>
+        <td>Save a color theme</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#set_tenant_ai_access_settings"><strong>set_tenant_ai_access_settings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/ai-access</td>
+        <td>Set the AI access settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#update_email_activation_settings"><strong>update_email_activation_settings</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/emailactivation</td>
+        <td>Update the email activation settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCommonSettingsApi.md#update_invitation_settings"><strong>update_invitation_settings</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/invitationsettings</td>
+        <td>Update the user invitation settings</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::CookiesApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCookiesApi.md#get_cookie_settings"><strong>get_cookie_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/cookiesettings</td>
+        <td>Get the cookie lifetime settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsCookiesApi.md#update_cookie_settings"><strong>update_cookie_settings</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/cookiesettings</td>
+        <td>Update the cookie lifetime settings</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::DocsCloudApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsDocsCloudApi.md#calculate_dev_pack"><strong>calculate_dev_pack</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/docscloud/calculatedevpack</td>
+        <td>Calculate the Docs Connect Dev Pack switch cost</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsDocsCloudApi.md#create_tenant_quota_report"><strong>create_tenant_quota_report</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/docscloud/tenant/quota/report</td>
+        <td>Start the Docs Connect quota report</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsDocsCloudApi.md#get_tenant"><strong>get_tenant</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/docscloud/tenant</td>
+        <td>Get the Docs Connect tenant</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsDocsCloudApi.md#get_tenant_config"><strong>get_tenant_config</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/docscloud/tenant/config</td>
+        <td>Get the Docs Connect tenant configuration</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsDocsCloudApi.md#get_tenant_info"><strong>get_tenant_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/docscloud/tenant/info</td>
+        <td>Get the Docs Connect tenant information</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsDocsCloudApi.md#get_tenant_quota"><strong>get_tenant_quota</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/docscloud/tenant/quota</td>
+        <td>Get the Docs Connect tenant quota</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsDocsCloudApi.md#get_tenant_quota_report"><strong>get_tenant_quota_report</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/docscloud/tenant/quota/report</td>
+        <td>Get the Docs Connect quota report status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsDocsCloudApi.md#get_tenant_usage"><strong>get_tenant_usage</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/docscloud/tenant/usage</td>
+        <td>Get the Docs Connect tenant usage</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsDocsCloudApi.md#start_docs_cloud_trial"><strong>start_docs_cloud_trial</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/docscloud/trial</td>
+        <td>Start the Docs Connect trial</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsDocsCloudApi.md#switch_to_dev_pack"><strong>switch_to_dev_pack</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/docscloud/switchtodevpack</td>
+        <td>Switch Docs Connect to Docs Connect Dev Pack</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsDocsCloudApi.md#terminate_tenant_quota_report"><strong>terminate_tenant_quota_report</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/settings/docscloud/tenant/quota/report</td>
+        <td>Terminate the Docs Connect quota report</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsDocsCloudApi.md#update_tenant_config"><strong>update_tenant_config</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/docscloud/tenant/config</td>
+        <td>Update the Docs Connect tenant configuration</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::EncryptionApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsEncryptionApi.md#get_storage_encryption_progress"><strong>get_storage_encryption_progress</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/encryption/progress</td>
+        <td>Get the storage encryption progress</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsEncryptionApi.md#get_storage_encryption_settings"><strong>get_storage_encryption_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/encryption/settings</td>
+        <td>Get the storage encryption settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsEncryptionApi.md#start_storage_encryption"><strong>start_storage_encryption</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/encryption/start</td>
+        <td>Start the storage encryption</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::GreetingSettingsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsGreetingSettingsApi.md#get_greeting_settings"><strong>get_greeting_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/greetingsettings</td>
+        <td>Get greeting settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsGreetingSettingsApi.md#get_is_default_greeting_settings"><strong>get_is_default_greeting_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/greetingsettings/isdefault</td>
+        <td>Check the default greeting settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsGreetingSettingsApi.md#restore_greeting_settings"><strong>restore_greeting_settings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/greetingsettings/restore</td>
+        <td>Restore the greeting settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsGreetingSettingsApi.md#save_greeting_settings"><strong>save_greeting_settings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/greetingsettings</td>
+        <td>Save the greeting settings</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::IPRestrictionsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsIPRestrictionsApi.md#get_ip_restrictions"><strong>get_ip_restrictions</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/iprestrictions</td>
+        <td>Get IP restrictions</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsIPRestrictionsApi.md#read_ip_restrictions_settings"><strong>read_ip_restrictions_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/iprestrictions/settings</td>
+        <td>Get IP restriction settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsIPRestrictionsApi.md#save_ip_restrictions"><strong>save_ip_restrictions</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/iprestrictions</td>
+        <td>Save IP restrictions</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsIPRestrictionsApi.md#update_ip_restrictions_settings"><strong>update_ip_restrictions_settings</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/iprestrictions/settings</td>
+        <td>Update IP restriction settings</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::LicenseApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsLicenseApi.md#accept_license"><strong>accept_license</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/license/accept</td>
+        <td>Activate a license</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsLicenseApi.md#get_is_license_required"><strong>get_is_license_required</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/license/required</td>
+        <td>Check if a license is required</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsLicenseApi.md#refresh_license"><strong>refresh_license</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/license/refresh</td>
+        <td>Refresh the license</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsLicenseApi.md#upload_license"><strong>upload_license</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/license</td>
+        <td>Upload a license</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::LoginSettingsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsLoginSettingsApi.md#get_login_settings"><strong>get_login_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/security/loginsettings</td>
+        <td>Get login settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsLoginSettingsApi.md#set_default_login_settings"><strong>set_default_login_settings</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/settings/security/loginsettings</td>
+        <td>Reset login settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsLoginSettingsApi.md#update_login_settings"><strong>update_login_settings</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/security/loginsettings</td>
+        <td>Update login settings</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::MessagesApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsMessagesApi.md#enable_admin_message_settings"><strong>enable_admin_message_settings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/messagesettings</td>
+        <td>Enable or disable administrator messages</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsMessagesApi.md#send_admin_mail"><strong>send_admin_mail</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/sendadmmail</td>
+        <td>Send a message to the administrator</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsMessagesApi.md#send_join_invite_mail"><strong>send_join_invite_mail</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/sendjoininvite</td>
+        <td>Send an invitation email</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::NotificationsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsNotificationsApi.md#get_notification_channels"><strong>get_notification_channels</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/notification/channels</td>
+        <td>Get notification channels</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsNotificationsApi.md#get_notification_settings"><strong>get_notification_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/notification/{type}</td>
+        <td>Check notification availability</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsNotificationsApi.md#get_rooms_notification_settings"><strong>get_rooms_notification_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/notification/rooms</td>
+        <td>Get muted rooms</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsNotificationsApi.md#set_notification_settings"><strong>set_notification_settings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/notification</td>
+        <td>Set notification status</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsNotificationsApi.md#set_rooms_notification_status"><strong>set_rooms_notification_status</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/notification/rooms</td>
+        <td>Mute or unmute a room</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::OwnerApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsOwnerApi.md#send_owner_change_instructions"><strong>send_owner_change_instructions</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/owner</td>
+        <td>Start the portal owner change</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsOwnerApi.md#update_portal_owner"><strong>update_portal_owner</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/owner</td>
+        <td>Confirm the portal owner change</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::QuotaApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsQuotaApi.md#get_user_quota_settings"><strong>get_user_quota_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/userquotasettings</td>
+        <td>Get the user quota settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsQuotaApi.md#save_ai_agent_quota_settings"><strong>save_ai_agent_quota_settings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/aiagentquotasettings</td>
+        <td>Save the AI Agent quota settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsQuotaApi.md#save_room_quota_settings"><strong>save_room_quota_settings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/roomquotasettings</td>
+        <td>Save the room quota settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsQuotaApi.md#set_tenant_quota_settings"><strong>set_tenant_quota_settings</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/tenantquotasettings</td>
+        <td>Save the tenant quota settings</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::RebrandingApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#delete_additional_white_label_settings"><strong>delete_additional_white_label_settings</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/settings/rebranding/additional</td>
+        <td>Delete the additional white label settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#delete_company_white_label_settings"><strong>delete_company_white_label_settings</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/settings/rebranding/company</td>
+        <td>Delete the company white label settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#get_additional_white_label_settings"><strong>get_additional_white_label_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/rebranding/additional</td>
+        <td>Get the additional white label settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#get_company_white_label_settings"><strong>get_company_white_label_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/rebranding/company</td>
+        <td>Get the company white label settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#get_enable_whitelabel"><strong>get_enable_whitelabel</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/enablewhitelabel</td>
+        <td>Check the white label availability</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#get_is_default_white_label_logo_text"><strong>get_is_default_white_label_logo_text</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/whitelabel/logotext/isdefault</td>
+        <td>Check the default logo text</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#get_is_default_white_label_logos"><strong>get_is_default_white_label_logos</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/whitelabel/logos/isdefault</td>
+        <td>Check the default white label logos</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#get_licensor_data"><strong>get_licensor_data</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/companywhitelabel</td>
+        <td>Get the licensor data</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#get_white_label_logo_text"><strong>get_white_label_logo_text</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/whitelabel/logotext</td>
+        <td>Get the white label logo text</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#get_white_label_logos"><strong>get_white_label_logos</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/whitelabel/logos</td>
+        <td>Get the white label logos</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#restore_white_label_logo_text"><strong>restore_white_label_logo_text</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/whitelabel/logotext/restore</td>
+        <td>Restore the white label logo text</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#restore_white_label_logos"><strong>restore_white_label_logos</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/whitelabel/logos/restore</td>
+        <td>Restore the white label logos</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#save_additional_white_label_settings"><strong>save_additional_white_label_settings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/rebranding/additional</td>
+        <td>Save the additional white label settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#save_company_white_label_settings"><strong>save_company_white_label_settings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/rebranding/company</td>
+        <td>Save the company white label settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#save_white_label_logo_text"><strong>save_white_label_logo_text</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/whitelabel/logotext/save</td>
+        <td>Save the white label logo text</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#save_white_label_settings"><strong>save_white_label_settings</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/whitelabel/logos/save</td>
+        <td>Save the white label logos</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsRebrandingApi.md#save_white_label_settings_from_files"><strong>save_white_label_settings_from_files</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/whitelabel/logos/savefromfiles</td>
+        <td>Save the logos from files</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::SSOApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsSSOApi.md#get_default_sso_settings_v2"><strong>get_default_sso_settings_v2</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/ssov2/default</td>
+        <td>Get the default SSO settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsSSOApi.md#get_sso_settings_v2"><strong>get_sso_settings_v2</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/ssov2</td>
+        <td>Get the SSO settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsSSOApi.md#get_sso_settings_v2_constants"><strong>get_sso_settings_v2_constants</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/ssov2/constants</td>
+        <td>Get the SSO settings constants</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsSSOApi.md#reset_sso_settings_v2"><strong>reset_sso_settings_v2</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/settings/ssov2</td>
+        <td>Reset the SSO settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsSSOApi.md#save_sso_settings_v2"><strong>save_sso_settings_v2</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/ssov2</td>
+        <td>Save the SSO settings</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::SecurityApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsSecurityApi.md#get_enabled_modules"><strong>get_enabled_modules</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/security/modules</td>
+        <td>Get enabled modules</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsSecurityApi.md#get_is_product_administrator"><strong>get_is_product_administrator</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/security/administrator</td>
+        <td>Check product administrator</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsSecurityApi.md#get_password_settings"><strong>get_password_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/security/password</td>
+        <td>Get password settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsSecurityApi.md#get_product_administrators"><strong>get_product_administrators</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/security/administrator/{productId}</td>
+        <td>Get product administrators</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsSecurityApi.md#get_web_item_security_info"><strong>get_web_item_security_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/security/{id}</td>
+        <td>Check module availability</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsSecurityApi.md#get_web_item_settings_security_info"><strong>get_web_item_settings_security_info</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/security</td>
+        <td>Get module access settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsSecurityApi.md#set_access_to_web_items"><strong>set_access_to_web_items</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/security/access</td>
+        <td>Set access to modules in bulk</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsSecurityApi.md#set_product_administrator"><strong>set_product_administrator</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/security/administrator</td>
+        <td>Set product administrator</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsSecurityApi.md#set_web_item_security"><strong>set_web_item_security</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/security</td>
+        <td>Set module access</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsSecurityApi.md#update_password_settings"><strong>update_password_settings</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/security/password</td>
+        <td>Update password settings</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::StatisticsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsStatisticsApi.md#get_space_usage_statistics"><strong>get_space_usage_statistics</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/statistics/spaceusage/{id}</td>
+        <td>Get the space usage statistics</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::StorageApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsStorageApi.md#get_all_backup_storages"><strong>get_all_backup_storages</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/storage/backup</td>
+        <td>Get the backup storages</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsStorageApi.md#get_all_cdn_storages"><strong>get_all_cdn_storages</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/storage/cdn</td>
+        <td>Get the CDN storages</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsStorageApi.md#get_all_storages"><strong>get_all_storages</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/storage</td>
+        <td>Get the portal storages</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsStorageApi.md#get_amazon_s3_regions"><strong>get_amazon_s3_regions</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/storage/s3/regions</td>
+        <td>Get the Amazon S3 regions</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsStorageApi.md#get_storage_progress"><strong>get_storage_progress</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/storage/progress</td>
+        <td>Get the storage migration progress</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsStorageApi.md#reset_cdn_to_default"><strong>reset_cdn_to_default</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/settings/storage/cdn</td>
+        <td>Reset the CDN storage settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsStorageApi.md#reset_storage_to_default"><strong>reset_storage_to_default</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/settings/storage</td>
+        <td>Reset the storage settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsStorageApi.md#update_cdn_storage"><strong>update_cdn_storage</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/storage/cdn</td>
+        <td>Update the CDN storage</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsStorageApi.md#update_storage"><strong>update_storage</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/storage</td>
+        <td>Switch the portal storage</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::TFASettingsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsTFASettingsApi.md#get_tfa_app_codes"><strong>get_tfa_app_codes</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/tfaappcodes</td>
+        <td>Get the TFA backup codes</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsTFASettingsApi.md#get_tfa_confirm_data"><strong>get_tfa_confirm_data</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/tfaapp/confirm</td>
+        <td>Get TFA confirmation data</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsTFASettingsApi.md#get_tfa_settings"><strong>get_tfa_settings</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/tfaapp</td>
+        <td>Get the TFA settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsTFASettingsApi.md#tfa_app_generate_setup_code"><strong>tfa_app_generate_setup_code</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/tfaapp/setup</td>
+        <td>Generate the TFA setup code</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsTFASettingsApi.md#tfa_validate_auth_code"><strong>tfa_validate_auth_code</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/tfaapp/validate</td>
+        <td>Validate the TFA code</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsTFASettingsApi.md#unlink_tfa_app"><strong>unlink_tfa_app</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/tfaappnewapp</td>
+        <td>Unlink the TFA application</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsTFASettingsApi.md#update_tfa_app_codes"><strong>update_tfa_app_codes</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/tfaappnewcodes</td>
+        <td>Regenerate the TFA backup codes</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsTFASettingsApi.md#update_tfa_settings"><strong>update_tfa_settings</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/tfaapp</td>
+        <td>Update the TFA settings</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsTFASettingsApi.md#update_tfa_settings_link"><strong>update_tfa_settings_link</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/tfaappwithlink</td>
+        <td>Update TFA settings with a link</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::TelegramApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsTelegramApi.md#check_telegram"><strong>check_telegram</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/telegram/check</td>
+        <td>Check the Telegram connection</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsTelegramApi.md#link_telegram"><strong>link_telegram</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/telegram/link</td>
+        <td>Get the Telegram link</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsTelegramApi.md#unlink_telegram"><strong>unlink_telegram</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/settings/telegram/link</td>
+        <td>Unlink Telegram</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::WebhooksApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsWebhooksApi.md#create_webhook"><strong>create_webhook</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/webhook</td>
+        <td>Create a webhook</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsWebhooksApi.md#enable_webhook"><strong>enable_webhook</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/webhook/enable</td>
+        <td>Switch a webhook on or off</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsWebhooksApi.md#get_tenant_webhooks"><strong>get_tenant_webhooks</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/webhook</td>
+        <td>Get the portal webhooks</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsWebhooksApi.md#get_webhook_triggers"><strong>get_webhook_triggers</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/webhook/triggers</td>
+        <td>Get the webhook triggers</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsWebhooksApi.md#get_webhooks_logs"><strong>get_webhooks_logs</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/webhooks/log</td>
+        <td>Get the webhook delivery log</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsWebhooksApi.md#remove_webhook"><strong>remove_webhook</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/settings/webhook/{id}</td>
+        <td>Remove a webhook</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsWebhooksApi.md#retry_webhook"><strong>retry_webhook</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/webhook/{id}/retry</td>
+        <td>Retry a webhook delivery</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsWebhooksApi.md#retry_webhooks"><strong>retry_webhooks</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/webhook/retry</td>
+        <td>Retry webhook deliveries</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsWebhooksApi.md#update_webhook"><strong>update_webhook</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/webhook</td>
+        <td>Update a webhook</td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>Settings::WebpluginsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsWebpluginsApi.md#add_web_plugin_from_file"><strong>add_web_plugin_from_file</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/settings/webplugins</td>
+        <td>Add a web plugin</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsWebpluginsApi.md#delete_web_plugin"><strong>delete_web_plugin</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/settings/webplugins/{name}</td>
+        <td>Delete a web plugin</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsWebpluginsApi.md#get_web_plugin"><strong>get_web_plugin</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/webplugins/{name}</td>
+        <td>Get a web plugin by name</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsWebpluginsApi.md#get_web_plugins"><strong>get_web_plugins</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/settings/webplugins</td>
+        <td>Get web plugins</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsWebpluginsApi.md#refresh_web_plugin"><strong>refresh_web_plugin</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/webplugins/{name}/refresh</td>
+        <td>Refresh a web plugin</td>
+      </tr>
+      <tr>
+        <td><a href="docs/SettingsWebpluginsApi.md#update_web_plugin"><strong>update_web_plugin</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/settings/webplugins/{name}</td>
+        <td>Update a web plugin</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+<details>
+  <summary>ThirdParty</summary>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Method</th>
+        <th>HTTP request</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align: center;"><strong>ThirdParty::ThirdPartyApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/ThirdPartyApi.md#get_third_party_code"><strong>get_third_party_code</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/thirdparty/{provider}</td>
+        <td>Get provider consent URL</td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+
+### Documentation For Models
+
+<details><summary>Models list</summary>
+
+ - [DocspaceApiSdk::AccessRequestKeyDto](docs/AccessRequestKeyDto.md)
+ - [DocspaceApiSdk::AccountEntryArrayWrapper](docs/AccountEntryArrayWrapper.md)
+ - [DocspaceApiSdk::AccountEntryDto](docs/AccountEntryDto.md)
+ - [DocspaceApiSdk::AccountInfoArrayWrapper](docs/AccountInfoArrayWrapper.md)
+ - [DocspaceApiSdk::AccountInfoDto](docs/AccountInfoDto.md)
+ - [DocspaceApiSdk::AccountLoginType](docs/AccountLoginType.md)
+ - [DocspaceApiSdk::AccountSearchArea](docs/AccountSearchArea.md)
+ - [DocspaceApiSdk::AceShortArrayWrapper](docs/AceShortArrayWrapper.md)
+ - [DocspaceApiSdk::AceShortDto](docs/AceShortDto.md)
+ - [DocspaceApiSdk::ActionLinkActionRequest](docs/ActionLinkActionRequest.md)
+ - [DocspaceApiSdk::ActionLinkRequest](docs/ActionLinkRequest.md)
+ - [DocspaceApiSdk::ActionType](docs/ActionType.md)
+ - [DocspaceApiSdk::ActiveConnectionsDto](docs/ActiveConnectionsDto.md)
+ - [DocspaceApiSdk::ActiveConnectionsItemDto](docs/ActiveConnectionsItemDto.md)
+ - [DocspaceApiSdk::ActiveConnectionsWrapper](docs/ActiveConnectionsWrapper.md)
+ - [DocspaceApiSdk::ActiveServiceArrayWrapper](docs/ActiveServiceArrayWrapper.md)
+ - [DocspaceApiSdk::ActiveServiceDto](docs/ActiveServiceDto.md)
+ - [DocspaceApiSdk::AdditionalResourcesDto](docs/AdditionalResourcesDto.md)
+ - [DocspaceApiSdk::AdditionalResourcesWrapper](docs/AdditionalResourcesWrapper.md)
+ - [DocspaceApiSdk::AdditionalWhiteLabelSettingsDto](docs/AdditionalWhiteLabelSettingsDto.md)
+ - [DocspaceApiSdk::AdditionalWhiteLabelSettingsRequestDto](docs/AdditionalWhiteLabelSettingsRequestDto.md)
+ - [DocspaceApiSdk::AdditionalWhiteLabelSettingsWrapper](docs/AdditionalWhiteLabelSettingsWrapper.md)
+ - [DocspaceApiSdk::AdminMessageBaseSettingsRequestDto](docs/AdminMessageBaseSettingsRequestDto.md)
+ - [DocspaceApiSdk::AdminMessageSettingsRequestDto](docs/AdminMessageSettingsRequestDto.md)
+ - [DocspaceApiSdk::AiActionArgs](docs/AiActionArgs.md)
+ - [DocspaceApiSdk::AiActionArgsPrompt](docs/AiActionArgsPrompt.md)
+ - [DocspaceApiSdk::AiActionType](docs/AiActionType.md)
+ - [DocspaceApiSdk::AiAgentNewItemsDto](docs/AiAgentNewItemsDto.md)
+ - [DocspaceApiSdk::AiAgentsCreateRequest](docs/AiAgentsCreateRequest.md)
+ - [DocspaceApiSdk::AiAgentsDeleteRequest](docs/AiAgentsDeleteRequest.md)
+ - [DocspaceApiSdk::AiAgentsGet200Response](docs/AiAgentsGet200Response.md)
+ - [DocspaceApiSdk::AiAgentsGet200ResponseAllOfResponse](docs/AiAgentsGet200ResponseAllOfResponse.md)
+ - [DocspaceApiSdk::AiAgentsResetQuotaRequest](docs/AiAgentsResetQuotaRequest.md)
+ - [DocspaceApiSdk::AiAgentsUpdateQuotaRequest](docs/AiAgentsUpdateQuotaRequest.md)
+ - [DocspaceApiSdk::AiAgentsUpdateQuotaRequestRoomIdsInner](docs/AiAgentsUpdateQuotaRequestRoomIdsInner.md)
+ - [DocspaceApiSdk::AiAgentsUpdateRequest](docs/AiAgentsUpdateRequest.md)
+ - [DocspaceApiSdk::AiApiDateTime](docs/AiApiDateTime.md)
+ - [DocspaceApiSdk::AiApproveToolCallRequest](docs/AiApproveToolCallRequest.md)
+ - [DocspaceApiSdk::AiAssignmentMutationResult](docs/AiAssignmentMutationResult.md)
+ - [DocspaceApiSdk::AiAssignmentsAssignRequest](docs/AiAssignmentsAssignRequest.md)
+ - [DocspaceApiSdk::AiAssignmentsCascadeProfileDeleteRequest](docs/AiAssignmentsCascadeProfileDeleteRequest.md)
+ - [DocspaceApiSdk::AiAttachment](docs/AiAttachment.md)
+ - [DocspaceApiSdk::AiAttachmentFormKeysInner](docs/AiAttachmentFormKeysInner.md)
+ - [DocspaceApiSdk::AiAttachmentsLinkToMessageRequest](docs/AiAttachmentsLinkToMessageRequest.md)
+ - [DocspaceApiSdk::AiAttachmentsSaveFileRequest](docs/AiAttachmentsSaveFileRequest.md)
+ - [DocspaceApiSdk::AiAttachmentsSaveFileRequestInput](docs/AiAttachmentsSaveFileRequestInput.md)
+ - [DocspaceApiSdk::AiAttachmentsSaveFilesManyRequest](docs/AiAttachmentsSaveFilesManyRequest.md)
+ - [DocspaceApiSdk::AiBuiltinProviderType](docs/AiBuiltinProviderType.md)
+ - [DocspaceApiSdk::AiBulkAssignmentResult](docs/AiBulkAssignmentResult.md)
+ - [DocspaceApiSdk::AiBulkAssignmentResultErrorsInner](docs/AiBulkAssignmentResultErrorsInner.md)
+ - [DocspaceApiSdk::AiChatEvent](docs/AiChatEvent.md)
+ - [DocspaceApiSdk::AiChatPriceDto](docs/AiChatPriceDto.md)
+ - [DocspaceApiSdk::AiChatSettingsDto](docs/AiChatSettingsDto.md)
+ - [DocspaceApiSdk::AiChatToolPermissionMode](docs/AiChatToolPermissionMode.md)
+ - [DocspaceApiSdk::AiChatToolPrefsScope](docs/AiChatToolPrefsScope.md)
+ - [DocspaceApiSdk::AiConfigDto](docs/AiConfigDto.md)
+ - [DocspaceApiSdk::AiCreateProfileInput](docs/AiCreateProfileInput.md)
+ - [DocspaceApiSdk::AiCreatePromptInput](docs/AiCreatePromptInput.md)
+ - [DocspaceApiSdk::AiDistributedTaskStatus](docs/AiDistributedTaskStatus.md)
+ - [DocspaceApiSdk::AiEditorToolsCall200Response](docs/AiEditorToolsCall200Response.md)
+ - [DocspaceApiSdk::AiEditorToolsCallRequest](docs/AiEditorToolsCallRequest.md)
+ - [DocspaceApiSdk::AiEditorToolsList200Response](docs/AiEditorToolsList200Response.md)
+ - [DocspaceApiSdk::AiEditorToolsList200ResponseToolsInner](docs/AiEditorToolsList200ResponseToolsInner.md)
+ - [DocspaceApiSdk::AiEmbeddingPriceDto](docs/AiEmbeddingPriceDto.md)
+ - [DocspaceApiSdk::AiEmbeddingProviderType](docs/AiEmbeddingProviderType.md)
+ - [DocspaceApiSdk::AiEmployeeDto](docs/AiEmployeeDto.md)
+ - [DocspaceApiSdk::AiEntryPricingDtoAiChatPriceDto](docs/AiEntryPricingDtoAiChatPriceDto.md)
+ - [DocspaceApiSdk::AiEntryPricingDtoAiEmbeddingPriceDto](docs/AiEntryPricingDtoAiEmbeddingPriceDto.md)
+ - [DocspaceApiSdk::AiEntryPricingDtoAiImagePriceDto](docs/AiEntryPricingDtoAiImagePriceDto.md)
+ - [DocspaceApiSdk::AiEntryPricingDtoDecimal](docs/AiEntryPricingDtoDecimal.md)
+ - [DocspaceApiSdk::AiErrorCode](docs/AiErrorCode.md)
+ - [DocspaceApiSdk::AiErrorData](docs/AiErrorData.md)
+ - [DocspaceApiSdk::AiErrorResponse](docs/AiErrorResponse.md)
+ - [DocspaceApiSdk::AiExportTextToDocx202Response](docs/AiExportTextToDocx202Response.md)
+ - [DocspaceApiSdk::AiExportTextToDocxRequest](docs/AiExportTextToDocxRequest.md)
+ - [DocspaceApiSdk::AiExportTextToDocxRequestFolderId](docs/AiExportTextToDocxRequestFolderId.md)
+ - [DocspaceApiSdk::AiFileEntryBaseDto](docs/AiFileEntryBaseDto.md)
+ - [DocspaceApiSdk::AiFileEntryDto](docs/AiFileEntryDto.md)
+ - [DocspaceApiSdk::AiFileEntryDtoAllOfAvailableShareRights](docs/AiFileEntryDtoAllOfAvailableShareRights.md)
+ - [DocspaceApiSdk::AiFileEntryDtoAllOfSecurity](docs/AiFileEntryDtoAllOfSecurity.md)
+ - [DocspaceApiSdk::AiFileEntryDtoAllOfShareSettings](docs/AiFileEntryDtoAllOfShareSettings.md)
+ - [DocspaceApiSdk::AiFileEntryType](docs/AiFileEntryType.md)
+ - [DocspaceApiSdk::AiFileOperationDto](docs/AiFileOperationDto.md)
+ - [DocspaceApiSdk::AiFileOperationType](docs/AiFileOperationType.md)
+ - [DocspaceApiSdk::AiFileOperationWrapper](docs/AiFileOperationWrapper.md)
+ - [DocspaceApiSdk::AiFileShare](docs/AiFileShare.md)
+ - [DocspaceApiSdk::AiFolderArrayWrapper](docs/AiFolderArrayWrapper.md)
+ - [DocspaceApiSdk::AiFolderContentDto](docs/AiFolderContentDto.md)
+ - [DocspaceApiSdk::AiFolderContentWrapper](docs/AiFolderContentWrapper.md)
+ - [DocspaceApiSdk::AiFolderDto](docs/AiFolderDto.md)
+ - [DocspaceApiSdk::AiFolderMutationResult](docs/AiFolderMutationResult.md)
+ - [DocspaceApiSdk::AiFolderType](docs/AiFolderType.md)
+ - [DocspaceApiSdk::AiFolderWrapper](docs/AiFolderWrapper.md)
+ - [DocspaceApiSdk::AiImagePriceDto](docs/AiImagePriceDto.md)
+ - [DocspaceApiSdk::AiImportError](docs/AiImportError.md)
+ - [DocspaceApiSdk::AiImportMode](docs/AiImportMode.md)
+ - [DocspaceApiSdk::AiImportResult](docs/AiImportResult.md)
+ - [DocspaceApiSdk::AiImportResultImported](docs/AiImportResultImported.md)
+ - [DocspaceApiSdk::AiLogoCoverDto](docs/AiLogoCoverDto.md)
+ - [DocspaceApiSdk::AiLogoDto](docs/AiLogoDto.md)
+ - [DocspaceApiSdk::AiMCPItem](docs/AiMCPItem.md)
+ - [DocspaceApiSdk::AiMetadataMatchDto](docs/AiMetadataMatchDto.md)
+ - [DocspaceApiSdk::AiModel](docs/AiModel.md)
+ - [DocspaceApiSdk::AiNewItemsAgentNewItemsArrayWrapper](docs/AiNewItemsAgentNewItemsArrayWrapper.md)
+ - [DocspaceApiSdk::AiNewItemsDtoAgentNewItemsDto](docs/AiNewItemsDtoAgentNewItemsDto.md)
+ - [DocspaceApiSdk::AiOpenAIChatCompletionChunk](docs/AiOpenAIChatCompletionChunk.md)
+ - [DocspaceApiSdk::AiOpenAIChoiceDelta](docs/AiOpenAIChoiceDelta.md)
+ - [DocspaceApiSdk::AiOpenAIChunkChoice](docs/AiOpenAIChunkChoice.md)
+ - [DocspaceApiSdk::AiOpenAIFinishReason](docs/AiOpenAIFinishReason.md)
+ - [DocspaceApiSdk::AiOpenAIStreamChunk](docs/AiOpenAIStreamChunk.md)
+ - [DocspaceApiSdk::AiOpenAIStreamError](docs/AiOpenAIStreamError.md)
+ - [DocspaceApiSdk::AiOpenAIStreamErrorError](docs/AiOpenAIStreamErrorError.md)
+ - [DocspaceApiSdk::AiOpenAIToolCallDelta](docs/AiOpenAIToolCallDelta.md)
+ - [DocspaceApiSdk::AiOpenAIToolCallDeltaFunction](docs/AiOpenAIToolCallDeltaFunction.md)
+ - [DocspaceApiSdk::AiOpenOrCreateResult](docs/AiOpenOrCreateResult.md)
+ - [DocspaceApiSdk::AiOpenaiChatCompletions403Response](docs/AiOpenaiChatCompletions403Response.md)
+ - [DocspaceApiSdk::AiOpenaiChatCompletions403ResponseError](docs/AiOpenaiChatCompletions403ResponseError.md)
+ - [DocspaceApiSdk::AiOpenaiImagesGenerations403Response](docs/AiOpenaiImagesGenerations403Response.md)
+ - [DocspaceApiSdk::AiOpenaiImagesGenerations403ResponseError](docs/AiOpenaiImagesGenerations403ResponseError.md)
+ - [DocspaceApiSdk::AiPreferencesSetDeepModeRequest](docs/AiPreferencesSetDeepModeRequest.md)
+ - [DocspaceApiSdk::AiPreferencesSetReasoningLevelRequest](docs/AiPreferencesSetReasoningLevelRequest.md)
+ - [DocspaceApiSdk::AiPreferencesSetToolPermissionModeRequest](docs/AiPreferencesSetToolPermissionModeRequest.md)
+ - [DocspaceApiSdk::AiPriceCurrencyDto](docs/AiPriceCurrencyDto.md)
+ - [DocspaceApiSdk::AiPricesDto](docs/AiPricesDto.md)
+ - [DocspaceApiSdk::AiPricesWrapper](docs/AiPricesWrapper.md)
+ - [DocspaceApiSdk::AiProfile](docs/AiProfile.md)
+ - [DocspaceApiSdk::AiProfileMutationResult](docs/AiProfileMutationResult.md)
+ - [DocspaceApiSdk::AiProfilesCreate400Response](docs/AiProfilesCreate400Response.md)
+ - [DocspaceApiSdk::AiProfilesGetById200Response](docs/AiProfilesGetById200Response.md)
+ - [DocspaceApiSdk::AiProfilesListProviderModels400Response](docs/AiProfilesListProviderModels400Response.md)
+ - [DocspaceApiSdk::AiProfilesListProviderModels400ResponseAnyOf](docs/AiProfilesListProviderModels400ResponseAnyOf.md)
+ - [DocspaceApiSdk::AiProfilesListProviderModelsRequest](docs/AiProfilesListProviderModelsRequest.md)
+ - [DocspaceApiSdk::AiProfilesTestConnection200Response](docs/AiProfilesTestConnection200Response.md)
+ - [DocspaceApiSdk::AiProfilesTestConnection200ResponseAnyOf](docs/AiProfilesTestConnection200ResponseAnyOf.md)
+ - [DocspaceApiSdk::AiPrompt](docs/AiPrompt.md)
+ - [DocspaceApiSdk::AiPromptBundle](docs/AiPromptBundle.md)
+ - [DocspaceApiSdk::AiPromptFolder](docs/AiPromptFolder.md)
+ - [DocspaceApiSdk::AiPromptMutationResult](docs/AiPromptMutationResult.md)
+ - [DocspaceApiSdk::AiPromptsImportBundleRequest](docs/AiPromptsImportBundleRequest.md)
+ - [DocspaceApiSdk::AiPromptsImportBundleRequestOptions](docs/AiPromptsImportBundleRequestOptions.md)
+ - [DocspaceApiSdk::AiPromptsMoveRequest](docs/AiPromptsMoveRequest.md)
+ - [DocspaceApiSdk::AiPromptsRenameFolderRequest](docs/AiPromptsRenameFolderRequest.md)
+ - [DocspaceApiSdk::AiPromptsUpdateRequest](docs/AiPromptsUpdateRequest.md)
+ - [DocspaceApiSdk::AiPromptsUpdateRequestUpdates](docs/AiPromptsUpdateRequestUpdates.md)
+ - [DocspaceApiSdk::AiProvider](docs/AiProvider.md)
+ - [DocspaceApiSdk::AiProviderType](docs/AiProviderType.md)
+ - [DocspaceApiSdk::AiReasoningDepth](docs/AiReasoningDepth.md)
+ - [DocspaceApiSdk::AiReasoningLevel](docs/AiReasoningLevel.md)
+ - [DocspaceApiSdk::AiReasoningSupport](docs/AiReasoningSupport.md)
+ - [DocspaceApiSdk::AiRegenerateStreamRequest](docs/AiRegenerateStreamRequest.md)
+ - [DocspaceApiSdk::AiResolvedAssignment](docs/AiResolvedAssignment.md)
+ - [DocspaceApiSdk::AiRoomDataLifetimeDto](docs/AiRoomDataLifetimeDto.md)
+ - [DocspaceApiSdk::AiRoomDataLifetimePeriod](docs/AiRoomDataLifetimePeriod.md)
+ - [DocspaceApiSdk::AiRoomType](docs/AiRoomType.md)
+ - [DocspaceApiSdk::AiSendCustomRequest](docs/AiSendCustomRequest.md)
+ - [DocspaceApiSdk::AiSendRequest](docs/AiSendRequest.md)
+ - [DocspaceApiSdk::AiSendStreamBody](docs/AiSendStreamBody.md)
+ - [DocspaceApiSdk::AiSettingsDto](docs/AiSettingsDto.md)
+ - [DocspaceApiSdk::AiSettingsWrapper](docs/AiSettingsWrapper.md)
+ - [DocspaceApiSdk::AiSuccessResponse](docs/AiSuccessResponse.md)
+ - [DocspaceApiSdk::AiThread](docs/AiThread.md)
+ - [DocspaceApiSdk::AiThreadMessageLike](docs/AiThreadMessageLike.md)
+ - [DocspaceApiSdk::AiThreadMessageLikeContent](docs/AiThreadMessageLikeContent.md)
+ - [DocspaceApiSdk::AiThreadMessageLikeContentAnyOfInner](docs/AiThreadMessageLikeContentAnyOfInner.md)
+ - [DocspaceApiSdk::AiThreadMessageLikeStatus](docs/AiThreadMessageLikeStatus.md)
+ - [DocspaceApiSdk::AiThreadsAppendUserMessage200Response](docs/AiThreadsAppendUserMessage200Response.md)
+ - [DocspaceApiSdk::AiThreadsAppendUserMessageRequest](docs/AiThreadsAppendUserMessageRequest.md)
+ - [DocspaceApiSdk::AiThreadsCreateRequest](docs/AiThreadsCreateRequest.md)
+ - [DocspaceApiSdk::AiThreadsOpenOrCreateRequest](docs/AiThreadsOpenOrCreateRequest.md)
+ - [DocspaceApiSdk::AiThreadsOpenOrCreateRequestEntityMeta](docs/AiThreadsOpenOrCreateRequestEntityMeta.md)
+ - [DocspaceApiSdk::AiThreadsRegenerateTitle200Response](docs/AiThreadsRegenerateTitle200Response.md)
+ - [DocspaceApiSdk::AiThreadsRegenerateTitleRequest](docs/AiThreadsRegenerateTitleRequest.md)
+ - [DocspaceApiSdk::AiThreadsRenameRequest](docs/AiThreadsRenameRequest.md)
+ - [DocspaceApiSdk::AiThreadsTouchRequest](docs/AiThreadsTouchRequest.md)
+ - [DocspaceApiSdk::AiThreadsUpdateMessageRequest](docs/AiThreadsUpdateMessageRequest.md)
+ - [DocspaceApiSdk::AiToolAnnotations](docs/AiToolAnnotations.md)
+ - [DocspaceApiSdk::AiToolCallData](docs/AiToolCallData.md)
+ - [DocspaceApiSdk::AiToolPermissionMode](docs/AiToolPermissionMode.md)
+ - [DocspaceApiSdk::AiToolsAddCustomServerRequest](docs/AiToolsAddCustomServerRequest.md)
+ - [DocspaceApiSdk::AiToolsBulkResult](docs/AiToolsBulkResult.md)
+ - [DocspaceApiSdk::AiToolsBulkResultErrorsInner](docs/AiToolsBulkResultErrorsInner.md)
+ - [DocspaceApiSdk::AiToolsListSystemTools200Response](docs/AiToolsListSystemTools200Response.md)
+ - [DocspaceApiSdk::AiToolsMutationResult](docs/AiToolsMutationResult.md)
+ - [DocspaceApiSdk::AiToolsRemoveCustomServerRequest](docs/AiToolsRemoveCustomServerRequest.md)
+ - [DocspaceApiSdk::AiToolsReplaceAllCustomServersRequest](docs/AiToolsReplaceAllCustomServersRequest.md)
+ - [DocspaceApiSdk::AiToolsSetAllowAlwaysRequest](docs/AiToolsSetAllowAlwaysRequest.md)
+ - [DocspaceApiSdk::AiToolsSetDisabledRequest](docs/AiToolsSetDisabledRequest.md)
+ - [DocspaceApiSdk::AiToolsUpdateCustomServerRequest](docs/AiToolsUpdateCustomServerRequest.md)
+ - [DocspaceApiSdk::AiUserSettingsDto](docs/AiUserSettingsDto.md)
+ - [DocspaceApiSdk::AiUserSettingsWrapper](docs/AiUserSettingsWrapper.md)
+ - [DocspaceApiSdk::AiVectorizationSettingsDto](docs/AiVectorizationSettingsDto.md)
+ - [DocspaceApiSdk::AiVectorizationSettingsWrapper](docs/AiVectorizationSettingsWrapper.md)
+ - [DocspaceApiSdk::AiVectorizationStartTask200Response](docs/AiVectorizationStartTask200Response.md)
+ - [DocspaceApiSdk::AiVectorizationStartTaskRequest](docs/AiVectorizationStartTaskRequest.md)
+ - [DocspaceApiSdk::AiWatermarkAdditions](docs/AiWatermarkAdditions.md)
+ - [DocspaceApiSdk::AiWatermarkDto](docs/AiWatermarkDto.md)
+ - [DocspaceApiSdk::AiWebSearchConfig](docs/AiWebSearchConfig.md)
+ - [DocspaceApiSdk::AiWebSearchConfigure400Response](docs/AiWebSearchConfigure400Response.md)
+ - [DocspaceApiSdk::AiWebSearchConfigureRequest](docs/AiWebSearchConfigureRequest.md)
+ - [DocspaceApiSdk::AiWebSearchMutationResult](docs/AiWebSearchMutationResult.md)
+ - [DocspaceApiSdk::AiWebSearchSetActiveConfigRequest](docs/AiWebSearchSetActiveConfigRequest.md)
+ - [DocspaceApiSdk::AmazonS3RegionArrayWrapper](docs/AmazonS3RegionArrayWrapper.md)
+ - [DocspaceApiSdk::AmazonS3RegionDto](docs/AmazonS3RegionDto.md)
+ - [DocspaceApiSdk::AnonymousConfigDto](docs/AnonymousConfigDto.md)
+ - [DocspaceApiSdk::ApiDateTime](docs/ApiDateTime.md)
+ - [DocspaceApiSdk::ApiKeyResponseArrayWrapper](docs/ApiKeyResponseArrayWrapper.md)
+ - [DocspaceApiSdk::ApiKeyResponseDto](docs/ApiKeyResponseDto.md)
+ - [DocspaceApiSdk::ApiKeyResponseWrapper](docs/ApiKeyResponseWrapper.md)
+ - [DocspaceApiSdk::AppArrayWrapper](docs/AppArrayWrapper.md)
+ - [DocspaceApiSdk::AppDto](docs/AppDto.md)
+ - [DocspaceApiSdk::AppWrapper](docs/AppWrapper.md)
+ - [DocspaceApiSdk::ApplyFilterOption](docs/ApplyFilterOption.md)
+ - [DocspaceApiSdk::ArchiveRoomRequest](docs/ArchiveRoomRequest.md)
+ - [DocspaceApiSdk::ArrayArrayWrapper](docs/ArrayArrayWrapper.md)
+ - [DocspaceApiSdk::AssignMetadataTemplates](docs/AssignMetadataTemplates.md)
+ - [DocspaceApiSdk::AuditEventArrayWrapper](docs/AuditEventArrayWrapper.md)
+ - [DocspaceApiSdk::AuditEventDto](docs/AuditEventDto.md)
+ - [DocspaceApiSdk::AuditReportFormat](docs/AuditReportFormat.md)
+ - [DocspaceApiSdk::AuditTrailActionDto](docs/AuditTrailActionDto.md)
+ - [DocspaceApiSdk::AuditTrailModuleDto](docs/AuditTrailModuleDto.md)
+ - [DocspaceApiSdk::AuditTrailProductArrayWrapper](docs/AuditTrailProductArrayWrapper.md)
+ - [DocspaceApiSdk::AuditTrailProductDto](docs/AuditTrailProductDto.md)
+ - [DocspaceApiSdk::AuditTrailTypesDto](docs/AuditTrailTypesDto.md)
+ - [DocspaceApiSdk::AuditTrailTypesWrapper](docs/AuditTrailTypesWrapper.md)
+ - [DocspaceApiSdk::AuthKeyDto](docs/AuthKeyDto.md)
+ - [DocspaceApiSdk::AuthKeyRequest](docs/AuthKeyRequest.md)
+ - [DocspaceApiSdk::AuthRequestDto](docs/AuthRequestDto.md)
+ - [DocspaceApiSdk::AuthServiceArrayWrapper](docs/AuthServiceArrayWrapper.md)
+ - [DocspaceApiSdk::AuthServiceDto](docs/AuthServiceDto.md)
+ - [DocspaceApiSdk::AuthWithCodeRequestDto](docs/AuthWithCodeRequestDto.md)
+ - [DocspaceApiSdk::AuthenticationTokenDto](docs/AuthenticationTokenDto.md)
+ - [DocspaceApiSdk::AuthenticationTokenWrapper](docs/AuthenticationTokenWrapper.md)
+ - [DocspaceApiSdk::AutoCleanUpDataDto](docs/AutoCleanUpDataDto.md)
+ - [DocspaceApiSdk::AutoCleanUpDataWrapper](docs/AutoCleanUpDataWrapper.md)
+ - [DocspaceApiSdk::AutoCleanupRequestDto](docs/AutoCleanupRequestDto.md)
+ - [DocspaceApiSdk::BackupCronRequest](docs/BackupCronRequest.md)
+ - [DocspaceApiSdk::BackupHistoryRecordArrayWrapper](docs/BackupHistoryRecordArrayWrapper.md)
+ - [DocspaceApiSdk::BackupHistoryRecordDto](docs/BackupHistoryRecordDto.md)
+ - [DocspaceApiSdk::BackupPeriod](docs/BackupPeriod.md)
+ - [DocspaceApiSdk::BackupProgressDto](docs/BackupProgressDto.md)
+ - [DocspaceApiSdk::BackupProgressEnum](docs/BackupProgressEnum.md)
+ - [DocspaceApiSdk::BackupProgressWrapper](docs/BackupProgressWrapper.md)
+ - [DocspaceApiSdk::BackupServiceStateDto](docs/BackupServiceStateDto.md)
+ - [DocspaceApiSdk::BackupServiceStateWrapper](docs/BackupServiceStateWrapper.md)
+ - [DocspaceApiSdk::BackupStorageType](docs/BackupStorageType.md)
+ - [DocspaceApiSdk::BackupsCountResultDto](docs/BackupsCountResultDto.md)
+ - [DocspaceApiSdk::BackupsCountResultWrapper](docs/BackupsCountResultWrapper.md)
+ - [DocspaceApiSdk::BalanceDto](docs/BalanceDto.md)
+ - [DocspaceApiSdk::BalanceWrapper](docs/BalanceWrapper.md)
+ - [DocspaceApiSdk::BaseBatchRequestDto](docs/BaseBatchRequestDto.md)
+ - [DocspaceApiSdk::BaseBatchRequestDtoAllOfFileIds](docs/BaseBatchRequestDtoAllOfFileIds.md)
+ - [DocspaceApiSdk::BaseBatchRequestDtoAllOfFolderIds](docs/BaseBatchRequestDtoAllOfFolderIds.md)
+ - [DocspaceApiSdk::BatchRequestDto](docs/BatchRequestDto.md)
+ - [DocspaceApiSdk::BatchRequestDtoAllOfDestFolderId](docs/BatchRequestDtoAllOfDestFolderId.md)
+ - [DocspaceApiSdk::BatchRequestDtoAllOfFileIds](docs/BatchRequestDtoAllOfFileIds.md)
+ - [DocspaceApiSdk::BatchRequestDtoAllOfFolderIds](docs/BatchRequestDtoAllOfFolderIds.md)
+ - [DocspaceApiSdk::BatchTagsRequestDto](docs/BatchTagsRequestDto.md)
+ - [DocspaceApiSdk::BooleanWrapper](docs/BooleanWrapper.md)
+ - [DocspaceApiSdk::CapabilitiesDto](docs/CapabilitiesDto.md)
+ - [DocspaceApiSdk::CapabilitiesWrapper](docs/CapabilitiesWrapper.md)
+ - [DocspaceApiSdk::ChangeClientActivationRequest](docs/ChangeClientActivationRequest.md)
+ - [DocspaceApiSdk::ChangeEmailRequest](docs/ChangeEmailRequest.md)
+ - [DocspaceApiSdk::ChangeHistoryRequest](docs/ChangeHistoryRequest.md)
+ - [DocspaceApiSdk::ChangeOwnerRequestDto](docs/ChangeOwnerRequestDto.md)
+ - [DocspaceApiSdk::ChangePasswordRequest](docs/ChangePasswordRequest.md)
+ - [DocspaceApiSdk::ChangeWalletServiceStateRequestDto](docs/ChangeWalletServiceStateRequestDto.md)
+ - [DocspaceApiSdk::ChatSettings](docs/ChatSettings.md)
+ - [DocspaceApiSdk::ChatSettingsDto](docs/ChatSettingsDto.md)
+ - [DocspaceApiSdk::CheckConfirmRequestDto](docs/CheckConfirmRequestDto.md)
+ - [DocspaceApiSdk::CheckConversionRequestDto](docs/CheckConversionRequestDto.md)
+ - [DocspaceApiSdk::CheckDestFolderDto](docs/CheckDestFolderDto.md)
+ - [DocspaceApiSdk::CheckDestFolderResult](docs/CheckDestFolderResult.md)
+ - [DocspaceApiSdk::CheckDestFolderWrapper](docs/CheckDestFolderWrapper.md)
+ - [DocspaceApiSdk::CheckDocServiceUrlRequestDto](docs/CheckDocServiceUrlRequestDto.md)
+ - [DocspaceApiSdk::CheckFillFormDraftRequest](docs/CheckFillFormDraftRequest.md)
+ - [DocspaceApiSdk::CheckMoveOrCopyBatchItemsDestFolderIdParameter](docs/CheckMoveOrCopyBatchItemsDestFolderIdParameter.md)
+ - [DocspaceApiSdk::CheckMoveOrCopyBatchItemsFolderIdsParameterInner](docs/CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md)
+ - [DocspaceApiSdk::CheckUploadRequest](docs/CheckUploadRequest.md)
+ - [DocspaceApiSdk::ChunkedUploadSessionDto](docs/ChunkedUploadSessionDto.md)
+ - [DocspaceApiSdk::ChunkedUploadSessionResultDto](docs/ChunkedUploadSessionResultDto.md)
+ - [DocspaceApiSdk::ChunkedUploadSessionResultWrapper](docs/ChunkedUploadSessionResultWrapper.md)
+ - [DocspaceApiSdk::ChunkedUploadSessionWrapper](docs/ChunkedUploadSessionWrapper.md)
+ - [DocspaceApiSdk::ClientInfoResponse](docs/ClientInfoResponse.md)
+ - [DocspaceApiSdk::ClientResponse](docs/ClientResponse.md)
+ - [DocspaceApiSdk::ClientSecretResponse](docs/ClientSecretResponse.md)
+ - [DocspaceApiSdk::CoEditingConfigDto](docs/CoEditingConfigDto.md)
+ - [DocspaceApiSdk::CoEditingConfigMode](docs/CoEditingConfigMode.md)
+ - [DocspaceApiSdk::ColorThemeColorsDto](docs/ColorThemeColorsDto.md)
+ - [DocspaceApiSdk::ColorThemeColorsRequestDto](docs/ColorThemeColorsRequestDto.md)
+ - [DocspaceApiSdk::CompanyWhiteLabelSettingsDto](docs/CompanyWhiteLabelSettingsDto.md)
+ - [DocspaceApiSdk::CompanyWhiteLabelSettingsRequestDto](docs/CompanyWhiteLabelSettingsRequestDto.md)
+ - [DocspaceApiSdk::CompanyWhiteLabelSettingsWrapper](docs/CompanyWhiteLabelSettingsWrapper.md)
+ - [DocspaceApiSdk::ConfigurationDto](docs/ConfigurationDto.md)
+ - [DocspaceApiSdk::ConfigurationWrapper](docs/ConfigurationWrapper.md)
+ - [DocspaceApiSdk::ConfirmData](docs/ConfirmData.md)
+ - [DocspaceApiSdk::ConfirmDto](docs/ConfirmDto.md)
+ - [DocspaceApiSdk::ConfirmType](docs/ConfirmType.md)
+ - [DocspaceApiSdk::ConfirmWrapper](docs/ConfirmWrapper.md)
+ - [DocspaceApiSdk::ConnectionTestResultDto](docs/ConnectionTestResultDto.md)
+ - [DocspaceApiSdk::ConnectionTestResultWrapper](docs/ConnectionTestResultWrapper.md)
+ - [DocspaceApiSdk::Contact](docs/Contact.md)
+ - [DocspaceApiSdk::ConversationResultArrayWrapper](docs/ConversationResultArrayWrapper.md)
+ - [DocspaceApiSdk::ConversationResultDto](docs/ConversationResultDto.md)
+ - [DocspaceApiSdk::ConvertDocumentLayoutRequest](docs/ConvertDocumentLayoutRequest.md)
+ - [DocspaceApiSdk::ConvertDocumentRendererRequest](docs/ConvertDocumentRendererRequest.md)
+ - [DocspaceApiSdk::ConvertFileRequestDto](docs/ConvertFileRequestDto.md)
+ - [DocspaceApiSdk::ConvertPdfRequest](docs/ConvertPdfRequest.md)
+ - [DocspaceApiSdk::ConvertSpreadsheetLayoutRequest](docs/ConvertSpreadsheetLayoutRequest.md)
+ - [DocspaceApiSdk::ConvertSpreadsheetMarginsRequest](docs/ConvertSpreadsheetMarginsRequest.md)
+ - [DocspaceApiSdk::ConvertSpreadsheetPageSizeRequest](docs/ConvertSpreadsheetPageSizeRequest.md)
+ - [DocspaceApiSdk::ConvertThumbnailRequest](docs/ConvertThumbnailRequest.md)
+ - [DocspaceApiSdk::CookieSettingsDto](docs/CookieSettingsDto.md)
+ - [DocspaceApiSdk::CookieSettingsRequestDto](docs/CookieSettingsRequestDto.md)
+ - [DocspaceApiSdk::CookieSettingsWrapper](docs/CookieSettingsWrapper.md)
+ - [DocspaceApiSdk::CopyAsRequest](docs/CopyAsRequest.md)
+ - [DocspaceApiSdk::CopyAsRequestDestFolderId](docs/CopyAsRequestDestFolderId.md)
+ - [DocspaceApiSdk::CoverRequestDto](docs/CoverRequestDto.md)
+ - [DocspaceApiSdk::CoversResultArrayWrapper](docs/CoversResultArrayWrapper.md)
+ - [DocspaceApiSdk::CoversResultDto](docs/CoversResultDto.md)
+ - [DocspaceApiSdk::CreateApiKeyRequestDto](docs/CreateApiKeyRequestDto.md)
+ - [DocspaceApiSdk::CreateBackupScheduleRequestDto](docs/CreateBackupScheduleRequestDto.md)
+ - [DocspaceApiSdk::CreateClientRequest](docs/CreateClientRequest.md)
+ - [DocspaceApiSdk::CreateFileRequest](docs/CreateFileRequest.md)
+ - [DocspaceApiSdk::CreateFileRequestTemplateId](docs/CreateFileRequestTemplateId.md)
+ - [DocspaceApiSdk::CreateFolderRequest](docs/CreateFolderRequest.md)
+ - [DocspaceApiSdk::CreateMetadataTemplateRequestDto](docs/CreateMetadataTemplateRequestDto.md)
+ - [DocspaceApiSdk::CreateRoomFromTemplateDto](docs/CreateRoomFromTemplateDto.md)
+ - [DocspaceApiSdk::CreateRoomRequestDto](docs/CreateRoomRequestDto.md)
+ - [DocspaceApiSdk::CreateTagRequestDto](docs/CreateTagRequestDto.md)
+ - [DocspaceApiSdk::CreateTextOrHtmlFileRequest](docs/CreateTextOrHtmlFileRequest.md)
+ - [DocspaceApiSdk::CreateThirdPartyRoomRequest](docs/CreateThirdPartyRoomRequest.md)
+ - [DocspaceApiSdk::CreateWebhooksConfigRequestDto](docs/CreateWebhooksConfigRequestDto.md)
+ - [DocspaceApiSdk::CronParamsDto](docs/CronParamsDto.md)
+ - [DocspaceApiSdk::CspDto](docs/CspDto.md)
+ - [DocspaceApiSdk::CspRequestDto](docs/CspRequestDto.md)
+ - [DocspaceApiSdk::CspWrapper](docs/CspWrapper.md)
+ - [DocspaceApiSdk::CurrenciesArrayWrapper](docs/CurrenciesArrayWrapper.md)
+ - [DocspaceApiSdk::CurrenciesDto](docs/CurrenciesDto.md)
+ - [DocspaceApiSdk::CurrentLicenseInfo](docs/CurrentLicenseInfo.md)
+ - [DocspaceApiSdk::CustomColorThemeDto](docs/CustomColorThemeDto.md)
+ - [DocspaceApiSdk::CustomColorThemeRequestDto](docs/CustomColorThemeRequestDto.md)
+ - [DocspaceApiSdk::CustomColorThemesSettingsDto](docs/CustomColorThemesSettingsDto.md)
+ - [DocspaceApiSdk::CustomColorThemesSettingsRequestDto](docs/CustomColorThemesSettingsRequestDto.md)
+ - [DocspaceApiSdk::CustomColorThemesSettingsWrapper](docs/CustomColorThemesSettingsWrapper.md)
+ - [DocspaceApiSdk::CustomFieldRequest](docs/CustomFieldRequest.md)
+ - [DocspaceApiSdk::CustomFieldValueArrayWrapper](docs/CustomFieldValueArrayWrapper.md)
+ - [DocspaceApiSdk::CustomFieldValueDto](docs/CustomFieldValueDto.md)
+ - [DocspaceApiSdk::CustomFilterRequest](docs/CustomFilterRequest.md)
+ - [DocspaceApiSdk::CustomerConfigDto](docs/CustomerConfigDto.md)
+ - [DocspaceApiSdk::CustomerInfoDto](docs/CustomerInfoDto.md)
+ - [DocspaceApiSdk::CustomerInfoWrapper](docs/CustomerInfoWrapper.md)
+ - [DocspaceApiSdk::CustomerMonthlyUsageArrayWrapper](docs/CustomerMonthlyUsageArrayWrapper.md)
+ - [DocspaceApiSdk::CustomerMonthlyUsageDto](docs/CustomerMonthlyUsageDto.md)
+ - [DocspaceApiSdk::CustomerMonthlyUsageReportRequestDto](docs/CustomerMonthlyUsageReportRequestDto.md)
+ - [DocspaceApiSdk::CustomerOperationsReportRequestDto](docs/CustomerOperationsReportRequestDto.md)
+ - [DocspaceApiSdk::CustomerServiceUsageDto](docs/CustomerServiceUsageDto.md)
+ - [DocspaceApiSdk::CustomerServiceUsageReportDto](docs/CustomerServiceUsageReportDto.md)
+ - [DocspaceApiSdk::CustomerServiceUsageReportRequestDto](docs/CustomerServiceUsageReportRequestDto.md)
+ - [DocspaceApiSdk::CustomerServiceUsageReportWrapper](docs/CustomerServiceUsageReportWrapper.md)
+ - [DocspaceApiSdk::CustomizationConfigDto](docs/CustomizationConfigDto.md)
+ - [DocspaceApiSdk::DarkThemeSettingsDto](docs/DarkThemeSettingsDto.md)
+ - [DocspaceApiSdk::DarkThemeSettingsRequestDto](docs/DarkThemeSettingsRequestDto.md)
+ - [DocspaceApiSdk::DarkThemeSettingsType](docs/DarkThemeSettingsType.md)
+ - [DocspaceApiSdk::DarkThemeSettingsWrapper](docs/DarkThemeSettingsWrapper.md)
+ - [DocspaceApiSdk::DateToAutoCleanUp](docs/DateToAutoCleanUp.md)
+ - [DocspaceApiSdk::DeepLinkConfigurationRequestDto](docs/DeepLinkConfigurationRequestDto.md)
+ - [DocspaceApiSdk::DeepLinkDto](docs/DeepLinkDto.md)
+ - [DocspaceApiSdk::DeepLinkHandlingMode](docs/DeepLinkHandlingMode.md)
+ - [DocspaceApiSdk::DeepLinkSettingsRequestDto](docs/DeepLinkSettingsRequestDto.md)
+ - [DocspaceApiSdk::DefaultProductRequestDto](docs/DefaultProductRequestDto.md)
+ - [DocspaceApiSdk::DefaultTemplateItemDto](docs/DefaultTemplateItemDto.md)
+ - [DocspaceApiSdk::DefaultTemplateSettingsDto](docs/DefaultTemplateSettingsDto.md)
+ - [DocspaceApiSdk::DefaultTemplateSettingsRequestDto](docs/DefaultTemplateSettingsRequestDto.md)
+ - [DocspaceApiSdk::DefaultTemplateSettingsRequestDtoSelectedFile](docs/DefaultTemplateSettingsRequestDtoSelectedFile.md)
+ - [DocspaceApiSdk::DefaultTemplateSettingsResetRequestDto](docs/DefaultTemplateSettingsResetRequestDto.md)
+ - [DocspaceApiSdk::DefaultTemplateSettingsWrapper](docs/DefaultTemplateSettingsWrapper.md)
+ - [DocspaceApiSdk::DeleteBatchRequestDto](docs/DeleteBatchRequestDto.md)
+ - [DocspaceApiSdk::DeleteBatchRequestDtoAllOfFileIds](docs/DeleteBatchRequestDtoAllOfFileIds.md)
+ - [DocspaceApiSdk::DeleteBatchRequestDtoAllOfFolderIds](docs/DeleteBatchRequestDtoAllOfFolderIds.md)
+ - [DocspaceApiSdk::DeleteFileRequest](docs/DeleteFileRequest.md)
+ - [DocspaceApiSdk::DeleteFolderRequest](docs/DeleteFolderRequest.md)
+ - [DocspaceApiSdk::DeleteRoomRequest](docs/DeleteRoomRequest.md)
+ - [DocspaceApiSdk::DeleteVersionBatchRequestDto](docs/DeleteVersionBatchRequestDto.md)
+ - [DocspaceApiSdk::DiscountCategoryDto](docs/DiscountCategoryDto.md)
+ - [DocspaceApiSdk::DisplayRequestDto](docs/DisplayRequestDto.md)
+ - [DocspaceApiSdk::DistributedTaskStatus](docs/DistributedTaskStatus.md)
+ - [DocspaceApiSdk::DnsSettingsRequestDto](docs/DnsSettingsRequestDto.md)
+ - [DocspaceApiSdk::DocServiceUrlDto](docs/DocServiceUrlDto.md)
+ - [DocspaceApiSdk::DocServiceUrlWrapper](docs/DocServiceUrlWrapper.md)
+ - [DocspaceApiSdk::DocsCloudConfigDto](docs/DocsCloudConfigDto.md)
+ - [DocspaceApiSdk::DocsCloudConfigRequestDto](docs/DocsCloudConfigRequestDto.md)
+ - [DocspaceApiSdk::DocsCloudConfigWrapper](docs/DocsCloudConfigWrapper.md)
+ - [DocspaceApiSdk::DocsCloudDevPackRequestDto](docs/DocsCloudDevPackRequestDto.md)
+ - [DocspaceApiSdk::DocsCloudIpFilterConfigDto](docs/DocsCloudIpFilterConfigDto.md)
+ - [DocspaceApiSdk::DocsCloudIpFilterConfigRequest](docs/DocsCloudIpFilterConfigRequest.md)
+ - [DocspaceApiSdk::DocsCloudIpFilterRuleDto](docs/DocsCloudIpFilterRuleDto.md)
+ - [DocspaceApiSdk::DocsCloudIpFilterRuleRequest](docs/DocsCloudIpFilterRuleRequest.md)
+ - [DocspaceApiSdk::DocsCloudLicenseInfoDto](docs/DocsCloudLicenseInfoDto.md)
+ - [DocspaceApiSdk::DocsCloudPaymentDto](docs/DocsCloudPaymentDto.md)
+ - [DocspaceApiSdk::DocsCloudQuotaDto](docs/DocsCloudQuotaDto.md)
+ - [DocspaceApiSdk::DocsCloudQuotaUserDto](docs/DocsCloudQuotaUserDto.md)
+ - [DocspaceApiSdk::DocsCloudQuotaWrapper](docs/DocsCloudQuotaWrapper.md)
+ - [DocspaceApiSdk::DocsCloudSecurityConfigDto](docs/DocsCloudSecurityConfigDto.md)
+ - [DocspaceApiSdk::DocsCloudSecurityConfigRequest](docs/DocsCloudSecurityConfigRequest.md)
+ - [DocspaceApiSdk::DocsCloudServerConfigDto](docs/DocsCloudServerConfigDto.md)
+ - [DocspaceApiSdk::DocsCloudServerConfigRequest](docs/DocsCloudServerConfigRequest.md)
+ - [DocspaceApiSdk::DocsCloudServerInfoDto](docs/DocsCloudServerInfoDto.md)
+ - [DocspaceApiSdk::DocsCloudStatsDto](docs/DocsCloudStatsDto.md)
+ - [DocspaceApiSdk::DocsCloudTenantDto](docs/DocsCloudTenantDto.md)
+ - [DocspaceApiSdk::DocsCloudTenantInfoDto](docs/DocsCloudTenantInfoDto.md)
+ - [DocspaceApiSdk::DocsCloudTenantInfoWrapper](docs/DocsCloudTenantInfoWrapper.md)
+ - [DocspaceApiSdk::DocsCloudTenantWrapper](docs/DocsCloudTenantWrapper.md)
+ - [DocspaceApiSdk::DocsCloudUsageDto](docs/DocsCloudUsageDto.md)
+ - [DocspaceApiSdk::DocsCloudUsageWrapper](docs/DocsCloudUsageWrapper.md)
+ - [DocspaceApiSdk::DocsCloudUserStatsDto](docs/DocsCloudUserStatsDto.md)
+ - [DocspaceApiSdk::DocsCloudUsersLimitDto](docs/DocsCloudUsersLimitDto.md)
+ - [DocspaceApiSdk::DocsCloudWopiConfigDto](docs/DocsCloudWopiConfigDto.md)
+ - [DocspaceApiSdk::DocsCloudWopiConfigRequest](docs/DocsCloudWopiConfigRequest.md)
+ - [DocspaceApiSdk::DocumentBuilderTaskDto](docs/DocumentBuilderTaskDto.md)
+ - [DocspaceApiSdk::DocumentBuilderTaskWrapper](docs/DocumentBuilderTaskWrapper.md)
+ - [DocspaceApiSdk::DocumentConfigDto](docs/DocumentConfigDto.md)
+ - [DocspaceApiSdk::DocumentOptionsDto](docs/DocumentOptionsDto.md)
+ - [DocspaceApiSdk::DomainNameRulesDto](docs/DomainNameRulesDto.md)
+ - [DocspaceApiSdk::DoubleNullableWrapper](docs/DoubleNullableWrapper.md)
+ - [DocspaceApiSdk::DoubleWrapper](docs/DoubleWrapper.md)
+ - [DocspaceApiSdk::DownloadRequestDto](docs/DownloadRequestDto.md)
+ - [DocspaceApiSdk::DownloadRequestDtoAllOfFileIds](docs/DownloadRequestDtoAllOfFileIds.md)
+ - [DocspaceApiSdk::DownloadRequestDtoAllOfFolderIds](docs/DownloadRequestDtoAllOfFolderIds.md)
+ - [DocspaceApiSdk::DownloadRequestItemDto](docs/DownloadRequestItemDto.md)
+ - [DocspaceApiSdk::DownloadRequestItemDtoKey](docs/DownloadRequestItemDtoKey.md)
+ - [DocspaceApiSdk::DraftLocation](docs/DraftLocation.md)
+ - [DocspaceApiSdk::DuplicateRequestDto](docs/DuplicateRequestDto.md)
+ - [DocspaceApiSdk::DuplicateRequestDtoAllOfFileIds](docs/DuplicateRequestDtoAllOfFileIds.md)
+ - [DocspaceApiSdk::DuplicateRequestDtoAllOfFolderIds](docs/DuplicateRequestDtoAllOfFolderIds.md)
+ - [DocspaceApiSdk::EditHistoryArrayWrapper](docs/EditHistoryArrayWrapper.md)
+ - [DocspaceApiSdk::EditHistoryAuthorDto](docs/EditHistoryAuthorDto.md)
+ - [DocspaceApiSdk::EditHistoryChangesDto](docs/EditHistoryChangesDto.md)
+ - [DocspaceApiSdk::EditHistoryDataDto](docs/EditHistoryDataDto.md)
+ - [DocspaceApiSdk::EditHistoryDataWrapper](docs/EditHistoryDataWrapper.md)
+ - [DocspaceApiSdk::EditHistoryDto](docs/EditHistoryDto.md)
+ - [DocspaceApiSdk::EditHistoryUrlDto](docs/EditHistoryUrlDto.md)
+ - [DocspaceApiSdk::EditorConfigurationDto](docs/EditorConfigurationDto.md)
+ - [DocspaceApiSdk::EditorToolCallParametersDto](docs/EditorToolCallParametersDto.md)
+ - [DocspaceApiSdk::EditorToolCallStateDto](docs/EditorToolCallStateDto.md)
+ - [DocspaceApiSdk::EditorType](docs/EditorType.md)
+ - [DocspaceApiSdk::EmailActivationSettingsDto](docs/EmailActivationSettingsDto.md)
+ - [DocspaceApiSdk::EmailActivationSettingsRequestDto](docs/EmailActivationSettingsRequestDto.md)
+ - [DocspaceApiSdk::EmailActivationSettingsWrapper](docs/EmailActivationSettingsWrapper.md)
+ - [DocspaceApiSdk::EmailInvitationDto](docs/EmailInvitationDto.md)
+ - [DocspaceApiSdk::EmailMemberRequestDto](docs/EmailMemberRequestDto.md)
+ - [DocspaceApiSdk::EmbeddedConfigDto](docs/EmbeddedConfigDto.md)
+ - [DocspaceApiSdk::EmployeeActivationStatus](docs/EmployeeActivationStatus.md)
+ - [DocspaceApiSdk::EmployeeArrayWrapper](docs/EmployeeArrayWrapper.md)
+ - [DocspaceApiSdk::EmployeeDto](docs/EmployeeDto.md)
+ - [DocspaceApiSdk::EmployeeFullArrayWrapper](docs/EmployeeFullArrayWrapper.md)
+ - [DocspaceApiSdk::EmployeeFullDto](docs/EmployeeFullDto.md)
+ - [DocspaceApiSdk::EmployeeFullWrapper](docs/EmployeeFullWrapper.md)
+ - [DocspaceApiSdk::EmployeeStatus](docs/EmployeeStatus.md)
+ - [DocspaceApiSdk::EmployeeType](docs/EmployeeType.md)
+ - [DocspaceApiSdk::EmployeeWrapper](docs/EmployeeWrapper.md)
+ - [DocspaceApiSdk::EnabledModuleArrayWrapper](docs/EnabledModuleArrayWrapper.md)
+ - [DocspaceApiSdk::EnabledModuleDto](docs/EnabledModuleDto.md)
+ - [DocspaceApiSdk::EncryptionKeyArrayWrapper](docs/EncryptionKeyArrayWrapper.md)
+ - [DocspaceApiSdk::EncryptionKeyDto](docs/EncryptionKeyDto.md)
+ - [DocspaceApiSdk::EncryptionKeyRequestDto](docs/EncryptionKeyRequestDto.md)
+ - [DocspaceApiSdk::EncryptionSettingsDto](docs/EncryptionSettingsDto.md)
+ - [DocspaceApiSdk::EncryptionSettingsWrapper](docs/EncryptionSettingsWrapper.md)
+ - [DocspaceApiSdk::EncryptionStatus](docs/EncryptionStatus.md)
+ - [DocspaceApiSdk::EntityQuotaDto](docs/EntityQuotaDto.md)
+ - [DocspaceApiSdk::EntityQuotaSettingsDto](docs/EntityQuotaSettingsDto.md)
+ - [DocspaceApiSdk::EntityQuotaSettingsWrapper](docs/EntityQuotaSettingsWrapper.md)
+ - [DocspaceApiSdk::EntryFieldDto](docs/EntryFieldDto.md)
+ - [DocspaceApiSdk::EntryMetadataDto](docs/EntryMetadataDto.md)
+ - [DocspaceApiSdk::EntryMetadataWrapper](docs/EntryMetadataWrapper.md)
+ - [DocspaceApiSdk::EntryTemplateDto](docs/EntryTemplateDto.md)
+ - [DocspaceApiSdk::EntryType](docs/EntryType.md)
+ - [DocspaceApiSdk::ErrorApiResponse](docs/ErrorApiResponse.md)
+ - [DocspaceApiSdk::ErrorApiResponseError](docs/ErrorApiResponseError.md)
+ - [DocspaceApiSdk::ExchangeToken200Response](docs/ExchangeToken200Response.md)
+ - [DocspaceApiSdk::ExternalDatabaseConnectionRequestDto](docs/ExternalDatabaseConnectionRequestDto.md)
+ - [DocspaceApiSdk::ExternalDatabaseType](docs/ExternalDatabaseType.md)
+ - [DocspaceApiSdk::ExternalDbSyncFormResultDto](docs/ExternalDbSyncFormResultDto.md)
+ - [DocspaceApiSdk::ExternalDbSyncTaskDto](docs/ExternalDbSyncTaskDto.md)
+ - [DocspaceApiSdk::ExternalDbSyncTaskWrapper](docs/ExternalDbSyncTaskWrapper.md)
+ - [DocspaceApiSdk::ExternalResourceDto](docs/ExternalResourceDto.md)
+ - [DocspaceApiSdk::ExternalResourcesDto](docs/ExternalResourcesDto.md)
+ - [DocspaceApiSdk::ExternalShareDto](docs/ExternalShareDto.md)
+ - [DocspaceApiSdk::ExternalShareRequestParam](docs/ExternalShareRequestParam.md)
+ - [DocspaceApiSdk::ExternalShareStatus](docs/ExternalShareStatus.md)
+ - [DocspaceApiSdk::ExternalShareWrapper](docs/ExternalShareWrapper.md)
+ - [DocspaceApiSdk::ExternalSharingSettingsDto](docs/ExternalSharingSettingsDto.md)
+ - [DocspaceApiSdk::ExternalSharingSettingsRequestDto](docs/ExternalSharingSettingsRequestDto.md)
+ - [DocspaceApiSdk::ExternalSharingSettingsWrapper](docs/ExternalSharingSettingsWrapper.md)
+ - [DocspaceApiSdk::FeatureUsedDto](docs/FeatureUsedDto.md)
+ - [DocspaceApiSdk::FeedbackConfigDto](docs/FeedbackConfigDto.md)
+ - [DocspaceApiSdk::FieldError](docs/FieldError.md)
+ - [DocspaceApiSdk::FileArrayWrapper](docs/FileArrayWrapper.md)
+ - [DocspaceApiSdk::FileConflictResolveType](docs/FileConflictResolveType.md)
+ - [DocspaceApiSdk::FileDto](docs/FileDto.md)
+ - [DocspaceApiSdk::FileDtoAllOfViewAccessibility](docs/FileDtoAllOfViewAccessibility.md)
+ - [DocspaceApiSdk::FileEncryptionInfoDto](docs/FileEncryptionInfoDto.md)
+ - [DocspaceApiSdk::FileEncryptionInfoWrapper](docs/FileEncryptionInfoWrapper.md)
+ - [DocspaceApiSdk::FileEntryArrayWrapper](docs/FileEntryArrayWrapper.md)
+ - [DocspaceApiSdk::FileEntryBaseArrayWrapper](docs/FileEntryBaseArrayWrapper.md)
+ - [DocspaceApiSdk::FileEntryBaseDto](docs/FileEntryBaseDto.md)
+ - [DocspaceApiSdk::FileEntryBaseWrapper](docs/FileEntryBaseWrapper.md)
+ - [DocspaceApiSdk::FileEntryDto](docs/FileEntryDto.md)
+ - [DocspaceApiSdk::FileEntryType](docs/FileEntryType.md)
+ - [DocspaceApiSdk::FileKeysDto](docs/FileKeysDto.md)
+ - [DocspaceApiSdk::FileLinkDto](docs/FileLinkDto.md)
+ - [DocspaceApiSdk::FileLinkRequest](docs/FileLinkRequest.md)
+ - [DocspaceApiSdk::FileLinkWrapper](docs/FileLinkWrapper.md)
+ - [DocspaceApiSdk::FileOperationArrayWrapper](docs/FileOperationArrayWrapper.md)
+ - [DocspaceApiSdk::FileOperationDto](docs/FileOperationDto.md)
+ - [DocspaceApiSdk::FileOperationRequestBaseDto](docs/FileOperationRequestBaseDto.md)
+ - [DocspaceApiSdk::FileOperationType](docs/FileOperationType.md)
+ - [DocspaceApiSdk::FileOperationWrapper](docs/FileOperationWrapper.md)
+ - [DocspaceApiSdk::FileReferenceDataDto](docs/FileReferenceDataDto.md)
+ - [DocspaceApiSdk::FileReferenceDto](docs/FileReferenceDto.md)
+ - [DocspaceApiSdk::FileReferenceWrapper](docs/FileReferenceWrapper.md)
+ - [DocspaceApiSdk::FileShare](docs/FileShare.md)
+ - [DocspaceApiSdk::FileShareArrayWrapper](docs/FileShareArrayWrapper.md)
+ - [DocspaceApiSdk::FileShareDto](docs/FileShareDto.md)
+ - [DocspaceApiSdk::FileShareLink](docs/FileShareLink.md)
+ - [DocspaceApiSdk::FileShareParams](docs/FileShareParams.md)
+ - [DocspaceApiSdk::FileShareResponseArrayWrapper](docs/FileShareResponseArrayWrapper.md)
+ - [DocspaceApiSdk::FileShareWrapper](docs/FileShareWrapper.md)
+ - [DocspaceApiSdk::FileStatus](docs/FileStatus.md)
+ - [DocspaceApiSdk::FileType](docs/FileType.md)
+ - [DocspaceApiSdk::FileUploadResultDto](docs/FileUploadResultDto.md)
+ - [DocspaceApiSdk::FileUploadResultWrapper](docs/FileUploadResultWrapper.md)
+ - [DocspaceApiSdk::FileWrapper](docs/FileWrapper.md)
+ - [DocspaceApiSdk::FilesSettingsDto](docs/FilesSettingsDto.md)
+ - [DocspaceApiSdk::FilesSettingsDtoInternalFormats](docs/FilesSettingsDtoInternalFormats.md)
+ - [DocspaceApiSdk::FilesSettingsWrapper](docs/FilesSettingsWrapper.md)
+ - [DocspaceApiSdk::FilesStatisticsFolder](docs/FilesStatisticsFolder.md)
+ - [DocspaceApiSdk::FilesStatisticsResultDto](docs/FilesStatisticsResultDto.md)
+ - [DocspaceApiSdk::FilesStatisticsResultWrapper](docs/FilesStatisticsResultWrapper.md)
+ - [DocspaceApiSdk::FillingFormResultDto](docs/FillingFormResultDto.md)
+ - [DocspaceApiSdk::FillingFormResultWrapper](docs/FillingFormResultWrapper.md)
+ - [DocspaceApiSdk::FilterType](docs/FilterType.md)
+ - [DocspaceApiSdk::FinishDto](docs/FinishDto.md)
+ - [DocspaceApiSdk::FirebaseDeviceDto](docs/FirebaseDeviceDto.md)
+ - [DocspaceApiSdk::FirebaseDeviceWrapper](docs/FirebaseDeviceWrapper.md)
+ - [DocspaceApiSdk::FirebaseDto](docs/FirebaseDto.md)
+ - [DocspaceApiSdk::FirebaseRequestDto](docs/FirebaseRequestDto.md)
+ - [DocspaceApiSdk::FolderArrayWrapper](docs/FolderArrayWrapper.md)
+ - [DocspaceApiSdk::FolderContentArrayWrapper](docs/FolderContentArrayWrapper.md)
+ - [DocspaceApiSdk::FolderContentDto](docs/FolderContentDto.md)
+ - [DocspaceApiSdk::FolderContentWrapper](docs/FolderContentWrapper.md)
+ - [DocspaceApiSdk::FolderDto](docs/FolderDto.md)
+ - [DocspaceApiSdk::FolderLinkRequest](docs/FolderLinkRequest.md)
+ - [DocspaceApiSdk::FolderMetadataSearch](docs/FolderMetadataSearch.md)
+ - [DocspaceApiSdk::FolderType](docs/FolderType.md)
+ - [DocspaceApiSdk::FolderWrapper](docs/FolderWrapper.md)
+ - [DocspaceApiSdk::FormFillingManageAction](docs/FormFillingManageAction.md)
+ - [DocspaceApiSdk::FormFillingStatus](docs/FormFillingStatus.md)
+ - [DocspaceApiSdk::FormGalleryDto](docs/FormGalleryDto.md)
+ - [DocspaceApiSdk::FormMetadataDto](docs/FormMetadataDto.md)
+ - [DocspaceApiSdk::FormResultsDto](docs/FormResultsDto.md)
+ - [DocspaceApiSdk::FormRoleArrayWrapper](docs/FormRoleArrayWrapper.md)
+ - [DocspaceApiSdk::FormRoleDto](docs/FormRoleDto.md)
+ - [DocspaceApiSdk::FormRoleRequest](docs/FormRoleRequest.md)
+ - [DocspaceApiSdk::FormSubmissionsDto](docs/FormSubmissionsDto.md)
+ - [DocspaceApiSdk::FormSubmissionsWrapper](docs/FormSubmissionsWrapper.md)
+ - [DocspaceApiSdk::FormsItemArrayWrapper](docs/FormsItemArrayWrapper.md)
+ - [DocspaceApiSdk::FormsItemDataDto](docs/FormsItemDataDto.md)
+ - [DocspaceApiSdk::FormsItemDto](docs/FormsItemDto.md)
+ - [DocspaceApiSdk::GenerateDocxToolCallParametersDto](docs/GenerateDocxToolCallParametersDto.md)
+ - [DocspaceApiSdk::GenerateFormToolCallParametersDto](docs/GenerateFormToolCallParametersDto.md)
+ - [DocspaceApiSdk::GeneratePresentationToolCallParametersDto](docs/GeneratePresentationToolCallParametersDto.md)
+ - [DocspaceApiSdk::GetPortalPrices200Response](docs/GetPortalPrices200Response.md)
+ - [DocspaceApiSdk::GetPortalPrices200ResponseLinksInner](docs/GetPortalPrices200ResponseLinksInner.md)
+ - [DocspaceApiSdk::GetReferenceDataDto](docs/GetReferenceDataDto.md)
+ - [DocspaceApiSdk::GobackConfigDto](docs/GobackConfigDto.md)
+ - [DocspaceApiSdk::GreetingSettingsRequestDto](docs/GreetingSettingsRequestDto.md)
+ - [DocspaceApiSdk::GroupArrayWrapper](docs/GroupArrayWrapper.md)
+ - [DocspaceApiSdk::GroupDto](docs/GroupDto.md)
+ - [DocspaceApiSdk::GroupMemberSecurityArrayWrapper](docs/GroupMemberSecurityArrayWrapper.md)
+ - [DocspaceApiSdk::GroupMemberSecurityDto](docs/GroupMemberSecurityDto.md)
+ - [DocspaceApiSdk::GroupRequestDto](docs/GroupRequestDto.md)
+ - [DocspaceApiSdk::GroupSummaryArrayWrapper](docs/GroupSummaryArrayWrapper.md)
+ - [DocspaceApiSdk::GroupSummaryDto](docs/GroupSummaryDto.md)
+ - [DocspaceApiSdk::GroupWrapper](docs/GroupWrapper.md)
+ - [DocspaceApiSdk::HideConfirmConvertRequestDto](docs/HideConfirmConvertRequestDto.md)
+ - [DocspaceApiSdk::HistoryActionDto](docs/HistoryActionDto.md)
+ - [DocspaceApiSdk::HistoryArrayWrapper](docs/HistoryArrayWrapper.md)
+ - [DocspaceApiSdk::HistoryDataDto](docs/HistoryDataDto.md)
+ - [DocspaceApiSdk::HistoryDto](docs/HistoryDto.md)
+ - [DocspaceApiSdk::ICompressWrapper](docs/ICompressWrapper.md)
+ - [DocspaceApiSdk::IconRequest](docs/IconRequest.md)
+ - [DocspaceApiSdk::ImageSizeDto](docs/ImageSizeDto.md)
+ - [DocspaceApiSdk::ImportableApiEntity](docs/ImportableApiEntity.md)
+ - [DocspaceApiSdk::InfoConfigDto](docs/InfoConfigDto.md)
+ - [DocspaceApiSdk::Int32Wrapper](docs/Int32Wrapper.md)
+ - [DocspaceApiSdk::Int64Wrapper](docs/Int64Wrapper.md)
+ - [DocspaceApiSdk::InvitationLinkCreateRequestDto](docs/InvitationLinkCreateRequestDto.md)
+ - [DocspaceApiSdk::InvitationLinkDeleteRequestDto](docs/InvitationLinkDeleteRequestDto.md)
+ - [DocspaceApiSdk::InvitationLinkDto](docs/InvitationLinkDto.md)
+ - [DocspaceApiSdk::InvitationLinkUpdateRequestDto](docs/InvitationLinkUpdateRequestDto.md)
+ - [DocspaceApiSdk::InvitationLinkWrapper](docs/InvitationLinkWrapper.md)
+ - [DocspaceApiSdk::InviteUsersRequestDto](docs/InviteUsersRequestDto.md)
+ - [DocspaceApiSdk::IpRestrictionArrayWrapper](docs/IpRestrictionArrayWrapper.md)
+ - [DocspaceApiSdk::IpRestrictionDto](docs/IpRestrictionDto.md)
+ - [DocspaceApiSdk::IpRestrictionEntryDto](docs/IpRestrictionEntryDto.md)
+ - [DocspaceApiSdk::IpRestrictionsDto](docs/IpRestrictionsDto.md)
+ - [DocspaceApiSdk::IpRestrictionsSettingsDto](docs/IpRestrictionsSettingsDto.md)
+ - [DocspaceApiSdk::IpRestrictionsSettingsWrapper](docs/IpRestrictionsSettingsWrapper.md)
+ - [DocspaceApiSdk::IpRestrictionsWrapper](docs/IpRestrictionsWrapper.md)
+ - [DocspaceApiSdk::IsDefaultWhiteLabelLogosArrayWrapper](docs/IsDefaultWhiteLabelLogosArrayWrapper.md)
+ - [DocspaceApiSdk::IsDefaultWhiteLabelLogosDto](docs/IsDefaultWhiteLabelLogosDto.md)
+ - [DocspaceApiSdk::IsDefaultWhiteLabelLogosWrapper](docs/IsDefaultWhiteLabelLogosWrapper.md)
+ - [DocspaceApiSdk::ItemKeyValuePairBooleanString](docs/ItemKeyValuePairBooleanString.md)
+ - [DocspaceApiSdk::ItemKeyValuePairBooleanStringWrapper](docs/ItemKeyValuePairBooleanStringWrapper.md)
+ - [DocspaceApiSdk::ItemKeyValuePairObjectObject](docs/ItemKeyValuePairObjectObject.md)
+ - [DocspaceApiSdk::ItemKeyValuePairStringBoolean](docs/ItemKeyValuePairStringBoolean.md)
+ - [DocspaceApiSdk::ItemKeyValuePairStringLogoRequestDto](docs/ItemKeyValuePairStringLogoRequestDto.md)
+ - [DocspaceApiSdk::ItemKeyValuePairStringString](docs/ItemKeyValuePairStringString.md)
+ - [DocspaceApiSdk::JsonValueWrapper](docs/JsonValueWrapper.md)
+ - [DocspaceApiSdk::LicensorDetailsArrayWrapper](docs/LicensorDetailsArrayWrapper.md)
+ - [DocspaceApiSdk::LicensorDetailsDto](docs/LicensorDetailsDto.md)
+ - [DocspaceApiSdk::LicensorDetailsWrapper](docs/LicensorDetailsWrapper.md)
+ - [DocspaceApiSdk::LinkAccountRequestDto](docs/LinkAccountRequestDto.md)
+ - [DocspaceApiSdk::LinkType](docs/LinkType.md)
+ - [DocspaceApiSdk::LocationType](docs/LocationType.md)
+ - [DocspaceApiSdk::LockFileRequest](docs/LockFileRequest.md)
+ - [DocspaceApiSdk::LoginEventArrayWrapper](docs/LoginEventArrayWrapper.md)
+ - [DocspaceApiSdk::LoginEventDto](docs/LoginEventDto.md)
+ - [DocspaceApiSdk::LoginProvider](docs/LoginProvider.md)
+ - [DocspaceApiSdk::LoginSettingsDto](docs/LoginSettingsDto.md)
+ - [DocspaceApiSdk::LoginSettingsRequestDto](docs/LoginSettingsRequestDto.md)
+ - [DocspaceApiSdk::LoginSettingsWrapper](docs/LoginSettingsWrapper.md)
+ - [DocspaceApiSdk::LogoConfigDto](docs/LogoConfigDto.md)
+ - [DocspaceApiSdk::LogoCoverDto](docs/LogoCoverDto.md)
+ - [DocspaceApiSdk::LogoDto](docs/LogoDto.md)
+ - [DocspaceApiSdk::LogoRequest](docs/LogoRequest.md)
+ - [DocspaceApiSdk::LogoRequestDto](docs/LogoRequestDto.md)
+ - [DocspaceApiSdk::MailDomainSettingsRequestDto](docs/MailDomainSettingsRequestDto.md)
+ - [DocspaceApiSdk::ManageFormFillingDto](docs/ManageFormFillingDto.md)
+ - [DocspaceApiSdk::MemberRequestDto](docs/MemberRequestDto.md)
+ - [DocspaceApiSdk::MembersRequest](docs/MembersRequest.md)
+ - [DocspaceApiSdk::MentionArrayWrapper](docs/MentionArrayWrapper.md)
+ - [DocspaceApiSdk::MentionDto](docs/MentionDto.md)
+ - [DocspaceApiSdk::MentionMessageRequest](docs/MentionMessageRequest.md)
+ - [DocspaceApiSdk::MessageAction](docs/MessageAction.md)
+ - [DocspaceApiSdk::MetadataConflictResolveType](docs/MetadataConflictResolveType.md)
+ - [DocspaceApiSdk::MetadataFieldDto](docs/MetadataFieldDto.md)
+ - [DocspaceApiSdk::MetadataFieldOptionDto](docs/MetadataFieldOptionDto.md)
+ - [DocspaceApiSdk::MetadataFieldOptionRequest](docs/MetadataFieldOptionRequest.md)
+ - [DocspaceApiSdk::MetadataFieldRequest](docs/MetadataFieldRequest.md)
+ - [DocspaceApiSdk::MetadataFieldType](docs/MetadataFieldType.md)
+ - [DocspaceApiSdk::MetadataFieldWrapper](docs/MetadataFieldWrapper.md)
+ - [DocspaceApiSdk::MetadataFilterConditionRequest](docs/MetadataFilterConditionRequest.md)
+ - [DocspaceApiSdk::MetadataMatchDto](docs/MetadataMatchDto.md)
+ - [DocspaceApiSdk::MetadataOperationDto](docs/MetadataOperationDto.md)
+ - [DocspaceApiSdk::MetadataOperationWrapper](docs/MetadataOperationWrapper.md)
+ - [DocspaceApiSdk::MetadataTemplateArrayWrapper](docs/MetadataTemplateArrayWrapper.md)
+ - [DocspaceApiSdk::MetadataTemplateDto](docs/MetadataTemplateDto.md)
+ - [DocspaceApiSdk::MetadataTemplateWrapper](docs/MetadataTemplateWrapper.md)
+ - [DocspaceApiSdk::MetadataValueDto](docs/MetadataValueDto.md)
+ - [DocspaceApiSdk::MetadataValueRequest](docs/MetadataValueRequest.md)
+ - [DocspaceApiSdk::MigratingApiFiles](docs/MigratingApiFiles.md)
+ - [DocspaceApiSdk::MigratingApiGroup](docs/MigratingApiGroup.md)
+ - [DocspaceApiSdk::MigratingApiUser](docs/MigratingApiUser.md)
+ - [DocspaceApiSdk::MigrationApiInfo](docs/MigrationApiInfo.md)
+ - [DocspaceApiSdk::MigrationStatusDto](docs/MigrationStatusDto.md)
+ - [DocspaceApiSdk::MigrationStatusWrapper](docs/MigrationStatusWrapper.md)
+ - [DocspaceApiSdk::MobilePhoneActivationStatus](docs/MobilePhoneActivationStatus.md)
+ - [DocspaceApiSdk::MobileRequestDto](docs/MobileRequestDto.md)
+ - [DocspaceApiSdk::ModelModule](docs/ModelModule.md)
+ - [DocspaceApiSdk::ModuleWrapper](docs/ModuleWrapper.md)
+ - [DocspaceApiSdk::MultiSizeLogoCoverDto](docs/MultiSizeLogoCoverDto.md)
+ - [DocspaceApiSdk::NewItemsDtoFileEntryBaseDto](docs/NewItemsDtoFileEntryBaseDto.md)
+ - [DocspaceApiSdk::NewItemsDtoRoomNewItemsDto](docs/NewItemsDtoRoomNewItemsDto.md)
+ - [DocspaceApiSdk::NewItemsFileEntryBaseArrayWrapper](docs/NewItemsFileEntryBaseArrayWrapper.md)
+ - [DocspaceApiSdk::NewItemsRoomNewItemsArrayWrapper](docs/NewItemsRoomNewItemsArrayWrapper.md)
+ - [DocspaceApiSdk::NotificationChannelDto](docs/NotificationChannelDto.md)
+ - [DocspaceApiSdk::NotificationChannelStatusDto](docs/NotificationChannelStatusDto.md)
+ - [DocspaceApiSdk::NotificationChannelStatusWrapper](docs/NotificationChannelStatusWrapper.md)
+ - [DocspaceApiSdk::NotificationSettingsDto](docs/NotificationSettingsDto.md)
+ - [DocspaceApiSdk::NotificationSettingsRequestDto](docs/NotificationSettingsRequestDto.md)
+ - [DocspaceApiSdk::NotificationSettingsWrapper](docs/NotificationSettingsWrapper.md)
+ - [DocspaceApiSdk::NotificationType](docs/NotificationType.md)
+ - [DocspaceApiSdk::ObjectArrayWrapper](docs/ObjectArrayWrapper.md)
+ - [DocspaceApiSdk::OperationDto](docs/OperationDto.md)
+ - [DocspaceApiSdk::OperationOrderType](docs/OperationOrderType.md)
+ - [DocspaceApiSdk::OperationStatus](docs/OperationStatus.md)
+ - [DocspaceApiSdk::OperationTokenUsageDto](docs/OperationTokenUsageDto.md)
+ - [DocspaceApiSdk::OperationType](docs/OperationType.md)
+ - [DocspaceApiSdk::OrderByDto](docs/OrderByDto.md)
+ - [DocspaceApiSdk::OrderRequestDto](docs/OrderRequestDto.md)
+ - [DocspaceApiSdk::OrdersItemRequestDto](docs/OrdersItemRequestDto.md)
+ - [DocspaceApiSdk::OrdersRequestDto](docs/OrdersRequestDto.md)
+ - [DocspaceApiSdk::OwnerChangeInstructionsDto](docs/OwnerChangeInstructionsDto.md)
+ - [DocspaceApiSdk::OwnerChangeInstructionsWrapper](docs/OwnerChangeInstructionsWrapper.md)
+ - [DocspaceApiSdk::OwnerIdSettingsRequestDto](docs/OwnerIdSettingsRequestDto.md)
+ - [DocspaceApiSdk::PageableClientInfoResponse](docs/PageableClientInfoResponse.md)
+ - [DocspaceApiSdk::PageableClientResponse](docs/PageableClientResponse.md)
+ - [DocspaceApiSdk::PageableModificationResponse](docs/PageableModificationResponse.md)
+ - [DocspaceApiSdk::PageableResponse](docs/PageableResponse.md)
+ - [DocspaceApiSdk::PasswordHashSettingsDto](docs/PasswordHashSettingsDto.md)
+ - [DocspaceApiSdk::PasswordSettingsDto](docs/PasswordSettingsDto.md)
+ - [DocspaceApiSdk::PasswordSettingsRequestDto](docs/PasswordSettingsRequestDto.md)
+ - [DocspaceApiSdk::PasswordSettingsWrapper](docs/PasswordSettingsWrapper.md)
+ - [DocspaceApiSdk::PaymentCalculationDto](docs/PaymentCalculationDto.md)
+ - [DocspaceApiSdk::PaymentCalculationWrapper](docs/PaymentCalculationWrapper.md)
+ - [DocspaceApiSdk::PaymentMethodStatus](docs/PaymentMethodStatus.md)
+ - [DocspaceApiSdk::PaymentSettingsDto](docs/PaymentSettingsDto.md)
+ - [DocspaceApiSdk::PaymentSettingsWrapper](docs/PaymentSettingsWrapper.md)
+ - [DocspaceApiSdk::PaymentUrlRequestDto](docs/PaymentUrlRequestDto.md)
+ - [DocspaceApiSdk::Payments](docs/Payments.md)
+ - [DocspaceApiSdk::PermissionsConfigDto](docs/PermissionsConfigDto.md)
+ - [DocspaceApiSdk::PluginsConfigDto](docs/PluginsConfigDto.md)
+ - [DocspaceApiSdk::PluginsDto](docs/PluginsDto.md)
+ - [DocspaceApiSdk::PortalUserDto](docs/PortalUserDto.md)
+ - [DocspaceApiSdk::PortalUserWrapper](docs/PortalUserWrapper.md)
+ - [DocspaceApiSdk::PriceDto](docs/PriceDto.md)
+ - [DocspaceApiSdk::PriceStatus](docs/PriceStatus.md)
+ - [DocspaceApiSdk::PriceTimeUnit](docs/PriceTimeUnit.md)
+ - [DocspaceApiSdk::ProblemDetail](docs/ProblemDetail.md)
+ - [DocspaceApiSdk::ProductAdministratorDto](docs/ProductAdministratorDto.md)
+ - [DocspaceApiSdk::ProductAdministratorWrapper](docs/ProductAdministratorWrapper.md)
+ - [DocspaceApiSdk::ProductQuantityType](docs/ProductQuantityType.md)
+ - [DocspaceApiSdk::ProductType](docs/ProductType.md)
+ - [DocspaceApiSdk::ProviderArrayWrapper](docs/ProviderArrayWrapper.md)
+ - [DocspaceApiSdk::ProviderDto](docs/ProviderDto.md)
+ - [DocspaceApiSdk::ProviderFilter](docs/ProviderFilter.md)
+ - [DocspaceApiSdk::QuantityRequestDto](docs/QuantityRequestDto.md)
+ - [DocspaceApiSdk::QuotaArrayWrapper](docs/QuotaArrayWrapper.md)
+ - [DocspaceApiSdk::QuotaDto](docs/QuotaDto.md)
+ - [DocspaceApiSdk::QuotaFilter](docs/QuotaFilter.md)
+ - [DocspaceApiSdk::QuotaScope](docs/QuotaScope.md)
+ - [DocspaceApiSdk::QuotaSettingsRequestDto](docs/QuotaSettingsRequestDto.md)
+ - [DocspaceApiSdk::QuotaSettingsRequestDtoDefaultQuota](docs/QuotaSettingsRequestDtoDefaultQuota.md)
+ - [DocspaceApiSdk::QuotaState](docs/QuotaState.md)
+ - [DocspaceApiSdk::QuotaWrapper](docs/QuotaWrapper.md)
+ - [DocspaceApiSdk::RecaptchaType](docs/RecaptchaType.md)
+ - [DocspaceApiSdk::RecentConfigDto](docs/RecentConfigDto.md)
+ - [DocspaceApiSdk::RegStatus](docs/RegStatus.md)
+ - [DocspaceApiSdk::ReportDto](docs/ReportDto.md)
+ - [DocspaceApiSdk::ReportWrapper](docs/ReportWrapper.md)
+ - [DocspaceApiSdk::RequestLocation](docs/RequestLocation.md)
+ - [DocspaceApiSdk::RestrictedAiModelsDto](docs/RestrictedAiModelsDto.md)
+ - [DocspaceApiSdk::RestrictedAiModelsWrapper](docs/RestrictedAiModelsWrapper.md)
+ - [DocspaceApiSdk::ReviewConfigDto](docs/ReviewConfigDto.md)
+ - [DocspaceApiSdk::RoomDataLifetimeDto](docs/RoomDataLifetimeDto.md)
+ - [DocspaceApiSdk::RoomDataLifetimePeriod](docs/RoomDataLifetimePeriod.md)
+ - [DocspaceApiSdk::RoomFromTemplateStatusDto](docs/RoomFromTemplateStatusDto.md)
+ - [DocspaceApiSdk::RoomFromTemplateStatusWrapper](docs/RoomFromTemplateStatusWrapper.md)
+ - [DocspaceApiSdk::RoomGroupArrayWrapper](docs/RoomGroupArrayWrapper.md)
+ - [DocspaceApiSdk::RoomGroupDto](docs/RoomGroupDto.md)
+ - [DocspaceApiSdk::RoomGroupRequestDto](docs/RoomGroupRequestDto.md)
+ - [DocspaceApiSdk::RoomGroupWrapper](docs/RoomGroupWrapper.md)
+ - [DocspaceApiSdk::RoomInvitation](docs/RoomInvitation.md)
+ - [DocspaceApiSdk::RoomInvitationRequest](docs/RoomInvitationRequest.md)
+ - [DocspaceApiSdk::RoomLinkRequest](docs/RoomLinkRequest.md)
+ - [DocspaceApiSdk::RoomNewItemsDto](docs/RoomNewItemsDto.md)
+ - [DocspaceApiSdk::RoomPrivacyFilter](docs/RoomPrivacyFilter.md)
+ - [DocspaceApiSdk::RoomSecurityDto](docs/RoomSecurityDto.md)
+ - [DocspaceApiSdk::RoomSecurityError](docs/RoomSecurityError.md)
+ - [DocspaceApiSdk::RoomSecurityWrapper](docs/RoomSecurityWrapper.md)
+ - [DocspaceApiSdk::RoomTemplateDto](docs/RoomTemplateDto.md)
+ - [DocspaceApiSdk::RoomTemplateStatusDto](docs/RoomTemplateStatusDto.md)
+ - [DocspaceApiSdk::RoomTemplateStatusWrapper](docs/RoomTemplateStatusWrapper.md)
+ - [DocspaceApiSdk::RoomType](docs/RoomType.md)
+ - [DocspaceApiSdk::RoomsMetadataSearchRequestDto](docs/RoomsMetadataSearchRequestDto.md)
+ - [DocspaceApiSdk::RoomsNotificationSettingsDto](docs/RoomsNotificationSettingsDto.md)
+ - [DocspaceApiSdk::RoomsNotificationSettingsWrapper](docs/RoomsNotificationSettingsWrapper.md)
+ - [DocspaceApiSdk::RoomsNotificationsSettingsRequestDto](docs/RoomsNotificationsSettingsRequestDto.md)
+ - [DocspaceApiSdk::RunBuilderScriptOutputRequest](docs/RunBuilderScriptOutputRequest.md)
+ - [DocspaceApiSdk::RunBuilderScriptRequestDto](docs/RunBuilderScriptRequestDto.md)
+ - [DocspaceApiSdk::RunBuilderScriptRequestDtoArgument](docs/RunBuilderScriptRequestDtoArgument.md)
+ - [DocspaceApiSdk::SalesRequestDto](docs/SalesRequestDto.md)
+ - [DocspaceApiSdk::SaveAdditionalResourcesRequest](docs/SaveAdditionalResourcesRequest.md)
+ - [DocspaceApiSdk::SaveAsPdfRequest](docs/SaveAsPdfRequest.md)
+ - [DocspaceApiSdk::SaveAuthKeysRequestDto](docs/SaveAuthKeysRequestDto.md)
+ - [DocspaceApiSdk::SaveCompanyInfoRequest](docs/SaveCompanyInfoRequest.md)
+ - [DocspaceApiSdk::SaveFormRoleMappingDto](docs/SaveFormRoleMappingDto.md)
+ - [DocspaceApiSdk::ScheduleDto](docs/ScheduleDto.md)
+ - [DocspaceApiSdk::ScheduleWrapper](docs/ScheduleWrapper.md)
+ - [DocspaceApiSdk::ScopeResponse](docs/ScopeResponse.md)
+ - [DocspaceApiSdk::SearchArea](docs/SearchArea.md)
+ - [DocspaceApiSdk::SecurityArrayWrapper](docs/SecurityArrayWrapper.md)
+ - [DocspaceApiSdk::SecurityDto](docs/SecurityDto.md)
+ - [DocspaceApiSdk::SecurityInfoRequestDto](docs/SecurityInfoRequestDto.md)
+ - [DocspaceApiSdk::SecurityInfoSimpleRequestDto](docs/SecurityInfoSimpleRequestDto.md)
+ - [DocspaceApiSdk::SecurityRequestDto](docs/SecurityRequestDto.md)
+ - [DocspaceApiSdk::ServicePriceArrayWrapper](docs/ServicePriceArrayWrapper.md)
+ - [DocspaceApiSdk::ServicePriceDto](docs/ServicePriceDto.md)
+ - [DocspaceApiSdk::SessionRequest](docs/SessionRequest.md)
+ - [DocspaceApiSdk::SetAppEnabledRequest](docs/SetAppEnabledRequest.md)
+ - [DocspaceApiSdk::SetAppSettingsRequest](docs/SetAppSettingsRequest.md)
+ - [DocspaceApiSdk::SetAuditLifetimeSettingsRequest](docs/SetAuditLifetimeSettingsRequest.md)
+ - [DocspaceApiSdk::SetCustomFields](docs/SetCustomFields.md)
+ - [DocspaceApiSdk::SetManagerRequest](docs/SetManagerRequest.md)
+ - [DocspaceApiSdk::SetMetadataValues](docs/SetMetadataValues.md)
+ - [DocspaceApiSdk::SetPublicDto](docs/SetPublicDto.md)
+ - [DocspaceApiSdk::SetRestrictedAiModelsRequestDto](docs/SetRestrictedAiModelsRequestDto.md)
+ - [DocspaceApiSdk::SetWalletTopUpSettingsRequest](docs/SetWalletTopUpSettingsRequest.md)
+ - [DocspaceApiSdk::SettingsDto](docs/SettingsDto.md)
+ - [DocspaceApiSdk::SettingsRequestDto](docs/SettingsRequestDto.md)
+ - [DocspaceApiSdk::SettingsWrapper](docs/SettingsWrapper.md)
+ - [DocspaceApiSdk::ShareFilterType](docs/ShareFilterType.md)
+ - [DocspaceApiSdk::SignupAccountRequestDto](docs/SignupAccountRequestDto.md)
+ - [DocspaceApiSdk::SmtpOperationStatusDto](docs/SmtpOperationStatusDto.md)
+ - [DocspaceApiSdk::SmtpOperationStatusWrapper](docs/SmtpOperationStatusWrapper.md)
+ - [DocspaceApiSdk::SmtpSettingsDto](docs/SmtpSettingsDto.md)
+ - [DocspaceApiSdk::SmtpSettingsWrapper](docs/SmtpSettingsWrapper.md)
+ - [DocspaceApiSdk::SocketSettingsDto](docs/SocketSettingsDto.md)
+ - [DocspaceApiSdk::SocketSettingsWrapper](docs/SocketSettingsWrapper.md)
+ - [DocspaceApiSdk::SortOrder](docs/SortOrder.md)
+ - [DocspaceApiSdk::SortedByType](docs/SortedByType.md)
+ - [DocspaceApiSdk::SsoBindingTypeDto](docs/SsoBindingTypeDto.md)
+ - [DocspaceApiSdk::SsoCertificateDto](docs/SsoCertificateDto.md)
+ - [DocspaceApiSdk::SsoEncryptAlgorithmTypeDto](docs/SsoEncryptAlgorithmTypeDto.md)
+ - [DocspaceApiSdk::SsoFieldMappingDto](docs/SsoFieldMappingDto.md)
+ - [DocspaceApiSdk::SsoIdpCertificateActionTypeDto](docs/SsoIdpCertificateActionTypeDto.md)
+ - [DocspaceApiSdk::SsoIdpCertificateAdvancedDto](docs/SsoIdpCertificateAdvancedDto.md)
+ - [DocspaceApiSdk::SsoIdpSettingsDto](docs/SsoIdpSettingsDto.md)
+ - [DocspaceApiSdk::SsoNameIdFormatTypeDto](docs/SsoNameIdFormatTypeDto.md)
+ - [DocspaceApiSdk::SsoSettingsConstantsDto](docs/SsoSettingsConstantsDto.md)
+ - [DocspaceApiSdk::SsoSettingsConstantsWrapper](docs/SsoSettingsConstantsWrapper.md)
+ - [DocspaceApiSdk::SsoSettingsDto](docs/SsoSettingsDto.md)
+ - [DocspaceApiSdk::SsoSettingsRequestDto](docs/SsoSettingsRequestDto.md)
+ - [DocspaceApiSdk::SsoSettingsWrapper](docs/SsoSettingsWrapper.md)
+ - [DocspaceApiSdk::SsoSigningAlgorithmTypeDto](docs/SsoSigningAlgorithmTypeDto.md)
+ - [DocspaceApiSdk::SsoSpCertificateActionTypeDto](docs/SsoSpCertificateActionTypeDto.md)
+ - [DocspaceApiSdk::SsoSpCertificateAdvancedDto](docs/SsoSpCertificateAdvancedDto.md)
+ - [DocspaceApiSdk::StartBackupRequestDto](docs/StartBackupRequestDto.md)
+ - [DocspaceApiSdk::StartBackupRestoreRequestDto](docs/StartBackupRestoreRequestDto.md)
+ - [DocspaceApiSdk::StartEditRequest](docs/StartEditRequest.md)
+ - [DocspaceApiSdk::StartFillingForm](docs/StartFillingForm.md)
+ - [DocspaceApiSdk::StartFillingMode](docs/StartFillingMode.md)
+ - [DocspaceApiSdk::StartReassignRequestDto](docs/StartReassignRequestDto.md)
+ - [DocspaceApiSdk::StartUpdateUserTypeDto](docs/StartUpdateUserTypeDto.md)
+ - [DocspaceApiSdk::StorageArrayWrapper](docs/StorageArrayWrapper.md)
+ - [DocspaceApiSdk::StorageDto](docs/StorageDto.md)
+ - [DocspaceApiSdk::StorageEncryptionRequestDto](docs/StorageEncryptionRequestDto.md)
+ - [DocspaceApiSdk::StorageFilter](docs/StorageFilter.md)
+ - [DocspaceApiSdk::StorageRequestDto](docs/StorageRequestDto.md)
+ - [DocspaceApiSdk::StorageSettingsDto](docs/StorageSettingsDto.md)
+ - [DocspaceApiSdk::StorageSettingsWrapper](docs/StorageSettingsWrapper.md)
+ - [DocspaceApiSdk::StringArrayWrapper](docs/StringArrayWrapper.md)
+ - [DocspaceApiSdk::StringWrapper](docs/StringWrapper.md)
+ - [DocspaceApiSdk::StudioDefaultPageSettingsDto](docs/StudioDefaultPageSettingsDto.md)
+ - [DocspaceApiSdk::StudioDefaultPageSettingsWrapper](docs/StudioDefaultPageSettingsWrapper.md)
+ - [DocspaceApiSdk::SubAccountDto](docs/SubAccountDto.md)
+ - [DocspaceApiSdk::SubjectType](docs/SubjectType.md)
+ - [DocspaceApiSdk::SubmitFormDto](docs/SubmitFormDto.md)
+ - [DocspaceApiSdk::SubscriptionBalanceDto](docs/SubscriptionBalanceDto.md)
+ - [DocspaceApiSdk::SubscriptionBalanceWrapper](docs/SubscriptionBalanceWrapper.md)
+ - [DocspaceApiSdk::TariffDto](docs/TariffDto.md)
+ - [DocspaceApiSdk::TariffQuotaDto](docs/TariffQuotaDto.md)
+ - [DocspaceApiSdk::TariffState](docs/TariffState.md)
+ - [DocspaceApiSdk::TariffWrapper](docs/TariffWrapper.md)
+ - [DocspaceApiSdk::TaskProgressResponseDto](docs/TaskProgressResponseDto.md)
+ - [DocspaceApiSdk::TaskProgressResponseWrapper](docs/TaskProgressResponseWrapper.md)
+ - [DocspaceApiSdk::TelegramStatusDto](docs/TelegramStatusDto.md)
+ - [DocspaceApiSdk::TelegramStatusWrapper](docs/TelegramStatusWrapper.md)
+ - [DocspaceApiSdk::TemplatesConfigDto](docs/TemplatesConfigDto.md)
+ - [DocspaceApiSdk::TemplatesRequestDto](docs/TemplatesRequestDto.md)
+ - [DocspaceApiSdk::TenantAiAccessSettingsDto](docs/TenantAiAccessSettingsDto.md)
+ - [DocspaceApiSdk::TenantAiAccessSettingsRequestDto](docs/TenantAiAccessSettingsRequestDto.md)
+ - [DocspaceApiSdk::TenantAiAccessSettingsWrapper](docs/TenantAiAccessSettingsWrapper.md)
+ - [DocspaceApiSdk::TenantAuditSettingsDto](docs/TenantAuditSettingsDto.md)
+ - [DocspaceApiSdk::TenantAuditSettingsRequestDto](docs/TenantAuditSettingsRequestDto.md)
+ - [DocspaceApiSdk::TenantAuditSettingsWrapper](docs/TenantAuditSettingsWrapper.md)
+ - [DocspaceApiSdk::TenantBannerSettingsDto](docs/TenantBannerSettingsDto.md)
+ - [DocspaceApiSdk::TenantBannerSettingsRequestDto](docs/TenantBannerSettingsRequestDto.md)
+ - [DocspaceApiSdk::TenantBannerSettingsWrapper](docs/TenantBannerSettingsWrapper.md)
+ - [DocspaceApiSdk::TenantDeepLinkSettingsDto](docs/TenantDeepLinkSettingsDto.md)
+ - [DocspaceApiSdk::TenantDeepLinkSettingsWrapper](docs/TenantDeepLinkSettingsWrapper.md)
+ - [DocspaceApiSdk::TenantDevToolsAccessSettingsDto](docs/TenantDevToolsAccessSettingsDto.md)
+ - [DocspaceApiSdk::TenantDevToolsAccessSettingsRequestDto](docs/TenantDevToolsAccessSettingsRequestDto.md)
+ - [DocspaceApiSdk::TenantDevToolsAccessSettingsWrapper](docs/TenantDevToolsAccessSettingsWrapper.md)
+ - [DocspaceApiSdk::TenantDto](docs/TenantDto.md)
+ - [DocspaceApiSdk::TenantIndustry](docs/TenantIndustry.md)
+ - [DocspaceApiSdk::TenantQuotaDto](docs/TenantQuotaDto.md)
+ - [DocspaceApiSdk::TenantQuotaFeatureDto](docs/TenantQuotaFeatureDto.md)
+ - [DocspaceApiSdk::TenantQuotaSettingsDto](docs/TenantQuotaSettingsDto.md)
+ - [DocspaceApiSdk::TenantQuotaSettingsRequestDto](docs/TenantQuotaSettingsRequestDto.md)
+ - [DocspaceApiSdk::TenantQuotaSettingsWrapper](docs/TenantQuotaSettingsWrapper.md)
+ - [DocspaceApiSdk::TenantQuotaWrapper](docs/TenantQuotaWrapper.md)
+ - [DocspaceApiSdk::TenantStatus](docs/TenantStatus.md)
+ - [DocspaceApiSdk::TenantTrustedDomainsType](docs/TenantTrustedDomainsType.md)
+ - [DocspaceApiSdk::TenantUserInvitationSettingsDto](docs/TenantUserInvitationSettingsDto.md)
+ - [DocspaceApiSdk::TenantUserInvitationSettingsRequestDto](docs/TenantUserInvitationSettingsRequestDto.md)
+ - [DocspaceApiSdk::TenantUserInvitationSettingsWrapper](docs/TenantUserInvitationSettingsWrapper.md)
+ - [DocspaceApiSdk::TenantWalletService](docs/TenantWalletService.md)
+ - [DocspaceApiSdk::TenantWalletServiceSettingsDto](docs/TenantWalletServiceSettingsDto.md)
+ - [DocspaceApiSdk::TenantWalletServiceSettingsWrapper](docs/TenantWalletServiceSettingsWrapper.md)
+ - [DocspaceApiSdk::TenantWalletSettingsDto](docs/TenantWalletSettingsDto.md)
+ - [DocspaceApiSdk::TenantWalletSettingsRequestDto](docs/TenantWalletSettingsRequestDto.md)
+ - [DocspaceApiSdk::TenantWalletSettingsWrapper](docs/TenantWalletSettingsWrapper.md)
+ - [DocspaceApiSdk::TenantWrapper](docs/TenantWrapper.md)
+ - [DocspaceApiSdk::TerminateRequestDto](docs/TerminateRequestDto.md)
+ - [DocspaceApiSdk::TfaAppCodeArrayWrapper](docs/TfaAppCodeArrayWrapper.md)
+ - [DocspaceApiSdk::TfaAppCodeDto](docs/TfaAppCodeDto.md)
+ - [DocspaceApiSdk::TfaConfirmDataDto](docs/TfaConfirmDataDto.md)
+ - [DocspaceApiSdk::TfaConfirmDataWrapper](docs/TfaConfirmDataWrapper.md)
+ - [DocspaceApiSdk::TfaRequestDto](docs/TfaRequestDto.md)
+ - [DocspaceApiSdk::TfaSettingsArrayWrapper](docs/TfaSettingsArrayWrapper.md)
+ - [DocspaceApiSdk::TfaSettingsDto](docs/TfaSettingsDto.md)
+ - [DocspaceApiSdk::TfaSetupCodeDto](docs/TfaSetupCodeDto.md)
+ - [DocspaceApiSdk::TfaSetupCodeWrapper](docs/TfaSetupCodeWrapper.md)
+ - [DocspaceApiSdk::TfaType](docs/TfaType.md)
+ - [DocspaceApiSdk::TfaValidateRequestDto](docs/TfaValidateRequestDto.md)
+ - [DocspaceApiSdk::ThirdPartyAccountArrayWrapper](docs/ThirdPartyAccountArrayWrapper.md)
+ - [DocspaceApiSdk::ThirdPartyAccountDto](docs/ThirdPartyAccountDto.md)
+ - [DocspaceApiSdk::ThirdPartyBackupRequestDto](docs/ThirdPartyBackupRequestDto.md)
+ - [DocspaceApiSdk::ThirdPartyCheckConversionRequestDto](docs/ThirdPartyCheckConversionRequestDto.md)
+ - [DocspaceApiSdk::ThirdPartyChunkedUploadSessionDto](docs/ThirdPartyChunkedUploadSessionDto.md)
+ - [DocspaceApiSdk::ThirdPartyChunkedUploadSessionResultDto](docs/ThirdPartyChunkedUploadSessionResultDto.md)
+ - [DocspaceApiSdk::ThirdPartyChunkedUploadSessionResultWrapper](docs/ThirdPartyChunkedUploadSessionResultWrapper.md)
+ - [DocspaceApiSdk::ThirdPartyChunkedUploadSessionWrapper](docs/ThirdPartyChunkedUploadSessionWrapper.md)
+ - [DocspaceApiSdk::ThirdPartyConfigurationDto](docs/ThirdPartyConfigurationDto.md)
+ - [DocspaceApiSdk::ThirdPartyConfigurationWrapper](docs/ThirdPartyConfigurationWrapper.md)
+ - [DocspaceApiSdk::ThirdPartyDraftLocation](docs/ThirdPartyDraftLocation.md)
+ - [DocspaceApiSdk::ThirdPartyFileArrayWrapper](docs/ThirdPartyFileArrayWrapper.md)
+ - [DocspaceApiSdk::ThirdPartyFileDto](docs/ThirdPartyFileDto.md)
+ - [DocspaceApiSdk::ThirdPartyFileEntryDto](docs/ThirdPartyFileEntryDto.md)
+ - [DocspaceApiSdk::ThirdPartyFileWrapper](docs/ThirdPartyFileWrapper.md)
+ - [DocspaceApiSdk::ThirdPartyFolderArrayWrapper](docs/ThirdPartyFolderArrayWrapper.md)
+ - [DocspaceApiSdk::ThirdPartyFolderContentDto](docs/ThirdPartyFolderContentDto.md)
+ - [DocspaceApiSdk::ThirdPartyFolderContentWrapper](docs/ThirdPartyFolderContentWrapper.md)
+ - [DocspaceApiSdk::ThirdPartyFolderDto](docs/ThirdPartyFolderDto.md)
+ - [DocspaceApiSdk::ThirdPartyFolderWrapper](docs/ThirdPartyFolderWrapper.md)
+ - [DocspaceApiSdk::ThirdPartyRequestDto](docs/ThirdPartyRequestDto.md)
+ - [DocspaceApiSdk::ThirdPartySaveAsPdfRequest](docs/ThirdPartySaveAsPdfRequest.md)
+ - [DocspaceApiSdk::ThirdPartyUploadSessionResponseDto](docs/ThirdPartyUploadSessionResponseDto.md)
+ - [DocspaceApiSdk::ThirdPartyUploadSessionResponseWrapper](docs/ThirdPartyUploadSessionResponseWrapper.md)
+ - [DocspaceApiSdk::Thumbnail](docs/Thumbnail.md)
+ - [DocspaceApiSdk::ThumbnailsDataDto](docs/ThumbnailsDataDto.md)
+ - [DocspaceApiSdk::ThumbnailsDataWrapper](docs/ThumbnailsDataWrapper.md)
+ - [DocspaceApiSdk::ThumbnailsRequest](docs/ThumbnailsRequest.md)
+ - [DocspaceApiSdk::TimeBoundDto](docs/TimeBoundDto.md)
+ - [DocspaceApiSdk::TimezoneArrayWrapper](docs/TimezoneArrayWrapper.md)
+ - [DocspaceApiSdk::TimezoneDto](docs/TimezoneDto.md)
+ - [DocspaceApiSdk::TokenDiagnosticsDto](docs/TokenDiagnosticsDto.md)
+ - [DocspaceApiSdk::TokenDiagnosticsWrapper](docs/TokenDiagnosticsWrapper.md)
+ - [DocspaceApiSdk::TopUpDepositRequestDto](docs/TopUpDepositRequestDto.md)
+ - [DocspaceApiSdk::TransactionInfoDto](docs/TransactionInfoDto.md)
+ - [DocspaceApiSdk::TurnOnAdminMessageSettingsRequestDto](docs/TurnOnAdminMessageSettingsRequestDto.md)
+ - [DocspaceApiSdk::UpcomingPaymentArrayWrapper](docs/UpcomingPaymentArrayWrapper.md)
+ - [DocspaceApiSdk::UpcomingPaymentDto](docs/UpcomingPaymentDto.md)
+ - [DocspaceApiSdk::UpdateApiKeyRequest](docs/UpdateApiKeyRequest.md)
+ - [DocspaceApiSdk::UpdateClientRequest](docs/UpdateClientRequest.md)
+ - [DocspaceApiSdk::UpdateCommentRequest](docs/UpdateCommentRequest.md)
+ - [DocspaceApiSdk::UpdateFileRequest](docs/UpdateFileRequest.md)
+ - [DocspaceApiSdk::UpdateFolderMetadataTemplateRequest](docs/UpdateFolderMetadataTemplateRequest.md)
+ - [DocspaceApiSdk::UpdateGroupRequest](docs/UpdateGroupRequest.md)
+ - [DocspaceApiSdk::UpdateMemberCultureRequest](docs/UpdateMemberCultureRequest.md)
+ - [DocspaceApiSdk::UpdateMemberRequestDto](docs/UpdateMemberRequestDto.md)
+ - [DocspaceApiSdk::UpdateMembersQuotaRequestDto](docs/UpdateMembersQuotaRequestDto.md)
+ - [DocspaceApiSdk::UpdateMembersQuotaRequestDtoQuota](docs/UpdateMembersQuotaRequestDtoQuota.md)
+ - [DocspaceApiSdk::UpdateMembersRequestDto](docs/UpdateMembersRequestDto.md)
+ - [DocspaceApiSdk::UpdateMetadataFieldRequest](docs/UpdateMetadataFieldRequest.md)
+ - [DocspaceApiSdk::UpdateMetadataTemplate](docs/UpdateMetadataTemplate.md)
+ - [DocspaceApiSdk::UpdatePhotoMemberRequest](docs/UpdatePhotoMemberRequest.md)
+ - [DocspaceApiSdk::UpdateRoomGroupRequest](docs/UpdateRoomGroupRequest.md)
+ - [DocspaceApiSdk::UpdateRoomRequest](docs/UpdateRoomRequest.md)
+ - [DocspaceApiSdk::UpdateRoomsQuotaRequestDto](docs/UpdateRoomsQuotaRequestDto.md)
+ - [DocspaceApiSdk::UpdateRoomsRoomIdsRequestDto](docs/UpdateRoomsRoomIdsRequestDto.md)
+ - [DocspaceApiSdk::UpdateTagRequestDto](docs/UpdateTagRequestDto.md)
+ - [DocspaceApiSdk::UpdateWebhooksConfigRequestDto](docs/UpdateWebhooksConfigRequestDto.md)
+ - [DocspaceApiSdk::UploadResultDto](docs/UploadResultDto.md)
+ - [DocspaceApiSdk::UploadResultWrapper](docs/UploadResultWrapper.md)
+ - [DocspaceApiSdk::UploadSessionResponseDto](docs/UploadSessionResponseDto.md)
+ - [DocspaceApiSdk::UploadSessionResponseWrapper](docs/UploadSessionResponseWrapper.md)
+ - [DocspaceApiSdk::UsageSpaceStatItemArrayWrapper](docs/UsageSpaceStatItemArrayWrapper.md)
+ - [DocspaceApiSdk::UsageSpaceStatItemDto](docs/UsageSpaceStatItemDto.md)
+ - [DocspaceApiSdk::UserConfigDto](docs/UserConfigDto.md)
+ - [DocspaceApiSdk::UserExistsResponseDto](docs/UserExistsResponseDto.md)
+ - [DocspaceApiSdk::UserExistsResponseWrapper](docs/UserExistsResponseWrapper.md)
+ - [DocspaceApiSdk::UserInvitation](docs/UserInvitation.md)
+ - [DocspaceApiSdk::UserInvitationRequestDto](docs/UserInvitationRequestDto.md)
+ - [DocspaceApiSdk::ValidationErrorResponse](docs/ValidationErrorResponse.md)
+ - [DocspaceApiSdk::ValidationResult](docs/ValidationResult.md)
+ - [DocspaceApiSdk::VectorizationStatus](docs/VectorizationStatus.md)
+ - [DocspaceApiSdk::WalletQuantityRequestDto](docs/WalletQuantityRequestDto.md)
+ - [DocspaceApiSdk::WalletServiceArrayWrapper](docs/WalletServiceArrayWrapper.md)
+ - [DocspaceApiSdk::WalletServiceDto](docs/WalletServiceDto.md)
+ - [DocspaceApiSdk::WalletServiceWrapper](docs/WalletServiceWrapper.md)
+ - [DocspaceApiSdk::WatermarkAdditions](docs/WatermarkAdditions.md)
+ - [DocspaceApiSdk::WatermarkDto](docs/WatermarkDto.md)
+ - [DocspaceApiSdk::WatermarkOnDrawDto](docs/WatermarkOnDrawDto.md)
+ - [DocspaceApiSdk::WatermarkParagraphDto](docs/WatermarkParagraphDto.md)
+ - [DocspaceApiSdk::WatermarkRequestDto](docs/WatermarkRequestDto.md)
+ - [DocspaceApiSdk::WatermarkTextRunDto](docs/WatermarkTextRunDto.md)
+ - [DocspaceApiSdk::WebItemSecurityRequestDto](docs/WebItemSecurityRequestDto.md)
+ - [DocspaceApiSdk::WebItemsSecurityRequestDto](docs/WebItemsSecurityRequestDto.md)
+ - [DocspaceApiSdk::WebPluginArrayWrapper](docs/WebPluginArrayWrapper.md)
+ - [DocspaceApiSdk::WebPluginDto](docs/WebPluginDto.md)
+ - [DocspaceApiSdk::WebPluginRequest](docs/WebPluginRequest.md)
+ - [DocspaceApiSdk::WebPluginWrapper](docs/WebPluginWrapper.md)
+ - [DocspaceApiSdk::WebhookGroupStatus](docs/WebhookGroupStatus.md)
+ - [DocspaceApiSdk::WebhookRetryRequestDto](docs/WebhookRetryRequestDto.md)
+ - [DocspaceApiSdk::WebhookTrigger](docs/WebhookTrigger.md)
+ - [DocspaceApiSdk::WebhookTriggerArrayWrapper](docs/WebhookTriggerArrayWrapper.md)
+ - [DocspaceApiSdk::WebhookTriggerDto](docs/WebhookTriggerDto.md)
+ - [DocspaceApiSdk::WebhooksConfigDto](docs/WebhooksConfigDto.md)
+ - [DocspaceApiSdk::WebhooksConfigWithStatusArrayWrapper](docs/WebhooksConfigWithStatusArrayWrapper.md)
+ - [DocspaceApiSdk::WebhooksConfigWithStatusDto](docs/WebhooksConfigWithStatusDto.md)
+ - [DocspaceApiSdk::WebhooksConfigWrapper](docs/WebhooksConfigWrapper.md)
+ - [DocspaceApiSdk::WebhooksLogArrayWrapper](docs/WebhooksLogArrayWrapper.md)
+ - [DocspaceApiSdk::WebhooksLogDto](docs/WebhooksLogDto.md)
+ - [DocspaceApiSdk::WebhooksLogWrapper](docs/WebhooksLogWrapper.md)
+ - [DocspaceApiSdk::WhiteLabelItemArrayWrapper](docs/WhiteLabelItemArrayWrapper.md)
+ - [DocspaceApiSdk::WhiteLabelItemDto](docs/WhiteLabelItemDto.md)
+ - [DocspaceApiSdk::WhiteLabelItemPathDto](docs/WhiteLabelItemPathDto.md)
+ - [DocspaceApiSdk::WhiteLabelItemSizeDto](docs/WhiteLabelItemSizeDto.md)
+ - [DocspaceApiSdk::WhiteLabelLogoType](docs/WhiteLabelLogoType.md)
+ - [DocspaceApiSdk::WhiteLabelRequestDto](docs/WhiteLabelRequestDto.md)
+ - [DocspaceApiSdk::WizardRequestDto](docs/WizardRequestDto.md)
+ - [DocspaceApiSdk::WizardSettingsDto](docs/WizardSettingsDto.md)
+ - [DocspaceApiSdk::WizardSettingsWrapper](docs/WizardSettingsWrapper.md)
+ - [DocspaceApiSdk::XlsxReportResponseDto](docs/XlsxReportResponseDto.md)
+ - [DocspaceApiSdk::XlsxReportResponseWrapper](docs/XlsxReportResponseWrapper.md)
+
+</details>
