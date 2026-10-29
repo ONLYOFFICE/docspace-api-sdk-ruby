@@ -37,10 +37,10 @@ module DocspaceApiSdk
     # Whether this is the trial quota, which grants the paid limits for a while and then expires. A trial is not  extended by paying - a plan has to be bought instead.
     attr_accessor :trial
 
-    # The features the quota switches on, each with the limit it grants and, on the quota the portal is  actually on, how much of that limit is already used. A feature that is absent is off, so the list is the  whole truth about what the quota includes.
+    # The features the quota includes, each with the limit it grants and, on the portal's own quota, how much of it  is used. A flag that is off is listed with `value` false; an absent feature is one this answer does not report.
     attr_accessor :features
 
-    # The per-member storage allowance an administrator has set on top of the quota, and whether it is applied  at all. It describes the live portal rather than this quota, so every entry of a catalogue listing repeats  the same values, and it is empty unless the portal is a server installation or its plan includes  statistics.
+    # The per-member storage allowance an administrator has set on top of the quota, and whether it is applied  at all. It describes the live portal rather than this quota, so every entry of a catalogue listing repeats  the same values. It is filled in only on a server installation or when the portal's plan includes statistics.
     attr_accessor :users_quota
 
     # The same kind of per-room storage override, filled in and read the same way as `usersQuota`.

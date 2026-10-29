@@ -18,16 +18,17 @@ require 'time'
 
 module DocspaceApiSdk
   class PriceTimeUnit
-    None = 0.freeze
-    Hour = 1.freeze
-    Day = 2.freeze
-    Week = 3.freeze
-    Month = 4.freeze
-    Year = 5.freeze
-    ThreeYears = 6.freeze
+    None = 1.freeze
+    Hour = 2.freeze
+    Day = 3.freeze
+    Week = 4.freeze
+    Month = 5.freeze
+    Year = 6.freeze
+    ThreeYears = 7.freeze
+    Minute = 8.freeze
 
     def self.all_vars
-      @all_vars ||= [None, Hour, Day, Week, Month, Year, ThreeYears].freeze
+      @all_vars ||= [None, Hour, Day, Week, Month, Year, ThreeYears, Minute].freeze
     end
 
     # Builds the enum from string

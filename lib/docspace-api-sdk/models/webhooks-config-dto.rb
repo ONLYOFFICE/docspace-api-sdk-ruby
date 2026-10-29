@@ -34,10 +34,10 @@ module DocspaceApiSdk
     # Whether the certificate of `uri` is verified before a delivery. While it is `false` a self-signed  certificate is accepted as well.
     attr_accessor :ssl
 
-    # The events the subscription covers, as the bits of `GET api/2.0/settings/webhook/triggers` added  together. `0` is the catch-all and means every event, not none.
+    # The events the subscription covers, as the bits of `GET api/2.0/settings/webhook/triggers` added  together. `0` is the catch-all, not none: it covers every event the subscription creator's current role may  receive, which can be fewer than all the events of the portal.
     attr_accessor :triggers
 
-    # The single room or file the subscription is narrowed to, empty for a subscription that covers the whole  portal. It is kept as an opaque value, so both a numeric and a third-party identifier can appear.
+    # The single entity the subscription is narrowed to, empty for a subscription that covers the whole portal. It  is the GUID of a user or group for user and group events, and the Files API entry ID of a file, folder or room  otherwise, kept as an opaque value, so a numeric ID, a third-party ID or a GUID can appear.
     attr_accessor :target_id
 
     # The member who created the subscription, which is also who a non-administrator is limited to seeing. It is  empty for a subscription created by a portal background job.

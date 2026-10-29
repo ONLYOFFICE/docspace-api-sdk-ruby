@@ -25,7 +25,7 @@ module DocspaceApiSdk
     # The string value.
     attr_accessor :string_value
 
-    # The number value.
+    # The number value: a whole number of at most 2^53-1 (9007199254740991) in magnitude, the largest integer a JSON  client reads exactly. A larger one is refused rather than stored and returned rounded.
     attr_accessor :number_value
 
     # The date value. A value without a time zone offset is treated as UTC, the same way the metadata filters treat their date bounds.

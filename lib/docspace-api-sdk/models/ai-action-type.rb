@@ -28,9 +28,10 @@ module DocspaceApiSdk
     OCR = "OCR".freeze
     VISION = "Vision".freeze
     FORM_ANALYSIS = "FormAnalysis".freeze
+    GENERATE_META = "GenerateMeta".freeze
 
     def self.all_vars
-      @all_vars ||= [DEFAULT, CHAT, CODE, SUMMARIZATION, TRANSLATION, TEXT_ANALYZE, IMAGE_GENERATION, OCR, VISION, FORM_ANALYSIS].freeze
+      @all_vars ||= [DEFAULT, CHAT, CODE, SUMMARIZATION, TRANSLATION, TEXT_ANALYZE, IMAGE_GENERATION, OCR, VISION, FORM_ANALYSIS, GENERATE_META].freeze
     end
 
     # Builds the enum from string

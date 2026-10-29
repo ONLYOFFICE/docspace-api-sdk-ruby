@@ -695,6 +695,22 @@
 
 * `PortalUnblocked` (value: `6111`)
 
+* `CustomerServiceLimitCreated` (value: `6112`)
+
+* `CustomerServiceLimitUpdated` (value: `6113`)
+
+* `CustomerServiceLimitsSet` (value: `6114`)
+
+* `CustomerServiceLimitsDisabled` (value: `6115`)
+
+* `CustomerServiceLimitDeleted` (value: `6116`)
+
+* `WebhookRetried` (value: `6117`)
+
+* `AppEnabled` (value: `6119`)
+
+* `AppDisabled` (value: `6120`)
+
 * `ContactAdminMailSent` (value: `7000`)
 
 * `RoomInviteLinkUsed` (value: `7001`)

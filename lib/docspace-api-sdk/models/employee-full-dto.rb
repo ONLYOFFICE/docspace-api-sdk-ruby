@@ -133,6 +133,9 @@ module DocspaceApiSdk
     # Specifies if the user has a custom quota or not.
     attr_accessor :is_custom_quota
 
+    # The spending limit on the AI services in force for this user - the personal one, or else the limit for every  user - with what the user spent against it. Null when no such limit applies to the user, when the portal has no  billing service, or when the caller is neither a DocSpace administrator nor the user; the limit of the portal as  a whole is not reflected here. The value, and the spending in particular, can lag by a few minutes.
+    attr_accessor :ai_services_limit
+
     # The current login event ID.
     attr_accessor :login_event_id
 
@@ -214,6 +217,7 @@ module DocspaceApiSdk
         :'used_space' => :'usedSpace',
         :'shared' => :'shared',
         :'is_custom_quota' => :'isCustomQuota',
+        :'ai_services_limit' => :'aiServicesLimit',
         :'login_event_id' => :'loginEventId',
         :'auth_cookie_lifetime' => :'authCookieLifetime',
         :'created_by' => :'createdBy',
@@ -274,6 +278,7 @@ module DocspaceApiSdk
         :'used_space' => :'Float',
         :'shared' => :'Boolean',
         :'is_custom_quota' => :'Boolean',
+        :'ai_services_limit' => :'UserServiceLimitDto',
         :'login_event_id' => :'Integer',
         :'auth_cookie_lifetime' => :'Float',
         :'created_by' => :'EmployeeDto',
@@ -490,6 +495,10 @@ module DocspaceApiSdk
         self.is_custom_quota = attributes[:'is_custom_quota']
       end
 
+      if attributes.key?(:'ai_services_limit')
+        self.ai_services_limit = attributes[:'ai_services_limit']
+      end
+
       if attributes.key?(:'login_event_id')
         self.login_event_id = attributes[:'login_event_id']
       end
@@ -573,6 +582,7 @@ module DocspaceApiSdk
           used_space == o.used_space &&
           shared == o.shared &&
           is_custom_quota == o.is_custom_quota &&
+          ai_services_limit == o.ai_services_limit &&
           login_event_id == o.login_event_id &&
           auth_cookie_lifetime == o.auth_cookie_lifetime &&
           created_by == o.created_by &&
@@ -590,7 +600,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, display_name, avatar, avatar_original, avatar_max, avatar_medium, avatar_small, profile_url, has_avatar, is_anonim, first_name, last_name, user_name, email, contacts, status, activation_status, terminated, department, groups, location, notes, is_admin, is_room_admin, is_ldap, list_admin_modules, is_owner, is_visitor, is_collaborator, culture_name, mobile_phone, mobile_phone_activation_status, is_sso, theme, quota_limit, used_space, shared, is_custom_quota, login_event_id, auth_cookie_lifetime, created_by, registration_date, has_personal_folder, tfa_app_enabled].hash
+      [id, display_name, avatar, avatar_original, avatar_max, avatar_medium, avatar_small, profile_url, has_avatar, is_anonim, first_name, last_name, user_name, email, contacts, status, activation_status, terminated, department, groups, location, notes, is_admin, is_room_admin, is_ldap, list_admin_modules, is_owner, is_visitor, is_collaborator, culture_name, mobile_phone, mobile_phone_activation_status, is_sso, theme, quota_limit, used_space, shared, is_custom_quota, ai_services_limit, login_event_id, auth_cookie_lifetime, created_by, registration_date, has_personal_folder, tfa_app_enabled].hash
     end
 
     # Builds the object from hash

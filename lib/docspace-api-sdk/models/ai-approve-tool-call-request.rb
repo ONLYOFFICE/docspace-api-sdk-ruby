@@ -32,7 +32,7 @@ module DocspaceApiSdk
     # Index of the tool-call content part inside `message.content`.
     attr_accessor :idx
 
-    # Snapshot of the assistant message at the time the tool call surfaced.
+    # Snapshot of the assistant message at the time the tool call surfaced. Optional and ignored: the engine resumes from the stored message, and the copy inflated the body past the parser limit (Bug 84608).
     attr_accessor :message
 
     # Per-request engine options: extra tools, reasoning, prompt override.
@@ -137,8 +137,6 @@ module DocspaceApiSdk
 
       if attributes.key?(:'message')
         self.message = attributes[:'message']
-      else
-        self.message = nil
       end
 
       if attributes.key?(:'action_args')
@@ -171,10 +169,6 @@ module DocspaceApiSdk
         invalid_properties.push('invalid value for "idx", idx cannot be nil.')
       end
 
-      if @message.nil?
-        invalid_properties.push('invalid value for "message", message cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -185,7 +179,6 @@ module DocspaceApiSdk
       return false if @thread_id.nil?
       return false if @message_id.nil?
       return false if @idx.nil?
-      return false if @message.nil?
       true
     end
 
@@ -217,16 +210,6 @@ module DocspaceApiSdk
       end
 
       @idx = idx
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] message Value to be assigned
-    def message=(message)
-      if message.nil?
-        fail ArgumentError, 'message cannot be nil'
-      end
-
-      @message = message
     end
 
     # Checks equality by comparing each attribute.

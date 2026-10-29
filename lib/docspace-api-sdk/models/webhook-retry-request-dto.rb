@@ -19,7 +19,7 @@ require 'time'
 module DocspaceApiSdk
   # Which past webhook deliveries are sent again.
   class WebhookRetryRequestDto < ApiModelBase
-    # The delivery records to send again, by the identifiers `GET api/2.0/settings/webhooks/log` reports. An  identifier that exists nowhere, and one belonging to another member subscription when the caller is not a  DocSpace administrator, is skipped in silence rather than failing the call, so compare the number of records  that come back against the number sent. An empty list is accepted and queues nothing.
+    # The delivery records to send again, by the `id` values `GET api/2.0/settings/webhooks/log` reports. The bound  is per call: a longer batch has to be split into several calls.
     attr_accessor :ids
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -81,6 +81,10 @@ module DocspaceApiSdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@ids.nil? && @ids.length > 100
+        invalid_properties.push('invalid value for "ids", number of items must be less than or equal to 100.')
+      end
+
       invalid_properties
     end
 
@@ -88,7 +92,18 @@ module DocspaceApiSdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@ids.nil? && @ids.length > 100
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] ids Value to be assigned
+    def ids=(ids)
+      if !ids.nil? && ids.length > 100
+        fail ArgumentError, 'invalid value for "ids", number of items must be less than or equal to 100.'
+      end
+
+      @ids = ids
     end
 
     # Checks equality by comparing each attribute.

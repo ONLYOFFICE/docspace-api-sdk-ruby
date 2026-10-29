@@ -40,7 +40,7 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::AIApi.new
-ai_approve_tool_call_request = DocspaceApiSdk::AiApproveToolCallRequest.new({result: 3.56, thread_id: 'thread_id_example', message_id: 'message_id_example', idx: 3.56, message: DocspaceApiSdk::AiThreadMessageLike.new({role: 'user', content: DocspaceApiSdk::AiThreadMessageLikeContent.new})}) # AiApproveToolCallRequest | 
+ai_approve_tool_call_request = DocspaceApiSdk::AiApproveToolCallRequest.new({result: 3.56, thread_id: 'thread_id_example', message_id: 'message_id_example', idx: 3.56}) # AiApproveToolCallRequest | 
 
 begin
   # Approve tool call
@@ -116,7 +116,7 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::AI::AIApi.new
-ai_tool_call_data = DocspaceApiSdk::AiToolCallData.new({thread_id: '11111111-1111-1111-1111-111111111111', message_id: '22222222-2222-2222-2222-222222222222', idx: 0, message: DocspaceApiSdk::AiThreadMessageLike.new({role: 'user', content: DocspaceApiSdk::AiThreadMessageLikeContent.new})}) # AiToolCallData | 
+ai_tool_call_data = DocspaceApiSdk::AiToolCallData.new({thread_id: '11111111-1111-1111-1111-111111111111', message_id: '22222222-2222-2222-2222-222222222222', idx: 0}) # AiToolCallData | 
 
 begin
   # Deny tool call

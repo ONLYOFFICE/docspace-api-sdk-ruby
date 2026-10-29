@@ -9,11 +9,15 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | [**create_customer_monthly_usage_report**](PortalPaymentApi.md#create_customer_monthly_usage_report) | **POST** /api/2.0/portal/payment/customer/usage/monthly/report | Start the monthly usage report |
 | [**create_customer_operations_report**](PortalPaymentApi.md#create_customer_operations_report) | **POST** /api/2.0/portal/payment/customer/operationsreport | Start the operations report |
 | [**create_customer_service_usage_report**](PortalPaymentApi.md#create_customer_service_usage_report) | **POST** /api/2.0/portal/payment/customer/usage/report | Start the service usage report |
+| [**create_service_limit**](PortalPaymentApi.md#create_service_limit) | **POST** /api/2.0/portal/payment/servicelimit | Create a service limit |
+| [**delete_service_limit**](PortalPaymentApi.md#delete_service_limit) | **DELETE** /api/2.0/portal/payment/servicelimit/{id} | Delete a service limit |
+| [**disable_participant_service_limits**](PortalPaymentApi.md#disable_participant_service_limits) | **PUT** /api/2.0/portal/payment/servicelimit/participants/disable | Disable the user service limits |
 | [**get_accounting_service_prices**](PortalPaymentApi.md#get_accounting_service_prices) | **GET** /api/2.0/portal/payment/accounting/prices/{serviceName} | Get the service prices from the accounting service |
 | [**get_active_services**](PortalPaymentApi.md#get_active_services) | **GET** /api/2.0/portal/payment/activeservices | Get the active wallet services |
 | [**get_ai_prices**](PortalPaymentApi.md#get_ai_prices) | **GET** /api/2.0/portal/payment/ai-prices | Get AI model prices |
 | [**get_checkout_setup_url**](PortalPaymentApi.md#get_checkout_setup_url) | **GET** /api/2.0/portal/payment/checkoutsetupurl | Get the checkout setup page URL |
 | [**get_customer_balance**](PortalPaymentApi.md#get_customer_balance) | **GET** /api/2.0/portal/payment/customer/balance | Get the customer balance |
+| [**get_customer_deposits**](PortalPaymentApi.md#get_customer_deposits) | **GET** /api/2.0/portal/payment/customer/deposits | Get the wallet top-ups |
 | [**get_customer_info**](PortalPaymentApi.md#get_customer_info) | **GET** /api/2.0/portal/payment/customerinfo | Get the customer information |
 | [**get_customer_monthly_usage**](PortalPaymentApi.md#get_customer_monthly_usage) | **GET** /api/2.0/portal/payment/customer/usage/monthly | Get the customer monthly usage |
 | [**get_customer_monthly_usage_report**](PortalPaymentApi.md#get_customer_monthly_usage_report) | **GET** /api/2.0/portal/payment/customer/usage/monthly/report | Get the monthly usage report status |
@@ -21,6 +25,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | [**get_customer_operations_report**](PortalPaymentApi.md#get_customer_operations_report) | **GET** /api/2.0/portal/payment/customer/operationsreport | Get the operations report status |
 | [**get_customer_service_usage**](PortalPaymentApi.md#get_customer_service_usage) | **GET** /api/2.0/portal/payment/customer/usage | Get the customer service usage |
 | [**get_customer_service_usage_report**](PortalPaymentApi.md#get_customer_service_usage_report) | **GET** /api/2.0/portal/payment/customer/usage/report | Get the service usage report status |
+| [**get_deposit_invoice**](PortalPaymentApi.md#get_deposit_invoice) | **GET** /api/2.0/portal/payment/customer/deposits/{id}/invoice | Get the top-up invoice |
+| [**get_global_service_limit**](PortalPaymentApi.md#get_global_service_limit) | **GET** /api/2.0/portal/payment/servicelimit/global | Get the global service limit |
+| [**get_participant_service_limits**](PortalPaymentApi.md#get_participant_service_limits) | **GET** /api/2.0/portal/payment/servicelimit/participants | Get the user service limits |
 | [**get_payment_account**](PortalPaymentApi.md#get_payment_account) | **GET** /api/2.0/portal/payment/account | Get the billing account page |
 | [**get_payment_currencies**](PortalPaymentApi.md#get_payment_currencies) | **GET** /api/2.0/portal/payment/currencies | Get the billing currencies |
 | [**get_payment_quotas**](PortalPaymentApi.md#get_payment_quotas) | **GET** /api/2.0/portal/payment/quotas | Get the purchasable quotas |
@@ -28,13 +35,16 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | [**get_portal_prices**](PortalPaymentApi.md#get_portal_prices) | **GET** /api/2.0/portal/payment/prices | Get the product prices |
 | [**get_quota_payment_information**](PortalPaymentApi.md#get_quota_payment_information) | **GET** /api/2.0/portal/payment/quota | Get the current plan and limits |
 | [**get_restricted_ai_models**](PortalPaymentApi.md#get_restricted_ai_models) | **GET** /api/2.0/portal/payment/ai-model/restrictions | Get restricted AI models |
+| [**get_service_limit**](PortalPaymentApi.md#get_service_limit) | **GET** /api/2.0/portal/payment/servicelimit/{id} | Get a service limit |
 | [**get_subscription_balance_info**](PortalPaymentApi.md#get_subscription_balance_info) | **GET** /api/2.0/portal/payment/subscription/balance | Get the subscription balance information |
 | [**get_tenant_wallet_service_settings**](PortalPaymentApi.md#get_tenant_wallet_service_settings) | **GET** /api/2.0/portal/payment/servicessettings | Get the wallet service settings |
 | [**get_tenant_wallet_settings**](PortalPaymentApi.md#get_tenant_wallet_settings) | **GET** /api/2.0/portal/payment/topupsettings | Get the auto top-up settings |
+| [**get_total_service_limit**](PortalPaymentApi.md#get_total_service_limit) | **GET** /api/2.0/portal/payment/servicelimit/total | Get the portal service limit |
 | [**get_wallet_service**](PortalPaymentApi.md#get_wallet_service) | **GET** /api/2.0/portal/payment/walletservice | Get a wallet service |
 | [**get_wallet_services**](PortalPaymentApi.md#get_wallet_services) | **GET** /api/2.0/portal/payment/walletservices | Get wallet services |
 | [**move_subscription_to_wallet**](PortalPaymentApi.md#move_subscription_to_wallet) | **POST** /api/2.0/portal/payment/subscription/movetowallet | Move the subscription to the wallet |
 | [**send_payment_request**](PortalPaymentApi.md#send_payment_request) | **POST** /api/2.0/portal/payment/request | Contact the sales team |
+| [**set_participant_service_limits**](PortalPaymentApi.md#set_participant_service_limits) | **PUT** /api/2.0/portal/payment/servicelimit/participants | Set the user service limits |
 | [**set_restricted_ai_models**](PortalPaymentApi.md#set_restricted_ai_models) | **PUT** /api/2.0/portal/payment/ai-model/restrictions | Set restricted AI models |
 | [**set_tenant_wallet_settings**](PortalPaymentApi.md#set_tenant_wallet_settings) | **POST** /api/2.0/portal/payment/topupsettings | Set the auto top-up settings |
 | [**terminate_customer_monthly_usage_report**](PortalPaymentApi.md#terminate_customer_monthly_usage_report) | **DELETE** /api/2.0/portal/payment/customer/usage/monthly/report | Terminate the monthly usage report |
@@ -42,6 +52,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | [**terminate_customer_service_usage_report**](PortalPaymentApi.md#terminate_customer_service_usage_report) | **DELETE** /api/2.0/portal/payment/customer/usage/report | Terminate the service usage report |
 | [**top_up_deposit**](PortalPaymentApi.md#top_up_deposit) | **POST** /api/2.0/portal/payment/deposit | Top up the wallet |
 | [**update_payment**](PortalPaymentApi.md#update_payment) | **PUT** /api/2.0/portal/payment/update | Change the subscription quantity |
+| [**update_service_limit**](PortalPaymentApi.md#update_service_limit) | **PUT** /api/2.0/portal/payment/servicelimit | Update a service limit |
 | [**update_wallet_payment**](PortalPaymentApi.md#update_wallet_payment) | **PUT** /api/2.0/portal/payment/updatewallet | Change a wallet service quantity |
 
 
@@ -500,13 +511,278 @@ end
 - **Accept**: application/json
 
 
+## create_service_limit
+
+> <ServiceLimitWrapper> create_service_limit(opts)
+
+Create a service limit
+
+Creates a spending limit on the AI services - AI tools and AI search together - with `scope` saying whom it  applies to: `Total` for the portal as a whole, `Global` for every user separately, `Custom` for the user in  `userId`, which only this scope takes. A personal limit applies to its user instead of the one for every user,  and the limit of the portal is checked on top of both. The portal needs a billing customer, and the caller needs  the permission to edit the portal settings as well as DocSpace administrator rights. At least one of  `amountValue` and `quantityValue` must be given; with both, the services stop as soon as either is reached. The  call is mutating and written to the portal audit trail. It is not idempotent: a second limit of the same scope,  or for the same user, is refused with 409 - change the existing one with  `PUT api/2.0/portal/payment/servicelimit` instead. The scope, the user and the period cannot be changed later.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-service-limit/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Portal::PaymentApi.new
+opts = {
+  create_service_limit_request_dto: DocspaceApiSdk::CreateServiceLimitRequestDto.new # CreateServiceLimitRequestDto | 
+}
+
+begin
+  # Create a service limit
+  result = api_instance.create_service_limit(opts)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->create_service_limit: #{e}"
+end
+```
+
+#### Using the create_service_limit_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ServiceLimitWrapper>, Integer, Hash)> create_service_limit_with_http_info(opts)
+
+```ruby
+begin
+  # Create a service limit
+  data, status_code, headers = api_instance.create_service_limit_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ServiceLimitWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->create_service_limit_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_service_limit_request_dto** | [**CreateServiceLimitRequestDto**](CreateServiceLimitRequestDto.md) |  | [optional] |
+
+### Return type
+
+[**ServiceLimitWrapper**](ServiceLimitWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## delete_service_limit
+
+> delete_service_limit(id)
+
+Delete a service limit
+
+Removes one spending limit on the AI services completely - the limit of the portal as a whole, the one for  every user, or a personal one - so it no longer restricts anyone. The portal needs a billing customer, and the  caller needs the permission to edit the portal settings as well as DocSpace administrator rights. The call is  destructive and cannot be undone: unlike switching a limit off with `PUT api/2.0/portal/payment/servicelimit`,  which keeps its settings, a deleted limit is gone, and a new one has to be created with  `POST api/2.0/portal/payment/servicelimit`. Deleting a personal limit lets the limit for every user apply to  that user. It is written to the portal audit trail. An ID that does not exist, belongs to another portal or is  not a limit on the AI services answers 404, which is also what a repeated deletion of the same limit gets.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-service-limit/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Portal::PaymentApi.new
+id = 42 # Integer | The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits.
+
+begin
+  # Delete a service limit
+  api_instance.delete_service_limit(id)
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->delete_service_limit: #{e}"
+end
+```
+
+#### Using the delete_service_limit_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> delete_service_limit_with_http_info(id)
+
+```ruby
+begin
+  # Delete a service limit
+  data, status_code, headers = api_instance.delete_service_limit_with_http_info(id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->delete_service_limit_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **Integer** | The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits. |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## disable_participant_service_limits
+
+> <Int32Wrapper> disable_participant_service_limits
+
+Disable the user service limits
+
+Switches off every personal spending limit on the AI services in one call, so each user falls back to the limit  for every user, if one is set. The limit of the portal as a whole and the one for every user stay as they are.  The portal needs a billing customer, and the caller needs the permission to edit the portal settings as well as  DocSpace administrator rights. The switched-off limits stop restricting their users at once and are kept, so  each can be switched back on with `PUT api/2.0/portal/payment/servicelimit`. The call is mutating and  idempotent - repeating it switches off nothing more - and it is written to the portal audit trail. The answer is  the number of personal limits that were switched off, zero when none was in force. To switch off the limit of a  single user, use `PUT api/2.0/portal/payment/servicelimit` with `enabled` set to false.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/disable-participant-service-limits/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Portal::PaymentApi.new
+
+begin
+  # Disable the user service limits
+  result = api_instance.disable_participant_service_limits
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->disable_participant_service_limits: #{e}"
+end
+```
+
+#### Using the disable_participant_service_limits_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Int32Wrapper>, Integer, Hash)> disable_participant_service_limits_with_http_info
+
+```ruby
+begin
+  # Disable the user service limits
+  data, status_code, headers = api_instance.disable_participant_service_limits_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Int32Wrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->disable_participant_service_limits_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**Int32Wrapper**](Int32Wrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_accounting_service_prices
 
 > <ServicePriceArrayWrapper> get_accounting_service_prices(service_name, opts)
 
 Get the service prices from the accounting service
 
-Returns the portal's automatic wallet top-up settings: whether it is switched on, the balance that triggers  it, the balance it tops the wallet up to and the currency it charges in. Only a DocSpace administrator may  read it, no billing customer is needed, and the call is read-only. A portal that has never configured it gets  the defaults rather than an empty result, so `enabled` is the field that says whether anything happens at all.  Two of the values are kept by the portal itself and cannot be set through this API: `lowBalanceThreshold` is  the balance below which the portal warns its administrators by mail, and `lowBalanceNotified` says whether  that warning has already gone out for the current dip. Change the rest with  `POST api/2.0/portal/payment/topupsettings`.
+Returns the price list of one wallet service as the accounting service keeps it: every price record with its  time unit, cost and resulting price, volume threshold, validity period, status and discount category. Take  the service name from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`. The caller must  be a DocSpace administrator, and the server must have the billing and accounting services configured;  otherwise the call fails with 403. The call is read-only and can be repeated safely. By default the list  also holds retired and not yet started records; `active=true` keeps only the prices in force now. A service  with no prices comes back as an empty list. Amounts are in the currency of the service, which the records do  not name. The list is cached for all portals for up to an hour, so a change in the accounting service can  take that long to appear. For the current price of every plan and wallet service as the customer sees it, use  `GET api/2.0/portal/payment/quotas`. An unknown service name fails with 500, as does an unreachable  accounting service.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounting-service-prices/).
 
@@ -540,7 +816,7 @@ DocspaceApiSdk.configure do |config|
 end
 
 api_instance = DocspaceApiSdk::Portal::PaymentApi.new
-service_name = 'ai-tools' # String | The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error.
+service_name = 'ai-tools' # String | The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`.
 opts = {
   active: false # Boolean | Whether the answer is narrowed to the prices in force at the moment of the call. Leaving it false also  returns the retired and the not yet started ones, which is what pricing a movement recorded in the past  needs.
 }
@@ -576,7 +852,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **service_name** | **String** | The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error. |  |
+| **service_name** | **String** | The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`. |  |
 | **active** | **Boolean** | Whether the answer is narrowed to the prices in force at the moment of the call. Leaving it false also  returns the retired and the not yet started ones, which is what pricing a movement recorded in the past  needs. | [optional] |
 
 ### Return type
@@ -936,6 +1212,105 @@ end
 ### Return type
 
 [**BalanceWrapper**](BalanceWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_customer_deposits
+
+> <DepositReportWrapper> get_customer_deposits(opts)
+
+Get the wallet top-ups
+
+Lists the top-ups of the portal's wallet - the payments into it - one page at a time, which is what a list of  payments with their invoices is built from. A portal that is not a billing customer yet has no top-ups and  gets an empty result rather than an error. Only the payer or the portal owner may read it, as with the  invoices, and the call is read-only. Every filter is optional: `startDate` and `endDate` default to the  portal creation date and the present moment, a value without `Z` or an offset is read in the portal time  zone, and `status` narrows to how a top-up ended. `offset` and `limit` default to 0 and 25 and are echoed next  to `totalQuantity`, `totalPage` and `currentPage`; a negative `offset` or a `limit` outside 1 to 100 fails  with 400. An empty result means the portal is not a billing customer, has no wallet at the accounting service  yet, or that service could not be read; a period without top-ups gives an empty `collection`. A top-up with  `hasInvoice` true has an invoice, opened with `GET api/2.0/portal/payment/customer/deposits/{id}/invoice`.  For the full wallet history, charges and refunds included, use  `GET api/2.0/portal/payment/customer/operations`.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-deposits/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Portal::PaymentApi.new
+opts = {
+  start_date: Time.parse('2025-01-01T00:00:00Z'), # Time | The beginning of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is  read in the portal time zone, not in the caller's; defaults to the portal creation date.
+  end_date: Time.parse('2025-12-31T23:59:59Z'), # Time | The end of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is read in  the portal time zone, not in the caller's; defaults to the moment the call is made.
+  status: DocspaceApiSdk::OperationStatus::Pending, # OperationStatus | The outcome to keep. A top-up that is still being settled is reported as pending and may change later, while  the other outcomes are final; every outcome is reported when this is omitted.
+  offset: 0, # Integer | The number of top-ups to skip before the first one returned, for walking through a long history page by page.  Counted after the filters are applied, and starts at 0 when omitted.
+  limit: 25 # Integer | The maximum number of top-ups returned in one page. Defaults to 25 when omitted; the answer echoes the window  back next to `totalQuantity`, `totalPage` and `currentPage`, so the next `offset` can be computed without  counting the items.
+}
+
+begin
+  # Get the wallet top-ups
+  result = api_instance.get_customer_deposits(opts)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->get_customer_deposits: #{e}"
+end
+```
+
+#### Using the get_customer_deposits_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<DepositReportWrapper>, Integer, Hash)> get_customer_deposits_with_http_info(opts)
+
+```ruby
+begin
+  # Get the wallet top-ups
+  data, status_code, headers = api_instance.get_customer_deposits_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <DepositReportWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->get_customer_deposits_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **start_date** | **Time** | The beginning of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is  read in the portal time zone, not in the caller's; defaults to the portal creation date. | [optional] |
+| **end_date** | **Time** | The end of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is read in  the portal time zone, not in the caller's; defaults to the moment the call is made. | [optional] |
+| **status** | **OperationStatus** | The outcome to keep. A top-up that is still being settled is reported as pending and may change later, while  the other outcomes are final; every outcome is reported when this is omitted. | [optional] |
+| **offset** | **Integer** | The number of top-ups to skip before the first one returned, for walking through a long history page by page.  Counted after the filters are applied, and starts at 0 when omitted. | [optional] |
+| **limit** | **Integer** | The maximum number of top-ups returned in one page. Defaults to 25 when omitted; the answer echoes the window  back next to `totalQuantity`, `totalPage` and `currentPage`, so the next `offset` can be computed without  counting the items. | [optional] |
+
+### Return type
+
+[**DepositReportWrapper**](DepositReportWrapper.md)
 
 ### Authorization
 
@@ -1611,6 +1986,278 @@ This endpoint does not need any parameter.
 - **Accept**: application/json
 
 
+## get_deposit_invoice
+
+> <StringWrapper> get_deposit_invoice(id)
+
+Get the top-up invoice
+
+Hands back the address of the page on which the billing provider shows the invoice for one top-up of the  portal's wallet, so a client can open or download it. The top-up is named by the `id` that  `GET api/2.0/portal/payment/customer/deposits` returns, and only one listed there with `hasInvoice` true has an  invoice to show. Only the payer or the portal owner may read it, as with the billing account page, and the  call changes nothing. The address is absolute and points to the billing provider rather than to the portal;  it is asked for anew on every call, so request it when the user is about to open the invoice instead of  storing it. A top-up this portal does not have, one without an invoice, or a portal that is not a billing  customer answers 404, and an `id` that is not a number fails with 400. An installation without a billing  service answers 403, and 402 means the billing or the accounting service rejected the request or did not  answer, which a later retry may get past.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-deposit-invoice/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Portal::PaymentApi.new
+id = 15342 # Integer | The ID of the top-up, taken from the `id` field of `GET api/2.0/portal/payment/customer/deposits`.
+
+begin
+  # Get the top-up invoice
+  result = api_instance.get_deposit_invoice(id)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->get_deposit_invoice: #{e}"
+end
+```
+
+#### Using the get_deposit_invoice_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<StringWrapper>, Integer, Hash)> get_deposit_invoice_with_http_info(id)
+
+```ruby
+begin
+  # Get the top-up invoice
+  data, status_code, headers = api_instance.get_deposit_invoice_with_http_info(id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <StringWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->get_deposit_invoice_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **Integer** | The ID of the top-up, taken from the `id` field of `GET api/2.0/portal/payment/customer/deposits`. |  |
+
+### Return type
+
+[**StringWrapper**](StringWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_global_service_limit
+
+> <ServiceLimitWrapper> get_global_service_limit
+
+Get the global service limit
+
+Returns the spending limit on the AI services for every user - the same ceiling applied to each user separately,  for any user without a personal limit in force. Only a DocSpace administrator may read it, an installation  without a billing service answers 403, and the call is read-only. It comes without spending, since that is  counted per user: read it for each user from `GET api/2.0/portal/payment/servicelimit/participants`; `periodEnd`  still says when the current period ends for everyone. When no  such limit has been set, or it was deleted, the answer is 200 with a null `response`; create the limit with  `POST api/2.0/portal/payment/servicelimit` and the scope `Global`. A switched-off limit is still returned, with  `enabled` false. A portal with no billing customer answers 404.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-global-service-limit/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Portal::PaymentApi.new
+
+begin
+  # Get the global service limit
+  result = api_instance.get_global_service_limit
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->get_global_service_limit: #{e}"
+end
+```
+
+#### Using the get_global_service_limit_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ServiceLimitWrapper>, Integer, Hash)> get_global_service_limit_with_http_info
+
+```ruby
+begin
+  # Get the global service limit
+  data, status_code, headers = api_instance.get_global_service_limit_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ServiceLimitWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->get_global_service_limit_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ServiceLimitWrapper**](ServiceLimitWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_participant_service_limits
+
+> <ServiceLimitReportWrapper> get_participant_service_limits(opts)
+
+Get the user service limits
+
+Lists, one page at a time, the spending limit on the AI services in force for each portal user, with what the  user spent against it in the current period and what is left. Only a DocSpace administrator may read it, an  installation without a billing service answers 403, a portal with no billing customer answers 404, and the call  is read-only; a portal with no limits gets an empty page. A user's own limit wins over the one for every user: an item with the scope `Custom` is a  personal limit, one with `Global` the limit for every user, its ID repeated for each user it applies to.  Switched-off limits are not listed, and a user who has not used the AI services yet may be missing. `offset`  and `limit` page through the result and default to 0 and 25, and the answer repeats them next to  `totalQuantity`, `totalPage` and `currentPage`; `orderBy` and `orderType` sort it, the newest limits first by  default.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-participant-service-limits/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Portal::PaymentApi.new
+opts = {
+  offset: 0, # Integer | The number of limits to skip before the first one returned, counted in the sort order of the list.
+  limit: 25, # Integer | The largest number of limits one page holds.
+  order_by: DocspaceApiSdk::ServiceLimitOrderBy::Participant, # ServiceLimitOrderBy | The field the list is sorted by: the user a limit applies to, or the moment it was created.
+  order_type: DocspaceApiSdk::OperationOrderType::Descending # OperationOrderType | The direction the field named in `orderBy` is sorted in.
+}
+
+begin
+  # Get the user service limits
+  result = api_instance.get_participant_service_limits(opts)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->get_participant_service_limits: #{e}"
+end
+```
+
+#### Using the get_participant_service_limits_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ServiceLimitReportWrapper>, Integer, Hash)> get_participant_service_limits_with_http_info(opts)
+
+```ruby
+begin
+  # Get the user service limits
+  data, status_code, headers = api_instance.get_participant_service_limits_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ServiceLimitReportWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->get_participant_service_limits_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **offset** | **Integer** | The number of limits to skip before the first one returned, counted in the sort order of the list. | [optional] |
+| **limit** | **Integer** | The largest number of limits one page holds. | [optional] |
+| **order_by** | **ServiceLimitOrderBy** | The field the list is sorted by: the user a limit applies to, or the moment it was created. | [optional] |
+| **order_type** | **OperationOrderType** | The direction the field named in `orderBy` is sorted in. | [optional] |
+
+### Return type
+
+[**ServiceLimitReportWrapper**](ServiceLimitReportWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_payment_account
 
 > <StringWrapper> get_payment_account(opts)
@@ -2064,7 +2711,7 @@ This endpoint does not need any parameter.
 
 Get the current plan and limits
 
-Returns the quota the portal is on right now - its paid plan or the free one - with everything a client needs  to render itself: the price, the features that are switched on, the limits they grant (rooms, storage in  bytes, users, administrators, AI) and how much of each is already used. Every signed-in member of the portal  reads it, so it is not restricted to administrators; only guests are refused with 403. The call is read-only.  The plan is served from the cache by default, which is what a start-up needs; `refresh=true` fetches it from  the billing service instead, so use that right after a purchase and not routinely, because it is a remote  call. The catalogue of the quotas that could be bought instead is `GET api/2.0/portal/payment/quotas`, and the  money side of the same portal - customer, wallet and balance - starts at  `GET api/2.0/portal/payment/customerinfo`.
+Returns the quota the portal is on - its paid plan or the free one - with the limits its features grant and how  much of each is already used. Any signed-in member except a guest may call it. The call is read-only; the plan  comes from the cache, and `refresh=true` re-reads it from the billing service, a remote call meant for right  after a purchase. The answer is trimmed to the caller's user type: a DocSpace administrator or the owner gets  the price, the due date and all features, a room administrator only the `manager`, `room`, `total_size` and  `statistic` features, and a user only `total_size`. For both of the latter `price` is an empty object and  `dueDate` is omitted, while the storage quota settings (`usersQuota`, `roomsQuota`, `aiAgentsQuota`,  `tenantCustomQuota`) come back as for an administrator. The quotas that could be bought instead are  `GET api/2.0/portal/payment/quotas`. A guest is refused with 403.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-quota-payment-information/).
 
@@ -2224,6 +2871,95 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**RestrictedAiModelsWrapper**](RestrictedAiModelsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_service_limit
+
+> <ServiceLimitWrapper> get_service_limit(id)
+
+Get a service limit
+
+Returns one spending limit on the AI services of the portal by its ID - the limit of the portal as a whole, the  one for every user, or a personal one. Only a DocSpace administrator may read it, an installation without a  billing service answers 403, and the call is read-only. The limit comes back with its scope, thresholds, their  currency and unit, the period and whether it is in force, but without its spending: that comes with  `GET api/2.0/portal/payment/servicelimit/total` for the portal and with  `GET api/2.0/portal/payment/servicelimit/participants` for each user. A portal with no billing customer, and an  ID that does not exist, belongs to another portal or is not a limit on the AI services, answer 404.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-service-limit/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Portal::PaymentApi.new
+id = 42 # Integer | The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits.
+
+begin
+  # Get a service limit
+  result = api_instance.get_service_limit(id)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->get_service_limit: #{e}"
+end
+```
+
+#### Using the get_service_limit_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ServiceLimitWrapper>, Integer, Hash)> get_service_limit_with_http_info(id)
+
+```ruby
+begin
+  # Get a service limit
+  data, status_code, headers = api_instance.get_service_limit_with_http_info(id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ServiceLimitWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->get_service_limit_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **Integer** | The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits. |  |
+
+### Return type
+
+[**ServiceLimitWrapper**](ServiceLimitWrapper.md)
 
 ### Authorization
 
@@ -2482,6 +3218,92 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**TenantWalletSettingsWrapper**](TenantWalletSettingsWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_total_service_limit
+
+> <ServiceLimitWrapper> get_total_service_limit
+
+Get the portal service limit
+
+Returns the spending limit on the AI services for the portal as a whole - the ceiling the spending of every user  counts towards - together with what was spent against it in the current period and what is left. Only a  DocSpace administrator may read it, an installation without a billing service answers 403, and the call is  read-only. The limit is checked in addition to the limits  of the users, so a user can be stopped by it before reaching their own. The spending includes the expected cost  of AI operations still in progress. When no such limit has been set, or it was deleted, the answer is 200 with a  null `response`; create the limit with `POST api/2.0/portal/payment/servicelimit` and the scope `Total`. A  switched-off limit is still returned, with `enabled` false. A portal with no billing customer answers 404.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-total-service-limit/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Portal::PaymentApi.new
+
+begin
+  # Get the portal service limit
+  result = api_instance.get_total_service_limit
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->get_total_service_limit: #{e}"
+end
+```
+
+#### Using the get_total_service_limit_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ServiceLimitWrapper>, Integer, Hash)> get_total_service_limit_with_http_info
+
+```ruby
+begin
+  # Get the portal service limit
+  data, status_code, headers = api_instance.get_total_service_limit_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ServiceLimitWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->get_total_service_limit_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ServiceLimitWrapper**](ServiceLimitWrapper.md)
 
 ### Authorization
 
@@ -2838,6 +3660,97 @@ end
 ### Return type
 
 nil (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## set_participant_service_limits
+
+> <Int32Wrapper> set_participant_service_limits(opts)
+
+Set the user service limits
+
+Sets the same personal spending limit on the AI services for each of the listed portal users in one call,  replacing the personal limit any of them already has and switching it on, so it is how a ceiling is rolled out  to a group of users. The portal needs a billing customer, and the caller needs the permission to edit the portal  settings as well as DocSpace administrator rights. At least one of `amountValue` and `quantityValue` must be  given, every user in `userIds` must exist on the portal, and a user listed twice is limited once. One call takes  at most 1000 users; split a larger group into several calls. Unlike  `PUT api/2.0/portal/payment/servicelimit`, this sets the whole limit: a threshold left out is removed, and the  period may change, though a lifetime limit set to lifetime again keeps counting from where it was. Each personal  limit applies instead of the one for every user, and the limit of the portal is checked on top. The call is mutating and idempotent, and it is written to the portal audit trail. The answer is  the number of personal limits that were set; the result is listed by  `GET api/2.0/portal/payment/servicelimit/participants`.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-participant-service-limits/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Portal::PaymentApi.new
+opts = {
+  set_participant_service_limits_request_dto: DocspaceApiSdk::SetParticipantServiceLimitsRequestDto.new({user_ids: [3f2504e0-4f89-11d3-9a0c-0305e82c3301,  7c9e6679-7425-40de-944b-e07fc1f90ae7]}) # SetParticipantServiceLimitsRequestDto | 
+}
+
+begin
+  # Set the user service limits
+  result = api_instance.set_participant_service_limits(opts)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->set_participant_service_limits: #{e}"
+end
+```
+
+#### Using the set_participant_service_limits_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Int32Wrapper>, Integer, Hash)> set_participant_service_limits_with_http_info(opts)
+
+```ruby
+begin
+  # Set the user service limits
+  data, status_code, headers = api_instance.set_participant_service_limits_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Int32Wrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->set_participant_service_limits_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **set_participant_service_limits_request_dto** | [**SetParticipantServiceLimitsRequestDto**](SetParticipantServiceLimitsRequestDto.md) |  | [optional] |
+
+### Return type
+
+[**Int32Wrapper**](Int32Wrapper.md)
 
 ### Authorization
 
@@ -3457,6 +4370,97 @@ end
 ### Return type
 
 [**BooleanWrapper**](BooleanWrapper.md)
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_service_limit
+
+> <ServiceLimitWrapper> update_service_limit(opts)
+
+Update a service limit
+
+Changes the thresholds of an existing spending limit on the AI services, or switches it off and back on with  `enabled`. The portal needs a billing customer, and the caller needs the permission to edit the portal settings  as well as DocSpace administrator rights. Only the given fields change: an omitted threshold keeps its value, so  a threshold once set cannot be removed here - delete the limit with  `DELETE api/2.0/portal/payment/servicelimit/{id}` and create it anew with  `POST api/2.0/portal/payment/servicelimit`, which is also the way to change its scope, user or period. A  switched-off limit stops restricting the AI services at once. The call is mutating and idempotent, it is written  to the portal audit trail, and a new threshold applies from the very next operation; lowering it below what was  already spent blocks the AI services until the period ends. An ID that does not exist, belongs to another portal  or is not a limit on the AI services answers 404.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-service-limit/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure HTTP basic authorization: Basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+
+  # Configure OAuth2 access token for authorization: OAuth2
+  config.access_token = 'YOUR ACCESS TOKEN'
+
+  # Configure API key authorization: ApiKeyBearer
+  config.api_key['ApiKeyBearer'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['ApiKeyBearer'] = 'Bearer'
+
+  # Configure API key authorization: asc_auth_key
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization (JWT): Bearer
+  config.access_token = 'YOUR_BEARER_TOKEN'
+
+end
+
+api_instance = DocspaceApiSdk::Portal::PaymentApi.new
+opts = {
+  update_service_limit_request_dto: DocspaceApiSdk::UpdateServiceLimitRequestDto.new({id: 42}) # UpdateServiceLimitRequestDto | 
+}
+
+begin
+  # Update a service limit
+  result = api_instance.update_service_limit(opts)
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->update_service_limit: #{e}"
+end
+```
+
+#### Using the update_service_limit_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ServiceLimitWrapper>, Integer, Hash)> update_service_limit_with_http_info(opts)
+
+```ruby
+begin
+  # Update a service limit
+  data, status_code, headers = api_instance.update_service_limit_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ServiceLimitWrapper>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling Portal::PaymentApi->update_service_limit_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **update_service_limit_request_dto** | [**UpdateServiceLimitRequestDto**](UpdateServiceLimitRequestDto.md) |  | [optional] |
+
+### Return type
+
+[**ServiceLimitWrapper**](ServiceLimitWrapper.md)
 
 ### Authorization
 

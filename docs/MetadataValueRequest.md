@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **field_id** | **Integer** | The field ID. |  |
 | **string_value** | **String** | The string value. | [optional] |
-| **number_value** | **Integer** | The number value. | [optional] |
+| **number_value** | **Integer** | The number value: a whole number of at most 2^53-1 (9007199254740991) in magnitude, the largest integer a JSON  client reads exactly. A larger one is refused rather than stored and returned rounded. | [optional] |
 | **date_value** | **Time** | The date value. A value without a time zone offset is treated as UTC, the same way the metadata filters treat their date bounds. | [optional] |
 | **option_ids** | **Array&lt;String&gt;** | The selected choice option IDs. | [optional] |
 
