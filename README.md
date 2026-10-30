@@ -4658,8 +4658,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [DocspaceApiSdk::CheckDestFolderWrapper](docs/CheckDestFolderWrapper.md)
  - [DocspaceApiSdk::CheckDocServiceUrlRequestDto](docs/CheckDocServiceUrlRequestDto.md)
  - [DocspaceApiSdk::CheckFillFormDraftRequest](docs/CheckFillFormDraftRequest.md)
- - [DocspaceApiSdk::CheckMoveOrCopyBatchItemsDestFolderIdParameter](docs/CheckMoveOrCopyBatchItemsDestFolderIdParameter.md)
- - [DocspaceApiSdk::CheckMoveOrCopyBatchItemsFolderIdsParameterInner](docs/CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md)
  - [DocspaceApiSdk::CheckUploadRequest](docs/CheckUploadRequest.md)
  - [DocspaceApiSdk::ChunkedUploadSessionDto](docs/ChunkedUploadSessionDto.md)
  - [DocspaceApiSdk::ChunkedUploadSessionResultDto](docs/ChunkedUploadSessionResultDto.md)

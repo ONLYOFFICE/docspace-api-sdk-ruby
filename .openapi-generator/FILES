@@ -325,8 +325,6 @@ docs/CheckDestFolderResult.md
 docs/CheckDestFolderWrapper.md
 docs/CheckDocServiceUrlRequestDto.md
 docs/CheckFillFormDraftRequest.md
-docs/CheckMoveOrCopyBatchItemsDestFolderIdParameter.md
-docs/CheckMoveOrCopyBatchItemsFolderIdsParameterInner.md
 docs/CheckUploadRequest.md
 docs/ChunkedUploadSessionDto.md
 docs/ChunkedUploadSessionResultDto.md
@@ -1550,8 +1548,6 @@ lib/docspace-api-sdk/models/check-dest-folder-result.rb
 lib/docspace-api-sdk/models/check-dest-folder-wrapper.rb
 lib/docspace-api-sdk/models/check-doc-service-url-request-dto.rb
 lib/docspace-api-sdk/models/check-fill-form-draft-request.rb
-lib/docspace-api-sdk/models/check-move-or-copy-batch-items-dest-folder-id-parameter.rb
-lib/docspace-api-sdk/models/check-move-or-copy-batch-items-folder-ids-parameter-inner.rb
 lib/docspace-api-sdk/models/check-upload-request.rb
 lib/docspace-api-sdk/models/chunked-upload-session-dto.rb
 lib/docspace-api-sdk/models/chunked-upload-session-result-dto.rb
