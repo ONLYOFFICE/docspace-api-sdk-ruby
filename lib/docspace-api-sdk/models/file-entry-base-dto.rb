@@ -85,6 +85,9 @@ module DocspaceApiSdk
     # Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here.
     attr_accessor :file_entry_type
 
+    # Which concrete type the object is: `file`, `thirdPartyFile`, `folder`, `thirdPartyFolder`. It is what tells the types apart in a list that mixes several of them; a response limited by `fields` may leave it out.
+    attr_accessor :entry_kind
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -131,7 +134,8 @@ module DocspaceApiSdk
         :'provider_id' => :'providerId',
         :'order' => :'order',
         :'is_favorite' => :'isFavorite',
-        :'file_entry_type' => :'fileEntryType'
+        :'file_entry_type' => :'fileEntryType',
+        :'entry_kind' => :'entryKind'
       }
     end
 
@@ -169,7 +173,8 @@ module DocspaceApiSdk
         :'provider_id' => :'Integer',
         :'order' => :'String',
         :'is_favorite' => :'Boolean',
-        :'file_entry_type' => :'FileEntryType'
+        :'file_entry_type' => :'FileEntryType',
+        :'entry_kind' => :'String'
       }
     end
 
@@ -184,6 +189,11 @@ module DocspaceApiSdk
         :'order',
         :'is_favorite',
       ])
+    end
+
+    # discriminator's property name in OpenAPI v3
+    def self.openapi_discriminator_name
+      :'entry_kind'
     end
 
     # Initializes the object
@@ -289,6 +299,10 @@ module DocspaceApiSdk
       if attributes.key?(:'file_entry_type')
         self.file_entry_type = attributes[:'file_entry_type']
       end
+
+      if attributes.key?(:'entry_kind')
+        self.entry_kind = attributes[:'entry_kind']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -332,7 +346,8 @@ module DocspaceApiSdk
           provider_id == o.provider_id &&
           order == o.order &&
           is_favorite == o.is_favorite &&
-          file_entry_type == o.file_entry_type
+          file_entry_type == o.file_entry_type &&
+          entry_kind == o.entry_kind
     end
 
     # @see the `==` method
@@ -344,7 +359,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, access, shared_by, owned_by, shared, shared_for_user, shared_external, parent_shared, short_web_url, created, created_by, updated, auto_delete, root_folder_type, parent_room_type, updated_by, provider_item, provider_key, provider_id, order, is_favorite, file_entry_type].hash
+      [title, access, shared_by, owned_by, shared, shared_for_user, shared_external, parent_shared, short_web_url, created, created_by, updated, auto_delete, root_folder_type, parent_room_type, updated_by, provider_item, provider_key, provider_id, order, is_favorite, file_entry_type, entry_kind].hash
     end
 
     # Builds the object from hash

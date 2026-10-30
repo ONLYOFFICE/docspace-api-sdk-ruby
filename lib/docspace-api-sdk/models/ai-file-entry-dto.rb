@@ -85,6 +85,9 @@ module DocspaceApiSdk
     # Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here.
     attr_accessor :file_entry_type
 
+    # Which concrete type the object is: `file`, `thirdPartyFile`, `folder`, `thirdPartyFolder`. It is what tells the types apart in a list that mixes several of them; a response limited by `fields` may leave it out.
+    attr_accessor :entry_kind
+
     # The identifier to pass back to the other operations of this entry. It is a number for storage on the portal  and a string for a connected third-party account, and it is unique only within its own kind, so files and  folders may carry the same value.
     attr_accessor :id
 
@@ -177,6 +180,7 @@ module DocspaceApiSdk
         :'order' => :'order',
         :'is_favorite' => :'isFavorite',
         :'file_entry_type' => :'fileEntryType',
+        :'entry_kind' => :'entryKind',
         :'id' => :'id',
         :'root_folder_id' => :'rootFolderId',
         :'origin_id' => :'originId',
@@ -231,6 +235,7 @@ module DocspaceApiSdk
         :'order' => :'String',
         :'is_favorite' => :'Boolean',
         :'file_entry_type' => :'AiFileEntryType',
+        :'entry_kind' => :'String',
         :'id' => :'Integer',
         :'root_folder_id' => :'Integer',
         :'origin_id' => :'Integer',
@@ -377,6 +382,10 @@ module DocspaceApiSdk
         self.file_entry_type = attributes[:'file_entry_type']
       end
 
+      if attributes.key?(:'entry_kind')
+        self.entry_kind = attributes[:'entry_kind']
+      end
+
       if attributes.key?(:'id')
         self.id = attributes[:'id']
       end
@@ -488,6 +497,7 @@ module DocspaceApiSdk
           order == o.order &&
           is_favorite == o.is_favorite &&
           file_entry_type == o.file_entry_type &&
+          entry_kind == o.entry_kind &&
           id == o.id &&
           root_folder_id == o.root_folder_id &&
           origin_id == o.origin_id &&
@@ -515,7 +525,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, access, shared_by, owned_by, shared, shared_for_user, shared_external, parent_shared, short_web_url, created, created_by, updated, auto_delete, root_folder_type, parent_room_type, updated_by, provider_item, provider_key, provider_id, order, is_favorite, file_entry_type, id, root_folder_id, origin_id, origin_room_id, origin_title, origin_room_title, can_share, share_settings, security, available_share_rights, request_token, external, expiration_date, is_link_expired, assigned_metadata_templates, metadata_matches].hash
+      [title, access, shared_by, owned_by, shared, shared_for_user, shared_external, parent_shared, short_web_url, created, created_by, updated, auto_delete, root_folder_type, parent_room_type, updated_by, provider_item, provider_key, provider_id, order, is_favorite, file_entry_type, entry_kind, id, root_folder_id, origin_id, origin_room_id, origin_title, origin_room_title, can_share, share_settings, security, available_share_rights, request_token, external, expiration_date, is_link_expired, assigned_metadata_templates, metadata_matches].hash
     end
 
     # Builds the object from hash
