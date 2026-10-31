@@ -22,8 +22,11 @@ module DocspaceApiSdk
     # The ConnectionTestResultDto object returned by the operation.
     attr_accessor :response
 
-    # The total number of items in the response
+    # How many items this response carries: the length of the page for a list, 1 for a single object
     attr_accessor :count
+
+    # How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+    attr_accessor :total
 
     # List of links related to the response
     attr_accessor :links
@@ -39,6 +42,7 @@ module DocspaceApiSdk
       {
         :'response' => :'response',
         :'count' => :'count',
+        :'total' => :'total',
         :'links' => :'links',
         :'status' => :'status',
         :'status_code' => :'statusCode'
@@ -60,6 +64,7 @@ module DocspaceApiSdk
       {
         :'response' => :'ConnectionTestResultDto',
         :'count' => :'Integer',
+        :'total' => :'Integer',
         :'links' => :'Array<GetPortalPrices200ResponseLinksInner>',
         :'status' => :'Integer',
         :'status_code' => :'Integer'
@@ -94,6 +99,10 @@ module DocspaceApiSdk
 
       if attributes.key?(:'count')
         self.count = attributes[:'count']
+      end
+
+      if attributes.key?(:'total')
+        self.total = attributes[:'total']
       end
 
       if attributes.key?(:'links')
@@ -133,6 +142,7 @@ module DocspaceApiSdk
       self.class == o.class &&
           response == o.response &&
           count == o.count &&
+          total == o.total &&
           links == o.links &&
           status == o.status &&
           status_code == o.status_code
@@ -147,7 +157,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [response, count, links, status, status_code].hash
+      [response, count, total, links, status, status_code].hash
     end
 
     # Builds the object from hash
