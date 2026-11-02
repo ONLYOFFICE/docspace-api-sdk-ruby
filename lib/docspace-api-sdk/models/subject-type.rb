@@ -23,9 +23,10 @@ module DocspaceApiSdk
     Group = 2.freeze
     InvitationLink = 3.freeze
     PrimaryExternalLink = 4.freeze
+    AiProject = 5.freeze
 
     def self.all_vars
-      @all_vars ||= [User, ExternalLink, Group, InvitationLink, PrimaryExternalLink].freeze
+      @all_vars ||= [User, ExternalLink, Group, InvitationLink, PrimaryExternalLink, AiProject].freeze
     end
 
     # Builds the enum from string

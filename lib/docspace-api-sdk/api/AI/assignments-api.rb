@@ -24,7 +24,7 @@ module DocspaceApiSdk
       @api_client = api_client
     end
     # Bind a profile to an action
-    # Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile's declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write: a room's own binding is created by the agent that owns it, while reads accept an `entityId`.
+    # Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile's declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write; the reads accept an `entityId` for compatibility and answer the same portal-wide bindings.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-assign/
     # @param ai_assignments_assign_request [AiAssignmentsAssignRequest] 
     # @param [Hash] opts the optional parameters
@@ -35,7 +35,7 @@ module DocspaceApiSdk
     end
 
     # Bind a profile to an action
-    # Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile's declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write: a room's own binding is created by the agent that owns it, while reads accept an `entityId`.
+    # Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile's declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write; the reads accept an `entityId` for compatibility and answer the same portal-wide bindings.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-assign/
     # @param ai_assignments_assign_request [AiAssignmentsAssignRequest] 
     # @param [Hash] opts the optional parameters
@@ -234,10 +234,11 @@ module DocspaceApiSdk
     end
 
     # Get all assignments
-    # Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId` narrows it to a room and has to name one the caller can open; a room that is not an agent room degrades to the portal-wide set rather than answering empty, and omitting the parameter reads the portal-wide set directly. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others.
+    # Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId`, when sent, has to name a room the caller can open; the bindings are portal-wide, so the answer is the same set with or without it. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others. With `expand=profile` the answer is `{ assignments, profilesTotal, chatProfilesTotal }`: the assigned profiles themselves (as `GET api/2.0/ai/profiles/list` describes them) keyed by action, a binding whose profile no longer exists left out, plus how many profiles the portal has and how many of them can chat; this is the one read a chat needs to start.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-get-all-assignments/
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
+    # @option opts [String] :expand Set to profile to answer the assigned profiles themselves instead of their IDs: `{ assignments, profilesTotal, chatProfilesTotal }`. Omit for the plain ID map.
     # @return [Hash<String, String>]
     def ai_assignments_get_all_assignments(opts = {})
       data, _status_code, _headers = ai_assignments_get_all_assignments_with_http_info(opts)
@@ -245,10 +246,11 @@ module DocspaceApiSdk
     end
 
     # Get all assignments
-    # Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId` narrows it to a room and has to name one the caller can open; a room that is not an agent room degrades to the portal-wide set rather than answering empty, and omitting the parameter reads the portal-wide set directly. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others.
+    # Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId`, when sent, has to name a room the caller can open; the bindings are portal-wide, so the answer is the same set with or without it. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others. With `expand=profile` the answer is `{ assignments, profilesTotal, chatProfilesTotal }`: the assigned profiles themselves (as `GET api/2.0/ai/profiles/list` describes them) keyed by action, a binding whose profile no longer exists left out, plus how many profiles the portal has and how many of them can chat; this is the one read a chat needs to start.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-get-all-assignments/
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
+    # @option opts [String] :expand Set to profile to answer the assigned profiles themselves instead of their IDs: `{ assignments, profilesTotal, chatProfilesTotal }`. Omit for the plain ID map.
     # @return [Array<(Hash<String, String>, Integer, Hash)>] Hash<String, String> data, response status code and response headers
     def ai_assignments_get_all_assignments_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -260,6 +262,7 @@ module DocspaceApiSdk
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'entityId'] = opts[:'entity_id'] if !opts[:'entity_id'].nil?
+      query_params[:'expand'] = opts[:'expand'] if !opts[:'expand'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -366,7 +369,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-resolve-for-action/
     # @param action_type [String] The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [AiResolvedAssignment]
     def ai_assignments_resolve_for_action(action_type, opts = {})
       data, _status_code, _headers = ai_assignments_resolve_for_action_with_http_info(action_type, opts)
@@ -378,7 +381,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-resolve-for-action/
     # @param action_type [String] The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Array<(AiResolvedAssignment, Integer, Hash)>] AiResolvedAssignment data, response status code and response headers
     def ai_assignments_resolve_for_action_with_http_info(action_type, opts = {})
       if @api_client.config.debugging
@@ -435,7 +438,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-try-resolve-for-action/
     # @param action_type [String] The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [AiResolvedAssignment]
     def ai_assignments_try_resolve_for_action(action_type, opts = {})
       data, _status_code, _headers = ai_assignments_try_resolve_for_action_with_http_info(action_type, opts)
@@ -447,7 +450,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-try-resolve-for-action/
     # @param action_type [String] The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Array<(AiResolvedAssignment, Integer, Hash)>] AiResolvedAssignment data, response status code and response headers
     def ai_assignments_try_resolve_for_action_with_http_info(action_type, opts = {})
       if @api_client.config.debugging

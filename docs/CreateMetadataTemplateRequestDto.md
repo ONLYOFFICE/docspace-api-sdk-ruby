@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **name** | **String** | The template name. |  |
 | **visible** | **Boolean** | Specifies if the template is visible in the UI pickers. | [optional] |
-| **fields** | [**Array&lt;MetadataFieldRequest&gt;**](MetadataFieldRequest.md) | The template metadata fields. | [optional] |
+| **fields** | [**Array&lt;MetadataFieldRequest&gt;**](MetadataFieldRequest.md) | The template metadata fields. At least one field is required: a template without fields is not created. | [optional] |
 
 ## Example
 

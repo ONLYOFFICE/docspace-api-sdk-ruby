@@ -28,9 +28,10 @@ module DocspaceApiSdk
     AI_AGENTS = "AiAgents".freeze
     FORMS = "Forms".freeze
     FORM_TEMPLATES = "FormTemplates".freeze
+    AI_HUB = "AiHub".freeze
 
     def self.all_vars
-      @all_vars ||= [ACTIVE, ARCHIVE, ANY, RECENT_BY_LINKS, TEMPLATES, KNOWLEDGE, RESULT_STORAGE, AI_AGENTS, FORMS, FORM_TEMPLATES].freeze
+      @all_vars ||= [ACTIVE, ARCHIVE, ANY, RECENT_BY_LINKS, TEMPLATES, KNOWLEDGE, RESULT_STORAGE, AI_AGENTS, FORMS, FORM_TEMPLATES, AI_HUB].freeze
     end
 
     # Builds the enum from string

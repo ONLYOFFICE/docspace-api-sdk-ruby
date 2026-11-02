@@ -24,7 +24,7 @@ module DocspaceApiSdk
       @api_client = api_client
     end
     # Add custom server
-    # Registers a custom MCP server under the given name so the model may call its tools. The name becomes a URL path segment, so it may not be `.`, `..`, or contain a path separator or a control character. `config` may be omitted in two cases: a name matching a host-configured system server pins the entry to that server's canonical settings as a whitelist marker, and a name already registered portal-wide copies the portal-level configuration into this scope; anything else without a config is rejected. `entityId` scopes the registration and has to name a room the caller can open - a room that is not an agent room folds to the portal-wide scope, while an unreachable one is refused so it cannot silently rewrite the portal's own registry.
+    # Registers a custom MCP server under the given name so the model may call its tools. The name becomes a URL path segment, so it may not be `.`, `..`, or contain a path separator or a control character. `config` may be omitted in two cases: a name matching a host-configured system server pins the entry to that server's canonical settings, and a name already registered keeps its stored configuration; anything else without a config is rejected. The registry is one map per portal: `entityId`, when sent, has to name a room the caller can open, and an unreachable one is refused so it cannot silently rewrite the registry.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-add-custom-server/
     # @param ai_tools_add_custom_server_request [AiToolsAddCustomServerRequest] 
     # @param [Hash] opts the optional parameters
@@ -35,7 +35,7 @@ module DocspaceApiSdk
     end
 
     # Add custom server
-    # Registers a custom MCP server under the given name so the model may call its tools. The name becomes a URL path segment, so it may not be `.`, `..`, or contain a path separator or a control character. `config` may be omitted in two cases: a name matching a host-configured system server pins the entry to that server's canonical settings as a whitelist marker, and a name already registered portal-wide copies the portal-level configuration into this scope; anything else without a config is rejected. `entityId` scopes the registration and has to name a room the caller can open - a room that is not an agent room folds to the portal-wide scope, while an unreachable one is refused so it cannot silently rewrite the portal's own registry.
+    # Registers a custom MCP server under the given name so the model may call its tools. The name becomes a URL path segment, so it may not be `.`, `..`, or contain a path separator or a control character. `config` may be omitted in two cases: a name matching a host-configured system server pins the entry to that server's canonical settings, and a name already registered keeps its stored configuration; anything else without a config is rejected. The registry is one map per portal: `entityId`, when sent, has to name a room the caller can open, and an unreachable one is refused so it cannot silently rewrite the registry.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-add-custom-server/
     # @param ai_tools_add_custom_server_request [AiToolsAddCustomServerRequest] 
     # @param [Hash] opts the optional parameters
@@ -97,7 +97,7 @@ module DocspaceApiSdk
     # Returns the always-allow list of the scope - the tools whose calls run without pausing the round for approval. `entityId` picks the scope and omitting it reads the portal-wide setting. An empty answer means every tool call has to be approved through `POST api/2.0/ai/ai/approve-tool-call`. Use `GET api/2.0/ai/tools/is-allow-always` to ask about a single tool.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-allow-always/
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Array<String>]
     def ai_tools_get_allow_always(opts = {})
       data, _status_code, _headers = ai_tools_get_allow_always_with_http_info(opts)
@@ -108,7 +108,7 @@ module DocspaceApiSdk
     # Returns the always-allow list of the scope - the tools whose calls run without pausing the round for approval. `entityId` picks the scope and omitting it reads the portal-wide setting. An empty answer means every tool call has to be approved through `POST api/2.0/ai/ai/approve-tool-call`. Use `GET api/2.0/ai/tools/is-allow-always` to ask about a single tool.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-allow-always/
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Array<(Array<String>, Integer, Hash)>] Array<String> data, response status code and response headers
     def ai_tools_get_allow_always_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -160,7 +160,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-custom-server/
     # @param name [String] The custom MCP server name.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Object]
     def ai_tools_get_custom_server(name, opts = {})
       data, _status_code, _headers = ai_tools_get_custom_server_with_http_info(name, opts)
@@ -172,7 +172,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-custom-server/
     # @param name [String] The custom MCP server name.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
     def ai_tools_get_custom_server_with_http_info(name, opts = {})
       if @api_client.config.debugging
@@ -229,7 +229,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-disabled/
     # @param scope [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Hash<String, Array<String>>]
     def ai_tools_get_disabled(scope, opts = {})
       data, _status_code, _headers = ai_tools_get_disabled_with_http_info(scope, opts)
@@ -241,7 +241,7 @@ module DocspaceApiSdk
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-disabled/
     # @param scope [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Array<(Hash<String, Array<String>>, Integer, Hash)>] Hash<String, Array<String>> data, response status code and response headers
     def ai_tools_get_disabled_with_http_info(scope, opts = {})
       if @api_client.config.debugging
@@ -299,7 +299,7 @@ module DocspaceApiSdk
     # @param server_type [String] The MCP server type the tool belongs to.
     # @param tool_name [String] The tool name.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Boolean]
     def ai_tools_is_allow_always(server_type, tool_name, opts = {})
       data, _status_code, _headers = ai_tools_is_allow_always_with_http_info(server_type, tool_name, opts)
@@ -312,7 +312,7 @@ module DocspaceApiSdk
     # @param server_type [String] The MCP server type the tool belongs to.
     # @param tool_name [String] The tool name.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Array<(Boolean, Integer, Hash)>] Boolean data, response status code and response headers
     def ai_tools_is_allow_always_with_http_info(server_type, tool_name, opts = {})
       if @api_client.config.debugging
@@ -375,7 +375,7 @@ module DocspaceApiSdk
     # @param server_type [String] The MCP server type the tool belongs to.
     # @param tool_name [String] The tool name.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Boolean]
     def ai_tools_is_tool_disabled(server_type, tool_name, opts = {})
       data, _status_code, _headers = ai_tools_is_tool_disabled_with_http_info(server_type, tool_name, opts)
@@ -388,7 +388,7 @@ module DocspaceApiSdk
     # @param server_type [String] The MCP server type the tool belongs to.
     # @param tool_name [String] The tool name.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Array<(Boolean, Integer, Hash)>] Boolean data, response status code and response headers
     def ai_tools_is_tool_disabled_with_http_info(server_type, tool_name, opts = {})
       if @api_client.config.debugging
@@ -449,7 +449,7 @@ module DocspaceApiSdk
     # Lists the custom MCP servers registered in the scope as a map of name to configuration. `entityId` picks the scope and omitting it lists the portal-wide registry. The configuration of any entry that names a host-configured system server comes back empty, for the same reason as in the single-server read, and the portal's own built-in MCP server is left out of the list entirely because it is always enabled and cannot be configured. The names in the answer are what the disable and always-allow operations accept as `serverType`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-list-custom-servers/
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Hash<String, Object>]
     def ai_tools_list_custom_servers(opts = {})
       data, _status_code, _headers = ai_tools_list_custom_servers_with_http_info(opts)
@@ -460,7 +460,7 @@ module DocspaceApiSdk
     # Lists the custom MCP servers registered in the scope as a map of name to configuration. `entityId` picks the scope and omitting it lists the portal-wide registry. The configuration of any entry that names a host-configured system server comes back empty, for the same reason as in the single-server read, and the portal's own built-in MCP server is left out of the list entirely because it is always enabled and cannot be configured. The names in the answer are what the disable and always-allow operations accept as `serverType`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-list-custom-servers/
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Array<(Hash<String, Object>, Integer, Hash)>] Hash<String, Object> data, response status code and response headers
     def ai_tools_list_custom_servers_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -508,10 +508,10 @@ module DocspaceApiSdk
     end
 
     # List system tools
-    # Lists every tool the scope can offer the model, as a map of server type to tool group. The answer merges two sources - the host-configured system servers and the live tools of the scope's registered custom MCP servers; for an agent room those are the servers enabled for that agent alone, never the portal-wide registry - and names the system ones separately in `system`, so a client can tell the two apart. `errors` carries the reason a registered server delivered no tools, which is the text to show on a permission card, because the browser cannot reach a server-executed MCP server to find out for itself. The connections are opened server-side, so one request is enough and the client never speaks MCP itself; the portal's own built-in server is left out because it is always enabled.
+    # Lists every tool the scope can offer the model, as a map of server type to tool group. The answer merges two sources - the host-configured system servers and the live tools of the portal's registered custom MCP servers - and names the system ones separately in `system`, so a client can tell the two apart. `errors` carries the reason a registered server delivered no tools, which is the text to show on a permission card, because the browser cannot reach a server-executed MCP server to find out for itself. The connections are opened server-side, so one request is enough and the client never speaks MCP itself; the portal's own built-in server is left out because it is always enabled.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-list-system-tools/
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [AiToolsListSystemTools200Response]
     def ai_tools_list_system_tools(opts = {})
       data, _status_code, _headers = ai_tools_list_system_tools_with_http_info(opts)
@@ -519,10 +519,10 @@ module DocspaceApiSdk
     end
 
     # List system tools
-    # Lists every tool the scope can offer the model, as a map of server type to tool group. The answer merges two sources - the host-configured system servers and the live tools of the scope's registered custom MCP servers; for an agent room those are the servers enabled for that agent alone, never the portal-wide registry - and names the system ones separately in `system`, so a client can tell the two apart. `errors` carries the reason a registered server delivered no tools, which is the text to show on a permission card, because the browser cannot reach a server-executed MCP server to find out for itself. The connections are opened server-side, so one request is enough and the client never speaks MCP itself; the portal's own built-in server is left out because it is always enabled.
+    # Lists every tool the scope can offer the model, as a map of server type to tool group. The answer merges two sources - the host-configured system servers and the live tools of the portal's registered custom MCP servers - and names the system ones separately in `system`, so a client can tell the two apart. `errors` carries the reason a registered server delivered no tools, which is the text to show on a permission card, because the browser cannot reach a server-executed MCP server to find out for itself. The connections are opened server-side, so one request is enough and the client never speaks MCP itself; the portal's own built-in server is left out because it is always enabled.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-list-system-tools/
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Array<(AiToolsListSystemTools200Response, Integer, Hash)>] AiToolsListSystemTools200Response data, response status code and response headers
     def ai_tools_list_system_tools_with_http_info(opts = {})
       if @api_client.config.debugging

@@ -23,3 +23,5 @@
 
 * `FORM_TEMPLATES` (value: `"FormTemplates"`)
 
+* `AI_HUB` (value: `"AiHub"`)
+

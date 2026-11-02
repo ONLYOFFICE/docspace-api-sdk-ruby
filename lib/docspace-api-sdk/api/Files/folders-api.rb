@@ -754,7 +754,7 @@ module DocspaceApiSdk
       if @api_client.config.client_side_validation && folder_id.nil?
         fail ArgumentError, "Missing the required parameter 'folder_id' when calling Files::FoldersApi.get_folder_by_folder_id"
       end
-      allowable_values = [0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37]
+      allowable_values = [0, 1, 2, 3, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41]
       if @api_client.config.client_side_validation && opts[:'folder_type'] && !opts[:'folder_type'].all? { |item| allowable_values.include?(item) }
         fail ArgumentError, "invalid value for \"folder_type\", must include one of #{allowable_values}"
       end

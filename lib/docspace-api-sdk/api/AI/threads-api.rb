@@ -164,7 +164,7 @@ module DocspaceApiSdk
     end
 
     # Create a chat thread
-    # Creates a chat thread with a title supplied by the caller and returns it. A scoped thread requires that `entityId` names a room the caller can open, and a model has to resolve for the scope - an explicit `profileId`, or the room's `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. In an agent room the agent's own assignment overrides any `profileId` sent with the request, so a thread there always starts on the agent's model. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
+    # Creates a chat thread with a title supplied by the caller and returns it. `entityId`, when sent, is the AI project the chat runs in and has to name one the caller can chat in; threads themselves are one list per user. A model has to resolve - an explicit `profileId`, the project's model, or the `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-create/
     # @param ai_threads_create_request [AiThreadsCreateRequest] 
     # @param [Hash] opts the optional parameters
@@ -175,7 +175,7 @@ module DocspaceApiSdk
     end
 
     # Create a chat thread
-    # Creates a chat thread with a title supplied by the caller and returns it. A scoped thread requires that `entityId` names a room the caller can open, and a model has to resolve for the scope - an explicit `profileId`, or the room's `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. In an agent room the agent's own assignment overrides any `profileId` sent with the request, so a thread there always starts on the agent's model. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
+    # Creates a chat thread with a title supplied by the caller and returns it. `entityId`, when sent, is the AI project the chat runs in and has to name one the caller can chat in; threads themselves are one list per user. A model has to resolve - an explicit `profileId`, the project's model, or the `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-create/
     # @param ai_threads_create_request [AiThreadsCreateRequest] 
     # @param [Hash] opts the optional parameters
@@ -509,7 +509,7 @@ module DocspaceApiSdk
     # Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when `query` is given. Every parameter is optional: omitting `entityId` lists the global scope, and omitting `count` lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - `{id: <last thread id>, lastEditDate: <its date>}` - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an `id`, is ignored rather than rejected, and the read silently starts from the first page again.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-list/
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @option opts [Integer] :count The maximum number of items to return in one page.
     # @option opts [String] :cursor The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
     # @option opts [String] :query The full-text query the thread list is filtered by.
@@ -523,7 +523,7 @@ module DocspaceApiSdk
     # Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when `query` is given. Every parameter is optional: omitting `entityId` lists the global scope, and omitting `count` lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - `{id: <last thread id>, lastEditDate: <its date>}` - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an `id`, is ignored rather than rejected, and the read silently starts from the first page again.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-list/
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @option opts [Integer] :count The maximum number of items to return in one page.
     # @option opts [String] :cursor The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
     # @option opts [String] :query The full-text query the thread list is filtered by.
@@ -577,7 +577,7 @@ module DocspaceApiSdk
     end
 
     # Open or create
-    # Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; anything that is not an agent room folds to the global scope instead of being rejected.
+    # Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; threads are one list per user whatever it names.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-open-or-create/
     # @param ai_threads_open_or_create_request [AiThreadsOpenOrCreateRequest] 
     # @param [Hash] opts the optional parameters
@@ -588,7 +588,7 @@ module DocspaceApiSdk
     end
 
     # Open or create
-    # Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; anything that is not an agent room folds to the global scope instead of being rejected.
+    # Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; threads are one list per user whatever it names.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-open-or-create/
     # @param ai_threads_open_or_create_request [AiThreadsOpenOrCreateRequest] 
     # @param [Hash] opts the optional parameters

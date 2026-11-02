@@ -49,9 +49,13 @@ module DocspaceApiSdk
     DefaultTemplates = 35.freeze
     Forms = 36.freeze
     Ai = 37.freeze
+    InstructionsRoom = 38.freeze
+    KnowledgeRoom = 39.freeze
+    AiProjectRoom = 40.freeze
+    AiHub = 41.freeze
 
     def self.all_vars
-      @all_vars ||= [DEFAULT, COMMON, BUNCH, TRASH, USER, SHARE, Projects, Favorites, Recent, Templates, Privacy, VirtualRooms, FillingFormsRoom, EditingRoom, CustomRoom, Archive, ThirdpartyBackup, PublicRoom, ReadyFormFolder, InProcessFormFolder, FormFillingFolderDone, FormFillingFolderInProgress, VirtualDataRoom, RoomTemplates, AiRoom, Knowledge, ChatOutputs, AiAgents, DefaultTemplates, Forms, Ai].freeze
+      @all_vars ||= [DEFAULT, COMMON, BUNCH, TRASH, USER, SHARE, Projects, Favorites, Recent, Templates, Privacy, VirtualRooms, FillingFormsRoom, EditingRoom, CustomRoom, Archive, ThirdpartyBackup, PublicRoom, ReadyFormFolder, InProcessFormFolder, FormFillingFolderDone, FormFillingFolderInProgress, VirtualDataRoom, RoomTemplates, AiRoom, Knowledge, ChatOutputs, AiAgents, DefaultTemplates, Forms, Ai, InstructionsRoom, KnowledgeRoom, AiProjectRoom, AiHub].freeze
     end
 
     # Builds the enum from string

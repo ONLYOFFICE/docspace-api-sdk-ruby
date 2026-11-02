@@ -24,9 +24,12 @@ module DocspaceApiSdk
     PublicRoom = 6.freeze
     VirtualDataRoom = 8.freeze
     AiRoom = 9.freeze
+    InstructionsRoom = 10.freeze
+    KnowledgeRoom = 11.freeze
+    AiProjectRoom = 12.freeze
 
     def self.all_vars
-      @all_vars ||= [FillingFormsRoom, EditingRoom, CustomRoom, PublicRoom, VirtualDataRoom, AiRoom].freeze
+      @all_vars ||= [FillingFormsRoom, EditingRoom, CustomRoom, PublicRoom, VirtualDataRoom, AiRoom, InstructionsRoom, KnowledgeRoom, AiProjectRoom].freeze
     end
 
     # Builds the enum from string

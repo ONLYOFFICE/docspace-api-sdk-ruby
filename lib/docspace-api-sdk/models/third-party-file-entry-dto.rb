@@ -61,6 +61,9 @@ module DocspaceApiSdk
     # The IDs of the metadata templates assigned to the file entry.
     attr_accessor :assigned_metadata_templates
 
+    # Whether the entry has a metadata field a user can see and fill, by hand or with the AI filling: a field of a  visible assigned template, or a custom field. False when the entry has no metadata, when its assigned templates  are all hidden, or when they have no fields. It says nothing about the values: it stays true once every field is  filled, and nothing about the caller's rights: writing the values still needs the right to edit the entry  (`security.Edit`). It cannot be derived from `assignedMetadataTemplates`, which lists hidden templates too and  never lists the custom fields. Present, with a value, in the folder listing and in the file and folder info  responses; absent in the other responses that carry an entry (the answer to a creation, an upload or a rename),  which do not compute it, and for an entry of a third-party storage, which has no metadata. The same flag is  answered by `GET api/2.0/files/metadata/file/{fileId}` and `GET api/2.0/files/metadata/folder/{folderId}`.
+    attr_accessor :has_metadata_fields
+
     # Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here.
     attr_accessor :metadata_matches
 
@@ -104,6 +107,7 @@ module DocspaceApiSdk
         :'expiration_date' => :'expirationDate',
         :'is_link_expired' => :'isLinkExpired',
         :'assigned_metadata_templates' => :'assignedMetadataTemplates',
+        :'has_metadata_fields' => :'hasMetadataFields',
         :'metadata_matches' => :'metadataMatches'
       }
     end
@@ -128,14 +132,15 @@ module DocspaceApiSdk
         :'origin_title' => :'String',
         :'origin_room_title' => :'String',
         :'can_share' => :'Boolean',
-        :'share_settings' => :'AiFileEntryDtoAllOfShareSettings',
-        :'security' => :'AiFileEntryDtoAllOfSecurity',
-        :'available_share_rights' => :'AiFileEntryDtoAllOfAvailableShareRights',
+        :'share_settings' => :'FileEntryDtoAllOfShareSettings',
+        :'security' => :'FileEntryDtoAllOfSecurity',
+        :'available_share_rights' => :'FileEntryDtoAllOfAvailableShareRights',
         :'request_token' => :'String',
         :'external' => :'Boolean',
         :'expiration_date' => :'ApiDateTime',
         :'is_link_expired' => :'Boolean',
         :'assigned_metadata_templates' => :'Array<Integer>',
+        :'has_metadata_fields' => :'Boolean',
         :'metadata_matches' => :'Array<MetadataMatchDto>'
       }
     end
@@ -156,6 +161,7 @@ module DocspaceApiSdk
         :'external',
         :'is_link_expired',
         :'assigned_metadata_templates',
+        :'has_metadata_fields',
         :'metadata_matches'
       ])
     end
@@ -248,6 +254,10 @@ module DocspaceApiSdk
         end
       end
 
+      if attributes.key?(:'has_metadata_fields')
+        self.has_metadata_fields = attributes[:'has_metadata_fields']
+      end
+
       if attributes.key?(:'metadata_matches')
         if (value = attributes[:'metadata_matches']).is_a?(Array)
           self.metadata_matches = value
@@ -290,6 +300,7 @@ module DocspaceApiSdk
           expiration_date == o.expiration_date &&
           is_link_expired == o.is_link_expired &&
           assigned_metadata_templates == o.assigned_metadata_templates &&
+          has_metadata_fields == o.has_metadata_fields &&
           metadata_matches == o.metadata_matches && super(o)
     end
 
@@ -302,7 +313,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, root_folder_id, origin_id, origin_room_id, origin_title, origin_room_title, can_share, share_settings, security, available_share_rights, request_token, external, expiration_date, is_link_expired, assigned_metadata_templates, metadata_matches].hash
+      [id, root_folder_id, origin_id, origin_room_id, origin_title, origin_room_title, can_share, share_settings, security, available_share_rights, request_token, external, expiration_date, is_link_expired, assigned_metadata_templates, has_metadata_fields, metadata_matches].hash
     end
 
     # Builds the object from hash

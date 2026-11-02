@@ -65,3 +65,11 @@
 
 * `Ai` (value: `37`)
 
+* `InstructionsRoom` (value: `38`)
+
+* `KnowledgeRoom` (value: `39`)
+
+* `AiProjectRoom` (value: `40`)
+
+* `AiHub` (value: `41`)
+

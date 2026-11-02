@@ -39,9 +39,12 @@ module DocspaceApiSdk
     VirtualDataRooms = 24.freeze
     DiagramsOnly = 25.freeze
     AiRooms = 26.freeze
+    InstructionsRooms = 27.freeze
+    KnowledgeRooms = 28.freeze
+    AiProjectRooms = 29.freeze
 
     def self.all_vars
-      @all_vars ||= [None, FilesOnly, FoldersOnly, DocumentsOnly, PresentationsOnly, SpreadsheetsOnly, ImagesOnly, ByUser, ByDepartment, ArchiveOnly, ByExtension, MediaOnly, FillingFormsRooms, EditingRooms, CustomRooms, PublicRooms, Pdf, PdfForm, VirtualDataRooms, DiagramsOnly, AiRooms].freeze
+      @all_vars ||= [None, FilesOnly, FoldersOnly, DocumentsOnly, PresentationsOnly, SpreadsheetsOnly, ImagesOnly, ByUser, ByDepartment, ArchiveOnly, ByExtension, MediaOnly, FillingFormsRooms, EditingRooms, CustomRooms, PublicRooms, Pdf, PdfForm, VirtualDataRooms, DiagramsOnly, AiRooms, InstructionsRooms, KnowledgeRooms, AiProjectRooms].freeze
     end
 
     # Builds the enum from string

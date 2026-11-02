@@ -8,4 +8,4 @@ script:
   - bundle install --path vendor/bundle
   - bundle exec rspec
   - gem build docspace-api-sdk.gemspec
-  - gem install ./docspace-api-sdk-4.0.0.gem
+  - gem install ./docspace-api-sdk-4.1.0.gem

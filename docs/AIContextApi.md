@@ -5,6 +5,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**ai_context_get_context_folders**](AIContextApi.md#ai_context_get_context_folders) | **GET** /api/2.0/ai/context/get-context-folders | Get context folders |
+| [**ai_context_get_knowledge_folders**](AIContextApi.md#ai_context_get_knowledge_folders) | **GET** /api/2.0/ai/context/get-knowledge-folders | Get knowledge folders |
 | [**ai_context_get_room_skill**](AIContextApi.md#ai_context_get_room_skill) | **GET** /api/2.0/ai/context/get-room-skill | Get room skill |
 | [**ai_context_get_room_skills**](AIContextApi.md#ai_context_get_room_skills) | **GET** /api/2.0/ai/context/get-room-skills | Get room skills |
 
@@ -59,6 +60,77 @@ begin
   p data # => <AiSuccessResponse>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::ContextApi->ai_context_get_context_folders_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**AiSuccessResponse**](AiSuccessResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## ai_context_get_knowledge_folders
+
+> <AiSuccessResponse> ai_context_get_knowledge_folders
+
+Get knowledge folders
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-knowledge-folders/).
+
+### Examples
+
+```ruby
+require 'time'
+require 'docspace-api-sdk'
+# setup authorization
+DocspaceApiSdk.configure do |config|
+  # Configure API key authorization: cookieAuth
+  config.api_key['asc_auth_key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['asc_auth_key'] = 'Bearer'
+
+  # Configure Bearer authorization: bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = DocspaceApiSdk::AI::ContextApi.new
+
+begin
+  # Get knowledge folders
+  result = api_instance.ai_context_get_knowledge_folders
+  p result
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling AI::ContextApi->ai_context_get_knowledge_folders: #{e}"
+end
+```
+
+#### Using the ai_context_get_knowledge_folders_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AiSuccessResponse>, Integer, Hash)> ai_context_get_knowledge_folders_with_http_info
+
+```ruby
+begin
+  # Get knowledge folders
+  data, status_code, headers = api_instance.ai_context_get_knowledge_folders_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AiSuccessResponse>
+rescue DocspaceApiSdk::ApiError => e
+  puts "Error when calling AI::ContextApi->ai_context_get_knowledge_folders_with_http_info: #{e}"
 end
 ```
 

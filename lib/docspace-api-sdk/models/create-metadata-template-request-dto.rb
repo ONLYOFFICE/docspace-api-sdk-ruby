@@ -25,7 +25,7 @@ module DocspaceApiSdk
     # Specifies if the template is visible in the UI pickers.
     attr_accessor :visible
 
-    # The template metadata fields.
+    # The template metadata fields. At least one field is required: a template without fields is not created.
     attr_accessor :fields
 
     # Attribute mapping from ruby-style variable name to JSON key.

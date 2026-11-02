@@ -25,11 +25,15 @@ module DocspaceApiSdk
     # The custom fields with their values.
     attr_accessor :custom_fields
 
+    # Whether the entry has a metadata field a user can see and fill, by hand or with the AI filling: a field of a  template in `templates` whose `visible` is true, or a custom field in `customFields`. False when both lists are  empty, when every template is hidden, or when none of the visible ones has a field. It says nothing about the  values: it stays true once every field is filled. The same flag is carried by the entry in a folder listing and  in the file and folder info responses as `hasMetadataFields`, so a client that has the listing needs no call here  to decide whether to offer the filling.
+    attr_accessor :has_metadata_fields
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'templates' => :'templates',
-        :'custom_fields' => :'customFields'
+        :'custom_fields' => :'customFields',
+        :'has_metadata_fields' => :'hasMetadataFields'
       }
     end
 
@@ -47,7 +51,8 @@ module DocspaceApiSdk
     def self.openapi_types
       {
         :'templates' => :'Array<EntryTemplateDto>',
-        :'custom_fields' => :'Array<CustomFieldValueDto>'
+        :'custom_fields' => :'Array<CustomFieldValueDto>',
+        :'has_metadata_fields' => :'Boolean'
       }
     end
 
@@ -55,7 +60,7 @@ module DocspaceApiSdk
     def self.openapi_nullable
       Set.new([
         :'templates',
-        :'custom_fields'
+        :'custom_fields',
       ])
     end
 
@@ -86,6 +91,10 @@ module DocspaceApiSdk
           self.custom_fields = value
         end
       end
+
+      if attributes.key?(:'has_metadata_fields')
+        self.has_metadata_fields = attributes[:'has_metadata_fields']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -109,7 +118,8 @@ module DocspaceApiSdk
       return true if self.equal?(o)
       self.class == o.class &&
           templates == o.templates &&
-          custom_fields == o.custom_fields
+          custom_fields == o.custom_fields &&
+          has_metadata_fields == o.has_metadata_fields
     end
 
     # @see the `==` method
@@ -121,7 +131,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [templates, custom_fields].hash
+      [templates, custom_fields, has_metadata_fields].hash
     end
 
     # Builds the object from hash

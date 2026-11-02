@@ -167,7 +167,7 @@ module DocspaceApiSdk
     # Returns the web-search configuration in force for a scope - the provider, its endpoint and its settings. `entityId` picks a room and has to name one the caller can open; omitting it reads the portal-wide configuration, and a room with none of its own falls back to that. An unconfigured scope answers an empty result rather than 404. The provider key is not part of the answer, so a client cannot read it back after storing it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-get-active-config/
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [AiWebSearchConfig]
     def ai_web_search_get_active_config(opts = {})
       data, _status_code, _headers = ai_web_search_get_active_config_with_http_info(opts)
@@ -178,7 +178,7 @@ module DocspaceApiSdk
     # Returns the web-search configuration in force for a scope - the provider, its endpoint and its settings. `entityId` picks a room and has to name one the caller can open; omitting it reads the portal-wide configuration, and a room with none of its own falls back to that. An unconfigured scope answers an empty result rather than 404. The provider key is not part of the answer, so a client cannot read it back after storing it.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-get-active-config/
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Array<(AiWebSearchConfig, Integer, Hash)>] AiWebSearchConfig data, response status code and response headers
     def ai_web_search_get_active_config_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -229,7 +229,7 @@ module DocspaceApiSdk
     # Tells whether web search is available in a scope, as a bare boolean, which is the cheap check for hiding or showing the feature. `entityId` picks a room and has to name one the caller can open. It reports the same state as `GET api/2.0/ai/web-search/get-active-config` without transferring the configuration itself. A true answer means a provider is stored, not that the provider is currently reachable - probe that with `POST api/2.0/ai/web-search/test-connection`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-is-configured/
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Boolean]
     def ai_web_search_is_configured(opts = {})
       data, _status_code, _headers = ai_web_search_is_configured_with_http_info(opts)
@@ -240,7 +240,7 @@ module DocspaceApiSdk
     # Tells whether web search is available in a scope, as a bare boolean, which is the cheap check for hiding or showing the feature. `entityId` picks a room and has to name one the caller can open. It reports the same state as `GET api/2.0/ai/web-search/get-active-config` without transferring the configuration itself. A true answer means a provider is stored, not that the provider is currently reachable - probe that with `POST api/2.0/ai/web-search/test-connection`.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-is-configured/
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :entity_id The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+    # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @return [Array<(Boolean, Integer, Hash)>] Boolean data, response status code and response headers
     def ai_web_search_is_configured_with_http_info(opts = {})
       if @api_client.config.debugging

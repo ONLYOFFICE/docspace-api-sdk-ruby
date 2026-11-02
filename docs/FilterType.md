@@ -45,3 +45,9 @@
 
 * `AiRooms` (value: `26`)
 
+* `InstructionsRooms` (value: `27`)
+
+* `KnowledgeRooms` (value: `28`)
+
+* `AiProjectRooms` (value: `29`)
+
