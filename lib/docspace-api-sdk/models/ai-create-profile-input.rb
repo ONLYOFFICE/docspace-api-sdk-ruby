@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Input for creating a new profile — the same shape as `Profile` without the engine-generated fields (`id`, `createdAt`).
+  # Input for creating a new profile: the shape of a profile without the fields the service fills in (`id`, `createdAt`).
   class AiCreateProfileInput < ApiModelBase
     # User-defined profile display name.
     attr_accessor :name
 
-    # Provider type for this profile. Use `external` to delegate all HTTP transport to `PlatformAdapter.externalFetch` while reusing an existing provider's response parser — see `Profile.basedOn` for the format selector.
+    # The provider type of the profile. `external` sends every request through a transport the embedding application supplies while parsing the answers with the provider named in `basedOn`.
     attr_accessor :provider_type
 
     # Selects the response-format parser used by the `external` provider. Ignored for any other `providerType`.  Supported values are `openai`, `anthropic`, `mistral` and `openrouter`. Remaining values (`genai`, `stabilityai`, …) are accepted by the type but not yet implemented; passing one raises an error at request time.
@@ -43,7 +43,7 @@ module DocspaceApiSdk
     # Whether extended thinking is enabled for this profile's model.
     attr_accessor :reasoning
 
-    # Extended-thinking capabilities of the selected model as reported by the provider's catalogue at save time (see `Model.reasoningSupport`). When present the composer's Effort row follows it exactly; when absent the provider's id-based table answers. Hosts persist it with the rest of the profile.
+    # What the model can do with extended thinking, as the provider's catalogue reported it when the profile was saved; the effort choices in the chat follow it. When absent, the abilities are taken from the model ID.
     attr_accessor :reasoning_support
 
     # Bitmask of capabilities supported by the selected model.
@@ -58,7 +58,7 @@ module DocspaceApiSdk
     # Whether this profile uses a cloud-hosted provider (e.g. ONLYOFFICE DocSpace).
     attr_accessor :is_cloud_provider
 
-    # Route every provider request through the host's `fetchProxy` instead of the global `fetch`. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the `PlatformAdapter.fetchProxy` is not configured.
+    # Whether the chat client sends this profile's provider requests through the portal's proxy instead of directly. Has no effect when no proxy is configured.
     attr_accessor :use_proxy
 
     class EnumAttributeValidator

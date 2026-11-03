@@ -28,28 +28,6 @@ module DocspaceApiSdk
     # Every exported prompt.
     attr_accessor :prompts
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -72,7 +50,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'version' => :'Float',
+        :'version' => :'Integer',
         :'folders' => :'Array<AiPromptFolder>',
         :'prompts' => :'Array<AiPrompt>'
       }
@@ -132,6 +110,14 @@ module DocspaceApiSdk
         invalid_properties.push('invalid value for "version", version cannot be nil.')
       end
 
+      if @version > 1
+        invalid_properties.push('invalid value for "version", must be smaller than or equal to 1.')
+      end
+
+      if @version < 1
+        invalid_properties.push('invalid value for "version", must be greater than or equal to 1.')
+      end
+
       if @folders.nil?
         invalid_properties.push('invalid value for "folders", folders cannot be nil.')
       end
@@ -148,20 +134,28 @@ module DocspaceApiSdk
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @version.nil?
-      version_validator = EnumAttributeValidator.new('Float', [1])
-      return false unless version_validator.valid?(@version)
+      return false if @version > 1
+      return false if @version < 1
       return false if @folders.nil?
       return false if @prompts.nil?
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] version Object to be assigned
+    # Custom attribute writer method with validation
+    # @param [Object] version Value to be assigned
     def version=(version)
-      validator = EnumAttributeValidator.new('Float', [1])
-      unless validator.valid?(version)
-        fail ArgumentError, "invalid value for \"version\", must be one of #{validator.allowable_values}."
+      if version.nil?
+        fail ArgumentError, 'version cannot be nil'
       end
+
+      if version > 1
+        fail ArgumentError, 'invalid value for "version", must be smaller than or equal to 1.'
+      end
+
+      if version < 1
+        fail ArgumentError, 'invalid value for "version", must be greater than or equal to 1.'
+      end
+
       @version = version
     end
 

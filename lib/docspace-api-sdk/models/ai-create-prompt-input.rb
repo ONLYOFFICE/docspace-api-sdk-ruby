@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Input for creating a prompt — the engine generates `id`/`createdAt`/`updatedAt`.
+  # Input for creating a prompt; the service fills in `id`, `createdAt` and `updatedAt`.
   class AiCreatePromptInput < ApiModelBase
     # The prompt name.
     attr_accessor :name

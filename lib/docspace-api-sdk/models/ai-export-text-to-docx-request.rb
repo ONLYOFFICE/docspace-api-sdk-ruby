@@ -26,12 +26,38 @@ module DocspaceApiSdk
 
     attr_accessor :folder_id
 
+    # Output format: `Docx` (the default when omitted), `Pdf`, or `Md`, which stores the markdown verbatim instead of converting it.
+    attr_accessor :format
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'title' => :'title',
         :'content' => :'content',
-        :'folder_id' => :'folderId'
+        :'folder_id' => :'folderId',
+        :'format' => :'format'
       }
     end
 
@@ -50,7 +76,8 @@ module DocspaceApiSdk
       {
         :'title' => :'String',
         :'content' => :'String',
-        :'folder_id' => :'AiExportTextToDocxRequestFolderId'
+        :'folder_id' => :'AiExportTextToDocxRequestFolderId',
+        :'format' => :'String'
       }
     end
 
@@ -93,6 +120,10 @@ module DocspaceApiSdk
       else
         self.folder_id = nil
       end
+
+      if attributes.key?(:'format')
+        self.format = attributes[:'format']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -122,6 +153,8 @@ module DocspaceApiSdk
       return false if @title.nil?
       return false if @content.nil?
       return false if @folder_id.nil?
+      format_validator = EnumAttributeValidator.new('String', ["Docx", "Pdf", "Md"])
+      return false unless format_validator.valid?(@format)
       true
     end
 
@@ -155,6 +188,16 @@ module DocspaceApiSdk
       @folder_id = folder_id
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] format Object to be assigned
+    def format=(format)
+      validator = EnumAttributeValidator.new('String', ["Docx", "Pdf", "Md"])
+      unless validator.valid?(format)
+        fail ArgumentError, "invalid value for \"format\", must be one of #{validator.allowable_values}."
+      end
+      @format = format
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -162,7 +205,8 @@ module DocspaceApiSdk
       self.class == o.class &&
           title == o.title &&
           content == o.content &&
-          folder_id == o.folder_id
+          folder_id == o.folder_id &&
+          format == o.format
     end
 
     # @see the `==` method
@@ -174,7 +218,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [title, content, folder_id].hash
+      [title, content, folder_id, format].hash
     end
 
     # Builds the object from hash

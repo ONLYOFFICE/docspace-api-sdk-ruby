@@ -25,11 +25,14 @@ module DocspaceApiSdk
     # The user turn to send.
     attr_accessor :user_message
 
-    # Per-request engine options: extra tools, reasoning, prompt override.
+    # Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.
     attr_accessor :action_args
 
     # Optional entity (room) scope for profile resolution.
     attr_accessor :entity_id
+
+    # The folder or room the user is in. Tools run against it and the model is told it is the user's location; falls back to `entityId` when omitted.
+    attr_accessor :context_entity_id
 
     # Session-level profile override for this request only.
     attr_accessor :profile_id
@@ -41,6 +44,7 @@ module DocspaceApiSdk
         :'user_message' => :'userMessage',
         :'action_args' => :'actionArgs',
         :'entity_id' => :'entityId',
+        :'context_entity_id' => :'contextEntityId',
         :'profile_id' => :'profileId'
       }
     end
@@ -62,6 +66,7 @@ module DocspaceApiSdk
         :'user_message' => :'AiThreadMessageLike',
         :'action_args' => :'AiActionArgs',
         :'entity_id' => :'String',
+        :'context_entity_id' => :'String',
         :'profile_id' => :'String'
       }
     end
@@ -104,6 +109,10 @@ module DocspaceApiSdk
 
       if attributes.key?(:'entity_id')
         self.entity_id = attributes[:'entity_id']
+      end
+
+      if attributes.key?(:'context_entity_id')
+        self.context_entity_id = attributes[:'context_entity_id']
       end
 
       if attributes.key?(:'profile_id')
@@ -150,6 +159,7 @@ module DocspaceApiSdk
           user_message == o.user_message &&
           action_args == o.action_args &&
           entity_id == o.entity_id &&
+          context_entity_id == o.context_entity_id &&
           profile_id == o.profile_id
     end
 
@@ -162,7 +172,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [thread_id, user_message, action_args, entity_id, profile_id].hash
+      [thread_id, user_message, action_args, entity_id, context_entity_id, profile_id].hash
     end
 
     # Builds the object from hash

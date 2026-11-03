@@ -32,10 +32,10 @@ module DocspaceApiSdk
 
     attr_accessor :status
 
-    # Arbitrary per-message metadata.
+    # Per-message metadata. The chat library writes `custom` (with the round's `contextEntityId`) and `steps` (token usage per provider request); `unstable_state`, `unstable_annotations`, `unstable_data` and `submittedFeedback` may appear as well. Read it as an open map.
     attr_accessor :metadata
 
-    # Attachments linked to the message.
+    # Attachments linked to the message (`id`, `type`, `name`, `contentType`, `status`, `content`). Read them as open objects.
     attr_accessor :attachments
 
     class EnumAttributeValidator

@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **message_id** | **String** | Identifier of the message that was appended to the thread. |  |
+| **message_id** | [**AiThreadMessageLike**](AiThreadMessageLike.md) | The stored message itself - with its storage-assigned `id` and `createdAt` - despite the field name, which is kept for the clients that already read it. The message ID is `messageId.id`. |  |
 
 ## Example
 
@@ -12,6 +12,6 @@
 require 'docspace-api-sdk'
 
 instance = DocspaceApiSdk::AiThreadsAppendUserMessage200Response.new(
-  message_id: 22222222-2222-2222-2222-222222222222
+  message_id: null
 )
 ```

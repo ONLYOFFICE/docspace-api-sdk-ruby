@@ -6,8 +6,9 @@
 | ---- | ---- | ----------- | ----- |
 | **thread_id** | **String** | Target thread; a new one is created (with an auto title) when omitted. | [optional] |
 | **user_message** | [**AiThreadMessageLike**](AiThreadMessageLike.md) | The user turn to send. |  |
-| **action_args** | [**AiActionArgs**](AiActionArgs.md) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] |
+| **action_args** | [**AiActionArgs**](AiActionArgs.md) | Per-request options of the round: extra tools, reasoning, a prompt override and the connected context. | [optional] |
 | **entity_id** | **String** | Optional entity (room) scope for profile resolution. | [optional] |
+| **context_entity_id** | **String** | The folder or room the user is in. Tools run against it and the model is told it is the user's location; falls back to `entityId` when omitted. | [optional] |
 | **profile_id** | **String** | Session-level profile override for this request only. | [optional] |
 
 ## Example
@@ -20,6 +21,7 @@ instance = DocspaceApiSdk::AiSendStreamBody.new(
   user_message: {role=user, content=Summarise the attached contract.},
   action_args: {isReasoning=false},
   entity_id: 1234,
+  context_entity_id: null,
   profile_id: 00000000-0000-0000-0000-000000000000
 )
 ```

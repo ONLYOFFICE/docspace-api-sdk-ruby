@@ -244,7 +244,7 @@ end
 
 ## ai_assignments_get_all_assignments
 
-> Hash&lt;String, String&gt; ai_assignments_get_all_assignments(opts)
+> <AiAssignmentsGetAllAssignments200Response> ai_assignments_get_all_assignments(opts)
 
 Get all assignments
 
@@ -287,7 +287,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(Hash&lt;String, String&gt;, Integer, Hash)> ai_assignments_get_all_assignments_with_http_info(opts)
+> <Array(<AiAssignmentsGetAllAssignments200Response>, Integer, Hash)> ai_assignments_get_all_assignments_with_http_info(opts)
 
 ```ruby
 begin
@@ -295,7 +295,7 @@ begin
   data, status_code, headers = api_instance.ai_assignments_get_all_assignments_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => Hash&lt;String, String&gt;
+  p data # => <AiAssignmentsGetAllAssignments200Response>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::AssignmentsApi->ai_assignments_get_all_assignments_with_http_info: #{e}"
 end
@@ -310,7 +310,7 @@ end
 
 ### Return type
 
-**Hash&lt;String, String&gt;**
+[**AiAssignmentsGetAllAssignments200Response**](AiAssignmentsGetAllAssignments200Response.md)
 
 ### Authorization
 

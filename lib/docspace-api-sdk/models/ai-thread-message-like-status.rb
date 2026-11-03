@@ -19,12 +19,21 @@ require 'time'
 module DocspaceApiSdk
   # Delivery/generation status of the message.
   class AiThreadMessageLikeStatus < ApiModelBase
+    # `running`, `requires-action`, `complete` or `incomplete`.
     attr_accessor :type
+
+    # Why the message is in that state: `tool-calls` or `interrupt` for `requires-action`; `stop` or `unknown` for `complete`; `cancelled`, `tool-calls`, `length`, `content-filter`, `other` or `error` for `incomplete`. An `incomplete` message the chat stored carries `cancelled` (the round was stopped) or `error`.
+    attr_accessor :reason
+
+    # What failed, on an `incomplete` message whose `reason` is `error`.
+    attr_accessor :error
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type'
+        :'type' => :'type',
+        :'reason' => :'reason',
+        :'error' => :'error'
       }
     end
 
@@ -41,7 +50,9 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'type' => :'String'
+        :'type' => :'String',
+        :'reason' => :'String',
+        :'error' => :'AiChatErrorPayload'
       }
     end
 
@@ -71,6 +82,14 @@ module DocspaceApiSdk
         self.type = attributes[:'type']
       else
         self.type = nil
+      end
+
+      if attributes.key?(:'reason')
+        self.reason = attributes[:'reason']
+      end
+
+      if attributes.key?(:'error')
+        self.error = attributes[:'error']
       end
     end
 
@@ -109,7 +128,9 @@ module DocspaceApiSdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type
+          type == o.type &&
+          reason == o.reason &&
+          error == o.error
     end
 
     # @see the `==` method
@@ -121,7 +142,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type].hash
+      [type, reason, error].hash
     end
 
     # Builds the object from hash

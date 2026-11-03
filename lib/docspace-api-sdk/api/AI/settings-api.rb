@@ -83,20 +83,20 @@ module DocspaceApiSdk
     end
 
     # Get the tool permission mode
-    # Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+    # Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), inside the service's `response` envelope, proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-tool-mode/
     # @param [Hash] opts the optional parameters
-    # @return [AiSuccessResponse]
+    # @return [AiToolPermissionModeWrapper]
     def ai_settings_get_tool_mode(opts = {})
       data, _status_code, _headers = ai_settings_get_tool_mode_with_http_info(opts)
       data
     end
 
     # Get the tool permission mode
-    # Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+    # Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), inside the service's `response` envelope, proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-tool-mode/
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
+    # @return [Array<(AiToolPermissionModeWrapper, Integer, Hash)>] AiToolPermissionModeWrapper data, response status code and response headers
     def ai_settings_get_tool_mode_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::SettingsApi.ai_settings_get_tool_mode ...'
@@ -119,7 +119,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiSuccessResponse'
+      return_type = opts[:debug_return_type] || 'AiToolPermissionModeWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']
@@ -260,22 +260,22 @@ module DocspaceApiSdk
     end
 
     # Set the tool permission mode
-    # Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+    # Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum with 400; the answer is the stored mode inside the service's `response` envelope. The mode applies to every chat of the user in the portal.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-tool-mode/
     # @param ai_settings_set_tool_mode_request [Hash<String, Object>] `{ mode }` with the AI service's `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum.
     # @param [Hash] opts the optional parameters
-    # @return [AiSuccessResponse]
+    # @return [AiToolPermissionModeWrapper]
     def ai_settings_set_tool_mode(ai_settings_set_tool_mode_request, opts = {})
       data, _status_code, _headers = ai_settings_set_tool_mode_with_http_info(ai_settings_set_tool_mode_request, opts)
       data
     end
 
     # Set the tool permission mode
-    # Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+    # Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum with 400; the answer is the stored mode inside the service's `response` envelope. The mode applies to every chat of the user in the portal.
     # See also: https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-tool-mode/
     # @param ai_settings_set_tool_mode_request [Hash<String, Object>] `{ mode }` with the AI service's `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AiSuccessResponse, Integer, Hash)>] AiSuccessResponse data, response status code and response headers
+    # @return [Array<(AiToolPermissionModeWrapper, Integer, Hash)>] AiToolPermissionModeWrapper data, response status code and response headers
     def ai_settings_set_tool_mode_with_http_info(ai_settings_set_tool_mode_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::SettingsApi.ai_settings_set_tool_mode ...'
@@ -307,7 +307,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(ai_settings_set_tool_mode_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AiSuccessResponse'
+      return_type = opts[:debug_return_type] || 'AiToolPermissionModeWrapper'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']

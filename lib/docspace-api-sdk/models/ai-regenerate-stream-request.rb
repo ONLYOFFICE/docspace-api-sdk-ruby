@@ -21,11 +21,23 @@ module DocspaceApiSdk
     # Target thread (must already exist).
     attr_accessor :thread_id
 
-    # Per-request engine options: extra tools, reasoning, prompt override.
+    # The user message to re-roll from: everything stored after it is deleted. When omitted, or no longer in the thread, the last user message is used.
+    attr_accessor :message_id
+
+    # How many messages from the start of the thread to keep, used when `messageId` does not resolve. The message at `keepCount - 1` has to be a user message; otherwise the value is ignored.
+    attr_accessor :keep_count
+
+    # The thread length the caller saw when it computed `keepCount`. When it differs from the stored length, `keepCount` is discarded and the last user message is used instead.
+    attr_accessor :expected_length
+
+    # Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.
     attr_accessor :action_args
 
     # Optional entity (room) scope for profile resolution.
     attr_accessor :entity_id
+
+    # The folder or room the user is in. Tools run against it and the model is told it is the user's location; falls back to `entityId` when omitted.
+    attr_accessor :context_entity_id
 
     # Session-level profile override for this request only.
     attr_accessor :profile_id
@@ -34,8 +46,12 @@ module DocspaceApiSdk
     def self.attribute_map
       {
         :'thread_id' => :'threadId',
+        :'message_id' => :'messageId',
+        :'keep_count' => :'keepCount',
+        :'expected_length' => :'expectedLength',
         :'action_args' => :'actionArgs',
         :'entity_id' => :'entityId',
+        :'context_entity_id' => :'contextEntityId',
         :'profile_id' => :'profileId'
       }
     end
@@ -54,8 +70,12 @@ module DocspaceApiSdk
     def self.openapi_types
       {
         :'thread_id' => :'String',
+        :'message_id' => :'String',
+        :'keep_count' => :'Integer',
+        :'expected_length' => :'Integer',
         :'action_args' => :'AiActionArgs',
         :'entity_id' => :'String',
+        :'context_entity_id' => :'String',
         :'profile_id' => :'String'
       }
     end
@@ -88,12 +108,28 @@ module DocspaceApiSdk
         self.thread_id = nil
       end
 
+      if attributes.key?(:'message_id')
+        self.message_id = attributes[:'message_id']
+      end
+
+      if attributes.key?(:'keep_count')
+        self.keep_count = attributes[:'keep_count']
+      end
+
+      if attributes.key?(:'expected_length')
+        self.expected_length = attributes[:'expected_length']
+      end
+
       if attributes.key?(:'action_args')
         self.action_args = attributes[:'action_args']
       end
 
       if attributes.key?(:'entity_id')
         self.entity_id = attributes[:'entity_id']
+      end
+
+      if attributes.key?(:'context_entity_id')
+        self.context_entity_id = attributes[:'context_entity_id']
       end
 
       if attributes.key?(:'profile_id')
@@ -137,8 +173,12 @@ module DocspaceApiSdk
       return true if self.equal?(o)
       self.class == o.class &&
           thread_id == o.thread_id &&
+          message_id == o.message_id &&
+          keep_count == o.keep_count &&
+          expected_length == o.expected_length &&
           action_args == o.action_args &&
           entity_id == o.entity_id &&
+          context_entity_id == o.context_entity_id &&
           profile_id == o.profile_id
     end
 
@@ -151,7 +191,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [thread_id, action_args, entity_id, profile_id].hash
+      [thread_id, message_id, keep_count, expected_length, action_args, entity_id, context_entity_id, profile_id].hash
     end
 
     # Builds the object from hash

@@ -26,8 +26,11 @@ module DocspaceApiSdk
 
     attr_accessor :user_message
 
-    # Per-request engine options: extra tools, reasoning, prompt override.
+    # Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.
     attr_accessor :action_args
+
+    # Profile to run this call on. When omitted, or when no profile has this id, the `Default` assignment is used.
+    attr_accessor :profile_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -35,7 +38,8 @@ module DocspaceApiSdk
         :'is_stream' => :'isStream',
         :'system_prompt' => :'systemPrompt',
         :'user_message' => :'userMessage',
-        :'action_args' => :'actionArgs'
+        :'action_args' => :'actionArgs',
+        :'profile_id' => :'profileId'
       }
     end
 
@@ -55,7 +59,8 @@ module DocspaceApiSdk
         :'is_stream' => :'Boolean',
         :'system_prompt' => :'String',
         :'user_message' => :'AiThreadMessageLike',
-        :'action_args' => :'AiActionArgs'
+        :'action_args' => :'AiActionArgs',
+        :'profile_id' => :'String'
       }
     end
 
@@ -101,6 +106,10 @@ module DocspaceApiSdk
 
       if attributes.key?(:'action_args')
         self.action_args = attributes[:'action_args']
+      end
+
+      if attributes.key?(:'profile_id')
+        self.profile_id = attributes[:'profile_id']
       end
     end
 
@@ -172,7 +181,8 @@ module DocspaceApiSdk
           is_stream == o.is_stream &&
           system_prompt == o.system_prompt &&
           user_message == o.user_message &&
-          action_args == o.action_args
+          action_args == o.action_args &&
+          profile_id == o.profile_id
     end
 
     # @see the `==` method
@@ -184,7 +194,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [is_stream, system_prompt, user_message, action_args].hash
+      [is_stream, system_prompt, user_message, action_args, profile_id].hash
     end
 
     # Builds the object from hash

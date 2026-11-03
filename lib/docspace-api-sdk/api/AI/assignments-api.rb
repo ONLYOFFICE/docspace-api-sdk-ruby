@@ -239,7 +239,7 @@ module DocspaceApiSdk
     # @param [Hash] opts the optional parameters
     # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @option opts [String] :expand Set to profile to answer the assigned profiles themselves instead of their IDs: `{ assignments, profilesTotal, chatProfilesTotal }`. Omit for the plain ID map.
-    # @return [Hash<String, String>]
+    # @return [AiAssignmentsGetAllAssignments200Response]
     def ai_assignments_get_all_assignments(opts = {})
       data, _status_code, _headers = ai_assignments_get_all_assignments_with_http_info(opts)
       data
@@ -251,7 +251,7 @@ module DocspaceApiSdk
     # @param [Hash] opts the optional parameters
     # @option opts [String] :entity_id The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
     # @option opts [String] :expand Set to profile to answer the assigned profiles themselves instead of their IDs: `{ assignments, profilesTotal, chatProfilesTotal }`. Omit for the plain ID map.
-    # @return [Array<(Hash<String, String>, Integer, Hash)>] Hash<String, String> data, response status code and response headers
+    # @return [Array<(AiAssignmentsGetAllAssignments200Response, Integer, Hash)>] AiAssignmentsGetAllAssignments200Response data, response status code and response headers
     def ai_assignments_get_all_assignments_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AI::AssignmentsApi.ai_assignments_get_all_assignments ...'
@@ -276,7 +276,7 @@ module DocspaceApiSdk
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'Hash<String, String>'
+      return_type = opts[:debug_return_type] || 'AiAssignmentsGetAllAssignments200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['cookieAuth', 'bearerAuth']

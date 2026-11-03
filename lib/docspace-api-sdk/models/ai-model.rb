@@ -31,7 +31,7 @@ module DocspaceApiSdk
     # Whether this model supports extended thinking / chain-of-thought reasoning.
     attr_accessor :reasoning
 
-    # What the model can do with extended thinking, when the provider's catalogue says so (OpenRouter and the ONLYOFFICE route report a per-model `reasoning` object). Copied onto the profile at save time; absent, the widget falls back to the provider's id-based table.
+    # What the model can do with extended thinking, when the provider's catalogue reports it (OpenRouter and the ONLYOFFICE route do). Copied onto the profile when it is saved; when absent, the abilities are taken from the model ID.
     attr_accessor :reasoning_support
 
     # Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per `ActionType`.

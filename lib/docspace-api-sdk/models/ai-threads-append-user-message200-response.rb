@@ -18,7 +18,7 @@ require 'time'
 
 module DocspaceApiSdk
   class AiThreadsAppendUserMessage200Response < ApiModelBase
-    # Identifier of the message that was appended to the thread.
+    # The stored message itself - with its storage-assigned `id` and `createdAt` - despite the field name, which is kept for the clients that already read it. The message ID is `messageId.id`.
     attr_accessor :message_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -41,7 +41,7 @@ module DocspaceApiSdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'message_id' => :'String'
+        :'message_id' => :'AiThreadMessageLike'
       }
     end
 

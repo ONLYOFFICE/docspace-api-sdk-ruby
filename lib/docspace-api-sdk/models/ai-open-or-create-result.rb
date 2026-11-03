@@ -17,12 +17,12 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Resolved thread state returned by `ThreadsEngine.openOrCreate`.
+  # The thread that was opened or created, with its stored messages.
   class AiOpenOrCreateResult < ApiModelBase
     # The thread that was opened, or the one just created.
     attr_accessor :thread_id
 
-    # Empty string for existing threads — the engine doesn't re-fetch.
+    # The title generated for a thread this call created; an empty string when it opened an existing thread.
     attr_accessor :title
 
     # The messages already in the thread - empty for a thread that was just created.

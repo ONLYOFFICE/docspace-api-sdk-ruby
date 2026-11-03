@@ -32,14 +32,17 @@ module DocspaceApiSdk
     # Index of the tool-call content part inside `message.content`.
     attr_accessor :idx
 
-    # Snapshot of the assistant message at the time the tool call surfaced. Optional and ignored: the engine resumes from the stored message, and the copy inflated the body past the parser limit (Bug 84608).
+    # A copy of the assistant message as it was when the tool call surfaced. Optional and ignored: the round resumes from the stored message. Leave it out - a long conversation's copy can push the body past the size limit.
     attr_accessor :message
 
-    # Per-request engine options: extra tools, reasoning, prompt override.
+    # Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.
     attr_accessor :action_args
 
     # Optional entity (room) scope for profile resolution.
     attr_accessor :entity_id
+
+    # The folder or room the user is in. Tools run against it and the model is told it is the user's location; falls back to `entityId` when omitted.
+    attr_accessor :context_entity_id
 
     # Session-level profile override for this request only.
     attr_accessor :profile_id
@@ -55,6 +58,7 @@ module DocspaceApiSdk
         :'message' => :'message',
         :'action_args' => :'actionArgs',
         :'entity_id' => :'entityId',
+        :'context_entity_id' => :'contextEntityId',
         :'profile_id' => :'profileId'
       }
     end
@@ -80,6 +84,7 @@ module DocspaceApiSdk
         :'message' => :'AiThreadMessageLike',
         :'action_args' => :'AiActionArgs',
         :'entity_id' => :'String',
+        :'context_entity_id' => :'String',
         :'profile_id' => :'String'
       }
     end
@@ -145,6 +150,10 @@ module DocspaceApiSdk
 
       if attributes.key?(:'entity_id')
         self.entity_id = attributes[:'entity_id']
+      end
+
+      if attributes.key?(:'context_entity_id')
+        self.context_entity_id = attributes[:'context_entity_id']
       end
 
       if attributes.key?(:'profile_id')
@@ -225,6 +234,7 @@ module DocspaceApiSdk
           message == o.message &&
           action_args == o.action_args &&
           entity_id == o.entity_id &&
+          context_entity_id == o.context_entity_id &&
           profile_id == o.profile_id
     end
 
@@ -237,7 +247,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [result, allow_always, thread_id, message_id, idx, message, action_args, entity_id, profile_id].hash
+      [result, allow_always, thread_id, message_id, idx, message, action_args, entity_id, context_entity_id, profile_id].hash
     end
 
     # Builds the object from hash

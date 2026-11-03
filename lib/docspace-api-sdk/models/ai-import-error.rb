@@ -17,7 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
-  # Per-entry error reported by `PromptsEngine.importBundle`.
+  # One refused entry of a prompt bundle import.
   class AiImportError < ApiModelBase
     # `folder` or `prompt`, plus the offending name or id.
     attr_accessor :kind

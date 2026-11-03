@@ -17,6 +17,7 @@ require 'date'
 require 'time'
 
 module DocspaceApiSdk
+  # Per-request options of an AI round: extra tools, the depth of reasoning, a system prompt override and the rooms and folder connected as context.
   class AiActionArgs < ApiModelBase
     # Extra tools offered to the model for this request.
     attr_accessor :tools
@@ -28,6 +29,24 @@ module DocspaceApiSdk
     attr_accessor :reasoning_level
 
     attr_accessor :prompt
+
+    # Usage notes of the MCP servers the caller holds the connection to, keyed by server type; folded into the system prompt as advisory text.
+    attr_accessor :tool_instructions
+
+    # Instructions rooms connected to the chat as context, each with the skills the round may use.
+    attr_accessor :context_rooms
+
+    # Knowledge rooms connected to the chat; the knowledge search tool of the round is limited to them. Each `id` has to be a DocSpace room id.
+    attr_accessor :knowledge_rooms
+
+    # A single knowledge room, as an older client sends it. Read only when `knowledgeRooms` is absent; send `knowledgeRooms` instead.
+    attr_accessor :knowledge_room
+
+    # The folder connected to the chat as the round's context. It becomes the location the model is told the user works in, and the entry the round is attributed to.
+    attr_accessor :folder_context
+
+    # The entry the round is attributed to. A hint, resolved against the caller's own access.
+    attr_accessor :entity_id
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -57,7 +76,13 @@ module DocspaceApiSdk
         :'tools' => :'tools',
         :'is_reasoning' => :'isReasoning',
         :'reasoning_level' => :'reasoningLevel',
-        :'prompt' => :'prompt'
+        :'prompt' => :'prompt',
+        :'tool_instructions' => :'toolInstructions',
+        :'context_rooms' => :'contextRooms',
+        :'knowledge_rooms' => :'knowledgeRooms',
+        :'knowledge_room' => :'knowledgeRoom',
+        :'folder_context' => :'folderContext',
+        :'entity_id' => :'entityId'
       }
     end
 
@@ -77,7 +102,13 @@ module DocspaceApiSdk
         :'tools' => :'Array<AiMCPItem>',
         :'is_reasoning' => :'Boolean',
         :'reasoning_level' => :'AiReasoningLevel',
-        :'prompt' => :'AiActionArgsPrompt'
+        :'prompt' => :'AiActionArgsPrompt',
+        :'tool_instructions' => :'Hash<String, String>',
+        :'context_rooms' => :'Array<AiContextRoomRef>',
+        :'knowledge_rooms' => :'Array<AiKnowledgeRoomRef>',
+        :'knowledge_room' => :'AiKnowledgeRoomRef',
+        :'folder_context' => :'AiFolderContextRef',
+        :'entity_id' => :'String'
       }
     end
 
@@ -120,6 +151,36 @@ module DocspaceApiSdk
       if attributes.key?(:'prompt')
         self.prompt = attributes[:'prompt']
       end
+
+      if attributes.key?(:'tool_instructions')
+        if (value = attributes[:'tool_instructions']).is_a?(Hash)
+          self.tool_instructions = value
+        end
+      end
+
+      if attributes.key?(:'context_rooms')
+        if (value = attributes[:'context_rooms']).is_a?(Array)
+          self.context_rooms = value
+        end
+      end
+
+      if attributes.key?(:'knowledge_rooms')
+        if (value = attributes[:'knowledge_rooms']).is_a?(Array)
+          self.knowledge_rooms = value
+        end
+      end
+
+      if attributes.key?(:'knowledge_room')
+        self.knowledge_room = attributes[:'knowledge_room']
+      end
+
+      if attributes.key?(:'folder_context')
+        self.folder_context = attributes[:'folder_context']
+      end
+
+      if attributes.key?(:'entity_id')
+        self.entity_id = attributes[:'entity_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -145,7 +206,13 @@ module DocspaceApiSdk
           tools == o.tools &&
           is_reasoning == o.is_reasoning &&
           reasoning_level == o.reasoning_level &&
-          prompt == o.prompt
+          prompt == o.prompt &&
+          tool_instructions == o.tool_instructions &&
+          context_rooms == o.context_rooms &&
+          knowledge_rooms == o.knowledge_rooms &&
+          knowledge_room == o.knowledge_room &&
+          folder_context == o.folder_context &&
+          entity_id == o.entity_id
     end
 
     # @see the `==` method
@@ -157,7 +224,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [tools, is_reasoning, reasoning_level, prompt].hash
+      [tools, is_reasoning, reasoning_level, prompt, tool_instructions, context_rooms, knowledge_rooms, knowledge_room, folder_context, entity_id].hash
     end
 
     # Builds the object from hash

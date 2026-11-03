@@ -18,15 +18,97 @@ require 'time'
 
 module DocspaceApiSdk
   class AiThreadMessageLikeContentAnyOfInner < ApiModelBase
+    # Part kind: `text`, `reasoning`, `source`, `image`, `file`, `audio`, `data` or `tool-call`.
     attr_accessor :type
 
+    # The text of a `text` or `reasoning` part.
     attr_accessor :text
+
+    # Id of the part this one belongs to, on `text`, `reasoning`, `source` and `tool-call` parts. On a `reasoning` part the chat library keeps the provider's thinking signature here.
+    attr_accessor :parent_id
+
+    # A `source` part's source kind; always `url`.
+    attr_accessor :source_type
+
+    # A `source` part's id.
+    attr_accessor :id
+
+    # A `source` part's URL.
+    attr_accessor :url
+
+    # A `source` part's title.
+    attr_accessor :title
+
+    # An `image` part's picture, as a URL (usually a `data:` URL). For an image the user attached, a JSON string `{ ref, title, kind: image }` naming the stored attachment instead.
+    attr_accessor :image
+
+    # A `file` part's media type. For a file the user attached, a JSON string `{ ref, title, kind: file, path, type }` naming the stored attachment instead - the chat library carries the reference here.
+    attr_accessor :mime_type
+
+    # A `file` part's content; empty when the part references an attachment. (A `data` part would carry its payload here too, as any JSON value; neither the chat library nor this service writes one.)
+    attr_accessor :data
+
+    # The file name of a `file` or `image` part.
+    attr_accessor :filename
+
+    # An `image` part's display name, or a `data` part's name.
+    attr_accessor :name
+
+    attr_accessor :audio
+
+    # A `tool-call` part's call id.
+    attr_accessor :tool_call_id
+
+    # A `tool-call` part's tool name.
+    attr_accessor :tool_name
+
+    # A `tool-call` part's arguments.
+    attr_accessor :args
+
+    # A `tool-call` part's arguments as the model streamed them, JSON text.
+    attr_accessor :args_text
+
+    attr_accessor :result
+
+    # Whether a `tool-call` part's result is an error.
+    attr_accessor :is_error
+
+    attr_accessor :artifact
+
+    attr_accessor :interrupt
+
+    # Messages of a sub-agent run inside a `tool-call` part.
+    attr_accessor :messages
+
+    # Provider-specific data of a `tool-call` part - for a Gemini call, `{ thoughtSignature }`, which has to be sent back with the call.
+    attr_accessor :metadata
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'type' => :'type',
-        :'text' => :'text'
+        :'text' => :'text',
+        :'parent_id' => :'parentId',
+        :'source_type' => :'sourceType',
+        :'id' => :'id',
+        :'url' => :'url',
+        :'title' => :'title',
+        :'image' => :'image',
+        :'mime_type' => :'mimeType',
+        :'data' => :'data',
+        :'filename' => :'filename',
+        :'name' => :'name',
+        :'audio' => :'audio',
+        :'tool_call_id' => :'toolCallId',
+        :'tool_name' => :'toolName',
+        :'args' => :'args',
+        :'args_text' => :'argsText',
+        :'result' => :'result',
+        :'is_error' => :'isError',
+        :'artifact' => :'artifact',
+        :'interrupt' => :'interrupt',
+        :'messages' => :'messages',
+        :'metadata' => :'metadata'
       }
     end
 
@@ -44,13 +126,36 @@ module DocspaceApiSdk
     def self.openapi_types
       {
         :'type' => :'String',
-        :'text' => :'String'
+        :'text' => :'String',
+        :'parent_id' => :'String',
+        :'source_type' => :'String',
+        :'id' => :'String',
+        :'url' => :'String',
+        :'title' => :'String',
+        :'image' => :'String',
+        :'mime_type' => :'String',
+        :'data' => :'String',
+        :'filename' => :'String',
+        :'name' => :'String',
+        :'audio' => :'AiThreadMessageLikeContentAnyOfInnerAudio',
+        :'tool_call_id' => :'String',
+        :'tool_name' => :'String',
+        :'args' => :'Object',
+        :'args_text' => :'String',
+        :'result' => :'Object',
+        :'is_error' => :'Boolean',
+        :'artifact' => :'Object',
+        :'interrupt' => :'AiThreadMessageLikeContentAnyOfInnerInterrupt',
+        :'messages' => :'Array<Object>',
+        :'metadata' => :'Object'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'result',
+        :'artifact',
       ])
     end
 
@@ -78,6 +183,92 @@ module DocspaceApiSdk
 
       if attributes.key?(:'text')
         self.text = attributes[:'text']
+      end
+
+      if attributes.key?(:'parent_id')
+        self.parent_id = attributes[:'parent_id']
+      end
+
+      if attributes.key?(:'source_type')
+        self.source_type = attributes[:'source_type']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'url')
+        self.url = attributes[:'url']
+      end
+
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
+      end
+
+      if attributes.key?(:'image')
+        self.image = attributes[:'image']
+      end
+
+      if attributes.key?(:'mime_type')
+        self.mime_type = attributes[:'mime_type']
+      end
+
+      if attributes.key?(:'data')
+        self.data = attributes[:'data']
+      end
+
+      if attributes.key?(:'filename')
+        self.filename = attributes[:'filename']
+      end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'audio')
+        self.audio = attributes[:'audio']
+      end
+
+      if attributes.key?(:'tool_call_id')
+        self.tool_call_id = attributes[:'tool_call_id']
+      end
+
+      if attributes.key?(:'tool_name')
+        self.tool_name = attributes[:'tool_name']
+      end
+
+      if attributes.key?(:'args')
+        self.args = attributes[:'args']
+      end
+
+      if attributes.key?(:'args_text')
+        self.args_text = attributes[:'args_text']
+      end
+
+      if attributes.key?(:'result')
+        self.result = attributes[:'result']
+      end
+
+      if attributes.key?(:'is_error')
+        self.is_error = attributes[:'is_error']
+      end
+
+      if attributes.key?(:'artifact')
+        self.artifact = attributes[:'artifact']
+      end
+
+      if attributes.key?(:'interrupt')
+        self.interrupt = attributes[:'interrupt']
+      end
+
+      if attributes.key?(:'messages')
+        if (value = attributes[:'messages']).is_a?(Array)
+          self.messages = value
+        end
+      end
+
+      if attributes.key?(:'metadata')
+        self.metadata = attributes[:'metadata']
       end
     end
 
@@ -117,7 +308,28 @@ module DocspaceApiSdk
       return true if self.equal?(o)
       self.class == o.class &&
           type == o.type &&
-          text == o.text
+          text == o.text &&
+          parent_id == o.parent_id &&
+          source_type == o.source_type &&
+          id == o.id &&
+          url == o.url &&
+          title == o.title &&
+          image == o.image &&
+          mime_type == o.mime_type &&
+          data == o.data &&
+          filename == o.filename &&
+          name == o.name &&
+          audio == o.audio &&
+          tool_call_id == o.tool_call_id &&
+          tool_name == o.tool_name &&
+          args == o.args &&
+          args_text == o.args_text &&
+          result == o.result &&
+          is_error == o.is_error &&
+          artifact == o.artifact &&
+          interrupt == o.interrupt &&
+          messages == o.messages &&
+          metadata == o.metadata
     end
 
     # @see the `==` method
@@ -129,7 +341,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, text].hash
+      [type, text, parent_id, source_type, id, url, title, image, mime_type, data, filename, name, audio, tool_call_id, tool_name, args, args_text, result, is_error, artifact, interrupt, messages, metadata].hash
     end
 
     # Builds the object from hash

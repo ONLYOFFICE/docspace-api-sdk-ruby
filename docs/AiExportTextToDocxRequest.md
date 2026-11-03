@@ -7,6 +7,7 @@
 | **title** | **String** | Document title (also the file name). |  |
 | **content** | **String** | Markdown content to convert. |  |
 | **folder_id** | [**AiExportTextToDocxRequestFolderId**](AiExportTextToDocxRequestFolderId.md) |  |  |
+| **format** | **String** | Output format: `Docx` (the default when omitted), `Pdf`, or `Md`, which stores the markdown verbatim instead of converting it. | [optional] |
 
 ## Example
 
@@ -16,6 +17,7 @@ require 'docspace-api-sdk'
 instance = DocspaceApiSdk::AiExportTextToDocxRequest.new(
   title: null,
   content: null,
-  folder_id: null
+  folder_id: null,
+  format: null
 )
 ```

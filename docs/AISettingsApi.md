@@ -88,11 +88,11 @@ This endpoint does not need any parameter.
 
 ## ai_settings_get_tool_mode
 
-> <AiSuccessResponse> ai_settings_get_tool_mode
+> <AiToolPermissionModeWrapper> ai_settings_get_tool_mode
 
 Get the tool permission mode
 
-Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+Returns the calling user's tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service's `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), inside the service's `response` envelope, proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-tool-mode/).
 
@@ -127,7 +127,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AiSuccessResponse>, Integer, Hash)> ai_settings_get_tool_mode_with_http_info
+> <Array(<AiToolPermissionModeWrapper>, Integer, Hash)> ai_settings_get_tool_mode_with_http_info
 
 ```ruby
 begin
@@ -135,7 +135,7 @@ begin
   data, status_code, headers = api_instance.ai_settings_get_tool_mode_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <AiSuccessResponse>
+  p data # => <AiToolPermissionModeWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::SettingsApi->ai_settings_get_tool_mode_with_http_info: #{e}"
 end
@@ -147,7 +147,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+[**AiToolPermissionModeWrapper**](AiToolPermissionModeWrapper.md)
 
 ### Authorization
 
@@ -307,11 +307,11 @@ This endpoint does not need any parameter.
 
 ## ai_settings_set_tool_mode
 
-> <AiSuccessResponse> ai_settings_set_tool_mode(ai_settings_set_tool_mode_request)
+> <AiToolPermissionModeWrapper> ai_settings_set_tool_mode(ai_settings_set_tool_mode_request)
 
 Set the tool permission mode
 
-Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+Stores the calling user's tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum with 400; the answer is the stored mode inside the service's `response` envelope. The mode applies to every chat of the user in the portal.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-tool-mode/).
 
@@ -347,7 +347,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AiSuccessResponse>, Integer, Hash)> ai_settings_set_tool_mode_with_http_info(ai_settings_set_tool_mode_request)
+> <Array(<AiToolPermissionModeWrapper>, Integer, Hash)> ai_settings_set_tool_mode_with_http_info(ai_settings_set_tool_mode_request)
 
 ```ruby
 begin
@@ -355,7 +355,7 @@ begin
   data, status_code, headers = api_instance.ai_settings_set_tool_mode_with_http_info(ai_settings_set_tool_mode_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <AiSuccessResponse>
+  p data # => <AiToolPermissionModeWrapper>
 rescue DocspaceApiSdk::ApiError => e
   puts "Error when calling AI::SettingsApi->ai_settings_set_tool_mode_with_http_info: #{e}"
 end
@@ -369,7 +369,7 @@ end
 
 ### Return type
 
-[**AiSuccessResponse**](AiSuccessResponse.md)
+[**AiToolPermissionModeWrapper**](AiToolPermissionModeWrapper.md)
 
 ### Authorization
 

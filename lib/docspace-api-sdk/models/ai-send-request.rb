@@ -24,11 +24,14 @@ module DocspaceApiSdk
     # The user turn to send.
     attr_accessor :user_message
 
-    # Per-request engine options: extra tools, reasoning, prompt override.
+    # Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.
     attr_accessor :action_args
 
     # Optional entity (room) scope for profile resolution.
     attr_accessor :entity_id
+
+    # The folder or room the user is in. Tools run against it and the model is told it is the user's location; falls back to `entityId` when omitted.
+    attr_accessor :context_entity_id
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -58,7 +61,8 @@ module DocspaceApiSdk
         :'action_type' => :'actionType',
         :'user_message' => :'userMessage',
         :'action_args' => :'actionArgs',
-        :'entity_id' => :'entityId'
+        :'entity_id' => :'entityId',
+        :'context_entity_id' => :'contextEntityId'
       }
     end
 
@@ -78,7 +82,8 @@ module DocspaceApiSdk
         :'action_type' => :'AiActionType',
         :'user_message' => :'AiThreadMessageLike',
         :'action_args' => :'AiActionArgs',
-        :'entity_id' => :'String'
+        :'entity_id' => :'String',
+        :'context_entity_id' => :'String'
       }
     end
 
@@ -122,6 +127,10 @@ module DocspaceApiSdk
 
       if attributes.key?(:'entity_id')
         self.entity_id = attributes[:'entity_id']
+      end
+
+      if attributes.key?(:'context_entity_id')
+        self.context_entity_id = attributes[:'context_entity_id']
       end
     end
 
@@ -178,7 +187,8 @@ module DocspaceApiSdk
           action_type == o.action_type &&
           user_message == o.user_message &&
           action_args == o.action_args &&
-          entity_id == o.entity_id
+          entity_id == o.entity_id &&
+          context_entity_id == o.context_entity_id
     end
 
     # @see the `==` method
@@ -190,7 +200,7 @@ module DocspaceApiSdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [action_type, user_message, action_args, entity_id].hash
+      [action_type, user_message, action_args, entity_id, context_entity_id].hash
     end
 
     # Builds the object from hash
