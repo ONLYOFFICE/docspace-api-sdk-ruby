@@ -1,0 +1,73 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    if: github.server_url == 'https://github.com'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Get info
+        id: info
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          if ! grep -q "^## $version\$" CHANGELOG.md; then
+            echo "::error::CHANGELOG.md has no section for $version"
+            exit 1
+          fi
+          gem_version=$(sed -nE "s/^[[:space:]]*VERSION = '([^']+)'.*/\1/p" lib/docspace-api-sdk/version.rb)
+          if [ "$gem_version" != "$version" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match lib/docspace-api-sdk/version.rb ($gem_version)"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+
+      - name: Build gems
+        run: |
+          mkdir -p pkg
+          gem build docspace-api-sdk.gemspec --output "$PWD/pkg/docspace-api-sdk-${{ steps.info.outputs.version }}.gem"
+
+      - uses: rubygems/configure-rubygems-credentials@v1.0.0
+
+      # A gem whose version is on RubyGems already is skipped, which makes a
+      # re-run of this workflow safe.
+      - name: Publish to RubyGems
+        run: |
+          for gem in pkg/*.gem; do
+            read -r name version < <(ruby -rrubygems/package -e 's = Gem::Package.new(ARGV[0]).spec; puts "#{s.name} #{s.version}"' "$gem")
+            code=$(curl -s -o /dev/null -w '%{http_code}' "https://rubygems.org/api/v2/rubygems/$name/versions/$version.json")
+            if [ "$code" = "200" ]; then
+              echo "$name $version is already on RubyGems, skipping"
+            else
+              gem push "$gem"
+            fi
+          done
+
+      - name: Extract release notes
+        env:
+          VERSION: ${{ steps.info.outputs.version }}
+        run: |
+          awk -v head="## $VERSION" '
+            $0 == head { p = 1; next }
+            /^## / { p = 0 }
+            p
+          ' CHANGELOG.md > RELEASE.md
+
+      - uses: ncipollo/release-action@v1
+        with:
+          bodyFile: RELEASE.md
+          tag: ${{ github.ref_name }}
+          artifacts: pkg/*.gem

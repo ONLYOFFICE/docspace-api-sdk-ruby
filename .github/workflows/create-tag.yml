@@ -1,0 +1,107 @@
+name: Create Tag
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "CHANGELOG.md"
+  workflow_dispatch:
+
+concurrency:
+  group: create-tag
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  create-tag:
+    if: github.server_url != 'https://github.com'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Get version
+        id: info
+        run: |
+          version=$(grep -Eo '^## [0-9]+(\.[0-9]+)+' CHANGELOG.md | head -n 1 | cut -c4-)
+          if [ -z "$version" ]; then
+            echo "::error::No version found in CHANGELOG.md"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Check tag
+        id: check
+        env:
+          TAG: v${{ steps.info.outputs.version }}
+        run: |
+          if git rev-parse -q --verify "refs/tags/$TAG" > /dev/null; then
+            echo "$TAG already exists"
+            echo "create=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "create=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check gem version
+        if: steps.check.outputs.create == 'true'
+        env:
+          VERSION: ${{ steps.info.outputs.version }}
+        run: |
+          gem_version=$(sed -nE "s/^[[:space:]]*VERSION = '([^']+)'.*/\1/p" lib/docspace-api-sdk/version.rb)
+          if [ "$gem_version" != "$VERSION" ]; then
+            echo "::error::CHANGELOG.md is at $VERSION but lib/docspace-api-sdk/version.rb is at $gem_version"
+            exit 1
+          fi
+
+      - uses: ruby/setup-ruby@v1
+        if: steps.check.outputs.create == 'true'
+        with:
+          ruby-version: "3.3"
+
+      - name: Build gems
+        if: steps.check.outputs.create == 'true'
+        run: |
+          mkdir -p pkg
+          gem build docspace-api-sdk.gemspec --output "$PWD/pkg/docspace-api-sdk.gem"
+
+      - name: Check packaged files
+        if: steps.check.outputs.create == 'true'
+        run: |
+          status=0
+          for gem in pkg/*.gem; do
+            extra=$(gem spec "$gem" files | sed -n 's/^- //p' \
+              | grep -Ev '^(lib/.+\.rb|README\.md|CHANGELOG\.md|AUTHORS\.md|LICENSE)$' || true)
+            if [ -n "$extra" ]; then
+              echo "::error::$gem packages unexpected files:"
+              echo "$extra"
+              status=1
+            fi
+          done
+          exit $status
+
+      - name: Install and load gems
+        if: steps.check.outputs.create == 'true'
+        run: |
+          gem install --no-document pkg/*.gem
+          cd "$(mktemp -d)"
+          ruby -e 'require "docspace-api-sdk"; puts DocspaceApiSdk::VERSION'
+
+      - name: Build API sample
+        if: steps.check.outputs.create == 'true'
+        working-directory: samples/docspace-api-sdk-ruby-sample
+        run: |
+          bundle install
+          ruby -c main.rb
+
+      - name: Create tag
+        if: steps.check.outputs.create == 'true'
+        env:
+          TAG: v${{ steps.info.outputs.version }}
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git tag -a "$TAG" -m "Release/$TAG"
+          git push origin "$TAG"
