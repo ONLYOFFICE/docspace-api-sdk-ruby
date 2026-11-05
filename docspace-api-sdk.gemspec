@@ -28,16 +28,19 @@ Gem::Specification.new do |s|
   s.description = "A simple Ruby SDK for integrating with the ONLYOFFICE DocSpace API"
   s.license     = "Apache-2.0"
   s.required_ruby_version = ">= 2.7"
-  s.metadata    = {}
+  s.metadata    = {
+    "source_code_uri"       => "https://github.com/ONLYOFFICE/docspace-api-sdk-ruby",
+    "changelog_uri"         => "https://github.com/ONLYOFFICE/docspace-api-sdk-ruby/blob/master/CHANGELOG.md",
+    "bug_tracker_uri"       => "https://github.com/ONLYOFFICE/docspace-api-sdk-ruby/issues",
+    "documentation_uri"     => "https://github.com/ONLYOFFICE/docspace-api-sdk-ruby/blob/master/README.md",
+    "rubygems_mfa_required" => "true"
+  }
 
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
 
   s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
 
-  s.files         = Dir.glob("**/*", File::FNM_DOTMATCH)
-                       .select { |f| File.file?(f) }
-                       .reject { |f| f.end_with?(".gem") || f.start_with?("pkg/", ".bundle/", "vendor/bundle/") }
-  s.test_files    = s.files.grep(%r{\Aspec/})
+  s.files         = Dir["lib/**/*.rb", "README.md", "CHANGELOG.md", "AUTHORS.md", "LICENSE"]
   s.executables   = []
   s.require_paths = ["lib"]
 end

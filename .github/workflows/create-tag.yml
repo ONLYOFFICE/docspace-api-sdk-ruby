@@ -1,0 +1,133 @@
+name: Create Tag
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "CHANGELOG.md"
+  workflow_dispatch:
+
+concurrency:
+  group: create-tag
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  create-tag:
+    # Releases are cut from master only, including manual runs (workflow_dispatch
+    # can otherwise be started from any branch).
+    if: github.server_url != 'https://github.com' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Get version
+        id: info
+        run: |
+          # Take the first "## <digit>..." heading verbatim, skipping non-version
+          # headings such as "## Unreleased": release.yml looks the section up by
+          # an exact "## <version>" match, so both must agree on the full text.
+          version=$(sed -n 's/^## \([0-9]\)/\1/p' CHANGELOG.md | head -n 1)
+          if [ -z "$version" ]; then
+            echo "::error::No version found in CHANGELOG.md"
+            exit 1
+          fi
+          # RubyGems writes pre-releases with dots (4.1.0.beta.1); "4.1.0-beta.1"
+          # would be published as 4.1.0.pre.beta.1 and no longer match the tag.
+          if ! printf '%s\n' "$version" | grep -Eqx '[0-9]+\.[0-9]+\.[0-9]+(\.[0-9A-Za-z]+)*'; then
+            echo "::error::CHANGELOG.md heading '## $version' must be exactly '## x.y.z' or '## x.y.z.beta.1', with nothing else on the line"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Check tag
+        id: check
+        env:
+          TAG: v${{ steps.info.outputs.version }}
+        run: |
+          if git rev-parse -q --verify "refs/tags/$TAG" > /dev/null; then
+            echo "$TAG already exists"
+            echo "create=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "create=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: ruby/setup-ruby@v1
+        if: steps.check.outputs.create == 'true'
+        with:
+          ruby-version: "3.3"
+
+      - name: Check gem version
+        if: steps.check.outputs.create == 'true'
+        env:
+          VERSION: ${{ steps.info.outputs.version }}
+        run: |
+          # Let Ruby evaluate version.rb instead of parsing it, so the check
+          # does not depend on how the file is formatted.
+          gem_version=$(ruby -e 'load ARGV[0]; print DocspaceApiSdk::VERSION' lib/docspace-api-sdk/version.rb)
+          if [ "$gem_version" != "$VERSION" ]; then
+            echo "::error::CHANGELOG.md is at $VERSION but lib/docspace-api-sdk/version.rb is at $gem_version"
+            exit 1
+          fi
+
+      - name: Build gems
+        if: steps.check.outputs.create == 'true'
+        run: |
+          mkdir -p pkg
+          gem build docspace-api-sdk.gemspec --output "$PWD/pkg/docspace-api-sdk.gem"
+
+      - name: Check packaged files
+        if: steps.check.outputs.create == 'true'
+        run: |
+          status=0
+          for gem in pkg/*.gem; do
+            extra=$(gem spec "$gem" files | sed -n 's/^- //p' \
+              | grep -Ev '^(lib/.+\.rb|README\.md|CHANGELOG\.md|AUTHORS\.md|LICENSE)$' || true)
+            if [ -n "$extra" ]; then
+              echo "::error::$gem packages unexpected files:"
+              echo "$extra"
+              status=1
+            fi
+          done
+          # The gemspec packages only lib/**/*.rb, so a tracked non-.rb file
+          # under lib/ (YAML, data) would be dropped silently: fail on it too.
+          missing=$(comm -23 <(git ls-files lib | sort) \
+            <(gem spec pkg/docspace-api-sdk.gem files | sed -n 's/^- //p' | sort))
+          if [ -n "$missing" ]; then
+            echo "::error::pkg/docspace-api-sdk.gem is missing tracked files under lib/ (extend s.files in the gemspec):"
+            echo "$missing"
+            status=1
+          fi
+          exit $status
+
+      - name: Install and load gems
+        if: steps.check.outputs.create == 'true'
+        run: |
+          gem install --no-document pkg/*.gem
+          cd "$(mktemp -d)"
+          ruby -e 'require "docspace-api-sdk"; puts DocspaceApiSdk::VERSION'
+
+      # Checks the sample itself (dependencies resolve, main.rb parses); it uses
+      # the source tree via path: '../..'. The built gem is covered by the two
+      # steps above: every tracked lib/ file is packaged, and requiring the
+      # installed gem outside the repo loads every .rb file in it.
+      - name: Check API sample
+        if: steps.check.outputs.create == 'true'
+        working-directory: samples/docspace-api-sdk-ruby-sample
+        run: |
+          bundle install
+          ruby -c main.rb
+
+      - name: Create tag
+        if: steps.check.outputs.create == 'true'
+        env:
+          TAG: v${{ steps.info.outputs.version }}
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git tag -a "$TAG" -m "Release/$TAG"
+          git push origin "$TAG"
