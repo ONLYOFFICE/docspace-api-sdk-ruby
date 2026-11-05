@@ -20,7 +20,7 @@ jobs:
         id: info
         run: |
           version="${GITHUB_REF_NAME#v}"
-          if ! grep -q "^## $version\$" CHANGELOG.md; then
+          if ! grep -qxF "## $version" CHANGELOG.md; then
             echo "::error::CHANGELOG.md has no section for $version"
             exit 1
           fi
@@ -30,6 +30,12 @@ jobs:
             exit 1
           fi
           echo "version=$version" >> "$GITHUB_OUTPUT"
+          # Gem pre-release versions contain a letter (4.1.0.beta.1).
+          if [[ "$version" =~ [A-Za-z] ]]; then
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - uses: ruby/setup-ruby@v1
         with:
@@ -71,3 +77,4 @@ jobs:
           bodyFile: RELEASE.md
           tag: ${{ github.ref_name }}
           artifacts: pkg/*.gem
+          prerelease: ${{ steps.info.outputs.prerelease }}

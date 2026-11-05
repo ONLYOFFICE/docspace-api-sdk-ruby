@@ -26,9 +26,18 @@ jobs:
       - name: Get version
         id: info
         run: |
-          version=$(grep -Eo '^## [0-9]+(\.[0-9]+)+' CHANGELOG.md | head -n 1 | cut -c4-)
+          # Take the first "## <digit>..." heading verbatim, skipping non-version
+          # headings such as "## Unreleased": release.yml looks the section up by
+          # an exact "## <version>" match, so both must agree on the full text.
+          version=$(sed -n 's/^## \([0-9]\)/\1/p' CHANGELOG.md | head -n 1)
           if [ -z "$version" ]; then
             echo "::error::No version found in CHANGELOG.md"
+            exit 1
+          fi
+          # RubyGems writes pre-releases with dots (4.1.0.beta.1); "4.1.0-beta.1"
+          # would be published as 4.1.0.pre.beta.1 and no longer match the tag.
+          if ! printf '%s\n' "$version" | grep -Eqx '[0-9]+\.[0-9]+\.[0-9]+(\.[0-9A-Za-z]+)*'; then
+            echo "::error::CHANGELOG.md heading '## $version' is not a gem version (x.y.z or x.y.z.beta.1)"
             exit 1
           fi
           echo "version=$version" >> "$GITHUB_OUTPUT"
