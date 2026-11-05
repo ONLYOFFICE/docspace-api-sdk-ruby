@@ -39,7 +39,7 @@ jobs:
           # RubyGems writes pre-releases with dots (4.1.0.beta.1); "4.1.0-beta.1"
           # would be published as 4.1.0.pre.beta.1 and no longer match the tag.
           if ! printf '%s\n' "$version" | grep -Eqx '[0-9]+\.[0-9]+\.[0-9]+(\.[0-9A-Za-z]+)*'; then
-            echo "::error::CHANGELOG.md heading '## $version' is not a gem version (x.y.z or x.y.z.beta.1)"
+            echo "::error::CHANGELOG.md heading '## $version' must be exactly '## x.y.z' or '## x.y.z.beta.1', with nothing else on the line"
             exit 1
           fi
           echo "version=$version" >> "$GITHUB_OUTPUT"
@@ -91,6 +91,15 @@ jobs:
               status=1
             fi
           done
+          # The gemspec packages only lib/**/*.rb, so a tracked non-.rb file
+          # under lib/ (YAML, data) would be dropped silently: fail on it too.
+          missing=$(comm -23 <(git ls-files lib | sort) \
+            <(gem spec pkg/docspace-api-sdk.gem files | sed -n 's/^- //p' | sort))
+          if [ -n "$missing" ]; then
+            echo "::error::pkg/docspace-api-sdk.gem is missing tracked files under lib/ (extend s.files in the gemspec):"
+            echo "$missing"
+            status=1
+          fi
           exit $status
 
       - name: Install and load gems
