@@ -56,21 +56,23 @@ jobs:
             echo "create=true" >> "$GITHUB_OUTPUT"
           fi
 
+      - uses: ruby/setup-ruby@v1
+        if: steps.check.outputs.create == 'true'
+        with:
+          ruby-version: "3.3"
+
       - name: Check gem version
         if: steps.check.outputs.create == 'true'
         env:
           VERSION: ${{ steps.info.outputs.version }}
         run: |
-          gem_version=$(sed -nE "s/^[[:space:]]*VERSION = '([^']+)'.*/\1/p" lib/docspace-api-sdk/version.rb)
+          # Let Ruby evaluate version.rb instead of parsing it, so the check
+          # does not depend on how the file is formatted.
+          gem_version=$(ruby -e 'load ARGV[0]; print DocspaceApiSdk::VERSION' lib/docspace-api-sdk/version.rb)
           if [ "$gem_version" != "$VERSION" ]; then
             echo "::error::CHANGELOG.md is at $VERSION but lib/docspace-api-sdk/version.rb is at $gem_version"
             exit 1
           fi
-
-      - uses: ruby/setup-ruby@v1
-        if: steps.check.outputs.create == 'true'
-        with:
-          ruby-version: "3.3"
 
       - name: Build gems
         if: steps.check.outputs.create == 'true'

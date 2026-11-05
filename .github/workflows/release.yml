@@ -16,6 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+
       - name: Get info
         id: info
         run: |
@@ -24,7 +28,8 @@ jobs:
             echo "::error::CHANGELOG.md has no section for $version"
             exit 1
           fi
-          gem_version=$(sed -nE "s/^[[:space:]]*VERSION = '([^']+)'.*/\1/p" lib/docspace-api-sdk/version.rb)
+          # Let Ruby evaluate version.rb instead of parsing it (as in create-tag.yml).
+          gem_version=$(ruby -e 'load ARGV[0]; print DocspaceApiSdk::VERSION' lib/docspace-api-sdk/version.rb)
           if [ "$gem_version" != "$version" ]; then
             echo "::error::Tag $GITHUB_REF_NAME does not match lib/docspace-api-sdk/version.rb ($gem_version)"
             exit 1
@@ -36,10 +41,6 @@ jobs:
           else
             echo "prerelease=false" >> "$GITHUB_OUTPUT"
           fi
-
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: "3.3"
 
       - name: Build gems
         run: |
