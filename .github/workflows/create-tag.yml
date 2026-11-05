@@ -111,7 +111,11 @@ jobs:
           cd "$(mktemp -d)"
           ruby -e 'require "docspace-api-sdk"; puts DocspaceApiSdk::VERSION'
 
-      - name: Build API sample
+      # Checks the sample itself (dependencies resolve, main.rb parses); it uses
+      # the source tree via path: '../..'. The built gem is covered by the two
+      # steps above: every tracked lib/ file is packaged, and requiring the
+      # installed gem outside the repo loads every .rb file in it.
+      - name: Check API sample
         if: steps.check.outputs.create == 'true'
         working-directory: samples/docspace-api-sdk-ruby-sample
         run: |
