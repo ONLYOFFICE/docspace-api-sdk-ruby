@@ -47,7 +47,29 @@ jobs:
           mkdir -p pkg
           gem build docspace-api-sdk.gemspec --output "$PWD/pkg/docspace-api-sdk-${{ steps.info.outputs.version }}.gem"
 
-      - uses: rubygems/configure-rubygems-credentials@v1.0.0
+      # rubygems/configure-rubygems-credentials has no `owner` input yet (checked up
+      # to v2.1.0), so the OIDC token is exchanged by hand. `owner` is the immutable
+      # ID of the RubyGems.org account whose pending trusted publisher creates the
+      # gem; RubyGems rejects the first push without it.
+      - name: Get RubyGems API key
+        env:
+          RUBYGEMS_OWNER: "223405"
+        run: |
+          set -o pipefail
+          jwt=$(curl -sSf -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=rubygems.org" | jq -r .value)
+          response=$(jq -n --arg jwt "$jwt" --arg owner "$RUBYGEMS_OWNER" '{jwt: $jwt, owner: $owner}' |
+            curl -sS -w '\n%{http_code}' -X POST https://rubygems.org/api/v1/oidc/trusted_publisher/exchange_token \
+              -H 'Content-Type: application/json' -H 'Accept: application/json' --data-binary @-)
+          code="${response##*$'\n'}"
+          body="${response%$'\n'*}"
+          if [ "$code" != "201" ]; then
+            echo "::error::RubyGems token exchange failed ($code): $body"
+            exit 1
+          fi
+          key=$(jq -r .rubygems_api_key <<< "$body")
+          echo "::add-mask::$key"
+          echo "GEM_HOST_API_KEY=$key" >> "$GITHUB_ENV"
 
       # A gem whose version is on RubyGems already is skipped, which makes a
       # re-run of this workflow safe.
